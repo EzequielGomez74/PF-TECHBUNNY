@@ -1,6 +1,7 @@
-BETO 
-BETO 
-BETO
+BETO;
+BETO;
+BETO;
 
-
-PEPITO PEPITO.
+function hola() {
+  var x;
+}
