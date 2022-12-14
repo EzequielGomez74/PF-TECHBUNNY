@@ -2,7 +2,8 @@ require("dotenv").config();
 const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
+const { log } = require("console");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
@@ -13,17 +14,13 @@ const sequelize = new Sequelize(
 );
 const basename = path.basename(__filename);
 const modelDefiners = [];
-
+const dbPath = __dirname.split("\\services\\db")[0];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, "/models"))
-  .filter(
-    (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-  )
-  .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
-  });
-
+fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
+  modelDefiners.push(
+    require(path.join(dbPath, "/apiServices/", file, "/model.js"))
+  );
+});
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
@@ -40,9 +37,24 @@ console.log(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
+const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
+  sequelize.models;
+
+// ----> CATEGORY & SUBCATEGORIES
+Category.hasMany(SubCategory);
+SubCategory.belongsTo(Category, { foreignKey: "category_id" });
+// ----> SUBCATEGORIES & PRODUCTS & BRAND
+SubCategory.hasMany(Product);
+Brand.hasMany(Product);
+Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
+Product.belongsTo(Brand, { foreignKey: "brand_id" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
+  Category,
+  SubCategory,
+  Product,
+  Brand,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
