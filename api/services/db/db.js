@@ -37,9 +37,16 @@ console.log(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
+const { Brand , Category, Country, Order, Product , Review , SubCategory, User } = sequelize.models;
+
+// ----> CATEGORY & SUBCATEGORIES 
+Category.hasMany(SubCategory)
+SubCategory.belongsTo(Category)
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
+  Category, SubCategory,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
