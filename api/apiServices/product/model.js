@@ -7,20 +7,21 @@ module.exports = (sequelize) => {
     "Product",
     {
       product_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
         defaultValue: "",
       },
-      image: { 
+      image: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -28,18 +29,18 @@ module.exports = (sequelize) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      stock:{
+      stock: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
-      soldCount:{
+      soldCount: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
     },
-      {
+    {
       timestamps: false,
       createdAt: false,
       updatedAt: false,
