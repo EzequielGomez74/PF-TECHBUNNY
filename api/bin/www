@@ -1,12 +1,11 @@
 const server = require("../app.js");
 const { db } = require("../services/db/db.js");
-
-
+const loadAllAssets = require("../scripts/initializeDb.js");
 console.log("HOLA");
 // Syncing all the models at once.
 db.sync({ force: true }).then(async () => {
+  await loadAllAssets();
 
-  
   server.listen(3001, () => {
     console.log("%s listening at 3001");
   });
