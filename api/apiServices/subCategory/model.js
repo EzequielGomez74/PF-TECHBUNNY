@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
     "SubCategory",
     {
       subcategory_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: DataTypes.STRING,

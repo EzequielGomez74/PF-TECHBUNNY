@@ -37,16 +37,24 @@ console.log(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-const { Brand , Category, Country, Order, Product , Review , SubCategory, User } = sequelize.models;
+const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
+  sequelize.models;
 
-// ----> CATEGORY & SUBCATEGORIES 
-Category.hasMany(SubCategory)
-SubCategory.belongsTo(Category)
-
+// ----> CATEGORY & SUBCATEGORIES
+Category.hasMany(SubCategory);
+SubCategory.belongsTo(Category, { foreignKey: "category_id" });
+// ----> SUBCATEGORIES & PRODUCTS & BRAND
+SubCategory.hasMany(Product);
+Brand.hasMany(Product);
+Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
+Product.belongsTo(Brand, { foreignKey: "brand_id" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
-  Category, SubCategory,
+  Category,
+  SubCategory,
+  Product,
+  Brand,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
