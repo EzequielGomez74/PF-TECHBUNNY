@@ -13,8 +13,6 @@ async function loadtodb(array, model) {
     }
 }
 
-loadtodb(category, Category)
-
 function loadAllAssets() {
     loadtodb(category, Category);
     loadtodb(subcategory, SubCategory);
