@@ -5,12 +5,17 @@ const category = require("../services/db/assets/category.json");
 const subcategory = require("../services/db/assets/subcategory.json");
 const { Category, SubCategory } = require("../services/db/db.js")
 
-function loadtodb(array, model) {
+async function loadtodb(array, model) {
     try {
-        model.bulkCreate(array)
+       await model.bulkCreate(array)
     } catch (error) {
         console.log(error)
     }
 }
 
 loadtodb(category, Category)
+
+function loadAllAssets() {
+    loadtodb(category, Category);
+    loadtodb(subcategory, SubCategory);
+}
