@@ -4,9 +4,9 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Product",
+    "country",
     {
-      product_id: {
+      country_id: {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
@@ -15,28 +15,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        defaultValue: "",
-      },
-      image: { 
+      flag: { 
         type: DataTypes.TEXT,
         allowNull: true,
-      },
-      price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      stock:{
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0,
-      },
-      soldCount:{
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0,
+        defaultValue: "https://flagcdn.com/w320/ar.png",
       },
     },
       {
