@@ -1,12 +1,26 @@
-async function loadDb(array, model) {
+// "esta va a cargar jsons a la data base"
+
+const brands = require("../services/db/assets/brands.json");
+const category = require("../services/db/assets/category.json");
+const subcategory = require("../services/db/assets/subcategory.json");
+const { Category, SubCategory } = require("../services/db/db.js");
+
+async function loadtodb(array, model) {
   try {
     await model.bulkCreate(array);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+loadtodb(category, Category);
+
+function loadAllAssets() {
+  loadtodb(category, Category);
+  loadtodb(subcategory, SubCategory);
 }
 
 function loadAllAssets() {
-  loadDb(categories, Category);
-  loadDb(products, Product);
-  loadDb(users, User);
+  loadtodb(category, Category);
+  loadtodb(subcategory, SubCategory);
 }
-module.export = { loadAllAssets };
