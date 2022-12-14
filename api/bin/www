@@ -5,6 +5,8 @@ const { db } = require("../services/db/db.js");
 console.log("HOLA");
 // Syncing all the models at once.
 db.sync({ force: true }).then(async () => {
+
+  
   server.listen(3001, () => {
     console.log("%s listening at 3001");
   });
