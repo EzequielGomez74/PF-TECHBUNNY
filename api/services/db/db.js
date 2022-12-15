@@ -72,7 +72,7 @@ Order.belongsTo(User, { foreignKey: "user_id"});
 
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
