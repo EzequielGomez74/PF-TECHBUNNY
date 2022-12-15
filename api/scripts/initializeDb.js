@@ -20,7 +20,6 @@ async function loadtoDb(array, model) {
 }
 
 async function loadAllAssets() {
-  console.log(categories);
   await loadtoDb(categories, Category);
   await loadtoDb(subcategories, SubCategory);
   await loadtoDb(brands, Brand);
