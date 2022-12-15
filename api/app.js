@@ -7,6 +7,9 @@ const {
   accessControl,
 } = require("./middlewares/index.js");
 
+const indexRouter = require("./routes/index.js");
+
+
 require("./services/db/db.js");
 
 const server = express();
@@ -19,8 +22,10 @@ server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(accessControl);
 
+server.use("/", indexRouter);
 // Error catching endware.
 server.use(generalErrorHandler);
+
 
 //FIN DE MIDDLEWARES
 
