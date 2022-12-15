@@ -66,7 +66,7 @@ Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
