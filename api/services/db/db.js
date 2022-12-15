@@ -42,7 +42,7 @@ const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
 // ----> CATEGORY & SUBCATEGORIES
 Category.hasMany(SubCategory, { foreignKey: "category_id" });
 //SubCategory.belongsTo(Category, { foreignKey: "category_id" });
-// ----> SUBCATEGORIES & PRODUCTS & BRAND
+
 //Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
 //Product.belongsTo(Brand, { foreignKey: "brand_id" });
 SubCategory.hasMany(Product, { foreignKey: "subcategory_id" });
