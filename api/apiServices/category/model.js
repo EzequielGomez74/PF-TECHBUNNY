@@ -8,11 +8,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-<<<<<<< HEAD
-        defaultValue: DataTypes.UUIDV4
-=======
-        autoIncrement: true,
->>>>>>> beto
       },
       name: {
         type: DataTypes.STRING,
