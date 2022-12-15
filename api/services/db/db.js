@@ -39,11 +39,14 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
   sequelize.models;
 
-  
-  Category.hasMany(SubCategory, { foreignKey:"category_id"});
-  SubCategory.hasMany(Product, { foreignKey:"subcategory_id"});
-  Brand.hasMany(Product, { foreignKey:"brand_id"});
-
+// ----> CATEGORY & SUBCATEGORIES
+Category.hasMany(SubCategory, { foreignKey: "category_id" });
+//SubCategory.belongsTo(Category, { foreignKey: "category_id" });
+// ----> SUBCATEGORIES & PRODUCTS & BRAND
+//Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
+//Product.belongsTo(Brand, { foreignKey: "brand_id" });
+SubCategory.hasMany(Product, { foreignKey: "subcategory_id" });
+Brand.hasMany(Product, { foreignKey: "brand_id" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
