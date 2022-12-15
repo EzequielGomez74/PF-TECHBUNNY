@@ -7,9 +7,10 @@ module.exports = (sequelize) => {
     "Country",
     {
       country_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -20,6 +21,10 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: "https://flagcdn.com/w320/ar.png",
       },
+      languages: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      }
     },
       {
       timestamps: false,
