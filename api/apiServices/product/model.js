@@ -39,6 +39,18 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: 0,
       },
+      brand: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      subcategory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
