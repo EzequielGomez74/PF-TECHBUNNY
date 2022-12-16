@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
     "Review",
     {
       review_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       description: {
         type: DataTypes.TEXT,

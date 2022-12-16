@@ -7,19 +7,20 @@ module.exports = (sequelize) => {
     "Order",
     {
       order_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
-      orderDate: {
-        type: DataTypes.DATE,
+      status: {
+        type: DataTypes.ENUM(["reservado", "en proceso", "completado", "cancelado"]),
         allowNull: false,
-      },
+      }
     },
       {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
       freezeTableName: true,
     }
   );

@@ -39,11 +39,23 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: 0,
       },
+      brand: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      subcategory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
       freezeTableName: true,
     }
   );

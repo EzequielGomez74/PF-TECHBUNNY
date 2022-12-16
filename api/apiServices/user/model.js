@@ -34,8 +34,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      zipCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       role: {
-        type: DataTypes.ENUM(["admin","user"]),
+        type: DataTypes.ENUM(["guest","admin","user"]),
         allowNull: true,
         defaultValue: "user",
       },
@@ -56,9 +60,9 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
       freezeTableName: true,
     }
   );
