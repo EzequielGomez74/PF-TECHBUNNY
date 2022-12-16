@@ -30,7 +30,6 @@ let capsEntries = entries.map((entry) => [
   entry[1],
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
-console.log(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
@@ -41,6 +40,7 @@ const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
   sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
+<<<<<<< HEAD
 Category.hasMany(SubCategory, { foreignKey: "category_id" });
 SubCategory.belongsTo(Category, { foreignKey: "category_id" });
 // ----> SUBCATEGORIES & PRODUCTS & BRAND
@@ -48,9 +48,26 @@ SubCategory.hasMany(Product, { foreignKey: "subcategory_id" });
 Brand.hasMany(Product, { foreignKey: "brand_id" });
 Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
 Product.belongsTo(Brand, { foreignKey: "brand_id" });
+=======
+
+Product.hasMany(Review, { foreignKey: "product_id" });
+Review.belongsTo(Product, { foreignKey: "product_id" });
+
+User.hasMany(Review, { foreignKey: "user_id" });
+Review.belongsTo(User, { foreignKey: "user_id" });
+
+Order.belongsToMany(Product, { through: "OrderProduct" });
+Product.belongsToMany(Order, { through: "OrderProduct" });
+
+User.hasMany(Order, { foreignKey: "user_id" });
+Order.belongsTo(User, { foreignKey: "user_id" });
+
+Country.hasMany(User, { foreignKey: "country_id" });
+User.belongsTo(Country, { foreignKey: "country_id" });
+>>>>>>> 932ab17d1f8d7d313417c9533219e55cf58e1a15
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
