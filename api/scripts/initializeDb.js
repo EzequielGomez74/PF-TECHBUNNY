@@ -36,8 +36,7 @@ async function loadtoDb(array, model, mode) {
 
 function loadAllAssets() {
   loadtoDb(categories, Category, false);
-  //console.log("2");
-  yield null;
+  console.log("2");
   const newArraySubcategories = subcategories.map(async (sub) => {
     const categoryInstance = await Category.findByPk(sub.category_id);
     console.log("A");
