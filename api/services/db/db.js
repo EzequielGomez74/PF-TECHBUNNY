@@ -41,11 +41,11 @@ const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
   sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
-Category.hasMany(SubCategory);
+Category.hasMany(SubCategory, { foreignKey: "category_id" });
 SubCategory.belongsTo(Category, { foreignKey: "category_id" });
 // ----> SUBCATEGORIES & PRODUCTS & BRAND
-SubCategory.hasMany(Product);
-Brand.hasMany(Product);
+SubCategory.hasMany(Product, { foreignKey: "subcategory_id" });
+Brand.hasMany(Product, { foreignKey: "brand_id" });
 Product.belongsTo(SubCategory, { foreignKey: "subcategory_id" });
 Product.belongsTo(Brand, { foreignKey: "brand_id" });
 
