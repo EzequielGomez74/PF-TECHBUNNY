@@ -4,7 +4,9 @@ const {
   SubCategory,
   Brand,
 } = require("../../services/db/db.js");
-const productDescriptionParser = require("../../scripts/productDescriptionParser.js");
+const {
+  productDescriptionParser,
+} = require("../../scripts/productDescriptionParser.js");
 const axios = require("axios");
 
 async function getAllProducts() {
@@ -24,8 +26,8 @@ async function getAllProducts() {
 async function getProductById(productId) {
   try {
     const product = await Product.findByPk(productId);
-    const newObj = { ...product };
-    newObj.description = productDescriptionParser(product.description);
+    const newObj = { ...product.dataValues };
+    newObj.description = productDescriptionParser(newObj.description);
     return newObj;
   } catch (error) {
     throw new Error(error);
