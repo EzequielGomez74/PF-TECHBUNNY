@@ -5,64 +5,59 @@ const categories = require("../services/db/assets/categories.json");
 const subcategories = require("../services/db/assets/subcategories.json");
 const products = require("../services/db/assets/products.json");
 const {
-  Category,
-  SubCategory,
-  Product,
-  Brand,
+	Category,
+	SubCategory,
+	Product,
+	Brand,
 } = require("../services/db/db.js");
 
 async function loadtoDb(array, model, mode) {
-  if (mode) {
-    let newArr = [];
-    Promise.all(array)
-      .then(async (res) => {
-        res.forEach((response) => {
-          newArr.push(response);
-        });
-        await model.bulkCreate(newArr);
-        loadAllAssets().next();
-        console.log("TERMINE");
-      })
-      .catch((err) => console.log(err));
-  } else {
-    try {
-      await model.bulkCreate(array);
-      console.log("1");
-    } catch (error) {
-      console.log(error);
-    }
-  }
+	if (mode) {
+		let newArr = [];
+		Promise.all(array)
+			.then(async (res) => {
+				res.forEach((response) => {
+					newArr.push(response);
+				});
+				await model.bulkCreate(newArr);
+				loadAllAssets();
+				console.log("TERMINE");
+			})
+			.catch((err) => console.log(err));
+	} else {
+		try {
+			await model.bulkCreate(array);
+			console.log("1");
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
-function loadAllAssets() {
-  loadtoDb(categories, Category, false);
+async function loadAllAssets() {
+	await loadtoDb(categories, Category, false);
+	await loadtoDb(brands, Brand, false);
   console.log("2");
-  
-  const newArraySubcategories = subcategories.map(async (sub) => {
-    const categoryInstance = await Category.findByPk(sub.category_id);
-    console.log("A");
-    return {
-      name: sub.name,
-      category: categoryInstance.name,
-    };
-  });
-
-
-  Promise.all(newArraySubcategories,)
+	const newArraySubcategories = subcategories.map(async (sub) => {
+		const categoryInstance = await Category.findByPk(sub.category_id);
+    console.log("entra al subcategories");
+		return {
+			name: sub.name,
+			category: categoryInstance.name,
+		};
+	});
+	const subs = await loadtoDb(newArraySubcategories, SubCategory, true);
   console.log("3");
-  loadtoDb(newArraySubcategories, SubCategory, true);
-  //yield null;
-  loadtoDb(brands, Brand, false);
-  console.log("ARRANCA FOREACH");
-  //yield null;
-  products.forEach(async (product) => {
-    Brand.findByPk(product.brand_id).then((res) => {
+	products.forEach(async (product) => {
+    console.log("ARRANCA FOREACH");
+     Brand.findByPk(product.brand_id).then(async (res) => {
       const newObj = { brandName: res.name };
       //setTimeout(() => {}, 500);
       //console.log(product);
-      SubCategory.findByPk(product.subcategory_id).then(async (resp) => {
-        newObj.name = resp.name;
-        newObj.category = resp.category;
+      const eso = await SubCategory.findByPk(product.subcategory_id).then(async (resp) => {
+        console.log("vuelve al foreach");
+        const name = await resp.name;
+        const category = await resp.category;
         const obj = {
           name: product.name,
           image: product.image,
@@ -71,17 +66,14 @@ function loadAllAssets() {
           stock: product.stock,
           soldCount: product.soldCount,
           brand: newObj.brandName,
-          subcategory: newObj.name,
-          category: newObj.category,
+          subcategory: name,
+          category: category,
         };
-        await Product.create(obj);
+        const crear = await Product.create(obj);
       });
     });
   });
+
 }
-
-
-
-
 
 module.exports = loadAllAssets;
