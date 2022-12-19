@@ -10,10 +10,12 @@ function App() {
   return (
     <div className="App">
 
+
       <div>
         <CardV></CardV>
         <CardH></CardH>
       </div>
+
 
       <NavBar />
 
