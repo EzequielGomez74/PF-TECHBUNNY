@@ -1,18 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import CardV from './Components/Card V/CardV';
+import CardH from './Components/Card H/CardH';
 import Footer from './Components/Footer/Footer';
 import NavBar from './Components/NavBar/NavBar';
+
 
 function App() {
   return (
     <div className="App">
 
       <div>
-
-        <h1>HOLA!</h1>
-
-
-        
+        <CardV></CardV>
+        <CardH></CardH>
       </div>
 
       <NavBar />
