@@ -11,74 +11,52 @@ const {
   Brand,
 } = require("../services/db/db.js");
 
-async function loadtoDb(array, model, mode) {
-  if (mode) {
-    let newArr = [];
-    Promise.all(array)
-      .then(async (res) => {
-        res.forEach((response) => {
-          newArr.push(response);
-        });
-        await model.bulkCreate(newArr);
-        loadAllAssets().next();
-        console.log("TERMINE");
-      })
-      .catch((err) => console.log(err));
-  } else {
-    try {
-      await model.bulkCreate(array);
-      console.log("1");
-    } catch (error) {
-      console.log(error);
-    }
+async function loadtoDb(array, model) {
+  try {
+    await model.bulkCreate(array);
+  } catch (error) {
+    throw new Error(error);
   }
 }
 
-function loadAllAssets() {
-  loadtoDb(categories, Category, false);
-  //console.log("2");
-  yield null;
-  const newArraySubcategories = subcategories.map(async (sub) => {
-    const categoryInstance = await Category.findByPk(sub.category_id);
-    console.log("A");
-    return {
-      name: sub.name,
-      category: categoryInstance.name,
-    };
-  });
-  console.log("3");
-  loadtoDb(newArraySubcategories, SubCategory, true);
-  //yield null;
-  loadtoDb(brands, Brand, false);
-  console.log("ARRANCA FOREACH");
-  //yield null;
-  products.forEach(async (product) => {
-    Brand.findByPk(product.brand_id).then((res) => {
-      const newObj = { brandName: res.name };
-      //setTimeout(() => {}, 500);
-      //console.log(product);
-      SubCategory.findByPk(product.subcategory_id).then(async (resp) => {
-        newObj.name = resp.name;
-        newObj.category = resp.category;
-        const obj = {
+async function loadAllAssets() {
+  try {
+    await loadtoDb(categories, Category, false);
+    const newArraySubcategories = await Promise.all(
+      subcategories.map(async (sub) => {
+        const categoryInstance = await Category.findByPk(sub.category_id);
+        return {
+          name: sub.name,
+          category: categoryInstance.name,
+        };
+      })
+    );
+    await loadtoDb(newArraySubcategories, SubCategory);
+    await loadtoDb(brands, Brand);
+    //using promise y handled with async/await
+    //using products.map instead of products.forEach
+    const newArrayProducts = await Promise.all(
+      products.map(async (product) => {
+        const brand = await Brand.findByPk(product.brand_id);
+        const subcategory = await SubCategory.findByPk(product.subcategory_id);
+        return {
           name: product.name,
           image: product.image,
           price: product.price,
           description: product.description,
           stock: product.stock,
           soldCount: product.soldCount,
-          brand: newObj.brandName,
-          subcategory: newObj.name,
-          category: newObj.category,
+          brand: brand.name,
+          subcategory: subcategory.name,
+          category: subcategory.category,
         };
-        await Product.create(obj);
-      });
-    });
-  });
+      })
+    );
+    await loadtoDb(newArrayProducts, Product);
+    console.log("DATABSE LOADED SUCCESFULLY");
+  } catch (error) {
+    throw new Error("DATABASE INITIALIZATION FAILED");
+  }
 }
-
-
-
-
 
 module.exports = loadAllAssets;
