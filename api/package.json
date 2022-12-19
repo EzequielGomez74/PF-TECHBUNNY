@@ -2,9 +2,9 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/www",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "nodemon ./bin/www",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
