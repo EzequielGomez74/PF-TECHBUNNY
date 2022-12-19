@@ -63,5 +63,6 @@ module.exports = {
   SubCategory,
   Product,
   Brand,
+  User,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
