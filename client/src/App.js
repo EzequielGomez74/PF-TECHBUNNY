@@ -5,7 +5,10 @@ function App() {
   return (
     <div className="App">
       <div>
+<<<<<<< HEAD
         <h1>HOLA!</h1>
+=======
+>>>>>>> santi
         
       </div>
       <header className="App-header">
