@@ -5,6 +5,10 @@ function App() {
   return (
     <div className="App">
       <div>
+<<<<<<< HEAD:src/App.js
+=======
+        <h1>HOLA!</h1>
+>>>>>>> eze:client/src/App.js
         
       </div>
       <header className="App-header">
