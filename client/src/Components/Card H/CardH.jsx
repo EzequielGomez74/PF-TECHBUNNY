@@ -14,6 +14,7 @@ function CardH(){
         disponible: "Sí",
         cantidad: 1,
         price: 4463.53,
+        
     }
     return(
         <div className="cardSuper">
