@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, FILTER_BY_CATEGORY } from './actionTypes'
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID } from './actionTypes'
 
 export const getProducts = () => {
     return function(dispatch){
@@ -9,9 +9,20 @@ export const getProducts = () => {
     }
 }
 
-export const filterByCategory = (products, idCategory) => {
+export const getCategories = () => {
     return function(dispatch){
-        const filtered = products.filter(p => p.category === idCategory)
-        dispatch({type:FILTER_BY_CATEGORY, payload: filtered})
+        return fetch ('http://localhost:3001/categories')
+        .then(resp => resp.json())
+        .then(data => dispatch({type: GET_CATEGORIES, payload: data}))
+        .catch(error => console.log(error))
+    }
+}
+
+export const getProductById = (id) => {
+    return function(dispatch){
+        return fetch (`http://localhost:3001/products/${id}`)
+        .then(resp => resp.json())
+        .then(data => dispatch({type: GET_PRODUCT_BY_ID, payload: data}))
+        .catch(error => console.log(error))
     }
 }
