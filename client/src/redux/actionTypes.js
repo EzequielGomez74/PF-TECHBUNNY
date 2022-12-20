@@ -2,7 +2,7 @@ export const GET_ALL_PRODUCTS= 'GET_ALL_PRODUCTS';
 export const GET_PRODUCT_BY_ID= 'GET_PRODUCT_BY_ID';
 export const POST_PRODUCT= 'POST_PRODUCT';
 export const POST_NEWSLETTER = 'POST_NEWSLETTER';
-export const PRODUCTS_BY_CATEGORY= 'PRRODUCTS_BY_CATEGORY';
+export const GET_CATEGORIES= 'GET_CATEGORIES';
 
 
 // Funciones sincrónicas
