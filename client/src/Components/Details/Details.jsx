@@ -42,7 +42,7 @@ function Details() {
   //   setComments([...comments, input]);
   //   setInput('');
   // }
-
+ 
   return (
     <div>
       <NavBar />
