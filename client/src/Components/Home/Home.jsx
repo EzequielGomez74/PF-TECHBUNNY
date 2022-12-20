@@ -15,7 +15,7 @@ function Home() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className={s.home}>
         <NavBar />
         <section>
           {products ? products.map(p => <CardV 
