@@ -21,7 +21,7 @@ async function loadtoDb(array, model) {
 
 async function loadAllAssets() {
   try {
-    await loadtoDb(categories, Category, false);
+    await loadtoDb(categories, Category);
     const newArraySubcategories = await Promise.all(
       subcategories.map(async (sub) => {
         const categoryInstance = await Category.findByPk(sub.category_id);
@@ -34,9 +34,6 @@ async function loadAllAssets() {
     await loadtoDb(newArraySubcategories, SubCategory);
     console.log('Acá')
     await loadtoDb(brands, Brand);
-    //using promise y handled with async/await
-    //using products.map instead of products.forEach
-    console.log('Hola')
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {
         const brand = await Brand.findByPk(product.brand_id);
