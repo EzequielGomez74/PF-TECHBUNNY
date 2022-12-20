@@ -79,5 +79,11 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
+    transition: 0.5s;
+}
+
+.three div p:hover{
+    color: #D7F136;
+    cursor: pointer;
 }
 

@@ -1,0 +1,77 @@
+/* Inicio de los estilos para la sección del Banner */
+
+.banners{
+    background-color: #F9F9F9;
+}
+
+.bannerOne{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.bannerOne div {
+    width: 360px;
+    height: 200px;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.bannerOne div:hover{
+    transform: translateY(-5px);
+}
+
+.a{
+    color: aliceblue;
+    background-image: url(../../images/bmouse.png);
+}
+
+.b{
+    color: aliceblue;
+    background-image: url(../../images/bsilla.png);
+}
+
+.c{
+    color: aliceblue;
+    background-image: url(../../images/bimpresora.png);
+}
+
+.bannerTwo{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.bannerTwo div {
+    width: 360px;
+    height: 200px;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.bannerTwo div:hover{
+    transform: translateY(-5px);
+}
+
+.d{
+    color: aliceblue;
+    background-image: url(../../images/bauriculares.png);
+}
+
+.e{
+    color: aliceblue;
+    background-image: url(../../images/bparlantes.png);
+}
+
+.f{
+    color: aliceblue;
+    background-image: url(../../images/bteclado.png);
+}
+
+/* Fin de los estilos para la sección del Banner */
