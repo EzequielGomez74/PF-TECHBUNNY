@@ -2,23 +2,21 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 
 const router = Router();
-//NEW USER /enter?type=logout   /enter?type=recover /enter?type=newUser
+//NEW USER
 router.post("/", async (req, res) => {
   const { user, password } = req.body;
   try {
-    //checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
-    //ATENTO ACA IMPLEMENTAR EL IF DEL QUERY !!
     res.status(200).json(await controller.handleNewUser(user, password));
   } catch (error) {
-    res.sendStatus(400); //ASDASDASD
+    res.status(error.message.statusCode).json(error.message.msg);
   }
 });
-//LOGIN
+//checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
+// /enter?type=logout   /enter?type=recover /enter?type=newUser
 router.put("/", async (req, res) => {
   console.log(req.query);
   try {
     if (req.query.type) {
-      console.log("!!!");
       switch (req.query.type) {
         case "recover":
           break;
