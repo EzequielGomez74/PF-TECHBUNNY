@@ -4,16 +4,12 @@ import CardV from './Components/Card V/CardV';
 import CardH from './Components/Card H/CardH';
 import Footer from './Components/Footer/Footer';
 import NavBar from './Components/NavBar/NavBar';
+import AboutUs from './Components/About/index';
 
 
 function App() {
   return (
     <div className="App">
-
-      <div>
-        <CardV></CardV>
-        <CardH></CardH>
-      </div>
 
       <NavBar />
 
