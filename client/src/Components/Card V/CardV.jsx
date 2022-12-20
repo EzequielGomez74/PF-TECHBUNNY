@@ -1,5 +1,5 @@
 import React from "react";
-import "./CardV.css";
+import s from './CardV.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
@@ -7,18 +7,14 @@ import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 function CardV({id, brand, name, image, price, category, subcategory}){
     return(
-    <div className="cardSuper">
-     <div className="cardContainer">
-        <div className="cardIcono">
-            <FontAwesomeIcon className="icono" icon={faHeart}></FontAwesomeIcon>
+    <div>
+        <div className={s.card}>
+            <FontAwesomeIcon className={s.heart} icon={faHeart} />
+            <img className={s.img} src={image} alt={id} />
+            <p className={s.brand}>{brand}</p>
+            <p className={s.name}>{name}</p>
+            <p className={s.price}>US${price}</p>
         </div>
-        <div className="cardImg">
-            <img src={image} alt={id} />
-        </div>
-        <h2 className="cardTitle">{brand}</h2>
-        <h3 className="cardText">{name}</h3>
-        <p className="price">${price}</p>
-     </div>
     </div>
     )
 };
