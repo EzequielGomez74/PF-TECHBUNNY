@@ -67,7 +67,7 @@ function Details() {
 
             switch (key) {
               case 'ul':
-                return (<ul>{value.map(data => {
+                return (<ul className={s.ul}>{value.map(data => {
                   return <li>{data}</li>
                 })}</ul>);
               case 'p':
