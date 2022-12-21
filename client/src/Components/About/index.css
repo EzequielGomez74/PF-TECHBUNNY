@@ -1,0 +1,57 @@
+.backgroundAboutUs{
+    background-color: #F9F9F9;
+}
+
+.tituloEquipo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.cardsContainer{
+    display: flex;
+    height: 1000px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.card{
+    width: 300px;
+    height: 430px;
+    background-color: #F9F9F9;
+    float: left;
+    margin: 15px 5px 25px;
+}
+
+.img{
+    width: 249px;
+    height: 285px;
+}
+
+.divImg{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.card h3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    font-style: normal;
+}
+
+.card h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 38px;
+    font-style: normal;
+}
+
+.gitHub{
+    width: 20px;
+    height: 20px;
+}

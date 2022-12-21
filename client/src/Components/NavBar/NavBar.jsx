@@ -22,7 +22,7 @@ function NavBar() {
         <section className={s.two}>
             <div>
                 <p><a href='/home'>HOME</a> </p>
-                <p>SOBRE TECHBUNNY</p>
+                <p><a href='/about'>SOBRE TECHBUNNY</a></p>
                 <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon icon={faAngleDown}/></p>
                 <p>VER ESTADO DE PEDIDO</p>
             </div>
