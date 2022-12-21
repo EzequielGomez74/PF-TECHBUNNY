@@ -61,7 +61,28 @@
 .gitHub{
     width: 20px;
     height: 20px;
+    color: black;
 }
+
+.linkedin{
+    width: 20px;
+    height: 20px;
+    color: #0e76a8;
+}
+
+.linkedin:hover{
+    color: #003148;
+}
+
+.gitHub:hover{
+    color:rgb(101, 101, 101);
+}
+
+a:link{
+    text-decoration: none }
+
+a:visited {
+    text-decoration: none }
 
 
 @media (max-width: 1115px){
