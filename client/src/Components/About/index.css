@@ -15,6 +15,7 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 0;
+  
 }
 
 .card{
@@ -23,10 +24,11 @@
     background-color: #F9F9F9;
     float: left;
     margin: 15px 5px 25px;
+    border: solid 1px #121111;
 }
 
 .img{
-    width: 249px;
+    width: 285px;
     height: 285px;
 }
 
@@ -54,4 +56,16 @@
 .gitHub{
     width: 20px;
     height: 20px;
+    
 }
+
+.linkedin{
+    width: 20px;
+    height: 20px;
+}
+
+a:link{
+    text-decoration: none }
+
+a:visited {
+    text-decoration: none }
