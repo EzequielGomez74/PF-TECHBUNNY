@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown} from '@fortawesome/free-solid-svg-icons'
 
@@ -10,7 +11,7 @@ function NavBar() {
         <section className={s.one}>
             <div>
                 <SearchBar />
-                <h1>TECHBUNNY</h1>
+                <Link to='/home'><h1 className={s.logo}>TECHBUNNY</h1></Link>
                 <div className={s.navDetail}>
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; 0</span>
