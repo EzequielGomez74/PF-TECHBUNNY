@@ -34,7 +34,7 @@
 }
 
 .divImg{
-    background-color: black;
+    background-color: white;
     border-radius: 50%;
     width: 83%;
     height: 60%;
@@ -67,11 +67,11 @@
 .linkedin{
     width: 20px;
     height: 20px;
-    color: #0e76a8;
+    color: black;
 }
 
 .linkedin:hover{
-    color: #003148;
+    color: #0e76a8;
 }
 
 .gitHub:hover{
