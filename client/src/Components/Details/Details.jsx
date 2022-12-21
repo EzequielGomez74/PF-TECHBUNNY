@@ -125,7 +125,7 @@ function Details() {
           <hr />
           {/* investigaa cómo hacer que las estrellas se muestren */}
           <input type="text" placeholder='Escribe un comentario sobre tu compra' />
-          <button>Agregar Comentario</button>
+          <button>AGREGAR COMENTARIO</button>
         </div>
       </section>
       <Footer />
