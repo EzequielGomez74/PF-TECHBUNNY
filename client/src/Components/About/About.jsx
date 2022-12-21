@@ -9,12 +9,14 @@ import imgAbi from "../../Photos/abi.png";
 import imgGer from "../../Photos/ger.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import "./About.css";
+import "./index.css";
 
 
 function aboutUs() {
     return (
+        
         <div className="backgroundAboutUs">
+            <NavBar />
         <div className="tituloEquipo">Nuestro Equipo</div>
         <div className="cardsContainer">
             <div className="card">
@@ -82,6 +84,7 @@ function aboutUs() {
                 <FontAwesomeIcon className="gitHub" icon={faGithub}/>
             </div>
         </div>
+        <Footer />
         </div>
 
 
