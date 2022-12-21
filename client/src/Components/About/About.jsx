@@ -43,28 +43,7 @@ function aboutUs() {
 
                 <a href="https://www.linkedin.com/in/alissa-gamarra/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
             </div>
-            <div className="card">
-            <div className="divImg">
-                <img className="img" src={imgSanti} alt="img"/>
-                </div>
-                <h3 className="apodo">SANTI</h3>
-                <h2 className="nombreCompleto">Santiago Larrique</h2>
-
-                 <a href="https://github.com/SantiagoL1804"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a>
-
-                <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
-            </div>
-            <div className="card">
-            <div className="divImg">
-                <img className="img" src={imgEmi} alt="img"/>
-                </div>
-                <h3 className="apodo">EMI</h3>
-                <h2 className="nombreCompleto">Emiliano Hernandez</h2>
-
-                <a href="https://github.com/emijhernandez"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a>
-
-                <a href="https://www.linkedin.com/in/emiliano-hernandez-473a3a231/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
-            </div>
+            
             <div className="card">
             <div className="divImg">
                 <img className="img" src={imgBeto} alt="img"/>
@@ -76,15 +55,7 @@ function aboutUs() {
 
                 <a href="https://www.linkedin.com/in/ezequiel-gomez-b9b563208/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
             </div>
-            <div className="card">
-            <div className="divImg">
-                <img className="img" src={imgMati} alt="img"/>
-                </div>
-                <h3 className="apodo">MATI</h3>
-                <h2 className="nombreCompleto">Matias Gimenez</h2>
-                <a href="https://github.com/Matyarg"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a> 
-                <a href="https://www.linkedin.com/in/matiassgimenez/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
-            </div>
+           
             <div className="card">
             <div className="divImg">
                 <img className="img" src={imgAbi} alt="img"/>
@@ -95,6 +66,41 @@ function aboutUs() {
                 <a href="https://www.linkedin.com/in/abi-breno-a0140320b/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
          
             </div>
+                  <div className="card">
+                <div className="divImg">
+                <img className="img" src={imgSanti} alt="img"/>
+                </div>
+                <h3 className="apodo">SANTI</h3>
+                <h2 className="nombreCompleto">Santiago Larrique</h2>
+
+                 <a href="https://github.com/SantiagoL1804"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a>
+
+                <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
+            </div>
+            
+
+            <div className="card">
+            <div className="divImg">
+                <img className="img" src={imgEmi} alt="img"/>
+                </div>
+                <h3 className="apodo">EMI</h3>
+                <h2 className="nombreCompleto">Emiliano Hernandez</h2>
+
+                <a href="https://github.com/emijhernandez"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a>
+
+                <a href="https://www.linkedin.com/in/emiliano-hernandez-473a3a231/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
+            </div>
+
+            <div className="card">
+            <div className="divImg">
+                <img className="img" src={imgMati} alt="img"/>
+                </div>
+                <h3 className="apodo">MATI</h3>
+                <h2 className="nombreCompleto">Matias Gimenez</h2>
+                <a href="https://github.com/Matyarg"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a> 
+                <a href="https://www.linkedin.com/in/matiassgimenez/"><FontAwesomeIcon className="linkedin" icon={faLinkedin} /> </a>
+            </div>
+            
             <div className="card">
             <div className="divImg">
                 <img className="img" src={imgGer} alt="img"/>
