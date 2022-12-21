@@ -9,7 +9,7 @@ import imgAbi from "../../Photos/abi.png";
 import imgGer from "../../Photos/ger.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import "./index.css";
+import "./About.css";
 
 
 function aboutUs() {
