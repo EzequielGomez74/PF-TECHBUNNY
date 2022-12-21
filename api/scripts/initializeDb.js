@@ -21,7 +21,7 @@ async function loadtoDb(array, model) {
 
 async function loadAllAssets() {
   try {
-    await loadtoDb(categories, Category, false);
+    await loadtoDb(categories, Category);
     const newArraySubcategories = await Promise.all(
       subcategories.map(async (sub) => {
         const categoryInstance = await Category.findByPk(sub.category_id);
@@ -32,9 +32,8 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArraySubcategories, SubCategory);
+    console.log('Acá')
     await loadtoDb(brands, Brand);
-    //using promise y handled with async/await
-    //using products.map instead of products.forEach
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {
         const brand = await Brand.findByPk(product.brand_id);
@@ -55,7 +54,7 @@ async function loadAllAssets() {
     await loadtoDb(newArrayProducts, Product);
     console.log("DATABSE LOADED SUCCESFULLY");
   } catch (error) {
-    throw new Error("DATABASE INITIALIZATION FAILED");
+    throw new Error(error.message);
   }
 }
 

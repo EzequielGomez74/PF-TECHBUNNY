@@ -10,7 +10,7 @@ function Footer() {
         {/* Maquetado completo. Falta linkear las preguntas frecuentes */}
         <div>
           <h3>SOPORTE</h3>
-          <p><FontAwesomeIcon icon={faComments} /> &nbsp;&nbsp; Preguntas frecuentes</p>
+          <p><FontAwesomeIcon icon={faComments} /> &nbsp;&nbsp;Preguntas frecuentes</p>
           <p><FontAwesomeIcon icon={faBox} /> &nbsp;&nbsp; Política de cambios</p>
           <p><FontAwesomeIcon icon={faBoxOpen} /> &nbsp;&nbsp;Política de devoluciones</p>
         </div>
@@ -35,3 +35,4 @@ function Footer() {
 }
 
 export default Footer
+

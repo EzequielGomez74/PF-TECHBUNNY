@@ -1,36 +1,22 @@
 import React from "react";
-import img from "../../Photos/auriejemplo.png";
-import "./CardV.css";
-import fav from "../../Photos/iconofav.png";
+import s from './CardV.module.css';
+import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 
 
-function CardV(){
-    const cardPrueba = {
-        icono: fav,
-        img: img,
-        title: "SKULLCANDY",
-        sub1: "Skullcandy Crusher",
-        sub2: "Bluetooth Sound Bass",
-        price: 4463.53,
-    }
+function CardV({id, brand, name, image, price, category, subcategory}){
     return(
-    <div className="cardSuper">
-     <div className="cardContainer">
-        <div className="cardIcono">
-            <FontAwesomeIcon className="icono" icon={faHeart}></FontAwesomeIcon>
+    <div>
+        <div className={s.card}>
+            <FontAwesomeIcon className={s.heart} icon={faHeart} />
+            <img className={s.img} src={image} alt={id} />
+            <p className={s.brand}>{brand}</p>
+            <Link to={`/detail/${id}`}><p className={s.name}>{name}</p></Link>
+            <p className={s.price}>US${price}</p>
         </div>
-        <div className="cardImg">
-            <img src={cardPrueba.img} alt="img"/>
-        </div>
-        <h2 className="cardTitle">{cardPrueba.title}</h2>
-        <h3 className="cardText">{cardPrueba.sub1}</h3>
-        <h3 className="cardText">{cardPrueba.sub2}</h3>
-        <p className="price">$ {cardPrueba.price}</p>
-     </div>
-     </div>
+    </div>
     )
 };
 

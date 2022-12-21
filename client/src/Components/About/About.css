@@ -1,0 +1,109 @@
+.backgroundAboutUs{
+    background-color: #F9F9F9;
+}
+
+.tituloEquipo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 45px;
+    padding: 40px;
+}
+
+.cardsContainer{
+    display: flex;
+    height: 1000px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: auto;
+    max-width: 1500px;
+}
+
+.card{
+    width: 300px;
+    height: 430px;
+    background-color: #F9F9F9;
+    float: left;
+    margin: 15px 5px 25px;
+}
+
+.img{
+    width: 249px;
+    height: 260px;
+}
+
+.divImg{
+    background-color: white;
+    border-radius: 50%;
+    width: 83%;
+    height: 60%;
+    margin-left: 25px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.divImg:hover{
+    transform: translateY(-6px);
+}
+
+.card h3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    font-style: normal;
+    margin-top: 25px;
+}
+
+.card h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    font-style: normal;
+}
+
+.gitHub{
+    width: 20px;
+    height: 20px;
+    color: black;
+}
+
+.linkedin{
+    width: 20px;
+    height: 20px;
+    color: black;
+}
+
+.linkedin:hover{
+    color: #0e76a8;
+}
+
+.gitHub:hover{
+    color:rgb(101, 101, 101);
+}
+
+a:link{
+    text-decoration: none }
+
+a:visited {
+    text-decoration: none }
+
+
+@media (max-width: 1115px){
+   .backgroundAboutUs{
+       height: 1600px;
+   }
+}
+
+@media (max-width: 970px){
+    .backgroundAboutUs{
+        height: 2000px;
+    }
+}
+
+@media (max-width: 656px){
+    .backgroundAboutUs{
+         height: 4000px;
+    }
+}
