@@ -39,6 +39,11 @@
     width: 83%;
     height: 60%;
     margin-left: 25px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.divImg:hover{
+    transform: translateY(-6px);
 }
 
 .card h3{
