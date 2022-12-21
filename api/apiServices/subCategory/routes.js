@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const {Router}=require("express")
 const controller=require("./controller")
 const router=Router()
@@ -20,3 +21,21 @@ router.get("/",async(req,res)=>{
 })
 
 module.exports= router;
+=======
+const { Router } = require("express");
+const controller = require("./controller.js");
+
+const router = Router();
+router.get("/", async (req, res) => {
+  const { category } = req.query;
+  try {
+    if (category)
+      res.status(200).json(await controller.getSubcategoryByCategory(category));
+    else res.status(200).json(await controller.getAllSubcategories());
+  } catch (error) {
+    res.sendStatus(400);
+  }
+});
+
+module.exports = router;
+>>>>>>> 66b7519adfc6f3782986a71883b225b8e9ec575c
