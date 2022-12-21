@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Details from './Components/Details/Details'
