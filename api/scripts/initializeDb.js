@@ -53,7 +53,7 @@ async function loadAllAssets() {
     await loadtoDb(newArrayProducts, Product);
     console.log("DATABSE LOADED SUCCESFULLY");
   } catch (error) {
-    throw new Error("DATABASE INITIALIZATION FAILED");
+    throw new Error(error.message);
   }
 }
 

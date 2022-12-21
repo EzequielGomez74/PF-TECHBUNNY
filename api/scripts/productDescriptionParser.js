@@ -25,4 +25,5 @@ function productDescriptionParser(description) {
   }
   return result;
 }
+
 module.exports = { productDescriptionParser };
