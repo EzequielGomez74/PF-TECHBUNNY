@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Home.module.css';
 
+
 function Home() {
   const products = useSelector(state => state.products)
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ function Home() {
   return (
     <div className={s.home}>
         <NavBar />
+
         <section>
           {products ? products.map(p => <CardV 
           key={p.product_id}
