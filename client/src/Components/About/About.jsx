@@ -1,11 +1,11 @@
 import React from "react";
 import imgEze from "../../Photos/eze.png";
 import imgAli from "../../Photos/ali.png";
+import imgAbi from "../../Photos/abi.png";
+import imgBeto from "../../Photos/beto.png";
 import imgSanti from "../../Photos/santi.png";
 import imgEmi from "../../Photos/emi.png";
-import imgBeto from "../../Photos/beto.png";
 import imgMati from "../../Photos/mati.png";
-import imgAbi from "../../Photos/abi.png";
 import imgGer from "../../Photos/ger.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
