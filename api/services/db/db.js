@@ -17,9 +17,11 @@ const modelDefiners = [];
 const dbPath = __dirname.split("\\services\\db")[0];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
-  modelDefiners.push(
-    require(path.join(dbPath, "/apiServices/", file, "/model.js"))
-  );
+  console.log(file);
+  if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
+    modelDefiners.push(
+      require(path.join(dbPath, "apiServices", file, "model.js"))
+    );
 });
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
@@ -40,6 +42,8 @@ const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
   sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
+// Category.hasMany(Product, { foreignKey: "category_id" });
+// Product.belongsTo(Category, { foreignKey: "category_id" });
 
 Product.hasMany(Review, { foreignKey: "product_id" });
 Review.belongsTo(Product, { foreignKey: "product_id" });
@@ -63,5 +67,7 @@ module.exports = {
   SubCategory,
   Product,
   Brand,
+  User,
+  Review,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
