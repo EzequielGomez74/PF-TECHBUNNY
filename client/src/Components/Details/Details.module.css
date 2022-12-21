@@ -190,19 +190,19 @@ hr{
         width: 420px;
         margin-bottom: 30px;
     }
-    .heart{
+    /* .heart{
         padding-top: 30px;
         padding-left: 880px;
         padding-bottom: 10px;
         font-size: 30px;
         transition: 0.5s;
-    } 
-     .productImage{
+    } */
+    /* .productImage{
         display: flex;
         flex-direction: column;
         align-items: center;
         background: #FFFFFF;
         width: 980px;
         height: 610px;
-    }
+    } */
 }
