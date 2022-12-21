@@ -10,13 +10,15 @@ import imgGer from "../../Photos/ger.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import "./About.css";
-
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 function aboutUs() {
     return (
-        
+        <div>
+        <NavBar />
         <div className="backgroundAboutUs">
-            <NavBar />
+            
         <div className="tituloEquipo">Nuestro Equipo</div>
         <div className="cardsContainer">
             <div className="card">
@@ -84,6 +86,8 @@ function aboutUs() {
                 <h2 className="nombreCompleto">German Fernandez</h2>
                 <a href="https://github.com/gerlini"> <FontAwesomeIcon className="gitHub" icon={faGithub}/> </a>
             </div>
+        </div>
+        
         </div>
         <Footer />
         </div>
