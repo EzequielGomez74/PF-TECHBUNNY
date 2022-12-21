@@ -10,7 +10,7 @@ function NavBar() {
         <section className={s.one}>
             <div>
                 <SearchBar />
-                <h1>TECHBUNNY</h1>
+                <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; 0</span>
@@ -21,7 +21,7 @@ function NavBar() {
         </section>
         <section className={s.two}>
             <div>
-                <p>HOME</p>
+                <p><a href='/home'>HOME</a> </p>
                 <p>SOBRE TECHBUNNY</p>
                 <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon icon={faAngleDown}/></p>
                 <p>VER ESTADO DE PEDIDO</p>

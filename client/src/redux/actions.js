@@ -8,6 +8,14 @@ export const getProducts = () => {
         .catch(error => console.log(error))
     }
 }
+export const getProductById = (id) => {
+    return function(dispatch){
+        return fetch (`http://localhost:3001/products/${id}`)
+        .then(resp => resp.json())
+        .then(data => dispatch({type: GET_PRODUCT_BY_ID, payload: data}))
+        .catch(error => console.log(error))
+    }
+}
 
 export const getCategories = () => {
     return function(dispatch){
@@ -18,11 +26,3 @@ export const getCategories = () => {
     }
 }
 
-export const getProductById = (id) => {
-    return function(dispatch){
-        return fetch (`http://localhost:3001/products/${id}`)
-        .then(resp => resp.json())
-        .then(data => dispatch({type: GET_PRODUCT_BY_ID, payload: data}))
-        .catch(error => console.log(error))
-    }
-}
