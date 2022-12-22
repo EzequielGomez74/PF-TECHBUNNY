@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import s from './CardV.module.css';
 import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
