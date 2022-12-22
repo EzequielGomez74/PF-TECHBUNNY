@@ -8,6 +8,7 @@ import s from './Details.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart, faStar, faTruck, faStore} from "@fortawesome/free-solid-svg-icons";
 import Dropdown from '../Dropdown/Dropdown';
+import Carrusel from '../Carrusel/Carrusel';
 
 function Details() {
   const { id } = useParams()
@@ -138,7 +139,7 @@ function Details() {
             <div>
               <button onClick={handleMinus} >-</button>&nbsp;&nbsp;&nbsp;&nbsp;{quantity}&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={handlePlus}>+</button>
             </div>
-            <span className={s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {stock} </span>
+            <span className={s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)} </span>
           </div>
           <button type='submit' className={s.mainButton}>Agregar al Carrito</button>
         </div>
@@ -151,12 +152,13 @@ function Details() {
         </div>
       </div>
 
-      <section>
+      <section className={s.carruselSection}>
         <br />
-        <p>CARRUSEL</p>
         <br />
+        <Carrusel />
       </section>
-
+      
+      <br />
       <div className={s.sub}>
         <div className={s.subTitles}>
           <h5>Comentarios</h5>
@@ -184,7 +186,7 @@ function Details() {
             <form className={s.cForm} onSubmit={handleSubmit}>
               <div>
                 <label className={s.label}>Valoración de tu compra&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <select name="rating" value={score.rating} onChange={handleChange} required >
+                <select name="rating" value={score.rating} onChange={handleChange} >
                   <option>seleccionar</option>
                   <option value="★☆☆☆☆">★☆☆☆☆</option>
                   <option value="★★☆☆☆">★★☆☆☆</option>
@@ -195,11 +197,12 @@ function Details() {
               </div>
               <textarea rows="5" name="review" value={score.review} placeholder='Escribe un comentario sobre tu compra' onChange={handleChange} />
               <br />
-              <input className={s.mainButton} type="submit" value="Submit" />
+              <input className={s.mainButton} type="submit" value="Agregar Comentario" />
             </form>
           </div>
         </div>
       </section>
+      <br />
       <Footer />
     </div>
   )
@@ -207,7 +210,8 @@ function Details() {
 
 export default Details
 
-
+//Extra al formulario de comentario
+// Faltan las validaciones del formulario. Es necesario que cuando se clickee el boton, se haya recibido todo, es decir, user_id, product_id, review y rating.
 
 // Recordatorio
 // Cuando se terminé el formulario de comentarios(se recibe por body el user_id, product_id, review y rating) se debe despachar un action creator CREATE_COMMENT(user_id,product_id, review, rating)
