@@ -53,32 +53,32 @@ function NavBar() {
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
-                <p>VER ESTADO DE PEDIDO</p>
                 <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpenCat(!openCat)}} icon={faAngleDown}/></p>
+                <p>VER ESTADO DE PEDIDO</p>
                 </div>
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
         <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
                     <ul>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Equipos armados"}/>
+                        <DropdownItemCat text={"Consolas"}/>
+                        <DropdownItemCat text={"Notebooks"}/>
+                        <DropdownItemCat text={"Gabinetes"}/>
+                        <DropdownItemCat text={"Fuentes y UPS"}/>
+                        <DropdownItemCat text={"Motherboards"}/>
+                        <DropdownItemCat text={"Procesadores"}/>
+                        <DropdownItemCat text={"Cooling"}/>
                     </ul>
                     <ul>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
-                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Memorias"}/>
+                        <DropdownItemCat text={"Almacenamiento"}/>
+                        <DropdownItemCat text={"Tarjetas de video"}/>
+                        <DropdownItemCat text={"Periféricos"}/>
+                        <DropdownItemCat text={"Monitores y TV"}/>
+                        <DropdownItemCat text={"Sillas"}/>
+                        <DropdownItemCat text={"Pendrives"}/>
+                        <DropdownItemCat text={"Impresoras"}/>
                     </ul>
         </div>
 
