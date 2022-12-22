@@ -67,5 +67,6 @@ module.exports = {
   Brand,
   User,
   Review,
+  Country,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
