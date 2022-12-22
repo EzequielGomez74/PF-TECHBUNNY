@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultValue: " "
+        defaultValue: "",
       },
       rating: {
         type: DataTypes.INTEGER,
@@ -21,9 +21,10 @@ module.exports = (sequelize) => {
       },
       reviewDate: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
+      },
     },
-  },
     {
       timestamps: false,
       createdAt: false,
