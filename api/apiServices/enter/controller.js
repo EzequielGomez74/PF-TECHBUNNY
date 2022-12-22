@@ -15,6 +15,7 @@ async function handleNewUser(user, password) {
     if (!duplicate)
       throw new Error({ statusCode: 400, msg: "Username already exist" }); //409 = conflict
     //Encryptar el password
+    console.log("2");
     const hashedPwd = await bcrypt.hash(password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
     const newUser = {
@@ -30,7 +31,8 @@ async function handleNewUser(user, password) {
     const userCreated = await User.create(newUser);
     return { success: `New user ${user} created` };
   } catch (error) {
-    console.log(error.message);
+    console.log("22");
+    console.log(error.message.statusCode);
     throw new Error({ statusCode: 500, msg: error.message });
   }
 }
