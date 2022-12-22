@@ -2,9 +2,39 @@ import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import user from "../../Photos/user.png";
+import logout from "../../Photos/log-out.png";
+import "./NavBar.css";
+import {useState, useEffect, useRef} from 'react';
+import checkIn from "../../Photos/checkin.png";
+import logIn from "../../Photos/log-in.png";
 
 function NavBar() {
+
+  const [open, setOpen] = useState(false);
+  const [openCat, setOpenCat] = useState(false);
+
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let handler = (e)=>{
+      if(!menuRef.current.contains(e.target)){
+        setOpen(false);
+        console.log(menuRef.current);
+      }if(!menuRef.current.contains(e.target)){
+        setOpenCat(false);
+        console.log(menuRef.current);
+      }     
+    };
+
+    document.addEventListener("mousedown", handler);
+    
+    return() =>{
+      document.removeEventListener("mousedown", handler);
+    }
+  });
+
   return (
     <div className={s.navBar}>
         <section className={s.one}>
@@ -15,7 +45,7 @@ function NavBar() {
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; 0</span>
                     <span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; 0</span>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
+                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
@@ -23,10 +53,35 @@ function NavBar() {
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
-                <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon icon={faAngleDown}/></p>
                 <p>VER ESTADO DE PEDIDO</p>
-            </div>
+                <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpenCat(!openCat)}} icon={faAngleDown}/></p>
+                </div>
+                
         </section>
+        {/* CATEGORIA DROPDOWN */}
+        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
+                    <ul>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                    </ul>
+                    <ul>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItem text={"Ejemplo"}/>
+                    </ul>
+        </div>
+
         <section className={s.three}>
             <div>
                 <p>Monitores</p>
@@ -43,8 +98,38 @@ function NavBar() {
                 <p>Discos</p>
             </div>
         </section>
+
+        {/* USUARIO REGISTRADO */}
+        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+                    <h3>NOMBRE USUARIO</h3>
+                    <span>Bienvenido/a a TECHBUNNY</span>
+                    <ul>
+                        <DropdownItem img = {user} text={"My Profile"}/>
+                        <DropdownItem img = {logout} text={"Log Out"}/>
+                    </ul>
+        </div>
+
+        {/* INVITADO */}
+        {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+                    <h3>INICIA SESIÓN</h3>
+                    <span>Para una mejor experiencia</span>
+                    <ul>
+                        <DropdownItem img = {logIn} text={"Log In"}/>
+                        <DropdownItem img = {checkIn} text={"Check In"}/>
+                    </ul>
+        </div> */}
+            
     </div>
   )
+}
+
+function DropdownItem(props){
+    return(
+        <li className={s.dropdownItem}>
+            <img src={props.img}></img>
+            <a>{props.text}</a>
+        </li>
+    )
 }
 
 export default NavBar
