@@ -5,6 +5,8 @@ import CardV from '../Card V/CardV';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Home.module.css';
+import Newsletter from '../NewsLetter/Newsletter';
+import BannerHome from '../Banner Home/Banner';
 
 function Home() {
   const products = useSelector(state => state.products)
@@ -17,6 +19,7 @@ function Home() {
   return (
     <div className={s.home}>
         <NavBar />
+        <BannerHome/>
 
         <section>
           {products ? products.map(p => <CardV 
@@ -42,7 +45,7 @@ function Home() {
                 <div className={s.f}></div>
             </div>
         </section>
-        
+        <Newsletter/>
         <Footer/>
         
     </div>
