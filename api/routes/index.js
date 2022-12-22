@@ -11,7 +11,7 @@ const reviews = require("../apiServices/review/routes.js");
 
 router.use("/enter", enter);
 router.use("/refresh", refresh);
-router.use(verifyJWT); //middleware de validacion de JWT
+//router.use(verifyJWT); //middleware de validacion de JWT
 router.use("/products", products);
 router.use("/categories", categories);
 router.use("/subcategories", subcategories);
