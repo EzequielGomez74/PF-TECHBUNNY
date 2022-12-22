@@ -44,7 +44,11 @@
   .dropdown-menu ul li{
     padding: 10px  0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    margin-left: -20px;
+    margin-left: -24px;
+  }
+
+  .dropdown-menu ul li a{
+    margin-top: -4px;
   }
   
   .dropdown-menu ul li:hover a{
@@ -52,12 +56,6 @@
     cursor: pointer;
   }
   
-  .dropdown-menu ul li:hover img{
-    opacity: 20;
-    cursor: pointer;
-    
-  }
-
   .dropdown-menu-cat{
     position: absolute;
     top: 120px;
@@ -111,7 +109,4 @@
     cursor: pointer;
   }
   
-  .dropdown-menu-cat ul li:hover img{
-    opacity: 20;
-    cursor: pointer;
-  }
+  

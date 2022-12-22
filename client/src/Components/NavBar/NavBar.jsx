@@ -2,7 +2,7 @@ import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightFromBracket, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import user from "../../Photos/user.png";
 import logout from "../../Photos/log-out.png";
 import "./NavBar.css";
@@ -61,24 +61,24 @@ function NavBar() {
         {/* CATEGORIA DROPDOWN */}
         <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
                     <ul>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
                     </ul>
                     <ul>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
-                        <DropdownItem text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
+                        <DropdownItemCat text={"Ejemplo"}/>
                     </ul>
         </div>
 
@@ -100,24 +100,24 @@ function NavBar() {
         </section>
 
         {/* USUARIO REGISTRADO */}
-        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+        {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                     <h3>NOMBRE USUARIO</h3>
                     <span>Bienvenido/a a TECHBUNNY</span>
                     <ul>
-                        <DropdownItem img = {user} text={"My Profile"}/>
-                        <DropdownItem img = {logout} text={"Log Out"}/>
+                        <DropdownItem icon = {faUser} text={"My Profile"}/>
+                        <DropdownItem icon = {faRightFromBracket} text={"Log Out"}/>
                     </ul>
-        </div>
+        </div> */}
 
         {/* INVITADO */}
-        {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                     <h3>INICIA SESIÓN</h3>
                     <span>Para una mejor experiencia</span>
                     <ul>
-                        <DropdownItem img = {logIn} text={"Log In"}/>
-                        <DropdownItem img = {checkIn} text={"Check In"}/>
+                        <DropdownItem icon = {faRightToBracket} text={"Log In"}/>
+                        <DropdownItem icon = {faUserPlus} text={"Check In"}/>
                     </ul>
-        </div> */}
+        </div>
             
     </div>
   )
@@ -127,6 +127,15 @@ function DropdownItem(props){
     return(
         <li className={s.dropdownItem}>
             <img src={props.img}></img>
+            <FontAwesomeIcon icon={props.icon} />
+            <a>{props.text}</a>
+        </li>
+    )
+}
+
+function DropdownItemCat(props){
+    return(
+        <li className={s.dropdownItem}>
             <a>{props.text}</a>
         </li>
     )
