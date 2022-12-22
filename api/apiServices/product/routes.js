@@ -32,9 +32,8 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-  const product = { ...req.body };
   try {
-    res.status(200).send(await controller.updateProduct(product));
+    res.status(200).send(await controller.updateProduct(req.body));
   } catch (error) {
     res.status(400).send(error);
   }
