@@ -11,6 +11,7 @@ import LandingPage from './Components/Landing/LandingPage';
 function App() {
   return (
     <div className="App">
+      
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path='/home' component={Home}  />

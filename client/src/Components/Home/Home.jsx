@@ -6,7 +6,6 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Home.module.css';
 
-
 function Home() {
   const products = useSelector(state => state.products)
   const dispatch = useDispatch()
@@ -43,7 +42,9 @@ function Home() {
                 <div className={s.f}></div>
             </div>
         </section>
+        
         <Footer/>
+        
     </div>
   )
 }
