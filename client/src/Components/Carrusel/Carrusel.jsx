@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "./styles.css";
+import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import CardV from '../Card V/CardV';
@@ -117,17 +117,30 @@ const products = [
     "subcategory": "Equipos AMD",
     "category": "Equipos armados",
     "active": true
-}]
+},
+{   "product_id": 10,
+    "name": "Equipo AMD Ryzen 5 5600X Full Gamer – 16gb – SSD – RTX3050",
+    "image": "https://thotcomputacion.com.uy/wp-content/uploads/2016/09/ryzrtx4-1-600x597.jpg",
+    "price": "1650.00",
+    "stock": 6,
+    "soldCount": 5,
+    "brand": "Amd",
+    "subcategory": "Equipos AMD",
+    "category": "Equipos armados",
+    "active": true
+  },
+  ]
 
-function Carrusel() {
+
+ function Carrusel() {
     return (
-        <>
+        <div className='container'>
           <Swiper
             slidesPerView={5}
             spaceBetween={15}
             slidesPerGroup={5}
             loop={true}
-            loopFillGroupWithBlank={true}
+            loopFillGroupWithBlank={true} 
             pagination={{
               clickable: true,
             }}
@@ -148,7 +161,7 @@ function Carrusel() {
                 />             
                 </SwiperSlide>)) }
           </Swiper>
-        </>
+        </div>
     );
 }
 
