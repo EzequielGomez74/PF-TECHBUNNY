@@ -1,0 +1,17 @@
+.input{
+    height: 40px;
+    width: 250px;
+    border: none;
+    text-indent: 10px;
+}
+
+.inputIcon{
+    height: 40px;
+    width: 40px;
+    background-color: #20232A;
+    color: white;
+}
+
+.inputIcon:hover{
+    cursor: pointer;
+}
