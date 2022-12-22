@@ -4,16 +4,11 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 async function handleNewUser(user, password) {
-  if (!user || !password)
-    throw new Error({
-      statusCode: 400,
-      msg: "Username and Password are required",
-    });
+  if (!user || !password) throw new Error("Username and Password are required");
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({ where: { name: user } });
-    if (!duplicate)
-      throw new Error({ statusCode: 400, msg: "Username already exist" }); //409 = conflict
+    if (duplicate) throw new Error("Username already exist"); //409 = conflict
     //Encryptar el password
     console.log("2");
     const hashedPwd = await bcrypt.hash(password, 10); //10 es la cantidad de SALT
@@ -31,9 +26,7 @@ async function handleNewUser(user, password) {
     const userCreated = await User.create(newUser);
     return { success: `New user ${user} created` };
   } catch (error) {
-    console.log("22");
-    console.log(error.message.statusCode);
-    throw new Error({ statusCode: 500, msg: error.message });
+    throw new Error(error);
   }
 }
 async function handleLogin(user, password) {
