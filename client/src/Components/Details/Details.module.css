@@ -223,6 +223,12 @@ hr{
     height: 10px;
 }
 
+/* Estilos de Carrusel */
+.carruselSection{
+    max-width: 1450px;
+    margin: auto;
+}
+
 /* Estilo de Comentarios */
 .commentSection{
     max-width: 1500px;
@@ -296,6 +302,7 @@ hr{
     padding-top: 10px;
     text-indent: 15px;
     background-color: #F6F5FA;
+    resize: none;
 }
 
 .cForm div{
@@ -314,7 +321,17 @@ textarea{
 }
 
 
-
+.testeo{
+    background-color: orange;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
 
 @media only screen and (max-width: 600px) {
     .productImage{
