@@ -13,4 +13,8 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/", (req, res) => {
+  const { review_id, description, rating } = req.body;
+});
+
 module.exports = router;
