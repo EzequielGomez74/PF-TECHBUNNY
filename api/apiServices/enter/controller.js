@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 async function handleNewUser(username, password) {
-  if (!user || !password)
+  if (!username || !password)
     throw new Error({
       statusCode: 400,
       msg: "Username and Password are required",
@@ -32,7 +32,7 @@ async function handleNewUser(username, password) {
     const userCreated = await User.create(newUser);
     return { success: `New user ${user} created` };
   } catch (error) {
-    throw new Error({ statusCode: 500, msg: error.message });
+    throw new Error(error);
   }
 }
 async function handleLogin(username, password) {

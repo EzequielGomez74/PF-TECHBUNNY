@@ -2,7 +2,8 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 
 const router = Router();
-
+//GET 	/products                                                                             <-- Trae todos los productos
+//GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
 router.get("/", async (req, res) => {
   try {
     if (req.query)
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+//GET 	/products/2											                                                      <-- Trae el producto de product_id = 2
 router.get("/:productId", async (req, res) => {
   const { productId } = req.params;
   try {
@@ -21,7 +22,7 @@ router.get("/:productId", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+//POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", async (req, res) => {
   const product = { ...req.body };
   try {
@@ -30,7 +31,7 @@ router.post("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+//PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
 router.put("/", async (req, res) => {
   try {
     res.status(200).send(await controller.updateProduct(req.body));
@@ -38,7 +39,7 @@ router.put("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+//DELETE	/products/3											                                                    <-- Borra el producto de product_id = 3 (El borrado es lógico)
 router.delete("/:productId", async (req, res) => {
   const { productId } = req.params;
   try {
