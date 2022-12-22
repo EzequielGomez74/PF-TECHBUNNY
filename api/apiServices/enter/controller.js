@@ -3,17 +3,23 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-async function handleNewUser(user, password) {
-  if (!user || !password) throw new Error("Username and Password are required");
+async function handleNewUser(username, password) {
+  if (!user || !password)
+    throw new Error({
+      statusCode: 400,
+      msg: "Username and Password are required",
+    });
   //Buscar usernames duplicados en DB
   try {
-    const duplicate = await User.findOne({ where: { name: user } });
-    if (duplicate) throw new Error("Username already exist"); //409 = conflict
+    const duplicate = await User.findOne({ where: { username: username } });
+    if (duplicate)
+      throw new Error({ statusCode: 400, msg: "Username already exist" }); //409 = conflict
     //Encryptar el password
     console.log("2");
     const hashedPwd = await bcrypt.hash(password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
     const newUser = {
+      username: username,
       name: "jose",
       surname: "perez",
       password: hashedPwd,
@@ -29,14 +35,14 @@ async function handleNewUser(user, password) {
     throw new Error(error);
   }
 }
-async function handleLogin(user, password) {
-  if (!user || !password)
+async function handleLogin(username, password) {
+  if (!username || !password)
     throw new Error({
       statusCode: 400,
       msg: "Username and Password are required",
     });
   try {
-    const foundUser = await User.findOne({ where: { name: user } });
+    const foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser)
       throw new Error({ statusCode: 401, msg: "Unauthorized user" }); //401 = unauthorized
     //evaluar password
