@@ -1,0 +1,117 @@
+:root {
+  --secondary-bg: #d7f136;
+  --secondary-text-color: #cecece;
+  --border-radius: 8px;
+  --speed: 500ms;
+}
+
+
+ .dropdown-menu{
+    position: absolute;
+    top: 60px;
+    right: 172px;
+    background-color: #d7f136;
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    width: 160px;
+  }
+  
+  .dropdown-menu::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+    background: var(--secondary-bg);
+    transform: rotate(45deg);
+  }
+  
+  .dropdown-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu ul li{
+    padding: 10px  0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-left: -20px;
+  }
+  
+  .dropdown-menu ul li:hover a{
+    color: #fefefe;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu ul li:hover img{
+    opacity: 20;
+    cursor: pointer;
+    
+  }
+
+  .dropdown-menu-cat{
+    position: absolute;
+    top: 120px;
+    right: 120px;
+    background-color: #d7f136;
+    border-radius: var(--border-radius);
+    padding: 5px -2px;
+    width:230px;
+  }
+  
+  .dropdown-menu-cat::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    height: 20px;
+    width: 17px;
+    background: var(--secondary-bg);
+    transform: rotate(45deg);
+  }
+  
+  .dropdown-menu-cat.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+    
+  }
+  
+  .dropdown-menu-cat.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu-cat ul li{
+    padding: 4px -5px;
+    border-left: 2px solid rgba(0, 0, 0, 0.295);
+    float: left;
+    margin-left: -10px;
+  }
+
+  .dropdown-menu-cat ul li a{
+    margin-right: 20px;
+    margin-left: 0px;
+  }
+  
+  .dropdown-menu-cat ul li:hover a{
+    color: #fefefe;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu-cat ul li:hover img{
+    opacity: 20;
+    cursor: pointer;
+  }
