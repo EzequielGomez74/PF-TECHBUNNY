@@ -32,6 +32,7 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArraySubcategories, SubCategory);
+    console.log('Acá')
     await loadtoDb(brands, Brand);
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {
