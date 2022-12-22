@@ -35,7 +35,6 @@ router.put("/", async (req, res) => {
       }
     } else {
       //login
-      console.log("ASD");
       const { user, password } = req.body;
       if (user && password) {
         const { accessToken, refreshToken } = await controller.handleLogin(
