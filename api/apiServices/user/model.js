@@ -5,9 +5,16 @@ module.exports = (sequelize) => {
     "User",
     {
       user_id: {
-        type: DataTypes.UUID,
+        // type: DataTypes.UUID,
+        // defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -18,7 +25,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       email: {
@@ -39,9 +46,9 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        type: DataTypes.ENUM(["guest","admin","user"]),
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: "user",
+        defaultValue: 2,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -56,7 +63,12 @@ module.exports = (sequelize) => {
       profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultvalue: "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
+        defaultvalue:
+          "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
+      },
+      refreshToken: {
+        type: DataTypes.TEXT,
+        allowNull: true,
       },
       isLogged: {
         type: DataTypes.BOOLEAN,
