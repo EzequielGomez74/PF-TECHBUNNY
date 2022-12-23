@@ -6,6 +6,7 @@ import Details from './Components/Details/Details'
 import Home from './Components/Home/Home';
 import About from './Components/About/About';
 import LandingPage from './Components/Landing/LandingPage';
+import Category from './Components/Category/Category';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
+        <Route exact path='/category/:name' component={Category}/>
       </Switch>
     </div>
   );
