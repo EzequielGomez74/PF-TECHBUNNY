@@ -20,4 +20,14 @@ async function getUserById(user_id) {
   }
 }
 
-module.exports = { getAllUsers,getUserById };
+async function editUser(user_id, data){
+  try {
+    await User.update( data, { where: { user_id }})
+    return ("usuario  modificado exitosamente.") //", User.username, "
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+
+module.exports = { getAllUsers,getUserById , editUser};
