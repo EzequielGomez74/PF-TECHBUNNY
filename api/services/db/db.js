@@ -17,9 +17,11 @@ const modelDefiners = [];
 const dbPath = __dirname.split("\\services\\db")[0];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
-  modelDefiners.push(
-    require(path.join(dbPath, "/apiServices/", file, "/model.js"))
-  );
+  console.log(file);
+  if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
+    modelDefiners.push(
+      require(path.join(dbPath, "apiServices", file, "model.js"))
+    );
 });
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
@@ -36,8 +38,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
-  sequelize.models;
+const {
+  Brand,
+  Category,
+  Country,
+  Order,
+  Product,
+  Review,
+  SubCategory,
+  User,
+  OrderProduct,
+} = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
 
@@ -47,8 +58,14 @@ Review.belongsTo(Product, { foreignKey: "product_id" });
 User.hasMany(Review, { foreignKey: "user_id" });
 Review.belongsTo(User, { foreignKey: "user_id" });
 
-Order.belongsToMany(Product, { through: "OrderProduct" });
-Product.belongsToMany(Order, { through: "OrderProduct" });
+Order.belongsToMany(Product, {
+  through: OrderProduct,
+  foreignKey: "order_id",
+});
+Product.belongsToMany(Order, {
+  through: OrderProduct,
+  foreignKey: "product_id",
+});
 
 User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User, { foreignKey: "user_id" });
@@ -63,5 +80,10 @@ module.exports = {
   SubCategory,
   Product,
   Brand,
+  User,
+  Review,
+  Country,
+  Order,
+  OrderProduct,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
