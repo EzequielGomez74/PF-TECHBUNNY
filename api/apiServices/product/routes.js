@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
-
+const requiredAccess = require("../../middlewares/requiredAccess.js");
 const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
@@ -14,6 +14,8 @@ router.get("/", async (req, res) => {
   }
 });
 //GET 	/products/2											                                                      <-- Trae el producto de product_id = 2
+router.use(requiredAccess(2));
+console.log("PASA POR product ID");
 router.get("/:productId", async (req, res) => {
   const { productId } = req.params;
   try {
@@ -39,7 +41,8 @@ router.put("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-//DELETE	/products/3											                                                    <-- Borra el producto de product_id = 3 (El borrado es lógico)
+//DELETE	/products/3									                                                        <-- Borra el producto de product_id = 3 (El borrado es lógico)
+router.use(requiredAccess(3));
 router.delete("/:productId", async (req, res) => {
   const { productId } = req.params;
   try {
