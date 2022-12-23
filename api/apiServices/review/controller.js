@@ -20,7 +20,6 @@ async function createReviews(review) {
 }
 
 async function updateReviews(review) {
-  console.log(review);
   try {
     await Review.update(review, { where: { review_id: review.review_id } });
     return "Reseña modificada con exito!";
