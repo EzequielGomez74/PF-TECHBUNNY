@@ -42,8 +42,6 @@ const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
   sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
-// Category.hasMany(Product, { foreignKey: "category_id" });
-// Product.belongsTo(Category, { foreignKey: "category_id" });
 
 Product.hasMany(Review, { foreignKey: "product_id" });
 Review.belongsTo(Product, { foreignKey: "product_id" });
@@ -68,5 +66,7 @@ module.exports = {
   Product,
   Brand,
   User,
+  Review,
+  Country,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
