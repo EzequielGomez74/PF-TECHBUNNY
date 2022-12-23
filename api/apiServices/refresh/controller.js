@@ -5,14 +5,16 @@ require("dotenv").config();
 async function handleRefreshToken(cookie) {
   const foundUser = await User.findOne({ where: { refreshToken: cookie } });
   //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-  if (!foundUser) throw new Error({ statusCode: 402, msg: "not found" });
+  if (!foundUser) throw new Error("not found");
   let accessToken = null;
+  console.log("verifica");
   jwt.verify(
     foundUser.refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (err, decode) => {
       if (err || foundUser.username !== decode.username)
-        throw new Error({ statusCode: 401, msg: "not found" });
+        throw new Error("not found");
+      console.log("genera el nuevo token");
       accessToken = jwt.sign(
         { username: foundUser.username },
         process.env.ACCESS_TOKEN_SECRET,
@@ -20,6 +22,7 @@ async function handleRefreshToken(cookie) {
           expiresIn: "30s",
         }
       );
+      console.log(accessToken);
     }
   );
   return accessToken;

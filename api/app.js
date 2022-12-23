@@ -17,9 +17,9 @@ server.use(morgan("dev"));
 server.use(accessControl);
 
 server.use("/", indexRouter);
-//404
+//server.use(cuatrocientoscuatro)
 // Error catching endware.
-server.use(generalErrorHandler);
+//server.use(generalErrorHandler);
 //FIN DE MIDDLEWARES
 
 module.exports = server;

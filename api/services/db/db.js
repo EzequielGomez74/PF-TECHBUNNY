@@ -38,8 +38,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
-  sequelize.models;
+const {
+  Brand,
+  Category,
+  Country,
+  Order,
+  Product,
+  Review,
+  SubCategory,
+  User,
+  OrderProduct,
+} = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
 
@@ -49,8 +58,14 @@ Review.belongsTo(Product, { foreignKey: "product_id" });
 User.hasMany(Review, { foreignKey: "user_id" });
 Review.belongsTo(User, { foreignKey: "user_id" });
 
-Order.belongsToMany(Product, { through: "OrderProduct" });
-Product.belongsToMany(Order, { through: "OrderProduct" });
+Order.belongsToMany(Product, {
+  through: OrderProduct,
+  foreignKey: "order_id",
+});
+Product.belongsToMany(Order, {
+  through: OrderProduct,
+  foreignKey: "product_id",
+});
 
 User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User, { foreignKey: "user_id" });
@@ -68,5 +83,7 @@ module.exports = {
   User,
   Review,
   Country,
+  Order,
+  OrderProduct,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
