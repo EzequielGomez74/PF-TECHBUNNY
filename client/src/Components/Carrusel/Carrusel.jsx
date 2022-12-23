@@ -117,11 +117,23 @@ const products = [
     "subcategory": "Equipos AMD",
     "category": "Equipos armados",
     "active": true
+  },
+  {
+  "product_id": 9,
+  "name": "Equipo AMD Ryzen 5 3600 Full Gamer – 16Gb – RX6500XT",
+  "image": "https://thotcomputacion.com.uy/wp-content/uploads/2021/10/xz10r-600x600.jpg",
+  "price": "1599.99",
+  "stock": 9,
+  "soldCount": 5,
+  "brand": "Amd",
+  "subcategory": "Equipos AMD",
+  "category": "Equipos armados",
+  "active": true
 }]
 
 function Carrusel() {
     return (
-        <>
+        <div className='container'>
           <Swiper
             slidesPerView={5}
             spaceBetween={15}
@@ -148,7 +160,7 @@ function Carrusel() {
                 />             
                 </SwiperSlide>)) }
           </Swiper>
-        </>
+        </div>
     );
 }
 

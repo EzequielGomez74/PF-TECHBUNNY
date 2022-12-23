@@ -21,7 +21,7 @@ body {
 .swiper-slide {
   text-align: center;
   font-size: 5px;
-  height: 430px;
+  height: 460px;
   background: white;
 
   /* Center slide text vertically */
@@ -55,6 +55,26 @@ span .swiper-pagination-bullet-active{
   --swiper-theme-color: #D7F136;
 }
 
+@media (max-width: 600px) {
+  .swiper-slide {
+    margin: 140px;
+  }
+  .swiper-button-next{
+    background-color: #c5bcbc;
+   opacity: 0;
+}
+.swiper-button-prev{
+  background-color: #c5bcbc;
+ opacity: 0;
+
+
+
+}
+.container{
+  width: 420px;
+}
+  
+  } 
 
 /* .swiper-slide img {
   display: block;

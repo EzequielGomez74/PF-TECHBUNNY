@@ -42,6 +42,8 @@
 }
 
 .heart{
+    background: none;
+    border: none;
     padding-top: 30px;
     padding-right: 30px;
     font-size: 25px;
@@ -229,6 +231,19 @@ hr{
     margin: auto;
 }
 
+.carrusel{
+    padding-top: 40px;
+}
+
+.currentProducts{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
 /* Estilo de Comentarios */
 .commentSection{
     max-width: 1500px;
@@ -287,6 +302,10 @@ hr{
     padding-bottom: 10px;
 }
 
+.noReview{
+    margin-top: 25px;
+}
+
 .cForm{
     margin-top: 40px;
     margin-left: 30px;
@@ -314,19 +333,6 @@ hr{
     font-weight: 700;
     font-size: 15px;
     line-height: 20px;
-}
-
-
-.testeo{
-    background-color: orange;
-    max-width: 1500px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 40px;
-    padding-bottom: 70px;
 }
 
 @media only screen and (max-width: 600px) {
