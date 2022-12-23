@@ -31,7 +31,7 @@
 
 .icon{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .imgP{
@@ -206,7 +206,7 @@ hr{
 .subTitles{
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
