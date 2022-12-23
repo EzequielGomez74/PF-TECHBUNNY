@@ -1,5 +1,6 @@
 [
   {
+    "username": "Betolocura",
     "name": "Beto",
     "surname": "Martinez",
     "password": "pepito123",
@@ -8,6 +9,7 @@
     "zipCode": 7600
   },
   {
+    "username": "Santilocura",
     "name": "Santi",
     "surname": "Larrique",
     "password": "pepito1234",
@@ -16,6 +18,7 @@
     "zipCode": 11200
   },
   {
+    "username": "Emilocura",
     "name": "Emi",
     "surname": "Hernandez",
     "password": "chessPro",
