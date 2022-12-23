@@ -29,7 +29,9 @@ router.put("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+// param: {
+//   review_id: 1;
+// }
 router.delete("/:review_id", async (req, res) => {
   const { review_id } = req.params;
   try {
