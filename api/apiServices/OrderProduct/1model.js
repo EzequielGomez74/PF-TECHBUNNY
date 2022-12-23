@@ -4,28 +4,23 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Country",
+    "OrderProduct",
     {
-      country_id: {
+      orderProduct_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      flag: {
-        type: DataTypes.TEXT,
+      count: {
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: "https://flagcdn.com/w320/ar.png",
       },
     },
     {
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
       freezeTableName: true,
     }
   );

@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       status: {
-        type: DataTypes.ENUM(["reservado", "en proceso", "completado", "cancelado"]),
+        type: DataTypes.ENUM(["creada", "procesada", "completa", "cancelada"]),
         allowNull: false,
-      }
+      },
     },
-      {
+    {
       timestamps: true,
       createdAt: true,
       updatedAt: true,
