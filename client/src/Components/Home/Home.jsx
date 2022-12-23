@@ -17,6 +17,13 @@ function Home() {
   return (
     <div className={s.home}>
         <NavBar />
+        <div className={s.heroSection}>
+          <div className={s.hero}>
+            <div className={s.heroImg}></div>
+            <div>¡Todo lo que buscas,<br /> en un solo lugar!</div>
+          </div>
+        </div>
+
         <section>
           {products ? products.map(p => <CardV 
           key={p.product_id}
