@@ -11,10 +11,10 @@ async function handleRefreshToken(cookie) {
     foundUser.refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (err, decode) => {
-      if (err || foundUser.name !== decode.username)
+      if (err || foundUser.username !== decode.username)
         throw new Error({ statusCode: 401, msg: "not found" });
       accessToken = jwt.sign(
-        { username: foundUser.name },
+        { username: foundUser.username },
         process.env.ACCESS_TOKEN_SECRET,
         {
           expiresIn: "30s",

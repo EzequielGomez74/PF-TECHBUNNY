@@ -30,7 +30,7 @@ async function handleNewUser(username, password) {
       profilePicture: "a",
     };
     const userCreated = await User.create(newUser);
-    return { success: `New user ${user} created` };
+    return { success: `New user ${username} created` };
   } catch (error) {
     throw new Error(error);
   }
@@ -50,12 +50,12 @@ async function handleLogin(username, password) {
     if (match) {
       //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
       const accessToken = jwt.sign(
-        { username: foundUser.name },
+        { username: foundUser.username },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "30s" }
       );
       const refreshToken = jwt.sign(
-        { username: foundUser.name },
+        { username: foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: "60s" }
       );
@@ -65,13 +65,13 @@ async function handleLogin(username, password) {
       return { accessToken, refreshToken };
     } else throw new Error({ statusCode: 400, msg: "Wrong Password" });
   } catch (error) {
-    throw new Error({ statusCode: 500, msg: error.message });
+    throw new Error(error.message);
   }
 }
 
 async function handleLogout(cookie) {
   const foundUser = await User.findOne({ where: { refreshToken: cookie } });
-  if (!foundUser) throw new Error({ statusCode: 401, msg: "User not found" });
+  if (!foundUser) throw new Error("User not found");
   foundUser.refreshToken = "";
   foundUser.save();
 }
