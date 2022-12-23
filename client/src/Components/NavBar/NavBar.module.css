@@ -1,3 +1,6 @@
+/* *{
+    border: 1px solid red;
+} */
 .navBar{
     display: flex;
     flex-direction: column;
@@ -81,3 +84,24 @@
     line-height: 20px;
 }
 
+
+.searchbarcontainer{
+display: flex;
+justify-content: center;
+
+}
+.icons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media(min-width :500px){
+  .mobile{
+    display: none;
+  }
+}
+@media (max-width: 500px){
+    .desktop{
+        display: none;
+    }
+  }

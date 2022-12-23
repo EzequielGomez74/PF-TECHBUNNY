@@ -7,6 +7,7 @@ import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown} from
 function NavBar() {
   return (
     <div className={s.navBar}>
+        <section className={s.desktop}>
         <section className={s.one}>
             <div>
                 <SearchBar />
@@ -42,6 +43,12 @@ function NavBar() {
                 <p>Impresoras</p>
                 <p>Discos</p>
             </div>
+        </section>
+        </section>
+        <section className={s.mobile}>
+        <div className={s.navtitle}><h1>TECHBUNNY</h1></div>
+        <div className={s.searchbarcontainer}><SearchBar /></div>
+        
         </section>
     </div>
   )
