@@ -17,7 +17,7 @@ function CardV(){
         price: 4463.53,
     }
     return(
-    <div className="cardSuper">
+    
      <div className="cardContainer">
         <div className="cardIcono">
             <FontAwesomeIcon className="icono" icon={faHeart}></FontAwesomeIcon>
@@ -30,7 +30,7 @@ function CardV(){
         <h3 className="cardText">{cardPrueba.sub2}</h3>
         <p className="price">$ {cardPrueba.price}</p>
      </div>
-     </div>
+     
     )
 };
 

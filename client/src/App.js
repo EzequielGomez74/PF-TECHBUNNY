@@ -21,7 +21,7 @@ function App() {
         <CardV/>
         <CardH/>
        <Newsletter/>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

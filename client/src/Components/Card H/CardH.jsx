@@ -18,7 +18,6 @@ function CardH(){
     }
     
     return(
-        <div className="cardSuper">
         <div className="cardContainerH">
         
         <div className="imgandtitle">
@@ -64,7 +63,7 @@ function CardH(){
             </div>
         </div>
         </div>
-    </div>
+    
     )
 }
 
