@@ -10,14 +10,7 @@ import Newsletter from './Components/NewsLetter/Newsletter';
 function App() {
   return (
     <div className="App">
-
-
-      
-
-
       <NavBar />
-
-      
         <CardV/>
         <CardH/>
        <Newsletter/>
