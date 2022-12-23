@@ -1,3 +1,4 @@
+
 .navBar{
     display: flex;
     flex-direction: column;
@@ -104,4 +105,54 @@
     cursor: pointer;
 }
 
+ul{
+    list-style: none;
+    
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 18px;
+    color: #20232a;
+    line-height: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: -10px;
+  }
+  
+  span{
+    font-size: 14px;
+    font-weight: 400;
+    color: #20232a;
+  }
+  
+  .dropdownItem{
+    display: flex;
+    margin: 10px auto;
+  }
+  
+  .dropdownItem img{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: var(--speed);
+  }
+  
+  .dropdownItem a{
+    max-width: 100px;
+    margin-left: 10px;
+    transition: var(--speed);
+    color: #20232a;
+    font-weight: 500;
+  }
+
+
+  
 

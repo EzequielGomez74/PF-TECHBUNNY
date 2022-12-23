@@ -8,7 +8,10 @@ router.post("/", async (req, res) => {
   try {
     res.status(200).json(await controller.handleNewUser(user, password));
   } catch (error) {
-    res.status(error.message.statusCode).json(error.message.msg);
+    console.log(error.message);
+    //res.send(error.message);
+    //console.log(error.msg);
+    res.status(error.statusCode).json(error.msg);
   }
 });
 //checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
