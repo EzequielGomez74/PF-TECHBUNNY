@@ -58,6 +58,11 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultvalue: "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
+      isLogged: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      }
     },
     {
       timestamps: true,
