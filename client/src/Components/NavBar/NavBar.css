@@ -9,7 +9,7 @@
  .dropdown-menu{
     position: absolute;
     top: 60px;
-    right: 172px;
+    right: 264px;
     background-color: #22262a;
     border-radius: var(--border-radius);
     padding: 10px 20px;
@@ -73,7 +73,7 @@
   .dropdown-menu-cat{
     position: absolute;
     top: 120px;
-    right: 500px;
+    right: 613px;
     background-color: #22262a;
     border-radius: var(--border-radius);
     padding: 5px -2px;
