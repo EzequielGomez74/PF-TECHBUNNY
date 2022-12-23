@@ -35,6 +35,42 @@ export default function reducer (state=initialState, action){
                 ...state,
                 filtered: action.payload,
             }
+        case 'FILTER_BY_PRICE':
+            return{
+                ...state,
+                filtered: action.payload,
+            }
+        case 'ORDER_BY_PRICE':
+            return{
+                ...state,
+                filtered: action.payload,
+            }
+        //     const products = state.products
+        //     const orderProductByPrice = products.sort(function(max,min){
+        //         if(action.payload === 'asc'){
+        //             if(max.price < min.price){
+        //                 return -1;
+        //             }else if(max.price > min.price){
+        //                 return 1;
+        //             }else{
+        //                 return 0;
+        //             }
+        //         } else if (action.payload === 'desc'){
+        //             if(max.price > min.price){
+        //                 return -1;
+        //             }else if(max.price < min.price){
+        //                 return 1;
+        //             }else{
+        //                 return 0;
+        //             }
+        //         }
+        //         return 'Ordered';
+        //     })
+        //     return{
+        //         ...state,
+        //         filtered: orderProductByPrice,
+        //     };
+
         default:
             return {...state}
     }
