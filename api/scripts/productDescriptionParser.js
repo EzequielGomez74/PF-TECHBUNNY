@@ -1,5 +1,4 @@
 function productDescriptionParser(description) {
-  console.log("ENTRA");
   const splitDesc = description.split("##");
   const result = [];
   let ulRef;
@@ -25,4 +24,5 @@ function productDescriptionParser(description) {
   }
   return result;
 }
+
 module.exports = { productDescriptionParser };
