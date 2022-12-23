@@ -89,13 +89,13 @@ async function createProduct(product) {
   }
 }
 
-async function deleteProduct(productId) {
+async function deleteProduct(product_id) {
   try {
     await Product.update(
       { active: false },
       {
         where: {
-          product_id: productId,
+          product_id,
         },
       }
     );
