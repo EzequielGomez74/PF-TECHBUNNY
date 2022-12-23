@@ -53,9 +53,12 @@ body {
 .swiper-button-next{
   background-color: #D7F136;
 color: black;
+opacity: 0.4;
+
 }
 .swiper-button-prev{
 background-color: #D7F136;
+opacity: 0.4;
 color: black;
 
 }

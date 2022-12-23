@@ -4,12 +4,9 @@ import SearchBar from './SearchBar';
 // import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightFromBracket, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
-import user from "../../Photos/user.png";
-import logout from "../../Photos/log-out.png";
 import "./NavBar.css";
 import {useState, useEffect, useRef} from 'react';
-import checkIn from "../../Photos/checkin.png";
-import logIn from "../../Photos/log-in.png";
+
 
 function NavBar() {
 

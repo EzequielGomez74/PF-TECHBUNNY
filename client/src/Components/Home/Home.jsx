@@ -22,6 +22,12 @@ function Home() {
     <div className={s.home}>
         <NavBar />
         <BannerHome/>
+        <div className={s.sub}>
+        <div className={s.subTitles}>
+          <h5>Recomendados</h5>
+          <span></span>
+        </div>
+      </div>
         <Carrusel />
         {/* <section>
 
@@ -53,6 +59,12 @@ f8
             </div>
         </section>
 
+        <div className={s.sub}>
+        <div className={s.subTitles}>
+          <h5>Recomendados</h5>
+          <span></span>
+        </div>
+      </div>
 
         <Carrusel/>
         <Newsletter/>
