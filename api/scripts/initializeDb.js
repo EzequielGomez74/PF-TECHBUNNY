@@ -60,7 +60,7 @@ async function loadAllAssets() {
     await loadtoDb(newArrayProducts, Product);
     await loadtoDb(users, User);
     await loadtoDb(reviews, Review);
-    await loadMockAsset(reviews, Review);
+    //await loadMockAsset(reviews, Review);
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {
     throw new Error(error.message);
