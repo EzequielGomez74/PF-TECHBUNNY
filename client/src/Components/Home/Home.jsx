@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Home.module.css';
 import Carrusel from '../Carrusel/Carrusel';
+import BannerHome from '../Banner Home/Banner'
+import Newsletter from '../NewsLetter/Newsletter'
 
 
 function Home() {
@@ -19,8 +21,14 @@ function Home() {
   return (
     <div className={s.home}>
         <NavBar />
+        <BannerHome/>
         <Carrusel />
         {/* <section>
+
+        
+
+        <section>
+f8
           {products ? products.map(p => <CardV 
           key={p.product_id}
           id={p.product_id}
@@ -44,8 +52,12 @@ function Home() {
                 <div className={s.f}></div>
             </div>
         </section>
-        <Carrusel />
+
+
+        <Carrusel/>
+        <Newsletter/>
         <Footer/>
+        
     </div>
   )
 }
