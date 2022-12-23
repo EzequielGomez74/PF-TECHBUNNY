@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+config
 node_modules
 node_modules/
 /node_modules
@@ -8,7 +9,6 @@ node_modules/
 .pnp.js
 /config
 config/
-config
 /config/
 /config
 config/

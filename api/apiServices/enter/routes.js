@@ -9,9 +9,7 @@ router.post("/", async (req, res) => {
     res.status(200).json(await controller.handleNewUser(user, password));
   } catch (error) {
     console.log(error.message);
-    //res.send(error.message);
-    //console.log(error.msg);
-    res.status(error.statusCode).json(error.msg);
+    res.status(400).json(error.msg);
   }
 });
 //checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
@@ -35,10 +33,10 @@ router.put("/", async (req, res) => {
       }
     } else {
       //login
-      const { user, password } = req.body;
-      if (user && password) {
+      const { username, password } = req.body;
+      if (username && password) {
         const { accessToken, refreshToken } = await controller.handleLogin(
-          user,
+          username,
           password
         );
         res.cookie("jwt", refreshToken, {
@@ -53,5 +51,23 @@ router.put("/", async (req, res) => {
   } catch (error) {
     res.sendStatus(400);
   }
+});
+
+router.put("/:typoDeAcceso", (req, res) => {
+  const userData = req.body;
+  const { typoDeAcceso } = req.params;
+  console.log(type);
+  //console.log(typoDeAcceso);
+  switch (typoDeAcceso) {
+    case "login":
+      break;
+    case "logout":
+      break;
+    case "recover":
+    default:
+      break;
+  }
+  //console.log(req.params);
+  res.send(req.params);
 });
 module.exports = router;
