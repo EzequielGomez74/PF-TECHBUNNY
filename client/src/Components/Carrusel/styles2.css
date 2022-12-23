@@ -17,13 +17,17 @@ body {
 .swiper {
   width: 100%;
   height: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #fff;
-  height: 465px;
+  height: 370px;
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -41,10 +45,19 @@ body {
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+  transition: transform .2s; /* Animation */
+
+}
+
+.swiper-button-next{
+  background-color: #D7F136;
+color: black;
+}
+.swiper-button-prev{
+background-color: #D7F136;
+color: black;
+
 }
 
 
@@ -67,5 +80,7 @@ body {
 .container{
   width: 420px;
 }
+
+
   
   }
