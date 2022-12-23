@@ -28,7 +28,7 @@ function Home() {
           <span></span>
         </div>
       </div>
-        <Carrusel />
+        {/* <Carrusel /> */}
         {/* <section>
 
         
@@ -66,7 +66,7 @@ f8
         </div>
       </div>
 
-        <Carrusel/>
+        {/* <Carrusel/> */}
         <Newsletter/>
         <Footer/>
         
