@@ -23,11 +23,22 @@
     justify-content: space-around;
 }
 
-.one div h1{
+.one div h1 a{
     font-style: normal;
     font-weight: 800;
     font-size: 28px;
     line-height: 16px;
+    color: black;
+    
+}
+
+.one div h1 a:hover{
+    cursor: pointer;
+    color: #9db022;
+}
+
+.logo{
+    color: black;
 }
 
 .navDetail span{
@@ -52,13 +63,19 @@
     padding-bottom: 5px;
 }
 
-.two div p{
+.two div p {
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    color: black;
+}
+.two div p a{
+   
+    color: black;
+    
 }
 
 .three{
@@ -82,8 +99,10 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
+    transition: 0.5s;
 }
 
+<<<<<<< HEAD
 
 .searchbarcontainer{
 display: flex;
@@ -105,3 +124,11 @@ justify-content: center;
         display: none;
     }
   }
+=======
+.three div p:hover{
+    color: #D7F136;
+    cursor: pointer;
+}
+
+
+>>>>>>> a53434b3716cd655b308b52864c0b7c4f263fd33
