@@ -3,3 +3,4 @@ module.exports = {
   DB_PASSWORD: "admin",
   DB_HOST: "localhost",
 };
+
