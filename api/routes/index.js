@@ -14,7 +14,7 @@ const verifyJWT = require("../middlewares/verifyJWT.js");
 
 router.use("/enter", enter);
 router.use("/refresh", refresh);
-router.use(verifyJWT); //middleware de validacion de JWT
+//router.use(verifyJWT); //middleware de validacion de JWT
 router.use("/products", products);
 router.use("/categories", category);
 router.use("/subcategories", subcategory);
