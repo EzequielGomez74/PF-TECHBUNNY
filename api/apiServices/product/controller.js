@@ -40,9 +40,9 @@ async function getAllProductsBy(condition) {
   }
 }
 
-async function getProductById(productId) {
+async function getProductById(product_id) {
   try {
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(product_id);
     const newObj = { ...product.dataValues };
     newObj.description = productDescriptionParser(newObj.description);
     return newObj;

@@ -1,0 +1,75 @@
+.card{
+    font-family: 'Poppins';
+    background-color: white;
+    width: 206px;
+    height: 348px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transition: 0.5s;
+}
+
+.iconWrap{
+    padding-left: 160px;
+    padding-right: 10px;
+}
+
+.heart{
+    background: none;
+    border: none;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.heart:hover{
+    color: #D7F136;
+    cursor: pointer;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+.img{
+    padding-top: 10px;
+    width: 150px;
+    height: auto;
+}
+
+.brand{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.name{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 20px;
+    color: black;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+.price{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

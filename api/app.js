@@ -19,7 +19,7 @@ server.use(accessControl);
 server.use("/", indexRouter);
 //server.use(cuatrocientoscuatro)
 // Error catching endware.
-//server.use(generalErrorHandler);
+server.use(generalErrorHandler);
 //FIN DE MIDDLEWARES
 
 module.exports = server;

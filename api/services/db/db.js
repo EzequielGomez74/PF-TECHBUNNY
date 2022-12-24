@@ -17,7 +17,6 @@ const modelDefiners = [];
 const dbPath = __dirname.split("\\services\\db")[0];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
-  console.log(file);
   if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
     modelDefiners.push(
       require(path.join(dbPath, "apiServices", file, "model.js"))
@@ -74,7 +73,7 @@ Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
 module.exports = {
-  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
