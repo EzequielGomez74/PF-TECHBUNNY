@@ -4,23 +4,21 @@ module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
-      user_id: {
-        // type: DataTypes.UUID,
-        // defaultValue: DataTypes.UUIDV4,
+      user_id: {        
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       surname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -46,6 +44,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
+        //1=guest 2=user 3=admin 
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 2,
