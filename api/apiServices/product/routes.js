@@ -13,10 +13,11 @@ router.get("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-//GET 	/products/2											                                                      <-- Trae el producto de product_id = 2
+//GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 router.use(requiredAccess(2));
-router.get("/:product_id", async (req, res) => {
-  const { product_id } = req.params;
+router.get("/:productId", async (req, res) => {
+  const { productId } = req.params;
+  console.log("PASA POR product ID");
   try {
     res.status(200).json(await controller.getProductById(product_id));
   } catch (error) {

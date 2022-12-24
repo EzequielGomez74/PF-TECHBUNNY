@@ -11,7 +11,7 @@ async function getAllUsers() {
 }
 async function getUserById(user_id) {
   try {
-    const userById = await SubCategory.findAll({
+    const userById = await User.findAll({
       where: { user_id },
     });
     return userById;
@@ -20,4 +20,15 @@ async function getUserById(user_id) {
   }
 }
 
-module.exports = { getAllUsers,getUserById };
+async function modifyUser(user_id, body){ //  los admins usan este controller
+  try {
+    await User.update( body, { where: { user_id }})
+    return ("usuario  modificado exitosamente.") 
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+
+
+module.exports = { getAllUsers,getUserById , modifyUser};

@@ -18,7 +18,7 @@ async function handleNewUser(username, password) {
       name: "jose",
       surname: "perez",
       password: hashedPwd,
-      role: 1,
+      role: 2,
       email: "a",
       billingAddress: "a",
       defaultShippingAddress: "a",
