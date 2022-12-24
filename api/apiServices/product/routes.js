@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 //GET 	/products/2											                                                      <-- Trae el producto de product_id = 2
-//router.use(requiredAccess(2));
+router.use(requiredAccess(2));
 router.get("/:product_id", async (req, res) => {
   const { product_id } = req.params;
   try {
@@ -25,7 +25,7 @@ router.get("/:product_id", async (req, res) => {
 });
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", async (req, res) => {
-console.log("a")
+  console.log("a");
 
   const product = { ...req.body };
   try {
