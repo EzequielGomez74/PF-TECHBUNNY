@@ -59,11 +59,11 @@ User.hasMany(Review, { foreignKey: "user_id" });
 Review.belongsTo(User, { foreignKey: "user_id" });
 
 Order.belongsToMany(Product, {
-  through: OrderProduct,
+  through: "OrderProduct",
   foreignKey: "order_id",
 });
 Product.belongsToMany(Order, {
-  through: OrderProduct,
+  through: "OrderProduct",
   foreignKey: "product_id",
 });
 

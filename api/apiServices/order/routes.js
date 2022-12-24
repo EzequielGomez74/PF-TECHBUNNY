@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   try {
     res.status(200).json({ order_id: await controller.createOrder(req.body) });
   } catch (error) {
-    res.sendStatus(400);
+    res.sendStatus(404);
   }
 });
 
