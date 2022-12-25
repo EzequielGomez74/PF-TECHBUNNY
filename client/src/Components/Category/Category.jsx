@@ -5,6 +5,7 @@ import * as actions from '../../redux/actions';
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
+import './Category.css'
 
 function Category(){
 
@@ -12,7 +13,7 @@ function Category(){
     let {name} = useParams();
     let dispatch = useDispatch();
     let products = useSelector(state => state.productsByCategory);
-    let categories = useSelector(state => state.categories);
+    // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
 
@@ -39,7 +40,7 @@ function Category(){
     return(
         <div>
         <NavBar/>
-        <div>
+        <div className="cartas">
             {active.brand ? filter.map(
                 (e) => <CardV
                 key= {e.product_id}
