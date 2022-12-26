@@ -1,11 +1,11 @@
-
-
 const initialState = {
     products:[],
     detail: {},
     categories: [],
     productsByCategory:[],
     filtered: [],
+    cart: [],
+    favorites: []
 }
 
 export default function reducer (state=initialState, action){
@@ -45,32 +45,26 @@ export default function reducer (state=initialState, action){
                 ...state,
                 filtered: action.payload,
             }
-        //     const products = state.products
-        //     const orderProductByPrice = products.sort(function(max,min){
-        //         if(action.payload === 'asc'){
-        //             if(max.price < min.price){
-        //                 return -1;
-        //             }else if(max.price > min.price){
-        //                 return 1;
-        //             }else{
-        //                 return 0;
-        //             }
-        //         } else if (action.payload === 'desc'){
-        //             if(max.price > min.price){
-        //                 return -1;
-        //             }else if(max.price < min.price){
-        //                 return 1;
-        //             }else{
-        //                 return 0;
-        //             }
-        //         }
-        //         return 'Ordered';
-        //     })
-        //     return{
-        //         ...state,
-        //         filtered: orderProductByPrice,
-        //     };
-
+        case 'ADD_FAVORITE':
+            return{
+                ...state,
+                favorites: [...state.favorites, action.payload]
+            }
+        case 'REMOVE_FAVORITE':
+            return{
+                ...state,
+                favorites: state.favorites.filter(f => f.id !== action.payload)
+            }
+        case 'ADD_CART':
+            return{
+                ...state,
+                cart: [...state.cart, action.payload]
+            }
+        case 'REMOVE_CART':
+            return{
+                ...state,
+                cart: state.cart.filter(f => f.product_id !== action.payload)
+            }
         default:
             return {...state}
     }

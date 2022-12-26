@@ -1,16 +1,17 @@
 import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
-// import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
-import {useState, useEffect, useRef} from 'react';
-import {Link} from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function NavBar() {
 
+  //para manejar el dropdown
   const [open, setOpen] = useState(false);
   const [closed, setClosed] = useState(true);
   const [openCat, setOpenCat] = useState(false);
@@ -22,14 +23,8 @@ function NavBar() {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
         setOpen(false);
-        console.log(menuRef.current);
-      }if(!menuRef.current.contains(e.target)){
         setClosed(false);
-        console.log(menuRef.current);
-      }if(!menuRef.current.contains(e.target)){
         setOpenCat(false);
-        console.log(menuRef.current);
-      }if(!menuRef.current.contains(e.target)){
         setClosedCat(false);
         console.log(menuRef.current);
       }    
@@ -42,6 +37,11 @@ function NavBar() {
     }
   });
 
+  // Para saber cuantos elementos se agregaron a favoritos
+  const favs = useSelector(state => state.favorites)
+  const cart = useSelector(state => state.cart)
+
+
   return (
     <div className={s.navBar}>
         <section className={s.one}>
@@ -50,8 +50,8 @@ function NavBar() {
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     <span><FontAwesomeIcon icon={faMoon} /></span>
-                    <span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; 0</span>
-                    <span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; 0</span>
+                    <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
+                    <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
                     <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
                 </div>
             </div>
@@ -66,7 +66,7 @@ function NavBar() {
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
-        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
+        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} onMouseEnter={()=>{setOpenCat(!openCat)}}>
                     <ul>
                        <Link to= "/category/Equipos%20armados"> <DropdownItemCat text={"Equipos armados"}/></Link>
                        <Link to= "/category/Consolas"> <DropdownItemCat text={"Consolas"}/></Link>
