@@ -18,13 +18,13 @@ function Category(){
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
-    let [currentPage, setCurrentPage] = useState(1);
-    let [productsPerPage] = useState(12);
-    let indexLastProduct = currentPage * productsPerPage;
-    let indexFirstProduct = indexLastProduct - productsPerPage;
-    let currentProduct = active.brand === false && active.price === false ? products.slice(indexFirstProduct, indexLastProduct): filter.slice(indexFirstProduct, indexLastProduct);
+    let [currentpage, setCurrentPage] = useState(1);
+    let [productsperpage] = useState(12);
+    let indexlastproduct = currentpage * productsperpage;
+    let indexfirstproduct = indexlastproduct - productsperpage;
+    let currentproduct = active.brand === false && active.price === false ? products.slice(indexfirstproduct, indexlastproduct): filter.slice(indexfirstproduct, indexlastproduct);
 
-    let paginate = (pageNumber) => {
+    let pagination = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
@@ -77,7 +77,7 @@ function Category(){
                     </select>
                 </div>
                 <div className={s.results}>
-                    {currentProduct.map(
+                    {currentproduct.map(
                         (e) => <CardV
                         key= {e.product_id}
                         id= {e.product_id}
@@ -91,10 +91,10 @@ function Category(){
                 </div>
                 <div className={s.paginate}>
                     <Pagination
-                    productsPerPage={productsPerPage}
+                    productsperpage={productsperpage}
                     products={products.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
+                    pagination={pagination}
+                    currentpage={currentpage}
                     />
                 </div>
             </div>

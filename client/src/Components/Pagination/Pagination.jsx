@@ -2,34 +2,34 @@ import React from "react";
 import './Pagination.css';
 
 export default function Pagination({
-    productsPerPage,
-    allProducts,
-    paginate,
-    currentPage,
+    productsperpage,
+    allproducts,
+    pagination,
+    currentpage,
 }) {
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(allProducts/productsPerPage); i++){
+    for (let i = 1; i <= Math.ceil(allproducts/productsperpage); i++){
         pageNumbers.push(i);
     }
 
-    if(currentPage === pageNumbers.length + 1) {
-        paginate(1);
+    if(currentpage === pageNumbers.length + 1) {
+        pagination(1);
     }
 
     return(
-        <div className="pagination">
-            <button className="btnPag" onClick={() => paginate(currentPage === 1 ? pageNumbers.length : currentPage -1)} >
+        <div className="btnPag">
+            <button  onClick={() => pagination(currentpage === 1 ? pageNumbers.length : currentpage -1)} >
             «{" "}
             </button>
             {
                 pageNumbers && pageNumbers.map((number) => (
-                    <button className="btnPag" key={number} onClick={() => paginate(number)}>
-                        {currentPage === number ? <b>{number}</b> : number}
+                    <button key={number} onClick={() => pagination(number)}>
+                        {currentpage === number ? <b>{number}</b> : number}
                     </button>
                 ))
             }
-            <button className="btnPag" onClick={() => paginate(currentPage === 0 ? currentPage : currentPage + 1)}>
+            <button onClick={() => pagination(currentpage === 0 ? currentpage : currentpage + 1)}>
             »{" "}
             </button>
         </div>
