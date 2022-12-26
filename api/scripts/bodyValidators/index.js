@@ -42,7 +42,10 @@ const product = [
 ];
 
 const order = [
-  check("name").isString(),
+  check("status").isString().withMessage("created, processed, complete, canceled debe ser true o false"),
+  check("user_id").exists().isNumeric().withMessage("debe colocar un user id al producto comprado y este debe ser numerico"),
+  // el front debe verificar que el usuario que envia la order exista en la dB
+  // el front debe verificar que el contenido de products[0] no posea products_id repetidos y su count sea mayor o igual a 1.
   (req, res, next) => {
     validateResult(req, res, next);
   },
