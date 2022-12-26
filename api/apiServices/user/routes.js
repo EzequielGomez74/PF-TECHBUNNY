@@ -25,7 +25,7 @@ router.put("/:user_id", validate.user, async (req, res) => {
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
-      throw new Error("fallo x");
+      throw new Error("el usuario que realizo la peticion no tiene permisos de admin");
     }
   } catch (error) {
     res.status(400).send(error.message);

@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const requiredAccess = require("../../middlewares/requiredAccess.js");
+const validate = require("../../scripts/bodyValidators/index.js");
+
+
 const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
@@ -36,7 +39,7 @@ router.post("/", async (req, res) => {
   }
 });
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
-router.put("/", async (req, res) => {
+router.put("/",validate.product, async (req, res) => {
   try {
     res.status(200).send(await controller.updateProduct(req.body));
   } catch (error) {
