@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
-const validate = require("../../scripts/validators/user");
+const validate = require("../../scripts/bodyValidators/index.js");
 const { User } = require("../../services/db/db.js");
 
 router.get("/:user_id", async (req, res) => {
@@ -21,7 +21,7 @@ router.put("/:user_id", validate.user, async (req, res) => {
     const usernameDb = await User.findByPk(user_id);
     if (
       usernameDb &&
-      (usernameDb.username === req.username || req.role === 3)
+      (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
