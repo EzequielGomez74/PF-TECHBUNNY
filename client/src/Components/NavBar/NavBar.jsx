@@ -62,7 +62,7 @@ function NavBar() {
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
                 <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
                 <p>VER ESTADO DE PEDIDO</p>
-                </div>
+            </div>
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
