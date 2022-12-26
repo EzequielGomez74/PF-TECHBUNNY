@@ -1,52 +1,35 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
-const { validateCreate } = require("../validators/users");
+const validate = require("../../scripts/validators/user");
 const { User } = require("../../services/db/db.js");
-const { log } = require("console");
 
 router.get("/:user_id", async (req, res) => {
-	try {
-		console.log("a");
-		if (req.params.user_id)
-			res.status(200).json(await controller.getUserById(category));
-		else res.status(200).json(await controller.getAllUsers());
-	} catch (error) {
-		res.sendStatus(400);
-	}
+  try {
+    if (req.params.user_id)
+      res.status(200).json(await controller.getUserById(req.params.user_id));
+    else res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.sendStatus(400);
+  }
 });
-
-// user_id: {
-// username: {
-// name: {
-// surname: {
-// password: {
-// email:
-// billingAddress: {
-// defaultShippingAddress:
-// zipCode:
-// role:
-// isActive:
-// needPasswordReset:
-// profilePicture:
-
-router.put("/:user_id", validateCreate, async (req, res) => {
-	try {
-		const data = req.body;
-		const { user_id } = req.params;
-		const usernameDb = await User.findByPk(user_id);
-
-		if (usernameDb && usernameDb.username === req.username  || req.role === 3) {
-					res.status(200).send(await controller.edit(user_id, data));
-          throw new Error("se modificó")
-
-				} else {
-      throw new Error("fallo x")
+// /users/3   body={surname:"beto",username:"pepe"}
+router.put("/:user_id", validate.user, async (req, res) => {
+  try {
+    const data = req.body;
+    const { user_id } = req.params;
+    const usernameDb = await User.findByPk(user_id);
+    if (
+      usernameDb &&
+      (usernameDb.username === req.username || req.role === 3)
+    ) {
+      res.status(200).send(await controller.modifyUser(user_id, data));
+    } else {
+      throw new Error("fallo x");
     }
-	} catch (error) {
-    console.log(error.message);
-
-	}
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 // router.put("/:user_id", async (req, res) => {

@@ -20,10 +20,10 @@ async function getUserById(user_id) {
   }
 }
 
-async function edit(user_id, body){ //  los admins usan este controller
+async function modifyUser(user_id, body){ //  los admins usan este controller
   try {
     await User.update( body, { where: { user_id }})
-    return ("usuario  modificado exitosamente.") //", User.username, "
+    return ("usuario  modificado exitosamente.") 
   } catch (error) {
     throw new Error(error.message);
   }
@@ -31,4 +31,4 @@ async function edit(user_id, body){ //  los admins usan este controller
 
 
 
-module.exports = { getAllUsers,getUserById , edit};
+module.exports = { getAllUsers,getUserById , modifyUser};

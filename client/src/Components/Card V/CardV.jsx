@@ -1,4 +1,5 @@
 import React from "react";
+// import ReactDOM from "react-dom";
 import s from './CardV.module.css';
 import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,8 +11,10 @@ function CardV({id, brand, name, image, price, category, subcategory}){
     return(
     <div>
         <div className={s.card}>
-            <FontAwesomeIcon className={s.heart} icon={faHeart} />
-            <img className={s.img} src={image} alt={id} />
+            <div className={s.iconWrap}>
+                <button className={s.heart}><FontAwesomeIcon icon={faHeart} /></button>
+            </div>
+            <Link to={`/detail/${id}`}><img className={s.img} src={image} alt={id} /></Link>
             <p className={s.brand}>{brand}</p>
             <Link to={`/detail/${id}`}><p className={s.name}>{name}</p></Link>
             <p className={s.price}>US${price}</p>
