@@ -3,9 +3,10 @@ import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
 // import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightFromBracket, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
 import {useState, useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
 
 
 function NavBar() {
@@ -59,41 +60,39 @@ function NavBar() {
         {/* CATEGORIA DROPDOWN */}
         <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
                     <ul>
-                        <DropdownItemCat text={"Equipos armados"}/>
-                        <DropdownItemCat text={"Consolas"}/>
-                        <DropdownItemCat text={"Notebooks"}/>
-                        <DropdownItemCat text={"Gabinetes"}/>
-                        <DropdownItemCat text={"Fuentes y UPS"}/>
-                        <DropdownItemCat text={"Motherboards"}/>
-                        <DropdownItemCat text={"Procesadores"}/>
-                        <DropdownItemCat text={"Cooling"}/>
+                       <Link to= "/category/Equipos%20armados"> <DropdownItemCat text={"Equipos armados"}/></Link>
+                       <Link to= "/category/Consolas"> <DropdownItemCat text={"Consolas"}/></Link>
+                       <Link to= "/category/Notebooks"> <DropdownItemCat text={"Notebooks"}/></Link>
+                       <Link to= "/category/Gabinetes"> <DropdownItemCat text={"Gabinetes"}/></Link>
+                       <Link to= "/category/Fuentes%20y%20UPS"> <DropdownItemCat text={"Fuentes y UPS"}/></Link>
+                       <Link to= "/category/Motherboards"> <DropdownItemCat text={"Motherboards"}/></Link>
+                       <Link to= "/category/Procesadores"> <DropdownItemCat text={"Procesadores"}/></Link>
+                       <Link to= "/category/Cooling"> <DropdownItemCat text={"Cooling"}/></Link>
                     </ul>
                     <ul>
-                        <DropdownItemCat text={"Memorias"}/>
-                        <DropdownItemCat text={"Almacenamiento"}/>
-                        <DropdownItemCat text={"Tarjetas de video"}/>
-                        <DropdownItemCat text={"Periféricos"}/>
-                        <DropdownItemCat text={"Monitores y TV"}/>
-                        <DropdownItemCat text={"Sillas"}/>
-                        <DropdownItemCat text={"Pendrives"}/>
-                        <DropdownItemCat text={"Impresoras"}/>
+                       <Link to= "/category/Memorias"> <DropdownItemCat text={"Memorias"}/></Link>
+                       <Link to= "/category/Almacenamiento"> <DropdownItemCat text={"Almacenamiento"}/></Link>
+                       <Link to= "/category/Tarjetas%20de%20video"> <DropdownItemCat text={"Tarjetas de video"}/></Link>
+                       <Link to= "/category/Periféricos"> <DropdownItemCat text={"Periféricos"}/></Link>
+                       <Link to= "/category/Monitores%20y%20TV"> <DropdownItemCat text={"Monitores y TV"}/></Link>
+                       <Link to= "/category/Sillas"> <DropdownItemCat text={"Sillas"}/></Link>
+                       <Link to= "/category/Pendrives"> <DropdownItemCat text={"Pendrives"}/></Link>
+                       <Link to= "/category/Impresoras"> <DropdownItemCat text={"Impresoras"}/></Link>
                     </ul>
         </div>
 
         <section className={s.three}>
             <div>
-                <p>Monitores</p>
-                <p>Teclados</p>
-                <p>Auriculares</p>
-                <p>Mouse</p>
-                <p>Parlantes</p>
-                <p>Sillas</p>
-                <p>Consolas</p>
-                <p>Notebooks</p>
-                <p>Fuentes</p>
-                <p>Procesadores</p>
-                <p>Impresoras</p>
-                <p>Discos</p>
+              <Link to="/category/Monitores%20y%20TV"><p>Monitores y TV</p> </Link> 
+              <Link to="/category/Periféricos"> <p>Periféricos</p></Link>
+              <Link to= "/category/Memorias"> <p>Memorias</p></Link> 
+              <Link to= "/category/Pendrives">  <p>Pendrives</p> </Link> 
+              <Link to= "/category/Notebooks"> <p>Notebooks</p></Link> 
+              <Link to= "/category/Consolas"> <p>Consolas</p></Link> 
+              <Link to= "/category/Gabinetes"> <p>Gabinetes</p></Link> 
+              <Link to= "/category/Motherboards"> <p>Motherboards</p></Link> 
+              <Link to= "/category/Procesadores"> <p>Procesadores</p></Link> 
+              <Link to= "/category/Cooling">   <p>Cooling</p></Link> 
             </div>
         </section>
 
@@ -124,7 +123,7 @@ function NavBar() {
 function DropdownItem(props){
     return(
         <li className={s.dropdownItem}>
-            <img src={props.img}></img>
+            {/* <img src={props.img}></img> */}
             <FontAwesomeIcon icon={props.icon} />
             <a>{props.text}</a>
         </li>
