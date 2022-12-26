@@ -21,8 +21,9 @@ router.get("/:order_id", async (req, res) => {
 
 router.put("/:order_id", async (req, res) => {
   try {
+    const data=req.body;
     if (req.params.order_id)
-      res.status(200).send(await controller.updateOrder(req.params.order_id));
+      res.status(200).send(await controller.updateOrder(req.params.order_id,data));
   } catch (error) {
     res.status(400).send(error);
   }

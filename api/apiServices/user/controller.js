@@ -25,7 +25,8 @@ async function deleteUser(user_id) {
     const deleteUserId = await User.destroy({
       where: { user_id },
     });
-    return deleteUserId;
+    if (deleteUserId){return "Usuario eliminado con exito!";}
+    else{return "Usuario no encontrado!"}
   } catch (error) {
     throw new Error(error.message);
   }
