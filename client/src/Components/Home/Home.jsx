@@ -21,14 +21,20 @@ function Home() {
   return (
     <div className={s.home}>
         <NavBar />
-        <div className={s.heroSection}>
-          <div className={s.hero}>
-            <div className={s.heroImg}></div>
-            <div>¡Todo lo que buscas,<br /> en un solo lugar!</div>
-          </div>
+        <BannerHome/>
+        <div className={s.sub}>
+        <div className={s.subTitles}>
+          <h5>Recomendados</h5>
+          <span></span>
         </div>
+      </div>
+        <Carrusel />
+        {/* <section>
+
+        
 
         <section>
+f8
           {products ? products.map(p => <CardV 
           key={p.product_id}
           id={p.product_id}
@@ -39,7 +45,7 @@ function Home() {
           category={p.category}
           subcategory={p.subcategory}
           />) : 'No hay productos'}
-        </section>
+        </section> */}
         <section className={s.banners} >
             <div className={s.bannerOne}>
                 <div className={s.a}></div>
@@ -60,7 +66,7 @@ function Home() {
         </div>
       </div>
 
-        {/* <Carrusel/> */}
+        <Carrusel/>
         <Newsletter/>
         <Footer/>
         
