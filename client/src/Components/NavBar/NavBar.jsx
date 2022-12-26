@@ -12,7 +12,9 @@ import {Link} from 'react-router-dom';
 function NavBar() {
 
   const [open, setOpen] = useState(false);
+  const [closed, setClosed] = useState(true);
   const [openCat, setOpenCat] = useState(false);
+  const [closedCat, setClosedCat] = useState(true);
 
   let menuRef = useRef();
 
@@ -22,9 +24,15 @@ function NavBar() {
         setOpen(false);
         console.log(menuRef.current);
       }if(!menuRef.current.contains(e.target)){
+        setClosed(false);
+        console.log(menuRef.current);
+      }if(!menuRef.current.contains(e.target)){
         setOpenCat(false);
         console.log(menuRef.current);
-      }     
+      }if(!menuRef.current.contains(e.target)){
+        setClosedCat(false);
+        console.log(menuRef.current);
+      }    
     };
 
     document.addEventListener("mousedown", handler);
@@ -44,7 +52,7 @@ function NavBar() {
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; 0</span>
                     <span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; 0</span>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} icon={faCaretDown}/></span>
+                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
@@ -52,7 +60,7 @@ function NavBar() {
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
-                <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpenCat(!openCat)}} icon={faAngleDown}/></p>
+                <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
                 <p>VER ESTADO DE PEDIDO</p>
                 </div>
                 
