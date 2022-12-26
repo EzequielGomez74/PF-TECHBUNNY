@@ -6,12 +6,6 @@ module.exports = (sequelize) => {
   sequelize.define(
     "OrderProduct",
     {
-      // orderProduct_id: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   primaryKey: true,
-      //   autoIncrement: true,
-      // },
       count: {
         type: DataTypes.INTEGER,
         allowNull: true,

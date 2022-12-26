@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
-const validate = require("../../scripts/validators/user");
+const validate = require("../../scripts/bodyValidators");
 const { User } = require("../../services/db/db.js");
 
 router.get("/:user_id", async (req, res) => {

@@ -54,7 +54,6 @@ async function getProductById(product_id) {
 async function updateProduct(product) {
   delete product.createdAt;
   delete product.updatedAt;
-  console.log(product);
   try {
     await Product.update(
       {
