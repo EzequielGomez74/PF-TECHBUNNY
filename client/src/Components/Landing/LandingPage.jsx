@@ -5,7 +5,6 @@ import "./LandingPage.css";
 export default function LandingPage() {
   return (
     <div className="landing">
-      <div className="prueba">
       <div className="divTitulo">
       <Link to="/home">
        <h1>TECHBUNNY</h1>
@@ -22,7 +21,6 @@ export default function LandingPage() {
          <h2>Invitado</h2>
         </Link>
        </div>
-      </div>
       </div>
     </div>
   );
