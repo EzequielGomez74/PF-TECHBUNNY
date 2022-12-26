@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, } from './actionTypes'
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE } from './actionTypes'
 
 export const getProducts = () => {
     return function(dispatch){
@@ -77,5 +77,29 @@ export const orderByPrice = (products, order) => {
     }
 }
 
+export const addFavorite = (payload) => {
+    return {
+        type: ADD_FAVORITE, payload
+    }
+}
+
+export const removeFavorite = (id) => {
+    return {
+        type: REMOVE_FAVORITE, payload: id
+    }
+}
+
+
+export const addCart = (payload) => {
+    return {
+        type: ADD_CART, payload
+    }
+}
+
+export const removeCart = (id) => {
+    return {
+        type: REMOVE_CART, payload: id
+    }
+}
 
 
