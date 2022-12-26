@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
+const validate = require("../../scripts/bodyValidators/index.js");
 
-router.post("/", async (req, res) => {
+
+router.post("/", validate.order, async (req, res) => {
   try {
     res.status(200).json({ order_id: await controller.createOrder(req.body) });
   } catch (error) {
