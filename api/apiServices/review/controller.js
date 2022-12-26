@@ -20,7 +20,6 @@ async function createReviews(review) {
 }
 
 async function updateReviews(review) {
-  console.log(review);
   try {
     await Review.update(review, { where: { review_id: review.review_id } });
     return "Reseña modificada con exito!";
@@ -31,7 +30,7 @@ async function updateReviews(review) {
 
 async function deleteReviews(review_id) {
   try {
-    await Review.destroy({ where: { review_id } });
+    await Review.destroy({ where: { review_id} });
     return "Reseña eliminada con exito!";
   } catch (error) {
     throw new Error(error);
