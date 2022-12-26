@@ -19,6 +19,7 @@ router.put("/:accessType", async (req, res) => {
   try {
     switch (accessType) {
       case "login":
+        console.log(req.body);
         const { username, password } = req.body;
         if (username && password) {
           const { accessToken, refreshToken } = await controller.handleLogin(
@@ -26,6 +27,8 @@ router.put("/:accessType", async (req, res) => {
             password
           );
           res.cookie("jwt", refreshToken, {
+            sameSite: "None",
+            secure: true,
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
           });
@@ -46,7 +49,7 @@ router.put("/:accessType", async (req, res) => {
         break;
     }
   } catch (error) {
-    res.sendStatus(400);
+    res.send(error.message);
   }
 });
 
