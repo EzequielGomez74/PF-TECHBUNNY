@@ -30,9 +30,9 @@ async function getOrderById(order_id) {
   }
 }
 
-async function updateOrder(order) {
+async function updateOrder(order,data) {
   try {
-    await Order.update({order_id:req.body.status}, { where: { order_id: order.order_id } });
+    await Order.update({order_id:data.status}, { where: { order_id: order.order_id } });
     return "Orden modificada con exito!";
   } catch (error) {
     throw new Error(error);
