@@ -9,9 +9,11 @@ async function createOrder({ status, user_id, products }) {
   // ];
   try {
     const newOrder = { status, user_id };
-    const order = await Order.create(newOrder);    
+    const order = await Order.create(newOrder);
     products.forEach(async (product) => {
-      await order.addProduct(product.product_id, { through: { count: product.count } });
+      await order.addProduct(product.product_id, {
+        through: { count: product.count },
+      });
     });
     return order.order_id;
   } catch (error) {

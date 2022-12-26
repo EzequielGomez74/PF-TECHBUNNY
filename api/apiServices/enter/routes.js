@@ -8,8 +8,7 @@ router.post("/", async (req, res) => {
   try {
     res.status(200).json(await controller.handleNewUser(username, password));
   } catch (error) {
-    console.log(error.message);
-    res.status(400).json(error.msg);
+    res.status(400).json(error.message);
   }
 });
 
@@ -19,7 +18,6 @@ router.put("/:accessType", async (req, res) => {
   try {
     switch (accessType) {
       case "login":
-        console.log(req.body);
         const { username, password } = req.body;
         if (username && password) {
           const { accessToken, refreshToken } = await controller.handleLogin(
