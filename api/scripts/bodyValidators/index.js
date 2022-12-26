@@ -1,9 +1,10 @@
 const { check } = require("express-validator");
+const { User } = require("../../services/db/db.js");
 const { validateResult } = require("../validateHelper.js");
 
 const user = [
   //estos no se deben de modificar
-  check("user_id").not().isEmpty().withMessage("no podes pasar un user id"),
+  check("user_id").isEmpty().withMessage("no podes pasar un user id"),
   check("role").not().exists().withMessage("no podes modificar un role"),
   check("refreshToken").not().exists().withMessage("no podes modificar el refresh token"),
   check('isActive').isEmpty().withMessage("no podes modificar isActive"),
@@ -60,10 +61,40 @@ const review = [
   },
 ]
 
-// },
+const enter = [
+  check("user_id").isEmpty().withMessage("no podes pasar un user id"),
+  check("role").exists().isNumeric().withMessage("role debe ser numerico"),
+  check("refreshToken").not().exists().withMessage("no podes modificar el refresh token"),
+  check('isActive').isEmpty().withMessage("no podes modificar isActive"),
+  check('needPasswordReset').isEmpty().withMessage("no podes modificar needPasswordReset"),
+  check('isLogged').isEmpty().withMessage("no podes modificar isLogged"),
+  
+  
+  //estos si se pueden modificar
+  check('username').exists().isString().withMessage("el username debe ser un string"), // se deben verificar si el user id ya existe en la base de datos pero por otro lado.
+  check("name").exists().isString(),
+  check("password").isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  check("email").isEmail(),
+  check("profilePicture").isURL().withMessage("La foto de perfil debe ser una url"),
+  check("defaultShippingAddress").exists().isString().withMessage("defaultShippingAddress es requerido y debe ser un string"),
+  check("surname").isString().withMessage("el surname debe ser un string"),
+  check("billingAddress").exists().isString().withMessage("el billingAddress debe ser un string y es requerido"),
+  check("zipCode").isNumeric().withMessage("el zipCode debe un numero"),
 
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
 
-module.exports = { user, product, order ,review};
+const enterLogin = [
+  check('username').exists().isString().withMessage("el username debe ser un string"),
+  check("password").exists().isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+module.exports = { user, product, order ,review, enter, enterLogin};
 
 // user_id: 
 // username: 
