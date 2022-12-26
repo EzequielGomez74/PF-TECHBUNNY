@@ -60,7 +60,7 @@ async function updateProduct(product) {
       {
         //buscar forma de destructurar toda la data
         ...product,
-        description: productDescriptionToString(product.description),
+        description: product.description,
       },
       {
         where: {
@@ -80,7 +80,7 @@ async function createProduct(product) {
       // create o findorcreate para que no se repita en la base de datos
       {
         ...product,
-        description: productDescriptionToString(product.description),
+        description: product.description,
       }
     );
     return "Producto creado con exito!";
