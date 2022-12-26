@@ -89,7 +89,7 @@ function NavBar() {
 
         <section className={s.three}>
             <div>
-              <Link to="/category/Monitores%20y%20TV"><p>Monitores y TV</p> </Link> 
+              <Link to="/category/Monitores%20y%20TV"><p>Monitores</p> </Link> 
               <Link to="/category/Periféricos"> <p>Periféricos</p></Link>
               <Link to= "/category/Memorias"> <p>Memorias</p></Link> 
               <Link to= "/category/Pendrives">  <p>Pendrives</p> </Link> 
