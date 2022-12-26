@@ -1,14 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
-import CardV from './Components/Card V/CardV';
-import CardH from './Components/Card H/CardH';
-import Footer from './Components/Footer/Footer';
-import NavBar from './Components/NavBar/NavBar';
+import { Route, Switch } from 'react-router-dom';
+import Details from './Components/Details/Details'
+// import CardV from './Components/Card V/CardV';
+// import CardH from './Components/Card H/CardH';
+import Home from './Components/Home/Home';
+import About from './Components/About/About';
+import LandingPage from './Components/Landing/LandingPage';
 
 
 function App() {
   return (
     <div className="App">
+
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path='/home' component={Home}  />
+        <Route exact path='/detail/:id' component={Details}  />
+        <Route exact path='/about' component={About}  />
+      </Switch>
+
 
       <div>
         <CardV></CardV>
@@ -32,6 +42,7 @@ function App() {
         </a>
       </header>
       <Footer />
+
     </div>
   );
 }
