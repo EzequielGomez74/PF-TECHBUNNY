@@ -37,7 +37,7 @@ const basename = path.basename(__filename);
 const modelDefiners = [];
 const dbPath = __dirname.split("\\services\\db")[0];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
+fs.readdirSync(path.join(dbPath, "apiServices")).forEach((file) => {
   if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
     modelDefiners.push(
       require(path.join(dbPath, "apiServices", file, "model.js"))
