@@ -31,6 +31,7 @@ function App() {
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
+        <Route exact path='/category/:name' component={Category}/>
       </Switch>
 >>>>>>> a53434b3716cd655b308b52864c0b7c4f263fd33
     </div>
