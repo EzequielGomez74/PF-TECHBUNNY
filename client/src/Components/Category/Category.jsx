@@ -6,6 +6,7 @@ import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from './Category.module.css';
+import Pagination from '../Pagination/Pagination';
 
 function Category(){
 
@@ -17,8 +18,17 @@ function Category(){
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
+    let [currentPage, setCurrentPage] = useState(1);
+    let [productsPerPage] = useState(12);
+    let indexLastProduct = currentPage * productsPerPage;
+    let indexFirstProduct = indexLastProduct - productsPerPage;
+    let currentProduct = active.brand === false && active.price === false ? products.slice(indexFirstProduct, indexLastProduct): filter.slice(indexFirstProduct, indexLastProduct);
 
+    let paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
+    
     for (let i = 0; i < products.length; i++) {
         productBrands.push(products[i].brand)
     }
@@ -67,7 +77,7 @@ function Category(){
                     </select>
                 </div>
                 <div className={s.results}>
-                    {active.brand ? filter.map(
+                    {currentProduct.map(
                         (e) => <CardV
                         key= {e.product_id}
                         id= {e.product_id}
@@ -77,18 +87,15 @@ function Category(){
                         price= {e.price}
                         category= {e.category}
                         subcategory= {e.subcategory}
-                        />) : products.map(
-                        (e) => <CardV
-                        key= {e.product_id}
-                        id= {e.product_id}
-                        brand= {e.brand}
-                        name = {e.name}
-                        image= {e.image}
-                        price= {e.price}
-                        category= {e.category}
-                        subcategory= {e.subcategory}
-                        />
-                    )}
+                        />)}
+                </div>
+                <div className={s.paginate}>
+                    <Pagination
+                    productsPerPage={productsPerPage}
+                    products={products.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                    />
                 </div>
             </div>
             <Footer/>

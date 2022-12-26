@@ -10,9 +10,10 @@ import BannerHome from '../Banner Home/Banner'
 import Newsletter from '../NewsLetter/Newsletter'
 
 
+
 function Home() {
   // const products = useSelector(state => state.products)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(actions.getProducts());
