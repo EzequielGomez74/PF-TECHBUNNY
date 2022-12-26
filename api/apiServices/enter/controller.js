@@ -22,6 +22,7 @@ async function handleNewUser(data) {
       email: data.email,
       defaultShippingAddress: data.defaultShippingAddress,
       zipCode: data.zipCode,
+      profilePicture: "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png"
     };
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };
