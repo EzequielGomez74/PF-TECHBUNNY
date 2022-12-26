@@ -1,0 +1,10 @@
+.cartas {
+    display:grid;
+    grid-template-columns: repeat(6, 6fr);
+    align-content: center;
+    align-items:center;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 2%;
+}
