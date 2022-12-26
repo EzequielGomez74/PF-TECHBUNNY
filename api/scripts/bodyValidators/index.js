@@ -1,5 +1,5 @@
 const { check } = require("express-validator");
-const { validateResult } = require("../../scripts/validateHelper.js");
+const { validateResult } = require("../validateHelper.js");
 
 const user = [
   //check("user_id").not().exists(),
@@ -17,7 +17,7 @@ const user = [
   },
 ];
 const product = [];
-module.exports = user;
+module.exports = { user, product };
 
 // user_id: {
 // username: {

@@ -1,9 +1,5 @@
 {
   "dependencies": {
-<<<<<<< HEAD
-    "@formkit/auto-animate": "^1.0.0-beta.5"
-=======
     "swiper": "^8.4.5"
->>>>>>> 0e431466833e244657cfb6d697d6f80f385521f8
   }
 }
