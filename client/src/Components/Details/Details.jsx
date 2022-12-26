@@ -164,6 +164,9 @@ const testProducts = [
   "active": true
 }]
 
+
+//____________________________
+
 const [currentPage, setCurrentPage] = useState(1);
 const [productsPerPage] = useState(6);
 
@@ -272,7 +275,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
             </div>
             <span className={s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)} </span>
           </div>
-          <button type='submit' className={s.mainButton}>Agregar al Carrito</button>
+          <button type='submit' className={s.mainButton} onClick={()=> dispatch(actions.addCart({id:product.product_id, brand:product.brand , name:product.name, image:product.image, price:product.price}))} >Agregar al Carrito</button>
         </div>
       </section>
 

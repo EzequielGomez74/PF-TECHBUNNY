@@ -5,16 +5,19 @@ import * as actions from '../../redux/actions';
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
+import './Category.css'
 
 function Category(){
 
-    let [active, setActive] = useState({brand: false}); 
+    let [active, setActive] = useState({brand: false, price: false});
+    // let [order, setOrder] = useState("All");
     let {name} = useParams();
     let dispatch = useDispatch();
     let products = useSelector(state => state.productsByCategory);
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
+
 
     for (let i = 0; i < products.length; i++) {
         productBrands.push(products[i].brand)
@@ -36,10 +39,21 @@ function Category(){
         setActive({...active, brand: true})
     }
 
+    const orderPrice = (e) => {
+        dispatch(actions.orderByPrice(products, e.target.value))
+        setActive({...active, price: true})
+    }
+
+//    function orderPrice(e) {
+//     dispatch(actions.orderByPrice(e.target.value))
+//     setOrder(e.target.value)
+//     setActive({...active, price: true})
+//    }
+
     return(
         <div>
         <NavBar/>
-        <div>
+        <div className="cartas">
             {active.brand ? filter.map(
                 (e) => <CardV
                 key= {e.product_id}
@@ -67,9 +81,16 @@ function Category(){
           <select name='brand' value={active.brand} id="brand" onChange={filterBrands}  >
             <option>Filtrar por marcas</option>
             {Brands && Brands.map((brand, i) => <option key={i} value={brand} >{brand}</option>)}
-          </select>
-            
+          </select>     
         </div>
+        <div>
+        <select name="price" value={active.price} onChange={orderPrice} >
+                        <option>Ordenar por precio</option>
+                        <option value="asc">Precio -&nbsp;&nbsp;Precio +</option>
+                        <option value="desc">Precio +&nbsp;&nbsp;Precio -</option>
+                    </select>
+        </div>
+        
         
         <Footer/>
         </div>
