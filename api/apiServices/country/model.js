@@ -16,17 +16,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      flag: { 
+      flag: {
         type: DataTypes.TEXT,
         allowNull: true,
         defaultValue: "https://flagcdn.com/w320/ar.png",
       },
-      languages: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      }
     },
-      {
+    {
       timestamps: false,
       createdAt: false,
       updatedAt: false,

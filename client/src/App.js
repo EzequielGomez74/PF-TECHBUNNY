@@ -1,37 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
-import CardV from './Components/Card V/CardV';
-import CardH from './Components/Card H/CardH';
-import Footer from './Components/Footer/Footer';
-import NavBar from './Components/NavBar/NavBar';
+import { Route, Switch } from 'react-router-dom';
+import Details from './Components/Details/Details'
+// import CardV from './Components/Card V/CardV';
+// import CardH from './Components/Card H/CardH';
+import Home from './Components/Home/Home';
+import About from './Components/About/About';
+import LandingPage from './Components/Landing/LandingPage';
+import Category from './Components/Category/Category';
+import Favoritos from './Components/Favoritos/Favoritos';
+import Cart from './Components/Cart/Cart';
 
 
 function App() {
   return (
     <div className="App">
-
-      <div>
-        <CardV></CardV>
-        <CardH></CardH>
-      </div>
-
-      <NavBar />
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Footer />
+      
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path='/home' component={Home}  />
+        <Route exact path='/detail/:id' component={Details}  />
+        <Route exact path='/about' component={About}  />
+        <Route exact path='/favorites' component={Favoritos}  />
+        <Route exact path='/cart' component={Cart}  />
+        <Route exact path='/category/:name' component={Category}/>
+      </Switch>
     </div>
   );
 }

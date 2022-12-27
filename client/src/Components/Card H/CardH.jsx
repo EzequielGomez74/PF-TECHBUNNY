@@ -1,43 +1,28 @@
-import React from "react";
-import img from "../../Photos/auriejemplo.png";
+import React, { useState } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faX} from "@fortawesome/free-solid-svg-icons";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import {faMinus} from "@fortawesome/free-solid-svg-icons";
-import "./CardH.css"
+import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import s from './CardH.module.css';
 
 
-function CardH(){
-    const cardPrueba = {
-        img: img,
-        marca:"Skullcandy Audífono Cassette Bt Black",
-        disponible: "Sí",
-        cantidad: 1,
-        price: 4463.53,
-    }
+function CardH({id, brand, name, image, price, stock}){
     return(
-        <div className="cardSuper">
-        <div className="cardContainerH">
-        <div className="cardImgH">
-            <img className="imgCard" src={cardPrueba.img} alt="img"/>
-            <h2>{cardPrueba.marca}</h2>
+        <div className={s.card}>
+            <div className={s.close}><button className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.cardInfo} >
+                <div>
+                    <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>
+                </div>
+                <div className={s.pInfo}>
+                    <span className={s.pName}>{name}</span>
+                    <span className={s.pBrand}>{brand}</span>
+                    <div className={s.pStock}>
+                        &nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <span className={s.pPrice}>US${price}</span>
+                </div>
+            </div>
         </div>
-        <div className="cardDispon">
-        <p >{cardPrueba.disponible}</p>
-        </div>
-        <div className="cardCant">
-            <FontAwesomeIcon className="icon" icon={faMinus}/>
-            {cardPrueba.cantidad}
-            <FontAwesomeIcon className="icon" icon={faPlus}/>
-        </div>
-        <div className="priceH">
-        <p>$ {cardPrueba.price}</p>
-        </div>
-        <div className="cardDispon">
-            <FontAwesomeIcon className="icon" icon={faX}/>
-        </div>
-        </div>
-    </div>
     )
 }
 
