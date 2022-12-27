@@ -7,7 +7,7 @@ const category = require("../apiServices/category/routes.js");
 const brand = require("../apiServices/brand/routes.js");
 const country = require("../apiServices/country/routes.js");
 console.log("1");
-const subcategory = require("../apiServices/subcategory/routes.js");
+const subcategory = require("../apiServices/subcategory1/routes.js");
 console.log("2");
 const user = require("../apiServices/user/routes.js");
 const review = require("../apiServices/review/routes.js");
@@ -19,7 +19,7 @@ router.use("/refresh", refresh);
 //router.use(verifyJWT); //middleware de validacion de JWT
 router.use("/products", products);
 router.use("/categories", category);
-//router.use("/subcategories", subcategory);
+router.use("/subcategories", subcategory);
 router.use("/brands", brand);
 router.use("/reviews", review);
 router.use("/countries", country);
