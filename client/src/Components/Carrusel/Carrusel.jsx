@@ -139,7 +139,7 @@ const products = [
             slidesPerView={5}
             spaceBetween={15}
             slidesPerGroup={5}
-            loop={true}
+            loop={true} 
             loopFillGroupWithBlank={true} 
             pagination={{
               clickable: true,
