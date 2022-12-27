@@ -17,10 +17,11 @@ function NavBar() {
   const [openCat, setOpenCat] = useState(false);
   const [closedCat, setClosedCat] = useState(true);
 
+  let menuRef = useRef();
 
   useEffect(() => {
     let handler = (e)=>{
-    {
+      if(!menuRef.current.contains(e.target)){
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
@@ -50,7 +51,7 @@ function NavBar() {
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
+                    <span onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
