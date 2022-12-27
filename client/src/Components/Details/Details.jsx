@@ -234,7 +234,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
         <div className={s.block}>
           <div className={s.productImage}>
             <div className={s.icon}>
-              <button className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
+              <button onClick={()=> dispatch(actions.addFavorite({id: product.product_id, brand:product.brand , name: product.name, image:product.image, price:product.price, stock: product.stock})) } className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
             </div>
             <div className={s.imgP}>
               <img src={product.image} alt={product.product_id} />
