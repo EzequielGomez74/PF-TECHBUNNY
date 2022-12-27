@@ -12,16 +12,16 @@
   
   .btnPag button {
     border-radius: 15px;
-    background-color: #D7F136;
-    color: #20232A; 
+    background-color: #20232A;
+    color: #D7F136;
     border-radius: 2px;
-    border: 2px solid;
+   
     margin: 2px;
   }
   
   .btnPag button:hover {
-    background-color: #20232A;
-    color: #D7F136;
+    background-color: #D7F136;
+    color: #20232A; 
     transform: translateY(-4px);
     
   }

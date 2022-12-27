@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
+// import './NavBar.scss';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -49,7 +50,7 @@ function NavBar() {
                 <SearchBar />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
-                    <span><FontAwesomeIcon icon={faMoon} /></span>
+                    <span className={s.BotonDark}><FontAwesomeIcon icon={faMoon} /></span>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
                     <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
