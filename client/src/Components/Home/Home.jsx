@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch,  } from 'react-redux';
+import { useDispatch, useSelector,  } from 'react-redux';
 import * as actions from '../../redux/actions'
 // import CardV from '../Card V/CardV';
 import Footer from '../Footer/Footer';
@@ -29,23 +29,6 @@ function Home() {
         </div>
       </div>
         <Carrusel />
-        {/* <section>
-
-        
-
-        <section>
-f8
-          {products ? products.map(p => <CardV 
-          key={p.product_id}
-          id={p.product_id}
-          brand={p.brand}
-          name={p.name}
-          image={p.image}
-          price={p.price}
-          category={p.category}
-          subcategory={p.subcategory}
-          />) : 'No hay productos'}
-        </section> */}
         <section className={s.banners} >
             <div className={s.bannerOne}>
                 <div className={s.a}></div>

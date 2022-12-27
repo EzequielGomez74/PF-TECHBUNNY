@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
@@ -13,7 +13,6 @@ import {
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "../Dropdown/Dropdown";
-import Carrusel from "../Carrusel/Carrusel";
 
 function Details() {
   const { id } = useParams();
@@ -112,7 +111,9 @@ function Details() {
         <div className={s.block}>
           <div className={s.productImage}>
             <div className={s.icon}>
-              <FontAwesomeIcon icon={faHeart} className={s.heart} />
+              <button className={s.heart}>
+                <FontAwesomeIcon icon={faHeart} />
+              </button>
             </div>
             <div className={s.imgP}>
               <img src={product.image} alt={product.product_id} />
@@ -190,12 +191,6 @@ function Details() {
           <span></span>
         </div>
       </div>
-
-      <section className={s.carruselSection}>
-        <br />
-        <br />
-        <Carrusel />
-      </section>
 
       <br />
       <div className={s.sub}>

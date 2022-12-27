@@ -5,17 +5,19 @@ import * as actions from '../../redux/actions';
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
-import './Category.css'
+import s from './Category.module.css';
 
 function Category(){
 
-    let [active, setActive] = useState({brand: false}); 
+    let [active, setActive] = useState({brand: false, price: false});
+    // let [order, setOrder] = useState("All");
     let {name} = useParams();
     let dispatch = useDispatch();
     let products = useSelector(state => state.productsByCategory);
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
+
 
     for (let i = 0; i < products.length; i++) {
         productBrands.push(products[i].brand)
@@ -37,42 +39,53 @@ function Category(){
         setActive({...active, brand: true})
     }
 
+    const orderPrice = (e) => {
+        dispatch(actions.orderByPrice(products, e.target.value))
+        setActive({...active, price: true})
+    }
+
     return(
         <div>
-        <NavBar/>
-        <div className="cartas">
-            {active.brand ? filter.map(
-                (e) => <CardV
-                key= {e.product_id}
-                id= {e.product_id}
-                brand= {e.brand}
-                name = {e.name}
-                image= {e.image}
-                price= {e.price}
-                category= {e.category}
-                subcategory= {e.subcategory}
-                />) : products.map(
-                (e) => <CardV
-                key= {e.product_id}
-                id= {e.product_id}
-                brand= {e.brand}
-                name = {e.name}
-                image= {e.image}
-                price= {e.price}
-                category= {e.category}
-                subcategory= {e.subcategory}
-                />
-            )}
-        </div>
-        <div>
-          <select name='brand' value={active.brand} id="brand" onChange={filterBrands}  >
-            <option>Filtrar por marcas</option>
-            {Brands && Brands.map((brand, i) => <option key={i} value={brand} >{brand}</option>)}
-          </select>
-            
-        </div>
-        
-        <Footer/>
+            <NavBar/>
+            <div className={s.categoryPage}>
+                <div className={s.selectors}>
+                    <select name='brand' value={active.brand} id="brand" onChange={filterBrands}  >
+                        <option className={s.option}>Filtrar por marcas</option>
+                        {Brands && Brands.map((brand, i) => <option className={s.option} key={i} value={brand} >{brand}</option>)}
+                    </select>
+
+                    <select name="price" value={active.price} onChange={orderPrice} >
+                        <option className={s.option}>Ordenar por precio</option>
+                        <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
+                        <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
+                    </select>
+                </div>
+                <div className={s.results}>
+                    {active.brand ? filter.map(
+                        (e) => <CardV
+                        key= {e.product_id}
+                        id= {e.product_id}
+                        brand= {e.brand}
+                        name = {e.name}
+                        image= {e.image}
+                        price= {e.price}
+                        category= {e.category}
+                        subcategory= {e.subcategory}
+                        />) : products.map(
+                        (e) => <CardV
+                        key= {e.product_id}
+                        id= {e.product_id}
+                        brand= {e.brand}
+                        name = {e.name}
+                        image= {e.image}
+                        price= {e.price}
+                        category= {e.category}
+                        subcategory= {e.subcategory}
+                        />
+                    )}
+                </div>
+            </div>
+            <Footer/>
         </div>
     )
 }
