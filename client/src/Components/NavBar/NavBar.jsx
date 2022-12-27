@@ -17,17 +17,14 @@ function NavBar() {
   const [openCat, setOpenCat] = useState(false);
   const [closedCat, setClosedCat] = useState(true);
 
-//   let menuRef = useRef();
 
   useEffect(() => {
     let handler = (e)=>{
-    //   if(!menuRef.current.contains(e.target))
     {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
         setClosedCat(false);
-     
       }    
     };
 
