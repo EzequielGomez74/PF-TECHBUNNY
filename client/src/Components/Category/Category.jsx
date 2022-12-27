@@ -75,7 +75,7 @@ function Category(){
                         <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
                         <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
                     </select>
-
+ 
                     <div className={s.paginate}>
                     <Pagination
                     productsPerPage={productsPerPage}
@@ -112,5 +112,5 @@ function Category(){
         </div>
     )
 }
-
+ //no borrar esta linea
 export default Category;
