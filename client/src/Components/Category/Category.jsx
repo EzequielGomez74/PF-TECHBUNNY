@@ -75,6 +75,16 @@ function Category(){
                         <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
                         <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
                     </select>
+
+                    <div className={s.paginate}>
+                    <Pagination
+                    productsPerPage={productsPerPage}
+                    products={products.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                    />
+                </div>
+
                 </div>
                 <div className={s.results}>
                     {currentProduct.map(
