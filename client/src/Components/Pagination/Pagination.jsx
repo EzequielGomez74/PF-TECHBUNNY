@@ -1,38 +1,34 @@
 import React from "react";
 import './Pagination.css';
 
-export default function Pagination({
-    productsperpage,
-    allproducts,
-    pagination,
-    currentpage,
-}) {
+export default function Pagination({productsPerPage, products, paginate, currentPage}){
     const pageNumbers = [];
-
-    for (let i = 1; i <= Math.ceil(allproducts/productsperpage); i++){
-        pageNumbers.push(i);
+  
+    for(let i = 1; i <= Math.ceil(products/productsPerPage); i++){
+      pageNumbers.push(i)
     }
-
-    if(currentpage === pageNumbers.length + 1) {
-        pagination(1);
+    if(currentPage === pageNumbers.length + 1){
+      paginate(1)
     }
-
+  
     return(
-        <div className="btnPag">
-            <button  onClick={() => pagination(currentpage === 1 ? pageNumbers.length : currentpage -1)} >
-            «{" "}
+      <div className="btnPag">
+        <button
+          onClick={() => 
+            paginate(currentPage === 1 ? pageNumbers.length : currentPage -1)}
+            > « </button>
+  
+        {
+          pageNumbers && pageNumbers.map(number => (
+            <button key = {number} onClick = {() => paginate(number)}>
+              {currentPage === number ? <b>{number}</b> : number}
             </button>
-            {
-                pageNumbers && pageNumbers.map((number) => (
-                    <button key={number} onClick={() => pagination(number)}>
-                        {currentpage === number ? <b>{number}</b> : number}
-                    </button>
-                ))
-            }
-            <button onClick={() => pagination(currentpage === 0 ? currentpage : currentpage + 1)}>
-            »{" "}
-            </button>
-        </div>
+          ))
+        }
+  
+        <button onClick={() => paginate(currentPage === 0 ? currentPage : currentPage + 1)}
+        > » </button>
+      </div>
     )
-
-}
+  };
+  
