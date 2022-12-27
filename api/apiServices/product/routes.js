@@ -29,13 +29,13 @@ router.get("/:product_id", async (req, res) => {
 });
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", async (req, res) => {
-  console.log("a");
+  console.log("postea productos");
 
   const product = { ...req.body };
   try {
     res.status(200).send(await controller.createProduct(product));
   } catch (error) {
-    res.status(400).json({ msg: "betardi" });
+    res.status(400).json({ msg: "algo falló al crear el producto" });
   }
 });
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
