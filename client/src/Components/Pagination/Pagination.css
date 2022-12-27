@@ -12,13 +12,16 @@
   
   .btnPag button {
     border-radius: 15px;
-    background-color: black;
-    color: rgb(211, 36, 36); 
-    border-radius: .3em;
-    border: 1px solid;
+    background-color: #D7F136;
+    color: #20232A; 
+    border-radius: 2px;
+    border: 2px solid;
+    margin: 2px;
   }
   
   .btnPag button:hover {
-    color: rgba(170, 170, 170, 0.8) ;
+    background-color: #20232A;
+    color: #D7F136;
+    transform: translateY(-4px);
     
   }
