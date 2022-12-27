@@ -156,6 +156,7 @@ const products = [
                 name={p.name}
                 image={p.image}
                 price={p.price}
+                stock={p.stock}
                 category={p.category}
                 subcategory={p.subcategory}
                 />             
