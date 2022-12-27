@@ -17,4 +17,24 @@ async function createOrder({ status, user_id, products }) {
     throw new Error(error.message);
   }
 }
-module.exports = { createOrder };
+
+async function getOrderById(order_id) {
+  try {
+    const orderById = await Order.findAll({
+      where: { order_id },
+    });
+    return orderById;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+async function updateOrder(order,data) {
+  try {
+    await Order.update({order_id:data.status}, { where: { order_id: order.order_id } });
+    return "Orden modificada con exito!";
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+module.exports = { createOrder,getOrderById,updateOrder };

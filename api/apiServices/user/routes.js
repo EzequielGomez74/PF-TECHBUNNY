@@ -32,6 +32,15 @@ router.put("/:user_id", validate.user, async (req, res) => {
   }
 });
 
+router.delete("/:user_id", async (req, res) => {
+  try {
+    if (req.params.user_id)
+      res.status(200).json(await controller.deleteUser(req.params.user_id));
+  } catch (error) {
+    res.sendStatus(400);
+  }
+});
+
 // router.put("/:user_id", async (req, res) => {
 //   const { username, name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture } = req.body
 //   const { user_id } = req.params;
