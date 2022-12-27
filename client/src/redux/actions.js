@@ -14,27 +14,27 @@ import {
 } from "./actionTypes";
 
 //ORIGINAL DE FRONT > DESCOMENTAR
-export const getProducts = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/products")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_ALL_PRODUCTS, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
-
-//TESTEO DE LOGIN < COMENTAR
-// export const getProducts = (id) => {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axiosInstance.get("/products");
-//       console.log(response.data);
-//       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
-//     } catch (error) {
-//       console.log("FAILED TO AUTHENTICATE");
-//     }
+// export const getProducts = () => {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001/products")
+//       .then((resp) => resp.json())
+//       .then((data) => dispatch({ type: GET_ALL_PRODUCTS, payload: data }))
+//       .catch((error) => console.log(error));
 //   };
 // };
+
+//TESTEO DE LOGIN < COMENTAR
+export const getProducts = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/products");
+      console.log(response.data);
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+    } catch (error) {
+      console.log("FAILED TO AUTHENTICATE");
+    }
+  };
+};
 
 export const getProductById = (id) => {
   return function (dispatch) {
