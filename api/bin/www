@@ -9,9 +9,3 @@ db.sync({ force: true }).then(async () => {
     console.log("%s listening at 3001");
   });
 });
-
-// conn.sync({ force: false }).then(() => {
-//   server.listen(process.env.PORT, function () {
-//     console.log("escuchando en puerto", process.env.PORT); // eslint-disable-line no-console
-//   });
-// });
