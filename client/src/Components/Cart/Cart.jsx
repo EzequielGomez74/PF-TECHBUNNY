@@ -16,10 +16,14 @@ function Cart() {
               key={p.id} id={p.id} totalQuantity={p.totalQuantity}
               brand={p.brand} name={p.name} stock={p.stock}
               image={p.image} price={p.price}
-            />) 
-            : <p>Todavía no has agregado productos a tu carrito</p>}
+            />)
+            : 
+            <div>
+              <div className={s.heroCart}></div>
+              <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
+            </div>}
           </div>
-          <button className={s.mainButton}>Procesar Compra</button>
+          <button className={cart.length ? s.mainButton : s.none}>Procesar Compra</button>
       </section>
       <Footer/>
     </div>
