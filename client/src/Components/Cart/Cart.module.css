@@ -1,0 +1,30 @@
+.cartSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+
+.mainButton{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 360px;
+    height: 45px;
+    background-color: #20232A;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.mainButton:hover{
+    cursor: pointer;
+}

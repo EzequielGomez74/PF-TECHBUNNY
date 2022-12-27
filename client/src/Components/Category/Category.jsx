@@ -44,12 +44,6 @@ function Category(){
         setActive({...active, price: true})
     }
 
-//    function orderPrice(e) {
-//     dispatch(actions.orderByPrice(e.target.value))
-//     setOrder(e.target.value)
-//     setActive({...active, price: true})
-//    }
-
     return(
         <div>
             <NavBar/>
