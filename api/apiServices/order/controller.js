@@ -2,7 +2,6 @@ const { Order } = require("../../services/db/db.js");
 
 async function createOrder({ status, user_id, products }) {
   //product = [product_id,product_id,product_id,product_id]
-  //
   // products = [
   //   { product_id: 1, count: 2 },
   //   { product_id: 2, count: 1 },
