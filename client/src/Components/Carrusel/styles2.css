@@ -51,8 +51,8 @@ body {
 }
 
 .swiper-button-next{
-  background-color: #3b3b3b;
-  color: black;
+  background-color: #D7F136;
+  color: rgb(84, 84, 84);
   height: 370px;
   width: 40px;
   transform: translateY(-163px);
@@ -61,8 +61,8 @@ body {
 }
 
 .swiper-button-prev{
-  background-color: #3b3b3b;
-  color: black;
+  background-color: #D7F136;
+  color: rgb(84, 84, 84);
   height: 370px;
   width: 40px;
   transform: translateY(-163px);
