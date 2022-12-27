@@ -3,7 +3,7 @@ const { db } = require("../services/db/db.js");
 const loadAllAssets = require("../scripts/initializeDb.js");
 
 // Syncing all the models at once.
-db.sync({ force: true }).then(async () => {
+db.sync({ force: false }).then(async () => {
   await loadAllAssets();
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001");
