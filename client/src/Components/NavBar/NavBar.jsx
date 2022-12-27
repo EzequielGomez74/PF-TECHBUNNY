@@ -22,7 +22,7 @@ function NavBar() {
   const [openCat, setOpenCat] = useState(false);
 
   let menuRef = useRef();
-  console.log(menuRef.current);
+
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
