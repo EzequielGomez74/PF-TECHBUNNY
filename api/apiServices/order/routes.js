@@ -12,18 +12,35 @@ router.post("/", validate.order, async (req, res) => {
   }
 });
 
-router.get("/:order_id", async (req, res) => {
+
+router.get("/", async (req, res) => { // retorna todas las orders del usuario por id con QUERY
+  const { user_id } = req.query
   try {
-    if (req.params.order_id){
-      res.status(200).json(await controller.getOrderById(req.params.order_id));
+    if (user_id){
+    res.status(200).json(await controller.getOrderByUserId(user_id));
     }
-      else{
+    else {
       res.status(200).json(await controller.getOrders());
-      }
+    }
   } catch (error) {
-    res.sendStatus(400);
+    res.status(400).send(error.message);
   }
 });
+
+router.get("/:order_id", async (req, res) => { //retorna una sola por id con PARAMS
+  const { order_id } = req.params
+  try {
+    if (order_id){
+      res.status(200).json(await controller.getOrderById(order_id));
+    } else {
+      res.status(400).send("esta orden no existe")
+    }
+
+  } catch (error) {
+    res.status(400).send("fallo al pedir el order id");
+  }
+});
+
 
 router.put("/:order_id", async (req, res) => {
   try {
