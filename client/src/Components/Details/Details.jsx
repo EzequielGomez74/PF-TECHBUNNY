@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
@@ -19,15 +19,17 @@ function Details() {
   const { id } = useParams();
   const product = useSelector((state) => state.detail);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actions.getProductById(id));
-    console.log(product);
-    console.log(stock);
-  }, [dispatch, id]);
-
+  const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
+
+  useEffect(() => {
+    if (initialLoad.current) {
+      dispatch(actions.getProductById(id));
+      initialLoad.current = false;
+    }
+    setStock(product.stock);
+  }, [dispatch, product]);
 
   const handlePlus = () => {
     if (quantity < product.stock) {
@@ -173,7 +175,7 @@ function Details() {
               <button onClick={handlePlus}>+</button>
             </div>
             <span className={s.stock}>
-              &nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)}{" "}
+              &nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {stock}{" "}
             </span>
           </div>
           <button type="submit" className={s.mainButton}>
