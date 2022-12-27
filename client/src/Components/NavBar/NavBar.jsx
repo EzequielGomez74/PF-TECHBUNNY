@@ -17,16 +17,17 @@ function NavBar() {
   const [openCat, setOpenCat] = useState(false);
   const [closedCat, setClosedCat] = useState(true);
 
-  let menuRef = useRef();
+//   let menuRef = useRef();
 
   useEffect(() => {
     let handler = (e)=>{
-      if(!menuRef.current.contains(e.target)){
+    //   if(!menuRef.current.contains(e.target))
+    {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
         setClosedCat(false);
-        console.log(menuRef.current);
+     
       }    
     };
 
@@ -61,7 +62,7 @@ function NavBar() {
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
                 <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
-                <p>VER ESTADO DE PEDIDO</p>
+                <p><a href='/followUp'>VER ESTADO DE PEDIDO</a></p>
             </div>
                 
         </section>
