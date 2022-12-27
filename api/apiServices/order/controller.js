@@ -19,6 +19,16 @@ async function createOrder({ status, user_id, products }) {
   }
 }
 
+
+async function getOrders() {
+  try {
+    const orderById = await Order.findAll();
+    return orderById;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 async function getOrderById(order_id) {
   try {
     const orderById = await Order.findAll({
@@ -38,4 +48,4 @@ async function updateOrder(order,data) {
     throw new Error(error);
   }
 }
-module.exports = { createOrder,getOrderById,updateOrder };
+module.exports = { createOrder,getOrderById,updateOrder,getOrders };
