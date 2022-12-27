@@ -23,6 +23,18 @@ async function getUserById(user_id) {
   }
 }
 
+async function deleteUser(user_id) {
+  try {
+    const deleteUserId = await User.destroy({
+      where: { user_id },
+    });
+    if (deleteUserId){return "Usuario eliminado con exito!";}
+    else{return "Usuario no encontrado!"}
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 async function modifyUser(user_id, body){ //  los admins usan este controller
   try {
     console.log()
@@ -37,4 +49,4 @@ async function modifyUser(user_id, body){ //  los admins usan este controller
 
 
 
-module.exports = { getAllUsers,getUserById , modifyUser};
+module.exports = { getAllUsers,getUserById , modifyUser,deleteUser};
