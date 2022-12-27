@@ -14,7 +14,7 @@ import Cart from './Components/Cart/Cart';
 function App() {
   return (
     <div className="App">
-      
+
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path='/home' component={Home}  />
@@ -24,6 +24,31 @@ function App() {
         <Route exact path='/cart' component={Cart}  />
         <Route exact path='/category/:name' component={Category}/>
       </Switch>
+
+
+      <div>
+        <CardV></CardV>
+        <CardH></CardH>
+      </div>
+
+      <NavBar />
+
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+      <Footer />
+
     </div>
   );
 }
