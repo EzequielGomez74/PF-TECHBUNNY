@@ -102,5 +102,5 @@ export const removeCart = (id) => {
     }
 }
 
-
+// no descomentar esta linea
 
