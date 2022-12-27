@@ -39,7 +39,6 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArraySubcategories, SubCategory);
-    console.log('Acá')
     await loadtoDb(brands, Brand);
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {
@@ -61,7 +60,7 @@ async function loadAllAssets() {
     await loadtoDb(newArrayProducts, Product);
     await loadtoDb(users, User);
     await loadtoDb(reviews, Review);
-    await loadMockAsset(reviews, Review);
+    //await loadMockAsset(reviews, Review);
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {
     throw new Error(error.message);

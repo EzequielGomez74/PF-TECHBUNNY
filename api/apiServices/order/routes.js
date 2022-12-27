@@ -1,11 +1,10 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
-
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    res.status(200).json(await controller.getAllCountries());
+    res.status(200).json({ order_id: await controller.createOrder(req.body) });
   } catch (error) {
     res.sendStatus(400);
   }
