@@ -4,21 +4,11 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Order",
+    "OrderProduct",
     {
-      order_id: {
+      count: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      status: {
-        type: DataTypes.ENUM(["created", "processed", "complete", "canceled"]),
-        allowNull: false,
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

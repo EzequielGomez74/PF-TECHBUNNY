@@ -4,9 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
-      user_id: {
-        // type: DataTypes.UUID,
-        // defaultValue: DataTypes.UUIDV4,
+      user_id: {        
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -17,6 +15,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       surname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -42,9 +44,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        type: DataTypes.ENUM(["guest", "admin", "user"]),
+        //1=guest 2=user 3=admin 
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: "user",
+        defaultValue: 2,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -66,6 +69,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      isLogged: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      }
     },
     {
       timestamps: true,

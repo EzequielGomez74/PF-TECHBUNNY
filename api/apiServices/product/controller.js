@@ -40,9 +40,9 @@ async function getAllProductsBy(condition) {
   }
 }
 
-async function getProductById(productId) {
+async function getProductById(product_id) {
   try {
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(product_id);
     const newObj = { ...product.dataValues };
     newObj.description = productDescriptionParser(newObj.description);
     return newObj;
@@ -54,7 +54,6 @@ async function getProductById(productId) {
 async function updateProduct(product) {
   delete product.createdAt;
   delete product.updatedAt;
-  console.log(product);
   try {
     await Product.update(
       {
@@ -89,13 +88,13 @@ async function createProduct(product) {
   }
 }
 
-async function deleteProduct(productId) {
+async function deleteProduct(product_id) {
   try {
     await Product.update(
       { active: false },
       {
         where: {
-          product_id: productId,
+          product_id,
         },
       }
     );

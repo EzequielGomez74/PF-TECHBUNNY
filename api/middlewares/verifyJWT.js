@@ -2,13 +2,18 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 function verifyJWT(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  if (!authHeader) return res.sendStatus(401); //unauthorized
-  const token = authHeader.split(" ")[1];
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) return res.sendStatus(403);
+  console.log(req.headers);
+  const authHeader = req.headers["Authorization"];
+  console.log("HEADER ", authHeader);
+  if (!authHeader) return res.json({ m: "ard" }); //unauthorized
+  const token = authHeader.split(" ")[1]; //Bearer 112983*ÄS}d123+´}sa-
+  console.log(token);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
+    if (err) return res.json({ m: "ard" });
     //forbidden invalid token
-    req.user = decoded.username;
+    req.username = decoded.username;
+    req.role = decoded.role;
+    console.log("Pass ", decoded.username);
     next();
   });
 }
