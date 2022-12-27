@@ -1,14 +1,18 @@
 .card{
     font-family: 'Poppins';
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     width: 206px;
-    height: 348px;
+    height: 321px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 10px;
     padding-top: 15px;
-    padding-bottom: 15px;
-    transition: 0.5s;
+    padding-bottom: 22px;
+    
+    /* border: solid 1px #000000; */
+    border-radius: 0px;
+    margin-bottom: 10px;
 }
 
 .iconWrap{
@@ -28,9 +32,7 @@
     cursor: pointer;
 }
 
-.card:hover{
-    transform: translateY(-5px);
-}
+
 
 .img{
     padding-top: 10px;
@@ -72,4 +74,6 @@ a:visited{
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    transform: translateY(-10px);
+   
 }

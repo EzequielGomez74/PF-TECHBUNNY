@@ -3,6 +3,11 @@ export const GET_PRODUCT_BY_ID= 'GET_PRODUCT_BY_ID';
 export const POST_PRODUCT= 'POST_PRODUCT';
 export const POST_NEWSLETTER = 'POST_NEWSLETTER';
 export const GET_CATEGORIES= 'GET_CATEGORIES';
+export const GET_PRODUCTS_BY_CATEGORY= 'GET_PRODUCTS_BY_CATEGORY';
+export const FILTER_BY_BRAND= 'FILTER_BY_BRAND';
+export const FILTER_BY_PRICE= 'FILTER_BY_PRICE';
+export const ORDER_BY_PRICE= 'ORDER_BY_PRICE';
+
 
 
 // Funciones sincrónicas
