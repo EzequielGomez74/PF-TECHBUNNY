@@ -92,10 +92,10 @@ async function getOrderByUserId(user_id) {	// busca por order o por user id
 
 async function updateOrder(order,data) {
   try {
-    await Order.update({order_id:data.status}, { where: { order_id: order.order_id } });
+    await Order.update({status:data.status}, { where: { order_id: order } });
     return "Orden modificada con exito!";
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 module.exports = { createOrder,getOrderById,updateOrder,getOrders , getOrderByUserId};

@@ -44,11 +44,11 @@ router.get("/:order_id", async (req, res) => { //retorna una sola por id con PAR
 
 router.put("/:order_id", async (req, res) => {
   try {
-    const data=req.body;
+    const data = req.body;
     if (req.params.order_id)
       res.status(200).send(await controller.updateOrder(req.params.order_id,data));
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 module.exports = router;
