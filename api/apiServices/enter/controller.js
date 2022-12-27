@@ -44,12 +44,12 @@ async function handleLogin(username, password) {
       const accessToken = jwt.sign(
         { username: foundUser.username, role: foundUser.role },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "20s" }
+        { expiresIn: "30s" }
       );
       const refreshToken = jwt.sign(
         { username: foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "60s" }
+        { expiresIn: "1m" }
       );
       //guardar el refreshToken en la DB
       foundUser.set({ refreshToken: refreshToken });
