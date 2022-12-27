@@ -3,8 +3,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import s from './CartCard.module.css'
+import { useDispatch } from 'react-redux';
+import * as actions from '../../redux/actions'
 
 function CartCard({id, brand, name, image, price, stock, totalQuantity}) {
+    const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(totalQuantity)
     const [total, setTotal] = useState(parseInt(stock))
 
@@ -24,7 +27,7 @@ function CartCard({id, brand, name, image, price, stock, totalQuantity}) {
 
     return(
         <div className={s.card}>
-            <div className={s.close}><button className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.close}><button onClick={() => dispatch(actions.removeCart(id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>
