@@ -14,8 +14,12 @@ router.post("/", validate.order, async (req, res) => {
 
 router.get("/:order_id", async (req, res) => {
   try {
-    if (req.params.order_id)
+    if (req.params.order_id){
       res.status(200).json(await controller.getOrderById(req.params.order_id));
+    }
+      else{
+      res.status(200).json(await controller.getOrders());
+      }
   } catch (error) {
     res.sendStatus(400);
   }
