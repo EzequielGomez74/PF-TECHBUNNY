@@ -63,7 +63,7 @@ export default function reducer (state=initialState, action){
         case 'REMOVE_CART':
             return{
                 ...state,
-                cart: state.cart.filter(f => f.product_id !== action.payload)
+                cart: state.cart.filter(c => c.id !== action.payload)
             }
         default:
             return {...state}
