@@ -34,7 +34,8 @@ let sequelize =
 //Error: ENOENT: no such file or directory, scandir '/app/services/db/apiServices'
 const basename = path.basename(__filename);
 const modelDefiners = [];
-const dbPath = __dirname.split("\\services\\db")[0];
+//const dbPath = __dirname.split("\\services\\db")[0];
+const dbPath = path.join(__dirname, "..", "..");
 console.log("dirname", __dirname);
 console.log(dbPath);
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
