@@ -5,6 +5,11 @@
     text-indent: 10px;
 }
 
+.input:focus {
+    outline: none;
+    color: black;
+}
+
 .inputIcon{
     height: 40px;
     width: 40px;

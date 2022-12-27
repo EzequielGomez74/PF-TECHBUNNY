@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       price: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       stock: {
@@ -50,6 +50,11 @@ module.exports = (sequelize) => {
       category: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     {

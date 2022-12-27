@@ -1,0 +1,129 @@
+:root {
+  --secondary-bg: #22262a;
+  --secondary-text-color: #cecece;
+  --border-radius: 8px;
+  --speed: 500ms;
+}
+
+
+ .dropdown-menu{
+    position: absolute;
+    top: 60px;
+    right: 170px;
+    background-color: #22262a;
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    width: 160px;
+    
+  }
+
+  .dropdown-menu h3{
+    color:#fefefe;
+  }
+
+  .dropdown-menu span{
+    color:#fefefe;
+  }
+  
+  /* .dropdown-menu::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+    background: var(--secondary-bg);
+    transform: rotate(45deg);
+  } */
+  
+  .dropdown-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu ul li{
+    padding: 10px  0;
+    border-top: 1px solid rgba(208, 208, 208, 0.05);
+    margin-left: -24px;
+    color:#fefefe;
+  }
+
+  .dropdown-menu ul li a{
+    margin-top: -4px;
+    color:#fefefe;
+    
+  }
+  
+  .dropdown-menu ul li:hover a{
+    color: #d7f136;
+    cursor: pointer;
+  }
+
+  /* ---------DROPDOWN CATEGORIAS---------- */
+  
+  .dropdown-menu-cat{
+    position: absolute;
+    top: 120px;
+    right: 490px;
+    background-color: #22262a;
+    border-radius: var(--border-radius);
+    padding: 5px -2px;
+    width: 370px;
+  }
+  
+  
+  .dropdown-menu-cat.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+    
+  }
+  
+  .dropdown-menu-cat.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu-cat ul li{
+    padding: 1px 6px -1px;
+    border-left: 3px solid rgba(255, 255, 255, 0.429);
+    float: left;
+    margin-left: -15px;
+    margin-top: 3px;
+  }
+
+  .dropdown-menu-cat ul li a{
+    margin-right: 60px;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    text-align: left;
+    margin-bottom: -5px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fefefe;
+    
+  }
+  
+  .dropdown-menu-cat ul li:hover a{
+    color: #d7f136;
+    cursor: pointer;
+  }
+
+  
+  
+  
+  
