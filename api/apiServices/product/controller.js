@@ -24,6 +24,7 @@ async function getAllProducts() {
         exclude: ["description", "createdAt", "updatedAt"],
       },
     };
+
     const products = await Product.findAll(condition);
     return products;
   } catch (error) {

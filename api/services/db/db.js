@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
 const { log } = require("console");
+const pg = require("pg");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
@@ -12,6 +13,9 @@ const sequelize = new Sequelize(
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   }
 );
+Sequelize.postgres.DECIMAL.parse = function (value) {
+  return parseFloat(value);
+};
 const basename = path.basename(__filename);
 const modelDefiners = [];
 const dbPath = __dirname.split("\\services\\db")[0];
