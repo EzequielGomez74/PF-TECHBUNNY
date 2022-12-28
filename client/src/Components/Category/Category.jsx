@@ -7,6 +7,9 @@ import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from './Category.module.css';
 
+
+
+
 function Category(){
 
     let [active, setActive] = useState({brand: false, price: false});
@@ -85,9 +88,11 @@ function Category(){
                     )}
                 </div>
             </div>
+          
             <Footer/>
         </div>
     )
 }
+
 
 export default Category;
