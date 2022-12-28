@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import s from './CardH.module.css';
+import { useDispatch } from "react-redux";
+import * as actions from '../../redux/actions'
 
 
 function CardH({id, brand, name, image, price, stock}){
+    let dispatch = useDispatch()
     return(
         <div className={s.card}>
-            <div className={s.close}><button className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.close}><button className={s.icon} onClick={()=> dispatch(actions.removeFavorite(id))} ><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>
