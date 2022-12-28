@@ -2,7 +2,8 @@ const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const emailer = require ("../../config/emailer.ts")
+const emailer = require ("../../services/mailer/emailer.js")
+
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
@@ -46,12 +47,12 @@ async function handleLogin(username, password) {
       const accessToken = jwt.sign(
         { username: foundUser.username, role: foundUser.role },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "60s" }
+        { expiresIn: "600s" }
       );
       const refreshToken = jwt.sign(
         { username: foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "120s" }
+        { expiresIn: "1200s" }
       );
       //guardar el refreshToken en la DB
       foundUser.set({ refreshToken: refreshToken });
