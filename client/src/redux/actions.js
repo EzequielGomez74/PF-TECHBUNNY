@@ -11,6 +11,7 @@ import {
   REMOVE_CART,
   REMOVE_FAVORITE,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = () => {
   return function (dispatch) {
