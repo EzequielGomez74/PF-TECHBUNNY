@@ -25,15 +25,5 @@
     "email": "chess@gmail.com",
     "defaultShippingAddress": "Jose Marti 132",
     "zipCode": 1722
-  },
-  {
-    "username":"gerlini",
-    "email":"gerfer@gmail.com",
-    "name":"ger",
-    "surname":"fernandez",
-    "password":"123456",
-    "role":"3",
-    "defaultShippingAddress":"calle falsa 123",
-    "zipCode":1050,
-    "billingAddress":"asdas"}
+  }
 ]
