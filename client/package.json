@@ -13,26 +13,41 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.13",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.3",
+    "dropdown": "^0.2.0",
     "postcss": "^8.4.20",
-    "react-slick": "^0.29.0",
-    "redux": "^4.2.0",
-    "redux-thunk": "^2.4.2",
-    "swiper": "^8.4.5",
-    "web-vitals": "^2.1.4",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.3.4",
-    "bootstrap": "^5.2.3",
-    "axios": "^1.2.1",
-    "dropdown": "^0.2.0",
-    "react": "^18.2.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "react-slick": "^0.29.0",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
+    "swiper": "^8.4.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
