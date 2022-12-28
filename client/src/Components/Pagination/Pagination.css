@@ -1,27 +1,21 @@
-.pagination {
+.btnPag {
     display: flex;
     justify-content: space-around;
     margin: 20px;
-    width: 80%;
-    margin-left: 10%;
-    
-
-    
+    width: 10%;
+    margin-left: 45%;
 
   }
   
   .btnPag button {
     border-radius: 15px;
-    background-color: #20232A;
-    color: #D7F136;
-    border-radius: 2px;
-   
-    margin: 2px;
+    background-color: black;
+    color: rgb(211, 36, 36); 
+    border-radius: .3em;
+    border: 1px solid;
   }
   
   .btnPag button:hover {
-    background-color: #D7F136;
-    color: #20232A; 
-    transform: translateY(-4px);
+    color: rgba(170, 170, 170, 0.8) ;
     
   }

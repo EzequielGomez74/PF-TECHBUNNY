@@ -27,7 +27,6 @@ function NavBar() {
         setClosed(false);
         setOpenCat(false);
         setClosedCat(false);
-        console.log(menuRef.current);
       }    
     };
 
@@ -53,7 +52,7 @@ function NavBar() {
                     <span className={s.BotonDark}><FontAwesomeIcon icon={faMoon} /></span>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
+                    <span onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
@@ -62,7 +61,7 @@ function NavBar() {
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
                 <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
-                <p>VER ESTADO DE PEDIDO</p>
+                <p><a href='/followUp'>VER ESTADO DE PEDIDO</a></p>
             </div>
                 
         </section>
