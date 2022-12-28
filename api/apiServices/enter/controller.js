@@ -2,6 +2,7 @@ const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const emailer = require ("../../config/emailer.ts")
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
@@ -24,6 +25,7 @@ async function handleNewUser(data) {
       zipCode: data.zipCode,
       profilePicture: "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png"
     };
+    emailer.sendMail(newUser)
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
