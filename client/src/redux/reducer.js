@@ -7,6 +7,7 @@ const initialState = {
     cart: [],
     favorites: [],
     darkMode: false
+ 
 }
 
 export default function reducer (state=initialState, action){
