@@ -1,6 +1,6 @@
 // import { bindActionCreators } from 'redux'
 import axios from "axios";
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE } from './actionTypes'
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE } from './actionTypes'
 
 
 export function getProducts () {
@@ -150,5 +150,9 @@ export const removeCart = (id) => {
         type: REMOVE_CART, payload: id
     }
 }
+
+export function toggleDarkMode() {
+    return { type: TOGGLE_DARK_MODE };
+  }
 
 
