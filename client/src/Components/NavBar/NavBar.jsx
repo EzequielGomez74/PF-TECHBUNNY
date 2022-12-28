@@ -6,7 +6,8 @@ import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket,
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {toggleDarkMode} from '../../redux/actions';
 
 
 function NavBar() {
@@ -35,6 +36,9 @@ function NavBar() {
       document.removeEventListener("mousedown", handler);
     }
   });
+  
+  let dispatch = useDispatch();
+   
 
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
@@ -48,7 +52,8 @@ function NavBar() {
                 <SearchBar />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
-                    <span><FontAwesomeIcon icon={faMoon} /></span>
+                    
+                    <button onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={faMoon} /></button>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
                     <span onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>

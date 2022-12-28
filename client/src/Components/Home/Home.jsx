@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../redux/actions'
 // import CardV from '../Card V/CardV';
 import Footer from '../Footer/Footer';
@@ -19,8 +19,10 @@ function Home() {
     dispatch(actions.getProducts());
   }, [dispatch])
 
+  const dm = useSelector(state => state.darkMode);
+
   return (
-    <div className={s.home}>
+    <div className={dm ? s.dmhome : s.home} >
         <NavBar />
         <BannerHome/>
         <div className={s.sub}>
