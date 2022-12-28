@@ -5,27 +5,32 @@ import s from './Login.module.css';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { useSelector } from "react-redux";
 
 function Login() {
   const history = useHistory();
   const handleClick = () => {
       history.push('/register');
   }
+
+    //dark mode
+    const dm = useSelector(state => state.darkMode);
+
   return (
     <div>
       <NavBar />
-      <section className={s.loginSection}>
-        <div className={s.heroLogin}>
-          <div className={s.hero}></div>
+      <section className={dm ? s.dmloginSection : s.loginSection}>
+        <div className={dm ? s.dmheroLogin : s.heroLogin}>
+          <div className={dm ? s.dmhero : s.hero}></div>
         </div>
-        <div className={s.loginCard}>
+        <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Hola! Inicia Sesión</h4>
           <input type="text" placeholder='Usuario' />
           <input type="password" placeholder='Contraseña' />
-          <span className={s.m1}>¿Olvidaste tu contraseña?</span>
-          <button className={s.b1} >Iniciar Sesión</button>
-          <button className={s.b2}><FontAwesomeIcon icon={faGoogle} />&nbsp;&nbsp;&nbsp;Iniciar Sesión con Google</button>
-          <span onClick={handleClick} className={s.m2}>¿No tienes cuenta? <strong>¡Regístrate aquí!</strong></span>
+          <span className={dm ? s.dmm1 : s.m1}>¿Olvidaste tu contraseña?</span>
+          <button className={dm ? s.dmb1 : s.b1} >Iniciar Sesión</button>
+          <button className={dm ? s.dmb2 : s.b2}><FontAwesomeIcon icon={faGoogle} />&nbsp;&nbsp;&nbsp;Iniciar Sesión con Google</button>
+          <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>¿No tienes cuenta? <strong>¡Regístrate aquí!</strong></span>
         </div>
       </section>
       <Footer />
