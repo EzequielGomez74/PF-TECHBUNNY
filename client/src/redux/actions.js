@@ -55,7 +55,7 @@ export const filterByPrice = (products, max, min) => {
 //         dispatch({type: ORDER_BY_PRICE, payload})
 //     }
 // }
-
+ //noborrar
 export const orderByPrice = (products, order) => {
     return function(dispatch){
         if(order === 'asc'){
