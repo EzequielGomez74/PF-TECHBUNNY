@@ -12,7 +12,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import "./About.css";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
-//as
+//asa
 function aboutUs() {
   return (
     <div>
