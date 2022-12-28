@@ -67,8 +67,69 @@ export const getProductsByCategory = (category) => {
 };
 
 export const filterByBrand = (products, brand) => {
-  return function (dispatch) {
-    const filteredByBrand = products.filter((p) => p.brand === brand);
-    dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
-  };
-};
+    return function(dispatch){
+        const filteredByBrand = products.filter((p) => p.brand === brand)
+        dispatch({type: FILTER_BY_BRAND, payload: filteredByBrand})
+    }
+}
+
+export const filterByPrice = (products, max, min) => {
+    return function(dispatch){
+        const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+        dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
+    }
+}
+
+// export const orderByPrice = (payload) => {
+//     return function(dispatch){
+//         dispatch({type: ORDER_BY_PRICE, payload})
+//     }
+// }
+
+export const orderByPrice = (products, order) => {
+    return function(dispatch){
+        if(order === 'asc'){
+            const asc = products.sort((a,b)=>{
+                if(a.price < b.price) return -1;
+                if(a.price > b.price) return 1;
+                else return 0;
+            })
+            dispatch({type: ORDER_BY_PRICE, payload:[...asc]})
+        }
+        if(order === 'desc'){
+            const desc = products.sort((a,b)=>{
+                if(a.price > b.price) return -1;
+                if(a.price < b.price) return 1;
+                else return 0;
+            })
+            dispatch({type: ORDER_BY_PRICE, payload:[...desc]})
+        }
+    }
+}
+
+export const addFavorite = (payload) => {
+    return {
+        type: ADD_FAVORITE, payload
+    }
+}
+
+export const removeFavorite = (id) => {
+    return {
+        type: REMOVE_FAVORITE, payload: id
+    }
+}
+
+
+export const addCart = (payload) => {
+    return {
+        type: ADD_CART, payload
+    }
+}
+
+export const removeCart = (id) => {
+    return {
+        type: REMOVE_CART, payload: id
+    }
+}
+
+

@@ -6,7 +6,6 @@ import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from './Category.module.css';
-import Pagination from '../Pagination/Pagination';
 
 function Category(){
 
@@ -18,17 +17,8 @@ function Category(){
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
-    let [currentPage, setCurrentPage] = useState(1);
-    let [productsPerPage] = useState(12);
-    let indexLastProduct = currentPage * productsPerPage;
-    let indexFirstProduct = indexLastProduct - productsPerPage;
-    let currentProduct = active.brand === false && active.price === false ? products.slice(indexFirstProduct, indexLastProduct): filter.slice(indexFirstProduct, indexLastProduct);
 
-    let paginate = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
-    
     for (let i = 0; i < products.length; i++) {
         productBrands.push(products[i].brand)
     }
@@ -54,12 +44,6 @@ function Category(){
         setActive({...active, price: true})
     }
 
-//    function orderPrice(e) {
-//     dispatch(actions.orderByPrice(e.target.value))
-//     setOrder(e.target.value)
-//     setActive({...active, price: true})
-//    }
-
     return(
         <div>
             <NavBar/>
@@ -75,19 +59,9 @@ function Category(){
                         <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
                         <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
                     </select>
- 
-                    <div className={s.paginate}>
-                    <Pagination
-                    productsPerPage={productsPerPage}
-                    products={products.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                    />
-                </div>
-
                 </div>
                 <div className={s.results}>
-                    {currentProduct.map(
+                    {active.brand ? filter.map(
                         (e) => <CardV
                         key= {e.product_id}
                         id= {e.product_id}
@@ -97,15 +71,18 @@ function Category(){
                         price= {e.price}
                         category= {e.category}
                         subcategory= {e.subcategory}
-                        />)}
-                </div>
-                <div className={s.paginate}>
-                    <Pagination
-                    productsPerPage={productsPerPage}
-                    products={products.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                    />
+                        />) : products.map(
+                        (e) => <CardV
+                        key= {e.product_id}
+                        id= {e.product_id}
+                        brand= {e.brand}
+                        name = {e.name}
+                        image= {e.image}
+                        price= {e.price}
+                        category= {e.category}
+                        subcategory= {e.subcategory}
+                        />
+                    )}
                 </div>
             </div>
             <Footer/>

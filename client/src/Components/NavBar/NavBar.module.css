@@ -45,8 +45,7 @@
 }
 
 .two{
-    background-color: white;
-    cursor: pointer;
+  background-color: white;
 }
 
 .two div {
@@ -75,10 +74,6 @@
  
   color: black;
   
-}
-
-.two .categorias{
-  cursor: pointer;
 }
 
 .three{
@@ -158,20 +153,18 @@ span{
   font-weight: 500;
 }
 
-  @media handheld, only screen and (max-width: 767px) {
-    .three {
-      display:none;
-       
-    }
+@media handheld, only screen and (max-width: 767px) {
+  .three {
+    display:none;
+     
   }
-  
-  @media only screen and (max-width: 1023px) {
-    .three {
-      display:none;
-    }
+}
+
+@media only screen and (max-width: 1023px) {
+  .three {
+    display:none;
   }
+}
 
-  
 
-  
 
