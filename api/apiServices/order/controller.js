@@ -50,6 +50,8 @@ async function getOrderById(order_id) { // busca por order o por user id
         user_id: el.user_id,
         products: el.Products.map((el) => {return { product_id: el.product_id,
         count: el.OrderProduct.count}}),
+        createdAt: el.createdAt,
+        updatedAt: el.updatedAt,
       }
     })
 
@@ -79,6 +81,8 @@ async function getOrderByUserId(user_id) {	// busca por order o por user id
         user_id: el.user_id,
         products: el.Products.map((el) => {return { product_id: el.product_id,
         count: el.OrderProduct.count}}),
+        createdAt: el.createdAt,
+        updatedAt: el.updatedAt,
       }
     })
 
