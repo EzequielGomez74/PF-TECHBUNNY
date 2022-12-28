@@ -30,6 +30,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
+  background-color: #1b1d23;
 }
 
 .one div h1 a{
@@ -73,7 +74,7 @@
 }
 
 .dmtwo{
-  background-color: #20232a;
+  background-color: #1b1d23;
   cursor: pointer;
 }
 
@@ -207,6 +208,11 @@ a {
   text-decoration: none;
 }
 
+.two div p{
+  width: 300px;
+  height: 30px;
+}
+
 .two div a:hover{
   color: #7e7e7e;
   cursor: pointer;
@@ -257,7 +263,7 @@ h3{
 
 .btnMoon{
   border: none;
-  background-color: white;
+  background-color: transparent;
   color: #20232a;
   cursor: pointer;
   padding: 12px;
@@ -265,7 +271,7 @@ h3{
 
 .dmbtnMoon{
   border: none;
-  background-color: #20232a;
+  background-color: transparent;
   color: white;
   cursor: pointer;
   padding: 12px;

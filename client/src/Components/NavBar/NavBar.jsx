@@ -2,7 +2,7 @@ import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ function NavBar() {
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     
-                    <button className={dm ? s.dmbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={faMoon} /></button>
+                    <button className={dm ? s.dmbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
                     <Link to='/favorites'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
                     <span className={dm ? s.dmiconsbtn : s.iconsbtn} onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
@@ -63,10 +63,16 @@ function NavBar() {
         </section>
         <section className={dm ? s.dmtwo : s.two}>
             <div>
-                <p><a href='/home'>HOME</a> </p>
-                <p><a href='/about'>SOBRE TECHBUNNY</a></p>
+                <Link to='/home'>
+                <p>HOME</p>
+                </Link>
+                <Link to='/about'>
+                <p>SOBRE TECHBUNNY</p>
+                </Link>
                 <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
-                <p><a href='/followUp'>VER ESTADO DE PEDIDO</a></p>
+                <Link to='/followUp'>
+                <p>VER ESTADO DE PEDIDO</p>
+                </Link>
             </div>
                 
         </section>
