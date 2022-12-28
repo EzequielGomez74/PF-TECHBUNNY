@@ -1,0 +1,21 @@
+.dropdown strong{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.dropdown strong:hover{
+    cursor: pointer;
+}
+
+.dropdown p{
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 20px;
+    color: #121212;
+    padding-left: 30px;
+    padding-right: 30px;
+}
