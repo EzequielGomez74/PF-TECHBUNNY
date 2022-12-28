@@ -119,6 +119,18 @@ a {
   text-decoration: none;
 }
 
+.two div a:hover{
+  color: #7e7e7e;
+  cursor: pointer;
+}
+
+.two div p:hover{
+  color: #7e7e7e;
+  cursor: pointer;
+}
+
+
+
 h3{
   width: 100%;
   text-align: center;
