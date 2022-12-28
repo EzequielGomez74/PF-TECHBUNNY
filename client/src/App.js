@@ -8,6 +8,8 @@ import Category from './Components/Category/Category';
 import Favoritos from './Components/Favoritos/Favoritos';
 import Cart from './Components/Cart/Cart';
 import Error from './Components/Error/Error';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
