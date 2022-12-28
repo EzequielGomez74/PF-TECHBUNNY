@@ -8,7 +8,7 @@ export const FILTER_BY_BRAND= 'FILTER_BY_BRAND';
 export const FILTER_BY_PRICE= 'FILTER_BY_PRICE';
 export const ORDER_BY_PRICE= 'ORDER_BY_PRICE';
 
-
+//VERCEL LA CONCHA DE TU MADRE
 
 // Funciones sincrónicas
 export const ADD_CART= 'ADD_CART';
