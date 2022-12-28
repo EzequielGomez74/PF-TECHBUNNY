@@ -7,14 +7,21 @@
     justify-content: space-around;
     padding-top: 50px;
     padding-bottom: 60px;
-    background-color: orange;
     font-family: 'Poppins';
 }
 
 .heroLogin{
-    background-color: pink;
     height: 500px;
     width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero{
+    background-image: url(../../images/login.png);
+    width: 600px;
+    height: 490px;
 }
 
 .loginCard{
@@ -54,6 +61,10 @@
     margin-top: 20px;
 }
 
+.m2:hover{
+    cursor: pointer;
+}
+
 .loginCard button{
     margin-left: 40px;
     margin-right: 40px;
@@ -81,4 +92,10 @@
     background-color: #F6F5FA;
     color: #20232A;
     border: none;
+}
+
+@media only screen and (max-width: 800px) {
+    .heroLogin{
+        display: none;
+    }
 }
