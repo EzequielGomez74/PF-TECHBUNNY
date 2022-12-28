@@ -37,7 +37,6 @@ async function deleteUser(user_id) {
 
 async function modifyUser(user_id, body){ //  los admins usan este controller
   try {
-    console.log()
     body.password = await bcrypt.hash(body.password, 10) // 10 salt
 
     await User.update( body, { where: { user_id }})
