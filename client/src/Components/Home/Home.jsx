@@ -18,8 +18,10 @@ function Home() {
     dispatch(actions.getProducts());
   }, [dispatch])
 
+  const dm = useSelector(state => state.darkMode);
+
   return (
-    <div className={s.home}>
+    <div className={dm ? s.dmhome : s.home} >
         <NavBar />
         <BannerHome/>
         <div className={s.sub}>
