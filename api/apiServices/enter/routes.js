@@ -9,8 +9,7 @@ router.post("/", validate.enter ,async (req, res) => {
   try {
     res.status(200).json(await controller.handleNewUser(data));
   } catch (error) {
-    console.log(error.message);
-    res.status(400).json(error.msg);
+    res.status(400).json(error.message);
   }
 });
 
@@ -20,18 +19,18 @@ router.put("/:accessType", validate.enterLogin , async (req, res) => {
   try {
     switch (accessType) {
       case "login":
-        console.log(req.body);
         const { username, password } = req.body;
         if (username && password) {
           const { accessToken, refreshToken } = await controller.handleLogin(
             username,
             password
           );
+          res.cookie("beto", 2);
           res.cookie("jwt", refreshToken, {
             sameSite: "None",
             secure: true,
-            httpOnly: true,
-            maxAge: 5 * 24 * 60 * 60 * 1000,
+            httpOnly: false,
+            maxAge: 24 * 60 * 60 * 1000,
           });
           res.status(200).json({ accessToken });
         } else {
