@@ -2,22 +2,43 @@ require("dotenv").config();
 const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
+//const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
 const { log } = require("console");
 
-const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
-);
+/*
+ */
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+let sequelize =
+  process.env.NODE_ENV === "production"
+    ? new Sequelize(
+        `postgresql://postgres:6ArW2auywnfkkjN35Bgh@containers-us-west-31.railway.app:6923/railway`, //eso es lo que da railway en connect Postgres Connection URL
+        {
+          logging: false, // set to console.log to see the raw SQL queries
+          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+        }
+      )
+    : new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        {
+          logging: false, // set to console.log to see the raw SQL queries
+          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+        }
+      );
+
+// const sequelize = new Sequelize(
+//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
+//   {
+//     logging: false, // set to console.log to see the raw SQL queries
+//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+//   }
+// );
+//Error: ENOENT: no such file or directory, scandir '/app/services/db/apiServices'
 const basename = path.basename(__filename);
 const modelDefiners = [];
-const dbPath = __dirname.split("\\services\\db")[0];
+//const dbPath = __dirname.split("\\services\\db")[0];
+const dbPath = path.join(__dirname, "..", "..");
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(dbPath, "/apiServices")).forEach((file) => {
-  console.log(file);
+fs.readdirSync(path.join(dbPath, "apiServices")).forEach((file) => {
   if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
     modelDefiners.push(
       require(path.join(dbPath, "apiServices", file, "model.js"))
@@ -38,8 +59,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
-  sequelize.models;
+const {
+  Brand,
+  Category,
+  Country,
+  Order,
+  Product,
+  Review,
+  SubCategory,
+  User,
+  OrderProduct,
+} = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
 
@@ -49,8 +79,14 @@ Review.belongsTo(Product, { foreignKey: "product_id" });
 User.hasMany(Review, { foreignKey: "user_id" });
 Review.belongsTo(User, { foreignKey: "user_id" });
 
-Order.belongsToMany(Product, { through: "OrderProduct" });
-Product.belongsToMany(Order, { through: "OrderProduct" });
+Order.belongsToMany(Product, {
+  through: OrderProduct,
+  foreignKey: "order_id",
+});
+Product.belongsToMany(Order, {
+  through: OrderProduct,
+  foreignKey: "product_id",
+});
 
 User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User, { foreignKey: "user_id" });
@@ -59,7 +95,7 @@ Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
 module.exports = {
-  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
@@ -68,5 +104,7 @@ module.exports = {
   User,
   Review,
   Country,
+  Order,
+  OrderProduct,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
