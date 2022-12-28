@@ -29,7 +29,7 @@ function Home() {
           <span></span>
         </div>
       </div>
-        <Carrusel />
+        {/* <Carrusel /> */}
         <section className={s.banners} >
             <div className={s.bannerOne}>
                 <div className={s.a}></div>
@@ -50,7 +50,7 @@ function Home() {
         </div>
       </div>
 
-        <Carrusel/>
+        {/* <Carrusel/> */}
         <Newsletter/>
         <Footer/>
         
