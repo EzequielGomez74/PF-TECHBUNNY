@@ -15,7 +15,11 @@ function Favoritos() {
                 key={p.id} id={p.id}
                 stock={p.stock} brand={p.brand}
                 name={p.name} image={p.image} price={p.price}/>)
-            : <p>Todavía no has agregado productos favoritos</p>}
+            : 
+            <div>
+                <div className={s.heroFav}></div>
+                <p className={s.message}>¡Todavía no has agregado productos favoritos!</p>
+            </div>}
             </section>
             <Footer/>
         </div>
