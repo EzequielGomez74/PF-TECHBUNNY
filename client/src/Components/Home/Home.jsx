@@ -11,7 +11,6 @@ import Newsletter from '../NewsLetter/Newsletter'
 
 
 function Home() {
-  // const products = useSelector(state => state.products)
   const dispatch = useDispatch()
 
   useEffect(()=>{
