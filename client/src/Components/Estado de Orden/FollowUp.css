@@ -65,18 +65,18 @@
     justify-content: right;
 }
 
-button{
+.btnFollowUp{
     width: 240px;
     height: 40px;
     background-color:#20232A;
     border-radius: 12px;
 }
 
-button:hover{
+.btnFollowUp:hover{
     cursor: pointer;
 }
 
-button p{
+.btnFollowUp p{
     margin-top: 9px;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;

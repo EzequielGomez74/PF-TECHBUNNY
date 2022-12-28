@@ -25,7 +25,7 @@ function FollowUp(){
                         <input classname= 'prueba 'type="search" placeholder={`Número de Pedido(por ejemplo, 444455)`}/>
                         </div>
                         <div className="btnDiv">
-                        <button type="submit">
+                        <button className="btnFollowUp" type="submit">
                         <p> ENCONTRAR PEDIDO </p>
                         </button>
                         </div>

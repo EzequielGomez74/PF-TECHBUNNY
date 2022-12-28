@@ -38,29 +38,30 @@ function NavBar() {
   });
   
   let dispatch = useDispatch();
-   
-
+  
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
+  //dark mode
+  const dm = useSelector(state => state.darkMode);
 
 
   return (
     <div className={s.navBar}>
-        <section className={s.one}>
+        <section className={dm ? s.dmone : s.one}>
             <div>
                 <SearchBar />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     
-                    <button onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={faMoon} /></button>
-                    <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
-                    <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
+                    <button className={dm ? s.dmbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={faMoon} /></button>
+                    <Link to='/favorites'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
+                    <Link to='/cart'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
+                    <span className={dm ? s.dmiconsbtn : s.iconsbtn} onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
-        <section className={s.two}>
+        <section className={dm ? s.dmtwo : s.two}>
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
@@ -93,7 +94,7 @@ function NavBar() {
                     </ul>
         </div>
 
-        <section className={s.three}>
+        <section className={dm ? s.dmthree : s.three}>
             <div>
               <Link to="/category/Monitores%20y%20TV"><p>Monitores</p> </Link> 
               <Link to="/category/Periféricos"> <p>Periféricos</p></Link>
