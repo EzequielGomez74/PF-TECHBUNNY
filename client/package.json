@@ -16,6 +16,7 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "dropdown": "^0.2.0",
+    "postcss": "^8.4.20",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
