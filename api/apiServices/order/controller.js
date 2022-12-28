@@ -103,3 +103,13 @@ async function updateOrder(order,data) {
   }
 }
 module.exports = { createOrder,getOrderById,updateOrder,getOrders , getOrderByUserId};
+
+async function updateOrder(order,data) {
+  try {
+    await Order.update({status:data.status}, { where: { order_id: order } });
+    return "Orden modificada con exito!";
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+module.exports = { createOrder,getOrderById,updateOrder,getOrders , getOrderByUserId};
