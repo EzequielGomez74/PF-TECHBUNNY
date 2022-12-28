@@ -1,11 +1,11 @@
-
-
 const initialState = {
     products:[],
     detail: {},
     categories: [],
     productsByCategory:[],
     filtered: [],
+    cart: [],
+    favorites: []
 }
 
 export default function reducer (state=initialState, action){
@@ -34,6 +34,36 @@ export default function reducer (state=initialState, action){
             return{
                 ...state,
                 filtered: action.payload,
+            }
+        case 'FILTER_BY_PRICE':
+            return{
+                ...state,
+                filtered: action.payload,
+            }
+        case 'ORDER_BY_PRICE':
+            return{
+                ...state,
+                filtered: action.payload,
+            }
+        case 'ADD_FAVORITE':
+            return{
+                ...state,
+                favorites: [...state.favorites, action.payload]
+            }
+        case 'REMOVE_FAVORITE':
+            return{
+                ...state,
+                favorites: state.favorites.filter(f => f.id !== action.payload)
+            }
+        case 'ADD_CART':
+            return{
+                ...state,
+                cart: [...state.cart, action.payload]
+            }
+        case 'REMOVE_CART':
+            return{
+                ...state,
+                cart: state.cart.filter(f => f.product_id !== action.payload)
             }
         default:
             return {...state}
