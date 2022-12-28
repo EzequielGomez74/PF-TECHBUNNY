@@ -94,7 +94,7 @@ function Category(){
                         />)}
                 </div>
                 <div className={s.paginate}>
-                    <Pagination
+                <Pagination
                     productsPerPage={productsPerPage}
                     products={products.length}
                     paginate={paginate}

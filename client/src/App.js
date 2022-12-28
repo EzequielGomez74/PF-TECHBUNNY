@@ -9,6 +9,7 @@ import LandingPage from './Components/Landing/LandingPage';
 import Category from './Components/Category/Category';
 import Favoritos from './Components/Favoritos/Favoritos';
 import Cart from './Components/Cart/Cart';
+import FollowUp from './Components/Estado de Orden/FollowUp';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route exact path='/favorites' component={Favoritos}  />
         <Route exact path='/cart' component={Cart}  />
         <Route exact path='/category/:name' component={Category}/>
+        <Route exact path='/followUp' component={FollowUp}/>
       </Switch>
     </div>
   );
