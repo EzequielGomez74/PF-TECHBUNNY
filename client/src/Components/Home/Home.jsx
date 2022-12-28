@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector,  } from 'react-redux';
 import * as actions from '../../redux/actions'
 // import CardV from '../Card V/CardV';
 import Footer from '../Footer/Footer';
@@ -10,10 +10,9 @@ import BannerHome from '../Banner Home/Banner'
 import Newsletter from '../NewsLetter/Newsletter'
 
 
-
 function Home() {
   // const products = useSelector(state => state.products)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     dispatch(actions.getProducts());

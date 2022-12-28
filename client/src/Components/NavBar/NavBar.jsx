@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
+// import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,11 +12,8 @@ import { useSelector } from 'react-redux';
 
 function NavBar() {
 
-  //para manejar el dropdown
   const [open, setOpen] = useState(false);
-  const [closed, setClosed] = useState(true);
   const [openCat, setOpenCat] = useState(false);
-  const [closedCat, setClosedCat] = useState(true);
 
   let menuRef = useRef();
 
@@ -23,11 +21,11 @@ function NavBar() {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
         setOpen(false);
-        setClosed(false);
-        setOpenCat(false);
-        setClosedCat(false);
         console.log(menuRef.current);
-      }    
+      }if(!menuRef.current.contains(e.target)){
+        setOpenCat(false);
+        console.log(menuRef.current);
+      }     
     };
 
     document.addEventListener("mousedown", handler);
@@ -52,7 +50,7 @@ function NavBar() {
                     <span><FontAwesomeIcon icon={faMoon} /></span>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} onMouseOut={()=>{setOpen(!closed)}} icon={faCaretDown}/></span>
+                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
@@ -60,13 +58,13 @@ function NavBar() {
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
-                <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
+                <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpenCat(!openCat)}} icon={faAngleDown}/></p>
                 <p>VER ESTADO DE PEDIDO</p>
-            </div>
+                </div>
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
-        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} onMouseEnter={()=>{setOpenCat(!openCat)}}>
+        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
                     <ul>
                        <Link to= "/category/Equipos%20armados"> <DropdownItemCat text={"Equipos armados"}/></Link>
                        <Link to= "/category/Consolas"> <DropdownItemCat text={"Consolas"}/></Link>
