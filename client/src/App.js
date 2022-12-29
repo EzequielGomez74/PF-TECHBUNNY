@@ -1,39 +1,52 @@
 import './App.css';
-<<<<<<< HEAD
-import CardV from './Components/Card V/CardV';
-import CardH from './Components/Card H/CardH';
-import Footer from './Components/Footer/Footer';
-import NavBar from './Components/NavBar/NavBar';
-import Newsletter from './Components/NewsLetter/Newsletter';
-=======
 import { Route, Switch } from 'react-router-dom';
 import Details from './Components/Details/Details'
-// import CardV from './Components/Card V/CardV';
-// import CardH from './Components/Card H/CardH';
+import CardV from './Components/Card V/CardV';
+import CardH from './Components/Card H/CardH';
 import Home from './Components/Home/Home';
 import About from './Components/About/About';
 import LandingPage from './Components/Landing/LandingPage';
->>>>>>> a53434b3716cd655b308b52864c0b7c4f263fd33
+import Category from './Components/Category/Category';
+import Favoritos from './Components/Favoritos/Favoritos';
+import Cart from './Components/Cart/Cart';
 
 
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
-      <NavBar />
-        <CardV/>
-        <CardH/>
-       <Newsletter/>
-      {/* <Footer /> */}
-=======
+
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
+        <Route exact path='/favorites' component={Favoritos}  />
+        <Route exact path='/cart' component={Cart}  />
         <Route exact path='/category/:name' component={Category}/>
       </Switch>
->>>>>>> a53434b3716cd655b308b52864c0b7c4f263fd33
+
+
+      <div>
+        <CardV></CardV>
+        <CardH></CardH>
+      </div>
+
+
+      <header className="App-header">
+
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+
     </div>
   );
 }
