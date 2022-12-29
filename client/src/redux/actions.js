@@ -1,4 +1,5 @@
 import axiosInstance from "./axiosInstance";
+import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
@@ -11,57 +12,66 @@ import {
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
+  TOGGLE_DARK_MODE,
 } from "./actionTypes";
 
-export const getProducts = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/products")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_ALL_PRODUCTS, payload: data }))
-      .catch((error) => console.log(error));
+export const getProducts = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/products");
+      console.log(response.data);
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+    } catch (error) {
+      console.log("FAILED TO AUTHENTICATE");
+    }
   };
 };
-// export const getProducts = (id) => {
+
+// export function getProducts() {
 //   return async function (dispatch) {
 //     try {
-//       const response = await axiosInstance.get("/products");
-//       console.log(response.data);
-//       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+//       var json = await axios.get("http://localhost:3001/products");
+//       return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
 //     } catch (error) {
-//       console.log("FAILED TO AUTHENTICATE");
+//       alert(error);
 //     }
 //   };
-// };
+// }
 
-export const getProductById = (id) => {
-  return function (dispatch) {
-    return fetch(`http://localhost:3001/products/${id}`)
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_PRODUCT_BY_ID, payload: data }))
-      .catch((error) => console.log(error));
+export function getProductById(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`http://localhost:3001/products/${id}`);
+      return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
   };
-};
+}
 
-export const getCategories = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/categories")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_CATEGORIES, payload: data }))
-      .catch((error) => console.log(error));
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/categories");
+      return dispatch({ type: GET_CATEGORIES, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
   };
-};
+}
 
-export const getProductsByCategory = (category) => {
-  return function (dispatch) {
-    // let Capitalize = category[0].toUpperCase() + category.slice(1)
-    return fetch(`http://localhost:3001/products?category=${category}`)
-      .then((resp) => resp.json())
-      .then((data) =>
-        dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: data })
-      )
-      .catch((error) => console.log(error));
+export function getProductsByCategory(category) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(
+        `http://localhost:3001/products?category=${category}`
+      );
+      return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
   };
-};
+}
 
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
@@ -78,12 +88,6 @@ export const filterByPrice = (products, max, min) => {
     dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
   };
 };
-
-// export const orderByPrice = (payload) => {
-//     return function(dispatch){
-//         dispatch({type: ORDER_BY_PRICE, payload})
-//     }
-// }
 
 export const orderByPrice = (products, order) => {
   return function (dispatch) {

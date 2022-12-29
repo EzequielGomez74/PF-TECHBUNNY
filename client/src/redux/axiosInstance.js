@@ -5,6 +5,7 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
@@ -13,7 +14,6 @@ axiosInstance.interceptors.request.use(
     console.log(token);
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
-      config.credentials = "include";
     }
     return config;
   },
@@ -40,14 +40,12 @@ axiosInstance.interceptors.response.use(
             sessionStorage.setItem("accessToken", accessToken);
             console.log("NUEVO TOKEN");
             return axiosInstance(originalConfig);
-          } else {
-            //sino tiene que desloguear al user porque el refresh token esta vencido
-            //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
-            //se deberia hacer un request de tipo /enter/logout
-            console.log("DESLOGUEAR");
           }
         } catch (_error) {
-          return Promise.reject(_error);
+          //sino tiene que desloguear al user porque el refresh token esta vencido
+          //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
+          //se deberia hacer un request de tipo /enter/logout
+          console.log("DESLOGUEAR");
         }
       }
     }
