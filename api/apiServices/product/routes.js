@@ -10,10 +10,12 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     if (req.query)
-      res.status(200).json(await controller.getAllProductsBy(req.query));
-    else res.status(200).json(await controller.getAllProducts());
+      res
+        .status(200)
+        .json(await controller.getAllProductsBy(req.query, req.username));
+    else res.status(200).json(await controller.getAllProducts(req.username));
   } catch (error) {
-    res.status(400).send("asd");
+    res.status(400).send(error.message);
   }
 });
 
@@ -24,7 +26,9 @@ router.get("/", async (req, res) => {
 router.get("/:product_id", async (req, res) => {
   const { product_id } = req.params;
   try {
-    res.status(200).json(await controller.getProductById(product_id));
+    res
+      .status(200)
+      .json(await controller.getProductById(product_id, req.username));
   } catch (error) {
     res.status(400).json({ msg: "betin" });
   }
