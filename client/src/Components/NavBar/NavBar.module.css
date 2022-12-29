@@ -153,6 +153,8 @@ span{
   font-weight: 500;
 }
 
+
+
 @media handheld, only screen and (max-width: 767px) {
   .three {
     display:none;

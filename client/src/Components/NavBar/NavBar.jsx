@@ -7,7 +7,7 @@ import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRi
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode} from '../../redux/actions';
 
 
@@ -40,7 +40,9 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
-  
+  const dm = useSelector(state => state.darkMode)
+  const dispatch = useDispatch();
+
  
   
 
@@ -48,8 +50,8 @@ function NavBar() {
   return (
 
     
-    <div className={s.navBar}>
-        <section className={s.one}>
+    <div className={dm ? s.dmnavBar : s.navBar}>
+        <section className={dm ? s.dmone : s.one}>
             <div>
                 <SearchBar />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
