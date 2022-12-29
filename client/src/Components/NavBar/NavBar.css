@@ -73,7 +73,7 @@
   .dropdown-menu-cat{
     position: absolute;
     top: 120px;
-    right: 490px;
+    right: 460px;
     background-color: #22262a;
     border-radius: var(--border-radius);
     padding: 5px -2px;
