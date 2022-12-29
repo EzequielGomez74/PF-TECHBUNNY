@@ -1,77 +1,73 @@
-import React, { useEffect } from 'react';
-import { useDispatch,  } from 'react-redux';
-import * as actions from '../../redux/actions'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../redux/actions";
 // import CardV from '../Card V/CardV';
-import Footer from '../Footer/Footer';
-import NavBar from '../NavBar/NavBar';
-import s from './Home.module.css';
-import Carrusel from '../Carrusel/Carrusel';
-import BannerHome from '../Banner Home/Banner'
-import Newsletter from '../NewsLetter/Newsletter'
-
+import Footer from "../Footer/Footer";
+import NavBar from "../NavBar/NavBar";
+import s from "./Home.module.css";
+import Carrusel from "../Carrusel/Carrusel";
+import BannerHome from "../Banner Home/Banner";
+import Newsletter from "../NewsLetter/Newsletter";
+import { Link } from "react-router-dom";
 
 function Home() {
   // const products = useSelector(state => state.products)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(actions.getProducts());
-  }, [dispatch])
+  }, [dispatch]);
+
+  const dm = useSelector((state) => state.darkMode);
 
   return (
-    <div className={s.home}>
-        <NavBar />
-        <BannerHome/>
-        <div className={s.sub}>
-        <div className={s.subTitles}>
+    <div className={dm ? s.dmhome : s.home}>
+      <NavBar />
+      <BannerHome />
+      <div className={s.sub}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
-        <Carrusel />
-        {/* <section>
+      <Carrusel />
+      <section className={dm ? s.dmbanners : s.banners}>
+        <div className={s.bannerOne}>
+          <Link to="/category/Periféricos">
+            <div className={s.a}></div>
+          </Link>
+          <Link to="/category/Sillas">
+            <div className={s.b}></div>
+          </Link>
+          <Link to="/category/Impresoras">
+            <div className={s.c}></div>
+          </Link>
+        </div>
+        <div className={s.bannerTwo}>
+          <Link to="/category/Periféricos">
+            <div className={s.d}></div>
+          </Link>
+          <Link to="/category/Impresoras">
+            <div className={s.e}></div>
+          </Link>
+          <Link to="/category/Periféricos">
+            <div className={s.f}></div>
+          </Link>
+        </div>
+      </section>
 
-        
-
-        <section>
-f8
-          {products ? products.map(p => <CardV 
-          key={p.product_id}
-          id={p.product_id}
-          brand={p.brand}
-          name={p.name}
-          image={p.image}
-          price={p.price}
-          category={p.category}
-          subcategory={p.subcategory}
-          />) : 'No hay productos'}
-        </section> */}
-        <section className={s.banners} >
-            <div className={s.bannerOne}>
-                <div className={s.a}></div>
-                <div className={s.b}></div>
-                <div className={s.c}></div>
-            </div>
-            <div className={s.bannerTwo}>
-                <div className={s.d}></div>
-                <div className={s.e}></div>
-                <div className={s.f}></div>
-            </div>
-        </section>
-
-        <div className={s.sub}>
-        <div className={s.subTitles}>
+      <div className={s.sub}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
 
-        <Carrusel/>
-        <Newsletter/>
-        <Footer/>
-        
+      <Carrusel />
+      <Newsletter />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
