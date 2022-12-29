@@ -26,7 +26,8 @@ async function handleNewUser(data) {
       zipCode: data.zipCode,
       profilePicture: data.profilePicture,
     };
-    emailer.sendMail(newUser)
+    const object = {...newUser,type:"register"}
+    emailer.sendMail(newUser.email,object)
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
