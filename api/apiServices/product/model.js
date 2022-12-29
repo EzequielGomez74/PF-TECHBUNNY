@@ -51,6 +51,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
       active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
