@@ -42,8 +42,10 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
+  const results = useSelector(state => state.results)
   const dm = useSelector(state => state.darkMode)
 
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <div className={s.navBar}>
@@ -53,7 +55,7 @@ function NavBar() {
         </section>
         <section className={s.one}>
             <div>
-                <SearchBar />
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={faMoon} /></button>
@@ -130,7 +132,12 @@ function NavBar() {
                         <DropdownItem icon = {faUserPlus} text={"Check In"}/>
                     </ul>
         </div>
-            
+        <div>
+            { searchTerm.length && results.length ? results.map(p => <div>
+              <img src={p.image} alt={p.name} />
+              <span> {p.name} </span>
+            </div> ) : <span>No hay resultados</span> }
+        </div>
     </div>
   )
 }
