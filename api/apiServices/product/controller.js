@@ -1,9 +1,4 @@
-const {
-  Product,
-  Category,
-  SubCategory,
-  Brand,
-} = require("../../services/db/db.js");
+const { Product, Favorite } = require("../../services/db/db.js");
 const {
   productDescriptionParser,
 } = require("../../scripts/productDescriptionParser.js");
@@ -11,10 +6,26 @@ const {
 const {
   productDescriptionToString,
 } = require("../../scripts/productDescriptionToString.js");
-
+const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
-async function getAllProducts() {
+async function setFavoriteStatus(products, username) {
+  if (products) {
+    //traer un array de favoritos correspondiente al user que tiene el access token
+    const { user_id } = getUser({ username });
+    const favorites = await Favorite.findAll({ where: { user_id } });
+    favorites = [...favorites];
+    favorites.forEach((fav) => {
+      const productFound = products.find(
+        (product) => product.product_id === fav
+      );
+      if (productFound) productFound.favorite = true;
+    });
+  }
+  return products;
+}
+
+async function getAllProducts(user_id) {
   try {
     const condition = {
       where: {
@@ -25,24 +36,26 @@ async function getAllProducts() {
       },
     };
     const products = await Product.findAll(condition);
-    return products;
+    return setFavoriteStatus([...products], user_id);
   } catch (error) {
     throw new Error(error);
   }
 }
 
-async function getAllProductsBy(condition) {
+async function getAllProductsBy(condition, user_id) {
   try {
     let products = await Product.findAll({ where: condition });
+    products = setFavoriteStatus([...products], user_id);
     return products;
   } catch (error) {
     throw new Error(error);
   }
 }
 
-async function getProductById(product_id) {
+async function getProductById(product_id, user_id) {
   try {
     const product = await Product.findByPk(product_id);
+    product = setFavoriteStatus([product], user_id);
     const newObj = { ...product.dataValues };
     newObj.description = productDescriptionParser(newObj.description);
     return newObj;

@@ -24,7 +24,6 @@ router.put("/:accessType", async (req, res) => {
             username,
             password
           );
-          //res.cookie("beto", 2);
           res.cookie("jwt", refreshToken, {
             sameSite: "None",
             secure: true,
