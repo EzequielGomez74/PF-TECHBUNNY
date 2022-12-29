@@ -8,6 +8,10 @@
   display: none;
 }
 
+.dmnavResponsive{
+  display: none;
+}
+
 .one{
   background-color: white;
 }
