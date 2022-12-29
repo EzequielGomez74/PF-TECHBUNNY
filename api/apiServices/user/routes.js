@@ -4,13 +4,21 @@ const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
 const { User } = require("../../services/db/db.js");
 
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 router.get("/:user_id", async (req, res) => {
   try {
-    if (req.params.user_id)
+    console.log(req.params);
+    if (req.params)
       res.status(200).json(await controller.getUserById(req.params.user_id));
     else res.status(200).json(await controller.getAllUsers());
   } catch (error) {
-    res.sendStatus(400);
+    res.status(400).send(error.message);
   }
 });
 // /users/3   body={surname:"beto",username:"pepe"}
@@ -25,7 +33,9 @@ router.put("/:user_id", validate.user, async (req, res) => {
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
-      throw new Error("el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar");
+      throw new Error(
+        "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
+      );
     }
   } catch (error) {
     res.status(400).send(error.message);

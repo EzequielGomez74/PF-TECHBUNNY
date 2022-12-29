@@ -1,8 +1,21 @@
 const { Review } = require("../../services/db/db.js");
+const getUser = require("../../scripts/getUser");
 
 async function getAllReviewsBy(condition) {
   try {
     let reviews = await Review.findAll({ where: condition });
+    reviews = await Promise.all(
+      reviews.map(async (review) => {
+        const { username } = await getUser({
+          user_id: review.dataValues.user_id,
+        });
+        delete review.dataValues.user_id;
+        return {
+          ...review.dataValues,
+          username,
+        };
+      })
+    );
     return reviews;
   } catch (error) {
     throw new Error(error);
