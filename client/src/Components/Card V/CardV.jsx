@@ -9,22 +9,6 @@ import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 function CardV({id, brand, name, image, price, category, subcategory}){
     return(
-<<<<<<< HEAD
-    
-     <div className="cardContainer">
-        <div className="cardIcono">
-            <FontAwesomeIcon className="icono" icon={faHeart}></FontAwesomeIcon>
-        </div>
-        <div className="cardImg">
-            <img src={cardPrueba.img} alt="img"/>
-        </div>
-        <h2 className="cardTitle">{cardPrueba.title}</h2>
-        <h3 className="cardText">{cardPrueba.sub1}</h3>
-        <h3 className="cardText">{cardPrueba.sub2}</h3>
-        <p className="price">$ {cardPrueba.price}</p>
-     </div>
-     
-=======
     <div>
         <div className={s.card}>
             <div className={s.iconWrap}>
@@ -36,7 +20,6 @@ function CardV({id, brand, name, image, price, category, subcategory}){
             <p className={s.price}>US${price}</p>
         </div>
     </div>
->>>>>>> a53434b3716cd655b308b52864c0b7c4f263fd33
     )
 };
 
