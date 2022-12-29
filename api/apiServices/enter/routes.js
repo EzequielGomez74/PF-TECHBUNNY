@@ -25,7 +25,6 @@ router.put("/:accessType", validate.enterLogin , async (req, res) => {
             username,
             password
           );
-          //res.cookie("beto", 2);
           res.cookie("jwt", refreshToken, {
             sameSite: "None",
             secure: true,
