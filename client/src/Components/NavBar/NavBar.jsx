@@ -9,6 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../redux/actions'
+import Responsive from './Responsive';
 
 
 function NavBar() {
@@ -41,10 +42,15 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
+  const dm = useSelector(state => state.darkMode)
 
 
   return (
     <div className={s.navBar}>
+        <section className={dm ? s.dmnavResponsive : s.navResponsive}>
+            <h4>TECHBUNNY</h4>
+            <Responsive />
+        </section>
         <section className={s.one}>
             <div>
                 <SearchBar />
