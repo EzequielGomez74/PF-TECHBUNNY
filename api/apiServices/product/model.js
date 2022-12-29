@@ -56,6 +56,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
+      favorite: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      }
     },
     {
       timestamps: true,
