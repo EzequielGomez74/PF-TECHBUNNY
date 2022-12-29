@@ -64,8 +64,11 @@ function NavBar() {
                 <div className={s.navDetail}>
                     
                     <button className={dm ? s.dmbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
+
                     <Link to='/favorites'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
+
                     <Link to='/cart'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
+
                     <span className={dm ? s.dmiconsbtn : s.iconsbtn} onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
@@ -139,8 +142,13 @@ function NavBar() {
                     <h3>INICIA SESIÓN</h3>
                     <span>Para una mejor experiencia</span>
                     <ul>
+                        <Link to="/login">
                         <DropdownItem icon = {faRightToBracket} text={"Log In"}/>
+                        </Link>
+
+                        <Link to="/register">
                         <DropdownItem icon = {faUserPlus} text={"Check In"}/>
+                        </Link>
                     </ul>
         </div>
             
