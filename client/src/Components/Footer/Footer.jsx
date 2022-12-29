@@ -2,10 +2,15 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faBoxOpen, faBox, faTruckRampBox, faBagShopping, faListCheck, faPhoneVolume, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import s from './Footer.module.css';
+import { useSelector } from "react-redux";
 
 function Footer() {
+
+  //dark mode
+  const dm = useSelector(state => state.darkMode);
+
   return (
-    <div className={s.footer}>
+    <div className={dm ? s.dmfooter : s.footer}>
       <section className={s.main}>
         {/* Maquetado completo. Falta linkear las preguntas frecuentes */}
         <div>
