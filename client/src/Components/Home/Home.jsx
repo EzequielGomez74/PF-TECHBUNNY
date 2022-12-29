@@ -25,13 +25,13 @@ function Home() {
         <NavBar />
         <BannerHome/>
         <div className={s.sub}>
-        <div className={s.subTitles}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
         <Carrusel />
-        <section className={s.banners} >
+        <section className={dm ? s.dmbanners : s.banners} >
             <div className={s.bannerOne}>
                 <div className={s.a}></div>
                 <div className={s.b}></div>
@@ -45,7 +45,7 @@ function Home() {
         </section>
 
         <div className={s.sub}>
-        <div className={s.subTitles}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>

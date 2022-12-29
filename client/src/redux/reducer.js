@@ -6,7 +6,8 @@ const initialState = {
     filtered: [],
     cart: [],
     favorites: [],
-    
+    darkMode: false
+ 
 }
 
 export default function reducer (state=initialState, action){
@@ -66,7 +67,7 @@ export default function reducer (state=initialState, action){
                 ...state,
                 cart: state.cart.filter(c => c.id !== action.payload)
             }
-            case 'TOGGLE_DARK_MODE':
+        case 'TOGGLE_DARK_MODE':
                 return {
                   ...state,
                   darkMode: !state.darkMode
