@@ -10,6 +10,9 @@ import Pagination from '../Pagination/Pagination';
 
 function Category(){
 
+    //DARK MODE
+    const dm = useSelector(state => state.darkMode);
+
     let [active, setActive] = useState({brand: false, price: false});
     // let [order, setOrder] = useState("All");
     let {name} = useParams();
@@ -55,7 +58,7 @@ function Category(){
     }
 
     return(
-        <div>
+        <div className={dm ? s.dmbackground : s.background}>
             <NavBar/>
             <div className={s.categoryPage}>
                 <div className={s.selectors}>
