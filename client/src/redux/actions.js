@@ -1,6 +1,6 @@
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS } from './actionTypes'
 // import { bindActionCreators } from 'redux'
 import axios from "axios";
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE } from './actionTypes'
 
 
 export function getProducts () {
@@ -92,18 +92,10 @@ export const filterByBrand = (products, brand) => {
     }
 }
 
-export const filterByPrice = (products, max, min) => {
-    return function(dispatch){
-        const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
-        dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
-    }
-}
-
-
-
-// export const orderByPrice = (payload) => {
+// export const filterByPrice = (products, max, min) => {
 //     return function(dispatch){
-//         dispatch({type: ORDER_BY_PRICE, payload})
+//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
 //     }
 // }
 
@@ -157,5 +149,21 @@ export function toggleDarkMode() {
     return { type: TOGGLE_DARK_MODE };
   }
 
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
 
+// export const setSearchResults = (results) => {
+//     return {
+//         type: SET_SEARCH_RESULTS, results
+//     }
+// }
 
+export const getSearchResults = (products, searchTerm) => {
+    return function(dispatch){
+        const results = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        dispatch({type: GET_SEARCH_RESULTS, payload: results})
+    }
+}

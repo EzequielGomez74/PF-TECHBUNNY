@@ -108,4 +108,93 @@ a:visited {
     }
 }
 
+/* DARK MODE */
 
+.dmbackgroundAboutUs{
+    background-color: #20232A;
+}
+
+.dmtituloEquipo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 45px;
+    padding: 40px;
+    color: white;
+}
+
+.dmcardsContainer{
+    display: flex;
+    height: 1000px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: auto;
+    max-width: 1500px;
+    
+}
+
+.dmcard{
+    width: 300px;
+    height: 430px;
+    background-color: transparent;
+    float: left;
+    margin: 15px 5px 25px;
+}
+
+.dmimg{
+    width: 249px;
+    height: 260px;
+}
+
+.dmdivImg{
+    background-color: #2B3036;
+    border-radius: 50%;
+    width: 83%;
+    height: 60%;
+    margin-left: 25px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.dmdivImg:hover{
+    transform: translateY(-6px);
+}
+
+.dmcard h3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    font-style: normal;
+    margin-top: 25px;
+    color: #ababab;
+}
+
+.dmcard h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    font-style: normal;
+    color: white;
+}
+
+.dmgitHub{
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.dmlinkedin{
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.dmlinkedin:hover{
+    color: #0e76a8;
+}
+
+.dmgitHub:hover{
+    color:rgb(101, 101, 101);
+}
