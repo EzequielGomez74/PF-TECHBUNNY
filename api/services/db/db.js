@@ -3,7 +3,6 @@ const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 //const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
-const { log } = require("console");
 
 /*
  */
@@ -69,6 +68,7 @@ const {
   SubCategory,
   User,
   OrderProduct,
+  Favorite,
 } = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
@@ -94,6 +94,15 @@ Order.belongsTo(User, { foreignKey: "user_id" });
 Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
+User.belongsToMany(Product, {
+  through: Favorite,
+  foreignKey: "user_id",
+});
+Product.belongsToMany(User,{
+  through: Favorite,
+  foreignKey: "product_id"
+})
+
 module.exports = {
   //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
@@ -106,5 +115,6 @@ module.exports = {
   Country,
   Order,
   OrderProduct,
+  Favorite,
   Op, // para importart la conexión { conn } = require('./db.js');
 };

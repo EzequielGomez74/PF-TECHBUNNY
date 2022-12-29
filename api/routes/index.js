@@ -10,6 +10,7 @@ const subcategory = require("../apiServices/subcategories/routes.js");
 const user = require("../apiServices/user/routes.js");
 const review = require("../apiServices/review/routes.js");
 const order = require("../apiServices/order/routes.js");
+const favorite = require("../apiServices/favorite/routes.js");
 const verifyJWT = require("../middlewares/verifyJWT.js");
 
 router.use("/enter", enter);
@@ -23,6 +24,7 @@ router.use("/reviews", review);
 router.use("/countries", country);
 router.use("/orders", order);
 router.use("/users", user);
+router.use("/favorites", favorite)
 
 //router.use
 

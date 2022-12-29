@@ -1,4 +1,4 @@
-const { Order,Product, OrderProduct } = require("../../services/db/db.js");
+const { Order,Product  } = require("../../services/db/db.js");
 const Sequelize = require("sequelize");
 
 
