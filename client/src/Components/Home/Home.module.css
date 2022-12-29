@@ -2,10 +2,44 @@
     background-color: #F9F9F9;
 }
 
+.dmhome{
+    background-color: #20232a;
+}
+
+.heroSection{
+    padding-top: 30px;
+    background-color: #D7F136;
+}
+
+.hero{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.heroImg{
+    height: 360px;
+    width: 500px;
+    background: peachpuff;    
+    background-image: url(../../images/hero.png);
+    background-repeat: no-repeat;
+}
+
+.hero h1{
+    background-color: palevioletred;
+}
+
 /* Inicio de los estilos para la sección del Banner */
 
 .banners{
     background-color: #F9F9F9;
+}
+
+.dmbanners{
+    background-color: #20232a;
 }
 
 .bannerOne{
@@ -91,6 +125,32 @@
     background-color: #D7F136;
     height: 10px;
 }
+
+.dmsubTitles{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 20px;
+}
+
+.dmsubTitles h5{
+    color: white;
+    margin-left: 30px;
+    display: flex;
+}
+
+.dmsubTitles span{
+    width: 80px;
+    margin-left: 30px;
+    background-color: #D7F136;
+    height: 10px;
+}
+
+
+
 
 .d{
     color: aliceblue;

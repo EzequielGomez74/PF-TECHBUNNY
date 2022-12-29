@@ -4,17 +4,15 @@ const { sendMail } = require("../../services/mailer/emailer.js");
 
 
 async function createOrder({ status, user_id, products }) {
-  //product = [product_id,product_id,product_id,product_id]
-  // products = [
-  //   { product_id: 1, count: 2 },
-  //   { product_id: 2, count: 1 },
-  // ];
+
   try {
     const user = await User.findByPk(user_id)
     const newOrder = { status, user_id };
-    const order = await Order.create(newOrder);    
+    const order = await Order.create(newOrder);
     products.forEach(async (product) => {
-      await order.addProduct(product.product_id, { through: { count: product.count } });
+      await order.addProduct(product.product_id, {
+        through: { count: product.count },
+      });
     });
     const object = {...order , type:"order"}
     sendMail(user.email,objectg)

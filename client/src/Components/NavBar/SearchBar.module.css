@@ -5,6 +5,11 @@
     text-indent: 10px;
 }
 
+.input:focus {
+    outline: none;
+    color: black;
+}
+
 .inputIcon{
     height: 40px;
     width: 40px;
@@ -13,5 +18,30 @@
 }
 
 .inputIcon:hover{
+    cursor: pointer;
+}
+
+/* DARK MODE  */
+
+.dminput{
+    height: 40px;
+    width: 250px;
+    border: none;
+    text-indent: 10px;
+}
+
+.dminput:focus {
+    outline: none;
+    color: black;
+}
+
+.dminputIcon{
+    height: 40px;
+    width: 40px;
+    background-color: #20232A;
+    color: white;
+}
+
+.dminputIcon:hover{
     cursor: pointer;
 }

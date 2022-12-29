@@ -10,7 +10,6 @@ async function getAllReviewsBy(condition) {
 }
 
 async function createReviews(review) {
-  console.log(review);
   try {
     await Review.create(review);
     return "Reseña creada con exito!";
@@ -30,7 +29,7 @@ async function updateReviews(review) {
 
 async function deleteReviews(review_id) {
   try {
-    await Review.destroy({ where: { review_id} });
+    await Review.destroy({ where: { review_id } });
     return "Reseña eliminada con exito!";
   } catch (error) {
     throw new Error(error);
