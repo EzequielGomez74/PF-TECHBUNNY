@@ -1,5 +1,6 @@
-const { User } = require("../../services/db/db.js");
+const { User } = require("../services/db/db.js");
 async function getUser(condition) {
-  return await User.findOne({ where: condition });
+  const response = await User.findOne({ where: condition });
+  return  response
 }
 module.exports = getUser;

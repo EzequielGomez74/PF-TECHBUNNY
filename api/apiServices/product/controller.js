@@ -6,26 +6,26 @@ const {
 const {
   productDescriptionToString,
 } = require("../../scripts/productDescriptionToString.js");
+
 const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
-    const { user_id } = getUser({ username });
-    const favorites = await Favorite.findAll({ where: { user_id } });
+    const {user_id} = await getUser({ username });
+    let favorites = await Favorite.findAll({ where: { user_id } });
     favorites = [...favorites];
     favorites.forEach((fav) => {
-      const productFound = products.find(
-        (product) => product.product_id === fav
-      );
-      if (productFound) productFound.favorite = true;
+      const productFound = products.find((product) => product.product_id === fav.product_id);
+      if (productFound) { 
+        productFound.dataValues.favorite = true;}
     });
   }
   return products;
 }
 
-async function getAllProducts(user_id) {
+async function getAllProducts(username) {
   try {
     const condition = {
       where: {
@@ -36,31 +36,30 @@ async function getAllProducts(user_id) {
       },
     };
     const products = await Product.findAll(condition);
-    return setFavoriteStatus([...products], user_id);
+    return await setFavoriteStatus([...products], username);
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
-async function getAllProductsBy(condition, user_id) {
+async function getAllProductsBy(condition, username) {
   try {
     let products = await Product.findAll({ where: condition });
-    products = setFavoriteStatus([...products], user_id);
-    return products;
+    return await setFavoriteStatus([...products], username);
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
-async function getProductById(product_id, user_id) {
+async function getProductById(product_id, username) {
   try {
     const product = await Product.findByPk(product_id);
-    product = setFavoriteStatus([product], user_id);
+    product = await setFavoriteStatus([product], username);
     const newObj = { ...product.dataValues };
     newObj.description = productDescriptionParser(newObj.description);
     return newObj;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -72,7 +71,7 @@ async function updateProduct(product) {
       {
         //buscar forma de destructurar toda la data
         ...product,
-        description: productDescriptionToString(product.description),
+        description: product.description,
       },
       {
         where: {
@@ -82,7 +81,7 @@ async function updateProduct(product) {
     );
     return "Producto actualizado con exito!";
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -92,7 +91,7 @@ async function createProduct(product) {
       // create o findorcreate para que no se repita en la base de datos
       {
         ...product,
-        description: productDescriptionToString(product.description),
+        description: product.description,
       }
     );
     return "Producto creado con exito!";
