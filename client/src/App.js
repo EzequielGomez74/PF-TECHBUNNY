@@ -26,11 +26,8 @@ function App() {
         <Route exact path='/favorites' component={Favoritos}  />
         <Route exact path='/cart' component={Cart}  />
         <Route exact path='/category/:name' component={Category}/>
-<<<<<<<<< Temporary merge branch 1
         <Route exact path='*' component={Error}/>
-=========
         <Route exact path='/followUp' component={FollowUp}/>
->>>>>>>>> Temporary merge branch 2
       </Switch>
     </div>
   );

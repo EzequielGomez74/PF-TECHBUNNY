@@ -7,8 +7,7 @@ import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket,
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {toggleDarkMode} from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
 
 function NavBar() {
@@ -41,8 +40,6 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
-  //dark mode
-  const dm = useSelector(state => state.darkMode);
 
 
   return (
@@ -52,26 +49,19 @@ function NavBar() {
                 <SearchBar />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
-                    
-                    <button className={dm ? s.dmbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
-                    <Link to='/favorites'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
-                    <Link to='/cart'><span className={dm ? s.dmiconsbtn : s.iconsbtn}><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span className={dm ? s.dmiconsbtn : s.iconsbtn} onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
+                    <span><FontAwesomeIcon icon={faMoon} /></span>
+                    <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
+                    <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
+                    <span onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
         <section className={dm ? s.dmtwo : s.two}>
             <div>
-                <Link to='/home'>
-                <p>HOME</p>
-                </Link>
-                <Link to='/about'>
-                <p>SOBRE TECHBUNNY</p>
-                </Link>
+                <p><a href='/home'>HOME</a> </p>
+                <p><a href='/about'>SOBRE TECHBUNNY</a></p>
                 <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
-                <Link to='/followUp'>
-                <p>VER ESTADO DE PEDIDO</p>
-                </Link>
+                <p><a href='/followUp'>VER ESTADO DE PEDIDO</a></p>
             </div>
                 
         </section>
