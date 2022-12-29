@@ -3,7 +3,7 @@ import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
 // import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -48,24 +48,24 @@ function NavBar() {
   const [searchTerm, setSearchTerm] = useState('')
 
   return (
-    <div className={s.navBar}>
+    <div className={dm ? s.DMnavBar : s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
             <h4>TECHBUNNY</h4>
             <Responsive />
         </section>
-        <section className={s.one}>
+        <section className={dm ? s.DMone : s.one}>
             <div>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
-                <div className={s.navDetail}>
-                    <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={faMoon} /></button>
+                <div className={dm ? s.DMnavDetail :s.navDetail}>
+                    <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={dm ? faSun :faMoon} /></button>
                     <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
                     <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
                     <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
-        <section className={s.two}>
+        <section className={dm ? s.DMtwo : s.two}>
             <div>
                 <p><a href='/home'>HOME</a> </p>
                 <p><a href='/about'>SOBRE TECHBUNNY</a></p>
@@ -98,7 +98,7 @@ function NavBar() {
                     </ul>
         </div>
 
-        <section className={s.three}>
+        <section className={dm ? s.DMthree: s.three}>
             <div>
               <Link to="/category/Monitores%20y%20TV"><p>Monitores</p> </Link> 
               <Link to="/category/Periféricos"> <p>Periféricos</p></Link>
