@@ -234,7 +234,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
         <div className={s.block}>
           <div className={s.productImage}>
             <div className={s.icon}>
-              <button className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
+              <button onClick={()=> dispatch(actions.addFavorite({id: product.product_id, brand:product.brand , name: product.name, image:product.image, price:product.price, stock: product.stock})) } className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
             </div>
             <div className={s.imgP}>
               <img src={product.image} alt={product.product_id} />
@@ -275,7 +275,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
             </div>
             <span className={s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)} </span>
           </div>
-          <button type='submit' className={s.mainButton} onClick={()=> dispatch(actions.addCart({id:product.product_id, brand:product.brand , name:product.name, image:product.image, price:product.price}))} >Agregar al Carrito</button>
+          <button type='submit' className={s.mainButton} onClick={()=> dispatch(actions.addCart({id:product.product_id, brand:product.brand , name:product.name, image:product.image, price:product.price, stock: product.stock, totalQuantity:quantity}))} >Agregar al Carrito</button>
         </div>
       </section>
 
@@ -296,6 +296,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
                 name={p.name}
                 image={p.image}
                 price={p.price}
+                stock={p.stock}
                 category={p.category}
                 subcategory={p.subcategory}
             />) }

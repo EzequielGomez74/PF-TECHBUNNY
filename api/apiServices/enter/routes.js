@@ -25,11 +25,11 @@ router.put("/:accessType", validate.enterLogin , async (req, res) => {
             username,
             password
           );
-          res.cookie("beto", 2);
+          //res.cookie("beto", 2);
           res.cookie("jwt", refreshToken, {
             sameSite: "None",
             secure: true,
-            httpOnly: false,
+            httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
           });
           res.status(200).json({ accessToken });
