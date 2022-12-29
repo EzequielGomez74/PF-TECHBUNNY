@@ -61,6 +61,8 @@ const review = [
   },
 ]
 
+const newsletter = []
+
 const enter = [
   check("user_id").isEmpty().withMessage("no podes pasar un user id"),
   check("role").exists().isNumeric().withMessage("role debe ser numerico"),
@@ -94,7 +96,7 @@ const enterLogin = [
   },
 ]
 
-module.exports = { user, product, order ,review, enter, enterLogin};
+module.exports = { user, product, order ,review, newsletter, enter, enterLogin};
 
 // user_id: 
 // username: 

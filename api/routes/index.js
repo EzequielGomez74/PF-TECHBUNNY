@@ -11,10 +11,12 @@ const user = require("../apiServices/user/routes.js");
 const review = require("../apiServices/review/routes.js");
 const order = require("../apiServices/order/routes.js");
 const favorite = require("../apiServices/favorite/routes.js");
+const newsletter = require("../apiServices/newsletter/routes.js")
 const generateTestUsername = require("../middlewares/generateTestUsername.js");
 const verifyJWT = require("../middlewares/verifyJWT.js");
 
 router.use("/enter", enter);
+router.use("/newsletters",newsletter)
 router.use("/refresh", refresh);
 //router.use(verifyJWT); //middleware de validacion de JWT
 router.use(generateTestUsername);

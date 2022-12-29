@@ -13,13 +13,9 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       email: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      status: {
-        type: DataTypes.ENUM(["active","disabled"]),
-        allowNull: false,
-      },
+        type: DataTypes.STRING,
+        
+      }
     },
     {
       timestamps: true,
