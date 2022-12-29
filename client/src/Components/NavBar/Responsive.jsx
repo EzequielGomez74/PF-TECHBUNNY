@@ -39,7 +39,7 @@ const Responsive = () => {
         <div className={dm? s.dmmenuItems : s.menuItems}>
             <Link to='/home' ><p>HOME</p></Link>
             <Link to='/about' ><p>SOBRE TECHBUNNY</p></Link>
-            <p>CATEGORIAS</p>
+            <Link to='/categories' ><p>CATEGORIAS</p></Link>
             <Link to='/favorites' ><p>FAVORITOS</p></Link>
             <Link to='/cart' ><p>CARRITO</p></Link>
             <p>VER ESTADO DE PEDIDO</p>
