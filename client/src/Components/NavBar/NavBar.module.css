@@ -4,6 +4,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.navResponsive{
+  display: none;
+}
+
 .one{
   background-color: white;
 }
@@ -20,43 +24,16 @@
   justify-content: space-around;
 }
 
-.dmone div{
-  max-width: 1500px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-  display: flex;
-  height: 75px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: #1b1d23;
-}
-
 .one div h1 a{
   font-style: normal;
   font-weight: 800;
   font-size: 28px;
   line-height: 16px;
   color: black;
-  
-}
-
-.dmone div h1 a{
-  font-style: normal;
-  font-weight: 800;
-  font-size: 28px;
-  line-height: 16px;
-  color: black;
-  
 }
 
 .one div h1 a:hover{
   cursor: pointer;
-}
-
-.dmone div h1 a{
-  color: white;
 }
 
 .logo{
@@ -73,25 +50,7 @@
     cursor: pointer;
 }
 
-.dmtwo{
-  background-color: #1b1d23;
-  cursor: pointer;
-}
-
 .two div {
-  max-width: 1500px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.dmtwo div {
   max-width: 1500px;
   margin: auto;
   padding-left: 25px;
@@ -114,38 +73,16 @@
   color: black;
 }
 
-.dmtwo div p {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: white;
-}
-
 .two div p a{
   color: black;
-}
-
-.dmtwo div p a{
-  color: white;
 }
 
 .two .categorias{
   cursor: pointer;
 }
 
-.dmtwo .categorias{
-  cursor: pointer;
-}
-
 .three{
   background-color: black;
-}
-
-.dmthree{
-  background-color: #fefefe;
 }
 
 .three div {
@@ -159,18 +96,6 @@
   justify-content: space-around;
 }
 
-.dmthree div {
-  max-width: 1500px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-
 .three div p{
   color: white;
   font-style: normal;
@@ -180,21 +105,7 @@
   transition: 0.5s;
 }
 
-.dmthree div p{
-  color: black;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 20px;
-  transition: 0.5s;
-}
-
 .three div p:hover{
-  color: #D7F136;
-  cursor: pointer;
-}
-
-.dmthree div p:hover{
   color: #D7F136;
   cursor: pointer;
 }
@@ -218,23 +129,8 @@ a {
   margin-top: 0px;
 }
 
-.dmtwo div p{
-  width: 300px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
-
 .two div a:hover{
   color: #7e7e7e;
-  cursor: pointer;
-}
-
-.dmtwo div a:hover{
-  color: #D7F136;
   cursor: pointer;
 }
 
@@ -242,13 +138,6 @@ a {
   color: #7e7e7e;
   cursor: pointer;
 }
-
-.dmtwo div p:hover{
-  color: #D7F136;
-  cursor: pointer;
-}
-
-
 
 h3{
   width: 100%;
@@ -269,13 +158,6 @@ h3{
   color: #20232a;
 }
 
-.dmiconsbtn{
-  font-size: 14px;
-  font-weight: 400;
-  color: white;
-}
-
-
 .btnMoon{
   border: none;
   background-color: transparent;
@@ -283,15 +165,6 @@ h3{
   cursor: pointer;
   padding: 12px;
 }
-
-.dmbtnMoon{
-  border: none;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  padding: 12px;
-}
-
 
 .dropdownItem{
   display: flex;
@@ -314,7 +187,6 @@ h3{
 }
 
 
-
   @media handheld, only screen and (max-width: 767px) {
     .three {
       display:none;
@@ -328,13 +200,195 @@ h3{
     }
   }
 
-  /* DARK MODE */
-
-  .dmone{
-    background-color: #20232a;
+  @media only screen and (max-width: 800px){
+    .navResponsive{
+      display: flex;
+      background-color: white;
+      margin: auto;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    .navResponsive h4{
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 16px;
+      color: #20232A;
+    }
+  
+    /* DARK MODE  */
+    .dmnavResponsive{
+      display: flex;
+      background-color: #1B1D23;
+      margin: auto;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    .dmnavResponsive h4{
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 16px;
+      color: white;
+    }
+  
+    .one {
+      display:none;
+    }
+    .two {
+      display:none;
+    }
+    .dmone {
+      display:none;
+    }
+    .dmtwo {
+      display:none;
+    }
+    .dmthree {
+      display:none;
+    }
   }
 
-  
+  /* DARK MODE COMPLETO */
 
-  
+  .dmnavResponsive{
+    display: none;
+  }
 
+  .dmone div{
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    height: 75px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #1b1d23;
+  }
+
+  .dmone div h1 a{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 16px;
+    color: black;
+  }
+
+  .dmone div h1 a{
+    color: white;
+  }
+
+  .dmtwo{
+    background-color: #1b1d23;
+    cursor: pointer;
+  }
+
+  .dmtwo div {
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .dmtwo div p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .dmtwo div p a{
+    color: white;
+  }
+  
+  .dmtwo .categorias{
+    cursor: pointer;
+  }
+
+  .dmthree{
+    background-color: #fefefe;
+  }
+  
+  .dmthree div {
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .dmthree div p{
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    transition: 0.5s;
+  }
+
+  .dmthree div p:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .dmtwo div p{
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .dmtwo div a:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .dmtwo div p:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .dmiconsbtn{
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+  }
+
+  .dmbtnMoon{
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 12px;
+  }
+
+ 
