@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode} from '../../redux/actions';
+import Responsive from './Responsive';
 
 
 function NavBar() {
@@ -42,15 +43,23 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
+
+  const results = useSelector(state => state.results)
   //dark mode
   const dm = useSelector(state => state.darkMode);
+
+  const [searchTerm, setSearchTerm] = useState('')
 
 
   return (
     <div className={s.navBar}>
+        <section className={dm ? s.dmnavResponsive : s.navResponsive}>
+            <h4>TECHBUNNY</h4>
+            <Responsive />
+        </section>
         <section className={dm ? s.dmone : s.one}>
             <div>
-                <SearchBar />
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     
@@ -77,7 +86,7 @@ function NavBar() {
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
-        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} onMouseEnter={()=>{setOpenCat(!openCat)}}>
+        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} onMouseEnter={()=>{setOpenCat(!open)}} onMouseLeave={()=>{setOpenCat(!closedCat)}}>
                     <ul>
                        <Link to= "/category/Equipos%20armados"> <DropdownItemCat text={"Equipos armados"}/></Link>
                        <Link to= "/category/Consolas"> <DropdownItemCat text={"Consolas"}/></Link>
