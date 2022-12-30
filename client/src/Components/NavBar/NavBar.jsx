@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./NavBar.module.css";
 import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -52,34 +51,34 @@ function NavBar() {
   const dm = useSelector((state) => state.darkMode);
 
   return (
-    <div className={s.navBar}>
-      <section className={dm ? s.dmone : s.one}>
+    <div >
+      <section className={dm }>
         <div>
           <SearchBar />
           <h1>
             <a href="/home">TECHBUNNY</a>
           </h1>
-          <div className={s.navDetail}>
+          <div>
             <button
-              className={dm ? s.dmbtnMoon : s.btnMoon}
+              className={dm }
               onClick={() => dispatch(toggleDarkMode())}
             >
               <FontAwesomeIcon icon={faMoon} />
             </button>
             <Link to="/favorites">
-              <span className={dm ? s.dmiconsbtn : s.iconsbtn}>
+              <span className={dm }>
                 <FontAwesomeIcon icon={faHeart} />
                 &nbsp;&nbsp; {favs.length}
               </span>
             </Link>
             <Link to="/cart">
-              <span className={dm ? s.dmiconsbtn : s.iconsbtn}>
+              <span className={dm }>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
                 &nbsp;&nbsp; {cart.length}
               </span>
             </Link>
             <span
-              className={dm ? s.dmiconsbtn : s.iconsbtn}
+              className={dm }
               onClick={() => {
                 setOpen(!open);
               }}
@@ -91,7 +90,7 @@ function NavBar() {
           </div>
         </div>
       </section>
-      <section className={dm ? s.dmtwo : s.two}>
+      <section className={dm }>
         <div>
           <p>
             <a href="/home">HOME</a>{" "}
@@ -191,7 +190,7 @@ function NavBar() {
         </ul>
       </div>
 
-      <section className={dm ? s.dmthree : s.three}>
+      <section className={dm }>
         <div>
           <Link to="/category/Monitores%20y%20TV">
             <p>Monitores</p>{" "}
@@ -260,7 +259,7 @@ function NavBar() {
 
 function DropdownItem(props) {
   return (
-    <li className={s.dropdownItem}>
+    <li >
       {/* <img src={props.img}></img> */}
       <FontAwesomeIcon icon={props.icon} />
       <a>{props.text}</a>
@@ -270,7 +269,7 @@ function DropdownItem(props) {
 
 function DropdownItemCat(props) {
   return (
-    <li className={s.dropdownItem}>
+    <li >
       <a>{props.text}</a>
     </li>
   );

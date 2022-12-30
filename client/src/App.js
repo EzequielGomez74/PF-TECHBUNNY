@@ -31,10 +31,7 @@ function App() {
       </Switch>
 
 
-      <div>
-        <CardV></CardV>
-        <CardH></CardH>
-      </div>
+
 
 
       <header className="App-header">

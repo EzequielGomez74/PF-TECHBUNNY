@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CartCard from '../CartCard/CartCard';
@@ -5,10 +6,47 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
 
+
+
+
 function Cart() {
   const cart = useSelector(state => state.cart);
+
+
+
+  let productList = [];
+  let carrito = []
+
+  
+
+  let total = 0;
+
+  
+  async function pay() {
+      try{
+        const order_id = 1;
+        const preference = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`)        
+        console.log("PREFERENCIAAAAS",preference);
+        var script = document.createElement("script");
+    
+          // The source domain must be completed according to the site for which you are integrating.
+          // For example: for Argentina ".com.ar" or for Brazil ".com.br".
+          script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+          script.type = "text/javascript";
+          script.dataset.preferenceId = preference.data.preferenceId;
+          document.getElementById("page-content").innerHTML = "";
+          document.querySelector("#page-content").appendChild(script);
+      }
+      catch(error) {
+        console.error(error.message)  
+      }
+  }
+
   return (
     <div>
+      <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+
       <NavBar />
       <section className={s.cartSection}>
           <div>
@@ -19,6 +57,13 @@ function Cart() {
             />)
             : 
             <div>
+                <button onClick={pay} > pagaaaar</button>
+              <div><h1>PEPITO RULES</h1>
+                <div className='page-content' id="page-content" ></div>
+              </div>
+
+
+
               <div className={s.heroCart}></div>
               <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
             </div>}
