@@ -8,11 +8,11 @@ export const FILTER_BY_BRAND = "FILTER_BY_BRAND";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const TOGGLE_DARK_MODE = "TOGGLE_DARK_MODE";
+export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 
 // Funciones sincrónicas
 export const ADD_CART = "ADD_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
-
 //Faltan actions

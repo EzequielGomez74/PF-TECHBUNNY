@@ -14,14 +14,13 @@ async function setFavoriteStatus(products, username) {
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
     const { user_id } = await getUser({ username });
-    console.log("user_id", user_id);
-    let favorites = await Favorite.findAll({ where: { user_id } });
+    let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
     favorites.forEach((fav) => {
       const productFound = products.find(
         (product) => product.product_id === fav.product_id
       );
       if (productFound) {
-        productFound.dataValues.favorite = true;
+        productFound.favorite = true;
       }
     });
   }
@@ -60,7 +59,6 @@ async function getProductById(product_id, username) {
     let product = await Product.findByPk(product_id);
     product = await setFavoriteStatus([product.dataValues], username);
     const newObj = { ...product[0] };
-    console.log(newObj);
     newObj.description = productDescriptionParser(newObj.description);
     return newObj;
   } catch (error) {

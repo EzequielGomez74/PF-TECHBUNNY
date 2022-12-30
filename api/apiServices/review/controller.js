@@ -5,7 +5,7 @@ async function updateProductRating(product_id) {
   const productReviews = await getAllReviewsBy({ product_id });
   const total = productReviews.reduce((prev, rev) => prev + rev.rating, 0);
   Product.update(
-    { rating: total / productReviews.length },
+    { rating: Math.floor(total / productReviews.length) },
     { where: { product_id } }
   );
 }
