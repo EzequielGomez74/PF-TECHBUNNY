@@ -4,6 +4,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //
+
 router.get("/", async (req, res) => {
   try {
     if (req.query)
