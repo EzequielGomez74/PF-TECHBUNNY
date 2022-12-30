@@ -5,7 +5,11 @@ const initialState = {
     productsByCategory:[],
     filtered: [],
     cart: [],
-    favorites: []
+    favorites: [],
+    darkMode: false,
+    // searchTerm:'',
+    // searchResults:[],
+    results:[]
 }
 
 export default function reducer (state=initialState, action){
@@ -64,6 +68,26 @@ export default function reducer (state=initialState, action){
             return{
                 ...state,
                 cart: state.cart.filter(c => c.id !== action.payload)
+            }
+        case 'TOGGLE_DARK_MODE':
+                return {
+                  ...state,
+                  darkMode: !state.darkMode
+                };
+        // case 'SET_SEARCH_TERM':
+        //     return {
+        //         ...state,
+        //         searchTerm: action.searchTerm
+        //     }
+        // case 'SET_SEARCH_RESULTS':
+        //     return {
+        //         ...state,
+        //         searchResults: action.results,
+        //     }
+        case 'GET_SEARCH_RESULTS':
+            return {
+                ...state,
+                results: action.payload,
             }
         default:
             return {...state}

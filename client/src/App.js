@@ -7,7 +7,11 @@ import LandingPage from './Components/Landing/LandingPage';
 import Category from './Components/Category/Category';
 import Favoritos from './Components/Favoritos/Favoritos';
 import Cart from './Components/Cart/Cart';
+import FollowUp from './Components/Estado de Orden/FollowUp';
 import Error from './Components/Error/Error';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import Categories from './Components/Categories/Categories';
 
 
 function App() {
@@ -15,39 +19,18 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
         <Route exact path='/favorites' component={Favoritos}  />
         <Route exact path='/cart' component={Cart}  />
+        <Route exact path='/categories' component={Categories}  />
         <Route exact path='/category/:name' component={Category}/>
+        <Route exact path='/followUp' component={FollowUp}/>
         <Route exact path='*' component={Error}/>
       </Switch>
-
-
-      <div>
-        <CardV></CardV>
-        <CardH></CardH>
-      </div>
-
-      <NavBar />
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Footer />
-
     </div>
   );
 }
