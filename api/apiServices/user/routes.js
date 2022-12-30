@@ -13,6 +13,15 @@ router.get("/:user_id", async (req, res) => {
     res.sendStatus(400);
   }
 });
+
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+ 
 // /users/3   body={surname:"beto",username:"pepe"}
 router.put("/:user_id", validate.user, async (req, res) => {
   try {
