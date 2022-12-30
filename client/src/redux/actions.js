@@ -1,70 +1,89 @@
-import axiosInstance from "./axiosInstance.js";
-import {
-  GET_ALL_PRODUCTS,
-  GET_CATEGORIES,
-  GET_PRODUCT_BY_ID,
-  GET_PRODUCTS_BY_CATEGORY,
-  FILTER_BY_BRAND,
-  FILTER_BY_PRICE,
-  ORDER_BY_PRICE,
-  ADD_FAVORITE,
-  ADD_CART,
-  REMOVE_CART,
-  REMOVE_FAVORITE,
-} from "./actionTypes";
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS } from './actionTypes'
+// import { bindActionCreators } from 'redux'
+import axios from "axios";
 
-//ORIGINAL DE FRONT > DESCOMENTAR
-// export const getProducts = () => {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/products")
-//       .then((resp) => resp.json())
-//       .then((data) => dispatch({ type: GET_ALL_PRODUCTS, payload: data }))
-//       .catch((error) => console.log(error));
-//   };
-// };
 
-//TESTEO DE LOGIN < COMENTAR
-export const getProducts = (id) => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.get("/products");
-      console.log(response.data);
-      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
-    } catch (error) {
-      console.log("FAILED TO AUTHENTICATE");
+export function getProducts () {
+    return async function (dispatch){
+        try{
+            var json = await axios.get('http://localhost:3001/products')
+            return dispatch({type: GET_ALL_PRODUCTS, payload: json.data});
+        }catch(error){
+            alert(error)
+        }
     }
-  };
-};
+}
 
-export const getProductById = (id) => {
-  return function (dispatch) {
-    return fetch(`http://localhost:3001/products/${id}`)
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_PRODUCT_BY_ID, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
+// export const getProducts = () => {
+//     return function(dispatch){
+//         return fetch ('http://localhost:3001/products')
+//         .then(resp => resp.json())
+//         .then(data => dispatch({type: GET_ALL_PRODUCTS, payload: data}))
+//         .catch(error => console.log(error))
+//     }
+// }
 
-export const getCategories = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/categories")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_CATEGORIES, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
+export function getProductById(id) {
+    return async function (dispatch){
+        try{
+            var json = await axios.get(`http://localhost:3001/products/${id}`)
+            return dispatch({type: GET_PRODUCT_BY_ID, payload: json.data});
+        }catch(error){
+            alert(error)
+        }
+    }
+}
 
-export const getProductsByCategory = (category) => {
-  return function (dispatch) {
-    // let Capitalize = category[0].toUpperCase() + category.slice(1)
-    return fetch(`http://localhost:3001/products?category=${category}`)
-      .then((resp) => resp.json())
-      .then((data) =>
-        dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: data })
-      )
-      .catch((error) => console.log(error));
-  };
-};
+// export const getProductById = (id) => {
+//     return function(dispatch){
+//         return fetch (`http://localhost:3001/products/${id}`)
+//         .then(resp => resp.json())
+//         .then(data => dispatch({type: GET_PRODUCT_BY_ID, payload: data}))
+//         .catch(error => console.log(error))
+//     }
+// }
+
+export function getCategories () {
+    return async function (dispatch){
+        try{
+            var json = await axios.get('http://localhost:3001/categories')
+            return dispatch({type: GET_CATEGORIES, payload: json.data});
+        }catch(error){
+            alert(error)
+        }
+    }
+}
+
+// export const getCategories = () => {
+//     return function(dispatch){
+//         return fetch ('http://localhost:3001/categories')
+//         .then(resp => resp.json())
+//         .then(data => dispatch({type: GET_CATEGORIES, payload: data}))
+//         .catch(error => console.log(error))
+//     }
+// }
+
+export function getProductsByCategory(category) {
+    return async function (dispatch){
+        try{
+            var json = await axios.get(`http://localhost:3001/products?category=${category}`)
+            return dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data});
+        }catch(error){
+            alert(error)
+        }
+    }
+}
+
+// export const getProductsByCategory = (category) => {
+//     return function(dispatch){
+//         // let Capitalize = category[0].toUpperCase() + category.slice(1)
+//         return fetch (`http://localhost:3001/products?category=${category}`)
+//         .then(resp => resp.json())
+//         .then(data => dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: data}))
+//         .catch(error => console.log(error))
+//     }
+// }
+
 
 export const filterByBrand = (products, brand) => {
     return function(dispatch){
@@ -73,16 +92,10 @@ export const filterByBrand = (products, brand) => {
     }
 }
 
-export const filterByPrice = (products, max, min) => {
-    return function(dispatch){
-        const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
-        dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
-    }
-}
-
-// export const orderByPrice = (payload) => {
+// export const filterByPrice = (products, max, min) => {
 //     return function(dispatch){
-//         dispatch({type: ORDER_BY_PRICE, payload})
+//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
 //     }
 // }
 
@@ -132,4 +145,25 @@ export const removeCart = (id) => {
     }
 }
 
+export function toggleDarkMode() {
+    return { type: TOGGLE_DARK_MODE };
+  }
 
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
+
+// export const setSearchResults = (results) => {
+//     return {
+//         type: SET_SEARCH_RESULTS, results
+//     }
+// }
+
+export const getSearchResults = (products, searchTerm) => {
+    return function(dispatch){
+        const results = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        dispatch({type: GET_SEARCH_RESULTS, payload: results})
+    }
+}

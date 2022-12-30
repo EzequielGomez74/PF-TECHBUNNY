@@ -52,15 +52,22 @@ body {
 
 .swiper-button-next{
   background-color: #D7F136;
-color: black;
-opacity: 0.4;
-
+  color: rgb(84, 84, 84);
+  height: 370px;
+  width: 40px;
+  transform: translateY(-163px);
+  border-radius: 0px 5px 5px 0px;
+  opacity: 0.9;
 }
-.swiper-button-prev{
-background-color: #D7F136;
-opacity: 0.4;
-color: black;
 
+.swiper-button-prev{
+  background-color: #D7F136;
+  color: rgb(84, 84, 84);
+  height: 370px;
+  width: 40px;
+  transform: translateY(-163px);
+  border-radius: 5px 0px 0px 5px;
+  opacity: 0.9;
 }
 
 
