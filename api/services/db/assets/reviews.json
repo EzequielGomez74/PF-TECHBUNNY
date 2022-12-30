@@ -28,5 +28,11 @@
     "rating": 4,
     "user_id": 3,
     "product_id": 2
+  },
+  {
+    "description": "Lo mejor .",
+    "rating": 4,
+    "user_id": 3,
+    "product_id": 4
   }
 ]

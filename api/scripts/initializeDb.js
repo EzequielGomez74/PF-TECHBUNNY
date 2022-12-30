@@ -8,10 +8,10 @@ const countries = require("../services/db/assets/countries.json");
 const reviews = require("../services/db/assets/reviews.json");
 const users = require("../services/db/assets/users.json");
 const {
-	Category,
-	SubCategory,
-	Product,
-	Brand,
+  Category,
+  SubCategory,
+  Product,
+  Brand,
   Country,
   Review,
   User,
@@ -39,7 +39,6 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArraySubcategories, SubCategory);
-    console.log('Acá')
     await loadtoDb(brands, Brand);
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {

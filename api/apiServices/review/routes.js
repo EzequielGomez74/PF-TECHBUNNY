@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
+const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //
@@ -22,7 +23,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", validate.review, async (req, res) => {
   try {
     res.status(200).send(await controller.updateReviews(req.body));
   } catch (error) {

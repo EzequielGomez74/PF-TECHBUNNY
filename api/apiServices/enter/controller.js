@@ -2,6 +2,8 @@ const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const emailer = require ("../../services/mailer/emailer.js")
+
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
@@ -22,7 +24,10 @@ async function handleNewUser(data) {
       email: data.email,
       defaultShippingAddress: data.defaultShippingAddress,
       zipCode: data.zipCode,
+      profilePicture: data.profilePicture,
     };
+    const object = {...newUser,type:"register"}
+    emailer.sendMail(newUser.email,object)
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
@@ -41,14 +46,14 @@ async function handleLogin(username, password) {
     if (true) {
       //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)      
       const accessToken = jwt.sign(
-        { username: foundUser.name },
+        { username: foundUser.username, role: foundUser.role },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "60s" }
+        { expiresIn: "600s" }
       );
       const refreshToken = jwt.sign(
         { username: foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "120s" }
+        { expiresIn: "1200s" }
       );
       //guardar el refreshToken en la DB
       foundUser.set({ refreshToken: refreshToken });

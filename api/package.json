@@ -4,8 +4,9 @@
   "description": "",
   "main": "bin/www",
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "start": "node ./bin/www",
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "dev": "nodemon ./bin/www"
   },
   "author": "Henry",
   "license": "ISC",
@@ -14,10 +15,6 @@
     "npm": ">=6.14.6"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-brands-svg-icons": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.2.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.19.0",
@@ -28,7 +25,8 @@
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "pg": "^8.8.0",
+    "nodemailer": "^6.8.0",
+    "pg": "^8.5.1",
     "sequelize": "^6.3.5",
     "validatorjs": "^3.22.1"
   },
