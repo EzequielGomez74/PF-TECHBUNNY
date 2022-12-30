@@ -31,3 +31,4 @@ export default function Pagination({productsPerPage, products, paginate, current
       </div>
     )
   };
+  

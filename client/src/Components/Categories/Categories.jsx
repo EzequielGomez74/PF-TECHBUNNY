@@ -33,5 +33,5 @@ function Categories() {
     </div>
   )
 }
- //hola
+
 export default Categories

@@ -143,8 +143,8 @@ export const removeCart = (id) => {
     return {
         type: REMOVE_CART, payload: id
     }
-    
 }
+
 export function toggleDarkMode() {
     return { type: TOGGLE_DARK_MODE };
   }
