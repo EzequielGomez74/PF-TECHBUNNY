@@ -1,10 +1,14 @@
 const { Newsletter } = require("../../services/db/db.js");
+const { sendMail } = require("../../services/mailer/emailer.js");
+
 
 async function subscribe(email) {
      const existe = await Newsletter.findOne({where: email})
      try {
      if (existe) return "ya estas subscripto"
       await Newsletter.create(email);
+      const object = {type:"newsletter"}
+      sendMail(email.email,object)
       return "Bienvenido al Newsletter!";
     } catch (error) {
       throw new Error(error);
