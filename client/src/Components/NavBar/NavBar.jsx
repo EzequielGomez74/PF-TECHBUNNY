@@ -1,21 +1,23 @@
 import React from 'react';
 import s from './NavBar.module.css';
 import SearchBar from './SearchBar';
-// import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faAngleDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import {toggleDarkMode} from '../../redux/actions';
 import Responsive from './Responsive';
 
 
 function NavBar() {
 
+  //para manejar el dropdown
   const [open, setOpen] = useState(false);
+  const [closed, setClosed] = useState(true);
   const [openCat, setOpenCat] = useState(false);
+  const [closedCat, setClosedCat] = useState(true);
 
   let menuRef = useRef();
 
@@ -23,11 +25,10 @@ function NavBar() {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
         setOpen(false);
-        console.log(menuRef.current);
-      }if(!menuRef.current.contains(e.target)){
+        setClosed(false);
         setOpenCat(false);
-        console.log(menuRef.current);
-      }     
+        setClosedCat(false);
+      }    
     };
 
     document.addEventListener("mousedown", handler);
@@ -36,46 +37,60 @@ function NavBar() {
       document.removeEventListener("mousedown", handler);
     }
   });
-
+  
   let dispatch = useDispatch();
-
+  
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector(state => state.favorites)
   const cart = useSelector(state => state.cart)
+
   const results = useSelector(state => state.results)
-  const dm = useSelector(state => state.darkMode)
+  //dark mode
+  const dm = useSelector(state => state.darkMode);
+  const DM = useSelector(state => state.darkMode);
 
   const [searchTerm, setSearchTerm] = useState('')
 
+
   return (
-    <div className={dm ? s.DMnavBar : s.navBar}>
+    <div className={s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
             <h4>TECHBUNNY</h4>
             <Responsive />
         </section>
-        <section className={dm ? s.DMone : s.one}>
+        <section className={DM ? s.DMone : s.one}>
             <div>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
-                <div className={dm ? s.DMnavDetail :s.navDetail}>
-                    <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={dm ? faSun :faMoon} /></button>
-                    <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
-                    <Link to='/cart'><span><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
-                    <span><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpen(!open)}} icon={faCaretDown}/></span>
+                <div className={s.navDetail}>
+                    
+                    <button className={DM ? s.DMbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
+
+                    <Link to='/favorites'><span className={DM ? s.DMiconsbtn : s.iconsbtn}><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
+
+                    <Link to='/cart'><span className={DM ? s.DMiconsbtn : s.iconsbtn}><FontAwesomeIcon name='cart' icon={faCartShopping} />&nbsp;&nbsp; {cart.length}</span></Link>
+
+                    <span className={DM ? s.DMiconsbtn : s.iconsbtn} onClick={()=>{setOpen(!open)}}><FontAwesomeIcon icon={faUser}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
             </div>
         </section>
-        <section className={dm ? s.DMtwo : s.two}>
+        <section className={DM ? s.DMtwo : s.two}>
             <div>
-                <p><a href='/home'>HOME</a> </p>
-                <p><a href='/about'>SOBRE TECHBUNNY</a></p>
-                <p>CATEGORIAS &nbsp;&nbsp;<FontAwesomeIcon onClick={()=>{setOpenCat(!openCat)}} icon={faAngleDown}/></p>
+                <Link to='/home'>
+                <p>HOME</p>
+                </Link>
+                <Link to='/about'>
+                <p>SOBRE TECHBUNNY</p>
+                </Link>
+                <p onMouseOver={()=>{setOpenCat(!openCat)}} onMouseOut={()=>{setOpenCat(!closedCat)}}>CATEGORIAS</p>
+                <Link to='/followUp'>
                 <p>VER ESTADO DE PEDIDO</p>
-                </div>
+                </Link>
+            </div>
                 
         </section>
         {/* CATEGORIA DROPDOWN */}
-        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} >
+        <div className={`dropdown-menu-cat ${openCat? 'active' : 'inactive'}`} onMouseEnter={()=>{setOpenCat(!open)}} onMouseLeave={()=>{setOpenCat(!closedCat)}}>
                     <ul>
                        <Link to= "/category/Equipos%20armados"> <DropdownItemCat text={"Equipos armados"}/></Link>
                        <Link to= "/category/Consolas"> <DropdownItemCat text={"Consolas"}/></Link>
@@ -98,7 +113,7 @@ function NavBar() {
                     </ul>
         </div>
 
-        <section className={dm ? s.DMthree: s.three}>
+        <section className={DM ? s.DMthree : s.three}>
             <div>
               <Link to="/category/Monitores%20y%20TV"><p>Monitores</p> </Link> 
               <Link to="/category/Periféricos"> <p>Periféricos</p></Link>
@@ -128,16 +143,23 @@ function NavBar() {
                     <h3>INICIA SESIÓN</h3>
                     <span>Para una mejor experiencia</span>
                     <ul>
+                        <Link to="/login">
                         <DropdownItem icon = {faRightToBracket} text={"Log In"}/>
+                        </Link>
+
+                        <Link to="/register">
                         <DropdownItem icon = {faUserPlus} text={"Check In"}/>
+                        </Link>
                     </ul>
         </div>
+
         <div>
             { searchTerm.length && results.length ? results.map(p => <div>
               <img src={p.image} alt={p.name} />
               <span> {p.name} </span>
             </div> ) : <span>No hay resultados</span> }
         </div>
+            
     </div>
   )
 }

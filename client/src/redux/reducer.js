@@ -70,10 +70,10 @@ export default function reducer (state=initialState, action){
                 cart: state.cart.filter(c => c.id !== action.payload)
             }
         case 'TOGGLE_DARK_MODE':
-            return {
-                ...state,
-                darkMode: !state.darkMode
-            };
+                return {
+                  ...state,
+                  darkMode: !state.darkMode
+                };
         // case 'SET_SEARCH_TERM':
         //     return {
         //         ...state,

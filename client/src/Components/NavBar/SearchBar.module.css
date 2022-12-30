@@ -3,6 +3,8 @@
     width: 250px;
     border: none;
     text-indent: 10px;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid #20232A;
 }
 
 .input:focus {
@@ -11,12 +13,43 @@
 }
 
 .inputIcon{
-    height: 40px;
+    height: 44px;
     width: 40px;
     background-color: #20232A;
     color: white;
+    border-radius: 0px 5px 5px 0px;
 }
 
 .inputIcon:hover{
+    cursor: pointer;
+}
+
+/* DARK MODE  */
+
+.dminput{
+    height: 40px;
+    width: 250px;
+    border: none;
+    text-indent: 10px;
+    background-color: #1B1D23;
+    border: 1px solid #fefefe;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.dminput:focus {
+    outline: none;
+    color: white;
+}
+
+.dminputIcon{
+    height: 40px;
+    width: 40px;
+    background-color: #fefefe;
+    color: #20232A;
+    border: 1px solid #fefefe;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.dminputIcon:hover{
     cursor: pointer;
 }
