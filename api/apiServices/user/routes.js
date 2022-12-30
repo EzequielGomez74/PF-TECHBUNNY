@@ -4,19 +4,16 @@ const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
 const { User } = require("../../services/db/db.js");
 
-router.get("/", async (req, res) => {
+router.get("/:user_id", async (req, res) => {
   try {
-    res.status(200).json(await controller.getAllUsers());
+    res.status(200).json(await controller.getUserById(req.params.user_id));
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
-router.get("/:user_id", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    console.log(req.params);
-    if (req.params)
-      res.status(200).json(await controller.getUserById(req.params.user_id));
-    else res.status(200).json(await controller.getAllUsers());
+    res.status(200).json(await controller.getAllUsers());
   } catch (error) {
     res.status(400).send(error.message);
   }

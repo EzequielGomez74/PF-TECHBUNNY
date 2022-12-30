@@ -1,16 +1,16 @@
 const nodemailer = require("nodemailer");
 const { configmailtrap, configgmail } = require("../../config/mailerconfig");
 
-const template = (userdata,object) => {
-   if(object.type==="register")
-  return {
-    // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
-    from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
-    to: `${userdata}`,
-    subject: `Hola Bienvenido a TechBunny ✔`, // Subject line
-    html: htmlregister, // html body
-  };
-  if(object.type==="order"){
+const template = (userdata, object) => {
+  if (object.type === "register")
+    return {
+      // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
+      from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
+      to: `${userdata}`,
+      subject: `Hola Bienvenido a TechBunny ✔`, // Subject line
+      html: htmlregister, // html body
+    };
+  if (object.type === "order") {
     return {
       // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
@@ -21,17 +21,15 @@ const template = (userdata,object) => {
   }
 };
 const createTrans = () => {
-const transport = nodemailer.createTransport(configmailtrap)
-return transport;
-}
-const sendMail = async (userdata,object) => {
-  const transporter = createTrans()
-  const info = await transporter.sendMail(template(userdata,object));
+  const transport = nodemailer.createTransport(configmailtrap);
+  return transport;
+};
+const sendMail = async (userdata, object) => {
+  const transporter = createTrans();
+  const info = transporter.sendMail(template(userdata, object));
   console.log("Message sent: %s", info.messageId);
-  return 
-}
-
-
+  return;
+};
 
 const htmlorder = `<table border="0" cellpadding="0" cellspacing="0" bgcolor="#F2F2F2" style="direction:ltr;width:100%;min-width:320px;text-align:center;color:#292c2e;font-family:Arial,Verdana,Heveltica,sans-serif;font-size:1em;">
 <tbody>
@@ -113,7 +111,7 @@ const htmlorder = `<table border="0" cellpadding="0" cellspacing="0" bgcolor="#F
   </tr>
 </tbody>
 </table>
-`
+`;
 
 const htmlregister = `<html>
 <head>
@@ -349,5 +347,5 @@ const htmlregister = `<html>
 
 </body>
 </html>
-<!--{% endblock %}-->`
-module.exports = { sendMail }
+<!--{% endblock %}-->`;
+module.exports = { sendMail };

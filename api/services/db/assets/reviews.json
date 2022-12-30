@@ -1,19 +1,19 @@
 [
   {
     "description": "Es peor que una orgia con 7 negros nigerianos",
-    "rating": 2,
+    "rating": 1,
     "user_id": 1,
     "product_id": 1
   },
   {
     "description": "Lo mejor que me paso despues de divorciarme de mi señora.",
-    "rating": 3,
+    "rating": 1,
     "user_id": 2,
     "product_id": 1
   },
   {
     "description": "Exelente experiencia, entre tener un hijo o este mouse, no se con cual me quedo.",
-    "rating": 5,
+    "rating": 1,
     "user_id": 2,
     "product_id": 2
   },
@@ -25,13 +25,13 @@
   },
   {
     "description": "Lo mejor que me paso en la vida despues de matar una persona.",
-    "rating": 4,
+    "rating": 1,
     "user_id": 3,
     "product_id": 2
   },
   {
     "description": "Lo mejor .",
-    "rating": 4,
+    "rating": 1,
     "user_id": 3,
     "product_id": 4
   }

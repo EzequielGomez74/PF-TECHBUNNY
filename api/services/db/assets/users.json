@@ -27,17 +27,17 @@
     "zipCode": 1722
   },
   {
-    "username":"gerlini",
-    "email":"gerfer@gmail.com",
-    "name":"ger",
-    "surname":"fernandez",
-    "password":"123456",
-    "role":"3",
-    "defaultShippingAddress":"calle falsa 123",
-    "zipCode":1050,
-    "billingAddress":"asdas"},
-
-    {
+    "username": "gerlini",
+    "email": "gerfer@gmail.com",
+    "name": "ger",
+    "surname": "fernandez",
+    "password": "123456",
+    "role": "3",
+    "defaultShippingAddress": "calle falsa 123",
+    "zipCode": 1050,
+    "billingAddress": "asdas"
+  },
+  {
     "username": "maty",
     "name": "matias",
     "password": "123456",
@@ -48,4 +48,5 @@
     "zipCode": "122",
     "profilePicture": "www.google.com",
     "billingAddress": "calle falsa 123"
-  }]
+  }
+]

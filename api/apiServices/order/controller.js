@@ -51,14 +51,10 @@ async function getOrderById(order_id) {
     const orderById = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
-        order_id: el.order_id,
-        status: el.status,
-        user_id: el.user_id,
+        ...el,
         products: el.Products.map((el) => {
           return { product_id: el.product_id, count: el.OrderProduct.count };
         }),
-        createdAt: el.createdAt,
-        updatedAt: el.updatedAt,
       };
     });
 
@@ -85,14 +81,10 @@ async function getOrderByUserId(user_id) {
     const clearResponse = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
-        order_id: el.order_id,
-        status: el.status,
-        user_id: el.user_id,
+        ...el,
         products: el.Products.map((el) => {
           return { product_id: el.product_id, count: el.OrderProduct.count };
         }),
-        createdAt: el.createdAt,
-        updatedAt: el.updatedAt,
       };
     });
 
