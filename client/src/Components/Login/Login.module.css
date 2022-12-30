@@ -38,6 +38,7 @@
     font-size: 25px;
     line-height: 45px;
     padding-top: 20px;
+   color: #a4a4a4;
 }
 
 .loginCard input{
@@ -143,7 +144,7 @@
     font-size: 25px;
     line-height: 45px;
     padding-top: 20px;
-    color: #f6f5fa;
+    color: #a4a4a4;
 }
 
 .dmloginCard input{

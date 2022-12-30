@@ -22,6 +22,7 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
+    color: #5e5d5d;
 }
 
 .dmfavSection{
@@ -49,5 +50,5 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
-    color: white;
+    color: rgb(158, 158, 158);
 }
