@@ -69,7 +69,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      verifyToken: {
+      verificationData: {
         type: DataTypes.TEXT,
         allowNull: true,
       },

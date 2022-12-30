@@ -20,17 +20,21 @@ async function handleNewUser(data) {
       ...data,
       password: hashedPwd,
     };
-    const object = { ...newUser, type: "register" };
-    emailer.sendMail(newUser.email, object);
     //GENERARA TOKEN Y GUARDAR EN DB
     const verifyToken = jwt.sign(
       { username: newUser.username },
       process.env.VERIFY_MAIL_TOKEN_SECRET,
       { expiresIn: "24h" }
     );
+    //GENERA VERYFICATION CODE
+    let verificationData = require("crypto").randomBytes(10).toString("hex");
+    verificationData += " " + verifyToken;
     const userCreated = await User.create(newUser);
-    userCreated.verifyToken = verifyToken;
+    userCreated.verificationData = verificationData;
     userCreated.save();
+    //ARMAMOS MAIL
+    const object = { ...newUser, type: "register" };
+    emailer.sendMail(newUser.email, object);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
