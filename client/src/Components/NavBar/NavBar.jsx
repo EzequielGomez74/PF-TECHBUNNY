@@ -153,11 +153,18 @@ function NavBar() {
                     </ul>
         </div>
 
-        <div>
-            { searchTerm.length && results.length ? results.map(p => <div>
-              <img src={p.image} alt={p.name} />
-              <span> {p.name} </span>
-            </div> ) : <span>No hay resultados</span> }
+        <div className='search1'>
+            { searchTerm.length && results.length ? results.map((p,i) =>{
+                if(i < 5)
+                return ( <div>
+                   <Link to = {`/detail/${p.product_id}`}> <img src={p.image} alt={p.name} /></Link>
+                   <Link to = {`/detail/${p.product_id}`}> <span className='NameSearch'> {p.name} </span> </Link>
+                  </div>)
+                  else{
+                        return null
+                  }
+            } 
+            ) : <span id="hola" >No hay resultados</span> }
         </div>
             
     </div>
