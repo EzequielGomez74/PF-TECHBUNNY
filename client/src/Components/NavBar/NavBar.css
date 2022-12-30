@@ -122,3 +122,35 @@
     color: #d7f136;
     cursor: pointer;
   }
+
+img {
+  width: 100px;
+  height: 70px;
+}
+
+  .search1{
+    max-width: 290px;
+    max-height: 260px;
+    top: 61px;
+    right: 960px;
+    background-color: #fefefe;
+    border-radius: var(--border-radius);
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 1;
+    border: 4px solid black;
+    transition: var(--speed) ease;
+    text-decoration: none;
+    
+  }
+
+  .NameSearch{
+    font-size: 12px;
+    text-align: center;
+    color: #22262a;
+    font-weight: 600;
+    bottom: 15px;
+
+  }
+  
