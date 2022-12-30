@@ -26,7 +26,9 @@ async function handleNewUser(data) {
       zipCode: data.zipCode,
       profilePicture: data.profilePicture,
     };
-    const object = {...newUser,type:"register"}
+    let verificationNumber = require ("crypto").randomBytes(10).toString("hex")
+    const object = {...newUser,type:"register",verificationNumber: verificationNumber}
+    console.log("OBJETOOOO",object)
     emailer.sendMail(newUser.email,object)
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };

@@ -1,4 +1,4 @@
-const { Order,Product, OrderProduct, User } = require("../../services/db/db.js");
+const { Order,Product, User } = require("../../services/db/db.js");
 const Sequelize = require("sequelize");
 const { sendMail } = require("../../services/mailer/emailer.js");
 
@@ -14,8 +14,9 @@ async function createOrder({ status, user_id, products }) {
         through: { count: product.count },
       });
     });
-    const object = {...order , type:"order"}
-    sendMail(user.email,objectg)
+    const object = {...order.dataValues ,...user.dataValues, type:"order"}
+    console.log("DATAA",object)
+    sendMail(user.email,object)
     return order.order_id;
   } catch (error) {
     throw new Error(error.message);
