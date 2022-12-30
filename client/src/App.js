@@ -28,8 +28,8 @@ function App() {
         <Route exact path='/cart' component={Cart}  />
         <Route exact path='/categories' component={Categories}  />
         <Route exact path='/category/:name' component={Category}/>
-        <Route exact path='*' component={Error}/>
         <Route exact path='/followUp' component={FollowUp}/>
+        <Route exact path='*' component={Error}/>
       </Switch>
     </div>
   );

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function SearchBar({ searchTerm, setSearchTerm }) {
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
-  const results = useSelector(state => state.results)
+
 
   useEffect(()=>{
     dispatch(getProducts())
@@ -23,9 +23,7 @@ function SearchBar({ searchTerm, setSearchTerm }) {
     <div>
         <input type="text" value={searchTerm} onChange={handleChange} className={s.input} placeholder={`Buscar productos` } />
         <button className={s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
-        {/* <div>
-        { searchTerm.length && results.length ? results.map(p => <span> {p.name} </span> ) : <span>No hay resultados</span> }
-        </div> */}
+      
     </div>
   )
 }

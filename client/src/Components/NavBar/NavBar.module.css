@@ -75,6 +75,13 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: black;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .two div p a{
@@ -123,15 +130,6 @@ a {
   text-decoration: none;
 }
 
-.two div p{
-  width: 300px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0px;
-  margin-top: 0px;
-}
 
 .two div a:hover{
   color: #7e7e7e;
@@ -254,24 +252,27 @@ h3{
     .two {
       display:none;
     }
-    .dmone {
+    .three{
+      display: none;
+    } 
+    .DMone {
       display:none;
     }
-    .dmtwo {
+    .DMtwo {
       display:none;
     }
-    .dmthree {
+    .DMthree {
       display:none;
     }
   }
 
   /* DARK MODE COMPLETO */
 
-  .dmnavResponsive{
+  .DMnavResponsive{
     display: none;
   }
 
-  .dmone div{
+  .DMone div{
     max-width: 1500px;
     margin: auto;
     padding-left: 25px;
@@ -284,7 +285,7 @@ h3{
     background-color: #1b1d23;
   }
 
-  .dmone div h1 a{
+  .DMone div h1 a{
     font-style: normal;
     font-weight: 800;
     font-size: 28px;
@@ -292,16 +293,15 @@ h3{
     color: black;
   }
 
-  .dmone div h1 a{
+  .DMone div h1 a{
     color: white;
   }
 
-  .dmtwo{
-    background-color: #1b1d23;
+  .DMtwo{
     cursor: pointer;
   }
 
-  .dmtwo div {
+  .DMtwo div {
     max-width: 1500px;
     margin: auto;
     padding-left: 25px;
@@ -312,9 +312,10 @@ h3{
     justify-content: space-around;
     padding-top: 5px;
     padding-bottom: 5px;
+    background-color: #1B1D23;
   }
 
-  .dmtwo div p {
+  .DMtwo div p {
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -324,19 +325,19 @@ h3{
     color: white;
   }
 
-  .dmtwo div p a{
+  .DMtwo div p a{
     color: white;
   }
   
-  .dmtwo .categorias{
+  .DMtwo .categorias{
     cursor: pointer;
   }
 
-  .dmthree{
+  .DMthree{
     background-color: #fefefe;
   }
   
-  .dmthree div {
+  .DMthree div {
     max-width: 1500px;
     margin: auto;
     padding-left: 25px;
@@ -347,7 +348,7 @@ h3{
     justify-content: space-around;
   }
 
-  .dmthree div p{
+  .DMthree div p{
     color: black;
     font-style: normal;
     font-weight: 600;
@@ -356,12 +357,12 @@ h3{
     transition: 0.5s;
   }
 
-  .dmthree div p:hover{
+  .DMthree div p:hover{
     color: #D7F136;
     cursor: pointer;
   }
 
-  .dmtwo div p{
+  .DMtwo div p{
     width: 300px;
     height: 40px;
     display: flex;
@@ -371,28 +372,26 @@ h3{
     margin-top: 0px;
   }
 
-  .dmtwo div a:hover{
+  .DMtwo div a:hover{
     color: #D7F136;
     cursor: pointer;
   }
 
-  .dmtwo div p:hover{
+  .DMtwo div p:hover{
     color: #D7F136;
     cursor: pointer;
   }
 
-  .dmiconsbtn{
+  .DMiconsbtn{
     font-size: 14px;
     font-weight: 400;
     color: white;
   }
 
-  .dmbtnMoon{
+  .DMbtnMoon{
     border: none;
     background-color: transparent;
     color: white;
     cursor: pointer;
     padding: 12px;
   }
-
- 
