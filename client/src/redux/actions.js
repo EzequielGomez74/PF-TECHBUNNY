@@ -10,7 +10,11 @@ import {
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
+  GET_REVIEWS_BY,
+  GET_ALL_USERS,
 } from "./actionTypes";
+
+import axios from "axios";
 
 export const getProducts = () => {
   return function (dispatch) {
@@ -50,12 +54,52 @@ export const getProductsByCategory = (category) => {
   };
 };
 
+export const getReviewsBy = (productId, userId) => {
+  return function (dispatch) {
+    return fetch(
+      // `http://localhost:3001/reviews?${
+      //   productId ? "product_id=" + productId + "&" : ""
+      // }${userId ? "user_id=" + userId + "&" : ""}`
+      `http://localhost:3001/reviews?product_id=${productId}`
+    )
+      .then((resp) => resp.json())
+      .then((data) => dispatch({ type: GET_REVIEWS_BY, payload: data }))
+      .catch((error) => console.log(error));
+  };
+};
+
+export const postReview = (review) => {
+  return async function () {
+    try {
+      let postedGame = await axios.post(
+        "http://localhost:3001/reviews",
+        review
+      );
+
+      return postedGame;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getAllUsers = () => {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/users`)
+      .then((resp) => resp.json())
+      .then((data) => dispatch({ type: GET_ALL_USERS, payload: data }))
+      .catch((error) => console.log(error));
+  };
+};
+
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
     const filteredByBrand = products.filter((p) => p.brand === brand);
     dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
   };
 };
+
+export const fiterByScore = (products, score) => {};
 
 export const filterByPrice = (products, max, min) => {
   return function (dispatch) {

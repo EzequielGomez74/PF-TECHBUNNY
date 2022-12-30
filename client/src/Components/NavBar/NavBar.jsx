@@ -1,7 +1,6 @@
 import React from "react";
 import s from "./NavBar.module.css";
 import SearchBar from "./SearchBar";
-// import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoon,
@@ -9,14 +8,16 @@ import {
   faCartShopping,
   faUser,
   faCaretDown,
-  faAngleDown,
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NavBar() {
+  //para manejar el dropdown
   const [open, setOpen] = useState(false);
   const [closed, setClosed] = useState(true);
   const [openCat, setOpenCat] = useState(false);
@@ -24,13 +25,11 @@ function NavBar() {
 
   useEffect(() => {
     let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      {
         setOpen(false);
-        console.log(menuRef.current);
-      }
-      if (!menuRef.current.contains(e.target)) {
+        setClosed(false);
         setOpenCat(false);
-        console.log(menuRef.current);
+        setClosedCat(false);
       }
     };
 
@@ -40,6 +39,10 @@ function NavBar() {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  // Para saber cuantos elementos se agregaron a favoritos
+  const favs = useSelector((state) => state.favorites);
+  const cart = useSelector((state) => state.cart);
 
   return (
     <div className={s.navBar}>
@@ -72,6 +75,9 @@ function NavBar() {
                 onClick={() => {
                   setOpen(!open);
                 }}
+                onMouseOut={() => {
+                  setOpen(!closed);
+                }}
                 icon={faCaretDown}
               />
             </span>
@@ -86,20 +92,28 @@ function NavBar() {
           <p>
             <a href="/about">SOBRE TECHBUNNY</a>
           </p>
-          <p>
-            CATEGORIAS &nbsp;&nbsp;
-            <FontAwesomeIcon
-              onClick={() => {
-                setOpenCat(!openCat);
-              }}
-              icon={faAngleDown}
-            />
+          <p
+            onMouseOver={() => {
+              setOpenCat(!openCat);
+            }}
+            onMouseOut={() => {
+              setOpenCat(!closedCat);
+            }}
+          >
+            CATEGORIAS
           </p>
-          <p>VER ESTADO DE PEDIDO</p>
+          <p>
+            <a href="/followUp">VER ESTADO DE PEDIDO</a>
+          </p>
         </div>
       </section>
       {/* CATEGORIA DROPDOWN */}
-      <div className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}>
+      <div
+        className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
+        onMouseEnter={() => {
+          setOpenCat(!openCat);
+        }}
+      >
         <ul>
           <Link to="/category/Equipos%20armados">
             {" "}
@@ -172,18 +186,45 @@ function NavBar() {
 
       <section className={s.three}>
         <div>
-          <p>Monitores</p>
-          <p>Teclados</p>
-          <p>Auriculares</p>
-          <p>Mouse</p>
-          <p>Parlantes</p>
-          <p>Sillas</p>
-          <p>Consolas</p>
-          <p>Notebooks</p>
-          <p>Fuentes</p>
-          <p>Procesadores</p>
-          <p>Impresoras</p>
-          <p>Discos</p>
+          <Link to="/category/Monitores%20y%20TV">
+            <p>Monitores</p>{" "}
+          </Link>
+          <Link to="/category/Periféricos">
+            {" "}
+            <p>Periféricos</p>
+          </Link>
+          <Link to="/category/Memorias">
+            {" "}
+            <p>Memorias</p>
+          </Link>
+          <Link to="/category/Pendrives">
+            {" "}
+            <p>Pendrives</p>{" "}
+          </Link>
+          <Link to="/category/Notebooks">
+            {" "}
+            <p>Notebooks</p>
+          </Link>
+          <Link to="/category/Consolas">
+            {" "}
+            <p>Consolas</p>
+          </Link>
+          <Link to="/category/Gabinetes">
+            {" "}
+            <p>Gabinetes</p>
+          </Link>
+          <Link to="/category/Motherboards">
+            {" "}
+            <p>Motherboards</p>
+          </Link>
+          <Link to="/category/Procesadores">
+            {" "}
+            <p>Procesadores</p>
+          </Link>
+          <Link to="/category/Cooling">
+            {" "}
+            <p>Cooling</p>
+          </Link>
         </div>
       </section>
 
@@ -213,7 +254,7 @@ function NavBar() {
 function DropdownItem(props) {
   return (
     <li className={s.dropdownItem}>
-      <img src={props.img}></img>
+      {/* <img src={props.img}></img> */}
       <FontAwesomeIcon icon={props.icon} />
       <a>{props.text}</a>
     </li>

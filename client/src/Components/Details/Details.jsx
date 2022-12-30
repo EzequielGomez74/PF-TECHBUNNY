@@ -17,18 +17,35 @@ import Dropdown from "../Dropdown/Dropdown";
 function Details() {
   const { id } = useParams();
   const product = useSelector((state) => state.detail);
+  const reviews = useSelector((state) => state.reviews);
+  const currentUser = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
+  const [localReviews, setLocalReviews] = useState({
+    rating: "",
+    description: "",
+    product_id: parseInt(id),
+    //user hardcodeado
+    user_id: currentUser.user_id,
+    username: currentUser.username,
+  });
+  const [totalReviews, setTotalReviews] = useState([]);
 
   useEffect(() => {
+    console.log("hola");
     if (initialLoad.current) {
       dispatch(actions.getProductById(id));
+      dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
     }
+
     setStock(product.stock);
-  }, [dispatch, product]);
+    setTotalReviews([...reviews]);
+  }, [product]);
+
+  console.log(reviews);
 
   const handlePlus = () => {
     if (quantity < product.stock) {
@@ -66,30 +83,41 @@ function Details() {
 
   // Inicio de Lógica Comentarios
 
-  const [score, setScore] = useState({
-    rating: "",
-    review: "",
-  });
-  const [comments, setComments] = useState([]);
+  console.log(totalReviews);
 
   const handleChange = (e) => {
-    setScore({
-      ...score,
+    setLocalReviews({
+      ...localReviews,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setComments([...comments, score]);
-    setScore({
+    setTotalReviews([
+      ...totalReviews,
+      { ...localReviews, rating: ratingToNumber(localReviews.rating) },
+    ]);
+
+    dispatch(
+      actions.postReview({
+        user_id: localReviews.user_id,
+        product_id: localReviews.product_id,
+        description: localReviews.description,
+        rating: ratingToNumber(localReviews.rating),
+      })
+    );
+
+    setLocalReviews({
+      ...localReviews,
       rating: "",
-      review: "",
+      description: "",
     });
   };
 
-  const averageReview = (c) => {
-    const numbers = [];
+  const averageRating = (c) => {
+    // const numbers = [];
+    const numbers = reviews.map((r) => r.rating);
     for (let i = 0; i < c.length; i++) {
       if (c[i].rating === "★☆☆☆☆") numbers.push(1);
       if (c[i].rating === "★★☆☆☆") numbers.push(2);
@@ -97,9 +125,45 @@ function Details() {
       if (c[i].rating === "★★★★☆") numbers.push(4);
       if (c[i].rating === "★★★★★") numbers.push(5);
     }
+
     const sum = numbers.reduce((prev, curr) => prev + curr);
-    const average = Math.ceil(sum / c.length);
+    const average = Math.ceil(sum / numbers.length);
+    console.log(average);
     return average;
+  };
+
+  const ratingToString = (rating) => {
+    switch (rating) {
+      case 1:
+        return "★☆☆☆☆";
+      case 2:
+        return "★★☆☆☆";
+      case 3:
+        return "★★★☆☆";
+      case 4:
+        return "★★★★☆";
+      case 5:
+        return "★★★★★";
+      default:
+        return undefined;
+    }
+  };
+
+  const ratingToNumber = (rating) => {
+    switch (rating) {
+      case "★☆☆☆☆":
+        return 1;
+      case "★★☆☆☆":
+        return 2;
+      case "★★★☆☆":
+        return 3;
+      case "★★★★☆":
+        return 4;
+      case "★★★★★":
+        return 5;
+      default:
+        return undefined;
+    }
   };
 
   // Fin de Lógica Comentarios
@@ -131,8 +195,8 @@ function Details() {
           <h1 className={s.pName}>{product.name}</h1>
 
           <div className={s.pScore}>
-            {comments.length ? (
-              new Array(averageReview(comments))
+            {reviews.length ? (
+              new Array(averageRating(totalReviews))
                 .fill(undefined)
                 .map((ele, idx) => <FontAwesomeIcon icon={faStar} key={idx} />)
             ) : (
@@ -204,19 +268,31 @@ function Details() {
         <div className={s.allComments}>
           <h5>
             <strong>Cantidad de comentarios:</strong> &nbsp;&nbsp;{" "}
-            {comments.length}
+            {/* {comments.length} */}
+            {reviews.length}
           </h5>
           <hr />
           <div>
             {/* Sección que muestra comentarios existentes */}
-            {comments.length ? (
+            {/* {comments.length ? (
               comments.map((c) => (
                 <div className={s.newComment}>
                   <span className={s.userId}>
-                    <strong>Por:</strong>
+                    <strong>Por {c.user_id}:</strong>
                   </span>
                   <span className={s.rating}>{c.rating} </span>
                   <p className={s.review}>{c.review}</p>
+                  <hr />
+                </div>
+              )))  */}
+            {totalReviews.length ? (
+              totalReviews?.map((r) => (
+                <div className={s.newComment}>
+                  <span className={s.userId}>
+                    <strong>Por {r.username}:</strong>
+                  </span>
+                  <span className={s.rating}>{ratingToString(r.rating)} </span>
+                  <p className={s.review}>"{r.description}"</p>
                   <hr />
                 </div>
               ))
@@ -236,7 +312,7 @@ function Details() {
                 </label>
                 <select
                   name="rating"
-                  value={score.rating}
+                  value={localReviews.rating}
                   onChange={handleChange}
                 >
                   <option>seleccionar</option>
@@ -249,8 +325,8 @@ function Details() {
               </div>
               <textarea
                 rows="5"
-                name="review"
-                value={score.review}
+                name="description"
+                value={localReviews.description}
                 placeholder="Escribe un comentario sobre tu compra"
                 onChange={handleChange}
               />
