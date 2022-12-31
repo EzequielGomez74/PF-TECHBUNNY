@@ -32,7 +32,6 @@ router.get("/pagar/:order_id", async (req, res) => { 	// TRAEMOS LAS PREFERENCIA
 				quantity: Number(el.dataValues.count),
 			};
 		});
-		console.log(carrito);
 
 		let preference = {
 			items: carrito,

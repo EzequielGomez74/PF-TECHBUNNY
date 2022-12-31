@@ -5,28 +5,18 @@ import CartCard from '../CartCard/CartCard';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
-
+import { useRef } from 'react';
 
 
 
 function Cart() {
   const cart = useSelector(state => state.cart);
-
-
-
-  let productList = [];
-  let carrito = []
-
-  
-
-  let total = 0;
-
-  
+  const refe = useRef();
   async function pay() {
       try{
         const order_id = 1;
-        const preference = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`)        
-        console.log("PREFERENCIAAAAS",preference);
+
+        const preference = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`)        //ESTO GENERA LAS PREFERENCES CON EL ORDER_ID QUE LE PASEMOS
         var script = document.createElement("script");
     
           // The source domain must be completed according to the site for which you are integrating.
@@ -34,45 +24,71 @@ function Cart() {
           script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
           script.type = "text/javascript";
           script.dataset.preferenceId = preference.data.preferenceId;
-          document.getElementById("page-content").innerHTML = "";
-          document.querySelector("#page-content").appendChild(script);
+          // document.getElementById("buttonPagar").innerHTML = "";
+          // document.querySelector("#buttonPagar").appendChild(script);
+          refe.current.appendChild(script)
+
+
       }
       catch(error) {
-        console.error(error.message)  
+        console.error("HOLAA",error.message)  
       }
   }
-
+ 
   return (
-    <div>
-      <script src="https://sdk.mercadopago.com/js/v2"></script>
+		<div>
+			<NavBar />
+			<section className={s.cartSection}>
+				<div>
+					{cart.length ? (
+						cart.map((p) => (
+							<CartCard
+								key={p.id}
+								id={p.id}
+								totalQuantity={p.totalQuantity}
+								brand={p.brand}
+								name={p.name}
+								stock={p.stock}
+								image={p.image}
+								price={p.price}
+							/>
+						))
+					) : (
+						<div>
+							<div>
+								<h1>PEPITO RULES</h1>
 
+								<a onClick={pay}>orden 1</a>
+								<br />
+								<hr />
 
-      <NavBar />
-      <section className={s.cartSection}>
-          <div>
-            {cart.length ? cart.map(p => <CartCard 
-              key={p.id} id={p.id} totalQuantity={p.totalQuantity}
-              brand={p.brand} name={p.name} stock={p.stock}
-              image={p.image} price={p.price}
-            />)
-            : 
-            <div>
-                <button onClick={pay} > pagaaaar</button>
-              <div><h1>PEPITO RULES</h1>
-                <div className='page-content' id="page-content" ></div>
-              </div>
+								<a onClick={pay}>orden 2</a>
+								<br />
+								<hr />
+								<a onClick={pay}>orden 3</a>
+								<div className="buttonPagar" id="buttonPagar" ref={refe}>
+									{" "}
+									<br />
+									<hr />
+									ACA VA EL BUTTON <br />
+									<hr />
+								</div>
+							</div>
 
-
-
-              <div className={s.heroCart}></div>
-              <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
-            </div>}
-          </div>
-          <button className={cart.length ? s.mainButton : s.none}>Procesar Compra</button>
-      </section>
-      <Footer/>
-    </div>
-  )
+							<div className={s.heroCart}></div>
+							<p className={s.message}>
+								¡Todavía no has agregado productos a tu carrito!
+							</p>
+						</div>
+					)}
+				</div>
+				<button className={cart.length ? s.mainButton : s.none}>
+					Procesar Compra
+				</button>
+			</section>
+			<Footer />
+		</div>
+	);
 }
 
 export default Cart
