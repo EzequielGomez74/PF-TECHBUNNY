@@ -73,6 +73,15 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+      },
+      googleAuth: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      secretAuth: {
+        type: DataTypes.STRING,
+        defaultValue: "2FADisabled",
       }
     },
     {
