@@ -15,14 +15,13 @@ async function setFavoriteStatus(products, username) {
     //traer un array de favoritos correspondiente al user que tiene el access token
     const { user_id } = await getUser({ username });
     console.log("user_id", user_id);
-    let favorites = await Favorite.findAll({ where: { user_id } });
-    console.log(favorites);
+    let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
     favorites.forEach((fav) => {
       const productFound = products.find(
         (product) => product.product_id === fav.product_id
       );
       if (productFound) {
-        productFound.dataValues.favorite = true;
+        productFound.favorite = true;
       }
     });
   }
@@ -50,7 +49,8 @@ async function getAllProductsBy(condition, username) {
   try {
     console.log("1");
     let products = await Product.findAll({ where: condition });
-    return await setFavoriteStatus([...products], username);
+    console.log(products);
+    return await setFavoriteStatus(products, username);
   } catch (error) {
     throw new Error(error.message);
   }

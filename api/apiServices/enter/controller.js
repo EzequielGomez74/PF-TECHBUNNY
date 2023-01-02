@@ -2,33 +2,30 @@ const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const emailer = require ("../../services/mailer/emailer.js")
-
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
     throw new Error("Username and Password are required");
   //Buscar usernames duplicados en DB
   try {
-    const duplicate = await User.findOne({ where: { username: data.username } });
+    const duplicate = await User.findOne({
+      where: { username: data.username },
+    });
     if (duplicate) throw new Error("Username already exist"); //409 = conflict
-    //Encryptar el password        
+    //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
     const newUser = {
-      username: data.username,
-      name: data.name,
-      surname: data.surname,
+      ...data,
       password: hashedPwd,
       role: data.role,
       email: data.email,
       defaultShippingAddress: data.defaultShippingAddress,
       zipCode: data.zipCode,
-      profilePicture: data.profilePicture,
     };
-    const object = {...newUser,type:"register"}
-    emailer.sendMail(newUser.email,object)
     const userCreated = await User.create(newUser);
+    userCreated.verifyToken = verifyToken;
+    userCreated.save();
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
@@ -36,7 +33,7 @@ async function handleNewUser(data) {
 }
 async function handleLogin(username, password) {
   if (!username || !password)
-  throw new Error("Username and Password are required");
+    throw new Error("Username and Password are required");
   try {
     const foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
@@ -44,7 +41,7 @@ async function handleLogin(username, password) {
     console.log("LLEGA");
     //const match = await bcrypt.compare(password, password);
     if (true) {
-      //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)      
+      //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
       const accessToken = jwt.sign(
         { username: foundUser.username, role: foundUser.role },
         process.env.ACCESS_TOKEN_SECRET,
@@ -58,7 +55,7 @@ async function handleLogin(username, password) {
       //guardar el refreshToken en la DB
       foundUser.set({ refreshToken: refreshToken });
       await foundUser.save();
-      
+
       return { accessToken, refreshToken };
     } else throw new Error("Wrong Password");
   } catch (error) {

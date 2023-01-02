@@ -11,6 +11,19 @@ import {
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import s from "./NavBar.module.css";
+import SearchBar from "./SearchBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMoon,
+  faHeart,
+  faCartShopping,
+  faUser,
+  faCaretDown,
+  faRightToBracket,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -31,14 +44,20 @@ function NavBar() {
         setOpenCat(false);
         setClosedCat(false);
       }
+      }
     };
 
     document.addEventListener("mousedown", handler);
 
     return () => {
+
+    return () => {
       document.removeEventListener("mousedown", handler);
     };
+    };
   });
+
+  let dispatch = useDispatch();
 
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector((state) => state.favorites);
@@ -230,6 +249,8 @@ function NavBar() {
 
       {/* USUARIO REGISTRADO */}
       {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+      {/* USUARIO REGISTRADO */}
+      {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                     <h3>NOMBRE USUARIO</h3>
                     <span>Bienvenido/a a TECHBUNNY</span>
                     <ul>
@@ -247,10 +268,28 @@ function NavBar() {
           <DropdownItem icon={faUserPlus} text={"Check In"} />
         </ul>
       </div>
+      {/* INVITADO */}
+      <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
+        <h3>INICIA SESIÓN</h3>
+        <span>Para una mejor experiencia</span>
+        <ul>
+          <DropdownItem icon={faRightToBracket} text={"Log In"} />
+          <DropdownItem icon={faUserPlus} text={"Check In"} />
+        </ul>
+      </div>
     </div>
+  );
   );
 }
 
+function DropdownItem(props) {
+  return (
+    <li className={s.dropdownItem}>
+      {/* <img src={props.img}></img> */}
+      <FontAwesomeIcon icon={props.icon} />
+      <a>{props.text}</a>
+    </li>
+  );
 function DropdownItem(props) {
   return (
     <li className={s.dropdownItem}>
@@ -267,6 +306,14 @@ function DropdownItemCat(props) {
       <a>{props.text}</a>
     </li>
   );
+function DropdownItemCat(props) {
+  return (
+    <li className={s.dropdownItem}>
+      <a>{props.text}</a>
+    </li>
+  );
 }
+
+export default NavBar;
 
 export default NavBar;
