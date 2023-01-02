@@ -56,7 +56,20 @@ function NavBar() {
     <div className={s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
             <h4>TECHBUNNY</h4>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
+            <div className='search1'>
+            { searchTerm.length && results.length ? results.map((p,i) =>{
+                if(i < 15)
+                return ( <div className='hola123'>
+                   <Link to = {`/detail/${p.product_id}`}> <img className='imgsearch' src={p.image} alt={p.name} /></Link>
+                   <Link to = {`/detail/${p.product_id}`}> <span className='NameSearch'> {p.name} </span> </Link>
+                  </div>)
+                 
+            } 
+            ) : null}
+        </div>
             <Responsive />
+            
         </section>
         <section className={DM ? s.DMone : s.one}>
             <div>
@@ -152,17 +165,17 @@ function NavBar() {
                         </Link>
                     </ul>
         </div>
-
+     
         <div className='search1'>
             { searchTerm.length && results.length ? results.map((p,i) =>{
-                if(i < 7)
+                if(i < 30)
                 return ( <div className='hola123'>
-                   <Link to = {`/detail/${p.product_id}`}> <img src={p.image} alt={p.name} /></Link>
+                   <Link to = {`/detail/${p.product_id}`}> <img className='imgsearch' src={p.image} alt={p.name} /></Link>
                    <Link to = {`/detail/${p.product_id}`}> <span className='NameSearch'> {p.name} </span> </Link>
                   </div>)
                  
             } 
-            ) : null}
+            ) :  ""}
         </div>
             
     </div>

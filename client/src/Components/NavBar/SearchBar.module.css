@@ -54,6 +54,8 @@
     cursor: pointer;
 }
 
+
+
 @media only screen and (max-width: 800px) {
     .search2{
         display: flex;
