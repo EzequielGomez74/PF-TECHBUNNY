@@ -1,19 +1,19 @@
 import React from 'react'
-import "./Newsletter.css";
 import imgNewsletter from "../../Photos/imgNewsletter.png";
+import s from "../NewsLetter/Newsletter.module.css";
 
 
 function Newsletter() {
   return (
-    <div className='maincointainer'>
-        <div className='prueba'>
-        <div className='imgcontainer'>
-            <img className='imgNewsletter' src={imgNewsletter}  alt="not found" />
+    <div className={s.maincointainer}>
+        <div className={s.prueba}>
+        <div className={s.imgcontainer}>
+            <img className={s.imgNewsletter} src={imgNewsletter}  alt="not found" />
         </div>
-        <div className="textandinput">
+        <div className={s.textandinput}>
             <h2>Suscríbete al Newsletter</h2>
-            <input type="search" className='inputText' placeholder={`Correo electrónico`} />
-            <button className='inputBtn'>SUSCRIBIRSE</button>
+            <input type="search" className={s.inputText} placeholder={`Correo electrónico`} />
+            <button className={s.inputBtn}>SUSCRIBIRSE</button>
             </div>
         </div>
             
