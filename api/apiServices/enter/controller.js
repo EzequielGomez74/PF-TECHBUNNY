@@ -27,20 +27,26 @@ async function handleNewUser(data) {
       { expiresIn: "24h" }
     );
     //GENERA VERYFICATION CODE
-    let verificationData = require("crypto").randomBytes(10).toString("hex");
-    verificationData += " " + verifyToken;
     const userCreated = await User.create(newUser);
-    userCreated.verificationData = verificationData;
+    let verificationCode =
+      userCreated.user_id +
+      "x" +
+      require("crypto").randomBytes(10).toString("hex");
+    userCreated.verificationData = verificationCode + " " + verifyToken;
     userCreated.save();
-    //ARMAMOS MAIL
-    const object = { ...newUser, type: "register" };
+    //SE CREA MAIL DATA
+    const object = {
+      ...newUser,
+      verificationCode: verificationCode,
+      type: "register",
+    };
     emailer.sendMail(newUser.email, object);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
   }
 }
-async function handleLogin(username, password) {
+async function handleLogin(username, password, token) {
   if (!username || !password)
     throw new Error("Username and Password are required");
   try {
@@ -48,24 +54,19 @@ async function handleLogin(username, password) {
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
     console.log("LLEGA");
-    //const match = await bcrypt.compare(password, password);
-    if (true) {
+    const match = await bcrypt.compare(password, password);
+    if (match) {
+      //SI TIENE 2FA
+      if (foundUser.googleAuth) {
+        if (token) {
+          if ("verify") {
+          } else return null;
+        } else {
+          return { twoFactor: true };
+        }
+      }
       //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-      const accessToken = jwt.sign(
-        { username: foundUser.username, role: foundUser.role },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "600s" }
-      );
-      const refreshToken = jwt.sign(
-        { username: foundUser.username },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "1200s" }
-      );
-      //guardar el refreshToken en la DB
-      foundUser.set({ refreshToken: refreshToken });
-      await foundUser.save();
-
-      return { accessToken, refreshToken };
+      return generateTokens(foundUser);
     } else throw new Error("Wrong Password");
   } catch (error) {
     throw new Error(error.message);
@@ -77,6 +78,23 @@ async function handleLogout(cookie) {
   if (!foundUser) throw new Error("User not found");
   foundUser.refreshToken = "";
   foundUser.save();
+}
+
+async function generateTokens(foundUser) {
+  const accessToken = jwt.sign(
+    { username: foundUser.username, role: foundUser.role },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "600s" }
+  );
+  const refreshToken = jwt.sign(
+    { username: foundUser.username },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: "1200s" }
+  );
+  //guardar el refreshToken en la DB
+  foundUser.set({ refreshToken: refreshToken });
+  await foundUser.save();
+  return { accessToken, refreshToken };
 }
 
 module.exports = { handleLogin, handleNewUser, handleLogout };

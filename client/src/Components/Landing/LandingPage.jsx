@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import axios from "axios";
 
-async function handleLogin() {
-  //const config = {Authorization:"Bearer "+}
-  const data = { username: "Betolocura", password: "pepito123" };
-  const response = await axios.put("http://localhost:3001/enter/login", data, {
-    withCredentials: true,
-  });
-  console.log("response token ", response.data.accessToken);
-  sessionStorage.setItem("accessToken", response.data.accessToken);
+async function handleLogin(token) {
+  try {
+    //const config = {Authorization:"Bearer "+}
+    const data = { username: "Betolocura", password: "pepito123", token };
+    const response = await axios.put(
+      "http://localhost:3001/enter/login",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.data.accessToken) {
+      sessionStorage.setItem("accessToken", response.data.accessToken);
+    } else if (response.data.twoFactor) {
+      //generarpopup
+    } else if (response.data === null) {
+      return "TOKEN INCORRECTO, REINGRESAR";
+    }
+  } catch (error) {
+    //metio mal
+  }
 }
 export default function LandingPage() {
   return (
@@ -21,12 +34,12 @@ export default function LandingPage() {
         </Link>
       </div>
       <div className="divBtn">
-        <div className="btnLogin" onClick={handleLogin}>
+        <div className="btnLogin" onClick={() => handleLogin()}>
           <Link to="/">
             <h2>Login</h2>
           </Link>
         </div>
-        <div className="btnInv">
+        <div className="btnInv" onClick={() => handleLogin("qweqwe")}>
           <Link to="/home">
             <h2>Invitado</h2>
           </Link>
