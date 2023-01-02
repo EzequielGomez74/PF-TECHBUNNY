@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
       if (accessToken) res.status(200).json({ accessToken });
       else res.status(400).json({ accessToken });
     } else {
-      res.sendStatus(401);
+      res.sendStatus(400);
     }
   } catch (error) {
     res.sendStatus(401);

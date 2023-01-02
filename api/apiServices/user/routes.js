@@ -18,6 +18,37 @@ router.get("/", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+
+
+router.get("/googleAuth/:user_id", async (req, res) => {            // ESTO ES CUANDO EL USER QUIERE ACTIVAR LA 2FA EN SU CUENTA
+  try {
+    res.status(200).json(await controller.getQR(req.params.user_id)); // RETORNA UN QR PARA ESE USUARIO
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+})
+
+
+
+router.put("/googleAuth/:user_id", async (req, res) => {                                                        // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER  
+  try {
+    res.status(200).json(await controller.compareGoogleAuth(req.params.user_id, req.body.token));                         // RETORNA VERIFIED TRUE O FALSE
+  } catch (error) {
+    res.status(400).send(error.message);
+    
+  }
+})
+
+ 
 // /users/3   body={surname:"beto",username:"pepe"}
 router.put("/:user_id", validate.user, async (req, res) => {
   try {

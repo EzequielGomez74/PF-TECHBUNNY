@@ -23,6 +23,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
+      case "GET_PAYPREFERENCES_BY_ID":
+        return {
+          ...state,
+          detail: action.payload,
+        };
     case "GET_PRODUCTS_BY_CATEGORY":
       return {
         ...state,

@@ -26,7 +26,7 @@ const createTrans = () => {
 };
 const sendMail = async (userdata, object) => {
   const transporter = createTrans();
-  const info = transporter.sendMail(template(userdata, object));
+  const info = await transporter.sendMail(template(userdata, object)); // DEBE TENER AWAIT PORQUE EL MSG TARDA EN ENVIARSE
   console.log("Message sent: %s", info.messageId);
   return;
 };
