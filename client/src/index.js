@@ -17,7 +17,7 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
-
+//asd
 // ReactDOM.render(
 //   <Provider store={store}>
 //     <BrowserRouter>
