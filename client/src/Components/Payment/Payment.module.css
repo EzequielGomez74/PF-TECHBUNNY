@@ -115,6 +115,10 @@
     margin-left: 10px;
 }
 
+.b1:hover{
+    cursor: pointer;
+}
+
 .b2{
     width: 150px;
     height: 40px;
@@ -129,6 +133,11 @@
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
+.b2:hover{
+    cursor: pointer;
+}
+
 
 @media only screen and (max-width: 800px) {
     .allInfo{
@@ -263,6 +272,10 @@
     margin-left: 10px;
 }
 
+.dmb1:hover{
+    cursor: pointer;
+}
+
 .dmb2{
     width: 150px;
     height: 40px;
@@ -276,4 +289,8 @@
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+.dmb2:hover{
+    cursor: pointer;
 }
