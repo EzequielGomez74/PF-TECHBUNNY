@@ -9,6 +9,8 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
 
+  const dm = useSelector(state => state.darkMode);
+
 
   useEffect(()=>{
     dispatch(getProducts())
@@ -20,9 +22,9 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   }
 
   return (
-    <div className='search2'>
-        <input type="text" value={searchTerm} onChange={handleChange} className={s.input} placeholder={`Buscar productos` } />
-        <button className={s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
+    <div className={s.search2}>
+        <input type="text" value={searchTerm} onChange={handleChange} className={dm? s.dminput : s.input} placeholder={`Buscar productos` } />
+        <button className={dm? s.dminputIcon : s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
       
     </div>
     
