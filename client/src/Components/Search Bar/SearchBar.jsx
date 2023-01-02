@@ -20,11 +20,12 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   }
 
   return (
-    <div>
+    <div className='search2'>
         <input type="text" value={searchTerm} onChange={handleChange} className={s.input} placeholder={`Buscar productos` } />
         <button className={s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
       
     </div>
+    
   )
 }
 
