@@ -24,8 +24,8 @@ function Cart() {
             <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
           </div>:
           <div>
-            <div className={s.heroCart}></div>
-              <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
+            <div className={dm ? s.dmheroCart : s.heroCart}></div>
+              <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos a tu carrito!</p>
           </div>
           
           }
