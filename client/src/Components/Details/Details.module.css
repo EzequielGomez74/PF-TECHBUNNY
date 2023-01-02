@@ -358,3 +358,355 @@ hr{
         width: 350px;
     }
 }
+
+/* DARK MODE */
+
+.dmdetailPage{
+    background-color: #20232a;
+    font-family: 'Poppins';
+}
+
+/* Estilo de Producto */
+
+.dmproductDetails{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+
+    
+}
+
+.dmblock{
+    display: flex;
+    flex-direction: column;
+}
+
+.dmproductImage{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    width: 980px;
+    height: 610px;
+}
+
+.dmicon{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dmimgP{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 540px;
+}
+
+.dmheart{
+    background: none;
+    border: none;
+    padding-top: 30px;
+    padding-right: 30px;
+    font-size: 25px;
+    transition: 0.5s;
+}
+
+.dmheart:hover{
+    color: #D7F136;
+}
+
+.dmproductImage img{
+    width: 400px;
+    height: auto;
+}
+
+.dmproductInfo{
+    background: #FFFFFF;
+    width: 980px;
+}
+
+/* Estilos de Cart y contenido */
+.dmproductCart{
+    background: #2B3036;
+    border: #121212;
+    width: 420px;
+}
+
+.dmpId{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 20px;
+    color: white;
+    padding-left: 30px;
+}
+
+.dmpBrand{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.dmpName{
+    display: flex;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.dmdelivery{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 30px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+   
+}
+
+.dmdelivery h3{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    color: white;
+}
+
+.dmdelivery div label{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: white;
+}
+
+hr{
+    border: 1px solid #F6F5FA;
+}
+
+.dmquantity{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
+}
+
+.dmprice{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.dmquantity div button{
+    width: 30px;
+    height: 45px;
+    background: #20232A;
+    color: #F6F5FA;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    transition: 0.5s;
+}
+
+.dmquantity div button:hover{
+    background: #F6F5FA;
+    color: #20232A;
+}
+
+.dmstock{
+    padding-top: 15px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 20px;
+    color: #a0a0a0;
+}
+
+.dmmainButton{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 360px;
+    height: 45px;
+    background-color: #20232A;
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #d7f136;
+}
+
+.dmmainButton:hover{
+    cursor: pointer;
+}
+
+.dmsub{
+    max-width: 1500px;
+    height: 70px;
+    margin: auto;
+    margin-bottom: 15px ;
+}
+
+.dmsubTitles{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 20px;
+    color: white;
+}
+
+.dmsubTitles h5{
+    margin-left: 30px;
+    display: flex;
+   
+}
+
+.dmsubTitles span{
+    width: 80px;
+    margin-left: 30px;
+    background-color: #D7F136;
+    height: 10px;
+}
+
+/* Estilos de Carrusel */
+.dmcarruselSection{
+    max-width: 1450px;
+    margin: auto;
+}
+
+.dmcarrusel{
+    padding-top: 40px;
+}
+
+.dmcurrentProducts{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+/* Estilo de Comentarios */
+.dmcommentSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+
+.dmallComments{
+    background: #2B3036;
+    width: 1450px;
+}
+
+.dmallComments h5{
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+}
+
+.dmnewComment{
+    padding-top: 10px;
+}
+
+.dmuserId{
+    display: flex;
+    margin-left: 30px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.dmrating{
+    display: flex;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.dmreview{
+    display: flex;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+.dmnoReview{
+    margin-top: 25px;
+    color: white;
+}
+
+.dmcForm{
+    margin-top: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
+    color: white;
+}
+
+.dmcForm textarea{
+    display: flex;
+    width: 1380px;
+    margin-top: 20px;
+    border: none;
+    font-family: 'Poppins';
+    padding-top: 10px;
+    text-indent: 15px;
+    background-color: #F6F5FA;
+    resize: none;
+    background-color: #1b1d23;
+}
+
+.dmcForm div{
+    display: flex;
+    
+}
+
+.dmcForm div label{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+}

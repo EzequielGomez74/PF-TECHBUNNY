@@ -12,6 +12,9 @@ import Dropdown from '../Dropdown/Dropdown';
 import CardV from '../Card V/CardV';
 
 function Details() {
+
+  const dm = useSelector(state => state.darkMode);
+
   const { id } = useParams()
   const product = useSelector(state => state.detail);
   const dispatch = useDispatch();
@@ -228,35 +231,35 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
 // Fin de Lógica Comentarios
 
   return (
-    <div className={s.detailPage}>
+    <div className={dm? s.dmdetailPage : s.detailPage}>
       <NavBar />
-      <section className={s.productDetails}>
-        <div className={s.block}>
-          <div className={s.productImage}>
-            <div className={s.icon}>
+      <section className={dm? s.dmproductDetails : s.productDetails}>
+        <div className={dm? s.dmblock : s.block}>
+          <div className={dm? s.dmproductImage : s.productImage}>
+            <div className={dm? s.dmicon : s.icon}>
               <button onClick={()=> dispatch(actions.addFavorite({id: product.product_id, brand:product.brand , name: product.name, image:product.image, price:product.price, stock: product.stock})) } className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
             </div>
-            <div className={s.imgP}>
+            <div className={dm? s.dmimgP : s.imgP}>
               <img src={product.image} alt={product.product_id} />
             </div>
           </div>
-          <div className={s.productInfo}>
+          <div className={dm? s.dmproductInfo : s.productInfo}>
             <div>
               <Dropdown description={description} />
             </div>
           </div>
         </div>
-        <div className={s.productCart} >
-          <span className={s.pId} >ID Producto: {product.product_id} </span>
-          <h2 className={s.pBrand}>{product.brand}</h2>
-          <h1 className={s.pName}>{product.name}</h1>
+        <div className={dm? s.dmproductCart : s.productCart} >
+          <span className={dm? s.dmpId : s.pId} >ID Producto: {product.product_id} </span>
+          <h2 className={dm? s.dmpBrand : s.pBrand}>{product.brand}</h2>
+          <h1 className={dm? s.dmpName : s.pName}>{product.name}</h1>
 
-          <div className={s.pScore}>
+          <div className={dm? s.dmpScore : s.pScore}>
             {comments.length ? new Array(averageReview(comments)).fill(undefined).map((ele, idx)=>(
               <FontAwesomeIcon icon={faStar} key={idx} />
             )) : <span>Sin puntuación</span> }
           </div>
-          <div className={s.delivery}>
+          <div className={dm? s.dmdelivery : s.delivery}>
             <h3>Tipo de Entrega</h3>
             <div>
               <input type="radio" id="contactChoice1" name="contact" value="email" />
@@ -268,27 +271,27 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
             </div>
           </div>
           <hr />
-          <h2 className={s.price}>US${product.price}</h2>
-          <div className={s.quantity} >
+          <h2 className={dm? s.dmprice : s.price}>US${product.price}</h2>
+          <div className={dm? s.dmquantity : s.quantity} >
             <div>
               <button onClick={handleMinus} >-</button>&nbsp;&nbsp;&nbsp;&nbsp;{quantity}&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={handlePlus}>+</button>
             </div>
-            <span className={s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)} </span>
+            <span className={dm? s.dmstock : s.stock} >&nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {parseInt(stock)} </span>
           </div>
-          <button type='submit' className={s.mainButton} onClick={()=> dispatch(actions.addCart({id:product.product_id, brand:product.brand , name:product.name, image:product.image, price:product.price, stock: product.stock, totalQuantity:quantity}))} >Agregar al Carrito</button>
+          <button type='submit' className={dm? s.dmmainButton : s.mainButton} onClick={()=> dispatch(actions.addCart({id:product.product_id, brand:product.brand , name:product.name, image:product.image, price:product.price, stock: product.stock, totalQuantity:quantity}))} >Agregar al Carrito</button>
         </div>
       </section>
 
-      <div className={s.sub}>
-        <div className={s.subTitles}>
+      <div className={dm? s.dmsub : s.sub}>
+        <div className={dm? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
 
-      <section className={s.carruselSection}>
-        <div className={s.carrusel}>
-          <div className={s.currentProducts}>
+      <section className={dm? s.dmcarruselSection : s.carruselSection}>
+        <div className={dm? s.dmcarrusel : s.carrusel}>
+          <div className={dm? s.dmcurrentProducts : s.currentProducts}>
             {currentProducts.map(p =><CardV
                 key={p.product_id}
                 id={p.product_id}
@@ -301,15 +304,15 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
                 subcategory={p.subcategory}
             />) }
           </div>
-          <div className={s.pagination}>
+          <div className={dm? s.dmpagination : s.pagination}>
               { currentPage === 1 ?                              
-              <div className={s.pagbutton} >
-                  <button className={s.disabled} disabled>Back</button>
-                  <button className={s.next} onClick={next} >Next</button>
+              <div className={dm? s.dmpagbutton : s.pagbutton} >
+                  <button className={dm? s.dmdisabled : s.disabled} disabled>Back</button>
+                  <button className={dm? s.dmnext : s.next} onClick={next} >Next</button>
               </div> :                             
-              <div className={s.pagbutton} >
-                  <button className={s.back} onClick={back} >Back</button>
-                  <button className={s.next} onClick={next} >Next</button>
+              <div className={dm? s.dmpagbutton : s.pagbutton} >
+                  <button className={dm? s.dmback : s.back} onClick={back} >Back</button>
+                  <button className={dm? s.dmnext : s.next} onClick={next} >Next</button>
               </div>}
           </div>
           {/* <Carrusel /> */}
@@ -317,33 +320,33 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
       </section>
       
       <br />
-      <div className={s.sub}>
-        <div className={s.subTitles}>
+      <div className={dm? s.dmsub : s.sub}>
+        <div className={dm? s.dmsubTitles : s.subTitles}>
           <h5>Comentarios</h5>
           <span></span>
         </div>
       </div>
       
-      <section className={s.commentSection}>
-        <div className={s.allComments}>
+      <section className={dm? s.dmcommentSection : s.commentSection}>
+        <div className={dm? s.dmallComments : s.allComments}>
           <h5><strong>Cantidad de comentarios:</strong> &nbsp;&nbsp; {comments.length}</h5>
           <hr />        
           <div>
             {/* Sección que muestra comentarios existentes */}
             {comments.length? comments.map(c => (
-            <div className={s.newComment}>
-              <span className={s.userId}><strong>Por:</strong></span>
-              <span className={s.rating} >{c.rating} </span>
-              <p className={s.review}>{c.review}</p>
+            <div className={dm? s.dmnewComment : s.newComment}>
+              <span className={dm? s.dmuserId : s.userId}><strong>Por:</strong></span>
+              <span className={dm? s.dmrating : s.rating} >{c.rating} </span>
+              <p className={dm? s.dmreview : s.review}>{c.review}</p>
               <hr />
-            </div>)) : <p className={s.noReview}>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>  }
+            </div>)) : <p className={dm? s.dmnoReview : s.noReview}>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>  }
             
             {/* Sección de para crear comentarios */}
             
 
-            <form className={s.cForm} onSubmit={handleSubmit}>
+            <form className={dm? s.dmcForm : s.cForm} onSubmit={handleSubmit}>
               <div>
-                <label className={s.label}>Valoración de tu compra&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label className={dm? s.dmlabel : s.label}>Valoración de tu compra&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <select name="rating" value={score.rating} onChange={handleChange} >
                   <option>seleccionar</option>
                   <option value="★☆☆☆☆">★☆☆☆☆</option>
@@ -355,7 +358,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
               </div>
               <textarea rows="5" name="review" value={score.review} placeholder='Escribe un comentario sobre tu compra' onChange={handleChange} />
               <br />
-              <input className={s.mainButton} type="submit" value="Agregar Comentario" />
+              <input className={dm? s.dmmainButton : s.mainButton} type="submit" value="Agregar Comentario" />
             </form>
           </div>
         </div>
