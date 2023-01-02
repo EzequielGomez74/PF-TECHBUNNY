@@ -14,33 +14,31 @@ import {
   REMOVE_FAVORITE,
   GET_REVIEWS_BY,
   GET_ALL_USERS,
+  TOGGLE_DARK_MODE,
 } from "./actionTypes";
-=========
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE } from './actionTypes'
->>>>>>>>> Temporary merge branch 2
 
-export const getProducts = (id) => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.get("/products");
-      console.log(response.data);
-      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
-    } catch (error) {
-      console.log("FAILED TO AUTHENTICATE");
-    }
-  };
-};
-
-// export function getProducts() {
+// export const getProducts = (id) => {
 //   return async function (dispatch) {
 //     try {
-//       var json = await axios.get("http://localhost:3001/products");
-//       return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+//       const response = await axiosInstance.get("/products");
+//       console.log(response.data);
+//       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
 //     } catch (error) {
-//       alert(error);
+//       console.log("FAILED TO AUTHENTICATE");
 //     }
 //   };
-// }
+// };
+
+export function getProducts() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/products");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
 
 export function getProductById(id) {
   return async function (dispatch) {
@@ -75,31 +73,34 @@ export function getProductsByCategory(category) {
       alert(error);
     }
   };
-};
+}
 
 export const getReviewsBy = (productId, userId) => {
-  return function (dispatch) {
-    return fetch(
-      // `http://localhost:3001/reviews?${
-      //   productId ? "product_id=" + productId + "&" : ""
-      // }${userId ? "user_id=" + userId + "&" : ""}`
-      `http://localhost:3001/reviews?product_id=${productId}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_REVIEWS_BY, payload: data }))
-      .catch((error) => console.log(error));
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        // `http://localhost:3001/reviews?${
+        //   productId ? "product_id=" + productId + "&" : ""
+        // }${userId ? "user_id=" + userId + "&" : ""}`
+        `http://localhost:3001/reviews?product_id=${productId}`
+      );
+
+      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
 export const postReview = (review) => {
   return async function () {
     try {
-      let postedGame = await axios.post(
+      let postedReview = await axios.post(
         "http://localhost:3001/reviews",
         review
       );
 
-      return postedGame;
+      return postedReview;
     } catch (error) {
       console.log(error);
     }
@@ -150,34 +151,29 @@ export const orderByPrice = (products, order) => {
         else return 0;
       });
       dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
-  return function (dispatch) {
-    if (order === "asc") {
-      const asc = products.sort((a, b) => {
-        if (a.price < b.price) return -1;
-        if (a.price > b.price) return 1;
-        else return 0;
-      });
-      dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
+      return function (dispatch) {
+        if (order === "asc") {
+          const asc = products.sort((a, b) => {
+            if (a.price < b.price) return -1;
+            if (a.price > b.price) return 1;
+            else return 0;
+          });
+          dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
+        }
+        if (order === "desc") {
+          const desc = products.sort((a, b) => {
+            if (a.price > b.price) return -1;
+            if (a.price < b.price) return 1;
+            else return 0;
+          });
+          dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
+        }
+      };
     }
-    if (order === "desc") {
-      const desc = products.sort((a, b) => {
-        if (a.price > b.price) return -1;
-        if (a.price < b.price) return 1;
-        else return 0;
-      });
-      dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
-    }
-  };
-};
   };
 };
 
 export const addFavorite = (payload) => {
-  return {
-    type: ADD_FAVORITE,
-    payload,
-  };
-};
   return {
     type: ADD_FAVORITE,
     payload,
@@ -190,18 +186,12 @@ export const removeFavorite = (id) => {
     payload: id,
   };
 };
-  return {
-    type: REMOVE_FAVORITE,
-    payload: id,
-  };
-};
+
+export function toggleDarkMode() {
+  return { type: TOGGLE_DARK_MODE };
+}
 
 export const addCart = (payload) => {
-  return {
-    type: ADD_CART,
-    payload,
-  };
-};
   return {
     type: ADD_CART,
     payload,

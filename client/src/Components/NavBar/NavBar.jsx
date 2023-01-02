@@ -10,24 +10,14 @@ import {
   faCaretDown,
   faRightToBracket,
   faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import s from "./NavBar.module.css";
-import SearchBar from "./SearchBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMoon,
-  faHeart,
-  faCartShopping,
-  faUser,
-  faCaretDown,
-  faRightToBracket,
-  faUserPlus,
+  faSun,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDarkMode } from "../../redux/actions";
+import Responsive from "./Responsive";
 
 function NavBar() {
   //para manejar el dropdown
@@ -36,24 +26,22 @@ function NavBar() {
   const [openCat, setOpenCat] = useState(false);
   const [closedCat, setClosedCat] = useState(true);
 
+  let menuRef = useRef();
+
   useEffect(() => {
     let handler = (e) => {
-      {
+      if (!menuRef.current.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
         setClosedCat(false);
-      }
       }
     };
 
     document.addEventListener("mousedown", handler);
 
     return () => {
-
-    return () => {
       document.removeEventListener("mousedown", handler);
-    };
     };
   });
 
@@ -63,54 +51,68 @@ function NavBar() {
   const favs = useSelector((state) => state.favorites);
   const cart = useSelector((state) => state.cart);
 
+  const results = useSelector((state) => state.results);
+  //dark mode
+  const dm = useSelector((state) => state.darkMode);
+  const DM = useSelector((state) => state.darkMode);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className={s.navBar}>
-      <section className={s.one}>
+      <section className={dm ? s.dmnavResponsive : s.navResponsive}>
+        <h4>TECHBUNNY</h4>
+        <Responsive />
+      </section>
+      <section className={DM ? s.DMone : s.one}>
         <div>
-          <SearchBar />
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <h1>
             <a href="/home">TECHBUNNY</a>
           </h1>
           <div className={s.navDetail}>
-            <span>
-              <FontAwesomeIcon icon={faMoon} />
-            </span>
+            <button
+              className={DM ? s.DMbtnMoon : s.btnMoon}
+              onClick={() => dispatch(toggleDarkMode())}
+            >
+              <FontAwesomeIcon icon={dm ? faSun : faMoon} />
+            </button>
+
             <Link to="/favorites">
-              <span>
+              <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
                 &nbsp;&nbsp; {favs.length}
               </span>
             </Link>
+
             <Link to="/cart">
-              <span>
+              <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
                 &nbsp;&nbsp; {cart.length}
               </span>
             </Link>
-            <span>
+
+            <span
+              className={DM ? s.DMiconsbtn : s.iconsbtn}
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
               <FontAwesomeIcon icon={faUser} />
               &nbsp;&nbsp;
-              <FontAwesomeIcon
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                onMouseOut={() => {
-                  setOpen(!closed);
-                }}
-                icon={faCaretDown}
-              />
+              <FontAwesomeIcon icon={faCaretDown} />
             </span>
           </div>
         </div>
       </section>
-      <section className={s.two}>
+      <section className={DM ? s.DMtwo : s.two}>
         <div>
-          <p>
-            <a href="/home">HOME</a>{" "}
-          </p>
-          <p>
-            <a href="/about">SOBRE TECHBUNNY</a>
-          </p>
+          <Link to="/home">
+            <p>HOME</p>
+          </Link>
+          <Link to="/about">
+            <p>SOBRE TECHBUNNY</p>
+          </Link>
           <p
             onMouseOver={() => {
               setOpenCat(!openCat);
@@ -121,16 +123,19 @@ function NavBar() {
           >
             CATEGORIAS
           </p>
-          <p>
-            <a href="/followUp">VER ESTADO DE PEDIDO</a>
-          </p>
+          <Link to="/followUp">
+            <p>VER ESTADO DE PEDIDO</p>
+          </Link>
         </div>
       </section>
       {/* CATEGORIA DROPDOWN */}
       <div
         className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
         onMouseEnter={() => {
-          setOpenCat(!openCat);
+          setOpenCat(!open);
+        }}
+        onMouseLeave={() => {
+          setOpenCat(!closedCat);
         }}
       >
         <ul>
@@ -203,7 +208,7 @@ function NavBar() {
         </ul>
       </div>
 
-      <section className={s.three}>
+      <section className={DM ? s.DMthree : s.three}>
         <div>
           <Link to="/category/Monitores%20y%20TV">
             <p>Monitores</p>{" "}
@@ -249,8 +254,6 @@ function NavBar() {
 
       {/* USUARIO REGISTRADO */}
       {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
-      {/* USUARIO REGISTRADO */}
-      {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                     <h3>NOMBRE USUARIO</h3>
                     <span>Bienvenido/a a TECHBUNNY</span>
                     <ul>
@@ -264,32 +267,32 @@ function NavBar() {
         <h3>INICIA SESIÓN</h3>
         <span>Para una mejor experiencia</span>
         <ul>
-          <DropdownItem icon={faRightToBracket} text={"Log In"} />
-          <DropdownItem icon={faUserPlus} text={"Check In"} />
+          <Link to="/login">
+            <DropdownItem icon={faRightToBracket} text={"Log In"} />
+          </Link>
+
+          <Link to="/register">
+            <DropdownItem icon={faUserPlus} text={"Check In"} />
+          </Link>
         </ul>
       </div>
-      {/* INVITADO */}
-      <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-        <h3>INICIA SESIÓN</h3>
-        <span>Para una mejor experiencia</span>
-        <ul>
-          <DropdownItem icon={faRightToBracket} text={"Log In"} />
-          <DropdownItem icon={faUserPlus} text={"Check In"} />
-        </ul>
+
+      <div>
+        {searchTerm.length && results.length ? (
+          results.map((p) => (
+            <div>
+              <img src={p.image} alt={p.name} />
+              <span> {p.name} </span>
+            </div>
+          ))
+        ) : (
+          <span>No hay resultados</span>
+        )}
       </div>
     </div>
   );
-  );
 }
 
-function DropdownItem(props) {
-  return (
-    <li className={s.dropdownItem}>
-      {/* <img src={props.img}></img> */}
-      <FontAwesomeIcon icon={props.icon} />
-      <a>{props.text}</a>
-    </li>
-  );
 function DropdownItem(props) {
   return (
     <li className={s.dropdownItem}>
@@ -306,14 +309,6 @@ function DropdownItemCat(props) {
       <a>{props.text}</a>
     </li>
   );
-function DropdownItemCat(props) {
-  return (
-    <li className={s.dropdownItem}>
-      <a>{props.text}</a>
-    </li>
-  );
 }
-
-export default NavBar;
 
 export default NavBar;

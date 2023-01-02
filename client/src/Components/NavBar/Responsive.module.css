@@ -1,0 +1,113 @@
+.menuIcon {
+  font-size: 20px;
+  padding-bottom: 15px;
+}
+
+.menuIcon:hover {
+  cursor: pointer;
+}
+
+.menuItems {
+  margin-top: 20px;
+}
+
+.menuItems a:hover {
+  color: black;
+}
+
+.userItems {
+  padding-top: 20px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.userItems span {
+  margin-left: 30px;
+}
+
+.userItems button {
+  background: transparent;
+  border: none;
+}
+
+.userItems button:hover {
+  cursor: pointer;
+}
+
+.session {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.session p {
+  margin: 5px;
+  width: 120px;
+}
+
+.session p:hover {
+  color: black;
+}
+
+/* DarkMode */
+.dmmenuIcon {
+  font-size: 20px;
+  padding-bottom: 15px;
+  color: white;
+}
+
+.dmmenuIcon:hover {
+  cursor: pointer;
+}
+
+.dmmenuItems p {
+  margin-top: 20px;
+  color: white;
+}
+
+.dmmenuItems a:hover {
+  color: white;
+}
+
+.dmuserItems {
+  padding-top: 20px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.dmuserItems span {
+  color: white;
+  margin-left: 30px;
+}
+
+.dmuserItems button {
+  color: white;
+  background: transparent;
+  border: none;
+}
+
+.dmuserItems button:hover {
+  cursor: pointer;
+}
+
+.dmsession {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.dmsession p {
+  margin: 5px;
+  width: 120px;
+  color: white;
+}
+
+.dmsession p:hover {
+  color: black;
+}

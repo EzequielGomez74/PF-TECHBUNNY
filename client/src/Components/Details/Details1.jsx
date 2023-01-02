@@ -21,9 +21,8 @@ function Details() {
   const currentUser = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
-  const [quantity, setQuantity] = useState(2);
+  const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
-  const [reviewCount, setReviewCount] = useState(1);
   const [localReviews, setLocalReviews] = useState({
     rating: "",
     description: "",
@@ -41,10 +40,10 @@ function Details() {
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
     }
-    setReviewCount(reviews.length);
+
     setStock(product.stock);
     setTotalReviews([...reviews]);
-  }, [product, reviews]); //Tener en cuenta las dependencias para el asincronismo al traer de la api
+  }, [product]);
 
   console.log(reviews);
 
@@ -95,10 +94,10 @@ function Details() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setTotalReviews([
-    //   ...totalReviews,
-    //   { ...localReviews, rating: ratingToNumber(localReviews.rating) },
-    // ]);
+    setTotalReviews([
+      ...totalReviews,
+      { ...localReviews, rating: ratingToNumber(localReviews.rating) },
+    ]);
 
     dispatch(
       actions.postReview({
@@ -114,9 +113,6 @@ function Details() {
       rating: "",
       description: "",
     });
-
-    initialLoad.current = true;
-    dispatch(actions.getReviewsBy(id));
   };
 
   const averageRating = (c) => {
@@ -273,7 +269,7 @@ function Details() {
           <h5>
             <strong>Cantidad de comentarios:</strong> &nbsp;&nbsp;{" "}
             {/* {comments.length} */}
-            {reviewCount}
+            {reviews.length}
           </h5>
           <hr />
           <div>
