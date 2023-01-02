@@ -73,6 +73,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      //IS LOGGED ?????
       isLogged: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
