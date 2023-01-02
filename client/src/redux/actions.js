@@ -11,6 +11,7 @@ import {
   REMOVE_CART,
   REMOVE_FAVORITE,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = () => {
   return function (dispatch) {
@@ -39,14 +40,21 @@ export const getCategories = () => {
 };
 
 export const getProductsByCategory = (category) => {
-  return function (dispatch) {
-    // let Capitalize = category[0].toUpperCase() + category.slice(1)
-    return fetch(`/products?category=${category}`)
-      .then((resp) => resp.json())
-      .then((data) =>
-        dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: data })
-      )
-      .catch((error) => console.log(error));
+  return async function (dispatch) {
+    try{
+      const response = await axios.get(`/products?category=${category}`)
+      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: response.data })
+    }
+    catch (error){
+      console.log(error)
+    }
+    
+    // return fetch(`/products?category=${category}`)
+    //   .then((resp) => resp.json())
+    //   .then((data) =>
+    //     dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: data })
+    //   )
+    //   .catch((error) => console.log(error));
   };
 };
 

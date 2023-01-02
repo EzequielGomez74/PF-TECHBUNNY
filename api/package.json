@@ -4,8 +4,10 @@
   "description": "",
   "main": "bin/www",
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "start": "node ./bin/www",
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "dev": "nodemon ./bin/www"
+
   },
   "author": "Henry",
   "license": "ISC",
