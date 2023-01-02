@@ -10,7 +10,8 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = sessionStorage.getItem("accessToken");
+    let token = sessionStorage.getItem("accessToken");
+    console.log("1", token);
     if (!token) {
       const body = {
         username: "anonimo",
@@ -23,12 +24,11 @@ axiosInstance.interceptors.request.use(
         body,
         { withCredentials: true }
       );
-
       console.log("GUEST LOGIN ", response.data);
-
-      sessionStorage.setItem("accessToken", response.data.accessToken);
+      token = response.data.accessToken;
+      sessionStorage.setItem("accessToken", token);
     }
-    console.log(token);
+    console.log("token ultimo", token);
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
     }
