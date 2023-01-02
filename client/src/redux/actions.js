@@ -1,5 +1,6 @@
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS } from './actionTypes'
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS, COMPLETE_PROFILE, GET_REVIEWS_BY, STATUS_REGISTER } from './actionTypes'
 // import { bindActionCreators } from 'redux'
+import axiosInstance from "./axiosInstance";
 import axios from "axios";
 
 
@@ -165,5 +166,50 @@ export const getSearchResults = (products, searchTerm) => {
     return function(dispatch){
         const results = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
         dispatch({type: GET_SEARCH_RESULTS, payload: results})
+    }
+}
+
+export const completeProfile = (payload) => {
+    return { type: COMPLETE_PROFILE, payload }
+}
+
+export const getReviewsBy = (productId, userId) => {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/reviews?product_id=${productId}`
+        );
+        return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  
+export const postReview = (review, onSuccess) => {
+    return async function () {
+      try {
+        let postedReview = await axios.post(
+          "http://localhost:3001/reviews",
+          review
+        );
+        onSuccess();
+        return postedReview;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+};
+
+//Verificación del Mail
+export const statusRegister = (token) => {
+    return async function(dispatch) {
+        try{
+            let validate = await axios.put(`http://localhost:3001/verify/${token}`)
+            // if validate.data.notAccepted === 'FAIL' || 'SUCCESS'
+            return dispatch({type: STATUS_REGISTER, payload: validate.data.status})
+        }catch(error){
+            alert(error)
+        }
     }
 }

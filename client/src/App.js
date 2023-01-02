@@ -12,6 +12,9 @@ import Error from './Components/Error/Error';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Categories from './Components/Categories/Categories';
+import Profile from './Components/Profile/Profile';
+import Payment from './Components/Payment/Payment';
+import Verify from './Components/Verify/Verify';
 
 
 function App() {
@@ -21,11 +24,14 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/verify/:token" component={Verify} />
+        <Route exact path="/profile" component={Profile} />
         <Route exact path='/home' component={Home}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
         <Route exact path='/favorites' component={Favoritos}  />
         <Route exact path='/cart' component={Cart}  />
+        <Route exact path='/payment' component={Payment}  />
         <Route exact path='/categories' component={Categories}  />
         <Route exact path='/category/:name' component={Category}/>
         <Route exact path='/followUp' component={FollowUp}/>

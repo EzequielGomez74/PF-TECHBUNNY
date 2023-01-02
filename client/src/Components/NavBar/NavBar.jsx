@@ -53,7 +53,7 @@ function NavBar() {
 
 
   return (
-    <div className={s.navBar}>
+    <div className={dm ? s.DMnavBar : s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
             <h4>TECHBUNNY</h4>
             <Responsive />

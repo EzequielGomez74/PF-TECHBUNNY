@@ -9,7 +9,10 @@ const initialState = {
     darkMode: false,
     // searchTerm:'',
     // searchResults:[],
-    results:[]
+    results:[],
+    reviews: [],
+    currentUser: {},
+    tokenAccepted: ''
 }
 
 export default function reducer (state=initialState, action){
@@ -88,6 +91,21 @@ export default function reducer (state=initialState, action){
             return {
                 ...state,
                 results: action.payload,
+            }
+        case 'COMPLETE_PROFILE':
+            return {
+                ...state,
+                profile: action.payload,
+            }
+        case 'GET_REVIEWS_BY':
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case 'STATUS_REGISTER':
+            return {
+                ...state,
+                tokenAccepted: action.payload
             }
         default:
             return {...state}

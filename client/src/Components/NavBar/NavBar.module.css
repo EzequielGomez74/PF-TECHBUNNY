@@ -267,6 +267,12 @@ h3{
   }
 
   /* DARK MODE COMPLETO */
+  .DMnavBar{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1B1D23;
+  }
 
   .DMnavResponsive{
     display: none;
