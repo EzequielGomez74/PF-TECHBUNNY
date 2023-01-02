@@ -15,6 +15,7 @@ import {
   GET_REVIEWS_BY,
   GET_ALL_USERS,
   TOGGLE_DARK_MODE,
+  CLEAN_PRODUCT_DETAIL,
 } from "./actionTypes";
 
 // export const getProducts = (id) => {
@@ -203,4 +204,8 @@ export const removeCart = (id) => {
     type: REMOVE_CART,
     payload: id,
   };
+};
+
+export const cleanDetail = () => {
+  return { type: CLEAN_PRODUCT_DETAIL };
 };

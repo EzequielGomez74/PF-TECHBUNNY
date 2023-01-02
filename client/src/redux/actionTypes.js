@@ -19,5 +19,5 @@ export const ADD_CART = "ADD_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
-
+export const CLEAN_PRODUCT_DETAIL = "CLEAN_PRODUCT_DETAIL";
 //Faltan actions

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import Details from "./Components/Details/Details1";
+import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
 import LandingPage from "./Components/Landing/LandingPage";
