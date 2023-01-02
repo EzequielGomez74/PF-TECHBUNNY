@@ -339,7 +339,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
               <span className={dm? s.dmrating : s.rating} >{c.rating} </span>
               <p className={dm? s.dmreview : s.review}>{c.review}</p>
               <hr />
-            </div>)) : <p className={dm? s.dmnoReview : s.noReview}>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>  }
+            </div>)) : <p className={dm? s.dmnoReview : s.noReview}>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>}
             
             {/* Sección de para crear comentarios */}
             
