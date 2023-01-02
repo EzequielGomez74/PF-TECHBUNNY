@@ -23,6 +23,8 @@ const Responsive = () => {
     const favs = useSelector(state => state.favorites)
     const cart = useSelector(state => state.cart)
     const dm = useSelector(state => state.darkMode)
+    
+    const results = useSelector(state => state.results)
 
   return <div ref={parent} className={s.dropdown}>
     <div className={s.menu} onClick={reveal}>
@@ -30,7 +32,9 @@ const Responsive = () => {
     </div>
     { show && 
     <div className={`dropdown-content`} >
-        <SearchBar/>
+       
+
+       
         <div className={dm ? s.dmuserItems : s.userItems}>
             <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
             <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
