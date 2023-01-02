@@ -6,7 +6,12 @@ import axios from "axios";
 async function handleLogin(token) {
   try {
     //const config = {Authorization:"Bearer "+}
-    const data = { username: "Betolocura", password: "pepito123", token };
+    const data = {
+      username: "Betolocura",
+      password: "pepito123",
+      token,
+      guest: false,
+    };
     const response = await axios.put(
       "http://localhost:3001/enter/login",
       data,
@@ -14,6 +19,7 @@ async function handleLogin(token) {
         withCredentials: true,
       }
     );
+    console.log("2 ", response.data);
     if (response.data.accessToken) {
       sessionStorage.setItem("accessToken", response.data.accessToken);
     } else if (response.data.twoFactor) {

@@ -21,17 +21,19 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
       case "login":
         const { username, password } = req.body;
         if (username && password) {
-          const authResult = await controller.handleLogin(username, password);
+          const authResult = await controller.handleLogin(req.body);
+          console.log("1", authResult);
           if (authResult.refreshToken) {
-            res.cookie("jwt", refreshToken, {
+            res.cookie("jwt", authResult.refreshToken, {
               sameSite: "None",
               secure: true,
               httpOnly: true,
               maxAge: 24 * 60 * 60 * 1000,
             });
             res.status(200).json({ accessToken: authResult.accessToken });
+          } else {
+            res.status(200).json(authResult);
           }
-          res.status(200).json(authResult);
         } else {
           res.sendStatus(400);
         }

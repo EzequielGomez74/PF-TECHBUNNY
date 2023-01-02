@@ -9,8 +9,25 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
+  async (config) => {
     const token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      const body = {
+        username: "anonimo",
+        password: "anonimo",
+        token: null,
+        guest: true,
+      };
+      const response = await axios.put(
+        "http://localhost:3001/enter/login",
+        body,
+        { withCredentials: true }
+      );
+
+      console.log("GUEST LOGIN ", response.data);
+
+      sessionStorage.setItem("accessToken", response.data.accessToken);
+    }
     console.log(token);
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
