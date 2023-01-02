@@ -16,28 +16,28 @@ import {
   GET_REVIEWS_BY,
 } from "./actionTypes";
 
-// export const getProducts = (id) => {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axiosInstance.get("/products");
-//       console.log(response.data);
-//       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
-//     } catch (error) {
-//       console.log("FAILED TO AUTHENTICATE");
-//     }
-//   };
-// };
-
-export function getProducts() {
+export const getProducts = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/products");
-      return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+      const response = await axiosInstance.get("/products");
+      console.log(response.data);
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
     } catch (error) {
-      alert(error);
+      console.log("FAILED TO AUTHENTICATE");
     }
   };
-}
+};
+
+// export function getProducts() {
+//   return async function (dispatch) {
+//     try {
+//       var json = await axios.get("http://localhost:3001/products");
+//       return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+//     } catch (error) {
+//       alert(error);
+//     }
+//   };
+// }
 
 export function getProductById(id) {
   return async function (dispatch) {

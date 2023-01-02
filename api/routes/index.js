@@ -15,19 +15,19 @@ const newsletter = require("../apiServices/newsletter/routes.js");
 const verify = require("../apiServices/verify/routes.js");
 const generateTestUsername = require("../middlewares/generateTestUsername.js");
 const verifyJWT = require("../middlewares/verifyJWT.js");
-
 router.use("/verify", verify);
 router.use("/enter", enter);
-router.use("/newsletters", newsletter);
 router.use("/refresh", refresh);
-//router.use(verifyJWT); //middleware de validacion de JWT
-router.use(generateTestUsername);
-router.use("/products", products);
+//todo middleware de asignacion de access token en caso de que no exista
+router.use(verifyJWT); // !validacion de JWT
+router.use("/newsletters", newsletter);
 router.use("/categories", category);
 router.use("/subcategories", subcategory);
 router.use("/brands", brand);
-router.use("/reviews", review);
 router.use("/countries", country);
+router.use("/products", products);
+//router.use(generateTestUsername);
+router.use("/reviews", review);
 router.use("/orders", order);
 router.use("/users", user);
 router.use("/favorites", favorite);

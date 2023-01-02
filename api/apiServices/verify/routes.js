@@ -10,5 +10,6 @@ router.put("/:code", async (req, res) => {
     res.status(400).send("Error al procesar el codigo de verificacion");
   }
 });
+//todo crear ruta de refresh del validation code del emai
 
 module.exports = router;

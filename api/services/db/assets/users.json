@@ -1,5 +1,14 @@
 [
   {
+    "username": "anonimo",
+    "name": "Anonimus",
+    "surname": "without",
+    "password": "anonimoforever",
+    "email": "aaa@aaa.gmail.com",
+    "defaultShippingAddress": "av siempre viva 742",
+    "zipCode": 7600
+  },
+  {
     "username": "Betolocura",
     "name": "Beto",
     "surname": "Martinez",
