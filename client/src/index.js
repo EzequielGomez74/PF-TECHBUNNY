@@ -17,7 +17,7 @@ root.render(
       <App />
     </BrowserRouter>
   </Provider>
-); // tuki
+); // tukis
 
 // ReactDOM.render(
 //   <Provider store={store}>
