@@ -12,13 +12,9 @@ async function handleLogin(token) {
       token,
       guest: false,
     };
-    const response = await axios.put(
-      "prueba1-production-4ff1.up.railway.app/enter/login",
-      data,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.put("/enter/login", data, {
+      withCredentials: true,
+    });
     if (response.data.accessToken) {
       sessionStorage.setItem("accessToken", response.data.accessToken);
       console.log("acces token seteado");
