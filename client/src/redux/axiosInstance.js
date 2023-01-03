@@ -11,7 +11,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     let token = sessionStorage.getItem("accessToken");
-    console.log("1", token);
     if (!token) {
       const body = {
         username: "anonimo",
@@ -63,6 +62,8 @@ axiosInstance.interceptors.response.use(
           //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
           //se deberia hacer un request de tipo /enter/logout
           console.log("DESLOGUEAR");
+          sessionStorage.removeItem("accessToken");
+          // borra accessToken
         }
       }
     }

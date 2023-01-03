@@ -21,7 +21,7 @@ export const getProducts = (id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
-      console.log(response.data);
+      console.log("Mostrando productos");
       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
