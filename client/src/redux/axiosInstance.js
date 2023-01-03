@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  //baseURL: "http://localhost:3001",
+  baseURL: "https://prueba1-production-4ff1.up.railway.app/",
   headers: {
     "Content-Type": "application/json",
   },
