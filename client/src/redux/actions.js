@@ -6,7 +6,7 @@ import axios from "axios";
 export function getProducts () {
     return async function (dispatch){
         try{
-            var json = await axios.get('http://localhost:3001/products')
+            var json = await axios.get('/products')
             return dispatch({type: GET_ALL_PRODUCTS, payload: json.data});
         }catch(error){
             alert(error)
@@ -26,7 +26,7 @@ export function getProducts () {
 export function getProductById(id) {
     return async function (dispatch){
         try{
-            var json = await axios.get(`http://localhost:3001/products/${id}`)
+            var json = await axios.get(`/products/${id}`)
             return dispatch({type: GET_PRODUCT_BY_ID, payload: json.data});
         }catch(error){
             alert(error)
@@ -46,7 +46,7 @@ export function getProductById(id) {
 export function getCategories () {
     return async function (dispatch){
         try{
-            var json = await axios.get('http://localhost:3001/categories')
+            var json = await axios.get('/categories')
             return dispatch({type: GET_CATEGORIES, payload: json.data});
         }catch(error){
             alert(error)
@@ -66,14 +66,14 @@ export function getCategories () {
 export function getProductsByCategory(category) {
     return async function (dispatch){
         try{
-            var json = await axios.get(`http://localhost:3001/products?category=${category}`)
+            var json = await axios.get(`/products?category=${category}`)
             return dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data});
         }catch(error){
             alert(error)
         }
     }
 }
-
+//asd
 // export const getProductsByCategory = (category) => {
 //     return function(dispatch){
 //         // let Capitalize = category[0].toUpperCase() + category.slice(1)
