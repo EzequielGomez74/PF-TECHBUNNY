@@ -19,9 +19,9 @@ async function handleLogin(token) {
         withCredentials: true,
       }
     );
-    console.log("2 ", response.data);
     if (response.data.accessToken) {
       sessionStorage.setItem("accessToken", response.data.accessToken);
+      console.log("acces token seteado");
     } else if (response.data.twoFactor) {
       //generarpopup
     } else if (response.data === null) {
