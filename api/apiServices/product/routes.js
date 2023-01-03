@@ -23,6 +23,7 @@ router.get("/", async (req, res) => {
 // GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 router.get("/:product_id", async (req, res) => {
   const { product_id } = req.params;
+  console.log("id");
   try {
     res
       .status(200)
