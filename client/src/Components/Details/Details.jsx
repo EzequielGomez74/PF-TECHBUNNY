@@ -8,7 +8,7 @@ import s from './Details.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart, faStar, faTruck, faStore} from "@fortawesome/free-solid-svg-icons";
 import Dropdown from '../Dropdown/Dropdown';
-// import Carrusel from '../Carrusel/Carrusel';
+import Carrusel from '../Carrusel/Carrusel';
 import CardV from '../Card V/CardV';
 
 function Details() {
