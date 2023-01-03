@@ -6,10 +6,11 @@ export default function LandingPage() {
   return (
     <div className="landing">
       <div className="divTitulo">
-      <Link to="/home">
-       <h1>TECHBUNNY</h1>
-      </Link>
+        <Link to="/home">
+          <h1>TECHBUNNY</h1>
+        </Link>
       </div>
-     </div>
+    </div>
   );
 }
+// asda
