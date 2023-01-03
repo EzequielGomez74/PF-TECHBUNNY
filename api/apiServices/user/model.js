@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
-      user_id: {        
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        //1=guest 2=user 3=admin 
+        //1=guest 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 2,
@@ -69,19 +69,14 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      verificationData: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       isLogged: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-      },
-      googleAuth: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
-      secretAuth: {
-        type: DataTypes.STRING,
-        defaultValue: "2FADisabled",
       }
     },
     {

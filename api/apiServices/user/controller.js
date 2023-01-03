@@ -1,13 +1,14 @@
 const bcrypt = require("bcrypt");
-const speakeasy = require('speakeasy')
-const qrcode = require('qrcode');
-var fs = require('fs');
+
+
+
 const { User } = require("../../services/db/db.js");
 
 const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
+    console.log("a");
     const allUsers = await User.findAll();
     return allUsers;
   } catch (error) {
@@ -55,25 +56,28 @@ async function getUserById(user_id) {
     throw new Error(error.message);
   }
 }
-
 async function deleteUser(user_id) {
   try {
     const deleteUserId = await User.destroy({
       where: { user_id },
     });
-    if (deleteUserId){return "Usuario eliminado con exito!";}
-    else{return "Usuario no encontrado!"}
+    if (deleteUserId) {
+      return "Usuario eliminado con exito!";
+    } else {
+      return "Usuario no encontrado!";
+    }
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-async function modifyUser(user_id, body){ //  los admins usan este controller
+async function modifyUser(user_id, body) {
+  //  los admins usan este controller
   try {
-    body.password = await bcrypt.hash(body.password, 10) // 10 salt
+    body.password = await bcrypt.hash(body.password, 10); // 10 salt
 
-    await User.update( body, { where: { user_id }})
-    return ("usuario  modificado exitosamente.") 
+    await User.update(body, { where: { user_id } });
+    return "usuario  modificado exitosamente.";
   } catch (error) {
     throw new Error(error.message);
   }
@@ -81,4 +85,4 @@ async function modifyUser(user_id, body){ //  los admins usan este controller
 
 
 
-module.exports = { getAllUsers , getUserById , modifyUser , deleteUser, getQR , compareGoogleAuth};
+module.exports = { getAllUsers,getUserById , modifyUser,deleteUser};
