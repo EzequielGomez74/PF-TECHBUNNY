@@ -20,13 +20,13 @@ router.use("/enter", enter);
 router.use("/refresh", refresh);
 //todo middleware de asignacion de access token en caso de que no exista
 //router.use(verifyJWT); // !validacion de JWT
+router.use(generateTestUsername);
 router.use("/newsletters", newsletter);
 router.use("/categories", category);
 router.use("/subcategories", subcategory);
 router.use("/brands", brand);
 router.use("/countries", country);
 router.use("/products", products);
-//router.use(generateTestUsername);
 router.use("/reviews", review);
 router.use("/orders", order);
 router.use("/users", user);
