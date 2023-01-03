@@ -286,7 +286,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
         </div>
       </div>
 
-      <section className={s.carruselSection}>
+      {/* <section className={s.carruselSection}>
         <div className={s.carrusel}>
           <div className={s.currentProducts}>
             {currentProducts.map(p =><CardV
@@ -312,9 +312,10 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
                   <button className={s.next} onClick={next} >Next</button>
               </div>}
           </div>
-          {/* <Carrusel /> */}
+          
         </div>
-      </section>
+      </section> */}
+      <Carrusel /> 
       
       <br />
       <div className={s.sub}>
