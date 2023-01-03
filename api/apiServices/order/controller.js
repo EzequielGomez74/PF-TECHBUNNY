@@ -14,7 +14,7 @@ async function createOrder({ status, user_id, products }) {
 		const order = await Order.create(newOrder);
 		let suma = 0;
 
-		await products.forEach(async (product) => {
+		 products.forEach(async (product) => {
 			const productoDb = await Product.findByPk(product.product_id); // ACA TRAEMOS LOS PRODUCTOS CON SU PRICE
 			await order.addProduct(product.product_id, { // CREA LOS DATOS DE LA TABLA INTERMEDIA
 				
@@ -30,7 +30,7 @@ async function createOrder({ status, user_id, products }) {
 				{ where: { order_id: order.dataValues.order_id } }
 			);
 		});
-		const userdata = {...order.dataValues ,...user.dataValues, type:"order"}
+		const  userdata = {...user.dataValues,...order.dataValues ,...user.dataValues, type:"order"}
 		console.log("DATAA",userdata)
 		sendMail(userdata)
 		return order.order_id;

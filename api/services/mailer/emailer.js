@@ -1,5 +1,5 @@
-const nodemailer = require("nodemailer");
-const { configmailtrap, configgmail } = require("../../config/mailerconfig");
+const nodemailer = require ("nodemailer");
+const { configmailtrap, configgmail } = require ("../../config/mailerconfig");
 const {pedidotemplate} = require ("./templates/pedidotemplate.js")
 const {welcometemplate} = require ("./templates/welcometemplate.js")
 const {newslettertemplate} = require ("./templates/newslettertemplate")

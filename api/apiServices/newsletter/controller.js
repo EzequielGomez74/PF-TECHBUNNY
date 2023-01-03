@@ -7,11 +7,13 @@ async function subscribe(email) {
      try {
      if (existe) return "ya estas subscripto"
       await Newsletter.create(email);
-      const userdata = {email:email,type:"newsletter"}
+      console.log("MAILLLL",email);
+      const userdata = {email:email.email,type:"newsletter"}
+      console.log("USERDATANEWS",userdata);
       sendMail(userdata)
       return "Bienvenido al Newsletter!";
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }
 
