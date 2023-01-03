@@ -33,45 +33,6 @@
 // ]);
 // sequelize.models = Object.fromEntries(capsEntries);
 
-// // En sequelize.models están todos los modelos importados como propiedades
-// // Para relacionarlos hacemos un destructuring
-
-// //--------------
-// //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-// const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
-//   sequelize.models;
-
-// // ----> CATEGORY & SUBCATEGORIES
-
-// Product.hasMany(Review, { foreignKey: "product_id" });
-// Review.belongsTo(Product, { foreignKey: "product_id" });
-
-// User.hasMany(Review, { foreignKey: "user_id" });
-// Review.belongsTo(User, { foreignKey: "user_id" });
-
-// Order.belongsToMany(Product, { through: "OrderProduct" });
-// Product.belongsToMany(Order, { through: "OrderProduct" });
-
-// User.hasMany(Order, { foreignKey: "user_id" });
-// Order.belongsTo(User, { foreignKey: "user_id" });
-
-// Country.hasMany(User, { foreignKey: "country_id" });
-// User.belongsTo(Country, { foreignKey: "country_id" });
-
-// module.exports = {
-//   // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-//   db: sequelize,
-//   Category,
-//   SubCategory,
-//   Product,
-//   Brand,
-//   User,
-//   Review,
-//   Country,
-//   Op, // para importart la conexión { conn } = require('./db.js');
-// };
-
-
 require("dotenv").config();
 const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
@@ -132,19 +93,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //--------------
 //DESTRUCTURING DE MODEL Y CREACION DE RELACIONES
-const {
-  Brand,
-  Category,
-  Country,
-  Order,
-  Product,
-  Review,
-  Newsletter,
-  SubCategory,
-  User,
-  OrderProduct,
-  Favorite,
-} = sequelize.models;
+const { Brand, Category, Country, Order, Product, Review, SubCategory, User } =
+  sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
 
@@ -154,14 +104,8 @@ Review.belongsTo(Product, { foreignKey: "product_id" });
 User.hasMany(Review, { foreignKey: "user_id" });
 Review.belongsTo(User, { foreignKey: "user_id" });
 
-Order.belongsToMany(Product, {
-  through: OrderProduct,
-  foreignKey: "order_id",
-});
-Product.belongsToMany(Order, {
-  through: OrderProduct,
-  foreignKey: "product_id",
-});
+Order.belongsToMany(Product, { through: "OrderProduct" });
+Product.belongsToMany(Order, { through: "OrderProduct" });
 
 User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User, { foreignKey: "user_id" });
@@ -169,17 +113,8 @@ Order.belongsTo(User, { foreignKey: "user_id" });
 Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
-User.belongsToMany(Product, {
-  through: Favorite,
-  foreignKey: "user_id",
-});
-Product.belongsToMany(User,{
-  through: Favorite,
-  foreignKey: "product_id"
-})
-
 module.exports = {
-  //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  // ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
   Category,
   SubCategory,
@@ -187,10 +122,6 @@ module.exports = {
   Brand,
   User,
   Review,
-  Newsletter,
   Country,
-  Order,
-  OrderProduct,
-  Favorite,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
