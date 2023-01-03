@@ -14,9 +14,9 @@ async function createOrder({ status, user_id, products }) {
         through: { count: product.count },
       });
     });
-    const object = {...order.dataValues ,...user.dataValues, type:"order"}
-    console.log("DATAA",object)
-    sendMail(user.email,object)
+    const userdata = {...order.dataValues ,...user.dataValues, type:"order"}
+    console.log("DATAA",userdata)
+    sendMail(userdata)
     return order.order_id;
   } catch (error) {
     throw new Error(error.message);
