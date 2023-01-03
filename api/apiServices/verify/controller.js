@@ -1,6 +1,7 @@
 const { User } = require("../../services/db/db.js");
 const { use } = require("./routes.js");
 const jwt = require("jsonwebtoken");
+const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
 require("dotenv").config();
 
 async function validateUser(code) {
@@ -20,7 +21,15 @@ async function validateUser(code) {
     throw new Error(error.message);
   }
 }
-
+async function refreshValidation(email) {
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user.isActive) generateValidationAndSendMail(user);
+    return "email sent";
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 function isValidToken(token) {
   let valid = false;
   jwt.verify(token, process.env.VERIFY_MAIL_TOKEN_SECRET, (err, decoded) => {
@@ -29,4 +38,4 @@ function isValidToken(token) {
   });
   return valid;
 }
-module.exports = { validateUser };
+module.exports = { validateUser, refreshValidation };
