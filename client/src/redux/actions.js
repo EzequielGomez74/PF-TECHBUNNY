@@ -9,7 +9,7 @@ export function getProducts () {
             var json = await axios.get('/products')
             return dispatch({type: GET_ALL_PRODUCTS, payload: json.data});
         }catch(error){
-            alert(error)
+            console.log(error.message);
         }
     }
 }
@@ -29,7 +29,7 @@ export function getProductById(id) {
             var json = await axios.get(`/products/${id}`)
             return dispatch({type: GET_PRODUCT_BY_ID, payload: json.data});
         }catch(error){
-            alert(error)
+            console.log(error.message);
         }
     }
 }
@@ -49,7 +49,7 @@ export function getCategories () {
             var json = await axios.get('/categories')
             return dispatch({type: GET_CATEGORIES, payload: json.data});
         }catch(error){
-            alert(error)
+            console.log(error.message);
         }
     }
 }
@@ -69,7 +69,7 @@ export function getProductsByCategory(category) {
             var json = await axios.get(`/products?category=${category}`)
             return dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data});
         }catch(error){
-            alert(error)
+            console.log(error.message);
         }
     }
 }
