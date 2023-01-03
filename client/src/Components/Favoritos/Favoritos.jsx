@@ -6,19 +6,23 @@ import NavBar from '../NavBar/NavBar';
 import s from './Favoritos.module.css'
 
 function Favoritos() {
+
+    //dark mode
+  const dm = useSelector(state => state.darkMode);
+
     const favs = useSelector(state => state.favorites)
     return (
         <div>
             <NavBar />
-            <section className={s.favSection}>
+            <section className={dm ? s.dmfavSection : s.favSection}>
                 {favs.length ? favs.map(p => <CardH 
                 key={p.id} id={p.id}
                 stock={p.stock} brand={p.brand}
                 name={p.name} image={p.image} price={p.price}/>)
             : 
             <div>
-                <div className={s.heroFav}></div>
-                <p className={s.message}>¡Todavía no has agregado productos favoritos!</p>
+                <div className={dm ? s.dmheroFav : s.heroFav}></div>
+                <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos favoritos!</p>
             </div>}
             </section>
             <Footer/>
