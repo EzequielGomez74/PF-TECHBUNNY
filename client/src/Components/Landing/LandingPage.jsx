@@ -13,7 +13,7 @@ async function handleLogin(token) {
       guest: false,
     };
     const response = await axios.put(
-      "https://pf-techbunny-lake.vercel.app/enter/login",
+      "prueba1-production-4ff1.up.railway.app/enter/login",
       data,
       {
         withCredentials: true,
