@@ -14,8 +14,8 @@ return `
           <tr>
             <td style="padding:2% 5%">
               <!-- EMAIL BODY -->
-              <h2 style="font-size:22px;">Pedido ${userdata.email} registrado!</h2>
-              <p>Hola <b>${userdata.email}</b>, Su nuevo pedido fue creado con exito!</p>
+              <h2 style="font-size:22px;">Pedido n°${userdata.order_id} registrado!</h2>
+              <p>Hola <b>${userdata.name}</b>, Su nuevo pedido fue creado con exito!</p>
               <table cellpadding="0" cellspacing="0" style="direction:ltr;width: 100%;">
                 <tbody>
                   <tr>
@@ -24,7 +24,7 @@ return `
                   </tr>
                   <tr>
                     <td style="font-weight:bold;text-align:left;">Última Atualizacion</td>
-                    <td style="color:#7f8c8d;text-align:right;">${userdata.email}</td>
+                    <td style="color:#7f8c8d;text-align:right;">${userdata.updatedAt}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold;text-align:left;">CPF/CNPJ na Nota</td>
@@ -38,18 +38,18 @@ return `
                   </tr>
                   <tr>
                     <td colspan="2" style="color:#7f8c8d;text-align:left;">
-                    ${userdata.email}
+                    ${userdata.defaultShippingAddress}
                     </td>
                   </tr>
                   <tr>
-                    <td style="font-weight:bold;text-align:left;">Forma de Pagamento</td>
-                    <td style="color:#7f8c8d;text-align:right;">${userdata.email}</td>
+                    <td style="font-weight:bold;text-align:left;">Estado de pago</td>
+                    <td style="color:#7f8c8d;text-align:right;">${userdata.status}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr style="font-weight: bold;font-size:18px;">
                     <td style="font-weight:bold;text-align:left;padding: 15px 0 0;">Total</td>
-                    <td style="color:#27ae60;text-align:right;padding: 15px 0 0;"> $${userdata.email}</td>
+                    <td style="color:#27ae60;text-align:right;padding: 15px 0 0;"> $${userdata.total}</td>
                   </tr>
                 </tfoot>
               </table>

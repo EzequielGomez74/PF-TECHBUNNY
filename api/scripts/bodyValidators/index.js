@@ -59,9 +59,14 @@ const review = [
   (req, res, next) => {
     validateResult(req, res, next);
   },
-]
+] 
 
-const newsletter = []
+const newsletter = [
+  check("email").isEmail().withMessage("Debes ingresar un mail valido"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  }
+]
 
 const enter = [
   check("user_id").isEmpty().withMessage("no podes pasar un user id"),
