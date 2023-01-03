@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
+  GET_PAYPREFERENCES_BY_ID,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
@@ -48,7 +49,16 @@ export function getProductById(id) {
     }
   };
 }
-
+export function getPayPreferencesById(order_id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`);
+      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
 export function getCategories() {
   return async function (dispatch) {
     try {
