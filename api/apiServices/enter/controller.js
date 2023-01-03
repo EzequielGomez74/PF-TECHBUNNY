@@ -73,12 +73,12 @@ async function generateTokens(foundUser, infinite) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "10s" }
+    { expiresIn: "3m" }
   );
   const refreshToken = jwt.sign(
     { username: foundUser.username },
     process.env.REFRESH_TOKEN_SECRET,
-    infinite ? null : { expiresIn: "30s" }
+    infinite ? null : { expiresIn: "15m" }
   );
   //guardar el refreshToken en la DB
   await foundUser.set({ refreshToken: refreshToken });
