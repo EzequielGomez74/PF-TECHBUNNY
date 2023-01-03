@@ -4,6 +4,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //
+
 router.get("/", async (req, res) => {
   try {
     if (req.query)
@@ -15,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const review = { ...req.body };
+  const review = req.body;
   try {
     res.status(200).send(await controller.createReviews(review));
   } catch (error) {

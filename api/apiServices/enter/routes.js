@@ -4,7 +4,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
-router.post("/", validate.enter ,async (req, res) => {
+router.post("/", validate.enter, async (req, res) => {
   const data = req.body;
   try {
     res.status(200).json(await controller.handleNewUser(data));
@@ -14,7 +14,7 @@ router.post("/", validate.enter ,async (req, res) => {
 });
 
 // PARAMS /enter/login   /enter/logout  /enter/recover
-router.put("/:accessType", validate.enterLogin , async (req, res) => {
+router.put("/:accessType", validate.enterLogin, async (req, res) => {
   const { accessType } = req.params;
   try {
     switch (accessType) {
@@ -44,6 +44,7 @@ router.put("/:accessType", validate.enterLogin , async (req, res) => {
         } else res.sendStatus(400);
         break;
       case "recover":
+      //enviar mail de recover
       default:
         break;
     }

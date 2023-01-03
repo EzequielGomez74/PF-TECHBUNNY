@@ -6,11 +6,16 @@ const { User } = require("../../services/db/db.js");
 
 router.get("/:user_id", async (req, res) => {
   try {
-    if (req.params.user_id)
-      res.status(200).json(await controller.getUserById(req.params.user_id));
-    else res.status(200).json(await controller.getAllUsers());
+    res.status(200).json(await controller.getUserById(req.params.user_id));
   } catch (error) {
-    res.sendStatus(400);
+    res.status(400).send(error.message);
+  }
+});
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 });
 
@@ -56,7 +61,9 @@ router.put("/:user_id", validate.user, async (req, res) => {
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
-      throw new Error("el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar");
+      throw new Error(
+        "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
+      );
     }
   } catch (error) {
     res.status(400).send(error.message);
