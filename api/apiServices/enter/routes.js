@@ -22,7 +22,6 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
         const { username, password } = req.body;
         if (username && password) {
           const authResult = await controller.handleLogin(req.body);
-          console.log("1", authResult);
           if (authResult.refreshToken) {
             res.cookie("jwt", authResult.refreshToken, {
               sameSite: "None",

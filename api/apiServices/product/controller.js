@@ -47,7 +47,6 @@ async function getAllProducts(username) {
 async function getAllProductsBy(condition, username) {
   try {
     let products = await Product.findAll({ where: condition });
-    console.log(products);
     return await setFavoriteStatus(products, username);
   } catch (error) {
     throw new Error(error.message);

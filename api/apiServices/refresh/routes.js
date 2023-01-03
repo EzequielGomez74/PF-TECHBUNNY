@@ -4,7 +4,6 @@ const controller = require("./controller.js");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  console.log("Refresh Token ", req.cookies.jwt);
   const cookies = req.cookies?.jwt;
   try {
     if (cookies) {

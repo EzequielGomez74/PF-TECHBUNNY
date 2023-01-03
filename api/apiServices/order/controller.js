@@ -56,8 +56,6 @@ async function getOrderById(order_id) {
         },
       },
     });
-
-    console.log(orde1);
     const orderById = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
