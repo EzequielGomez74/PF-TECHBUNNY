@@ -7,8 +7,8 @@ async function subscribe(email) {
      try {
      if (existe) return "ya estas subscripto"
       await Newsletter.create(email);
-      const object = {type:"newsletter"}
-      sendMail(email.email,object)
+      const userdata = {email:email,type:"newsletter"}
+      sendMail(userdata)
       return "Bienvenido al Newsletter!";
     } catch (error) {
       throw new Error(error);

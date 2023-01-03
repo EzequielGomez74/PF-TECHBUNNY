@@ -26,10 +26,11 @@ async function handleNewUser(data) {
       zipCode: data.zipCode,
       profilePicture: data.profilePicture,
     };
+    // verificationNumber es el numero para validar el email
     let verificationNumber = require ("crypto").randomBytes(10).toString("hex")
-    const object = {...newUser,type:"register",verificationNumber: verificationNumber}
-    console.log("OBJETOOOO",object)
-    emailer.sendMail(newUser.email,object)
+    const userdata = {...newUser, type:"register", verificationNumber: verificationNumber}
+    console.log("OBJETOOOO",userdata)
+    emailer.sendMail(userdata)
     const userCreated = await User.create(newUser);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
