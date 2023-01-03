@@ -26,7 +26,7 @@ router.use("/subcategories", subcategory);
 router.use("/brands", brand);
 router.use("/countries", country);
 router.use("/products", products);
-router.use(generateTestUsername);
+//router.use(generateTestUsername);
 router.use("/reviews", review);
 router.use("/orders", order);
 router.use("/users", user);
