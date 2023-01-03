@@ -43,7 +43,7 @@ export const getProducts = (id) => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`http://localhost:3001/products/${id}`);
+      var json = await axios.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
       alert(error);
@@ -53,9 +53,7 @@ export function getProductById(id) {
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/reviews?product_id=${productId}`
-      );
+      const response = await axios.get(`/reviews?product_id=${productId}`);
       return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -66,10 +64,7 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      let postedReview = await axios.post(
-        "http://localhost:3001/reviews",
-        review
-      );
+      let postedReview = await axios.post("/reviews", review);
       onSuccess();
       return postedReview;
     } catch (error) {
@@ -81,7 +76,7 @@ export const postReview = (review, onSuccess) => {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/categories");
+      var json = await axios.get("/categories");
       return dispatch({ type: GET_CATEGORIES, payload: json.data });
     } catch (error) {
       alert(error);
@@ -92,9 +87,7 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(
-        `http://localhost:3001/products?category=${category}`
-      );
+      var json = await axios.get(`/products?category=${category}`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       alert(error);
