@@ -59,6 +59,7 @@ async function getProductById(product_id, username) {
     product = await setFavoriteStatus([product.dataValues], username);
     const newObj = { ...product[0] };
     newObj.description = productDescriptionParser(newObj.description);
+    console.log("pasa");
     return newObj;
   } catch (error) {
     throw new Error(error.message);
