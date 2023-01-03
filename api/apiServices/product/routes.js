@@ -7,6 +7,7 @@ const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
 router.get("/", async (req, res) => {
+  console.log("1");
   try {
     if (req.query)
       res
