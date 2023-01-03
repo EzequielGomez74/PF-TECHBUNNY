@@ -1,8 +1,9 @@
 const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const emailer = require("../../services/mailer/emailer.js");
+const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
+require("dotenv").config();
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
@@ -22,26 +23,9 @@ async function handleNewUser(data) {
     };
     //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
     //GENERARA TOKEN Y GUARDAR EN DB
-    const verifyToken = jwt.sign(
-      { username: newUser.username },
-      process.env.VERIFY_MAIL_TOKEN_SECRET,
-      { expiresIn: "72h" }
-    );
     //GENERA VERYFICATION CODE
     const userCreated = await User.create(newUser);
-    let verificationCode =
-      userCreated.user_id +
-      "x" +
-      require("crypto").randomBytes(10).toString("hex");
-    userCreated.verificationData = verificationCode + " " + verifyToken;
-    userCreated.save();
-    //SE CREA MAIL DATA
-    const object = {
-      ...newUser,
-      verificationCode: verificationCode,
-      type: "register",
-    };
-    emailer.sendMail(newUser.email, object);
+    generateValidationAndSendMail(userCreated);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
@@ -50,7 +34,7 @@ async function handleNewUser(data) {
 async function handleLogin({ username, password, token, guest }) {
   if (guest) {
     const guestUser = await User.findByPk(1);
-    return generateTokens(guestUser);
+    return generateTokens(guestUser, true);
   }
   if (!username || !password)
     throw new Error("Username and Password are required");
@@ -71,7 +55,7 @@ async function handleLogin({ username, password, token, guest }) {
         }
       }
       // ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-      return generateTokens(foundUser);
+      return generateTokens(foundUser, false);
     } else throw new Error("Wrong Password");
   } catch (error) {
     throw new Error(error.message);
@@ -85,7 +69,7 @@ async function handleLogout(cookie) {
   foundUser.save();
 }
 
-async function generateTokens(foundUser) {
+async function generateTokens(foundUser, infinite) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
@@ -94,7 +78,7 @@ async function generateTokens(foundUser) {
   const refreshToken = jwt.sign(
     { username: foundUser.username },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "30s" }
+    infinite ? null : { expiresIn: "30s" }
   );
   //guardar el refreshToken en la DB
   await foundUser.set({ refreshToken: refreshToken });
