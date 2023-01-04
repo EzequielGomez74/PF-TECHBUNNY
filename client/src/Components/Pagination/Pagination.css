@@ -1,34 +1,24 @@
 .btnPag {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
-  width: 10%;
-  margin-left: 45%;
-}
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    width: 10%;
+    margin-left: 45%;
 
-.btnPag button {
-  border-radius: 15px;
-  background-color: black;
-  color: #fefefe;
-  border-radius: 0.3em;
-  border: 1px solid;
-}
+  }
+  
+  .btnPag button {
+    border-radius: 15px;
+    background-color: black;
+    color: #fefefe;
+    border-radius: .3em;
+    border: 1px solid;
+  }
+  
+  .btnPag button:hover {
+    color: #d7f136;
+  }
 
-.btnPag button:hover {
-  color: #d7f136;
-}
-
-.btnPag button b {
-  color: #d7f136;
-}
-
-.disabled {
-  background-color: #424242;
-  border: none;
-  border-radius: 5px;
-  margin: 10px 3px 10px 3px;
-  color: rgb(151, 151, 151);
-  padding: 10px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
-  transition: 0.3s;
-}
+  .btnPag button b{
+    color: #d7f136;
+  }

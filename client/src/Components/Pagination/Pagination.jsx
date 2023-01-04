@@ -19,7 +19,8 @@ export default function Pagination({
   return (
     <div className="btnPag">
       <button
-        className={`${currentPage === 1 ? "disabled" : "btnPag"}`}
+        className="prevNextPag"
+        disabled={currentPage === 1}
         onClick={() =>
           paginate(currentPage === 1 ? pageNumbers.length : currentPage - 1)
         }
@@ -36,6 +37,7 @@ export default function Pagination({
         ))}
 
       <button
+        disabled={currentPage === pageNumbers.length}
         onClick={() =>
           paginate(currentPage === 0 ? currentPage : currentPage + 1)
         }
