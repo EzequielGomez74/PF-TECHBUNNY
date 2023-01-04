@@ -3,7 +3,6 @@ const controller = require("./controller.js");
 const requiredAccess = require("../../middlewares/requiredAccess.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 
-
 const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
@@ -19,8 +18,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-
 //GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 //router.use(requiredAccess(2));
 router.get("/:product_id", async (req, res) => {
@@ -34,10 +31,8 @@ router.get("/:product_id", async (req, res) => {
   }
 });
 
-
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
-router.post("/", async (req, res) => {
-
+router.post("/", validate.product, async (req, res) => {
   const product = { ...req.body };
   try {
     res.status(200).send(await controller.createProduct(product));
@@ -46,7 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
-router.put("/",validate.product, async (req, res) => {
+router.put("/", validate.product, async (req, res) => {
   try {
     res.status(200).send(await controller.updateProduct(req.body));
   } catch (error) {
