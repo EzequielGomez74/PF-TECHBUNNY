@@ -15,8 +15,15 @@
 .banner{
     max-width: 45%;
     transform: translateY(50%);
-    
-}
+    }
+
+    .banner:hover{
+        transform: translateY(50%) scale(1.1);
+        transition: 0.5s;
+        filter: brightness(1.2) saturate(1.2) ; 
+
+        
+    }
 
 a{
     text-decoration: none;
