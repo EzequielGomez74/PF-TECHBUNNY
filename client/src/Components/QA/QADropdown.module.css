@@ -4,6 +4,10 @@
     padding-bottom: 25px;
 }
 
+.question:hover{
+    cursor: pointer;
+}
+
 .answer{
     text-align: left;
     margin-left: 15px;
@@ -20,4 +24,8 @@
     text-align: left;
     margin-left: 15px;
     margin-right: 15px;
+}
+
+.DMquestion:hover{
+    cursor: pointer;
 }
