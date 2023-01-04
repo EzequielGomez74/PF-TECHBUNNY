@@ -93,8 +93,8 @@ const enter = [
 ]
 
 const enterLogin = [
-  check('username').exists().isString().withMessage("el username debe ser un string"),
   check("password").exists().isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  check('username').exists().isString().withMessage("el username debe ser un string"),
   (req, res, next) => {
     validateResult(req, res, next);
   },
