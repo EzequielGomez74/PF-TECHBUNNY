@@ -11,6 +11,7 @@ export const TOGGLE_DARK_MODE = "TOGGLE_DARK_MODE";
 export const SET_SEARCH_TERM = "SET_SEARCH_TERM";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
+export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 
 // Funciones sincrÃ³nicas
 export const ADD_CART = "ADD_CART";

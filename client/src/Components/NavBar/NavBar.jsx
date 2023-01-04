@@ -12,26 +12,8 @@ import {
   faUserPlus,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import s from "./NavBar.module.css";
-import SearchBar from "./SearchBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMoon,
-  faHeart,
-  faCartShopping,
-  faUser,
-  faCaretDown,
-  faRightToBracket,
-  faUserPlus,
-  faSun,
-} from "@fortawesome/free-solid-svg-icons";
+
 import "./NavBar.css";
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../redux/actions";
-import Responsive from "./Responsive";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -71,15 +53,9 @@ function NavBar() {
   const cart = useSelector((state) => state.cart);
 
   const results = useSelector((state) => state.results);
-  const favs = useSelector((state) => state.favorites);
-  const cart = useSelector((state) => state.cart);
-
-  const results = useSelector((state) => state.results);
   //dark mode
   const dm = useSelector((state) => state.darkMode);
   const DM = useSelector((state) => state.darkMode);
-
-  const [searchTerm, setSearchTerm] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -89,7 +65,7 @@ function NavBar() {
         <h4>TECHBUNNY</h4>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <div className="search1">
-          {searchTerm.length && results.length
+          {searchTerm.length && results && results.length
             ? results.map((p, i) => {
                 if (i < 15)
                   return (

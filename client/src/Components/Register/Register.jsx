@@ -5,26 +5,16 @@ import s from "./Register.module.css";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import React from 'react'
-import NavBar from '../NavBar/NavBar';
-import Footer from '../Footer/Footer';
-import s from './Register.module.css';
-import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useSelector } from "react-redux";
-
 
 function Register() {
   const history = useHistory();
   const handleClick = () => {
     history.push("/login");
   };
-      history.push('/login');
-  }
 
-   //dark mode
-   const dm = useSelector(state => state.darkMode);
+  //dark mode
+  const dm = useSelector((state) => state.darkMode);
 
   return (
     <div>
@@ -46,12 +36,17 @@ function Register() {
           <span onClick={handleClick} className={s.m2}>
             ¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong>
           </span>
-          <input type="text" placeholder='Usuario' />
-          <input type="email" placeholder='Email' />
-          <input type="password" placeholder='Contraseña' />
-          <button className={dm ? s.dmb1 : s.b1} >Registrar</button>
-          <button className={dm ? s.dmb2 : s.b2}><FontAwesomeIcon icon={faGoogle} />&nbsp;&nbsp;&nbsp;Registrar con Google</button>
-          <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong></span>
+          <input type="text" placeholder="Usuario" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Contraseña" />
+          <button className={dm ? s.dmb1 : s.b1}>Registrar</button>
+          <button className={dm ? s.dmb2 : s.b2}>
+            <FontAwesomeIcon icon={faGoogle} />
+            &nbsp;&nbsp;&nbsp;Registrar con Google
+          </button>
+          <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>
+            ¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong>
+          </span>
         </div>
       </section>
       <Footer />

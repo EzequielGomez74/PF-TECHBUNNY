@@ -1,9 +1,22 @@
 import axiosInstance from "./axiosInstance";
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS } from './actionTypes'
+import {
+  GET_ALL_PRODUCTS,
+  GET_CATEGORIES,
+  GET_PRODUCT_BY_ID,
+  GET_PRODUCTS_BY_CATEGORY,
+  GET_REVIEWS_BY,
+  FILTER_BY_BRAND,
+  ORDER_BY_PRICE,
+  ADD_FAVORITE,
+  ADD_CART,
+  REMOVE_CART,
+  REMOVE_FAVORITE,
+  TOGGLE_DARK_MODE,
+  GET_SEARCH_RESULTS,
+  CLEAN_PRODUCT_DETAIL,
+} from "./actionTypes";
 // import { bindActionCreators } from 'redux'
 import axios from "axios";
->>>>>>>>> Temporary merge branch 2
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, FILTER_BY_PRICE, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE } from './actionTypes'
 
 // export const getProducts = (id) => {
 //   return async function (dispatch) {
@@ -17,61 +30,74 @@ import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CA
 //   };
 // };
 
-export function getProducts () {
-    return async function (dispatch){
-        try{
-            var json = await axios.get('/products')
-            return dispatch({type: GET_ALL_PRODUCTS, payload: json.data});
-        }catch(error){
-            console.log(error.message);
-        }
+export function getProducts() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/products");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 }
 
 export function getProductById(id) {
-    return async function (dispatch){
-        try{
-            var json = await axios.get(`/products/${id}`)
-            return dispatch({type: GET_PRODUCT_BY_ID, payload: json.data});
-        }catch(error){
-            console.log(error.message);
-        }
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`/products/${id}`);
+      return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 }
 
-// export const getProductById = (id) => {
-//     return function(dispatch){
-//         return fetch (`http://localhost:3001/products/${id}`)
-//         .then(resp => resp.json())
-//         .then(data => dispatch({type: GET_PRODUCT_BY_ID, payload: data}))
-//         .catch(error => console.log(error))
-//     }
-// }
-
-export function getCategories () {
-    return async function (dispatch){
-        try{
-            var json = await axios.get('/categories')
-            return dispatch({type: GET_CATEGORIES, payload: json.data});
-        }catch(error){
-            console.log(error.message);
-        }
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/categories");
+      return dispatch({ type: GET_CATEGORIES, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 }
 
 export function getProductsByCategory(category) {
-    return async function (dispatch){
-        try{
-            var json = await axios.get(`/products?category=${category}`)
-            return dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data});
-        }catch(error){
-            console.log(error.message);
-        }
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`/products?category=${category}`);
+      return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
     }
+  };
 }
+
+export const getReviewsBy = (productId, userId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get(
+        `/reviews?product_id=${productId}`
+      );
+      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const postReview = (review, onSuccess) => {
+  return async function () {
+    try {
+      let postedReview = await axiosInstance.post("/reviews", review);
+      onSuccess();
+      return postedReview;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 //asd
 // export const getProductsByCategory = (category) => {
 //     return function(dispatch){
@@ -82,7 +108,6 @@ export function getProductsByCategory(category) {
 //         .catch(error => console.log(error))
 //     }
 // }
-
 
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
@@ -171,10 +196,6 @@ export const removeCart = (id) => {
   };
 };
 
-export function toggleDarkMode() {
-    return { type: TOGGLE_DARK_MODE };
-  }
-
 // export const setSearchTerm = (searchTerm) => {
 //     return {
 //         type: SET_SEARCH_TERM, searchTerm
@@ -188,8 +209,16 @@ export function toggleDarkMode() {
 // }
 
 export const getSearchResults = (products, searchTerm) => {
-    return function(dispatch){
-        const results = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        dispatch({type: GET_SEARCH_RESULTS, payload: results})
-    }
-}
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
+
+export const cleanDetail = () => {
+  return {
+    type: CLEAN_PRODUCT_DETAIL,
+  };
+};

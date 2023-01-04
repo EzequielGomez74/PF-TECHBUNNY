@@ -11,19 +11,6 @@ import FollowUp from "./Components/Estado de Orden/FollowUp";
 import Error from "./Components/Error/Error";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-import "./App.css";
-import { Route, Switch } from "react-router-dom";
-import Details from "./Components/Details/Details";
-import Home from "./Components/Home/Home";
-import About from "./Components/About/About";
-import LandingPage from "./Components/Landing/LandingPage";
-import Category from "./Components/Category/Category";
-import Favoritos from "./Components/Favoritos/Favoritos";
-import Cart from "./Components/Cart/Cart";
-import FollowUp from "./Components/Estado de Orden/FollowUp";
-import Error from "./Components/Error/Error";
-import Login from "./Components/Login/Login";
-import Register from "./Components/Register/Register";
 import Categories from "./Components/Categories/Categories";
 
 function App() {
