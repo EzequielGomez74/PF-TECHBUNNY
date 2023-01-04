@@ -15,6 +15,14 @@ async function getAllUsers() {
     throw new Error(error.message);
   }
 }
+async function getUserBy(condition) {
+  try {
+    const user = await User.findOne({ where: condition });
+    return user;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 async function getQR(user_id) {
   //ACA GENERAMOS EL QR DEL USER QUE QUIERE ACTIVAR 2FA
@@ -94,4 +102,5 @@ module.exports = {
   deleteUser,
   getQR,
   compareGoogleAuth,
+  getUserBy,
 };

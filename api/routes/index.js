@@ -15,6 +15,7 @@ const newsletter = require("../apiServices/newsletter/routes.js");
 const verify = require("../apiServices/verify/routes.js");
 const generateTestUsername = require("../middlewares/generateTestUsername.js");
 const verifyJWT = require("../middlewares/verifyJWT.js");
+
 router.use("/verify", verify);
 router.use("/enter", enter);
 router.use("/refresh", refresh);
