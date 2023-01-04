@@ -28,17 +28,17 @@ router.get("/", async (req, res) => {
 });
 
 
-
-router.get("/googleAuth/:user_id", async (req, res) => {            // ESTO ES CUANDO EL USER QUIERE ACTIVAR LA 2FA EN SU CUENTA
+// $   /googleAuth/3   esto es para cuando el user quiere activar la 2FA
+router.get("/googleAuth/:user_id", async (req, res) => {                     
   try {
-    res.status(200).json(await controller.getQR(req.params.user_id)); // RETORNA UN QR PARA ESE USUARIO
+    res.status(200).json(await controller.getQR(req.params.user_id));         // $ RETORNA UN STRING QUE SE INSERTA EN UNA ETIQUETA <IMG> PARA MOSTRAR EL QR DE ESE USUARIO
   } catch (error) {
     res.status(400).send(error.message);
   }
 })
 
 
-
+// $ ACTIVA 
 router.put("/googleAuth/:user_id", async (req, res) => {                                                        // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER  
   try {
     res.status(200).json(await controller.compareGoogleAuth(req.params.user_id, req.body.token));                         // RETORNA VERIFIED TRUE O FALSE
@@ -49,7 +49,7 @@ router.put("/googleAuth/:user_id", async (req, res) => {                        
 })
 
  
-// /users/3   body={surname:"beto",username:"pepe"}
+// $   /users/3   body={surname:"beto",username:"pepe"}
 router.put("/:user_id", validate.user, async (req, res) => {
   try {
     const data = req.body;
