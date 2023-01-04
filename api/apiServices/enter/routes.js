@@ -3,7 +3,7 @@ const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
-//NEW USER
+// $ BODY   NEW USER  
 router.post("/", validate.enter, async (req, res) => {
   const data = req.body;
   try {
@@ -13,7 +13,8 @@ router.post("/", validate.enter, async (req, res) => {
   }
 });
 
-// PARAMS /enter/login   /enter/logout  /enter/recover
+
+// $ PARAMS /enter/login   /enter/logout  /enter/recover    ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
 router.put("/:accessType", validate.enterLogin, async (req, res) => {
   const { accessType } = req.params;
   try {
@@ -44,8 +45,7 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
           res.sendStatus(200);
         } else res.sendStatus(400);
         break;
-      case "recover":
-      //enviar mail de recover
+      case "recover":           //TODO IMPLEMENTAR RECOVERY VIA EMAIL
       default:
         break;
     }

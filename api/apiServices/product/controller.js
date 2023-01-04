@@ -67,8 +67,8 @@ async function getProductById(product_id, username) {
 }
 
 async function updateProduct(product) {
-  delete product.createdAt;
-  delete product.updatedAt;
+  // delete product.createdAt;
+  // delete product.updatedAt; porque eliminan esto? 
   try {
     await Product.update(
       {
