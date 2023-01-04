@@ -1,5 +1,15 @@
 [
   {
+    "username": "anonimo",
+    "name": "Anonimus",
+    "surname": "without",
+    "password": "anonimoforever",
+    "email": "aaa@aaa.gmail.com",
+    "defaultShippingAddress": "av siempre viva 742",
+    "zipCode": 7600
+  },
+  {
+    "username": "Betolocura",
     "name": "Beto",
     "surname": "Martinez",
     "password": "pepito123",
@@ -8,6 +18,7 @@
     "zipCode": 7600
   },
   {
+    "username": "Santilocura",
     "name": "Santi",
     "surname": "Larrique",
     "password": "pepito1234",
@@ -16,11 +27,35 @@
     "zipCode": 11200
   },
   {
+    "username": "Emilocura",
     "name": "Emi",
     "surname": "Hernandez",
     "password": "chessPro",
     "email": "chess@gmail.com",
     "defaultShippingAddress": "Jose Marti 132",
     "zipCode": 1722
+  },
+  {
+    "username": "gerlini",
+    "email": "gerfer@gmail.com",
+    "name": "ger",
+    "surname": "fernandez",
+    "password": "123456",
+    "role": "3",
+    "defaultShippingAddress": "calle falsa 123",
+    "zipCode": 1050,
+    "billingAddress": "asdas"
+  },
+  {
+    "username": "maty",
+    "name": "matias",
+    "password": "123456",
+    "surname": "gimenez",
+    "role": "2",
+    "email": "abc@gmail.com",
+    "defaultShippingAddress": "calle falsa 123",
+    "zipCode": "122",
+    "profilePicture": "www.google.com",
+    "billingAddress": "calle falsa 123"
   }
 ]
