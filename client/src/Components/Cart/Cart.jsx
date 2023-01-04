@@ -7,19 +7,28 @@ import s from './Cart.module.css'
 
 function Cart() {
   const cart = useSelector(state => state.cart);
+  const dm = useSelector(state => state.darkMode);
   return (
     <div>
       <NavBar />
-      <section className={s.cartSection}>
+      <section className={dm ? s.dmcartSection : s.cartSection}>
+          {cart.length ?
           <div>
-            {cart.length ? cart.map(p => <CartCard 
+            <div>
+              {cart.map(p => <CartCard 
               key={p.id} id={p.id} totalQuantity={p.totalQuantity}
               brand={p.brand} name={p.name} stock={p.stock}
               image={p.image} price={p.price}
-            />) 
-            : <p>Todavía no has agregado productos a tu carrito</p>}
+            />)}
+            </div>
+            <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
+          </div>:
+          <div>
+            <div className={s.heroCart}></div>
+              <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
           </div>
-          <button className={s.mainButton}>Procesar Compra</button>
+          
+          }
       </section>
       <Footer/>
     </div>

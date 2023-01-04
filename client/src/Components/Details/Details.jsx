@@ -8,7 +8,7 @@ import s from './Details.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart, faStar, faTruck, faStore} from "@fortawesome/free-solid-svg-icons";
 import Dropdown from '../Dropdown/Dropdown';
-// import Carrusel from '../Carrusel/Carrusel';
+import Carrusel from '../Carrusel/Carrusel';
 import CardV from '../Card V/CardV';
 
 function Details() {
@@ -234,7 +234,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
         <div className={s.block}>
           <div className={s.productImage}>
             <div className={s.icon}>
-              <button className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
+              <button onClick={()=> dispatch(actions.addFavorite({id: product.product_id, brand:product.brand , name: product.name, image:product.image, price:product.price, stock: product.stock})) } className={s.heart}><FontAwesomeIcon icon={faHeart}/></button>
             </div>
             <div className={s.imgP}>
               <img src={product.image} alt={product.product_id} />
@@ -286,7 +286,7 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
         </div>
       </div>
 
-      <section className={s.carruselSection}>
+      {/* <section className={s.carruselSection}>
         <div className={s.carrusel}>
           <div className={s.currentProducts}>
             {currentProducts.map(p =><CardV
@@ -312,9 +312,10 @@ const pageNumber = Math.ceil(testProducts.length / productsPerPage);
                   <button className={s.next} onClick={next} >Next</button>
               </div>}
           </div>
-          {/* <Carrusel /> */}
+          
         </div>
-      </section>
+      </section> */}
+      <Carrusel /> 
       
       <br />
       <div className={s.sub}>

@@ -10,6 +10,9 @@ import Pagination from '../Pagination/Pagination';
 
 function Category(){
 
+    //DARK MODE
+    const dm = useSelector(state => state.darkMode);
+
     let [active, setActive] = useState({brand: false, price: false});
     // let [order, setOrder] = useState("All");
     let {name} = useParams();
@@ -55,7 +58,7 @@ function Category(){
     }
 
     return(
-        <div>
+        <div className={dm ? s.dmbackground : s.background}>
             <NavBar/>
             <div className={s.categoryPage}>
                 <div className={s.selectors}>
@@ -69,16 +72,6 @@ function Category(){
                         <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
                         <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
                     </select>
-
-                    <div className={s.paginate}>
-                    <Pagination
-                    productsPerPage={productsPerPage}
-                    products={products.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                    />
-                </div>
-
                 </div>
                 <div className={s.results}>
                     {currentProduct.map(
@@ -94,7 +87,7 @@ function Category(){
                         />)}
                 </div>
                 <div className={s.paginate}>
-                    <Pagination
+                <Pagination
                     productsPerPage={productsPerPage}
                     products={products.length}
                     paginate={paginate}

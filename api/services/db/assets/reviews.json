@@ -1,32 +1,38 @@
 [
   {
-    "description": "Es peor 1 ",
+    "description": "Buena marca mala calidad",
     "rating": 2,
     "user_id": 1,
     "product_id": 1
   },
   {
-    "description": "Lo mejor 2 ",
+    "description": "meh maso",
     "rating": 3,
     "user_id": 2,
     "product_id": 1
   },
   {
-    "description": "Exelente experiencia. 3",
+    "description": "Excelente producto, lo que esperaba",
     "rating": 5,
     "user_id": 2,
     "product_id": 2
   },
   {
-    "description": "se rompio 4 ",
+    "description": "mal tele, se rompio a los 2 dias",
     "rating": 1,
     "user_id": 1,
     "product_id": 3
   },
   {
-    "description": "Lo mejor que me paso en la vida. 5",
+    "description": "buen producto",
     "rating": 4,
     "user_id": 3,
     "product_id": 2
+  },
+  {
+    "description": "Lo mejor .",
+    "rating": 1,
+    "user_id": 3,
+    "product_id": 4
   }
 ]

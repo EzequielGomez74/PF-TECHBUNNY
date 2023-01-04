@@ -1,12 +1,9 @@
 const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
       user_id: {
-        // type: DataTypes.UUID,
-        // defaultValue: DataTypes.UUIDV4,
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -14,9 +11,13 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surname: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -42,9 +43,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        type: DataTypes.ENUM(["guest", "admin", "user"]),
+        //1=guest 2=user 3=admin
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: "user",
+        defaultValue: 1,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -65,6 +67,25 @@ module.exports = (sequelize) => {
       refreshToken: {
         type: DataTypes.TEXT,
         allowNull: true,
+      },
+      verificationData: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      //IS LOGGED ?????
+      isLogged: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      googleAuth: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      secretAuth: {
+        type: DataTypes.STRING,
+        defaultValue: "2FADisabled",
       },
     },
     {
