@@ -1,0 +1,23 @@
+.qa{
+    background-color: white;
+    width: 450px;
+    padding-bottom: 25px;
+}
+
+.answer{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.DMqa{
+    background-color: #2B3036;
+    width: 450px;
+    padding-bottom: 25px;
+}
+
+.DManswer{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 15px;
+}

@@ -1,6 +1,6 @@
 import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS, COMPLETE_PROFILE, GET_REVIEWS_BY, STATUS_REGISTER } from './actionTypes'
 // import { bindActionCreators } from 'redux'
-import axiosInstance from "./axiosInstance";
+// import axiosInstance from "./axiosInstance";
 import axios from "axios";
 
 
@@ -200,6 +200,19 @@ export const postReview = (review, onSuccess) => {
       }
     };
 };
+
+// // Traer el nuevo usuario registrado-PENDIENTE
+// export const getNewRegisteredUser= (user_id) => {
+//     return async function(dispatch){
+//         try{
+//             // Verificar que el user_id sea de un usuario válido
+//             l
+//         }catch(error){
+//             alert(error)
+//         }
+//     }
+// }
+
 
 //Verificación del Mail
 export const statusRegister = (token) => {

@@ -14,7 +14,7 @@ function Verify() {
 
     useEffect(()=>{
         dispatch(statusRegister((token)))
-    },[])
+    },[token])
 
     const history = useHistory();
     const handleLogin = () => {
@@ -30,7 +30,8 @@ function Verify() {
         { ta === 'FAIL' ? 
         <div>
             <h4>Validación Fallida</h4>
-            <button onClick={handleRegister} >Registrarse Nuevamente</button>
+            <button onClick={handleRegister} >Registrarse Nuevamente</button> 
+            {/* Revisar */}
         </div>: 
         <div>
             <h4>Validación Éxitosa</h4>

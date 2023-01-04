@@ -15,6 +15,7 @@ import Categories from './Components/Categories/Categories';
 import Profile from './Components/Profile/Profile';
 import Payment from './Components/Payment/Payment';
 import Verify from './Components/Verify/Verify';
+import QA from './Components/QA/QA';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route exact path='/categories' component={Categories}  />
         <Route exact path='/category/:name' component={Category}/>
         <Route exact path='/followUp' component={FollowUp}/>
+        <Route exact path='/qa' component={QA}/>
         <Route exact path='*' component={Error}/>
       </Switch>
     </div>

@@ -12,7 +12,8 @@ const initialState = {
     results:[],
     reviews: [],
     currentUser: {},
-    tokenAccepted: ''
+    // user: false,
+    tokenAccepted: '',
 }
 
 export default function reducer (state=initialState, action){
@@ -95,7 +96,7 @@ export default function reducer (state=initialState, action){
         case 'COMPLETE_PROFILE':
             return {
                 ...state,
-                profile: action.payload,
+                currentUser: action.payload,
             }
         case 'GET_REVIEWS_BY':
             return {
