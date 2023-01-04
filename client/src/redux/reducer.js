@@ -7,8 +7,9 @@ const initialState = {
   cart: [],
   favorites: [],
   darkMode: false,
-  reviews: [],
-  currentUser: {},
+  // searchTerm:'',
+  // searchResults:[],
+  results: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -23,20 +24,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
-      case "GET_PAYPREFERENCES_BY_ID":
-        return {
-          ...state,
-          detail: action.payload,
-        };
     case "GET_PRODUCTS_BY_CATEGORY":
       return {
         ...state,
         productsByCategory: action.payload,
-      };
-    case "GET_REVIEWS_BY":
-      return {
-        ...state,
-        reviews: action.payload,
       };
     case "GET_CATEGORIES":
       return {
@@ -82,6 +73,21 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         darkMode: !state.darkMode,
+      };
+    // case 'SET_SEARCH_TERM':
+    //     return {
+    //         ...state,
+    //         searchTerm: action.searchTerm
+    //     }
+    // case 'SET_SEARCH_RESULTS':
+    //     return {
+    //         ...state,
+    //         searchResults: action.results,
+    //     }
+    case "GET_SEARCH_RESULTS":
+      return {
+        ...state,
+        results: action.payload,
       };
     default:
       return { ...state };
