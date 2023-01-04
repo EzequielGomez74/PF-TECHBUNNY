@@ -3,18 +3,18 @@ import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
-  GET_PAYPREFERENCES_BY_ID,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
-  FILTER_BY_PRICE,
   ORDER_BY_PRICE,
   ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
+  GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
+  FILTER_BY_PRICE,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -113,6 +113,17 @@ export const filterByPrice = (products, max, min) => {
   };
 };
 
+export function toggleDarkMode() {
+  return { type: TOGGLE_DARK_MODE };
+}
+
+// export const filterByPrice = (products, max, min) => {
+//     return function(dispatch){
+//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
+//     }
+// }
+
 export const orderByPrice = (products, order) => {
   return function (dispatch) {
     if (order === "asc") {
@@ -162,6 +173,23 @@ export const removeCart = (id) => {
   };
 };
 
-export function toggleDarkMode() {
-  return { type: TOGGLE_DARK_MODE };
-}
+export const getSearchResults = (products, searchTerm) => {
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
+
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
+
+// export const setSearchResults = (results) => {
+//     return {
+//         type: SET_SEARCH_RESULTS, results
+//     }
+// }

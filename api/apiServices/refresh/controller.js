@@ -18,7 +18,7 @@ async function handleRefreshToken(cookie) {
           { username: foundUser.username, role: foundUser.role },
           process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: "30s",
+            expiresIn: "5m",
           }
         );
       }
