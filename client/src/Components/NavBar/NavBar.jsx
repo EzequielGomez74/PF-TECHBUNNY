@@ -298,7 +298,7 @@ function NavBar() {
       </div>
 
       <div className="search1">
-        {searchTerm.length && results.length
+        {searchTerm.length && results && results.length
           ? results.map((p, i) => {
               if (i < 30)
                 return (
