@@ -1,3 +1,4 @@
+
 const { SubCategory } = require("../../services/db/db.js");
 
 async function getAllSubcategories() {

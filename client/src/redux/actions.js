@@ -1,62 +1,101 @@
+import axiosInstance from "./axiosInstance";
+import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
-  FILTER_BY_PRICE,
   ORDER_BY_PRICE,
   ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
+  TOGGLE_DARK_MODE,
+  GET_SEARCH_RESULTS,
+  GET_REVIEWS_BY,
+  FILTER_BY_PRICE,
 } from "./actionTypes";
-import axios from "axios";
 
-export const getProducts = () => {
-  return function (dispatch) {
-    return fetch("/products")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_ALL_PRODUCTS, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
-export const getProductById = (id) => {
-  return function (dispatch) {
-    return fetch(`/products/${id}`)
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_PRODUCT_BY_ID, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
-
-export const getCategories = () => {
-  return function (dispatch) {
-    return fetch("/categories")
-      .then((resp) => resp.json())
-      .then((data) => dispatch({ type: GET_CATEGORIES, payload: data }))
-      .catch((error) => console.log(error));
-  };
-};
-
-export const getProductsByCategory = (category) => {
+export const getProducts = (id) => {
   return async function (dispatch) {
-    try{
-      const response = await axios.get(`/products?category=${category}`)
-      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: response.data })
+    try {
+      const response = await axiosInstance.get("/products");
+      console.log("Mostrando productos");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+    } catch (error) {
+      console.log("FAILED TO AUTHENTICATE");
     }
-    catch (error){
-      console.log(error)
-    }
-    
-    // return fetch(`/products?category=${category}`)
-    //   .then((resp) => resp.json())
-    //   .then((data) =>
-    //     dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: data })
-    //   )
-    //   .catch((error) => console.log(error));
   };
 };
+
+// export function getProducts() {
+//   return async function (dispatch) {
+//     try {
+//       var json = await axios.get("http://localhost:3001/products");
+//       return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+//     } catch (error) {
+//       alert(error);
+//     }
+//   };
+// }
+
+export function getProductById(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/products/${id}`);
+      return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+export const getReviewsBy = (productId, userId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get(
+        `/reviews?product_id=${productId}`
+      );
+      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const postReview = (review, onSuccess) => {
+  return async function () {
+    try {
+      let postedReview = await axiosInstance.post("/reviews", review);
+      onSuccess();
+      return postedReview;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get("/categories");
+      return dispatch({ type: GET_CATEGORIES, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getProductsByCategory(category) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/products?category=${category}`);
+      return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
@@ -74,9 +113,14 @@ export const filterByPrice = (products, max, min) => {
   };
 };
 
-// export const orderByPrice = (payload) => {
+export function toggleDarkMode() {
+  return { type: TOGGLE_DARK_MODE };
+}
+
+// export const filterByPrice = (products, max, min) => {
 //     return function(dispatch){
-//         dispatch({type: ORDER_BY_PRICE, payload})
+//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
 //     }
 // }
 
@@ -129,6 +173,23 @@ export const removeCart = (id) => {
   };
 };
 
-// no descomentar esta linea
+export const getSearchResults = (products, searchTerm) => {
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
 
-//hola
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
+
+// export const setSearchResults = (results) => {
+//     return {
+//         type: SET_SEARCH_RESULTS, results
+//     }
+// }
