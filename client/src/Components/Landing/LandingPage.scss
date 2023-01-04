@@ -17,6 +17,10 @@
     transform: translateY(50%);
 }
 
+.imgBanner{
+    display: none;
+}
+
 .banner:hover{
     transform: translateY(50%) scale(1.1);
     transition: 0.5s;
