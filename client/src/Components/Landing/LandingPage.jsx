@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.scss";
 import img from '../../Photos/banner1.png'
+import img1 from '../../Photos/Land1.png'
+import img2 from '../../Photos/Land2.png'
+import img3 from '../../Photos/Land3.png'
+
 
 export default function LandingPage() {
   return (
@@ -22,7 +26,11 @@ export default function LandingPage() {
         No dudes en echar un vistazo a nuestro catálogo y  <br/>descubrir todo lo que tenemos para ofrecerte. ¡Te esperamos!
         </p>
       
-        
+        <div>
+          <img class="imgBanner" src={img1} />
+          <img class="imgBanner" src={img2} />
+          <img class="imgBanner" src={img3} />
+        </div>
      </div>
   );
 }
