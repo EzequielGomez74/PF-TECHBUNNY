@@ -52,6 +52,14 @@ const order = [
   },
 ]
 
+const googleAuth = [
+  check("user_id").isNumeric().withMessage("el user_od debe un numero"),
+  check("token").isNumeric().withMessage("el token debe un numero"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
 const review = [
   check("review_id").isNumeric().withMessage("review id debe ser numerico"),
   check("rating").isNumeric().withMessage("rating  debe ser numerico"),
@@ -101,7 +109,7 @@ const enterLogin = [
   },
 ]
 
-module.exports = { user, product, order ,review, newsletter, enter, enterLogin};
+module.exports = { user, product, order ,review, newsletter, enter, enterLogin , googleAuth};
 
 // user_id: 
 // username: 

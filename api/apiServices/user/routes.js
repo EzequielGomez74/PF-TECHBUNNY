@@ -3,6 +3,7 @@ const controller = require("./controller.js");
 const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
 const { User } = require("../../services/db/db.js");
+const verify = require("../../scripts/2FA/verify2fa.js");
 
 router.get("/:user_id", async (req, res) => {
   try {
@@ -22,28 +23,28 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-
-router.get("/googleAuth/:user_id", async (req, res) => {            // ESTO ES CUANDO EL USER QUIERE ACTIVAR LA 2FA EN SU CUENTA
+router.get("/googleAuth/:user_id", async (req, res) => {
+  // ESTO ES CUANDO EL USER QUIERE ACTIVAR LA 2FA EN SU CUENTA
   try {
     res.status(200).json(await controller.getQR(req.params.user_id)); // RETORNA UN QR PARA ESE USUARIO
   } catch (error) {
     res.status(400).send(error.message);
   }
-})
+});
 
-
-
-router.put("/googleAuth/:user_id", async (req, res) => {                                                        // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER  
+router.put("/googleAuth/:user_id", validate.googleAuth, async (req, res) => {
+  // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER
   try {
-    res.status(200).json(await controller.compareGoogleAuth(req.params.user_id, req.body.token));                         // RETORNA VERIFIED TRUE O FALSE
+    res
+      .status(200)
+      .json(
+        await controller.compareGoogleAuth(req.params.user_id, req.body.token)
+      ); // RETORNA VERIFIED TRUE O FALSE
   } catch (error) {
     res.status(400).send(error.message);
-    
   }
-})
+});
 
- 
 // /users/3   body={surname:"beto",username:"pepe"}
 router.put("/:user_id", validate.user, async (req, res) => {
   try {
@@ -56,7 +57,9 @@ router.put("/:user_id", validate.user, async (req, res) => {
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
-      throw new Error("el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar");
+      throw new Error(
+        "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
+      );
     }
   } catch (error) {
     res.status(400).send(error.message);
