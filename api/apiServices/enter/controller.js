@@ -24,7 +24,9 @@ async function handleNewUser(data) {
     //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
     //GENERARA TOKEN Y GUARDAR EN DB
     //GENERA VERYFICATION CODE
+    console.log(data);
     const userCreated = await User.create(newUser);
+    console.log("2");
     generateValidationAndSendMail(userCreated);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {

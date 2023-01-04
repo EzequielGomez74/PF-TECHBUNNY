@@ -67,6 +67,7 @@ function Category(){
                         {Brands && Brands.map((brand, i) => <option className={s.option} key={i} value={brand} >{brand}</option>)}
                     </select>
 
+<<<<<<< HEAD
                     <select name="price" value={active.price} onChange={orderPrice} >
                         <option className={s.option}>Ordenar por precio</option>
                         <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
@@ -96,6 +97,17 @@ function Category(){
                 </div>
             </div>
             <Footer/>
+=======
+          <select name="price" value={active.price} onChange={orderPrice}>
+            <option className={s.option}>Ordenar por precio</option>
+            <option className={s.option} value="asc">
+              Precio -&nbsp;&nbsp;Precio +
+            </option>
+            <option className={s.option} value="desc">
+              Precio +&nbsp;&nbsp;Precio -
+            </option>
+          </select>
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
         </div>
     )
 }

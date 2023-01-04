@@ -12,7 +12,12 @@ import FollowUp from "./Components/Estado de Orden/FollowUp";
 import Error from "./Components/Error/Error";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+<<<<<<< HEAD
 //asd
+=======
+import Categories from "./Components/Categories/Categories";
+
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 function App() {
   return (
     <div className="App">
@@ -29,6 +34,18 @@ function App() {
         <Route exact path="/category/:name" component={Category} />
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="*" component={Error} />
+<<<<<<< HEAD
+=======
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/detail/:id" component={Details} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/favorites" component={Favoritos} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/categories" component={Categories} />
+        <Route exact path="/category/:name" component={Category} />
+        <Route exact path="/followUp" component={FollowUp} />
+        <Route exact path="*" component={Error} />
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       </Switch>
     </div>
   );

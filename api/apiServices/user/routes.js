@@ -11,16 +11,19 @@ router.get("/:user_id", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
 router.get("/", async (req, res) => {
   try {
-    res.status(200).json(await controller.getUserBy(req.query));
+    res.status(200).json(await controller.getAllUsers());
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
+
 router.get("/", async (req, res) => {
+  console.log(req.query);
   try {
-    res.status(200).json(await controller.getAllUsers());
+    res.status(200).json(await controller.getUserBy(req.query));
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -5,11 +5,35 @@ const initialState = {
   productsByCategory: [],
   filtered: [],
   cart: [],
+  reviews: [],
   favorites: [],
   darkMode: false,
   // searchTerm:'',
   // searchResults:[],
   results: [],
+<<<<<<< HEAD
+=======
+  currentUser: {
+    user_id: 1,
+    name: "Beto",
+    surname: "Martinez",
+    username: "Betolocura",
+    password: "pepito123",
+    email: "a@a.gmail.com",
+    billingAddress: "",
+    defaultShippingAddress: "Colon 1234",
+    zipCode: "7600",
+    role: 2,
+    isActive: null,
+    needPasswordReset: null,
+    profilePicture: null,
+    refreshToken: null,
+    isLogged: false,
+    createdAt: "2022-12-29T15:16:23.109Z",
+    updatedAt: "2022-12-29T15:16:23.109Z",
+    country_id: null,
+  },
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 };
 
 export default function reducer(state = initialState, action) {
@@ -33,6 +57,16 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         categories: action.payload,
+      };
+    case "GET_REVIEWS_BY":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "CLEAN_PRODUCT_DETAIL":
+      return {
+        ...state,
+        detail: {},
       };
     case "FILTER_BY_BRAND":
       return {

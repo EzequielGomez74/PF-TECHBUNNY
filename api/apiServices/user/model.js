@@ -36,11 +36,11 @@ module.exports = (sequelize) => {
       },
       defaultShippingAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       zipCode: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       role: {
         //1=guest 2=user 3=admin
@@ -51,17 +51,17 @@ module.exports = (sequelize) => {
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: true,
       },
       needPasswordReset: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultvalue:
+        defaultValue:
           "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
       refreshToken: {
@@ -73,11 +73,11 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       //IS LOGGED ?????
-      isLogged: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
+      // isLogged: {
+      //   type: DataTypes.BOOLEAN,
+      //   allowNull: false,
+      //   defaultValue: false,
+      // },
       googleAuth: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

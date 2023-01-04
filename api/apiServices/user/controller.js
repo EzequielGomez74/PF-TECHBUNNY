@@ -15,9 +15,11 @@ async function getAllUsers() {
     throw new Error(error.message);
   }
 }
+
 async function getUserBy(condition) {
   try {
     const user = await User.findOne({ where: condition });
+    console.log(user);
     return user;
   } catch (error) {
     throw new Error(error);

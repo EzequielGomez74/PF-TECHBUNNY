@@ -1,10 +1,14 @@
 import axiosInstance from "./axiosInstance";
+<<<<<<< HEAD
 import axios from "axios";
+=======
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
+  GET_REVIEWS_BY,
   FILTER_BY_BRAND,
   ORDER_BY_PRICE,
   ADD_FAVORITE,
@@ -13,6 +17,7 @@ import {
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
+<<<<<<< HEAD
   GET_REVIEWS_BY,
   FILTER_BY_PRICE,
 } from "./actionTypes";
@@ -30,20 +35,44 @@ export const getProducts = (id) => {
 };
 
 // export function getProducts() {
+=======
+  CLEAN_PRODUCT_DETAIL,
+} from "./actionTypes";
+// import { bindActionCreators } from 'redux'
+import axios from "axios";
+
+// export const getProducts = (id) => {
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 //   return async function (dispatch) {
 //     try {
-//       var json = await axios.get("http://localhost:3001/products");
-//       return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+//       const response = await axiosInstance.get("/products");
+//       console.log(response.data);
+//       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
 //     } catch (error) {
-//       alert(error);
+//       console.log("FAILED TO AUTHENTICATE");
 //     }
 //   };
-// }
+// };
+
+export function getProducts() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/products");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export function getProductById(id) {
   return async function (dispatch) {
     try {
+<<<<<<< HEAD
       var json = await axiosInstance.get(`/products/${id}`);
+=======
+      var json = await axios.get(`/products/${id}`);
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -78,7 +107,11 @@ export const postReview = (review, onSuccess) => {
 export function getCategories() {
   return async function (dispatch) {
     try {
+<<<<<<< HEAD
       var json = await axiosInstance.get("/categories");
+=======
+      var json = await axios.get("/categories");
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_CATEGORIES, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -89,13 +122,55 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
+<<<<<<< HEAD
       var json = await axiosInstance.get(`/products?category=${category}`);
+=======
+      var json = await axios.get(`/products?category=${category}`);
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
   };
 }
+<<<<<<< HEAD
+=======
+
+export const getReviewsBy = (productId, userId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get(
+        `/reviews?product_id=${productId}`
+      );
+      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const postReview = (review, onSuccess) => {
+  return async function () {
+    try {
+      let postedReview = await axiosInstance.post("/reviews", review);
+      onSuccess();
+      return postedReview;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+//asd
+// export const getProductsByCategory = (category) => {
+//     return function(dispatch){
+//         // let Capitalize = category[0].toUpperCase() + category.slice(1)
+//         return fetch (`http://localhost:3001/products?category=${category}`)
+//         .then(resp => resp.json())
+//         .then(data => dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: data}))
+//         .catch(error => console.log(error))
+//     }
+// }
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
@@ -104,6 +179,7 @@ export const filterByBrand = (products, brand) => {
   };
 };
 
+<<<<<<< HEAD
 export const filterByPrice = (products, max, min) => {
   return function (dispatch) {
     const filteredByPrice = products.filter(
@@ -117,6 +193,10 @@ export function toggleDarkMode() {
   return { type: TOGGLE_DARK_MODE };
 }
 
+=======
+export const fiterByScore = (products, score) => {};
+
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 // export const filterByPrice = (products, max, min) => {
 //     return function(dispatch){
 //         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
@@ -141,6 +221,24 @@ export const orderByPrice = (products, order) => {
         else return 0;
       });
       dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
+      return function (dispatch) {
+        if (order === "asc") {
+          const asc = products.sort((a, b) => {
+            if (a.price < b.price) return -1;
+            if (a.price > b.price) return 1;
+            else return 0;
+          });
+          dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
+        }
+        if (order === "desc") {
+          const desc = products.sort((a, b) => {
+            if (a.price > b.price) return -1;
+            if (a.price < b.price) return 1;
+            else return 0;
+          });
+          dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
+        }
+      };
     }
   };
 };
@@ -159,6 +257,10 @@ export const removeFavorite = (id) => {
   };
 };
 
+export function toggleDarkMode() {
+  return { type: TOGGLE_DARK_MODE };
+}
+
 export const addCart = (payload) => {
   return {
     type: ADD_CART,
@@ -173,6 +275,7 @@ export const removeCart = (id) => {
   };
 };
 
+<<<<<<< HEAD
 export const getSearchResults = (products, searchTerm) => {
   return function (dispatch) {
     const results = products.filter((p) =>
@@ -188,8 +291,34 @@ export const getSearchResults = (products, searchTerm) => {
 //     }
 // }
 
+=======
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
+
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 // export const setSearchResults = (results) => {
 //     return {
 //         type: SET_SEARCH_RESULTS, results
 //     }
 // }
+<<<<<<< HEAD
+=======
+
+export const getSearchResults = (products, searchTerm) => {
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
+
+export const cleanDetail = () => {
+  return {
+    type: CLEAN_PRODUCT_DETAIL,
+  };
+};
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f

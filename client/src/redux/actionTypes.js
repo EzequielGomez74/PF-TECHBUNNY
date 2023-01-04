@@ -13,11 +13,15 @@ export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 
+<<<<<<< HEAD
 // Funciones sincrónicas
 
+=======
+// Funciones sincrÃ³nicas
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 export const ADD_CART = "ADD_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
-
+export const CLEAN_PRODUCT_DETAIL = "CLEAN_PRODUCT_DETAIL";
 //Faltan actions

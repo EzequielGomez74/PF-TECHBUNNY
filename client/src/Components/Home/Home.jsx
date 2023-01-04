@@ -31,6 +31,7 @@ function Home() {
           <span></span>
         </div>
       </div>
+<<<<<<< HEAD
         <Carrusel />
         <section className={dm ? s.dmbanners : s.banners} >
             <div className={s.bannerOne}>
@@ -56,6 +57,33 @@ function Home() {
                 </Link>
             </div>
         </section>
+=======
+      <Carrusel />
+      <section className={dm ? s.dmbanners : s.banners}>
+        <div className={s.bannerOne}>
+          <Link to="/category/Periféricos">
+            <div className={s.a}></div>
+          </Link>
+          <Link to="/category/Sillas">
+            <div className={s.b}></div>
+          </Link>
+          <Link to="/category/Impresoras">
+            <div className={s.c}></div>
+          </Link>
+        </div>
+        <div className={s.bannerTwo}>
+          <Link to="/category/Periféricos">
+            <div className={s.d}></div>
+          </Link>
+          <Link to="/category/Impresoras">
+            <div className={s.e}></div>
+          </Link>
+          <Link to="/category/Periféricos">
+            <div className={s.f}></div>
+          </Link>
+        </div>
+      </section>
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 
         <div className={s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
@@ -64,10 +92,16 @@ function Home() {
         </div>
       </div>
 
+<<<<<<< HEAD
         <Carrusel/>
         <Newsletter/>
         <Footer/>
         
+=======
+      <Carrusel />
+      <Newsletter />
+      <Footer />
+>>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
     </div>
   )
 }

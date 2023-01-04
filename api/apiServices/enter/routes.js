@@ -4,7 +4,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
-router.post("/", validate.enter, async (req, res) => {
+router.post("/", async (req, res) => {
   const data = req.body;
   try {
     res.status(200).json(await controller.handleNewUser(data));
