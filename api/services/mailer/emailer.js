@@ -1,5 +1,5 @@
-const nodemailer = require("nodemailer");
-const { configmailtrap, configgmail } = require("../../config/mailerconfig");
+
+const { configmailtrap, configgmail } = require("../../config/mailerconfig"); //$ configuracion para envio de mails con GMAIL o con MAILTRAP //
 const { pedidotemplate } = require("./templates/pedidotemplate.js");
 const { welcometemplate } = require("./templates/welcometemplate.js");
 const { newslettertemplate } = require("./templates/newslettertemplate");
@@ -7,34 +7,32 @@ const { newslettertemplate } = require("./templates/newslettertemplate");
 const template = (userdata) => {
   if (userdata.type === "newsletter") {
     return {
-      // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Gracias por suscribirte al newsletter ✔`, // Subject line
-      html: newslettertemplate(userdata), // html body
+      html: newslettertemplate(userdata), //*
     };
   }
   if (userdata.type === "register") {
     return {
-      // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Hola Bienvenido a TechBunny ✔`, // Subject line
-      html: welcometemplate(userdata), // html body
+      html: welcometemplate(userdata), //*
     };
   }
   if (userdata.type === "order") {
     return {
-      // from: '"🐰 TechBunny 🐰" <techbunnypf@gmail.com>', //  si es con la config de gmail  no hace falta el from:
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Gracias por tu orden✔`, // Subject line
-      html: pedidotemplate(userdata), // html body
+      html: pedidotemplate(userdata), //*
     };
   }
 };
 const createTrans = () => {
-  const transport = nodemailer.createTransport(configmailtrap); //configgmail // configmailtrap
+  //$  si rempalazamos con: configgmail los emails salen desde techbunnypf@gmail.com y sino con: configmailtrap es para verlas con mailtrap
+  const transport = nodemailer.createTransport(configmailtrap); //$
   return transport;
 };
 const sendMail = async (userdata) => {
