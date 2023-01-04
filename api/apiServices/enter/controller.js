@@ -1,8 +1,9 @@
 const { User } = require("../../services/db/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const emailer = require("../../services/mailer/emailer.js");
+const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
+require("dotenv").config();
 
 async function handleNewUser(data) {
   if (!data.username || !data.password)
@@ -20,27 +21,21 @@ async function handleNewUser(data) {
       ...data,
       password: hashedPwd,
     };
+    //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
     //GENERARA TOKEN Y GUARDAR EN DB
-    const verifyToken = jwt.sign(
-      { username: newUser.username },
-      process.env.VERIFY_MAIL_TOKEN_SECRET,
-      { expiresIn: "24h" }
-    );
     //GENERA VERYFICATION CODE
-    let verificationData = require("crypto").randomBytes(10).toString("hex");
-    verificationData += " " + verifyToken;
     const userCreated = await User.create(newUser);
-    userCreated.verificationData = verificationData;
-    userCreated.save();
-    //ARMAMOS MAIL
-    const object = { ...newUser, type: "register" };
-    emailer.sendMail(newUser.email, object);
+    generateValidationAndSendMail(userCreated);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
   }
 }
-async function handleLogin(username, password) {
+async function handleLogin({ username, password, token, guest }) {
+  if (guest) {
+    const guestUser = await User.findByPk(1);
+    return generateTokens(guestUser, true);
+  }
   if (!username || !password)
     throw new Error("Username and Password are required");
   try {
@@ -50,22 +45,17 @@ async function handleLogin(username, password) {
     console.log("LLEGA");
     //const match = await bcrypt.compare(password, password);
     if (true) {
-      //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-      const accessToken = jwt.sign(
-        { username: foundUser.username, role: foundUser.role },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "600s" }
-      );
-      const refreshToken = jwt.sign(
-        { username: foundUser.username },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "1200s" }
-      );
-      //guardar el refreshToken en la DB
-      foundUser.set({ refreshToken: refreshToken });
-      await foundUser.save();
-
-      return { accessToken, refreshToken };
+      //SI TIENE 2FA
+      if (foundUser.googleAuth) {
+        if (token) {
+          if ("verify") {
+          } else return null;
+        } else {
+          return { twoFactor: true };
+        }
+      }
+      // ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
+      return generateTokens(foundUser, false);
     } else throw new Error("Wrong Password");
   } catch (error) {
     throw new Error(error.message);
@@ -77,6 +67,23 @@ async function handleLogout(cookie) {
   if (!foundUser) throw new Error("User not found");
   foundUser.refreshToken = "";
   foundUser.save();
+}
+
+async function generateTokens(foundUser, infinite) {
+  const accessToken = jwt.sign(
+    { username: foundUser.username, role: foundUser.role },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "30s" }
+  );
+  const refreshToken = jwt.sign(
+    { username: foundUser.username },
+    process.env.REFRESH_TOKEN_SECRET,
+    infinite ? null : { expiresIn: "2m" }
+  );
+  //guardar el refreshToken en la DB
+  await foundUser.set({ refreshToken: refreshToken });
+  await foundUser.save();
+  return { accessToken, refreshToken };
 }
 
 module.exports = { handleLogin, handleNewUser, handleLogout };

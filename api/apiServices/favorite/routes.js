@@ -14,7 +14,7 @@ router.get("/:user_id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/",verify.createFavorite, async (req, res) => {
   try {
     res.status(200).send(await controller.createFavorite(req.body));
   } catch (error) {

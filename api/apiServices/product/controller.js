@@ -47,7 +47,6 @@ async function getAllProducts(username) {
 async function getAllProductsBy(condition, username) {
   try {
     let products = await Product.findAll({ where: condition });
-    console.log(products);
     return await setFavoriteStatus(products, username);
   } catch (error) {
     throw new Error(error.message);
@@ -60,6 +59,7 @@ async function getProductById(product_id, username) {
     product = await setFavoriteStatus([product.dataValues], username);
     const newObj = { ...product[0] };
     newObj.description = productDescriptionParser(newObj.description);
+    console.log("pasa");
     return newObj;
   } catch (error) {
     throw new Error(error.message);

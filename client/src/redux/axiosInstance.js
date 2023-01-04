@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  //baseURL: "http://localhost:3001",
+  baseURL: "https://prueba1-production-4ff1.up.railway.app/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,9 +10,23 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = sessionStorage.getItem("accessToken");
-    console.log(token);
+  async (config) => {
+    let token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      const body = {
+        username: "anonimo",
+        password: "anonimo",
+        token: null,
+        guest: true,
+      };
+      const response = await axios.put("/enter/login", body, {
+        withCredentials: true,
+      });
+      console.log("GUEST LOGIN ", response.data);
+      token = response.data.accessToken;
+      sessionStorage.setItem("accessToken", token);
+    }
+    console.log("token ultimo", token);
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
     }
@@ -46,6 +61,8 @@ axiosInstance.interceptors.response.use(
           //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
           //se deberia hacer un request de tipo /enter/logout
           console.log("DESLOGUEAR");
+          sessionStorage.removeItem("accessToken");
+          // borra accessToken
         }
       }
     }

@@ -32,11 +32,6 @@ function App() {
       </Switch>
 
 
-      <div>
-        <CardV></CardV>
-        <CardH></CardH>
-      </div>
-
 
       <header className="App-header">
 
@@ -56,5 +51,5 @@ function App() {
     </div>
   );
 }
-
+//asd
 export default App;

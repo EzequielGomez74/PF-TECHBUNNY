@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validate.review,async (req, res) => {
   const review = req.body;
   try {
     res.status(200).send(await controller.createReviews(review));
