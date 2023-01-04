@@ -17,7 +17,7 @@ router.post("/", validate.enter ,async (req, res) => {
 router.put("/:accessType", validate.enterLogin , async (req, res) => {
   const { accessType } = req.params;
   try {
-    switch (accessType) {
+    switch (accessType) { 
       case "login":
         const { username, password } = req.body;
         if (username && password) {
