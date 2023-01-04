@@ -17,6 +17,10 @@
     transform: translateY(50%);
 }
 
+.imgBanner{
+    display: none;
+}
+
 .banner:hover{
     transform: translateY(50%) scale(1.1);
     transition: 0.5s;
@@ -45,7 +49,7 @@ a:hover{
     align-items: center;
     overflow: hidden;
     white-space: nowrap;
-    transform: translateY(105%) translateX(6%);
+    transform: translateY(105%) translateX(1%);
     
 }
 
@@ -60,7 +64,7 @@ a:hover{
     animation: typing 3s steps(280, end);  
     animation-iteration-count: alternate;
     animation-duration: 8s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; 
   
   }
 
@@ -92,15 +96,23 @@ a:hover{
 @media only screen and (max-width: 800px) {
    
     .banner{
-        max-width: 80%;
+        max-width: 100%;
         margin-top: 100px;
-       transform: translateY(175px);
+       transform: translateY(100px);
     }
-    
-  
       .typing-animation {
         display: none;
-      }
+    }
+    .landing{
+        background-image: 100vh;
+    }
+    .imgBanner{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        transform: translateY(200px) translateX(85px);
+    }
     
 }
  
