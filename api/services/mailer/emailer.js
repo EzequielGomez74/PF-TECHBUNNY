@@ -34,7 +34,7 @@ const template = (userdata) => {
   }
 };
 const createTrans = () => {
-  const transport = nodemailer.createTransport(configmailtrap); //configgmail
+  const transport = nodemailer.createTransport(configmailtrap); //configgmail // configmailtrap
   return transport;
 };
 const sendMail = async (userdata) => {
