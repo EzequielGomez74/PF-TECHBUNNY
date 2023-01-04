@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.scss";
+import img from '../../Photos/banner1.png'
 
 export default function LandingPage() {
   return (
     <div className="landing">
       <div className="divTitulo">
       <Link to="/home">
-       <h1>INGRESA A TECHBUNNY</h1>
+       <img src={img} className="banner" />
       </Link>
       </div>
       
