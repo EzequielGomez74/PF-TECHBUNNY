@@ -14,13 +14,25 @@
 .containerElements{
     display: flex;
     max-width: 70%;
-    margin-left: 20%;
+    margin-left: 10%;
     margin-top: 2%;
     margin-bottom: 2%;
 }
 .imgBanner{
     width: 80%;
 }
+
+.imgBannerOferta{
+   height: 50vh;
+   transform: translateX(-50px);
+}
+
+.imgBannerOferta2{
+    height: 50vh;
+    transform: translateY(28px) translateX(70px);
+ }
+ 
+
 
 .textBanner{
     display: flex;
