@@ -15,15 +15,13 @@
 .banner{
     max-width: 45%;
     transform: translateY(50%);
-    }
+}
 
-    .banner:hover{
-        transform: translateY(50%) scale(1.1);
-        transition: 0.5s;
-        filter: brightness(1.2) saturate(1.2) ; 
-
-        
-    }
+.banner:hover{
+    transform: translateY(50%) scale(1.1);
+    transition: 0.5s;
+    filter: brightness(1.2) saturate(1.2) ; 
+}
 
 a{
     text-decoration: none;
@@ -34,6 +32,7 @@ a:hover{
     text-decoration: none;
     color: #d7f136;
 }
+
 .typing-animation{
     font-size: 17px;
     font-family: 'Poppins', sans-serif;
@@ -46,29 +45,24 @@ a:hover{
     align-items: center;
     overflow: hidden;
     white-space: nowrap;
-    transform: translateY(290%);
+    transform: translateY(105%) translateX(6%);
+
 }
 
 @keyframes typing {
     from { width: 0}
     to { width: 200vh }
   }
-  
+
   .typing-animation {
     overflow: hidden; 
     white-space: nowrap; 
-    animation: typing 3s steps(280, end);  
+    animation: typing 3s steps(280, end);
     animation-iteration-count: alternate;
     animation-duration: 8s;
     animation-fill-mode: forwards;
-  
+
   }
-  
- 
-  
-
-
-
 
 @media (max-width: 1366px){
     .divTitulo{
@@ -95,5 +89,17 @@ a:hover{
 
      }
  }
- 
- 
+@media only screen and (max-width: 800px) {
+
+    .banner{
+        max-width: 80%;
+        margin-top: 100px;
+       transform: translateY(175px);
+    }
+
+
+      .typing-animation {
+        display: none;
+      }
+
+}
