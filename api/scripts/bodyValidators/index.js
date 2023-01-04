@@ -1,7 +1,6 @@
 const { check } = require("express-validator");
 const { User } = require("../../services/db/db.js");
 const { validateResult } = require("../validateHelper.js");
-
 const user = [
   //estos no se deben de modificar
   check("user_id").isEmpty().withMessage("no podes pasar un user id"),
@@ -61,7 +60,12 @@ const review = [
   },
 ]
 
-const newsletter = []
+const newsletter = [
+  check("email").isEmail().withMessage("Debes ingresar un mail valido"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  }
+]
 
 const enter = [
   check("user_id").isEmpty().withMessage("no podes pasar un user id"),
@@ -96,7 +100,30 @@ const enterLogin = [
   },
 ]
 
-module.exports = { user, product, order ,review, newsletter, enter, enterLogin};
+const validateUser = [
+  check('code').exists().isString().withMessage("el code debe ser un string"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+const refreshValidation = [
+  check('code').exists().isString().withMessage("el code debe ser un Email"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+const createFavorite = [
+  check('user_id').exists().isNumeric().withMessage("el user_id debe ser un Numero"),
+  check('product_id').exists().isNumeric().withMessage("el product_id debe ser un Numero"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+ 
+module.exports = { user, product, order ,review, newsletter, enter, enterLogin, validateUser, refreshValidation,createFavorite};
 
 // user_id: 
 // username: 

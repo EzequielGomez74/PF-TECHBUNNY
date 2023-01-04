@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize) => {
   sequelize.define(
     "User",
@@ -12,11 +11,11 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surname: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       username: {
         type: DataTypes.STRING,
@@ -47,7 +46,7 @@ module.exports = (sequelize) => {
         //1=guest 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 2,
+        defaultValue: 1,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -73,11 +72,24 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      //IS LOGGED ?????
       isLogged: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+      },
+<<<<<<<<< Temporary merge branch 1
+=========
+      googleAuth: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      secretAuth: {
+        type: DataTypes.STRING,
+        defaultValue: "2FADisabled",
       }
+>>>>>>>>> Temporary merge branch 2
     },
     {
       timestamps: true,
