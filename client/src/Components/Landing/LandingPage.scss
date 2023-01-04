@@ -1,5 +1,5 @@
 .landing{
-    background-image: url('../../Photos/imagenfondo1.png');
+    background-image: url('../../Photos/imagenfondo3.png');
     margin: 0;
     width: 100%;
     height: 100%;
@@ -12,25 +12,11 @@
     background-attachment: fixed;
 }
 
-
-.landing h1{
-    font-family: 'Poppins', sans-serif;
-    color: #d7f136;
-    align-items: center;
-    margin-top: 230px;
-    background-color: #20232a;
-    border-radius: 5px;
-    width: 25%;
-    margin-left: 38%;
-    margin-bottom:60px;
-    transform: translateY(585%);
+.banner{
+    max-width: 45%;
+    transform: translateY(50%);
+    
 }
-
-.landing h1:hover{
-    color: #20232a;
-    background-color: #d7f136;
-}
-
 
 a{
     text-decoration: none;
@@ -53,7 +39,7 @@ a:hover{
     align-items: center;
     overflow: hidden;
     white-space: nowrap;
-    transform: translateY(250%);
+    transform: translateY(290%);
 }
 
 @keyframes typing {
