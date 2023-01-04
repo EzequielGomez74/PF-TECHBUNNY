@@ -11,8 +11,6 @@ const initialState = {
   // searchTerm:'',
   // searchResults:[],
   results: [],
-<<<<<<< HEAD
-=======
   currentUser: {
     user_id: 1,
     name: "Beto",
@@ -33,7 +31,6 @@ const initialState = {
     updatedAt: "2022-12-29T15:16:23.109Z",
     country_id: null,
   },
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 };
 
 export default function reducer(state = initialState, action) {

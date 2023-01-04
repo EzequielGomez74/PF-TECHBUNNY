@@ -6,25 +6,6 @@
   margin-left: 45%;
 }
 
-<<<<<<< HEAD
-  }
-  
-  .btnPag button {
-    border-radius: 15px;
-    background-color: black;
-    color: #fefefe;
-    border-radius: .3em;
-    border: 1px solid;
-  }
-  
-  .btnPag button:hover {
-    color: #d7f136;
-  }
-
-  .btnPag button b{
-    color: #d7f136;
-  }
-=======
 .btnPag button {
   border-radius: 15px;
   background-color: black;
@@ -51,4 +32,3 @@
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
   transition: 0.3s;
 }
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f

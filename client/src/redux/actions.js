@@ -1,8 +1,4 @@
 import axiosInstance from "./axiosInstance";
-<<<<<<< HEAD
-import axios from "axios";
-=======
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
@@ -17,32 +13,12 @@ import {
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
-<<<<<<< HEAD
-  GET_REVIEWS_BY,
-  FILTER_BY_PRICE,
-} from "./actionTypes";
-
-export const getProducts = (id) => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.get("/products");
-      console.log("Mostrando productos");
-      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
-    } catch (error) {
-      console.log("FAILED TO AUTHENTICATE");
-    }
-  };
-};
-
-// export function getProducts() {
-=======
   CLEAN_PRODUCT_DETAIL,
 } from "./actionTypes";
 // import { bindActionCreators } from 'redux'
 import axios from "axios";
 
 // export const getProducts = (id) => {
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 //   return async function (dispatch) {
 //     try {
 //       const response = await axiosInstance.get("/products");
@@ -68,50 +44,18 @@ export function getProducts() {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
-<<<<<<< HEAD
-      var json = await axiosInstance.get(`/products/${id}`);
-=======
       var json = await axios.get(`/products/${id}`);
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
   };
 }
-export const getReviewsBy = (productId, userId) => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.get(
-        `/reviews?product_id=${productId}`
-      );
-      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const postReview = (review, onSuccess) => {
-  return async function () {
-    try {
-      let postedReview = await axiosInstance.post("/reviews", review);
-      onSuccess();
-      return postedReview;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 export function getCategories() {
   return async function (dispatch) {
     try {
-<<<<<<< HEAD
-      var json = await axiosInstance.get("/categories");
-=======
       var json = await axios.get("/categories");
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_CATEGORIES, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -122,19 +66,13 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-<<<<<<< HEAD
-      var json = await axiosInstance.get(`/products?category=${category}`);
-=======
       var json = await axios.get(`/products?category=${category}`);
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
   };
 }
-<<<<<<< HEAD
-=======
 
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
@@ -170,7 +108,6 @@ export const postReview = (review, onSuccess) => {
 //         .catch(error => console.log(error))
 //     }
 // }
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 
 export const filterByBrand = (products, brand) => {
   return function (dispatch) {
@@ -179,24 +116,8 @@ export const filterByBrand = (products, brand) => {
   };
 };
 
-<<<<<<< HEAD
-export const filterByPrice = (products, max, min) => {
-  return function (dispatch) {
-    const filteredByPrice = products.filter(
-      (p) => p.price < max && p.price > min
-    );
-    dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
-  };
-};
-
-export function toggleDarkMode() {
-  return { type: TOGGLE_DARK_MODE };
-}
-
-=======
 export const fiterByScore = (products, score) => {};
 
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 // export const filterByPrice = (products, max, min) => {
 //     return function(dispatch){
 //         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
@@ -275,37 +196,17 @@ export const removeCart = (id) => {
   };
 };
 
-<<<<<<< HEAD
-export const getSearchResults = (products, searchTerm) => {
-  return function (dispatch) {
-    const results = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  };
-};
-
 // export const setSearchTerm = (searchTerm) => {
 //     return {
 //         type: SET_SEARCH_TERM, searchTerm
 //     }
 // }
 
-=======
-// export const setSearchTerm = (searchTerm) => {
-//     return {
-//         type: SET_SEARCH_TERM, searchTerm
-//     }
-// }
-
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
 // export const setSearchResults = (results) => {
 //     return {
 //         type: SET_SEARCH_RESULTS, results
 //     }
 // }
-<<<<<<< HEAD
-=======
 
 export const getSearchResults = (products, searchTerm) => {
   return function (dispatch) {
@@ -321,4 +222,3 @@ export const cleanDetail = () => {
     type: CLEAN_PRODUCT_DETAIL,
   };
 };
->>>>>>> fdf4d407383cdabab393c3615932d12381e54a8f
