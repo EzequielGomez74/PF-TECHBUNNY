@@ -31,6 +31,9 @@ async function handleNewUser(data) {
     throw new Error(error);
   }
 }
+
+
+
 async function handleLogin({ username, password, token, guest }) {
   if (guest) {
     const guestUser = await User.findByPk(1);
