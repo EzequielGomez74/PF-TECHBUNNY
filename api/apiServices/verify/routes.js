@@ -10,7 +10,7 @@ router.put("/:code", async (req, res) => {
     res.status(400).send("Error al procesar el codigo de verificacion");
   }
 });
-//todo crear ruta de refresh del validation code del emai
+//todo crear ruta de refresh del validation code del email
 router.put("/", async (req, res) => {
   const { email } = req.body;
   try {

@@ -79,27 +79,5 @@ router.delete("/:user_id", async (req, res) => {
   }
 });
 
-// router.put("/:user_id", async (req, res) => {
-//   const { username, name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture } = req.body
-//   const { user_id } = req.params;
-//   const { userRole } = req.role;
-//   const { userDb } = req.username
-
-//   try {
-//     if ( user_id === userDb) { // ES USER
-//       let obj = { name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, profilePicture }
-//       res.status(200).send(await controller.editByUser(user_id, obj))
-//     }
-
-//     if (userRole === 3) { // ES ADMIN
-//       let obj = { username , name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture }
-//       res.status(200).send(await controller.editByAdmin(user_id, obj))
-//     }
-
-//   } catch (error) {
-//     throw new Error(error);
-
-//   }
-// })
 
 module.exports = router;
