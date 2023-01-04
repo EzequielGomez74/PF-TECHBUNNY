@@ -64,6 +64,11 @@ const review = [
 const newsletter = []
 
 const enter = [
+  check('username').exists().isString().withMessage("el username debe ser un string"), // se deben verificar si el user id ya existe en la base de datos pero por otro lado.
+  check("password").isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  check("email").isEmail(),
+
+  
   check("user_id").isEmpty().withMessage("no podes pasar un user id"),
   check("role").exists().isNumeric().withMessage("role debe ser numerico"),
   check("refreshToken").not().exists().withMessage("no podes modificar el refresh token"),
@@ -72,16 +77,12 @@ const enter = [
   check('isLogged').isEmpty().withMessage("no podes modificar isLogged"),
   
   
-  //estos si se pueden modificar
-  check('username').exists().isString().withMessage("el username debe ser un string"), // se deben verificar si el user id ya existe en la base de datos pero por otro lado.
-  check("name").exists().isString(),
-  check("password").isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
-  check("email").isEmail(),
-  check("profilePicture").isURL().withMessage("La foto de perfil debe ser una url"),
-  check("defaultShippingAddress").exists().isString().withMessage("defaultShippingAddress es requerido y debe ser un string"),
-  check("surname").isString().withMessage("el surname debe ser un string"),
-  check("billingAddress").exists().isString().withMessage("el billingAddress debe ser un string y es requerido"),
-  check("zipCode").isNumeric().withMessage("el zipCode debe un numero"),
+  // //estos si se pueden modificar
+  // *check("profilePicture").isURL().withMessage("La foto de perfil debe ser una url"),
+  // *check("defaultShippingAddress").isString().withMessage("defaultShippingAddress es requerido y debe ser un string"),
+  // *check("surname").isString().withMessage("el surname debe ser un string"),
+  // *check("billingAddress").isString().withMessage("el billingAddress debe ser un string y es requerido"),
+  // *check("zipCode").isNumeric().withMessage("el zipCode debe un numero"),
 
   (req, res, next) => {
     validateResult(req, res, next);
