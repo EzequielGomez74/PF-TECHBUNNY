@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.dmfooter{
+    background-color: #1b1d23;
+}
+
 .main{
     max-width: 1500px;
     margin: auto;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -14,6 +15,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "../Dropdown/Dropdown";
 import DisplayReview from "./DisplayReview";
+=======
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import * as actions from '../../redux/actions'
+import Footer from '../Footer/Footer';
+import NavBar from '../NavBar/NavBar';
+import s from './Details.module.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHeart, faStar, faTruck, faStore} from "@fortawesome/free-solid-svg-icons";
+import Dropdown from '../Dropdown/Dropdown';
+import Carrusel from '../Carrusel/Carrusel';
+import CardV from '../Card V/CardV';
+>>>>>>> eze
 
 function Details() {
   const { id } = useParams();
@@ -172,6 +187,40 @@ function Details() {
         </div>
       </div>
 
+<<<<<<< HEAD
+=======
+      {/* <section className={s.carruselSection}>
+        <div className={s.carrusel}>
+          <div className={s.currentProducts}>
+            {currentProducts.map(p =><CardV
+                key={p.product_id}
+                id={p.product_id}
+                brand={p.brand}
+                name={p.name}
+                image={p.image}
+                price={p.price}
+                stock={p.stock}
+                category={p.category}
+                subcategory={p.subcategory}
+            />) }
+          </div>
+          <div className={s.pagination}>
+              { currentPage === 1 ?                              
+              <div className={s.pagbutton} >
+                  <button className={s.disabled} disabled>Back</button>
+                  <button className={s.next} onClick={next} >Next</button>
+              </div> :                             
+              <div className={s.pagbutton} >
+                  <button className={s.back} onClick={back} >Back</button>
+                  <button className={s.next} onClick={next} >Next</button>
+              </div>}
+          </div>
+          
+        </div>
+      </section> */}
+      <Carrusel /> 
+      
+>>>>>>> eze
       <br />
       <div className={s.sub}>
         <div className={s.subTitles}>

@@ -1,56 +1,58 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
-const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
-router.post("/", validate.enter, async (req, res) => {
-  const data = req.body;
+router.post("/", async (req, res) => {
+  const { user, password } = req.body;
   try {
-    res.status(200).json(await controller.handleNewUser(data));
+    res.status(200).json(await controller.handleNewUser(user, password));
   } catch (error) {
-    res.status(400).json(error.message);
+    console.log(error.message);
+    //res.send(error.message);
+    //console.log(error.msg);
+    res.status(error.statusCode).json(error.msg);
   }
 });
-
-// PARAMS /enter/login   /enter/logout  /enter/recover
-router.put("/:accessType", validate.enterLogin, async (req, res) => {
-  const { accessType } = req.params;
+//checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
+// /enter?type=logout   /enter?type=recover /enter?type=newUser
+router.put("/", async (req, res) => {
+  console.log(req.query);
   try {
-    switch (accessType) {
-      case "login":
-        const { username, password } = req.body;
-        if (username && password) {
-          const { accessToken, refreshToken } = await controller.handleLogin(
-            username,
-            password
-          );
-          res.cookie("jwt", refreshToken, {
-            sameSite: "None",
-            secure: true,
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-          });
-          res.status(200).json({ accessToken });
-        } else {
-          res.sendStatus(400);
-        }
-        break;
-      case "logout":
-        const cookie = req.cookies?.jwt;
-        if (cookie) {
-          await controller.handleLogout(cookie);
-          res.sendStatus(200);
-        } else res.sendStatus(400);
-        break;
-      case "recover":
-      //enviar mail de recover
-      default:
-        break;
+    if (req.query.type) {
+      switch (req.query.type) {
+        case "recover":
+          break;
+        case "logout":
+          const cookie = req.cookies?.jwt;
+          if (cookie) {
+            await controller.handleLogout(cookie);
+            res.sendStatus(200);
+          } else res.sendStatus(400);
+          break;
+        default:
+          break;
+      }
+    } else {
+      //login
+      console.log("ASD");
+      const { user, password } = req.body;
+      if (user && password) {
+        const { accessToken, refreshToken } = await controller.handleLogin(
+          user,
+          password
+        );
+        res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+          maxAge: 5 * 24 * 60 * 60 * 1000,
+        });
+        res.status(200).json({ accessToken });
+      } else {
+        res.sendStatus(400);
+      }
     }
   } catch (error) {
-    res.send(error.message);
+    res.sendStatus(400);
   }
 });
-
 module.exports = router;

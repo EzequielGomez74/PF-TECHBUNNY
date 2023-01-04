@@ -29,6 +29,8 @@ const Responsive = () => {
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
 
+  const results = useSelector((state) => state.results);
+
   return (
     <div ref={parent} className={s.dropdown}>
       <div className={s.menu} onClick={reveal}>
@@ -40,7 +42,6 @@ const Responsive = () => {
       </div>
       {show && (
         <div className={`dropdown-content`}>
-          <SearchBar />
           <div className={dm ? s.dmuserItems : s.userItems}>
             <button onClick={() => dispatch(toggleDarkMode())}>
               <FontAwesomeIcon icon={dm ? faSun : faMoon} />
@@ -78,7 +79,7 @@ const Responsive = () => {
           </div>
           <div className={dm ? s.dmsession : s.session}>
             <Link to="/login">
-              <p>Inicar SesiÃ³n</p>
+              <p>Inicar Sesión</p>
             </Link>
             <Link to="/register">
               <p>Registrarse</p>

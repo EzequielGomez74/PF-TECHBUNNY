@@ -1,7 +1,15 @@
-.navBar{
+.navBar {
   display: flex;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+.navResponsive {
+  display: none;
+}
+
+.dmnavResponsive {
+  display: none;
 }
 
 .navResponsive{
@@ -12,11 +20,11 @@
   display: none;
 }
 
-.one{
+.one {
   background-color: white;
 }
 
-.one div{
+.one div {
   max-width: 1500px;
   margin: auto;
   padding-left: 25px;
@@ -44,14 +52,14 @@
   color: black;
 }
 
-.navDetail span{
+.navDetail span {
   margin: 10px;
   width: 50px;
 }
 
-.two{
-    background-color: white;
-    cursor: pointer;
+.two {
+  background-color: white;
+  cursor: pointer;
 }
 
 .two div {
@@ -123,7 +131,6 @@
 
 ul{
   list-style: none;
-  
 }
 
 a {
@@ -131,7 +138,7 @@ a {
 }
 
 
-.two div a:hover{
+.two div a:hover {
   color: #7e7e7e;
   cursor: pointer;
 }
@@ -154,7 +161,7 @@ h3{
   margin-bottom: -10px;
 }
 
-.iconsbtn{
+.iconsbtn {
   font-size: 14px;
   font-weight: 400;
   color: #20232a;
@@ -173,14 +180,14 @@ h3{
   margin: 10px auto;
 }
 
-.dropdownItem img{
+.dropdownItem img {
   max-width: 20px;
   margin-right: 10px;
   opacity: 0.5;
   transition: var(--speed);
 }
 
-.dropdownItem a{
+.dropdownItem a {
   max-width: 100px;
   margin-left: 10px;
   transition: var(--speed);
@@ -189,17 +196,76 @@ h3{
 }
 
 
-  @media handheld, only screen and (max-width: 767px) {
-    .three {
-      display:none;
-       
-    }
+@media handheld, only screen and (max-width: 767px) {
+  .three {
+    display: none;
   }
-  
-  @media only screen and (max-width: 1023px) {
-    .three {
-      display:none;
-    }
+}
+
+@media only screen and (max-width: 1023px) {
+  .three {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .navResponsive {
+    display: flex;
+    background-color: white;
+    margin: auto;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .navResponsive h4 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 16px;
+    color: #20232a;
+  }
+
+  /* DARK MODE  */
+  .dmnavResponsive {
+    display: flex;
+    background-color: #1b1d23;
+    margin: auto;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .dmnavResponsive h4 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 16px;
+    color: white;
+  }
+
+  .one {
+    display: none;
+  }
+  .two {
+    display: none;
+  }
+  .three {
+    display: none;
+  }
+  .DMone {
+    display: none;
+  }
+  .DMtwo {
+    display: none;
   }
 
   @media only screen and (max-width: 800px){

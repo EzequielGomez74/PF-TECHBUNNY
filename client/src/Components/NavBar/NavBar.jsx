@@ -12,7 +12,26 @@ import {
   faUserPlus,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import s from "./NavBar.module.css";
+import SearchBar from "./SearchBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMoon,
+  faHeart,
+  faCartShopping,
+  faUser,
+  faCaretDown,
+  faRightToBracket,
+  faUserPlus,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDarkMode } from "../../redux/actions";
+import Responsive from "./Responsive";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -52,9 +71,15 @@ function NavBar() {
   const cart = useSelector((state) => state.cart);
 
   const results = useSelector((state) => state.results);
+  const favs = useSelector((state) => state.favorites);
+  const cart = useSelector((state) => state.cart);
+
+  const results = useSelector((state) => state.results);
   //dark mode
   const dm = useSelector((state) => state.darkMode);
   const DM = useSelector((state) => state.darkMode);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -62,6 +87,26 @@ function NavBar() {
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
         <h4>TECHBUNNY</h4>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div className="search1">
+          {searchTerm.length && results.length
+            ? results.map((p, i) => {
+                if (i < 15)
+                  return (
+                    <div className="hola123">
+                      <Link to={`/detail/${p.product_id}`}>
+                        {" "}
+                        <img className="imgsearch" src={p.image} alt={p.name} />
+                      </Link>
+                      <Link to={`/detail/${p.product_id}`}>
+                        {" "}
+                        <span className="NameSearch"> {p.name} </span>{" "}
+                      </Link>
+                    </div>
+                  );
+              })
+            : null}
+        </div>
         <Responsive />
       </section>
       <section className={DM ? s.DMone : s.one}>
@@ -277,17 +322,24 @@ function NavBar() {
         </ul>
       </div>
 
-      <div>
-        {searchTerm.length && results.length ? (
-          results.map((p) => (
-            <div>
-              <img src={p.image} alt={p.name} />
-              <span> {p.name} </span>
-            </div>
-          ))
-        ) : (
-          <span>No hay resultados</span>
-        )}
+      <div className="search1">
+        {searchTerm.length && results.length
+          ? results.map((p, i) => {
+              if (i < 30)
+                return (
+                  <div className="hola123">
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <img className="imgsearch" src={p.image} alt={p.name} />
+                    </Link>
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <span className="NameSearch"> {p.name} </span>{" "}
+                    </Link>
+                  </div>
+                );
+            })
+          : ""}
       </div>
     </div>
   );

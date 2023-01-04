@@ -2,32 +2,14 @@ const initialState = {
   products: [],
   detail: {},
   categories: [],
-  reviews: [],
   productsByCategory: [],
   filtered: [],
   cart: [],
   favorites: [],
-  users: [],
-  currentUser: {
-    user_id: 1,
-    name: "Beto",
-    surname: "Martinez",
-    username: "Betolocura",
-    password: "pepito123",
-    email: "a@a.gmail.com",
-    billingAddress: "",
-    defaultShippingAddress: "Colon 1234",
-    zipCode: "7600",
-    role: 2,
-    isActive: null,
-    needPasswordReset: null,
-    profilePicture: null,
-    refreshToken: null,
-    isLogged: false,
-    createdAt: "2022-12-29T15:16:23.109Z",
-    updatedAt: "2022-12-29T15:16:23.109Z",
-    country_id: null,
-  },
+  darkMode: false,
+  // searchTerm:'',
+  // searchResults:[],
+  results: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -37,19 +19,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
-
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,
         detail: action.payload,
       };
-
-    case "CLEAN_PRODUCT_DETAIL":
-      return {
-        ...state,
-        detail: {},
-      };
-
     case "GET_PRODUCTS_BY_CATEGORY":
       return {
         ...state,
@@ -59,16 +33,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         categories: action.payload,
-      };
-    case "GET_REVIEWS_BY":
-      return {
-        ...state,
-        reviews: action.payload,
-      };
-    case "GET_ALL_USERS":
-      return {
-        ...state,
-        users: action.payload,
       };
     case "FILTER_BY_BRAND":
       return {
@@ -103,7 +67,27 @@ export default function reducer(state = initialState, action) {
     case "REMOVE_CART":
       return {
         ...state,
-        cart: state.cart.filter((f) => f.product_id !== action.payload),
+        cart: state.cart.filter((c) => c.id !== action.payload),
+      };
+    case "TOGGLE_DARK_MODE":
+      return {
+        ...state,
+        darkMode: !state.darkMode,
+      };
+    // case 'SET_SEARCH_TERM':
+    //     return {
+    //         ...state,
+    //         searchTerm: action.searchTerm
+    //     }
+    // case 'SET_SEARCH_RESULTS':
+    //     return {
+    //         ...state,
+    //         searchResults: action.results,
+    //     }
+    case "GET_SEARCH_RESULTS":
+      return {
+        ...state,
+        results: action.payload,
       };
     default:
       return { ...state };

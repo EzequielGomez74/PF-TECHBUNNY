@@ -7,7 +7,6 @@ const products = require("../services/db/assets/products.json");
 const countries = require("../services/db/assets/countries.json");
 const reviews = require("../services/db/assets/reviews.json");
 const users = require("../services/db/assets/users.json");
-const favorites = require("../services/db/assets/favorites.json");
 const {
   Category,
   SubCategory,
@@ -16,7 +15,6 @@ const {
   Country,
   Review,
   User,
-  Favorite,
 } = require("../services/db/db.js");
 
 async function loadtoDb(array, model) {
@@ -41,13 +39,19 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArraySubcategories, SubCategory);
+    console.log('Acá')
     await loadtoDb(brands, Brand);
     const newArrayProducts = await Promise.all(
       products.map(async (product) => {
         const brand = await Brand.findByPk(product.brand_id);
         const subcategory = await SubCategory.findByPk(product.subcategory_id);
         return {
-          ...product,
+          name: product.name,
+          image: product.image,
+          price: product.price,
+          description: product.description,
+          stock: product.stock,
+          soldCount: product.soldCount,
           brand: brand.name,
           subcategory: subcategory.name,
           category: subcategory.category,
@@ -55,17 +59,14 @@ async function loadAllAssets() {
       })
     );
     await loadtoDb(newArrayProducts, Product);
-    await loadtoDb(users, User); //TEST
-    await loadtoDb(reviews, Review); // TEST
-    await loadtoDb(favorites, Favorite); //TEST
-    setRatingOnProducts(); //TEST
+    await loadtoDb(users, User);
+    await loadtoDb(reviews, Review);
+    await loadMockAsset(reviews, Review);
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {
     throw new Error(error.message);
   }
 }
-
-function setRatingOnProducts() {}
 
 async function loadMockAsset(array, model) {
   const review = await Review.findByPk(1);
