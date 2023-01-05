@@ -1,10 +1,7 @@
 const bcrypt = require("bcrypt");
-<<<<<<<<< Temporary merge branch 1
-=========
 const speakeasy = require('speakeasy')
 const qrcode = require('qrcode');
 var fs = require('fs');
->>>>>>>>> Temporary merge branch 2
 const { User } = require("../../services/db/db.js");
 
 const verify = require("../../scripts/2FA/verify2fa.js");
@@ -64,7 +61,7 @@ async function getUserById(user_id) {
 }
 async function deleteUser(user_id) {
   try {
-    const deleteUserId = await User.destroy({
+    const deleteUserId = await User.update({isActive:false},{
       where: { user_id },
     });
     if (deleteUserId) {
@@ -89,10 +86,4 @@ async function modifyUser(user_id, body) {
   }
 }
 
-<<<<<<<<< Temporary merge branch 1
-module.exports = { getAllUsers, getUserById, modifyUser, deleteUser };
-=========
-
-
 module.exports = { getAllUsers , getUserById , modifyUser , deleteUser, getQR , compareGoogleAuth};
->>>>>>>>> Temporary merge branch 2

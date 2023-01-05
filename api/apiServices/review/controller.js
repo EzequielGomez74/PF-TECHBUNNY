@@ -52,8 +52,12 @@ async function updateReviews(review) {
 
 async function deleteReviews(review_id) {
   try {
-    await Review.destroy({ where: { review_id } });
-    return "Reseña eliminada con exito!";
+    const { review_id} = body;
+    const existe = await Review.findOne({ where: { review_id }});
+    if (existe) {
+      await Review.update({deleted:true},{ where: { review_id } });
+      return "Reseña eliminada con exito!";
+    }
   } catch (error) {
     throw new Error(error);
   }

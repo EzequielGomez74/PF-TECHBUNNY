@@ -78,8 +78,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: false,
       },
-<<<<<<<<< Temporary merge branch 1
-=========
       googleAuth: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -89,7 +87,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
       }
->>>>>>>>> Temporary merge branch 2
     },
     {
       timestamps: true,
