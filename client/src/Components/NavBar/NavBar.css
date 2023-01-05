@@ -5,6 +5,11 @@
   --speed: 500ms;
 }
 
+.logo {
+  width: 3%;
+  height: 44%;
+  
+}
 
  .dropdown-menu{
     position: absolute;

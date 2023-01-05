@@ -94,6 +94,11 @@
     border: none;
 }
 
+.img{
+    width: 60%;
+    height: 60%;
+}
+
 @media only screen and (max-width: 800px) {
     .heroLogin{
         display: none;

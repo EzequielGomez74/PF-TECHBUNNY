@@ -24,6 +24,11 @@
     height: 490px;
 }
 
+.img{
+    width: 60%;
+    height: 60%;
+}
+
 .loginCard{
     background-color: white;
     height: 500px;

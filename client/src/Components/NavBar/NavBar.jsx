@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode} from '../../redux/actions';
 import Responsive from './Responsive';
 import SearchBar from '../Search Bar/SearchBar';
+import logo from '../../Photos/loguito.png';
 
 
 function NavBar() {
@@ -62,6 +63,8 @@ function NavBar() {
             <div>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
+                <img src={logo} alt="logo" className='logo'/>
+            
                 <div className={s.navDetail}>
                     
                     <button className={DM ? s.DMbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
