@@ -59,16 +59,21 @@
         max-width: 60%;
     }
     .imgBanner{
-        width: 100%;
+        width: 250%;
         margin-top: 50%;
         margin-left: -20%;
+        height:80%;
+        transform: translateY(-20px);
+        
     }
     
     .textBanner{
         display: flex;
         align-items: center;
         text-align: left;
-        width: 650px;
+        width: 200%;
+        margin-left: 20%;
+        margin-right: -30%;
     }
 
     .cointainerBanner{
