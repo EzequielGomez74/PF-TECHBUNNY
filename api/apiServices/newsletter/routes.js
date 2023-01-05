@@ -1,3 +1,8 @@
+// * En esta ruta los usuarios se subscriben/desubscriben al newsletter para recibir ofertas de productos.
+// * Ademas, se puede solicitar todos los subscriptores.
+
+// todo crear ruta getallsubscribers que devuelva una lista de todos los emails activos, listo para enviar spam.
+
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");

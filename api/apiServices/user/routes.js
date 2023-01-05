@@ -7,11 +7,16 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 router.get("/:user_id", async (req, res) => {
   try {
-    if (req.params.user_id)
-      res.status(200).json(await controller.getUserById(req.params.user_id));
-    else res.status(200).json(await controller.getAllUsers());
+    res.status(200).json(await controller.getUserById(req.params.user_id));
   } catch (error) {
-    res.sendStatus(400);
+    res.status(400).send(error.message);
+  }
+});
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getAllUsers());
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 });
 
@@ -23,17 +28,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/googleAuth/:user_id", async (req, res) => {
-  // ESTO ES CUANDO EL USER QUIERE ACTIVAR LA 2FA EN SU CUENTA
+
+// $   /googleAuth/3   esto es para cuando el user quiere activar la 2FA
+router.get("/googleAuth/:user_id", async (req, res) => {                     
   try {
-    res.status(200).json(await controller.getQR(req.params.user_id)); // RETORNA UN QR PARA ESE USUARIO
+    res.status(200).json(await controller.getQR(req.params.user_id));         // $ RETORNA UN STRING QUE SE INSERTA EN UNA ETIQUETA <IMG> PARA MOSTRAR EL QR DE ESE USUARIO
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
 
-router.put("/googleAuth/:user_id", validate.googleAuth, async (req, res) => {
-  // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER
+
+// $ ACTIVA 
+router.put("/googleAuth/:user_id", async (req, res) => {                                                        // ACA SE CAMBIA googleAuth A true EN LA TABLA DE USER  
   try {
     res
       .status(200)
@@ -43,8 +50,9 @@ router.put("/googleAuth/:user_id", validate.googleAuth, async (req, res) => {
   } catch (error) {
     res.status(400).send(error.message);
   }
-});
+})
 
+ 
 // /users/3   body={surname:"beto",username:"pepe"}
 router.put("/:user_id", validate.user, async (req, res) => {
   try {
@@ -75,27 +83,5 @@ router.delete("/:user_id", async (req, res) => {
   }
 });
 
-// router.put("/:user_id", async (req, res) => {
-//   const { username, name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture } = req.body
-//   const { user_id } = req.params;
-//   const { userRole } = req.role;
-//   const { userDb } = req.username
-
-//   try {
-//     if ( user_id === userDb) { // ES USER
-//       let obj = { name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, profilePicture }
-//       res.status(200).send(await controller.editByUser(user_id, obj))
-//     }
-
-//     if (userRole === 3) { // ES ADMIN
-//       let obj = { username , name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture }
-//       res.status(200).send(await controller.editByAdmin(user_id, obj))
-//     }
-
-//   } catch (error) {
-//     throw new Error(error);
-
-//   }
-// })
 
 module.exports = router;

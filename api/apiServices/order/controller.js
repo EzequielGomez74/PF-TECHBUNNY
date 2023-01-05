@@ -44,10 +44,16 @@ async function getOrders() {
   } catch (error) {
     throw new Error(error.message);
   }
+  try {
+    const getOrders = await Order.findAll();
+    return getOrders;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function getOrderById(order_id) {
-  // BUSCA UNA ORDER POR ID
+  // ? BUSCA UNA ORDER POR ID
   try {
     const orde1 = await Order.findAll({
       where: { order_id },
@@ -59,8 +65,6 @@ async function getOrderById(order_id) {
         },
       },
     });
-
-    console.log(orde1);
     const orderById = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
@@ -75,10 +79,14 @@ async function getOrderById(order_id) {
   } catch (error) {
     throw new Error(error.message);
   }
+    return orderById;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function getOrderByUserId(user_id) {
-  // BUSCA TODAS LAS ORDENES DEL USUARIO
+  // ? BUSCA TODAS LAS ORDENES DEL USUARIO
   try {
     const orde1 = await Order.findAll({
       where: { user_id },
@@ -92,14 +100,13 @@ async function getOrderByUserId(user_id) {
     });
 
     const clearResponse = orde1.map((el) => {
-      //ordenamos los datos para mandarlos limpios al front
+      // ? ordenamos los datos para mandarlos limpios al front
       return {
         ...el.dataValues,
         Products: el.dataValues.Products.map((ele) => {
           return {
             product_id: ele.dataValues.product_id,
             count: ele.dataValues.OrderProduct.count,
-            // price: ele.OrderProduct.price
           };
         }),
       };
