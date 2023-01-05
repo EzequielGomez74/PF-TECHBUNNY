@@ -13,7 +13,7 @@ async function subscribe(email) {
 
   async function unsubscribe(newsletter_id) {
     try {
-      await Newsletter.destroy({ where:  newsletter_id  });
+      await Newsletter.update({subscribed:false},{ where:  newsletter_id  });
       return "Te desubscribiste!";
     } catch (error) {
       throw new Error(error);
