@@ -94,9 +94,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .heroLogin{
-        display: none;
-    }
+    
 }
 
 /* DARK MODE */

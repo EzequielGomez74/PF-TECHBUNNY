@@ -3,8 +3,8 @@
     width: 250px;
     border: none;
     text-indent: 10px;
-    border-radius: 5px 0px 0px 5px;
-    border: 1px solid #20232A;
+    border-radius: 5px;
+    border: 2px solid #20232A;
 }
 
 .input:focus {
@@ -33,7 +33,7 @@
     text-indent: 10px;
     background-color: #1B1D23;
     border: 1px solid #fefefe;
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 5px;
 }
 
 .dminput:focus {

@@ -23,7 +23,7 @@ function Login() {
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
           <div>
-            <img src={img} alt="bunny login" className={s.img} />
+            <img src={img} alt="bunny login" className={dm ? s.dmimg : s.img} />
           </div>
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
