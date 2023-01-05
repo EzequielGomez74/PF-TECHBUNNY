@@ -7,21 +7,23 @@ import {
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
-  ORDER_BY_PRICE,
   ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
-  GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
-  FILTER_BY_PRICE,
+  SORT_BY_PRICE,
   GET_LOGGED_USER,
+  GET_SEARCH_TERM,
+  GET_SEARCH_RESULTS,
+  GET_RESULTS,
+  CLEAN_DETAIL,
 } from "./actionTypes";
 
 const jwt = require("react-jwt");
 
-export const getProducts = (id) => {
+export const getProducts = () => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
@@ -101,21 +103,13 @@ export function getProductsByCategory(category) {
   };
 }
 
-export const filterByBrand = (products, brand) => {
-  return function (dispatch) {
-    const filteredByBrand = products.filter((p) => p.brand === brand);
-    dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
-  };
+export const filterByBrand = (brand) => {
+  return { type: FILTER_BY_BRAND, payload: brand };
 };
 
-export const filterByPrice = (products, max, min) => {
-  return function (dispatch) {
-    const filteredByPrice = products.filter(
-      (p) => p.price < max && p.price > min
-    );
-    dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
-  };
-};
+// export const filterByPrice = (priceOrder) => {
+//   return { type: SORT_BY_PRICE, payload: priceOrder };
+// };
 
 export function toggleDarkMode() {
   return { type: TOGGLE_DARK_MODE };
@@ -128,25 +122,8 @@ export function toggleDarkMode() {
 //     }
 // }
 
-export const orderByPrice = (products, order) => {
-  return function (dispatch) {
-    if (order === "asc") {
-      const asc = products.sort((a, b) => {
-        if (a.price < b.price) return -1;
-        if (a.price > b.price) return 1;
-        else return 0;
-      });
-      dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
-    }
-    if (order === "desc") {
-      const desc = products.sort((a, b) => {
-        if (a.price > b.price) return -1;
-        if (a.price < b.price) return 1;
-        else return 0;
-      });
-      dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
-    }
-  };
+export const orderByPrice = (priceOrder) => {
+  return { type: SORT_BY_PRICE, payload: priceOrder };
 };
 
 export const addFavorite = (payload) => {
@@ -183,6 +160,15 @@ export const getSearchResults = (products, searchTerm) => {
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
+
+export const getResults = (products, searchTerm) => {
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_RESULTS, payload: results });
   };
 };
 
@@ -242,4 +228,12 @@ export const getLoginUser = (user) => {
       //metio mal
     }
   };
+};
+
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
+};
+
+export const getSearchTerm = (searchTerm) => {
+  return { type: GET_SEARCH_TERM, payload: searchTerm };
 };

@@ -7,9 +7,11 @@ const initialState = {
   cart: [],
   favorites: [],
   darkMode: false,
-  // searchTerm:'',
+  searchTerm: "",
   // searchResults:[],
   results: [],
+  results2: [],
+  resultsComponent: [],
   loggedUser: {},
 };
 
@@ -29,6 +31,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productsByCategory: action.payload,
+        filtered: action.payload,
       };
     case "GET_CATEGORIES":
       return {
@@ -36,20 +39,47 @@ export default function reducer(state = initialState, action) {
         categories: action.payload,
       };
     case "FILTER_BY_BRAND":
+      const allProducts = state.filtered;
+      const filteredProducts = allProducts.filter((p) =>
+        p.brand.includes(action.payload)
+      );
       return {
         ...state,
-        filtered: action.payload,
+        productsByCategory: filteredProducts,
       };
-    case "FILTER_BY_PRICE":
+    case "SORT_BY_PRICE":
+      const orderedProductsByPrice = state.productsByCategory.sort(function (
+        a,
+        b
+      ) {
+        if (action.payload === "asc") {
+          if (a.price < b.price) {
+            return -1;
+          } else if (a.price > b.price) {
+            return 1;
+          } else {
+            return 0;
+          }
+        } else if (action.payload === "desc") {
+          if (a.price > b.price) {
+            return -1;
+          } else if (a.price < b.price) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+        return "Ordered";
+      });
       return {
         ...state,
-        filtered: action.payload,
+        productsByCategory: orderedProductsByPrice,
       };
-    case "ORDER_BY_PRICE":
-      return {
-        ...state,
-        filtered: action.payload,
-      };
+    // case "ORDER_BY_PRICE":
+    //   return {
+    //     ...state,
+    //     filtered: action.payload,
+    //   };
     case "ADD_FAVORITE":
       return {
         ...state,
@@ -90,11 +120,23 @@ export default function reducer(state = initialState, action) {
         ...state,
         results: action.payload,
       };
+    case "GET_RESULTS":
+      return {
+        ...state,
+        results2: action.payload,
+      };
     case "GET_LOGGED_USER":
       return {
         ...state,
         loggedUser: action.payload,
       };
+    case "GET_SEARCH_TERM":
+      return {
+        ...state,
+        searchTerm: action.payload,
+      };
+    case "CLEAN_DETAIL":
+      return { ...state, detail: {} };
     default:
       return { ...state };
   }

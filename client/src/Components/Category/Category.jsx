@@ -25,23 +25,26 @@ function Category() {
   let indexLastProduct = currentPage * productsPerPage;
   let indexFirstProduct = indexLastProduct - productsPerPage;
   let currentProduct =
-    active.brand === false && active.price === false
-      ? products.slice(indexFirstProduct, indexLastProduct)
-      : filter.slice(indexFirstProduct, indexLastProduct);
+    // active.brand === false && active.price === false?
+    products.slice(indexFirstProduct, indexLastProduct);
+  // : filter.slice(indexFirstProduct, indexLastProduct);
 
   let paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  for (let i = 0; i < products.length; i++) {
-    productBrands.push(products[i].brand);
+  for (let i = 0; i < filter.length; i++) {
+    productBrands.push(filter[i].brand);
   }
+
   let Brands = [];
+
   productBrands.forEach((b) => {
     if (!Brands.includes(b)) {
       Brands.push(b);
     }
   });
+  let initialLoad = true;
 
   useEffect(() => {
     dispatch(actions.getCategories());
@@ -49,12 +52,12 @@ function Category() {
   }, [dispatch, name]);
 
   const filterBrands = (e) => {
-    dispatch(actions.filterByBrand(products, e.target.value));
+    dispatch(actions.filterByBrand(e.target.value));
     setActive({ ...active, brand: true });
   };
 
-  const orderPrice = (e) => {
-    dispatch(actions.orderByPrice(products, e.target.value));
+  const sortPrice = (e) => {
+    dispatch(actions.orderByPrice(e.target.value));
     setActive({ ...active, price: true });
   };
 
@@ -78,7 +81,7 @@ function Category() {
               ))}
           </select>
 
-          <select name="price" value={active.price} onChange={orderPrice}>
+          <select name="price" value={active.price} onChange={sortPrice}>
             <option className={s.option}>Ordenar por precio</option>
             <option className={s.option} value="asc">
               Precio -&nbsp;&nbsp;Precio +
