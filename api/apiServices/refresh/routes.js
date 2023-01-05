@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const cookies = req.cookies?.jwt;
-  console.log("cookie ", cookies.jwt);
+  console.log("cookie ", cookies);
   try {
     if (cookies) {
       const accessToken = await controller.handleRefreshToken(cookies);

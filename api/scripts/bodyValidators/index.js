@@ -69,7 +69,12 @@ const review = [
   },
 ]
 
-const newsletter = []
+const newsletter = [
+  check("email").isEmail().withMessage("Debes ingresar un mail valido"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  }
+]
 
 const enter = [
   check('username').exists().isString().withMessage("el username debe ser un string"), // se deben verificar si el user id ya existe en la base de datos pero por otro lado.
@@ -98,14 +103,37 @@ const enter = [
 ]
 
 const enterLogin = [
-  check('username').exists().isString().withMessage("el username debe ser un string"),
   check("password").exists().isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  check('username').exists().isString().withMessage("el username debe ser un string"),
   (req, res, next) => {
     validateResult(req, res, next);
   },
 ]
 
-module.exports = { user, product, order ,review, newsletter, enter, enterLogin};
+const validateUser = [
+  check('code').exists().isString().withMessage("el code debe ser un string"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+const refreshValidation = [
+  check('code').exists().isString().withMessage("el code debe ser un Email"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+const createFavorite = [
+  check('user_id').exists().isNumeric().withMessage("el user_id debe ser un Numero"),
+  check('product_id').exists().isNumeric().withMessage("el product_id debe ser un Numero"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+ 
+module.exports = { user, product, order ,review, newsletter, enter, enterLogin, validateUser, refreshValidation,createFavorite};
 
 // user_id: 
 // username: 

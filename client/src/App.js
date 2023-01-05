@@ -10,6 +10,8 @@ import Cart from "./Components/Cart/Cart";
 import FollowUp from "./Components/Estado de Orden/FollowUp";
 import Error from "./Components/Error/Error";
 import Login from "./Components/Login/Login";
+import CardV from "./Components/Card H/CardH";
+import CardH from "./Components/Card V/CardV";
 import Register from "./Components/Register/Register";
 
 function App() {
@@ -28,6 +30,24 @@ function App() {
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="*" component={Error} />
       </Switch>
+
+
+
+      <header className="App-header">
+
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+
     </div>
   );
 }
