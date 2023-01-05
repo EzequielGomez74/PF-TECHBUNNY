@@ -1,4 +1,4 @@
-
+const nodemailer = require("nodemailer");
 const { configmailtrap, configgmail } = require("../../config/mailerconfig"); //$ configuracion para envio de mails con GMAIL o con MAILTRAP //
 const { pedidotemplate } = require("./templates/pedidotemplate.js");
 const { welcometemplate } = require("./templates/welcometemplate.js");
