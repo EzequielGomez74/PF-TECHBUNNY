@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useSelector } from "react-redux";
+import img from '../../Photos/bunnylogin.png'
 
 function Login() {
   const history = useHistory();
@@ -21,7 +22,9 @@ function Login() {
       <NavBar />
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
-          <div className={dm ? s.dmhero : s.hero}></div>
+          <div>
+            <img src={img} alt="bunny login" className={s.img} />
+          </div>
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Hola! Inicia Sesión</h4>

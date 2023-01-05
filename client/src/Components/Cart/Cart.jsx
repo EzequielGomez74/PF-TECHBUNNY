@@ -4,6 +4,7 @@ import CartCard from '../CartCard/CartCard';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
+import img from '../../Photos/bunnycart.png'
 
 function Cart() {
   const cart = useSelector(state => state.cart);
@@ -24,7 +25,9 @@ function Cart() {
             <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
           </div>:
           <div>
-            <div className={dm ? s.dmheroCart : s.heroCart}></div>
+            <div>
+              <img src={img} alt="bunny cart" className={s.img}/> 
+            </div>
               <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos a tu carrito!</p>
           </div>
           
