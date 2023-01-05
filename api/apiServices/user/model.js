@@ -1,10 +1,9 @@
 const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
-      user_id: {        
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -12,11 +11,11 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surname: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       username: {
         type: DataTypes.STRING,
@@ -44,10 +43,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        //1=guest 2=user 3=admin 
+        //1=guest 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 2,
+        defaultValue: 1,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -69,6 +68,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      verificationData: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      //IS LOGGED ?????
       isLogged: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -82,7 +86,7 @@ module.exports = (sequelize) => {
       secretAuth: {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
-      }
+      },
     },
     {
       timestamps: true,

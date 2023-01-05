@@ -8,6 +8,7 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
+    console.log("a");
     const allUsers = await User.findAll();
     return allUsers;
   } catch (error) {

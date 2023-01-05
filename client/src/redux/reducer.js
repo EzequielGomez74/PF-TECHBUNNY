@@ -7,6 +7,8 @@ const initialState = {
   cart: [],
   favorites: [],
   darkMode: false,
+  reviews: [],
+  currentUser: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -30,6 +32,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productsByCategory: action.payload,
+      };
+    case "GET_REVIEWS_BY":
+      return {
+        ...state,
+        reviews: action.payload,
       };
     case "GET_CATEGORIES":
       return {

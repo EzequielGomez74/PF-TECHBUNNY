@@ -14,13 +14,14 @@ import {
   REMOVE_CART,
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
+  GET_REVIEWS_BY,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
-      console.log(response.data);
+      console.log("Mostrando productos");
       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
@@ -42,30 +43,45 @@ export const getProducts = (id) => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`http://localhost:3001/products/${id}`);
+      var json = await axiosInstance.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
-      alert(error);
+      console.log(error.message);
     }
   };
 }
-export function getPayPreferencesById(order_id) {
+export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`);
-      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
+      const response = await axiosInstance.get(
+        `/reviews?product_id=${productId}`
+      );
+      return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
-}
+};
+
+export const postReview = (review, onSuccess) => {
+  return async function () {
+    try {
+      let postedReview = await axiosInstance.post("/reviews", review);
+      onSuccess();
+      return postedReview;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export function getCategories() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/categories");
+      var json = await axiosInstance.get("/categories");
       return dispatch({ type: GET_CATEGORIES, payload: json.data });
     } catch (error) {
-      alert(error);
+      console.log(error.message);
     }
   };
 }
@@ -73,12 +89,10 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(
-        `http://localhost:3001/products?category=${category}`
-      );
+      var json = await axiosInstance.get(`/products?category=${category}`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
-      alert(error);
+      console.log(error.message);
     }
   };
 }

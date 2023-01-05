@@ -1,10 +1,13 @@
+// * En esta ruta se registra y logean usuarios.
+
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
-
 const router = Router();
-//NEW USER
-router.post("/", validate.enter ,async (req, res) => {
+
+
+// $ BODY  CREACION DE USUARIO
+router.post("/", validate.enter, async (req, res) => {
   const data = req.body;
   try {
     res.status(200).json(await controller.handleNewUser(data));
@@ -13,25 +16,27 @@ router.post("/", validate.enter ,async (req, res) => {
   }
 });
 
-// PARAMS /enter/login   /enter/logout  /enter/recover
-router.put("/:accessType", validate.enterLogin , async (req, res) => {
+
+// $ PARAMS /enter/login   /enter/logout  /enter/recover    ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
+router.put("/:accessType", validate.enterLogin, async (req, res) => {
   const { accessType } = req.params;
   try {
     switch (accessType) { 
       case "login":
         const { username, password } = req.body;
         if (username && password) {
-          const { accessToken, refreshToken } = await controller.handleLogin(
-            username,
-            password
-          );
-          res.cookie("jwt", refreshToken, {
-            sameSite: "None",
-            secure: true,
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-          });
-          res.status(200).json({ accessToken });
+          const authResult = await controller.handleLogin(req.body);
+          if (authResult.refreshToken) {
+            res.cookie("jwt", authResult.refreshToken, {
+              sameSite: "None",
+              secure: true,
+              httpOnly: true,
+              maxAge: 24 * 60 * 60 * 1000,
+            });
+            res.status(200).json({ accessToken: authResult.accessToken });
+          } else {
+            res.status(200).json(authResult);
+          }
         } else {
           res.sendStatus(400);
         }
@@ -43,7 +48,7 @@ router.put("/:accessType", validate.enterLogin , async (req, res) => {
           res.sendStatus(200);
         } else res.sendStatus(400);
         break;
-      case "recover":
+      case "recover":           //TODO IMPLEMENTAR RECOVERY VIA EMAIL
       default:
         break;
     }
