@@ -1,0 +1,60 @@
+.categories{
+    max-width: 1500px;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+
+.categories div{
+    background-color: white;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 50px;
+    margin-top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.dmcategoriesPage{
+    background-color: #20232A;
+}
+
+.dmcategories{
+    max-width: 1500px;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #20232A;
+}
+
+.dmcategories div{
+    background-color: #2B3036;
+    color: white;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 50px;
+    margin-top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}

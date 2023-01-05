@@ -1,7 +1,16 @@
-const { Order, Product, User } = require("../../services/db/db.js");
+const {
+<<<<<<<<< Temporary merge branch 1
+  Order,
+  Product,
+  OrderProduct,
+  User,
+} = require("../../services/db/db.js");
+const Sequelize = require("sequelize");
 const { sendMail } = require("../../services/mailer/emailer.js");
 
+
 async function createOrder({ status, user_id, products }) {
+
   try {
     const user = await User.findByPk(user_id);                                  // ?BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
     const newOrder = { status, user_id };
@@ -56,11 +65,12 @@ async function getOrderById(order_id) {
         },
       },
     });
+
     const orderById = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
-        ...el.dataValues,
-        Products: el.Products.map((el) => {
+        ...el,
+        products: el.Products.map((el) => {
           return { product_id: el.product_id, count: el.OrderProduct.count };
         }),
       };
@@ -106,6 +116,23 @@ async function getOrderByUserId(user_id) {
 }
 
 async function updateOrder(order, data) {
+<<<<<<<<< Temporary merge branch 1
+  try {
+    await Order.update({status:data.status}, { where: { order_id: order } });
+    return "Orden modificada con exito!";
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+module.exports = {
+  createOrder,
+  getOrderById,
+  updateOrder,
+  getOrders,
+  getOrderByUserId,
+};
+
+async function updateOrder(order, data) {
   try {
     await Order.update({ status: data.status }, { where: { order_id: order } });
     return "Orden modificada con exito!";
@@ -119,4 +146,19 @@ module.exports = {
   updateOrder,
   getOrders,
   getOrderByUserId,
+=========
+	try {
+		await Order.update({ status: data.status }, { where: { order_id: order } });
+		return "Orden modificada con exito!";
+	} catch (error) {
+		throw new Error(error.message);
+	}
+}
+module.exports = {
+	createOrder,
+	getOrderById,
+	updateOrder,
+	getOrders,
+	getOrderByUserId,
+>>>>>>>>> Temporary merge branch 2
 };
