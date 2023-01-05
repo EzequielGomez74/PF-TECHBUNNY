@@ -14,6 +14,7 @@ const initialState = {
     currentUser: {},
     // user: false,
     tokenAccepted: '',
+    searchTerm: '',
 }
 
 export default function reducer (state=initialState, action){
@@ -107,6 +108,11 @@ export default function reducer (state=initialState, action){
             return {
                 ...state,
                 tokenAccepted: action.payload
+            }
+        case 'GET_SEARCH_TERM':
+            return{
+                ...state,
+                searchTerm: action.payload,
             }
         default:
             return {...state}

@@ -1,7 +1,8 @@
-import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS, COMPLETE_PROFILE, GET_REVIEWS_BY, STATUS_REGISTER } from './actionTypes'
+import { GET_ALL_PRODUCTS, GET_CATEGORIES, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_CATEGORY, FILTER_BY_BRAND, ORDER_BY_PRICE, ADD_FAVORITE, ADD_CART, REMOVE_CART, REMOVE_FAVORITE, TOGGLE_DARK_MODE, GET_SEARCH_RESULTS, COMPLETE_PROFILE, GET_REVIEWS_BY, STATUS_REGISTER, GET_SEARCH_TERM, GET_RESULTS_COMPONENT } from './actionTypes'
 // import { bindActionCreators } from 'redux'
 // import axiosInstance from "./axiosInstance";
 import axios from "axios";
+// import jwt from 'jsonwebtoken'
 
 
 export function getProducts () {
@@ -149,6 +150,10 @@ export const removeCart = (id) => {
 export function toggleDarkMode() {
     return { type: TOGGLE_DARK_MODE };
   }
+
+export const getSearchTerm = (searchTerm) => {
+    return { type: GET_SEARCH_TERM, payload: searchTerm }
+}
 
 // export const setSearchTerm = (searchTerm) => {
 //     return {

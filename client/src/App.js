@@ -16,6 +16,8 @@ import Profile from './Components/Profile/Profile';
 import Payment from './Components/Payment/Payment';
 import Verify from './Components/Verify/Verify';
 import QA from './Components/QA/QA';
+import Results from './Components/Results/Results';
+import EditProfile from './Components/Profile/EditProfile';
 
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/editProfile" component={EditProfile} />
         <Route exact path='/home' component={Home}  />
+        <Route exact path='/results' component={Results}  />
         <Route exact path='/detail/:id' component={Details}  />
         <Route exact path='/about' component={About}  />
         <Route exact path='/favorites' component={Favoritos}  />

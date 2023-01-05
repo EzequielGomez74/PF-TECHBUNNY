@@ -1,0 +1,30 @@
+.Results{
+    background: transparent;
+}
+.resultsPage{
+    max-width: 1500px;
+    margin: auto;
+    font-family: 'Poppins';
+}
+.resultsMessage{
+    max-width: 1450px;
+    display: flex;
+    margin: auto;
+}
+
+.resultsMessage h4{
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 45px;
+    padding: 40px;
+}
+
+.resultsCards{
+    padding-top: 10px;
+    max-width: 1400px;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
