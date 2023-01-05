@@ -86,7 +86,12 @@ module.exports = (sequelize) => {
       secretAuth: {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
-      }
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultvalue: false,
+      },
     },
     {
       timestamps: true,

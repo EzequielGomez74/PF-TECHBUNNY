@@ -61,10 +61,17 @@ async function getUserById(user_id) {
 }
 async function deleteUser(user_id) {
   try {
-    const deleteUserId = await User.update({isActive:false},{
-      where: { user_id },
-    });
-    if (deleteUserId) {
+    const { user_id} = body;
+    const existe = await User.findOne({ where: { user_id }});
+    if (existe) {
+      const isTrue = await User.update({deleted:true},{
+        where: { user_id },
+      });
+      if (isTrue) {
+        await User.update({deleted:false},{
+          where: { user_id },
+        });
+      }
       return "Usuario eliminado con exito!";
     } else {
       return "Usuario no encontrado!";
