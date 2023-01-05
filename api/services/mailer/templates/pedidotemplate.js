@@ -30,7 +30,7 @@ const pedidotemplate = (userdata) => {
                     <td style="font-weight:bold;text-align:left;">CPF/CNPJ na Nota</td>
                     <td style="color:#7f8c8d;text-align:right;">335.560.268-05</td>
                   </tr>
-                  <tr>Tiempo Estunadi de entrega</td>
+                  <tr>Tiempo Estimado de entrega</td>
                     <td style="color:#7f8c8d;text-align:right;">25 min.</td>
                   </tr>
                   <tr>
