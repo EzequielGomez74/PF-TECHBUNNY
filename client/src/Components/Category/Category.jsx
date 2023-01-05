@@ -9,6 +9,9 @@ import s from "./Category.module.css";
 import Pagination from "../Pagination/Pagination";
 
 function Category() {
+  //DARK MODE
+  const dm = useSelector((state) => state.darkMode);
+
   let [active, setActive] = useState({ brand: false, price: false });
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
@@ -56,7 +59,7 @@ function Category() {
   };
 
   return (
-    <div>
+    <div className={dm ? s.dmbackground : s.background}>
       <NavBar />
       <div className={s.categoryPage}>
         <div className={s.selectors}>
@@ -86,18 +89,20 @@ function Category() {
           </select>
         </div>
         <div className={s.results}>
-          {currentProduct.map((e) => (
-            <CardV
-              key={e.product_id}
-              id={e.product_id}
-              brand={e.brand}
-              name={e.name}
-              image={e.image}
-              price={e.price}
-              category={e.category}
-              subcategory={e.subcategory}
-            />
-          ))}
+          {currentProduct.length
+            ? currentProduct.map((e) => (
+                <CardV
+                  key={e.product_id}
+                  id={e.product_id}
+                  brand={e.brand}
+                  name={e.name}
+                  image={e.image}
+                  price={e.price}
+                  category={e.category}
+                  subcategory={e.subcategory}
+                />
+              ))
+            : "https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"}
         </div>
         <div className={s.paginate}>
           <Pagination

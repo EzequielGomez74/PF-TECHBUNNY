@@ -12,7 +12,6 @@ import {
   faUserPlus,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
-
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
@@ -299,7 +298,7 @@ function NavBar() {
       </div>
 
       <div className="search1">
-        {searchTerm.length && results.length
+        {searchTerm.length && results && results.length
           ? results.map((p, i) => {
               if (i < 30)
                 return (

@@ -33,11 +33,7 @@ async function handleNewUser(data) {
     throw new Error(error);
   }
 }
-async function handleLogin({ username, password, token, guest }) {
-  if (guest) {
-    const guestUser = await User.findByPk(1);
-    return generateTokens(guestUser, true);
-  }
+async function handleLogin({ username, password, token }) {
   if (!username || !password)
     throw new Error("Username and Password are required");
   try {
@@ -51,13 +47,19 @@ async function handleLogin({ username, password, token, guest }) {
       if (foundUser.googleAuth) {
         if (token) {
           if ("verify") {
+            //no hace nada
           } else return null;
         } else {
           return { twoFactor: true };
         }
       }
+      console.log("1");
       // ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-      return generateTokens(foundUser, false);
+      const response = await generateTokens(foundUser);
+      console.log("2r", response);
+      response.user = foundUser.dataValues;
+      console.log(response);
+      return response;
     } else throw new Error("Wrong Password");
   } catch (error) {
     throw new Error(error.message);
@@ -71,7 +73,7 @@ async function handleLogout(cookie) {
   foundUser.save();
 }
 
-async function generateTokens(foundUser, infinite) {
+async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
@@ -80,7 +82,7 @@ async function generateTokens(foundUser, infinite) {
   const refreshToken = jwt.sign(
     { username: foundUser.username },
     process.env.REFRESH_TOKEN_SECRET,
-    infinite ? null : { expiresIn: "50m" }
+    { expiresIn: "50m" }
   );
   //guardar el refreshToken en la DB
   await foundUser.set({ refreshToken: refreshToken });

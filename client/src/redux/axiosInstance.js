@@ -1,7 +1,9 @@
 import axios from "axios";
-
+import store from "./store.js";
+import { getLoginUser } from "../redux/actions";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3001",
+  //baseURL: "https://prueba1-production-4ff1.up.railway.app/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,13 +11,18 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = sessionStorage.getItem("accessToken");
-    console.log(token);
-    if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
+  async (config) => {
+    const state = store.getState();
+    if (Object.keys(state.loggedUser).length === 0) {
+      let token = sessionStorage.getItem("accessToken");
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+        await store.dispatch(getLoginUser(null));
+      } else {
+        await store.dispatch(getLoginUser(null));
+      }
+      return config;
     }
-    return config;
   },
   (error) => {
     return Promise.reject(error);
@@ -46,6 +53,8 @@ axiosInstance.interceptors.response.use(
           //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
           //se deberia hacer un request de tipo /enter/logout
           console.log("DESLOGUEAR");
+          sessionStorage.removeItem("accessToken");
+          // borra accessToken
         }
       }
     }
