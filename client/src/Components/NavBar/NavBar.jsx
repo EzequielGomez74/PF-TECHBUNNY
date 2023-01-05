@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './NavBar.module.css';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
@@ -49,8 +49,6 @@ function NavBar() {
   const dm = useSelector(state => state.darkMode);
   const DM = useSelector(state => state.darkMode);
 
-  const [searchTerm, setSearchTerm] = useState('')
-
 
   return (
     <div className={dm ? s.DMnavBar : s.navBar}>
@@ -60,7 +58,7 @@ function NavBar() {
         </section>
         <section className={DM ? s.DMone : s.one}>
             <div>
-                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
+                <SearchBar/>
                 <h1><a href='/home'>TECHBUNNY</a></h1>
                 <div className={s.navDetail}>
                     
@@ -151,13 +149,6 @@ function NavBar() {
                         <DropdownItem icon = {faUserPlus} text={"Check In"}/>
                         </Link>
                     </ul>
-        </div>
-
-        <div>
-            { searchTerm.length && results.length ? results.map(p => <div>
-              <img src={p.image} alt={p.name} />
-              <span> {p.name} </span>
-            </div> ) : <span>No hay resultados</span> }
         </div>
             
     </div>

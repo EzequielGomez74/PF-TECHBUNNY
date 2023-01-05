@@ -57,10 +57,30 @@ function Category(){
         setActive({...active, price: true})
     }
 
+    let [filterForm, setFilterForm] = useState({
+        brand: '',
+        price: ''});
+
     return(
         <div className={dm ? s.dmbackground : s.background}>
             <NavBar/>
             <div className={s.categoryPage}>
+                <form>
+                    <select name='brand' id="brand" value={filterForm.brand} onChange={e => setFilterForm(e.target.value) }  >
+                        <option className={s.option}>Filtrar por marcas</option>
+                        {Brands && Brands.map((brand, i) => <option className={s.option} key={i} value={brand} >{brand}</option>)}
+                    </select>
+
+                    <select name="price" value={filterForm.price} onChange={e => setFilterForm(e.target.value)} >
+                        <option className={s.option}>Ordenar por precio</option>
+                        <option className={s.option} value="asc">Precio -&nbsp;&nbsp;Precio +</option>
+                        <option className={s.option} value="desc">Precio +&nbsp;&nbsp;Precio -</option>
+                    </select>
+
+                    <button type="submit">Filtrar</button>
+                </form>
+
+
                 <div className={s.selectors}>
                     <select name='brand' value={active.brand} id="brand" onChange={filterBrands}  >
                         <option className={s.option}>Filtrar por marcas</option>

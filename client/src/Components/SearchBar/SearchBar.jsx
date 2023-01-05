@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import s from './SearchBar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { getProducts , getSearchResults, getSearchTerm } from '../../redux/actions'
+import { getProducts , getSearchResults, getResults, getSearchTerm } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
-function SearchBar({ searchTerm, setSearchTerm }) {
+function SearchBar() {
+  const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
   const products = useSelector(state => state.products)
   const history = useHistory();
@@ -24,7 +25,7 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   const handleClick = (e) => {
     setSearchTerm(e.target.value)
     dispatch(getSearchTerm(searchTerm))
-    dispatch(getSearchResults(products, searchTerm))
+    dispatch(getResults(products, searchTerm))
     history.push('/results');
   }
 
@@ -32,6 +33,13 @@ function SearchBar({ searchTerm, setSearchTerm }) {
     <div>
         <input type="text" value={searchTerm} onChange={handleChange} className={s.input} placeholder={`Buscar productos` } />
         <button className={s.inputIcon} onClick={handleClick} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
+
+        <div>
+            { searchTerm ? results.map(p => <div>
+              <img src={p.image} alt={p.name} />
+              <span> {p.name} </span>
+            </div> ) : <span>No hay resultados</span> }
+        </div>
     </div>
   )
 }

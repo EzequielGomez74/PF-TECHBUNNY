@@ -7,7 +7,7 @@ import s from './Results.module.css'
 
 
 function Results() {
-    const results = useSelector(state => state.results)
+    const results = useSelector(state => state.results2)
     const st = useSelector(state => state.searchTerm)
 
 

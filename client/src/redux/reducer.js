@@ -10,6 +10,7 @@ const initialState = {
     // searchTerm:'',
     // searchResults:[],
     results:[],
+    results2:[],
     reviews: [],
     currentUser: {},
     // user: false,
@@ -93,6 +94,11 @@ export default function reducer (state=initialState, action){
             return {
                 ...state,
                 results: action.payload,
+            }
+        case 'GET_RESULTS':
+            return {
+                ...state,
+                results2: action.payload,
             }
         case 'COMPLETE_PROFILE':
             return {

@@ -1,45 +1,44 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import Footer from '../Footer/Footer'
-import s from './Verify.module.css'
-import { statusRegister } from '../../redux/actions'
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Footer from "../Footer/Footer";
+//import s from "./Verify.module.css";
+import { statusRegister } from "../../redux/actions";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function Verify() {
+  const { token } = useParams();
+  const [status, setStatus] = useState("");
+  useEffect(() => {
+    statusRegister(token);
+  }, []);
 
-    const { token } = useParams();
-    const dispatch = useDispatch();
-    const ta = useSelector(state => state.tokenAccepted)
+  const history = useHistory();
 
-    useEffect(()=>{
-        dispatch(statusRegister((token)))
-    },[token])
-
-    const history = useHistory();
-    const handleLogin = () => {
-        history.push('/login');
+  const statusRegister = async (token) => {
+    try {
+      let validate = await axios.put(`/verify/${token}`);
+      console.log(validate.data);
+      if (validate.data.status === "SUCCESS") {
+        setStatus(validate.data.status);
+      } else setStatus(validate.data.status);
+    } catch (error) {
+      alert(error);
     }
-
-    const handleRegister = () => {
-        history.push('/register');
+  };
+  if (status !== "") {
+    if (status === "SUCCESS") {
+      setTimeout(function () {
+        history.push("/login");
+      }, 2000);
+      return <div>"Validación éxitosa"</div>;
+    } else {
+      setTimeout(function () {
+        history.push("/login");
+      }, 2000);
+      return <div>"Validación fallida"</div>;
     }
-
-  return (
-    <div>
-        { ta === 'FAIL' ? 
-        <div>
-            <h4>Validación Fallida</h4>
-            <button onClick={handleRegister} >Registrarse Nuevamente</button> 
-            {/* Revisar */}
-        </div>: 
-        <div>
-            <h4>Validación Éxitosa</h4>
-            <button onClick={handleLogin} >Inicie Sesión</button>
-        </div>  }
-        <Footer />      
-    </div>
-  )
+  }
 }
-
-export default Verify
+export default Verify;

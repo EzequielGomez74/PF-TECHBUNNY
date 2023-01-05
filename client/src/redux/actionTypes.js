@@ -17,6 +17,7 @@ export const STATUS_REGISTER = 'STATUS_REGISTER';
 // export const GET_NEW_REGISTERED_USER= 'GET_NEW_REGISTERED_USER';
 
 export const GET_SEARCH_TERM = 'GET_SEARCH_TERM'
+export const GET_RESULTS = 'GET_RESULTS'
 
 
 // Funciones sincrónicas
