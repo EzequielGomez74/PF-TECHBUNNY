@@ -14,11 +14,27 @@ const access_token_mp = require("../../config/mercadopago.js");
 // $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
 router.post("/", validate.order, async (req, res) => {
 	try {
-		res.status(200).json({ order_id: await controller.createOrder(req.body) });
+		res.status(200).json({Mensaje: `Se creo la orden nro° ${await controller.createOrder(req.body)}`} );
 	} catch (error) {
-		res.sendStatus(400);
+		res.status(400).json({error: error.message});
 	}
 });
+
+
+// $ Esta ruta elimina las ordenes
+
+// todo IMPLEMENTAR BORRADO LOGICOOOOOOOO
+
+router.delete("/:order_id", async (req, res) => {
+	try {
+		res.status(200).json( await controller.deleteProductOrder(req.params, req.body));
+	} catch (error) {
+		res.status(400).json({error: error.message});
+		
+	}
+})
+
+
 
 
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }

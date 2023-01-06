@@ -31,8 +31,8 @@ const template = (userdata) => {
   }
 };
 const createTrans = () => {
-  //$  si rempalazamos con: configgmail los emails salen desde techbunnypf@gmail.com y sino con: configmailtrap es para verlas con mailtrap
-  const transport = nodemailer.createTransport(configmailtrap); //$
+  //$  si remplazamos con: configgmail los emails salen desde techbunnypf@gmail.com y sino con: configmailtrap es para verlas con mailtrap
+  const transport = nodemailer.createTransport(configgmail); //$
   return transport;
 };
 const sendMail = async (userdata) => {
