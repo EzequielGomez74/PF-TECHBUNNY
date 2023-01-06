@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './NavBar.module.css';
-import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
@@ -9,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode} from '../../redux/actions';
 import Responsive from './Responsive';
+import SearchBar from '../Search Bar/SearchBar';
+import logo from '../../Photos/loguito.png';
 
 
 function NavBar() {
@@ -62,6 +63,8 @@ function NavBar() {
             <div>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
+                <img src={logo} alt="logo" className='logo'/>
+            
                 <div className={s.navDetail}>
                     
                     <button className={DM ? s.DMbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
@@ -156,13 +159,13 @@ function NavBar() {
         <div className='search1'>
             { searchTerm.length && results.length ? results.map((p,i) =>{
                 if(i < 7)
-                return ( <div>
-                   <Link to = {`/detail/${p.product_id}`}> <img src={p.image} alt={p.name} /></Link>
+                return ( <div className='hola123'>
+                   <Link to = {`/detail/${p.product_id}`}> <img className='imgsearch' src={p.image} alt={p.name} /></Link>
                    <Link to = {`/detail/${p.product_id}`}> <span className='NameSearch'> {p.name} </span> </Link>
                   </div>)
                  
             } 
-            ) : ""}
+            ) : null}
         </div>
             
     </div>

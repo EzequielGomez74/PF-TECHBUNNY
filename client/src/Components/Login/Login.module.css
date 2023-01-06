@@ -10,19 +10,9 @@
     font-family: 'Poppins';
 }
 
-.heroLogin{
-    height: 500px;
-    width: 900px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.hero{
-    background-image: url(../../images/login.png);
-    width: 600px;
-    height: 490px;
-}
+
+
 
 .loginCard{
     background-color: white;
@@ -38,7 +28,6 @@
     font-size: 25px;
     line-height: 45px;
     padding-top: 20px;
-   color: #a4a4a4;
 }
 
 .loginCard input{
@@ -95,10 +84,18 @@
     border: none;
 }
 
-@media only screen and (max-width: 800px) {
-    .heroLogin{
-        display: none;
+.img{
+    width: 60%;
+    height: 60%;
+}
+
+@media only screen and (max-width: 500px) {
+    .dmheroLogin{
+        width:60%;
+        height:60%;
     }
+    
+    
 }
 
 /* DARK MODE */
@@ -116,19 +113,6 @@
     background-color: #20232A;
 }
 
-.dmheroLogin{
-    height: 500px;
-    width: 900px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dmhero{
-    background-image: url(../../images/login-dm.png);
-    width: 600px;
-    height: 490px;
-}
 
 .dmloginCard{
     background-color: #2B3036;
@@ -144,7 +128,7 @@
     font-size: 25px;
     line-height: 45px;
     padding-top: 20px;
-    color: #a4a4a4;
+    color: #f6f5fa;
 }
 
 .dmloginCard input{
@@ -205,4 +189,9 @@
     background-color: transparent;
     color: #f6f5fa;
     border: 1px solid #f6f5fa;
+}
+
+.dmimg {
+    width: 100%;
+    height: 100%;
 }
