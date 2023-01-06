@@ -6,8 +6,8 @@ const generateValidationAndSendMail = require("../../scripts/generateValidationA
 require("dotenv").config();
 
 async function handleNewUser(data) {
-  if (!data.username || !data.password)
-    throw new Error("Username and Password are required");
+  if (!data.username || !data.password || !data.email)
+    throw new Error("Username , Password , Email are required");
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
