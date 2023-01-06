@@ -39,11 +39,6 @@ export default function reducer (state=initialState, action){
                 ...state,
                 filtered: action.payload,
             }
-        case 'FILTER_BY_PRICE':
-            return{
-                ...state,
-                filtered: action.payload,
-            }
         case 'ORDER_BY_PRICE':
             return{
                 ...state,
