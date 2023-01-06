@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       status: {
-        type: DataTypes.ENUM(["created", "processed", "complete", "canceled"]),
+        type: DataTypes.ENUM(["carrito","created", "processed", "complete", "canceled"]),
         allowNull: false,
       },
       user_id: {

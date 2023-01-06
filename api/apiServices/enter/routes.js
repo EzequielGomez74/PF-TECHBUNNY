@@ -6,7 +6,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 const router = Router();
 
 
-// $ BODY  CREACION DE USUARIO
+// $ BODY  CREACION DE USUARIO { username, password }
 router.post("/", validate.enter, async (req, res) => {
   const data = req.body;
   try {
@@ -17,7 +17,7 @@ router.post("/", validate.enter, async (req, res) => {
 });
 
 
-// $ PARAMS /enter/login   /enter/logout  /enter/recover    ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
+// $ PARAMS /enter/login   /enter/logout  /enter/recover   PARAMS { accessType }  ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
 router.put("/:accessType", validate.enterLogin, async (req, res) => {
   const { accessType } = req.params;
   try {

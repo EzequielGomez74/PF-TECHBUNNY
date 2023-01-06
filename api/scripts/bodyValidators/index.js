@@ -90,7 +90,7 @@ const enter = [
   check('isLogged').isEmpty().withMessage("no podes modificar isLogged"),
   
   
-  // //estos si se pueden modificar
+  // estos si se pueden modificar
   // *check("profilePicture").isURL().withMessage("La foto de perfil debe ser una url"),
   // *check("defaultShippingAddress").isString().withMessage("defaultShippingAddress es requerido y debe ser un string"),
   // *check("surname").isString().withMessage("el surname debe ser un string"),
