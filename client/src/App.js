@@ -12,6 +12,7 @@ import Error from './Components/Error/Error';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Categories from './Components/Categories/Categories';
+import QA from './Components/QA/QA';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route exact path='/categories' component={Categories}  />
         <Route exact path='/category/:name' component={Category}/>
         <Route exact path='/followUp' component={FollowUp}/>
+        <Route exact path ='/qa' component={QA}/>
         <Route exact path='*' component={Error}/>
       </Switch>
     </div>
