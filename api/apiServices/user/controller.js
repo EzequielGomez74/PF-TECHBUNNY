@@ -59,7 +59,7 @@ async function getUserById(user_id) {
     throw new Error(error.message);
   }
 }
-async function deleteUser(user_id) {
+async function deleteUser(body) {
   try {
     const { user_id} = body;
     const existe = await User.findOne({ where: { user_id }});

@@ -14,12 +14,10 @@ async function deleteProductOrder(params, body){
     if (body.status === "onCart"){ return res.status(400).send("En esta ruta solo se pueden borrar ordenes, no carritos.")}
     const {order_id} = params 
     const {product_id, product_name} = body
-
     await OrderProduct.update({where: {product_id: product_id, order_id: order_id}})
     console.log("El producto ", product_name, " fue eliminado del carrito")
   } catch (error) {
     throw new Error(error.message);
-    
   }
 }
 
