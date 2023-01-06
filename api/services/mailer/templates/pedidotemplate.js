@@ -1,5 +1,5 @@
-const pedidotemplate = (userdata,object)=>{
-return `
+const pedidotemplate = (userdata) => {
+  return `
 <table border="0" cellpadding="0" cellspacing="0" bgcolor="#F2F2F2" style="direction:ltr;width:100%;min-width:320px;text-align:center;color:#292c2e;font-family:Arial,Verdana,Heveltica,sans-serif;font-size:1em;">
 <tbody>
   <tr>
@@ -14,8 +14,8 @@ return `
           <tr>
             <td style="padding:2% 5%">
               <!-- EMAIL BODY -->
-              <h2 style="font-size:22px;">Pedido ${object.order_id} registrado!</h2>
-              <p>Hola <b>${object.username}</b>, Su nuevo pedido fue creado con exito!</p>
+              <h2 style="font-size:22px;">Pedido n°${userdata.order_id} registrado!</h2>
+              <p>Hola <b>${userdata.name}</b>, Su nuevo pedido fue creado con exito!</p>
               <table cellpadding="0" cellspacing="0" style="direction:ltr;width: 100%;">
                 <tbody>
                   <tr>
@@ -24,13 +24,13 @@ return `
                   </tr>
                   <tr>
                     <td style="font-weight:bold;text-align:left;">Última Atualizacion</td>
-                    <td style="color:#7f8c8d;text-align:right;">${object.updatepAt}</td>
+                    <td style="color:#7f8c8d;text-align:right;">${userdata.updatedAt}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold;text-align:left;">CPF/CNPJ na Nota</td>
                     <td style="color:#7f8c8d;text-align:right;">335.560.268-05</td>
                   </tr>
-                  <tr>Tiempo Estunadi de entrega</td>
+                  <tr>Tiempo Estimado de entrega</td>
                     <td style="color:#7f8c8d;text-align:right;">25 min.</td>
                   </tr>
                   <tr>
@@ -38,18 +38,18 @@ return `
                   </tr>
                   <tr>
                     <td colspan="2" style="color:#7f8c8d;text-align:left;">
-                    ${object.billingAddress}
+                    ${userdata.defaultShippingAddress}
                     </td>
                   </tr>
                   <tr>
-                    <td style="font-weight:bold;text-align:left;">Forma de Pagamento</td>
-                    <td style="color:#7f8c8d;text-align:right;">${object.Formadepago}</td>
+                    <td style="font-weight:bold;text-align:left;">Estado de pago</td>
+                    <td style="color:#7f8c8d;text-align:right;">${userdata.status}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr style="font-weight: bold;font-size:18px;">
                     <td style="font-weight:bold;text-align:left;padding: 15px 0 0;">Total</td>
-                    <td style="color:#27ae60;text-align:right;padding: 15px 0 0;"> $${object.totalprice}</td>
+                    <td style="color:#27ae60;text-align:right;padding: 15px 0 0;"> $${userdata.total}</td>
                   </tr>
                 </tfoot>
               </table>
@@ -75,6 +75,6 @@ return `
   </tr>
 </tbody>
 </table>
-`
-}
-module.exports = {pedidotemplate}
+`;
+};
+module.exports = { pedidotemplate };

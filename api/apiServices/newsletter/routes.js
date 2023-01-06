@@ -9,7 +9,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 const router = Router();
 
 //$ Esta ruta devuelve todas los emails subscriptos al newsletter { body.email }
-router.post("/",async (req, res) => {
+router.post("/",validate.newsletter , async (req, res) => {
   try {
     res.status(200).json(await controller.subscribe(req.body));
   } catch (error) {
