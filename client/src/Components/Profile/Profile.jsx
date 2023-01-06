@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { completeProfile } from '../../redux/actions';
+import s from './Profile.module.css'
 
 function Profile(){
     const user = useSelector(state => state.currentUser)
@@ -36,21 +37,21 @@ function Profile(){
     return(
         <div>
             <NavBar/>
-            <div>
+            <div className={s.profileSection}>
                 { user.name && user.email ? 
-                <div>
-                    <span> {user.name} </span>
-                    <span> {user.email} </span>
-                    <span> {user.billingAddress} </span>
-                    <span> {user.zipCode} </span>
+                <div className={s.profileInfo}>
+                    <span><strong>Usuario:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.name} </span>
+                    <span><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.email} </span>
+                    <span><strong>Dirección:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.billingAddress} </span>
+                    <span><strong>Código ZIP:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.zipCode} </span>
                     <button onClick={handleEditProfile} >Editar información</button>
                 </div> : 
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit} className={s.profileForm} >
                     <input type="text" name="name" value={input.name} onChange={handleChange} placeholder="Usuario"></input>
                     <input type="email" name="email" value={input.email} onChange={handleChange} placeholder="ejemplo@prueba.com"></input>
                     <input type="text" name="billingAddress" value={input.billingAddress} onChange={handleChange} placeholder="Dirección"></input>
                     <input type="text" name="zipCode" value={input.zipCode} onChange={handleChange} placeholder="Código postal"></input>
-                    <button type="submit">Guardar Cambios</button>
+                    <button type="submit">Guardar Información</button>
                 </form>
                 }
             </div>

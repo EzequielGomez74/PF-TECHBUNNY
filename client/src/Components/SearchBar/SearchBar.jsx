@@ -23,6 +23,7 @@ function SearchBar() {
   }
 
   const handleClick = (e) => {
+    // e.preventDefault()
     setSearchTerm(e.target.value)
     dispatch(getSearchTerm(searchTerm))
     dispatch(getResults(products, searchTerm))
