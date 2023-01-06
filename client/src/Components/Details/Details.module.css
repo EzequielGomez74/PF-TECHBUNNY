@@ -57,6 +57,16 @@
     color: #D7F136;
 }
 
+.h44
+{
+    font-style: normal;
+    font-weight: 660;
+    font-size: 15px;
+    line-height: 20px;
+    color: #121212;
+    padding-left: 35px;
+}
+
 .productImage img{
     width: 400px;
     height: auto;
