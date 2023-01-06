@@ -24,12 +24,13 @@ async function createOrder({ status, user_id, products }) {
       { where: { order_id: order.dataValues.order_id } }
     );
     const datos = await Order.findByPk(order.order_id);
-    const userdata = await {
+    const userdata = {
       ...user.dataValues,
       ...order.dataValues,
       ...datos.dataValues,
       type: "order",
     };
+	console.log("ACAAAAAAAAA",userdata)
     sendMail(userdata); 
     return order.order_id;
   } catch (error) {
