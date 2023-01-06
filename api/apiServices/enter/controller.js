@@ -6,8 +6,8 @@ const generateValidationAndSendMail = require("../../scripts/generateValidationA
 require("dotenv").config();
 
 async function handleNewUser(data) {
-  if (!data.username || !data.password)
-    throw new Error("Username and Password are required");
+  if (!data.username || !data.password || !data.email)
+    throw new Error("Username , Password , Email are required");
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
@@ -21,9 +21,11 @@ async function handleNewUser(data) {
       ...data,
       password: hashedPwd,
     };
-    //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
-    //GENERARA TOKEN Y GUARDAR EN DB
-    //GENERA VERYFICATION CODE
+    // verificationNumber es el numero para validar el email
+    let verificationNumber = require ("crypto").randomBytes(10).toString("hex")
+    const userdata = {...newUser, type:"register", verificationNumber: verificationNumber}
+    console.log("OBJETOOOO",userdata)
+    emailer.sendMail(userdata)
     const userCreated = await User.create(newUser);
     generateValidationAndSendMail(userCreated);
     return { success: `New user ${userCreated.username} created` };
