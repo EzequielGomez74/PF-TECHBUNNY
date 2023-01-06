@@ -9,35 +9,39 @@ const { sendMail } = require("../../services/mailer/emailer.js");
 
 
 async function createOrder({ status, user_id, products }) {
-	try {
-		const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
-		const newOrder = { status, user_id };
-		const order = await Order.create(newOrder);
-		let suma = 0;
-
-		await products.forEach(async (product) => {
-			const productoDb = await Product.findByPk(product.product_id); // ACA TRAEMOS LOS PRODUCTOS CON SU PRICE
-			await order.addProduct(product.product_id, { // CREA LOS DATOS DE LA TABLA INTERMEDIA
-				
-				through: {
-					product_name: productoDb.name,
-					count: product.count,
-					price: productoDb.dataValues.price,
-				},
-			});
-			suma += product.count * productoDb.dataValues.price; // CALCULA EL TOTAL DE LA ORDER
-			await Order.update(
-				{ total: suma },
-				{ where: { order_id: order.dataValues.order_id } }
-			);
-		});
-
-		const userData = { ...order, type: "order" }; //ENVIO DE EMAIL
-		sendMail(user.email, object); //ENVIO DE EMAIL
-		return order.order_id;
-	} catch (error) {
-		throw new Error(error.message);
-	}
+  try {
+    const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
+    const newOrder = { status, user_id };
+    const order = await Order.create(newOrder); //
+    let suma = 0;
+    await products.forEach(async (product) => {
+      // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
+      suma += product.count * product.price; // CALCULA EL TOTAL DE LA ORDER
+      await order.addProduct(product.product_id, {
+        // CREA LOS DATOS DE LA TABLA INTERMEDIA
+        through: {
+          product_name: product.product_name,
+          count: product.count,
+          price: product.price,
+        },
+      });
+    });
+    await Order.update(
+      { total: suma },
+      { where: { order_id: order.dataValues.order_id } }
+    );
+    const datos = await Order.findByPk(order.order_id);
+    const userdata = await {
+      ...user.dataValues,
+      ...order.dataValues,
+      ...datos.dataValues,
+      type: "order",
+    };
+    sendMail(userdata); 
+    return order.order_id;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function getOrders() {
@@ -50,29 +54,29 @@ async function getOrders() {
 }
 
 async function getOrderById(order_id) {
-	// BUSCA UNA ORDER POR ID
-	try {
-		const orde1 = await Order.findAll({
-			where: { order_id },
-			include: {
-				model: Product,
-				attributes: ["product_id"],
-				through: {
-					attributes: ["count"],
-				},
-			},
-		});
+  // BUSCA UNA ORDER POR ID
+  try {
+    const orde1 = await Order.findAll({
+      where: { order_id },
+      include: {
+        model: Product,
+        attributes: ["product_id"],
+        through: {
+          attributes: ["count"],
+        },
+      },
+    });
 
-		console.log(orde1);
-		const orderById = orde1.map((el) => {
-			//ordenamos los datos para mandarlos limpios al front
-			return {
-				...el.dataValues,
-				Products: el.Products.map((el) => {
-					return { product_id: el.product_id, count: el.OrderProduct.count };
-				}),
-			};
-		});
+    console.log(orde1);
+    const orderById = orde1.map((el) => {
+      //ordenamos los datos para mandarlos limpios al front
+      return {
+        ...el.dataValues,
+        Products: el.Products.map((el) => {
+          return { product_id: el.product_id, count: el.OrderProduct.count };
+        }),
+      };
+    });
 
     return orderById;
   } catch (error) {
@@ -81,7 +85,7 @@ async function getOrderById(order_id) {
 }
 
 async function getOrderByUserId(user_id) {
-  // ? BUSCA TODAS LAS ORDENES DEL USUARIO
+  // BUSCA TODAS LAS ORDENES DEL USUARIO
   try {
     const orde1 = await Order.findAll({
       where: { user_id },
@@ -94,19 +98,19 @@ async function getOrderByUserId(user_id) {
       },
     });
 
-		const clearResponse = orde1.map((el) => {
-			//ordenamos los datos para mandarlos limpios al front
-			return {
-				...el.dataValues,
-				Products: el.dataValues.Products.map((ele) => {
-					return {
-						product_id: ele.dataValues.product_id,
-						count: ele.dataValues.OrderProduct.count,
-						// price: ele.OrderProduct.price
-					};
-				}),
-			};
-		});
+    const clearResponse = orde1.map((el) => {
+      //ordenamos los datos para mandarlos limpios al front
+      return {
+        ...el.dataValues,
+        Products: el.dataValues.Products.map((ele) => {
+          return {
+            product_id: ele.dataValues.product_id,
+            count: ele.dataValues.OrderProduct.count,
+            // price: ele.OrderProduct.price
+          };
+        }),
+      };
+    });
 
     return clearResponse;
   } catch (error) {
