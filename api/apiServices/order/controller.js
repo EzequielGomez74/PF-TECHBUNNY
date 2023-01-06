@@ -4,34 +4,64 @@ const {
   OrderProduct,
   User,
 } = require("../../services/db/db.js");
-const Sequelize = require("sequelize");
 const { sendMail } = require("../../services/mailer/emailer.js");
 const { response } = require("express");
 
+// todo cuando se haga un post de cart, el mismo debe checkear si ya existe uno. Si es asi, se debe sumar al mismo.
 
+                                                          //? DELETE ORDER
+
+// $ esta funcion unicamente elimina productos del onCart de cada usuario.
 async function deleteProductOrder(params, body){
   try {
-    if (body.status === "onCart"){ return res.status(400).send("En esta ruta solo se pueden borrar ordenes, no carritos.")}
-    const {order_id} = params 
-    const {product_id, product_name} = body
-    await OrderProduct.update({where: {product_id: product_id, order_id: order_id}})
-    console.log("El producto ", product_name, " fue eliminado del carrito")
+    const cartUser = await Order.findAll({                                                                                              // $ esto busca el carrito en las ORDERS por el user_id
+			where: { 
+        user_id: params.user_id,
+        status: "onCart"
+       }
+		}); 
+    if (!cartUser[0].dataValues) { throw new Error("No se encontro un carrito asociado a este usuario")}
+    await OrderProduct.destroy({
+			where: {
+				order_id: cartUser[0].dataValues.order_id,                                                                                      // $ elimina por la orden perteneciente al cartUser
+				product_id: body.product_id,                                                                                                   // $ elimina el producto enviado por body
+			},
+		});
+    console.log("El producto ", body.product_name, " fue eliminado del carrito")
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
+                                                          //? UPDATE ORDER
+// $ esta funcion actualiza el estado de las ordenes (
+// $  status = "onCart" ===> status = "created"
+// $  status = "created" ===> status = "processed"
+// $  status = "processed" ===> status = "completed" || status = "canceled"
+async function updateOrder(user_id, order_id, status ) {
+  try {
+    console.log(user_id, order_id, status )
+    const order = await Order.update({status: status}, {where: {user_id: user_id, order_id: order_id}}); //
+    console.log("se cambio el estado de la orden nro° ", order_id, " perteneciente al user ", user_id, "al estado: ", status)
+    return order;
+    } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
-async function createOrder({ status, user_id, products }) {
+
+                                                          //? CREATE ORDER
+// $ esta funcion siempre creara carritos
+async function createOrder({ user_id, products }) {
   try {
     const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
-    const newOrder = { status, user_id };
+    const newOrder = {  user_id };
     const order = await Order.create(newOrder); //
     let suma = 0;
-    await products.forEach(async (product) => {               // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
-      suma += product.count * product.price;                  // $ CALCULA EL TOTAL DE LA ORDER
+    await products.forEach(async (product) => {                                                       // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
+      suma += product.count * product.price;                                                          // $ CALCULA EL TOTAL DE LA ORDER
       await order.addProduct(product.product_id, {
-        through: {                                            // $ CREA LOS DATOS DE LA TABLA INTERMEDIA
+        through: {                                                                                     // $ CREA LOS DATOS DE LA TABLA INTERMEDIA
           product_name: product.product_name,
           count: product.count,
           price: product.price,
@@ -49,13 +79,15 @@ async function createOrder({ status, user_id, products }) {
       ...datos.dataValues,
       type: "order",
     };
-    sendMail(userdata); 
+    // sendMail(userdata); 
     return order.order_id;
-  } catch (error) {
+    } catch (error) {
     throw new Error(error.message);
   }
 }
 
+
+                                                          //? GET ORDERS
 async function getOrders() {
   try {
     const getOrders = await Order.findAll();
@@ -64,6 +96,9 @@ async function getOrders() {
     throw new Error(error.message);
   }
 }
+
+
+                                                          //? GET ORDERS BY ID
 
 async function getOrderById(order_id) {
   // BUSCA UNA ORDER POR ID
@@ -78,8 +113,6 @@ async function getOrderById(order_id) {
         },
       },
     });
-
-    console.log(orde1);
     const orderById = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
@@ -89,13 +122,15 @@ async function getOrderById(order_id) {
         }),
       };
     });
-
     return orderById;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
+
+
+                                                          //? GET ORDERS BY USER ID
 async function getOrderByUserId(user_id) {
   // BUSCA TODAS LAS ORDENES DEL USUARIO
   try {
@@ -109,7 +144,6 @@ async function getOrderByUserId(user_id) {
         },
       },
     });
-
     const clearResponse = orde1.map((el) => {
       //ordenamos los datos para mandarlos limpios al front
       return {
@@ -123,22 +157,13 @@ async function getOrderByUserId(user_id) {
         }),
       };
     });
-
     return clearResponse;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-async function updateOrder(order, data) {
 
-  try {
-    await Order.update({status:data.status}, { where: { order_id: order } });
-    return "Orden modificada con exito!";
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
 module.exports = {
   createOrder,
   getOrderById,
