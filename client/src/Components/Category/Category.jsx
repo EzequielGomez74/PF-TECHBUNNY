@@ -120,7 +120,7 @@ function Category() {
                 id={e.product_id}
                 brand={e.brand}
                 name={e.name}
-                image={e.image}
+                image={e.image} 
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}
