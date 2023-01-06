@@ -6,6 +6,22 @@ const {
 } = require("../../services/db/db.js");
 const Sequelize = require("sequelize");
 const { sendMail } = require("../../services/mailer/emailer.js");
+const { response } = require("express");
+
+
+async function deleteProductOrder(params, body){
+  try {
+    if (body.status === "onCart"){ return res.status(400).send("En esta ruta solo se pueden borrar ordenes, no carritos.")}
+    const {order_id} = params 
+    const {product_id, product_name} = body
+
+    await OrderProduct.update({where: {product_id: product_id, order_id: order_id}})
+    console.log("El producto ", product_name, " fue eliminado del carrito")
+  } catch (error) {
+    throw new Error(error.message);
+    
+  }
+}
 
 
 async function createOrder({ status, user_id, products }) {
@@ -14,12 +30,10 @@ async function createOrder({ status, user_id, products }) {
     const newOrder = { status, user_id };
     const order = await Order.create(newOrder); //
     let suma = 0;
-    await products.forEach(async (product) => {
-      // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
-      suma += product.count * product.price; // CALCULA EL TOTAL DE LA ORDER
+    await products.forEach(async (product) => {               // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
+      suma += product.count * product.price;                  // $ CALCULA EL TOTAL DE LA ORDER
       await order.addProduct(product.product_id, {
-        // CREA LOS DATOS DE LA TABLA INTERMEDIA
-        through: {
+        through: {                                            // $ CREA LOS DATOS DE LA TABLA INTERMEDIA
           product_name: product.product_name,
           count: product.count,
           price: product.price,
@@ -133,4 +147,5 @@ module.exports = {
   updateOrder,
   getOrders,
   getOrderByUserId,
+  deleteProductOrder,
 };
