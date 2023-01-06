@@ -126,15 +126,16 @@ function Details() {
             )) : <span>Sin puntuación</span> }
           </div>
           <div className={dm? s.dmdelivery : s.delivery}>
-            <h3>Tipo de Entrega</h3>
-            <div>
+            <h3>Tipo de Entrega:</h3>
+            <h4 className={s.h44}>Retiro por sucursal - Envio a domicilio</h4>
+            {/* <div>
               <input type="radio" id="contactChoice1" name="contact" value="email" />
               <label>&nbsp;&nbsp;<FontAwesomeIcon icon={faTruck} /> &nbsp;&nbsp;Despacho a domicilio </label>
             </div>
             <div>
               <input type="radio" id="contactChoice1" name="contact" value="email" />
               <label>&nbsp;&nbsp;<FontAwesomeIcon icon={faStore} /> &nbsp;&nbsp;Retiro en tienda </label>
-            </div>
+            </div> */}
           </div>
           <hr />
           <h2 className={dm? s.dmprice : s.price}>US${product.price}</h2>
