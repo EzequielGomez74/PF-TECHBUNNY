@@ -1,3 +1,15 @@
+// const server = require("../app.js");
+// const { db } = require("../services/db/db.js");
+// const loadAllAssets = require("../scripts/initializeDb.js");
+
+// // Syncing all the models at once.
+// db.sync({ force: true }).then(async() => {
+//   await loadAllAssets();
+//   server.listen(3001, () => {
+//     console.log("%s listening at 3001");
+//   });
+// });
+
 const server = require("../app.js");
 const { db } = require("../services/db/db.js");
 const loadAllAssets = require("../scripts/initializeDb.js");
@@ -9,9 +21,3 @@ db.sync({ force: true }).then(async () => {
     console.log("%s listening at 3001");
   });
 });
-
-// conn.sync({ force: false }).then(() => {
-//   server.listen(process.env.PORT, function () {
-//     console.log("escuchando en puerto", process.env.PORT); // eslint-disable-line no-console
-//   });
-// });
