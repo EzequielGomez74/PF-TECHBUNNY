@@ -10,8 +10,8 @@ const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const access_token_mp = require("../../config/mercadopago.js");
 
-// $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
 
+// $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
 router.post("/", validate.order, async (req, res) => {
 	try {
 		res.status(200).json({ order_id: await controller.createOrder(req.body) });
@@ -20,7 +20,8 @@ router.post("/", validate.order, async (req, res) => {
 	}
 });
 
-// $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago.
+
+// $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
 		mercadopago.configure({
@@ -55,7 +56,8 @@ router.get("/pagar/:order_id", async (req, res) => {
 	}
 });
 
-// $ Esta ruta retorna todas las orders del usuario por id con QUERY
+
+// $ Esta ruta retorna todas las orders del usuario por id con QUERY { user_id }
 router.get("/", async (req, res) => {
 	const { user_id } = req.query;
 	try {
@@ -69,7 +71,8 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// $ Esta ruta retorna los detalles de una orden por PARAMS(order_id).
+
+// $ Esta ruta retorna los detalles de una orden por PARAMS { order_id }.
 router.get("/:order_id", async (req, res) => {
 	//retorna una sola por id con PARAMS
 	const { order_id } = req.params;
@@ -84,7 +87,8 @@ router.get("/:order_id", async (req, res) => {
 	}
 });
 
-// $ Esta ruta modifica una orden para cambiar el estado de la misma.
+
+// $ Esta ruta modifica una orden para cambiar el estado de la misma. PARAMS { order_id } BODY { data }
 router.put("/:order_id", async (req, res) => {
 	try {
 		const data = req.body;
