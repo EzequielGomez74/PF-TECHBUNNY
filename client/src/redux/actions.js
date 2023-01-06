@@ -92,12 +92,7 @@ export const filterByBrand = (products, brand) => {
     }
 }
 
-// export const filterByPrice = (products, max, min) => {
-//     return function(dispatch){
-//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
-//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
-//     }
-// }
+
 
 export const orderByPrice = (products, order) => {
     return function(dispatch){

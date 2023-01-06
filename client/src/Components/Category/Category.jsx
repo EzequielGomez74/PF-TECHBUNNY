@@ -18,6 +18,7 @@ function Category(){
     let {name} = useParams();
     let dispatch = useDispatch();
     let products = useSelector(state => state.productsByCategory);
+ 
     // let categories = useSelector(state => state.categories);
     let filter = useSelector(state => state.filtered);
     let productBrands = [];
