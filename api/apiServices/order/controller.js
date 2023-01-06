@@ -32,7 +32,7 @@ async function createOrder({ status, user_id, products }) {
 			);
 		});
 
-		const object = { ...order, type: "order" }; //ENVIO DE EMAIL
+		const userData = { ...order, type: "order" }; //ENVIO DE EMAIL
 		sendMail(user.email, object); //ENVIO DE EMAIL
 		return order.order_id;
 	} catch (error) {
