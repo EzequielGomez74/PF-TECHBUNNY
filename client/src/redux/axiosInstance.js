@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "./store.js";
-import { getLoginUser } from "../redux/actions";
+import loginUser from "../scripts/loginUser";
+
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3001",
   //baseURL: "https://prueba1-production-4ff1.up.railway.app/",
@@ -17,12 +18,15 @@ axiosInstance.interceptors.request.use(
       let token = sessionStorage.getItem("accessToken");
       if (token) {
         config.headers["Authorization"] = "Bearer " + token;
-        await store.dispatch(getLoginUser(null));
+        await loginUser(null);
       } else {
-        await store.dispatch(getLoginUser(null));
+        await loginUser(null);
       }
-      return config;
+    } else {
+      let token = sessionStorage.getItem("accessToken");
+      if (token) config.headers["Authorization"] = "Bearer " + token;
     }
+    return config;
   },
   (error) => {
     return Promise.reject(error);

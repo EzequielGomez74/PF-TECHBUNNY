@@ -22,32 +22,37 @@ router.put("/:accessType", async (req, res) => {
       case "login":
         const { username, password } = req.body;
         let authResult;
-        if (username && password) {
+        if (req.body?.tokenId) {
+          //todo login with google
+          console.log("entro con google");
+          authResult = await controller.handleGoogleLogin(req.body);
+        } else if (username && password) {
+          console.log("r body ", req.body);
           authResult = await controller.handleLogin(req.body);
+          console.log("r authResult ", authResult);
         } else if (
           Object.keys(req.body).length === 0 &&
           req.username !== null
         ) {
-          authResult = await controller.handleLogin({
-            username: req.username,
-            password: "pepito",
-            token: req.body.token,
-          });
+          const refreshToken = req.cookies?.jwt;
+          authResult = await controller.handleLoginWithRefresh(refreshToken);
+        } else if (req.username === null) {
+          return res.sendStatus(202);
         }
         console.log("auth ", authResult);
+        // ? manejo de respuesta
         if (authResult.refreshToken) {
+          console.log("GOOGLE ", authResult);
           res.cookie("jwt", authResult.refreshToken, {
             sameSite: "None",
             secure: true,
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
           });
-          return res
-            .status(200)
-            .json({
-              accessToken: authResult.accessToken,
-              user: authResult.user,
-            });
+          return res.status(200).json({
+            accessToken: authResult.accessToken,
+            user: authResult.user,
+          });
         } else if (authResult === null || authResult.twoFactor) {
           return res.status(200).json(authResult);
         } else {
@@ -55,6 +60,7 @@ router.put("/:accessType", async (req, res) => {
         }
         break;
       case "logout":
+        //! LOGOUT tiene que guardar data de la session - savedSessionData
         const cookie = req.cookies?.jwt;
         if (cookie) {
           await controller.handleLogout(cookie);

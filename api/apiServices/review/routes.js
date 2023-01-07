@@ -21,6 +21,7 @@ router.use(verifyJWT); // !validacion de JWT
 router.post("/", async (req, res) => {
   const review = req.body;
   try {
+    console.log(req.body);
     res.status(200).send(await controller.createReviews(review));
   } catch (error) {
     res.status(400).send(error);

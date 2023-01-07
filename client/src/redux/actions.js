@@ -16,7 +16,7 @@ import {
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   FILTER_BY_PRICE,
-  GET_LOGGED_USER,
+  SET_LOGGED_USER,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -45,6 +45,7 @@ export const getProducts = (id) => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
+      console.log("#");
       var json = await axiosInstance.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
@@ -68,7 +69,8 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      let postedReview = await axiosInstance.post("/reviews", review);
+      console.log("review", review);
+      const postedReview = await axiosInstance.post("/reviews", review);
       onSuccess();
       return postedReview;
     } catch (error) {
@@ -91,7 +93,9 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      var json = await axiosInstance.get(`/products?category=${category}`);
+      console.log(category);
+      let json = await axiosInstance.get(`/products?category=${category}`);
+      console.log("1");
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -202,32 +206,9 @@ export const getUser = () => {
   };
 };
 
-export const getLoginUser = (data) => {
-  return async function (dispatch) {
-    try {
-      //const config = {Authorization:"Bearer "+}
-      const response = await axios.put("/enter/login", data, {
-        withCredentials: true,
-      });
-      if (response.data.accessToken) {
-        console.log("deberia entrar ", response.data);
-        sessionStorage.setItem("accessToken", response.data.accessToken);
-        if (response.data.user) {
-          //!response.data tambien trae info de la session (carrito,etc)
-          return dispatch({
-            type: GET_LOGGED_USER,
-            payload: response.data.user,
-          });
-        }
-      } else if (response.data.twoFactor) {
-        //generar un pop up para ingresar el codigo que te aparece en el celular
-        //vuelvo a ejecutar /enter/login
-        //todo aca hacer el 2FA
-      } else if (response.data === null) {
-        return "TOKEN INCORRECTO, REINGRESAR";
-      }
-    } catch (error) {
-      //metio mal
-    }
+export const setLoggedUser = (user) => {
+  return {
+    type: SET_LOGGED_USER,
+    payload: user,
   };
 };

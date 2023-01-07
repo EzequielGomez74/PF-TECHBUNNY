@@ -12,6 +12,7 @@ import FollowUp from "./Components/Estado de Orden/FollowUp";
 import Error from "./Components/Error/Error";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import Verify from "./Components/Verify/Verify";
 //asd
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/category/:name" component={Category} />
         <Route exact path="/followUp" component={FollowUp} />
+        <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>

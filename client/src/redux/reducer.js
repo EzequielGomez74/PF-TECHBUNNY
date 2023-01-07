@@ -7,6 +7,7 @@ const initialState = {
   cart: [],
   favorites: [],
   darkMode: false,
+  reviews: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
@@ -90,10 +91,20 @@ export default function reducer(state = initialState, action) {
         ...state,
         results: action.payload,
       };
-    case "GET_LOGGED_USER":
+    case "GET_LOGGED_USER": {
+      return {
+        ...state,
+      };
+    }
+    case "SET_LOGGED_USER":
       return {
         ...state,
         loggedUser: action.payload,
+      };
+    case "GET_REVIEWS_BY":
+      return {
+        ...state,
+        reviews: action.payload,
       };
     default:
       return { ...state };

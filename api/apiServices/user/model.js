@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       role: {
-        //1=guest 2=user 3=admin
+        // 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 2,
@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultValue: true,
+        defaultValue: false,
       },
       needPasswordReset: {
         type: DataTypes.BOOLEAN,
@@ -72,15 +72,9 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      //IS LOGGED ?????
-      // isLogged: {
-      //   type: DataTypes.BOOLEAN,
-      //   allowNull: false,
-      //   defaultValue: false,
-      // },
       googleAuth: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false,
       },
       secretAuth: {
