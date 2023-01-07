@@ -23,22 +23,22 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
+    if (!notFound.current && searchTerm.length !== "") {
+      notFound.current = true;
+    }
+
+    if (noTerm.current && searchTerm.length !== "") {
+      noTerm.current = false;
+    } else if (!noTerm.current && !searchTerm.length) {
+      noTerm.current = true;
+    }
+
     if (ininitialLoad.current) {
       dispatch(getProducts());
       ininitialLoad.current = false;
     }
     console.log(searchTerm);
     if (searchTerm !== "") dispatch(getSearchResults(searchTerm));
-
-    if (!notFound.current && searchTerm.length) {
-      notFound.current = true;
-    }
-
-    if (noTerm.current && searchTerm.length) {
-      noTerm.current = false;
-    } else if (!noTerm.current && !searchTerm.length) {
-      noTerm.current = true;
-    }
   }, [dispatch, searchTerm]);
 
   const handleChange = (e) => {
@@ -90,7 +90,7 @@ function SearchBar() {
             })}
         </ul>
 
-        {notFound && "" === 0 && results.length && (
+        {notFound && !results.length && (
           <ul className={s.notFound}>
             <li>No se encontraron resultados</li>
           </ul>
