@@ -18,6 +18,7 @@
     margin-left: 10%;
     margin-top: 2%;
     margin-bottom: 2%;
+   
 }
 .imgBanner{
     width: 100%;
@@ -25,6 +26,10 @@
     margin-left: 35%;
     margin: 5px;
 }
+
+/* .bannerContainer{
+    transform: translateX(150px);
+} */
 
 .imgBannerOferta{
    height: 50vh;
