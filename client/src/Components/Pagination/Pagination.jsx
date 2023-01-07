@@ -37,6 +37,7 @@ export default function Pagination({
         ))}
 
       <button
+        className="prevNext"
         disabled={currentPage === pageNumbers.length}
         onClick={() =>
           paginate(currentPage === 0 ? currentPage : currentPage + 1)

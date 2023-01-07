@@ -9,6 +9,7 @@ import Carrusel from "../Carrusel/Carrusel";
 import BannerHome from "../Banner Home/Banner";
 import Newsletter from "../NewsLetter/Newsletter";
 import { Link } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Home() {
   // const products = useSelector(state => state.products)
@@ -55,7 +56,6 @@ function Home() {
           </Link>
         </div>
       </section>
-
       <div className={s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>

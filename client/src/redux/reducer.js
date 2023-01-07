@@ -10,7 +10,7 @@ const initialState = {
   searchTerm: "",
   // searchResults:[],
   results: [],
-  results2: [],
+  // results2: [],
   resultsComponent: [],
   loggedUser: {},
 };
@@ -39,10 +39,13 @@ export default function reducer(state = initialState, action) {
         categories: action.payload,
       };
     case "FILTER_BY_BRAND":
-      const allProducts = state.filtered;
-      const filteredProducts = allProducts.filter((p) =>
-        p.brand.includes(action.payload)
-      );
+      const allProductsByCategory = [...state.filtered];
+      const filteredProducts =
+        action.payload === "none"
+          ? allProductsByCategory
+          : allProductsByCategory.filter((p) =>
+              p.brand.includes(action.payload)
+            );
       return {
         ...state,
         productsByCategory: filteredProducts,
@@ -116,15 +119,19 @@ export default function reducer(state = initialState, action) {
     //         searchResults: action.results,
     //     }
     case "GET_SEARCH_RESULTS":
+      const backup = [...state.products];
+      const searched = backup.filter((p) =>
+        p.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
       return {
         ...state,
-        results: action.payload,
+        results: searched,
       };
-    case "GET_RESULTS":
-      return {
-        ...state,
-        results2: action.payload,
-      };
+    // case "GET_RESULTS":
+    //   return {
+    //     ...state,
+    //     results2: action.payload,
+    //   };
     case "GET_LOGGED_USER":
       return {
         ...state,

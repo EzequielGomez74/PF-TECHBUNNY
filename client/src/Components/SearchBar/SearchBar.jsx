@@ -15,8 +15,10 @@ import { useHistory, Link } from "react-router-dom";
 function SearchBar() {
   const results = useSelector((state) => state.results);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const history = useHistory();
   const ininitialLoad = useRef(true);
+  const notFound = useRef(false);
+  const noTerm = useRef(true);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -25,24 +27,37 @@ function SearchBar() {
       dispatch(getProducts());
       ininitialLoad.current = false;
     }
-    if (searchTerm !== "") dispatch(getSearchResults(products, searchTerm));
+    console.log(searchTerm);
+    if (searchTerm !== "") dispatch(getSearchResults(searchTerm));
+
+    if (!notFound.current && searchTerm.length) {
+      notFound.current = true;
+    }
+
+    if (noTerm.current && searchTerm.length) {
+      noTerm.current = false;
+    } else if (!noTerm.current && !searchTerm.length) {
+      noTerm.current = true;
+    }
   }, [dispatch, searchTerm]);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
+    if (!notFound.current && searchTerm.length) {
+      notFound.current = true;
+    }
   };
 
-  const history = useHistory();
-
   const handleClick = (e) => {
-    setSearchTerm(e.target.value);
-    dispatch(getSearchTerm(searchTerm));
-    dispatch(getResults(products, searchTerm));
-    history.push("/results");
+    // setSearchTerm(e.target.value);
+    // dispatch(getSearchTerm(searchTerm));
+    // dispatch(getResults(products, searchTerm));
+    history.push(`/results/${searchTerm}`);
+    setSearchTerm("");
   };
 
   return (
-    <div className="search2">
+    <form className={s.searchContainer}>
       <input
         type="text"
         value={searchTerm}
@@ -50,27 +65,40 @@ function SearchBar() {
         className={s.input}
         placeholder={`Buscar productos`}
       />
+
       <button className={s.inputIcon} onClick={handleClick}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-      {searchTerm && results
-        ? results.map((p, i) => {
-            if (i < 15)
-              return (
-                <div className="hola123">
-                  <Link to={`/detail/${p.product_id}`}>
-                    {" "}
-                    <img className="imgsearch" src={p.image} alt={p.name} />
-                  </Link>
-                  <Link to={`/detail/${p.product_id}`}>
-                    {" "}
-                    <span className="NameSearch"> {p.name} </span>{" "}
-                  </Link>
-                </div>
-              );
-          })
-        : null}
-    </div>
+      <div className={s.searchScroll}>
+        <ul className={s.searchElement}>
+          {searchTerm &&
+            results.length &&
+            results.map((p, i) => {
+              if (i < 15)
+                return (
+                  <li>
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <img className={s.imgsearch} src={p.image} alt={p.name} />
+                    </Link>
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <span className={s.NameSearch}> {p.name} </span>{" "}
+                    </Link>
+                  </li>
+                );
+            })}
+        </ul>
+
+        {notFound && "" === 0 && results.length && (
+          <ul className={s.notFound}>
+            <li>No se encontraron resultados</li>
+          </ul>
+        )}
+
+        {noTerm && !results.length && <div className={s.hiden}></div>}
+      </div>
+    </form>
   );
 }
 

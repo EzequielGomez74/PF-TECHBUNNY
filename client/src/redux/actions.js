@@ -103,14 +103,6 @@ export function getProductsByCategory(category) {
   };
 }
 
-export const filterByBrand = (brand) => {
-  return { type: FILTER_BY_BRAND, payload: brand };
-};
-
-// export const filterByPrice = (priceOrder) => {
-//   return { type: SORT_BY_PRICE, payload: priceOrder };
-// };
-
 export function toggleDarkMode() {
   return { type: TOGGLE_DARK_MODE };
 }
@@ -121,6 +113,14 @@ export function toggleDarkMode() {
 //         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
 //     }
 // }
+
+export const filterByBrand = (brand) => {
+  return { type: FILTER_BY_BRAND, payload: brand };
+};
+
+// export const filterByPrice = (priceOrder) => {
+//   return { type: SORT_BY_PRICE, payload: priceOrder };
+// };
 
 export const orderByPrice = (priceOrder) => {
   return { type: SORT_BY_PRICE, payload: priceOrder };
@@ -154,13 +154,14 @@ export const removeCart = (id) => {
   };
 };
 
-export const getSearchResults = (products, searchTerm) => {
-  return function (dispatch) {
-    const results = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  };
+export const getSearchResults = (searchTerm) => {
+  // return function (dispatch) {
+  //   const results = products.filter((p) =>
+  //     p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  // };
+  return { type: GET_SEARCH_RESULTS, payload: searchTerm };
 };
 
 export const getResults = (products, searchTerm) => {

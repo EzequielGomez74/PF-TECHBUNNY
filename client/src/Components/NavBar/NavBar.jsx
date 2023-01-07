@@ -61,7 +61,7 @@ function NavBar() {
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
         <h4>TECHBUNNY</h4>
-        <SearchBar />
+
         <div className="search1"></div>
         <Responsive />
       </section>

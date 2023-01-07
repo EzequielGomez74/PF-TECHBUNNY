@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/detail/:id" component={Details} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/results" component={Results} />
+        <Route exact path="/results/:searchTerm" component={Results} />
         <Route exact path="/favorites" component={Favoritos} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/categories" component={Categories} />
