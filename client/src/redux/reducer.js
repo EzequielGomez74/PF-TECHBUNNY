@@ -38,16 +38,19 @@ const initialState = {
           ...state,
           categories: action.payload,
         };
-      case "FILTER_BY_BRAND":
-        const allProducts = state.filtered;
-        const filteredProducts = allProducts.filter((p) =>
-          p.brand.includes(action.payload)
-        );
-        return {
-          ...state,
-          productsByCategory: filteredProducts,
-        };
-      case "SORT_BY_PRICE":
+        case "FILTER_BY_BRAND":
+          const allProductsByCategory = [...state.filtered];
+          const filteredProducts =
+            action.payload === "none"
+              ? allProductsByCategory
+              : allProductsByCategory.filter((p) =>
+                  p.brand.includes(action.payload)
+                );
+          return {
+            ...state,
+            productsByCategory: filteredProducts,
+          };
+       case "SORT_BY_PRICE":
         const orderedProductsByPrice = state.productsByCategory.sort(function (
           a,
           b
