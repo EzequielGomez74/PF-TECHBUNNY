@@ -20,21 +20,33 @@ function Details() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
+  const flag = useRef(true)
 
   useEffect(()=>{
+    // console.log('1')
     if(initialLoad.current){
       initialLoad.current = false;
-    dispatch(actions.getProductById(id))};
-    // removeCartProductsFromProduct();
+      dispatch(actions.getProductById(id))
+      return
+    };
+    console.log('2')
+    if(flag.current) {
+      // console.log('3')
+      removeCartProductsFromProduct();
+      flag.current = false;
+    }
     setStock (product.stock)
+    // console.log('4')
   },[dispatch,id, product])
-  
 
-  // function removeCartProductsFromProduct(){
-  //   const productFound = cart.find((product)=>id === product.product_id)
-  //   if(productFound)
-  //     product.stock -= productFound.stock
-  // }
+  function removeCartProductsFromProduct(){
+    const productFound = cart.find((p) => product.product_id === p.id)
+    console.log(productFound)
+    if(productFound){
+      // console.log('Entré')
+      product.stock -= productFound.totalQuantity
+    }
+  }
 
 
   const [quantity, setQuantity] = useState(0)
