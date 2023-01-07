@@ -10,10 +10,10 @@
     padding-bottom: 60px;
 }
 
-.heroFav{
-    height: 338px;
-    width: 450px;
-    background-image: url(../../images/fav.png);
+.favorito{
+    height: 488px;
+    width: 550px;
+  
 }
 
 .message{
