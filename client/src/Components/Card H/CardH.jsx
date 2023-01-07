@@ -28,6 +28,5 @@ function CardH({id, brand, name, image, price, stock}){
         </div>
     )
 }
- //hola
- 
+
 export default CardH;
