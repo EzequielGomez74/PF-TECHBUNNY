@@ -23,7 +23,6 @@ function Favoritos() {
                 name={p.name} image={p.image} price={p.price}/>)
             : 
             <div>
-                {/* <div className={dm ? s.dmheroFav : s.heroFav}></div> */}
                <img className={s.favorito} src={favorito} alt=""></img>
                 <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos favoritos!</p>
             </div>}
