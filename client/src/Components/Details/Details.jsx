@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import * as actions from '../../redux/actions'
@@ -17,11 +17,24 @@ function Details() {
 
   const { id } = useParams()
   const product = useSelector(state => state.detail);
+  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
+  const initialLoad = useRef(true);
 
   useEffect(()=>{
-    dispatch(actions.getProductById(id))
-  },[dispatch,id])
+    if(initialLoad.current){
+      initialLoad.current = false;
+    dispatch(actions.getProductById(id))};
+    // removeCartProductsFromProduct();
+    setStock (product.stock)
+  },[dispatch,id, product])
+  
+
+  // function removeCartProductsFromProduct(){
+  //   const productFound = cart.find((product)=>id === product.product_id)
+  //   if(productFound)
+  //     product.stock -= productFound.stock
+  // }
 
 
   const [quantity, setQuantity] = useState(0)
