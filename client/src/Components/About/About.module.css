@@ -64,14 +64,14 @@
 }
 
 .gitHub{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: black;
 }
 
 .linkedin{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: black;
 }
 
@@ -93,21 +93,34 @@ a:visited {
 @media (max-width: 1115px){
    .backgroundAboutUs{
        height: 1600px;
-       background-color: #20232A;
    }
+   .dmbackgroundAboutUs{
+    height: 4000px;
+    background-color: #20232A;
+
+}
 }
 
 @media (max-width: 970px){
     .backgroundAboutUs{
         height: 2000px;
+    }
+    .dmbackgroundAboutUs{
+        height: 4000px;
         background-color: #20232A;
+
     }
 }
 
 @media (max-width: 656px){
     .backgroundAboutUs{
          height: 4000px;
-         background-color: #20232A;
+         
+    }
+    .dmbackgroundAboutUs{
+        
+        background-color: #20232A;
+
     }
 }
 
@@ -115,6 +128,7 @@ a:visited {
 
 .dmbackgroundAboutUs{
     background-color: #20232A;
+    
 }
 
 .dmtituloEquipo{
@@ -134,7 +148,6 @@ a:visited {
     padding: 10px;
     margin: auto;
     max-width: 1500px;
-    background-color: #20232A;
     
 }
 
@@ -144,7 +157,6 @@ a:visited {
     background-color: transparent;
     float: left;
     margin: 15px 5px 25px;
-    background-color: #20232A;
 }
 
 .dmimg{
@@ -173,7 +185,6 @@ a:visited {
     font-style: normal;
     margin-top: 25px;
     color: #ababab;
-    
 }
 
 .dmcard h2{
@@ -186,14 +197,14 @@ a:visited {
 }
 
 .dmgitHub{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: white;
 }
 
 .dmlinkedin{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: white;
 }
 

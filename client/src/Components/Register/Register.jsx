@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import s from './Register.module.css';
@@ -6,10 +6,47 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useSelector } from "react-redux";
+import axios from 'axios';
+import Control from './Control';
 import img from '../../Photos/bunnylogin.png'
 
 
 function Register() {
+  const [register, setRegister]= useState({
+    username:'',
+    email:'',
+    password:''
+  })
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setRegister({
+      ...register,
+      [e.target.name]: e.target.value
+    })
+    setErrors(Control({
+      ...register,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const postNewUser =  async (user) => {
+    try{
+      await axios.post('http://localhost:3001/enter', user)
+    }catch(error){
+      console.log(error.message)
+    }
+  }
+
+  // Con botón local
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (register.username && register.password && register.email) postNewUser(register);
+    console.log(register)
+  }
+
+  // Pendiente con botón Google
+
   const history = useHistory();
   const handleClick = () => {
       history.push('/login');
@@ -29,9 +66,12 @@ function Register() {
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Regístrate!</h4>
-          <input type="text" placeholder='Usuario' />
-          <input type="email" placeholder='Email' />
-          <input type="password" placeholder='Contraseña' />
+          <input type="text" name='username' value={register.username} onChange={handleChange} placeholder='Usuario' />
+          {errors.username && (<span>{errors.username}</span>)}
+          <input type="email" name='email' value={register.email} onChange={handleChange} placeholder='Email' />
+          {errors.email && (<span>{errors.email}</span>)}
+          <input type="password" name='password' value={register.password} onChange={handleChange} placeholder='Contraseña' />
+          {errors.password && (<span>{errors.password}</span>)}
           <button className={dm ? s.dmb1 : s.b1} >Registrar</button>
           <button className={dm ? s.dmb2 : s.b2}><FontAwesomeIcon icon={faGoogle} />&nbsp;&nbsp;&nbsp;Registrar con Google</button>
           <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong></span>
