@@ -10,6 +10,7 @@ import Cart from "./Components/Cart/Cart";
 import FollowUp from "./Components/Estado de Orden/FollowUp";
 import Error from "./Components/Error/Error";
 import Login from "./Components/Login/Login";
+import Verify from "./Components/Verify/Verify";
 import Register from "./Components/Register/Register";
 import Categories from "./Components/Categories/Categories";
 import QA from "./Components/QA/QA";
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />
+        <Route exact path="/verify" component={Verify} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>
