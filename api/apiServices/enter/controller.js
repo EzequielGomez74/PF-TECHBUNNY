@@ -1,5 +1,5 @@
 const { User } = require("../../services/db/db.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
