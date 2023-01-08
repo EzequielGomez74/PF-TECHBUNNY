@@ -8,9 +8,8 @@ router.get("/", async (req, res) => {
   try {
     if (cookies) {
       const accessToken = await controller.handleRefreshToken(cookies);
-      console.log("?", accessToken);
       if (accessToken) res.status(200).json({ accessToken });
-      else res.sendStatus(402);
+      else res.status(400).json({ accessToken });
     } else {
       res.sendStatus(400);
     }

@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       product_name: {
         type: DataTypes.TEXT,
         allowNull: true,
-      }
+      },
     },
     {
       timestamps: true,
