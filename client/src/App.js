@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />
-        <Route exact path="/verify" component={Verify} />
+        <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>
