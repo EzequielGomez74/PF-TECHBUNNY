@@ -1,10 +1,9 @@
 const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize) => {
   sequelize.define(
     "User",
     {
-      user_id: {        
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -12,11 +11,11 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surname: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       username: {
         type: DataTypes.STRING,
@@ -24,7 +23,7 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -37,14 +36,14 @@ module.exports = (sequelize) => {
       },
       defaultShippingAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       zipCode: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       role: {
-        //1=guest 2=user 3=admin 
+        // 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 2,
@@ -52,28 +51,36 @@ module.exports = (sequelize) => {
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       needPasswordReset: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultvalue:
+        defaultValue:
           "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
       refreshToken: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      isLogged: {
+      verificationData: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      googleAuth: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false,
-      }
+      },
+      secretAuth: {
+        type: DataTypes.STRING,
+        defaultValue: "2FADisabled",
+      },
     },
     {
       timestamps: true,
