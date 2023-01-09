@@ -1,80 +1,58 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
-const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
 router.post("/", async (req, res) => {
-  const data = req.body;
+  const { user, password } = req.body;
   try {
-    res.status(200).json(await controller.handleNewUser(data));
+    res.status(200).json(await controller.handleNewUser(user, password));
   } catch (error) {
-    res.status(400).json(error.message);
+    console.log(error.message);
+    //res.send(error.message);
+    //console.log(error.msg);
+    res.status(error.statusCode).json(error.msg);
   }
 });
-
-// PARAMS /enter/login   /enter/logout  /enter/recover
-router.put("/:accessType", async (req, res) => {
-  console.log("enter-login");
-  const { accessType } = req.params;
+//checkear diferentes tipos de query (newUser , logout , recoverPassword ,etc)
+// /enter?type=logout   /enter?type=recover /enter?type=newUser
+router.put("/", async (req, res) => {
+  console.log(req.query);
   try {
-    switch (accessType) {
-      case "login":
-        const { username, password } = req.body;
-        let authResult;
-        if (req.body?.tokenId) {
-          //todo login with google
-          console.log("entro con google");
-          authResult = await controller.handleGoogleLogin(req.body);
-        } else if (username && password) {
-          console.log("r body ", req.body);
-          authResult = await controller.handleLogin(req.body);
-          console.log("r authResult ", authResult);
-        } else if (
-          Object.keys(req.body).length === 0 &&
-          req.username !== null
-        ) {
-          const refreshToken = req.cookies?.jwt;
-          authResult = await controller.handleLoginWithRefresh(refreshToken);
-        } else if (req.username === null) {
-          return res.sendStatus(202);
-        }
-        console.log("auth ", authResult);
-        // ? manejo de respuesta
-        if (authResult.refreshToken) {
-          console.log("GOOGLE ", authResult);
-          res.cookie("jwt", authResult.refreshToken, {
-            sameSite: "None",
-            secure: true,
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-          });
-          return res.status(200).json({
-            accessToken: authResult.accessToken,
-            user: authResult.user,
-          });
-        } else if (authResult === null || authResult.twoFactor) {
-          return res.status(200).json(authResult);
-        } else {
-          res.sendStatus(400);
-        }
-        break;
-      case "logout":
-        //! LOGOUT tiene que guardar data de la session - savedSessionData
-        const cookie = req.cookies?.jwt;
-        if (cookie) {
-          await controller.handleLogout(cookie);
-          res.sendStatus(200);
-        } else res.sendStatus(400);
-        break;
-      case "recover":
-      //enviar mail de recover
-      default:
-        break;
+    if (req.query.type) {
+      switch (req.query.type) {
+        case "recover":
+          break;
+        case "logout":
+          const cookie = req.cookies?.jwt;
+          if (cookie) {
+            await controller.handleLogout(cookie);
+            res.sendStatus(200);
+          } else res.sendStatus(400);
+          break;
+        default:
+          break;
+      }
+    } else {
+      //login
+      console.log("ASD");
+      const { user, password } = req.body;
+      if (user && password) {
+        const { accessToken, refreshToken } = await controller.handleLogin(
+          user,
+          password
+        );
+        res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+          maxAge: 5 * 24 * 60 * 60 * 1000,
+        });
+        res.status(200).json({ accessToken });
+      } else {
+        res.sendStatus(400);
+      }
     }
   } catch (error) {
-    res.send(error.message);
+    res.sendStatus(400);
   }
 });
-
 module.exports = router;
