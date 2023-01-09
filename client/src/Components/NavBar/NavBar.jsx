@@ -52,6 +52,8 @@ function NavBar() {
   const [searchTerm, setSearchTerm] = useState('')
 
 
+
+
   return (
     <div className={s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
