@@ -24,7 +24,7 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   return (
     <div className={s.search2}>
         <input type="text" value={searchTerm} onChange={handleChange} className={dm? s.dminput : s.input} placeholder={`Buscar productos` } />
-        <button className={dm? s.dminputIcon : s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
+        {/* <button className={dm? s.dminputIcon : s.inputIcon} ><FontAwesomeIcon icon={faMagnifyingGlass}/></button> */}
       
     </div>
     

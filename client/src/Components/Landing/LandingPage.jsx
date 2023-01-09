@@ -16,14 +16,14 @@ export default function LandingPage() {
       </Link>
       </div>
      
-       <p class="typing-animation">¡Bienvenido a nuestro ecommerce de tecnología!  <br/>Somos una empresa líder en la venta de productos de alta calidad  <br/>y con las últimas innovaciones en el mercado. 
+       <p class="typing-animation">¡Bienvenido a nuestro ecommerce de tecnología!  <br/>Somos una empresa líder en la venta de productos de alta calidad. 
         <br/>
           
 
-       Nuestro objetivo es ofrecerte lo mejor de la tecnología a precios competitivos  <br/>y con un servicio de atención al cliente excepcional. 
+       Nuestro objetivo es ofrecerte lo mejor de la tecnología al mejor precio  <br/>y con un servicio de atención al cliente excepcional. 
        
         <br/>
-        No dudes en echar un vistazo a nuestro catálogo y  <br/>descubrir todo lo que tenemos para ofrecerte. ¡Te esperamos!
+        Ingresa y mira nuestro catalogo de mas de 800 productos y  <br/>descubrir todo lo que tenemos para ofrecerte. ¡Que lo disfrutes!
         </p>
       
         <div>

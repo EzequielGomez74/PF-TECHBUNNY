@@ -10,6 +10,7 @@
     font-size: 40px;
     line-height: 42px;
     align-items: center;
+    margin-left: 30%;
 }
 .containerElements{
     display: flex;
@@ -17,10 +18,18 @@
     margin-left: 10%;
     margin-top: 2%;
     margin-bottom: 2%;
+   
 }
 .imgBanner{
-    width: 80%;
+    width: 100%;
+    height:100%;
+    margin-left: 35%;
+    margin: 5px;
 }
+
+/* .bannerContainer{
+    transform: translateX(150px);
+} */
 
 .imgBannerOferta{
    height: 50vh;
@@ -55,16 +64,21 @@
         max-width: 60%;
     }
     .imgBanner{
-        width: 100%;
+        width: 250%;
         margin-top: 50%;
         margin-left: -20%;
+        height:80%;
+        transform: translateY(-20px);
+        
     }
     
     .textBanner{
         display: flex;
         align-items: center;
         text-align: left;
-        width: 650px;
+        width: 200%;
+        margin-left: 20%;
+        margin-right: -30%;
     }
 
     .cointainerBanner{
