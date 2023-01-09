@@ -2,20 +2,28 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 import s from "./Details.module.css";
+import Footer from "../Footer/Footer";
 
 function DisplayReview({ reviews, product_id, handlePost }) {
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [totalReviews, setTotalReviews] = useState([]);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const dm = useSelector((state) => state.darkMode);
   const [localReviews, setLocalReviews] = useState({
     rating: "",
     description: "",
     product_id,
-    //user hardcodeado
-    user_id: 1,
-    username: "Betolocura",
+    user_id: "loggedUser.user_id",
+    username: "loggedUser.username",
   });
-
+  useEffect(() => {
+    setLocalReviews({
+      ...localReviews,
+      user_id: loggedUser.user_id,
+      username: loggedUser.username,
+    });
+  }, [loggedUser]);
   //END OF VARIABLES
 
   const handleChange = (e) => {
@@ -76,8 +84,8 @@ function DisplayReview({ reviews, product_id, handlePost }) {
   // HTML
   return (
     <div>
-      <section className={s.commentSection}>
-        <div className={s.allComments}>
+      <section className={dm ? s.dmcommentSection : s.commentSection}>
+        <div className={dm ? s.dmallComments : s.allComments}>
           <h5>
             <strong>Cantidad de comentarios:</strong> &nbsp;&nbsp;{" "}
             {reviews && reviews.length}
@@ -86,24 +94,28 @@ function DisplayReview({ reviews, product_id, handlePost }) {
           <div>
             {reviews && reviews.length ? (
               reviews?.map((r) => (
-                <div className={s.newComment}>
-                  <span className={s.userId}>
+                <div className={dm ? s.dmnewComment : s.newComment}>
+                  <span className={dm ? s.dmuserId : s.userId}>
                     <strong>Por {r.username}:</strong>
                   </span>
-                  <span className={s.rating}>{ratingToString(r.rating)} </span>
-                  <p className={s.review}>"{r.description}"</p>
+                  <span className={dm ? s.dmrating : s.rating}>
+                    {ratingToString(r.rating)}{" "}
+                  </span>
+                  <p className={dm ? s.dmreview : s.review}>
+                    "{r.description}"
+                  </p>
                   <hr />
                 </div>
               ))
             ) : (
-              <p className={s.noReview}>
+              <p className={dm ? s.dmnoReview : s.noReview}>
                 Este producto aún no tiene reseñas. ¡Sé el primero en
                 compartirnos tu opinión!
               </p>
             )}
-            <form className={s.cForm} onSubmit={handleSubmit}>
+            <form className={dm ? s.dmcForm : s.cForm} onSubmit={handleSubmit}>
               <div>
-                <label className={s.label}>
+                <label className={dm ? s.dmlabel : s.label}>
                   Valoración de tu compra&nbsp;&nbsp;&nbsp;&nbsp;
                 </label>
                 <select
@@ -128,7 +140,7 @@ function DisplayReview({ reviews, product_id, handlePost }) {
               />
               <br />
               <input
-                className={s.mainButton}
+                className={dm ? s.dmmainButton : s.mainButton}
                 type="submit"
                 value="Agregar Comentario"
               />
@@ -136,6 +148,8 @@ function DisplayReview({ reviews, product_id, handlePost }) {
           </div>
         </div>
       </section>
+      <br />
+      <Footer />
     </div>
   );
 }

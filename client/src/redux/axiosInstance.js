@@ -1,8 +1,10 @@
 import axios from "axios";
+import store from "./store.js";
+import loginUser from "../scripts/loginUser";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
-  //baseURL: "https://prueba1-production-4ff1.up.railway.app/",
+  //baseURL: "http://localhost:3001",
+  baseURL: "https://prueba1-production-4ff1.up.railway.app/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,24 +13,18 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    let token = sessionStorage.getItem("accessToken");
-    if (!token) {
-      const body = {
-        username: "anonimo",
-        password: "anonimo",
-        token: null,
-        guest: true,
-      };
-      const response = await axios.put("/enter/login", body, {
-        withCredentials: true,
-      });
-      console.log("GUEST LOGIN ", response.data);
-      token = response.data.accessToken;
-      sessionStorage.setItem("accessToken", token);
-    }
-    console.log("token ultimo", token);
-    if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
+    const state = store.getState();
+    if (Object.keys(state.loggedUser).length === 0) {
+      let token = sessionStorage.getItem("accessToken");
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+        await loginUser(null);
+      } else {
+        await loginUser(null);
+      }
+    } else {
+      let token = sessionStorage.getItem("accessToken");
+      if (token) config.headers["Authorization"] = "Bearer " + token;
     }
     return config;
   },

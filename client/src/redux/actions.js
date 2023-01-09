@@ -1,29 +1,24 @@
+// import store from "./store";
 import axiosInstance from "./axiosInstance";
-import axios from "axios";
-
+// import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
+  SORT_BY_PRICE,
   ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
-  GET_REVIEWS_BY,
-  SORT_BY_PRICE,
-  GET_LOGGED_USER,
-  GET_SEARCH_TERM,
   GET_SEARCH_RESULTS,
-  GET_RESULTS,
-  CLEAN_DETAIL,
+  GET_REVIEWS_BY,
+  SET_LOGGED_USER,
 } from "./actionTypes";
 
-const jwt = require("react-jwt");
-
-export const getProducts = () => {
+export const getProducts = (id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
@@ -49,6 +44,7 @@ export const getProducts = () => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
+      console.log("#");
       var json = await axiosInstance.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
@@ -72,7 +68,8 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      let postedReview = await axiosInstance.post("/reviews", review);
+      console.log("review", review);
+      const postedReview = await axiosInstance.post("/reviews", review);
       onSuccess();
       return postedReview;
     } catch (error) {
@@ -95,13 +92,39 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      var json = await axiosInstance.get(`/products?category=${category}`);
+      console.log(category);
+      let json = await axiosInstance.get(`/products?category=${category}`);
+      console.log("1");
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
   };
 }
+
+export const filterByBrand = (brand) => {
+  return { type: FILTER_BY_BRAND, payload: brand };
+};
+
+export const sortByPrice = (priceOrder) => {
+  return { type: SORT_BY_PRICE, payload: priceOrder };
+};
+
+// export const filterByBrand = (products, brand) => {
+//   return function (dispatch) {
+//     const filteredByBrand = products.filter((p) => p.brand === brand);
+//     dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
+//   };
+// };
+
+// export const filterByPrice = (products, max, min) => {
+//   return function (dispatch) {
+//     const filteredByPrice = products.filter(
+//       (p) => p.price < max && p.price > min
+//     );
+//     dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
+//   };
+// };
 
 export function toggleDarkMode() {
   return { type: TOGGLE_DARK_MODE };
@@ -114,17 +137,26 @@ export function toggleDarkMode() {
 //     }
 // }
 
-export const filterByBrand = (brand) => {
-  return { type: FILTER_BY_BRAND, payload: brand };
-};
-
-// export const filterByPrice = (priceOrder) => {
-//   return { type: SORT_BY_PRICE, payload: priceOrder };
+// export const orderByPrice = (products, order) => {
+//   return function (dispatch) {
+//     if (order === "asc") {
+//       const asc = products.sort((a, b) => {
+//         if (a.price < b.price) return -1;
+//         if (a.price > b.price) return 1;
+//         else return 0;
+//       });
+//       dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
+//     }
+//     if (order === "desc") {
+//       const desc = products.sort((a, b) => {
+//         if (a.price > b.price) return -1;
+//         if (a.price < b.price) return 1;
+//         else return 0;
+//       });
+//       dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
+//     }
+//   };
 // };
-
-export const orderByPrice = (priceOrder) => {
-  return { type: SORT_BY_PRICE, payload: priceOrder };
-};
 
 export const addFavorite = (payload) => {
   return {
@@ -154,22 +186,12 @@ export const removeCart = (id) => {
   };
 };
 
-export const getSearchResults = (searchTerm) => {
-  // return function (dispatch) {
-  //   const results = products.filter((p) =>
-  //     p.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  //   dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  // };
-  return { type: GET_SEARCH_RESULTS, payload: searchTerm };
-};
-
-export const getResults = (products, searchTerm) => {
+export const getSearchResults = (products, searchTerm) => {
   return function (dispatch) {
     const results = products.filter((p) =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    dispatch({ type: GET_RESULTS, payload: results });
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
   };
 };
 
@@ -191,50 +213,9 @@ export const getUser = () => {
   };
 };
 
-export const getLoginUser = (user) => {
-  return async function (dispatch) {
-    try {
-      //const config = {Authorization:"Bearer "+}
-      const data = {
-        username: user.username,
-        password: user.password,
-        guest: false,
-      };
-      const response = await axios.put("/enter/login", data, {
-        withCredentials: true,
-      });
-      console.log("2 ", response.data);
-      if (response.data.accessToken) {
-        sessionStorage.setItem("accessToken", response.data.accessToken);
-        //abrir token, sacar username y hacer el getuser y guardarlo en estado global user
-        let username = "";
-        jwt.verify(
-          response.data.accessToken,
-          process.env.ACCESS_TOKEN_SECRET,
-          async (err, decoded) => {
-            if (err) return new Error(err);
-            //forbidden invalid token
-            username = decoded.username;
-          }
-        );
-        const response = await axios.get(`/user?username=${username}`);
-
-        return dispatch({ type: GET_LOGGED_USER, payload: response.data });
-      } else if (response.data.twoFactor) {
-        //generarpopup
-      } else if (response.data === null) {
-        return "TOKEN INCORRECTO, REINGRESAR";
-      }
-    } catch (error) {
-      //metio mal
-    }
+export const setLoggedUser = (user) => {
+  return {
+    type: SET_LOGGED_USER,
+    payload: user,
   };
-};
-
-export const cleanDetail = () => {
-  return { type: CLEAN_DETAIL };
-};
-
-export const getSearchTerm = (searchTerm) => {
-  return { type: GET_SEARCH_TERM, payload: searchTerm };
 };

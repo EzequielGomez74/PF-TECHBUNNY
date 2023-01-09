@@ -7,11 +7,10 @@ const initialState = {
   cart: [],
   favorites: [],
   darkMode: false,
-  searchTerm: "",
+  reviews: [],
+  // searchTerm:'',
   // searchResults:[],
   results: [],
-  // results2: [],
-  resultsComponent: [],
   loggedUser: {},
 };
 
@@ -31,7 +30,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productsByCategory: action.payload,
-        filtered: action.payload,
+        filtered: action.payload
       };
     case "GET_CATEGORIES":
       return {
@@ -45,39 +44,44 @@ export default function reducer(state = initialState, action) {
           ? allProductsByCategory
           : allProductsByCategory.filter((p) =>
               p.brand.includes(action.payload)
-            );
-      return {
-        ...state,
-        productsByCategory: filteredProducts,
-      };
+          );
+        return {
+          ...state,
+          productsByCategory: filteredProducts,
+        };
     case "SORT_BY_PRICE":
       const orderedProductsByPrice = state.productsByCategory.sort(function (
         a,
         b
       ) {
-        if (action.payload === "asc") {
-          if (a.price < b.price) {
-            return -1;
-          } else if (a.price > b.price) {
-            return 1;
-          } else {
-            return 0;
+          if (action.payload === "asc") {
+            if (a.price < b.price) {
+              return -1;
+            } else if (a.price > b.price) {
+              return 1;
+            } else {
+              return 0;
+            }
+          } else if (action.payload === "desc") {
+            if (a.price > b.price) {
+              return -1;
+            } else if (a.price < b.price) {
+              return 1;
+            } else {
+              return 0;
+            }
           }
-        } else if (action.payload === "desc") {
-          if (a.price > b.price) {
-            return -1;
-          } else if (a.price < b.price) {
-            return 1;
-          } else {
-            return 0;
-          }
-        }
-        return "Ordered";
-      });
-      return {
-        ...state,
-        productsByCategory: orderedProductsByPrice,
-      };
+          return "Ordered";
+        });
+        return {
+          ...state,
+          productsByCategory: orderedProductsByPrice,
+        };
+    // case "FILTER_BY_PRICE":
+    //   return {
+    //     ...state,
+    //     filtered: action.payload,
+    //   };
     // case "ORDER_BY_PRICE":
     //   return {
     //     ...state,
@@ -119,31 +123,25 @@ export default function reducer(state = initialState, action) {
     //         searchResults: action.results,
     //     }
     case "GET_SEARCH_RESULTS":
-      const backup = [...state.products];
-      const searched = backup.filter((p) =>
-        p.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
       return {
         ...state,
-        results: searched,
+        results: action.payload,
       };
-    // case "GET_RESULTS":
-    //   return {
-    //     ...state,
-    //     results2: action.payload,
-    //   };
-    case "GET_LOGGED_USER":
+    case "GET_LOGGED_USER": {
+      return {
+        ...state,
+      };
+    }
+    case "SET_LOGGED_USER":
       return {
         ...state,
         loggedUser: action.payload,
       };
-    case "GET_SEARCH_TERM":
+    case "GET_REVIEWS_BY":
       return {
         ...state,
-        searchTerm: action.payload,
+        reviews: action.payload,
       };
-    case "CLEAN_DETAIL":
-      return { ...state, detail: {} };
     default:
       return { ...state };
   }

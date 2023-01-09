@@ -103,7 +103,7 @@ button[type="submit"] {
   overflow-y: auto;
   background-color: white;
   transform: translate(-217px, 228px);
-  border: solid 2px;
+  /* border: solid 2px; */
 }
 
 li {

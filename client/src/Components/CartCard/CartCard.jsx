@@ -36,9 +36,9 @@ function CartCard({id, brand, name, image, price, stock, totalQuantity}) {
                     <span className={s.pName}>{name}</span>
                     <span className={s.pBrand}>{brand}</span>
                     <div className={s.pStock}>
-                        <button onClick={handlePlus} ><FontAwesomeIcon icon={faPlus} /></button>
-                        &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
                         <button onClick={handleMinus} ><FontAwesomeIcon icon={faMinus} /></button>
+                        &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button onClick={handlePlus} ><FontAwesomeIcon icon={faPlus} /></button>
                     </div>
                     <span className={s.pPrice}>US${price * quantity}</span>
                 </div>

@@ -338,19 +338,24 @@ hr {
   .productImage {
     width: 420px;
   }
+
   .productInfo {
     width: 420px;
     margin-bottom: 30px;
   }
+
   .noReview {
     margin-left: 30px;
     margin-right: 30px;
     font-size: 14px;
   }
+
   .allComments {
     width: 420px;
   }
+
   .cForm textarea {
     width: 350px;
   }
 }
+

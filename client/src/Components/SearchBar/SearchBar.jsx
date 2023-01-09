@@ -16,26 +16,24 @@ function SearchBar() {
   const results = useSelector((state) => state.results);
   const dispatch = useDispatch();
   const history = useHistory();
-  const ininitialLoad = useRef(true);
+  const initialLoad = useRef(true);
   const notFound = useRef(false);
   const noTerm = useRef(true);
 
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (!notFound.current && searchTerm.length !== "") {
-      notFound.current = true;
-    }
-
-    if (noTerm.current && searchTerm.length !== "") {
+    if (noTerm.current && searchTerm.length) {
+      console.log("1 search");
+      console.log(searchTerm);
       noTerm.current = false;
     } else if (!noTerm.current && !searchTerm.length) {
       noTerm.current = true;
     }
-
-    if (ininitialLoad.current) {
+    console.log("2 search");
+    if (initialLoad.current) {
       dispatch(getProducts());
-      ininitialLoad.current = false;
+      initialLoad.current = false;
     }
     console.log(searchTerm);
     if (searchTerm !== "") dispatch(getSearchResults(searchTerm));
@@ -71,7 +69,7 @@ function SearchBar() {
       </button>
       <div className={s.searchScroll}>
         <ul className={s.searchElement}>
-          {searchTerm &&
+          {searchTerm.length &&
             results.length &&
             results.map((p, i) => {
               if (i < 15)
@@ -96,7 +94,11 @@ function SearchBar() {
           </ul>
         )}
 
-        {noTerm && !results.length && <div className={s.hiden}></div>}
+        {noTerm && !results.length && (
+          <ul className={s.hiden}>
+            <li> </li>
+          </ul>
+        )}
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import s from "./Login.module.css";
@@ -6,18 +6,19 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { getLoginUser } from "../../redux/actions";
-
+import loginUser from "../../scripts/loginUser";
+import img from "../../Photos/bunnylogin.png";
+import Control from "./Control";
+import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleClick = () => {
     history.push("/register");
   };
-
   //dark mode
   const dm = useSelector((state) => state.darkMode);
-
+  const [errors, setErrors] = useState({});
   const [login, setLogin] = useState({
     username: "",
     password: "",
@@ -28,10 +29,20 @@ function Login() {
       ...login,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      Control({
+        ...login,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleLogin = (e) => {
-    dispatch(getLoginUser(login));
+    loginUser({
+      username: login.username,
+      password: login.password,
+    });
+    //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
   };
 
   return (
@@ -39,7 +50,9 @@ function Login() {
       <NavBar />
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
-          <div className={dm ? s.dmhero : s.hero}></div>
+          <div>
+            <img src={img} alt="bunny login" className={dm ? s.dmimg : s.img} />
+          </div>
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Hola! Inicia Sesión</h4>
@@ -61,10 +74,7 @@ function Login() {
           <button onClick={handleLogin} className={dm ? s.dmb1 : s.b1}>
             Iniciar Sesión
           </button>
-          <button className={dm ? s.dmb2 : s.b2}>
-            <FontAwesomeIcon icon={faGoogle} />
-            &nbsp;&nbsp;&nbsp;Iniciar Sesión con Google
-          </button>
+          <GoogleLoginContainer />
           <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>
             ¿No tienes cuenta? <strong>¡Regístrate aquí!</strong>
           </span>
