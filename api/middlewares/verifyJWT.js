@@ -3,7 +3,6 @@ require("dotenv").config();
 
 function verifyJWT(req, res, next) {
   const authHeader = req.headers["authorization"];
-  console.log("Access Token in verify -> ", authHeader);
   if (!authHeader) return res.sendStatus(402); //unauthorized
   const token = authHeader.split(" ")[1]; //Bearer 112983*ÄS}d123+´}sa-
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {

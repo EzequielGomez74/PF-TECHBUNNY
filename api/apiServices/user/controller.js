@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const speakeasy = require("speakeasy");
 const qrcode = require("qrcode");
 var fs = require("fs");
@@ -8,7 +8,6 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
-    console.log("a");
     const allUsers = await User.findAll();
     return allUsers;
   } catch (error) {
@@ -19,7 +18,6 @@ async function getAllUsers() {
 async function getUserBy(condition) {
   try {
     const user = await User.findOne({ where: condition });
-    console.log(user);
     return user;
   } catch (error) {
     throw new Error(error);
@@ -31,7 +29,6 @@ async function getQR(user_id) {
   var secret = speakeasy.generateSecret({
     name: "TechBunny_TEST",
   });
-  console.log(secret);
   const response = qrcode.toDataURL(secret.otpauth_url, function (err, data) {
     // RETORNA UNA IMAGEN QR PARA PONER EN ETIQUETA IMG COMO SRC <img src= ${response} />
     fs.writeFile("qr.html", `<img src="${data}"> </img>`, function (err) {
@@ -40,8 +37,6 @@ async function getQR(user_id) {
     });
   });
   User.update({ secretAuth: secret.hex }, { where: { user_id } }); // GUARDAMOS EL SECRET DEL USER EN SU TABLA
-
-  console.log("se genero el QR");
 
   return response; // RETORNAMOS EL QR PARA LA CONFIGURACION DEL 2FA
 }
