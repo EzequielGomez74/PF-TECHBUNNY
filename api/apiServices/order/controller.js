@@ -79,7 +79,7 @@ async function createOrder({ user_id, products }) {
       ...datos.dataValues,
       type: "order",
     };
-    // sendMail(userdata); 
+    // !    sendMail(userdata); 
     return order.order_id;
     } catch (error) {
     throw new Error(error.message);
