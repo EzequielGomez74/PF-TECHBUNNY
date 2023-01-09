@@ -4,6 +4,8 @@ import CartCard from '../CartCard/CartCard';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
+import img from '../../Photos/bunnycart.png'
+import { Link } from 'react-router-dom';
 
 function Cart() {
   const cart = useSelector(state => state.cart);
@@ -21,11 +23,13 @@ function Cart() {
               image={p.image} price={p.price}
             />)}
             </div>
-            <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
+            <Link to="/payment"> <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button> </Link>
           </div>:
           <div>
-            <div className={s.heroCart}></div>
-              <p className={s.message}>¡Todavía no has agregado productos a tu carrito!</p>
+            <div>
+              <img src={img} alt="bunny cart" className={s.img}/> 
+            </div>
+              <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos a tu carrito!</p>
           </div>
           
           }

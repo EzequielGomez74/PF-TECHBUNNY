@@ -7,8 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+import Control from "./Control";
+import img from "../../Photos/bunnylogin.png";
 
 function Register() {
+  const [errors, setErrors] = useState({});
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -20,6 +24,12 @@ function Register() {
       ...register,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      Control({
+        ...register,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const postNewUser = async (user) => {
@@ -44,7 +54,6 @@ function Register() {
   const handleClick = () => {
     history.push("/login");
   };
-
   //dark mode
   const dm = useSelector((state) => state.darkMode);
 
@@ -53,7 +62,9 @@ function Register() {
       <NavBar />
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
-          <div className={dm ? s.dmhero : s.hero}></div>
+          <div>
+            <img src={img} alt="bunny login" className={s.img} />
+          </div>
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Regístrate!</h4>
@@ -81,10 +92,7 @@ function Register() {
           <button onClick={handleSubmit} className={dm ? s.dmb1 : s.b1}>
             Registrar
           </button>
-          <button className={dm ? s.dmb2 : s.b2}>
-            <FontAwesomeIcon icon={faGoogle} />
-            &nbsp;&nbsp;&nbsp;Registrar con Google
-          </button>
+          <GoogleLoginContainer />
           <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>
             ¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong>
           </span>

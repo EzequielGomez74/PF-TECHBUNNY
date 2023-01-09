@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
@@ -12,50 +12,63 @@ function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
 
-  let [active, setActive] = useState({ brand: false, price: false });
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
   let products = useSelector((state) => state.productsByCategory);
+  console.log("le", products.length);
   // let categories = useSelector(state => state.categories);
-  let filter = useSelector((state) => state.filtered);
+  let productsBackup = useSelector((state) => state.filtered);
+  const [filterPanel, setFileterPanel] = useState({
+    price: "none",
+    brand: "none",
+  });
   let productBrands = [];
   let [currentPage, setCurrentPage] = useState(1);
   let [productsPerPage] = useState(12);
   let indexLastProduct = currentPage * productsPerPage;
   let indexFirstProduct = indexLastProduct - productsPerPage;
-  let currentProduct =
-    active.brand === false && active.price === false
-      ? products.slice(indexFirstProduct, indexLastProduct)
-      : filter.slice(indexFirstProduct, indexLastProduct);
+  let currentProduct = products.slice(indexFirstProduct, indexLastProduct);
 
   let paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  for (let i = 0; i < products.length; i++) {
-    productBrands.push(products[i].brand);
+  console.log("productsBackup.length", productsBackup.length);
+  for (let i = 0; i < productsBackup.length; i++) {
+    productBrands.push(productsBackup[i].brand);
   }
+
   let Brands = [];
+
   productBrands.forEach((b) => {
     if (!Brands.includes(b)) {
       Brands.push(b);
     }
   });
 
+  let initialLoad = useRef(true);
+  let nameChange = useRef(name);
+
   useEffect(() => {
-    dispatch(actions.getCategories());
-    dispatch(actions.getProductsByCategory(name));
-  }, [dispatch, name]);
+    if (nameChange.current !== name) {
+      initialLoad.current = true;
+      nameChange.current = name;
+    }
+    console.log("hola");
+    if (initialLoad.current) {
+      dispatch(actions.getCategories());
+      dispatch(actions.getProductsByCategory(name));
+      initialLoad.current = false;
+      return;
+    }
+    console.log("chau");
+    dispatch(actions.filterByBrand(filterPanel.brand));
+    dispatch(actions.orderByPrice(filterPanel.price));
+    console.log(filterPanel.brand, filterPanel.price);
+  }, [dispatch, name, filterPanel, nameChange]);
 
-  const filterBrands = (e) => {
-    dispatch(actions.filterByBrand(products, e.target.value));
-    setActive({ ...active, brand: true });
-  };
-
-  const orderPrice = (e) => {
-    dispatch(actions.orderByPrice(products, e.target.value));
-    setActive({ ...active, price: true });
+  const handleFiltersChange = (e) => {
+    setFileterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
   return (
@@ -65,11 +78,13 @@ function Category() {
         <div className={s.selectors}>
           <select
             name="brand"
-            value={active.brand}
+            // value={active.brand}
             id="brand"
-            onChange={filterBrands}
+            onChange={(e) => handleFiltersChange(e)}
           >
-            <option className={s.option}>Filtrar por marcas</option>
+            <option value="none" selected className={s.option}>
+              Filtrar por marcas
+            </option>
             {Brands &&
               Brands.map((brand, i) => (
                 <option className={s.option} key={i} value={brand}>
@@ -78,8 +93,16 @@ function Category() {
               ))}
           </select>
 
-          <select name="price" value={active.price} onChange={orderPrice}>
-            <option className={s.option}>Ordenar por precio</option>
+          <select
+            name="price"
+            id="price"
+            selected
+            // value={active.price}
+            onChange={(e) => handleFiltersChange(e)}
+          >
+            <option value="none" className={s.option}>
+              Ordenar por precio
+            </option>
             <option className={s.option} value="asc">
               Precio -&nbsp;&nbsp;Precio +
             </option>
@@ -89,20 +112,25 @@ function Category() {
           </select>
         </div>
         <div className={s.results}>
-          {currentProduct.length
-            ? currentProduct.map((e) => (
-                <CardV
-                  key={e.product_id}
-                  id={e.product_id}
-                  brand={e.brand}
-                  name={e.name}
-                  image={e.image}
-                  price={e.price}
-                  category={e.category}
-                  subcategory={e.subcategory}
-                />
-              ))
-            : "https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"}
+          {currentProduct.length ? (
+            currentProduct.map((e) => (
+              <CardV
+                key={e.product_id}
+                id={e.product_id}
+                brand={e.brand}
+                name={e.name}
+                image={e.image}
+                price={e.price}
+                category={e.category}
+                subcategory={e.subcategory}
+              />
+            ))
+          ) : (
+            <img
+              src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+              alt=""
+            />
+          )}
         </div>
         <div className={s.paginate}>
           <Pagination

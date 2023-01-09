@@ -5,35 +5,52 @@ import * as actions from "../../redux/actions";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Details.module.css";
+import Carrusel from "../Carrusel/Carrusel";
+import Dropdown from "../Dropdown/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DisplayReview from "./DisplayReview";
 import {
   faHeart,
   faStar,
   faTruck,
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "../Dropdown/Dropdown";
-import DisplayReview from "./DisplayReview";
 
 function Details() {
   const { id } = useParams();
   const product = useSelector((state) => state.detail);
   const reviews = useSelector((state) => state.reviews);
+  const cart = useSelector((state) => state.cart);
+  const dm = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
+  const flag = useRef(true);
+
   useEffect(() => {
-    console.log("effect");
     if (initialLoad.current) {
-      console.log("entro al dispatch");
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
+      return;
+    }
+    if (flag.current) {
+      removeCartProductsFromProduct();
+      flag.current = false;
     }
     setStock(product.stock);
   }, [product, reviews, trigger]);
+
+  function removeCartProductsFromProduct() {
+    const productFound = cart.find((p) => product.product_id === p.id);
+    console.log(productFound);
+    if (productFound) {
+      // console.log('Entré')
+      product.stock -= productFound.totalQuantity;
+    }
+  }
 
   function handlePost(review) {
     dispatch(
@@ -43,7 +60,31 @@ function Details() {
       })
     );
   }
-
+  function handleAddToCart() {
+    dispatch(
+      actions.addCart({
+        id: product.product_id,
+        brand: product.brand,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        stock: product.stock,
+        totalQuantity: quantity,
+      })
+    );
+  }
+  function handleAddToFavorites() {
+    dispatch(
+      actions.addFavorite({
+        id: product.product_id,
+        brand: product.brand,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        stock: product.stock,
+      })
+    );
+  }
   // function removeCartProductsFromProduct(){
   //   const productFound = cart.find((product)=>id === product.product_id)
   //   if(productFound)
@@ -66,7 +107,6 @@ function Details() {
   const description = product.description?.map((ele) => {
     const key = Object.keys(ele)[0];
     const value = Object.values(ele)[0];
-
     switch (key) {
       case "ul":
         return (
@@ -88,31 +128,33 @@ function Details() {
   // Fin de Lógica Comentarios
 
   return (
-    <div className={s.detailPage}>
+    <div className={dm ? s.dmdetailPage : s.detailPage}>
       <NavBar />
-      <section className={s.productDetails}>
-        <div className={s.block}>
-          <div className={s.productImage}>
-            <div className={s.icon}>
-              <button className={s.heart}>
+      <section className={dm ? s.dmproductDetails : s.productDetails}>
+        <div className={dm ? s.dmblock : s.block}>
+          <div className={dm ? s.dmproductImage : s.productImage}>
+            <div className={dm ? s.dmicon : s.icon}>
+              <button className={s.heart} onClick={handleAddToFavorites}>
                 <FontAwesomeIcon icon={faHeart} />
               </button>
             </div>
-            <div className={s.imgP}>
+            <div className={dm ? s.dmimgP : s.imgP}>
               <img src={product.image} alt={product.product_id} />
             </div>
           </div>
-          <div className={s.productInfo}>
+          <div className={dm ? s.dmproductInfo : s.productInfo}>
             <div>
               <Dropdown description={description} />
             </div>
           </div>
         </div>
-        <div className={s.productCart}>
-          <span className={s.pId}>ID Producto: {product.product_id} </span>
-          <h2 className={s.pBrand}>{product.brand}</h2>
-          <h1 className={s.pName}>{product.name}</h1>
-          <div className={s.pScore}>
+        <div className={dm ? s.dmproductCart : s.productCart}>
+          <span className={dm ? s.dmpId : s.pId}>
+            ID Producto: {product.product_id}{" "}
+          </span>
+          <h2 className={dm ? s.dmpBrand : s.pBrand}>{product.brand}</h2>
+          <h1 className={dm ? s.dmpName : s.pName}>{product.name}</h1>
+          <div className={dm ? s.dmpScore : s.pScore}>
             {reviews && reviews.length ? (
               new Array(product.rating)
                 .fill(undefined)
@@ -121,62 +163,39 @@ function Details() {
               <span>Sin puntuación</span>
             )}
           </div>
-          <div className={s.delivery}>
-            <h3>Tipo de Entrega</h3>
-            <div>
-              <input
-                type="radio"
-                id="contactChoice1"
-                name="contact"
-                value="email"
-              />
-              <label>
-                &nbsp;&nbsp;
-                <FontAwesomeIcon icon={faTruck} /> &nbsp;&nbsp;Despacho a
-                domicilio{" "}
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="contactChoice1"
-                name="contact"
-                value="email"
-              />
-              <label>
-                &nbsp;&nbsp;
-                <FontAwesomeIcon icon={faStore} /> &nbsp;&nbsp;Retiro en tienda{" "}
-              </label>
-            </div>
-          </div>
+
           <hr />
-          <h2 className={s.price}>US${product.price}</h2>
-          <div className={s.quantity}>
+          <h2 className={dm ? s.dmprice : s.price}>US${product.price}</h2>
+          <div className={dm ? s.dmquantity : s.quantity}>
             <div>
               <button onClick={handleMinus}>-</button>&nbsp;&nbsp;&nbsp;&nbsp;
               {quantity}&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={handlePlus}>+</button>
             </div>
-            <span className={s.stock}>
+            <span className={dm ? s.dmstock : s.stock}>
               &nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {stock}{" "}
             </span>
           </div>
-          <button type="submit" className={s.mainButton}>
+          <button
+            type="submit"
+            className={dm ? s.dmmainButton : s.mainButton}
+            onClick={handleAddToCart}
+          >
             Agregar al Carrito
           </button>
         </div>
       </section>
 
-      <div className={s.sub}>
-        <div className={s.subTitles}>
+      <div className={dm ? s.dmsub : s.sub}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
-
+      <Carrusel />
       <br />
-      <div className={s.sub}>
-        <div className={s.subTitles}>
+      <div className={dm ? s.dmsub : s.sub}>
+        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Comentarios</h5>
           <span></span>
         </div>

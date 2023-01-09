@@ -3,7 +3,7 @@ import autoAnimate from '@formkit/auto-animate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHeart, faCartShopping, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 import s from './Responsive.module.css';
-import SearchBar from './SearchBar';
+import SearchBar from '../Search Bar/SearchBar';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../redux/actions';
@@ -23,8 +23,6 @@ const Responsive = () => {
     const favs = useSelector(state => state.favorites)
     const cart = useSelector(state => state.cart)
     const dm = useSelector(state => state.darkMode)
-    
-    const results = useSelector(state => state.results)
 
   return <div ref={parent} className={s.dropdown}>
     <div className={s.menu} onClick={reveal}>
@@ -32,9 +30,7 @@ const Responsive = () => {
     </div>
     { show && 
     <div className={`dropdown-content`} >
-       
-
-       
+        <SearchBar/>
         <div className={dm ? s.dmuserItems : s.userItems}>
             <button onClick={()=> dispatch(toggleDarkMode())} ><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
             <Link to='/favorites'><span><FontAwesomeIcon icon={faHeart} />&nbsp;&nbsp; {favs.length}</span></Link>
