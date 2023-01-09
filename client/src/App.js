@@ -18,6 +18,7 @@ import Verify from './Components/Verify/Verify';
 import QA from './Components/QA/QA';
 import Results from './Components/Results/Results';
 import EditProfile from './Components/Profile/EditProfile';
+import Dashboard from './Components/Dashboard (admin)/Dashboard';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route exact path='/category/:name' component={Category}/>
         <Route exact path='/followUp' component={FollowUp}/>
         <Route exact path='/qa' component={QA}/>
+        <Route exact path='/dashboard' component={Dashboard}/>
         <Route exact path='*' component={Error}/>
       </Switch>
     </div>
