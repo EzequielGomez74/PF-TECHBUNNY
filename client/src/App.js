@@ -16,6 +16,8 @@ import Categories from "./Components/Categories/Categories";
 import QA from "./Components/QA/QA";
 import Payment from "./Components/Payment/Payment";
 import axios from "axios";
+import Profile from "./Components/Profile/Profile";
+import EditProfile from "./Components/Profile/EditProfile";
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/editProfile" component={EditProfile} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/detail/:id" component={Details} />
         <Route exact path="/about" component={About} />
