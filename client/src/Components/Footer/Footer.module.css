@@ -73,5 +73,9 @@
         flex-direction: column;
         align-items: center;
     }
+
+    .dmfooter{
+        transform: translateY(2850px);
+    }
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './NavBar.module.css';
-import SearchBar from '../SearchBar/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faHeart, faCartShopping, faUser, faCaretDown, faRightToBracket, faUserPlus, faSun} from '@fortawesome/free-solid-svg-icons';
 import "./NavBar.css";
@@ -9,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode} from '../../redux/actions';
 import Responsive from './Responsive';
+import SearchBar from '../Search Bar/SearchBar';
+import logo from '../../Photos/loguito.png';
 
 
 function NavBar() {
@@ -49,17 +50,21 @@ function NavBar() {
   const dm = useSelector(state => state.darkMode);
   const DM = useSelector(state => state.darkMode);
 
+  const [searchTerm, setSearchTerm] = useState('')
+
 
   return (
-    <div className={dm ? s.DMnavBar : s.navBar}>
+    <div className={s.navBar}>
         <section className={dm ? s.dmnavResponsive : s.navResponsive}>
             <h4>TECHBUNNY</h4>
             <Responsive />
         </section>
         <section className={DM ? s.DMone : s.one}>
             <div>
-                <SearchBar/>
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}  />
                 <h1><a href='/home'>TECHBUNNY</a></h1>
+                <img  src={logo} alt="logo" className='logo'/>
+            
                 <div className={s.navDetail}>
                     
                     <button className={DM ? s.DMbtnMoon : s.btnMoon} onClick={()=>dispatch(toggleDarkMode())}><FontAwesomeIcon icon={dm ? faSun : faMoon} /></button>
@@ -149,6 +154,18 @@ function NavBar() {
                         <DropdownItem icon = {faUserPlus} text={"Check In"}/>
                         </Link>
                     </ul>
+        </div>
+
+        <div className='search1'>
+            { searchTerm.length && results.length ? results.map((p,i) =>{
+                if(i < 7)
+                return ( <div className='hola123'>
+                   <Link to = {`/detail/${p.product_id}`}> <img className='imgsearch' src={p.image} alt={p.name} /></Link>
+                   <Link to = {`/detail/${p.product_id}`}> <span className='NameSearch'> {p.name} </span> </Link>
+                  </div>)
+                 
+            } 
+            ) : null}
         </div>
             
     </div>

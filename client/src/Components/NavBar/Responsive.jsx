@@ -3,7 +3,7 @@ import autoAnimate from '@formkit/auto-animate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHeart, faCartShopping, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 import s from './Responsive.module.css';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../Search Bar/SearchBar';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../redux/actions';

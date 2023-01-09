@@ -7,6 +7,7 @@ import {
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
+  SORT_BY_PRICE,
   ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
@@ -15,7 +16,6 @@ import {
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
-  SORT_BY_PRICE
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -109,6 +109,13 @@ export const filterByBrand = (brand) => {
 export const sortByPrice = (priceOrder) => {
   return { type: SORT_BY_PRICE, payload: priceOrder };
 };
+
+// export const filterByBrand = (products, brand) => {
+//   return function (dispatch) {
+//     const filteredByBrand = products.filter((p) => p.brand === brand);
+//     dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
+//   };
+// };
 
 // export const filterByPrice = (products, max, min) => {
 //   return function (dispatch) {

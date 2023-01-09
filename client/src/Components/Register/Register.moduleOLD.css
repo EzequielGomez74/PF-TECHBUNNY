@@ -1,0 +1,193 @@
+.loginSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.heroLogin{
+    height: 500px;
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero{
+    background-image: url(../../images/register.png);
+    width: 676.45px;
+    height: 490px;
+}
+
+.img{
+    width: 30%;
+    height: 30%;
+}
+
+.loginCard{
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginCard h4{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 45px;
+    padding-top: 20px;
+}
+
+.loginCard input{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    background: #F6F5FA;
+}
+
+.m2{
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.m2:hover{
+    cursor: pointer;
+}
+
+.loginCard button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 12px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.loginCard button{
+    cursor: pointer;
+}
+
+.b1{
+    background-color: #20232A;
+    color: #FFFFFF;
+    border: none;
+}
+
+.b2{
+    background-color: #F6F5FA;
+    color: #20232A;
+    border: none;
+}
+
+@media only screen and (max-width: 800px) {
+    
+}
+
+/* DARK MODE */
+
+.dmloginSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+    background-color: #20232A;
+}
+
+.dmheroLogin{
+    height: 500px;
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dmhero{
+    background-image: url(../../images/register-dm.png);
+    width: 676.45px;
+    height: 490px;
+}
+
+.dmloginCard{
+    background-color: #2B3036;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dmloginCard h4{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 45px;
+    padding-top: 20px;
+    color: #f6f5fa;
+}
+
+.dmloginCard input{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    background: #22262A;
+}
+
+.dmm2{
+    font-size: 12px;
+    margin-top: 20px;
+    color: #f6f5fa;
+}
+
+.dmm2:hover{
+    cursor: pointer;
+}
+
+.dmloginCard button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 12px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dmloginCard button{
+    cursor: pointer;
+}
+
+.dmb1{
+    background-color: #D7F136;
+    color: #20232A;
+    border: none;
+}
+
+.dmb2{
+    background-color: transparent;
+    color: #f6f5fa;
+    border: 1px solid #f6f5fa;
+}

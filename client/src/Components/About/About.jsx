@@ -37,16 +37,16 @@ function AboutUs() {
 
                 <a href="https://www.linkedin.com/in/ezequiel-gomez-b9b563208/"> <FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a> 
             </div>
+
             <div className={dm ? s.dmcard : s.card}>
-                <div className={dm ? s.dmdivImg : s.divImg}>
-                <img className={dm ? s.dmimg : s.img} src={imgAli} alt="img"/>
+            <div className={dm ? s.dmdivImg : s.divImg}>
+                <img className={dm ? s.dmimg : s.img} src={imgAbi} alt="img"/>
                 </div>
-                <h3 className={dm ? s.dmapodo : s.apodo}>ALI</h3>
-                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Alissa Gamarra</h2>
-
-                <a href="https://github.com/alissagaar"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/>  </a> 
-
-                <a href="https://www.linkedin.com/in/alissa-gamarra/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
+                <h3 className={dm ? s.dmapodo : s.apodo}>ABI</h3>
+                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Abigail Breno</h2>
+                <a href="https://github.com/abibreno"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/>  </a> 
+                <a href="https://www.linkedin.com/in/abi-breno-a0140320b/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
+         
             </div>
             
             <div className={dm ? s.dmcard : s.card}>
@@ -58,19 +58,22 @@ function AboutUs() {
 
                 <a href="https://github.com/kubonka">  <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/> </a>
 
-                <a href="https://www.linkedin.com/in/ezequiel-gomez-b9b563208/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
+                <a href="https://www.linkedin.com/in/alberto-martinez-a0242b260/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
             </div>
            
             <div className={dm ? s.dmcard : s.card}>
-            <div className={dm ? s.dmdivImg : s.divImg}>
-                <img className={dm ? s.dmimg : s.img} src={imgAbi} alt="img"/>
+                <div className={dm ? s.dmdivImg : s.divImg}>
+                <img className={dm ? s.dmimg : s.img} src={imgAli} alt="img"/>
                 </div>
-                <h3 className={dm ? s.dmapodo : s.apodo}>ABI</h3>
-                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Abigail Breno</h2>
-                <a href="https://github.com/abibreno"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/>  </a> 
-                <a href="https://www.linkedin.com/in/abi-breno-a0140320b/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
-         
+                <h3 className={dm ? s.dmapodo : s.apodo}>ALI</h3>
+                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Alissa Gamarra</h2>
+
+                <a href="https://github.com/alissagaar"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/>  </a> 
+
+                <a href="https://www.linkedin.com/in/alissa-gamarra/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
             </div>
+
+
                   <div className={dm ? s.dmcard : s.card}>
                 <div className={dm ? s.dmdivImg : s.divImg}>
                 <img className={dm ? s.dmimg : s.img} src={imgSanti} alt="img"/>
