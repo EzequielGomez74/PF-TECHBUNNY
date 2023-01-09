@@ -70,6 +70,7 @@ const {
   User,
   OrderProduct,
   Favorite,
+  Cart
 } = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
@@ -104,6 +105,17 @@ Product.belongsToMany(User,{
   foreignKey: "product_id"
 })
 
+User.belongsToMany(Product, {
+  through: Cart,
+  foreignKey: "user_id",
+});
+Product.belongsToMany(User,{
+  through: Cart,
+  foreignKey: "product_id"
+})
+
+
+
 module.exports = {
   //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
@@ -118,5 +130,6 @@ module.exports = {
   Order,
   OrderProduct,
   Favorite,
+  Cart,
   Op, // para importart la conexión { conn } = require('./db.js');
 };

@@ -42,6 +42,7 @@ async function updateOrder(user_id, order_id, status ) {
   try {
     console.log(user_id, order_id, status )
     const order = await Order.update({status: status}, {where: {user_id: user_id, order_id: order_id}}); //
+    if(order.dataValues.status !== "onCart") sendMail(userdata);
     console.log("se cambio el estado de la orden nro° ", order_id, " perteneciente al user ", user_id, "al estado: ", status)
     return order;
     } catch (error) {
@@ -50,7 +51,7 @@ async function updateOrder(user_id, order_id, status ) {
 }
 
 
-                                                          //? CREATE ORDER
+
 // $ esta funcion siempre creara carritos
 async function createOrder({ user_id, products }) {
   try {
@@ -79,7 +80,7 @@ async function createOrder({ user_id, products }) {
       ...datos.dataValues,
       type: "order",
     };
-    // !    sendMail(userdata); 
+    // sendMail(userdata); 
     return order.order_id;
     } catch (error) {
     throw new Error(error.message);
