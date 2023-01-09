@@ -28,9 +28,16 @@ function Details() {
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
+  const idChange = useRef(id);
 
   useEffect(() => {
+    if (idChange.current !== id) {
+      dispatch(actions.getProductById(id));
+      idChange.current = id;
+    }
+
     if (initialLoad.current) {
+      console.log("Hola detail");
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
@@ -41,7 +48,7 @@ function Details() {
       flag.current = false;
     }
     setStock(product.stock);
-  }, [product, reviews, trigger]);
+  }, [product, reviews, trigger, id]);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
