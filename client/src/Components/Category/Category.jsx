@@ -38,6 +38,7 @@ function Category() {
     productBrands.push(productsBackup[i].brand);
   }
 
+  console.log(productBrands)
   let Brands = [];
 
   productBrands.forEach((b) => {
@@ -64,7 +65,7 @@ function Category() {
     console.log("chau");
 
     dispatch(actions.filterByBrand(filterPanel.brand));
-    dispatch(actions.orderByPrice(filterPanel.price));
+    dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
