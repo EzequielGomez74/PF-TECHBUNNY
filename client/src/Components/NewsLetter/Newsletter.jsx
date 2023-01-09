@@ -1,5 +1,5 @@
 import React from 'react'
-import imgNewsletter from "../../Photos/newsletter.png";
+import imgNewsletter from "../../Photos/imgNewsletter.png";
 import s from "../NewsLetter/Newsletter.module.css";
 
 
