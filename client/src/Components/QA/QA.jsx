@@ -45,6 +45,7 @@ function QA() {
 
 export default QA
 
+
 const cuenta = [{
     question:'¿Por qué crear una cuenta en TECHBUNNY?',
     answer: 'Al crear una cuenta en nuestro sitio, tendrás la oportunidad de comprar en la tienda con mayor diversidad de productos de tecnología y gaming . ¡Registrarse en TECHBUNNY es completamente gratis!En tu cuenta, podrás almacenar y gestionar todos tus datos personales. Además, podrás rastrear tus pedidos, crear listas de favoritos, acceder a promociones especiales, ¡entre muchas cosas más!'

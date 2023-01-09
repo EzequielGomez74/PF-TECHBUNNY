@@ -88,23 +88,23 @@
 
 @media (max-width: 420px) {
     .inputText{
-        width: 90px;
-        margin-bottom: 20px;
+        width: 120px;
         height: 16px;
         font-size: 5px;
-        margin-left: -50px;
+        margin-left: 0px;
+        transform: translateX(-44px);
     }
     .inputBtn{
         width: 50px;
-        height: 15px;
+        height: 16px;
         font-size: 3px;
-        transform: translateY(-0.5px);
+        transform: translateY(-20px) translateX(41px);
         letter-spacing: 1.5px;
     }
     .textandinput h2{
         font-size: 17px;
         line-height: 20px;
-        margin-left: -50px;
+        margin-left: -20px;
         margin-top: 26%;
     }
     .imgNewsletter{
