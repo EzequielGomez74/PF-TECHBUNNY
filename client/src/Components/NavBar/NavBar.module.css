@@ -75,7 +75,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: black;
-  width: 300px;
+  /* width: 300px; */
   height: 40px;
   display: flex;
   align-items: center;
@@ -363,7 +363,7 @@ h3{
   }
 
   .DMtwo div p{
-    width: 300px;
+    /* width: 300px; */
     height: 40px;
     display: flex;
     align-items: center;

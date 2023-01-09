@@ -48,7 +48,7 @@ function Home() {
                 <Link to='/category/Periféricos'>
                 <div className={s.d}></div>
                 </Link>
-                <Link to='/category/Impresoras'>
+                <Link to='/category/Periféricos'>
                 <div className={s.e}></div>
                 </Link>
                 <Link to='/category/Periféricos'>
