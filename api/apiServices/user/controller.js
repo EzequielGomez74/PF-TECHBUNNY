@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const speakeasy = require("speakeasy");
 const qrcode = require("qrcode");
 var fs = require("fs");

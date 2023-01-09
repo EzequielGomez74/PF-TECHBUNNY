@@ -1,10 +1,10 @@
 const { User } = require("../../services/db/db.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
 const { OAuth2Client } = require("google-auth-library");
-
+const TokenManager = require("../../scripts/TokenManager");
 require("dotenv").config();
 
 async function handleNewUser(data) {
@@ -28,7 +28,7 @@ async function handleNewUser(data) {
     //GENERARA TOKEN Y GUARDAR EN DB
     //GENERA VERYFICATION CODE
     const userCreated = await User.create(newUser);
-    generateValidationAndSendMail(userCreated);
+    generateValidationAndSendMail(userCreated, "register", 2);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
@@ -60,7 +60,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
         const response = await generateTokens(foundUser);
         response.user = foundUser.dataValues;
         //todo mandar solo los valores correspondientes
-        //todo mandar datos de la sesion tambien
+        //todo SETEAR SAVED SESSION DATA
         return response;
       }
     } else throw new Error("LOGIN FAIL");
@@ -103,6 +103,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
           email: email,
           username: name,
           profilePicture: picture,
+          usingGoogleLogin: true,
         };
         foundUser = await User.create(newUser);
       }
@@ -111,7 +112,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       console.log("response ", response);
       response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
-      //todo mandar datos de la sesion tambien
+      //todo SETEAR SAVED SESSION DATA
       return response;
     } else return { status: "bad credentials" };
   } catch (error) {
@@ -137,7 +138,7 @@ async function handleLoginWithRefresh(refreshToken) {
       const response = await generateTokens(foundUser);
       response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
-      //todo mandar datos de la sesion tambien
+      //todo SETEAR SAVED SESSION DATA
       return response;
     } else {
       return { status: "Login Failed" };
@@ -147,11 +148,28 @@ async function handleLoginWithRefresh(refreshToken) {
   }
 }
 
-async function handleLogout(cookie) {
-  const foundUser = await User.findOne({ where: { refreshToken: cookie } });
+async function handleLogout(refreshToken, savedSessionData) {
+  const foundUser = await User.findOne({ where: { refreshToken } });
   if (!foundUser) throw new Error("User not found");
   foundUser.refreshToken = "";
+  //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
+}
+
+async function handleRecoverPassword(username) {
+  try {
+    const users = await User.findAll({ where: { username } });
+    let foundUser = null;
+    users.forEach((user) => {
+      if (!user.dataValues.usingGoogleLogin) foundUser = user;
+    });
+    if (!foundUser) return "FAIL";
+    foundUser.update({ password: "" });
+    generateValidationAndSendMail(foundUser, "recover", 1);
+    return "SUCCESS";
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function generateTokens(foundUser) {
@@ -166,14 +184,12 @@ async function generateTokens(foundUser) {
     { expiresIn: "50m" }
   );
   //guardar el refreshToken en la DB
-  await foundUser.update({ refreshToken: refreshToken });
+  await foundUser.update({ refreshToken });
   return { accessToken, refreshToken };
 }
 async function verifyTwoFactorToken(foundUser, twoFactorToken) {
   try {
-    console.log("v1");
     if (foundUser.googleAuth) {
-      console.log("v2");
       if (twoFactorToken) {
         //todo verificar twoFactorToken
         if ("si no se verifica") return false;
@@ -192,4 +208,5 @@ module.exports = {
   handleLogout,
   handleGoogleLogin,
   handleLoginWithRefresh,
+  handleRecoverPassword,
 };

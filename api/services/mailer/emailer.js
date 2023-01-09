@@ -29,6 +29,14 @@ const template = (userdata) => {
       html: pedidotemplate(userdata), //*
     };
   }
+  if (userdata.type === "recover") {
+    return {
+      from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
+      to: `${userdata.email}`,
+      subject: `Gracias por tu orden✔`, // Subject line
+      html: recovertemplate(userdata), //*
+    };
+  }
 };
 const createTrans = () => {
   //$  si rempalazamos con: configgmail los emails salen desde techbunnypf@gmail.com y sino con: configmailtrap es para verlas con mailtrap

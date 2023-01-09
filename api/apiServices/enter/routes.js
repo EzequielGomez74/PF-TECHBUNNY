@@ -62,13 +62,19 @@ router.put("/:accessType", async (req, res) => {
       case "logout":
         //! LOGOUT tiene que guardar data de la session - savedSessionData
         const cookie = req.cookies?.jwt;
+        const savedSessionData = req.cookies?.savedSessionData;
         if (cookie) {
           await controller.handleLogout(cookie);
           res.sendStatus(200);
         } else res.sendStatus(400);
         break;
       case "recover":
-      //enviar mail de recover
+        //Entra un body = {username:"Pepito"}
+        if (req.body?.username) {
+          res.status(200).json({
+            status: await controller.handleRecoverPassword(req.body.username),
+          });
+        } else res.status(400).json({ status: "invalid username" });
       default:
         break;
     }
