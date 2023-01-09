@@ -18,7 +18,7 @@ function Category() {
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
   let productsBackup = useSelector((state) => state.filtered);
-  const [filterPanel, setFileterPanel] = useState({
+  const [filterPanel, setFilterPanel] = useState({
     price: "none",
     brand: "none",
   });
@@ -54,6 +54,10 @@ function Category() {
     if (nameChange.current !== name) {
       initialLoad.current = true;
       nameChange.current = name;
+      setFilterPanel({
+        price: "none",
+        brand: "none",
+      })
     }
     console.log("hola");
     if (initialLoad.current) {
@@ -70,7 +74,7 @@ function Category() {
   }, [dispatch, name, filterPanel, nameChange]);
 
   const handleFiltersChange = (e) => {
-    setFileterPanel({ ...filterPanel, [e.target.id]: e.target.value });
+    setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
   return (
