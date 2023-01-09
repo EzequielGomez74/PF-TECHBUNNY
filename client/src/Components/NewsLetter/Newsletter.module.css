@@ -16,8 +16,9 @@
 }
 
 .imgNewsletter{
-    width: 65%;
+    width: 95%;
     margin-top: 30px;
+    transform: translateX(-90px);
 
 }
 .textandinput h2{
@@ -27,7 +28,7 @@
     line-height: 45px;
     color: #20232a;
     font-style: normal;
-    margin-top: 45px;
+    margin-top: 115px;
     
 }
 
@@ -108,9 +109,9 @@
         margin-top: 26%;
     }
     .imgNewsletter{
-        width: 70%;
+        width: 90%;
         margin-top: 25px;
-        margin-left: -70px;
+        margin-left: 52px;
     }
     .prueba{
         margin-bottom: 4%;
