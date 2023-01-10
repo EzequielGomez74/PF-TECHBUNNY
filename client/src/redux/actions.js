@@ -16,7 +16,10 @@ import {
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
+  CLEAN_DETAIL,
+  CLEAN_CATEGORY_PRODUCTS,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -207,15 +210,27 @@ export const getSearchResults = (products, searchTerm) => {
 //     }
 // }
 
-export const getUser = () => {
-  return async function (dispatch) {
-    const user = await axiosInstance.get("/");
-  };
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
 };
 
-export const setLoggedUser = (user) => {
-  return {
-    type: SET_LOGGED_USER,
-    payload: user,
-  };
+export const cleanCategoryProducts = () => {
+  return { type: CLEAN_CATEGORY_PRODUCTS };
+};
+
+// export const getUser = () => {
+//   return async function (dispatch) {
+//     const user = await axiosInstance.get("/");
+//   };
+// };
+
+export const setLoggedUser = async (user) => {
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
