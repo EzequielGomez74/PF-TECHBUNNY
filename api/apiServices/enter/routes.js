@@ -46,7 +46,7 @@ router.put("/:accessType", async (req, res) => {
           res.cookie("jwt", authResult.refreshToken, {
             sameSite: "None",
             secure: true,
-            httpOnly: true,
+            httpOnly: false,
             maxAge: 24 * 60 * 60 * 1000,
           });
           return res.status(200).json({
