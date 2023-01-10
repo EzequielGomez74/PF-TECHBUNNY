@@ -4,6 +4,7 @@ module.exports = (sequelize) => {
     "User",
     {
       user_id: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -12,9 +13,11 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: true,
+        allowNull: true,
       },
       surname: {
         type: DataTypes.STRING,
+        allowNull: true,
         allowNull: true,
       },
       username: {
@@ -23,7 +26,7 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -36,13 +39,14 @@ module.exports = (sequelize) => {
       },
       defaultShippingAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       zipCode: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       role: {
+        // 2=user 3=admin
         // 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -51,20 +55,24 @@ module.exports = (sequelize) => {
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       needPasswordReset: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultvalue:
+        defaultValue:
           "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
-      refreshToken: {
+      accessToken: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      verificationData: {
         type: DataTypes.TEXT,
         allowNull: true,
       },

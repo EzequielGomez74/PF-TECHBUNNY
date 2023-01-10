@@ -45,6 +45,11 @@ async function createOrder( user_id ) {
           price: product.price,
         },
       });
+      suma += product.count * productoDb.dataValues.price; // CALCULA EL TOTAL DE LA ORDER
+      await Order.update(
+        { total: suma },
+        { where: { order_id: order.dataValues.order_id } }
+      );
     });
     await Order.update(
       { total: suma },

@@ -23,6 +23,13 @@ let sequelize =
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
         }
       );
+    : new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        {
+          logging: false, // set to console.log to see the raw SQL queries
+          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+        }
+      );
 
 // const sequelize = new Sequelize(
 //   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
@@ -65,6 +72,7 @@ const {
   Order,
   Product,
   Review,
+  Newsletter,
   Newsletter,
   SubCategory,
   User,
@@ -125,6 +133,7 @@ module.exports = {
   Brand,
   User,
   Review,
+  Newsletter,
   Newsletter,
   Country,
   Order,

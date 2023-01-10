@@ -1,5 +1,5 @@
 const { User } = require("../../services/db/db.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
@@ -13,11 +13,17 @@ async function handleNewUser(data) {
     const duplicate = await User.findOne({
       where: { username: data.username },
     });
+    const duplicate = await User.findOne({
+      where: { username: data.username },
+    });
     if (duplicate) throw new Error("Username already exist"); //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
+    const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
+    console.log("pass", hashedPwd);
     const newUser = {
+      ...data,
       ...data,
       password: hashedPwd,
     };
@@ -44,7 +50,7 @@ async function handleLogin({ username, password, token, guest }) {
   if (!username || !password)
     throw new Error("Username and Password are required");
   try {
-    const foundUser = await User.findOne({ where: { username: username } });
+    let foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
     console.log("LLEGA");
