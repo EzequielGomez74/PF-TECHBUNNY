@@ -1,41 +1,18 @@
 const {
   Order,
   Product,
-  OrderProduct,
   User,
+  Cart
 } = require("../../services/db/db.js");
 const { sendMail } = require("../../services/mailer/emailer.js");
-const { response } = require("express");
+const controller = require("./controller.js");
 
 // todo cuando se haga un post de cart, el mismo debe checkear si ya existe uno. Si es asi, se debe sumar al mismo.
 
-                                                          //? DELETE ORDER
 
-// $ esta funcion unicamente elimina productos del onCart de cada usuario.
-async function deleteProductOrder(params, body){
-  try {
-    const cartUser = await Order.findAll({                                                                                              // $ esto busca el carrito en las ORDERS por el user_id
-			where: { 
-        user_id: params.user_id,
-        status: "onCart"
-       }
-		}); 
-    if (!cartUser[0].dataValues) { throw new Error("No se encontro un carrito asociado a este usuario")}
-    await OrderProduct.destroy({
-			where: {
-				order_id: cartUser[0].dataValues.order_id,                                                                                      // $ elimina por la orden perteneciente al cartUser
-				product_id: body.product_id,                                                                                                   // $ elimina el producto enviado por body
-			},
-		});
-    console.log("El producto ", body.product_name, " fue eliminado del carrito")
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
 
                                                           //? UPDATE ORDER
 // $ esta funcion actualiza el estado de las ordenes (
-// $  status = "onCart" ===> status = "created"
 // $  status = "created" ===> status = "processed"
 // $  status = "processed" ===> status = "completed" || status = "canceled"
 async function updateOrder(user_id, order_id, status ) {
@@ -51,15 +28,15 @@ async function updateOrder(user_id, order_id, status ) {
 }
 
 
-
 // $ esta funcion siempre creara carritos
-async function createOrder({ user_id, products }) {
+async function createOrder( user_id ) {
   try {
+    const userCart = await Cart.findAll({where: {user_id}})
     const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
     const newOrder = {  user_id };
     const order = await Order.create(newOrder); //
     let suma = 0;
-    await products.forEach(async (product) => {                                                       // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
+    await userCart.forEach(async (product) => {                                             // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
       suma += product.count * product.price;                                                          // $ CALCULA EL TOTAL DE LA ORDER
       await order.addProduct(product.product_id, {
         through: {                                                                                     // $ CREA LOS DATOS DE LA TABLA INTERMEDIA
@@ -80,6 +57,7 @@ async function createOrder({ user_id, products }) {
       ...datos.dataValues,
       type: "order",
     };
+    await Cart.destroy({where: { user_id: user_id}})
     // sendMail(userdata); 
     return order.order_id;
     } catch (error) {
@@ -171,5 +149,4 @@ module.exports = {
   updateOrder,
   getOrders,
   getOrderByUserId,
-  deleteProductOrder,
 };

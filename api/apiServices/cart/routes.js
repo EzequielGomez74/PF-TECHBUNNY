@@ -37,5 +37,25 @@ router.put("/updateCount/:user_id", async (req, res) => {
   }
 });
 
+//? ESTE ELMIINA TODO EL CART
+// $ PARAMS { user_id } BODY { product_id, order_id }
+router.delete("/deleteCart/:user_id", async (req, res) => {
+	try {
+		res.status(200).json( await controller.deleteCart(req.params, req.body));
+	} catch (error) {
+		res.status(400).json({error: error.message});
+	}
+})
+
+
+//? ESTE ELMIINA UNA SOLA FILA DE LA TABLA CART
+// $ PARAMS { user_id } BODY { product_id, order_id }
+router.delete("/", async (req, res) => {
+	try {
+		res.status(200).json( await controller.deleteCart(req.params, req.body));
+	} catch (error) {
+		res.status(400).json({error: error.message});
+	}
+})
 
 module.exports = router;

@@ -48,17 +48,6 @@ const product = [
 ];
 
 
-
-// $ validacion ordenes al momento de hacer POST 
-const order = [
-  check("user_id").exists().isNumeric().withMessage("debe colocar un user id al producto comprado y este debe ser numerico"),
-  // ! el front debe verificar que el usuario que envia la order exista en la dB
-  // ! el front debe verificar que el contenido de products[0] no posea products_id repetidos y su count sea mayor o igual a 1.
-  (req, res, next) => {
-    validateResult(req, res, next);
-  },
-]
-
 const googleAuth = [
   check("user_id").isNumeric().withMessage("el user_od debe un numero"),
   check("token").isNumeric().withMessage("el token debe un numero"),
@@ -141,4 +130,4 @@ const createFavorite = [
 ]
 
  
-module.exports = { user, product, order ,review, newsletter, enter, enterLogin, validateUser, refreshValidation,createFavorite, googleAuth};
+module.exports = { user, product ,review, newsletter, enter, enterLogin, validateUser, refreshValidation,createFavorite, googleAuth};

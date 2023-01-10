@@ -78,9 +78,9 @@ router.get("/pagar/:order_id", async (req, res) => {
 });
 
 // $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
-router.post("/", validate.order, async (req, res) => {
+router.post("/:user_id", async (req, res) => {
 	try {
-		res.status(200).json({Mensaje: `La orden N° ${await controller.createOrder(req.body)} se creo con exito`} );
+		res.status(200).json({Mensaje: `La orden N° ${await controller.createOrder(req.params.user_id)} se creo con exito`} );
 	} catch (error) {
 		res.status(400).json({error: error.message});
 	}
@@ -99,15 +99,5 @@ router.put("/:order_id", async (req, res) => {
 	}
 });
 
-
-// $ PARAMS { user_id } BODY { product_id, order_id }
-router.delete("/oncart/:user_id", async (req, res) => {
-	try {
-		res.status(200).json( await controller.deleteProductOrder(req.params, req.body));
-	} catch (error) {
-		res.status(400).json({error: error.message});
-		
-	}
-})
 
 module.exports = router;
