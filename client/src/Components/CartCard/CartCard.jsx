@@ -6,10 +6,10 @@ import s from "./CartCard.module.css";
 import { useDispatch } from "react-redux";
 import * as actions from "../../redux/actions";
 
-function CartCard({product_id, brand, name, image, price, stock, totalQuantity}) {
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(totalQuantity)
-    const [total, setTotal] = useState(parseInt(stock))
+function CartCard({ id, brand, name, image, price, stock, totalQuantity }) {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(totalQuantity);
+  const [total, setTotal] = useState(parseInt(stock));
 
   const handlePlus = () => {
     if (quantity < total) {
@@ -25,26 +25,39 @@ function CartCard({product_id, brand, name, image, price, stock, totalQuantity})
     }
   };
 
-    return(
-        <div className={s.card}>
-            <div className={s.close}><button onClick={() => dispatch(actions.removeCart(product_id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
-            <div className={s.cardInfo} >
-                <div>
-                    <Link to={`/detail/${product_id}`}><img className={s.pImg} src={image} alt={product_id} /></Link>
-                </div>
-                <div className={s.pInfo}>
-                    <span className={s.pName}>{name}</span>
-                    <span className={s.pBrand}>{brand}</span>
-                    <div className={s.pStock}>
-                        <button onClick={handleMinus} ><FontAwesomeIcon icon={faMinus} /></button>
-                        &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button onClick={handlePlus} ><FontAwesomeIcon icon={faPlus} /></button>
-                    </div>
-                    <span className={s.pPrice}>US${price * quantity}</span>
-                </div>
-            </div>
+  return (
+    <div className={s.card}>
+      <div className={s.close}>
+        <button
+          onClick={() => dispatch(actions.removeCart(id))}
+          className={s.icon}
+        >
+          <FontAwesomeIcon icon={faX} />
+        </button>
+      </div>
+      <div className={s.cardInfo}>
+        <div>
+          <Link to={`/detail/${id}`}>
+            <img className={s.pImg} src={image} alt={id} />
+          </Link>
         </div>
-    )
+        <div className={s.pInfo}>
+          <span className={s.pName}>{name}</span>
+          <span className={s.pBrand}>{brand}</span>
+          <div className={s.pStock}>
+            <button onClick={handlePlus}>
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onClick={handleMinus}>
+              <FontAwesomeIcon icon={faMinus} />
+            </button>
+          </div>
+          <span className={s.pPrice}>US${price * quantity}</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default CartCard;

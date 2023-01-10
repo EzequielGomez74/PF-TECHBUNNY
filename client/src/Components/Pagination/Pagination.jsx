@@ -13,7 +13,7 @@ export default function Pagination({productsPerPage, products, paginate, current
   
     return(
       <div className="btnPag">
-        <button disabled={currentPage === 1}
+        <button
           onClick={() => 
             paginate(currentPage === 1 ? pageNumbers.length : currentPage -1)}
             > « </button>
@@ -26,8 +26,7 @@ export default function Pagination({productsPerPage, products, paginate, current
           ))
         }
   
-        <button disabled={currentPage === pageNumbers.length} onClick={() => 
-        paginate(currentPage === 0 ? currentPage : currentPage + 1)}
+        <button onClick={() => paginate(currentPage === 0 ? currentPage : currentPage + 1)}
         > » </button>
       </div>
     )

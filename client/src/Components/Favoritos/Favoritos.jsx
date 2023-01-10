@@ -4,8 +4,6 @@ import CardH from '../Card H/CardH';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Favoritos.module.css'
-import favorito from '../../Photos/favorito.png'
-
 
 function Favoritos() {
 
@@ -23,7 +21,7 @@ function Favoritos() {
                 name={p.name} image={p.image} price={p.price}/>)
             : 
             <div>
-               <img className={s.favorito} src={favorito} alt=""></img>
+                <div className={dm ? s.dmheroFav : s.heroFav}></div>
                 <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos favoritos!</p>
             </div>}
             </section>

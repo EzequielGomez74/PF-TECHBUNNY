@@ -1,6 +1,5 @@
 const { check } = require("express-validator");
 const { User } = require("../../services/db/db.js");
-const { User } = require("../../services/db/db.js");
 const { validateResult } = require("../validateHelper.js");
 
 
@@ -120,7 +119,6 @@ const refreshValidation = [
   (req, res, next) => {
     validateResult(req, res, next);
   },
-]
 ]
 
 const createFavorite = [

@@ -45,6 +45,7 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
+    color: #5e5d5d;
 }
 
 /* DARK MODE */
@@ -98,11 +99,5 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
-    color: white;
-}
-
-.img {
-    width: 60%;
-    height: 60%;
-   
+    color: rgb(255, 255, 255);
 }

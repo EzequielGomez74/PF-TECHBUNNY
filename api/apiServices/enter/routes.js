@@ -11,7 +11,6 @@ router.post("/", validate.enter, async (req, res) => {
   const data = req.body;
   try {
     res.status(200).json(await controller.handleNewUser(data));
-    res.status(200).json(await controller.handleNewUser(data));
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -43,13 +42,10 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
         }
         break;
       case "logout":
-        //! LOGOUT tiene que guardar data de la session - savedSessionData
-        // const cookie = req.cookies?.jwt;
-        // const savedSessionData = req.cookies?.savedSessionData;
-        if (req.body?.accessToken) {
-          res.status(200).json({
-            status: await controller.handleLogout(req.body.accessToken),
-          });
+        const cookie = req.cookies?.jwt;
+        if (cookie) {
+          await controller.handleLogout(cookie);
+          res.sendStatus(200);
         } else res.sendStatus(400);
         break;
       case "recover":           //TODO IMPLEMENTAR RECOVERY VIA EMAIL
