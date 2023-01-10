@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       role: {
-        //1=guest 2=user 3=admin
+        // 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 1,
@@ -86,6 +86,11 @@ module.exports = (sequelize) => {
       secretAuth: {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultvalue: false,
       },
     },
     {

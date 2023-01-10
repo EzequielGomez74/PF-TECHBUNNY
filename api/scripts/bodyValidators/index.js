@@ -48,18 +48,6 @@ const product = [
 ];
 
 
-
-// $ validacion ordenes al momento de hacer POST 
-const order = [
-  check("status").isString().withMessage("created, processed, complete, canceled debe ser true o false"),
-  check("user_id").exists().isNumeric().withMessage("debe colocar un user id al producto comprado y este debe ser numerico"),
-  // ! el front debe verificar que el usuario que envia la order exista en la dB
-  // ! el front debe verificar que el contenido de products[0] no posea products_id repetidos y su count sea mayor o igual a 1.
-  (req, res, next) => {
-    validateResult(req, res, next);
-  },
-]
-
 const googleAuth = [
   check("user_id").isNumeric().withMessage("el user_od debe un numero"),
   check("token").isNumeric().withMessage("el token debe un numero"),
@@ -76,6 +64,7 @@ const review = [
     validateResult(req, res, next);
   },
 ] 
+
 
 const newsletter = [
   check("email").isEmail().withMessage("Debes ingresar un mail valido"),
@@ -98,7 +87,7 @@ const enter = [
   check('isLogged').isEmpty().withMessage("no podes modificar isLogged"),
   
   
-  // //estos si se pueden modificar
+  // estos si se pueden modificar
   // *check("profilePicture").isURL().withMessage("La foto de perfil debe ser una url"),
   // *check("defaultShippingAddress").isString().withMessage("defaultShippingAddress es requerido y debe ser un string"),
   // *check("surname").isString().withMessage("el surname debe ser un string"),
@@ -111,25 +100,34 @@ const enter = [
 ]
 
 const enterLogin = [
-  check('username').exists().isString().withMessage("el username debe ser un string"),
   check("password").exists().isString().isLength({ min: 6 }).withMessage("la password debe tener al menos 6 caracteres"),
+  check('username').exists().isString().withMessage("el username debe ser un string"),
   (req, res, next) => {
     validateResult(req, res, next);
   },
 ]
 
-module.exports = { user, product, order ,review, newsletter, enter, enterLogin , googleAuth};
+const validateUser = [
+  check('code').exists().isString().withMessage("el code debe ser un string"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
 
-// user_id: 
-// username: 
-// name: 
-// surname: 
-// password: 
-// email:
-// billingAddress: 
-// defaultShippingAddress:
-// zipCode:
-// role:
-// isActive:
-// needPasswordReset:
-// profilePicture:
+const refreshValidation = [
+  check('code').exists().isString().withMessage("el code debe ser un Email"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+const createFavorite = [
+  check('user_id').exists().isNumeric().withMessage("el user_id debe ser un Numero"),
+  check('product_id').exists().isNumeric().withMessage("el product_id debe ser un Numero"),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+]
+
+ 
+module.exports = { user, product ,review, newsletter, enter, enterLogin, validateUser, refreshValidation,createFavorite, googleAuth};

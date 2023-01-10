@@ -19,11 +19,9 @@ axiosInstance.interceptors.request.use(
         token: null,
         guest: true,
       };
-      const response = await axios.put(
-        "http://localhost:3001/enter/login",
-        body,
-        { withCredentials: true }
-      );
+      const response = await axios.put("/enter/login", body, {
+        withCredentials: true,
+      });
       console.log("GUEST LOGIN ", response.data);
       token = response.data.accessToken;
       sessionStorage.setItem("accessToken", token);

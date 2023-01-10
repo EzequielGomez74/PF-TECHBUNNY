@@ -10,17 +10,40 @@ const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const access_token_mp = require("../../config/mercadopago.js");
 
-// $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
 
-router.post("/", validate.order, async (req, res) => {
+
+// $ Esta ruta retorna todas las orders del usuario por id con QUERY { user_id }
+router.get("/", async (req, res) => {
+	const { user_id } = req.query;
 	try {
-		res.status(200).json({ order_id: await controller.createOrder(req.body) });
+		if (user_id) {
+			res.status(200).json(await controller.getOrderByUserId(user_id));
+		} else {
+			res.status(200).json(await controller.getOrders());
+		}
 	} catch (error) {
-		res.sendStatus(400);
+		res.status(400).send(error.message);
 	}
 });
 
-// $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago.
+
+// $ Esta ruta retorna los detalles de una orden por PARAMS { order_id }.
+router.get("/:order_id", async (req, res) => {
+	//retorna una sola por id con PARAMS
+	const { order_id } = req.params;
+	try {
+		if (order_id) {
+			res.status(200).json(await controller.getOrderById(order_id));
+		} else {
+			res.status(400).send("esta orden no existe");
+		}
+	} catch (error) {
+		res.status(400).json({ error: error.message });
+	}
+});
+
+
+// $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
 		mercadopago.configure({
@@ -47,7 +70,6 @@ router.get("/pagar/:order_id", async (req, res) => {
 			auto_return: "approved",
 		};
 		const response = await mercadopago.preferences.create(preference);
-
 		const preferenceId = response.body.id;
 		res.send({ preferenceId });
 	} catch (error) {
@@ -55,46 +77,27 @@ router.get("/pagar/:order_id", async (req, res) => {
 	}
 });
 
-// $ Esta ruta retorna todas las orders del usuario por id con QUERY
-router.get("/", async (req, res) => {
-	const { user_id } = req.query;
+// $ Esta ruta genera nuevas ordenes. body{ "user_id": "2", "status": "processed", "products": [ { "product_id": "1", "count": 1 }, { "product_id": "2", "count": 1 }, { "product_id": "3", "count": 1}		}
+router.post("/:user_id", async (req, res) => {
 	try {
-		if (user_id) {
-			res.status(200).json(await controller.getOrderByUserId(user_id));
-		} else {
-			res.status(200).json(await controller.getOrders());
-		}
+		res.status(200).json({Mensaje: `La orden N° ${await controller.createOrder(req.params.user_id)} se creo con exito`} );
 	} catch (error) {
-		res.status(400).send(error.message);
+		res.status(400).json({error: error.message});
 	}
 });
 
-// $ Esta ruta retorna los detalles de una orden por PARAMS(order_id).
-router.get("/:order_id", async (req, res) => {
-	//retorna una sola por id con PARAMS
-	const { order_id } = req.params;
-	try {
-		if (order_id) {
-			res.status(200).json(await controller.getOrderById(order_id));
-		} else {
-			res.status(400).send("esta orden no existe");
-		}
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	}
-});
 
-// $ Esta ruta modifica una orden para cambiar el estado de la misma.
+// $ Esta ruta modifica una orden para cambiar el estado de la misma. PARAMS { order_id } BODY { data } 
 router.put("/:order_id", async (req, res) => {
 	try {
-		const data = req.body;
-		if (req.params.order_id)
-			res
-				.status(200)
-				.send(await controller.updateOrder(req.params.order_id, data));
+		const { status, user_id} = req.body;
+		const { order_id } = req.params
+		if (order_id)
+			res.status(200).send(await controller.updateOrder( user_id, order_id, status ));
 	} catch (error) {
 		res.status(400).send(error.message);
 	}
 });
+
 
 module.exports = router;

@@ -53,8 +53,8 @@ export function getProductById(id) {
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
-      const response = await axiosInstance.get(
-        `/reviews?product_id=${productId}`
+      const response = await axios.get(
+        `http://localhost:3001/reviews?product_id=${productId}`
       );
       return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
     } catch (error) {
@@ -66,7 +66,10 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      let postedReview = await axiosInstance.post("/reviews", review);
+      let postedReview = await axios.post(
+        "http://localhost:3001/reviews",
+        review
+      );
       onSuccess();
       return postedReview;
     } catch (error) {

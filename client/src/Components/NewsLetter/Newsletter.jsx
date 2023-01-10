@@ -20,5 +20,5 @@ function Newsletter() {
     </div>
   )
 }
-
+//newsletter 
 export default Newsletter

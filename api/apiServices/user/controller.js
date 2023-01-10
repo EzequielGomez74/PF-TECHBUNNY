@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
-const speakeasy = require("speakeasy");
-const qrcode = require("qrcode");
-var fs = require("fs");
+const speakeasy = require('speakeasy')
+const qrcode = require('qrcode');
+var fs = require('fs');
 const { User } = require("../../services/db/db.js");
 
 const verify = require("../../scripts/2FA/verify2fa.js");
@@ -59,13 +59,19 @@ async function getUserById(user_id) {
     throw new Error(error.message);
   }
 }
-
-async function deleteUser(user_id) {
+async function deleteUser(body) {
   try {
-    const deleteUserId = await User.destroy({
-      where: { user_id },
-    });
-    if (deleteUserId) {
+    const { user_id} = body;
+    const existe = await User.findOne({ where: { user_id }});
+    if (existe) {
+      const isTrue = await User.update({deleted:true},{
+        where: { user_id },
+      });
+      if (isTrue) {
+        await User.update({deleted:false},{
+          where: { user_id },
+        });
+      }
       return "Usuario eliminado con exito!";
     } else {
       return "Usuario no encontrado!";
@@ -87,11 +93,4 @@ async function modifyUser(user_id, body) {
   }
 }
 
-module.exports = {
-  getAllUsers,
-  getUserById,
-  modifyUser,
-  deleteUser,
-  getQR,
-  compareGoogleAuth,
-};
+module.exports = { getAllUsers , getUserById , modifyUser , deleteUser, getQR , compareGoogleAuth};
