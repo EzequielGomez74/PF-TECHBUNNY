@@ -18,6 +18,7 @@ import {
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -102,7 +103,6 @@ export function getProductsByCategory(category) {
     }
   };
 }
-
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -221,6 +221,12 @@ export const cleanCategoryProducts = () => {
 //     const user = await axiosInstance.get("/");
 //   };
 // };
+export function addOrRemoveQuantityFromCart(id, totalQuantity) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, totalQuantity },
+  };
+}
 
 export const setLoggedUser = (user) => {
   console.log("action logded user");
