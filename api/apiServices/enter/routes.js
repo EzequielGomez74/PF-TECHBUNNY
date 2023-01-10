@@ -65,7 +65,7 @@ router.put("/:accessType", async (req, res) => {
         const savedSessionData = req.cookies?.savedSessionData;
         if (cookie) {
           await controller.handleLogout(cookie);
-          res.sendStatus(200);
+          res.status(200).json({ status: "SUCCESS" });
         } else res.sendStatus(400);
         break;
       case "recover":

@@ -10,7 +10,7 @@ import s from "./GoogleLoginContainer.module.css";
 const GoogleLoginContainer = () => {
   const dm = useSelector((state) => state.darkMode);
   const clientId =
-    "359312154823-68i39m2gfa3fur10gbvcoutohieia5p5.apps.googleusercontent.com";
+    "359312154823-68i39m2gfa3fur10gbvcoutohieia5p5.apps.googleusercontent.com"; //process.env.GOOGLE_LOGIN_CLIENT_ID;
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });

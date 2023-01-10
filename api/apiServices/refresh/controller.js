@@ -6,6 +6,7 @@ async function handleRefreshToken(cookie) {
   let accessToken = null;
   try {
     const foundUser = await User.findOne({ where: { refreshToken: cookie } });
+    //!! ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
     if (!foundUser) throw new Error("not found");
     jwt.verify(
       foundUser.refreshToken,

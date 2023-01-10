@@ -28,8 +28,14 @@ function Details() {
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
+  const idChange = useRef(id);
 
   useEffect(() => {
+    if (idChange.current !== id) {
+      dispatch(actions.getProductById(id));
+      idChange.current = id;
+    }
+
     if (initialLoad.current) {
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
@@ -41,7 +47,10 @@ function Details() {
       flag.current = false;
     }
     setStock(product.stock);
-  }, [product, reviews, trigger]);
+    console.log("hola detail");
+  }, [product, reviews, trigger, id]);
+
+  useEffect(() => () => dispatch(actions.cleanDetail()), []);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
