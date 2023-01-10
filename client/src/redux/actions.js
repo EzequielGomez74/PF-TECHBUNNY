@@ -18,7 +18,9 @@ import {
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -94,16 +96,13 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      console.log(category);
       let json = await axiosInstance.get(`/products?category=${category}`);
-      console.log("1");
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
   };
 }
-
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -222,10 +221,21 @@ export const cleanCategoryProducts = () => {
 //     const user = await axiosInstance.get("/");
 //   };
 // };
+export function addOrRemoveQuantityFromCart(id, totalQuantity) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, totalQuantity },
+  };
+}
 
 export const setLoggedUser = (user) => {
-  return {
-    type: SET_LOGGED_USER,
-    payload: user,
-  };
+  console.log("action logded user");
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -22,6 +22,7 @@ server.use(credentials);
 server.use(cors(corsOptions));
 
 server.use("/", indexRouter);
+
 // server.use(cuatrocientoscuatro)
 // Error catching endware.
 server.use(generalErrorHandler);
