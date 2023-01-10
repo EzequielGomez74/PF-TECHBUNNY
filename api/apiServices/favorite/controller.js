@@ -14,7 +14,8 @@ async function createFavorite(body) {
     const { product_id, user_id } = body;
     const existe = await Favorite.findOne({ where: { product_id, user_id } });
     if (!existe) {
-      await Favorite.create({ product_id, user_id });
+      const prueba = await Favorite.create({ product_id, user_id });
+      console.log(prueba);
       return "Producto agregado a favoritos!";
     } else {
       await Favorite.destroy({ where: { product_id, user_id } });

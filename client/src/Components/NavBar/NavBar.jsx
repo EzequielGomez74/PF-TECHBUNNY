@@ -20,6 +20,7 @@ import Responsive from "./Responsive";
 import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
+import logoutUser from "../../scripts/logoutUser.js";
 
 function NavBar() {
   //para manejar el dropdown
@@ -59,11 +60,6 @@ function NavBar() {
   const DM = useSelector((state) => state.darkMode);
 
   const [searchTerm, setSearchTerm] = useState("");
-
-  const logOutHandler = async () => {
-    dispatch(setLoggedUser({}));
-    await axios.put("/enter/logout");
-  };
 
   return (
     <div className={s.navBar}>
@@ -295,11 +291,13 @@ function NavBar() {
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
             <Link to="/login">
-              <DropdownItem
-                onClick={() => logOutHandler()}
-                icon={faRightToBracket}
-                text={"Log Out"}
-              />
+              <button onClick={() => logoutUser()}>
+                <DropdownItem
+                  // onClick={() => logOutHandler()}
+                  icon={faRightToBracket}
+                  text={"Log Out"}
+                />
+              </button>
             </Link>
           </ul>
         </div>

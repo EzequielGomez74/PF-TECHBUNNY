@@ -5,16 +5,21 @@ import store from "../redux/store";
 const loginUser = async (data) => {
   try {
     //const config = {Authorization:"Bearer "+}
-    console.log("1 body ", data);
-    const response = await axios.put("/enter/login", data, {
-      withCredentials: true,
-    });
+    const accessToken = localStorage.getItem("accessToken");
+    let config = {};
+    if (accessToken) {
+      config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+    }
+    const response = await axios.put("/enter/login", data, config);
     if (response.data.accessToken) {
-      console.log("2 token ", response.data.accessToken);
-      sessionStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("accessToken", response.data.accessToken);
       if (response.data.user) {
         //!response.data tambien trae info de la session (carrito,etc) se va a llamar savedSessionData
-        console.log("setL");
+        console.log("user recibido", response.data.user);
         await store.dispatch(setLoggedUser(response.data.user));
       }
     } else if (response.data.twoFactor) {
