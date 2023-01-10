@@ -47,6 +47,7 @@ router.put("/:accessType", async (req, res) => {
             sameSite: "None",
             secure: true,
             httpOnly: true,
+            domain: "https://pf-techbunny-lake.vercel.app",
             Path: "/",
             maxAge: 24 * 60 * 60 * 1000,
           });
