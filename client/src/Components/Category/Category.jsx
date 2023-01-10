@@ -16,7 +16,6 @@ function Category() {
   let { name } = useParams();
   let dispatch = useDispatch();
   let products = useSelector((state) => state.productsByCategory);
-  console.log("le", products.length);
   // let categories = useSelector(state => state.categories);
   let productsBackup = useSelector((state) => state.filtered);
   const [filterPanel, setFileterPanel] = useState({
@@ -28,16 +27,18 @@ function Category() {
   let [productsPerPage] = useState(12);
   let indexLastProduct = currentPage * productsPerPage;
   let indexFirstProduct = indexLastProduct - productsPerPage;
+
   let currentProduct = products.slice(indexFirstProduct, indexLastProduct);
 
   let paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  console.log("productsBackup.length", productsBackup.length);
+
   for (let i = 0; i < productsBackup.length; i++) {
     productBrands.push(productsBackup[i].brand);
   }
 
+  console.log(productBrands)
   let Brands = [];
 
   productBrands.forEach((b) => {
@@ -62,8 +63,9 @@ function Category() {
       return;
     }
     console.log("chau");
+
     dispatch(actions.filterByBrand(filterPanel.brand));
-    dispatch(actions.orderByPrice(filterPanel.price));
+    dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
@@ -119,7 +121,7 @@ function Category() {
                 id={e.product_id}
                 brand={e.brand}
                 name={e.name}
-                image={e.image}
+                image={e.image} 
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}

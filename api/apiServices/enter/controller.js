@@ -104,6 +104,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
           username: name,
           profilePicture: picture,
           usingGoogleLogin: true,
+          isActive: true,
         };
         foundUser = await User.create(newUser);
       }
