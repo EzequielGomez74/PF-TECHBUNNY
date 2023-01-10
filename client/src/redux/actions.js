@@ -16,6 +16,7 @@ import {
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
+  GET_USER_BY_ID,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -102,6 +103,19 @@ export function getProductsByCategory(category) {
   };
 }
 
+export function getUserById(user_id){
+  return async function(dispatch){
+    try{
+      let user = await axiosInstance.get(`/users/${user_id}`);
+      return dispatch({type: GET_USER_BY_ID, payload: user.data});
+    }catch(error){
+      console.log(error.message);
+    }
+  }
+}
+
+
+
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -153,7 +167,20 @@ export function toggleDarkMode() {
 //   };
 // };
 
-export const addFavorite = (payload) => {
+// export const addFavorite = (payload) => {
+//   return async function(dispatch){
+//     try{
+//       let fav = await axiosInstance.post('/favorites' , payload)
+//       return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+//     }
+//     catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
+
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA
+export const addFavorite = (payload) => { 
   return {
     type: ADD_FAVORITE,
     payload,
@@ -167,6 +194,19 @@ export const removeFavorite = (id) => {
   };
 };
 
+// export const addCart = (payload) => {
+//   return async function(dispatch){
+//     try{
+//       let cart = await axiosInstance.post('/orders' , payload)
+//       return dispatch ({type: ADD_CART, payload: cart.data});
+//     }
+//     catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
+
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
 export const addCart = (payload) => {
   return {
     type: ADD_CART,

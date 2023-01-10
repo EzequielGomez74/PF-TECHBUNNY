@@ -13,7 +13,8 @@ export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
-export const SORT_BY_PRICE = 'SORT_BY_PRICE'
+export const SORT_BY_PRICE = 'SORT_BY_PRICE';
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
 // Funciones sincrónicas
 

@@ -129,6 +129,7 @@ function Category() {
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}
+                
               />
             ))
           ) : (
