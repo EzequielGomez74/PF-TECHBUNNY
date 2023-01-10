@@ -9,7 +9,5 @@ const corsOptions = {
     }
   },
   optionSuccessStatus: 200,
-  credentials: true,
-  exposedHeaders: ["set-cookie"],
 };
 module.exports = corsOptions;

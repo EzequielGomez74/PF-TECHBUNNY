@@ -12,11 +12,10 @@
     "username": "Betolocura",
     "name": "Beto",
     "surname": "Martinez",
-    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
+    "password": "pepito123",
     "email": "a@a.gmail.com",
-    "defaultShippingAddress": "password 123",
-    "zipCode": 7600,
-    "isActive": true
+    "defaultShippingAddress": "Colon 1234",
+    "zipCode": 7600
   },
   {
     "username": "Santilocura",
@@ -25,8 +24,7 @@
     "password": "pepito1234",
     "email": "b@b.gmail.com",
     "defaultShippingAddress": "Colon 5432",
-    "zipCode": 11200,
-    "isActive": true
+    "zipCode": 11200
   },
   {
     "username": "Emilocura",

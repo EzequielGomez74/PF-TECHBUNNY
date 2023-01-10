@@ -6,8 +6,6 @@ const { User } = require("../../services/db/db.js");
 
 const verify = require("../../scripts/2FA/verify2fa.js");
 
-const verify = require("../../scripts/2FA/verify2fa.js");
-
 async function getAllUsers() {
   try {
     console.log("a");
@@ -87,17 +85,7 @@ async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
     body.password = await bcrypt.hash(body.password, 10); // 10 salt
-async function modifyUser(user_id, body) {
-  //  los admins usan este controller
-  try {
-    body.password = await bcrypt.hash(body.password, 10); // 10 salt
 
-    await User.update(body, { where: { user_id } });
-    return "usuario  modificado exitosamente.";
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
     await User.update(body, { where: { user_id } });
     return "usuario  modificado exitosamente.";
   } catch (error) {

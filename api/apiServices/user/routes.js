@@ -2,13 +2,8 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
-const validate = require("../../scripts/bodyValidators/index.js");
 const { User } = require("../../services/db/db.js");
-const verifyJWT = require("../../middlewares/verifyJWT");
 
-router.use(verifyJWT); // !validacion de JWT
-//!     ----- ACCESO USER  -----
-//router.use(requiredAccess(2));
 router.get("/:user_id", async (req, res) => {
   try {
     res.status(200).json(await controller.getUserById(req.params.user_id));
@@ -28,7 +23,6 @@ router.get("/", async (req, res) => {
   try {
     res.status(200).json(await controller.getAllUsers());
   } catch (error) {
-    res.status(400).send(error.message);
     res.status(400).send(error.message);
   }
 });
@@ -64,13 +58,9 @@ router.put("/:user_id", validate.user, async (req, res) => {
     if (
       usernameDb &&
       (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
-      (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {
-      throw new Error(
-        "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
-      );
       throw new Error(
         "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
       );

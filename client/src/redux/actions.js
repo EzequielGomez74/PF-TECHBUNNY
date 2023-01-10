@@ -1,6 +1,5 @@
-// import store from "./store";
 import axiosInstance from "./axiosInstance";
-// import axios from "axios";
+import axios from "axios";
 import {
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
@@ -8,18 +7,14 @@ import {
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
-  SORT_BY_PRICE,
+  FILTER_BY_PRICE,
+  ORDER_BY_PRICE,
+  ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
-  GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
-  SET_LOGGED_USER,
-  CLEAN_DETAIL,
-  CLEAN_CATEGORY_PRODUCTS,
-  GET_USER_BY_ID,
-  ALL_FAVORITES_BY_USER,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -48,7 +43,6 @@ export const getProducts = (id) => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
-      console.log("#");
       var json = await axiosInstance.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
@@ -59,8 +53,8 @@ export function getProductById(id) {
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
-      const response = await axiosInstance.get(
-        `/reviews?product_id=${productId}`
+      const response = await axios.get(
+        `http://localhost:3001/reviews?product_id=${productId}`
       );
       return dispatch({ type: GET_REVIEWS_BY, payload: response.data });
     } catch (error) {
@@ -72,8 +66,10 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      console.log("review", review);
-      const postedReview = await axiosInstance.post("/reviews", review);
+      let postedReview = await axios.post(
+        "http://localhost:3001/reviews",
+        review
+      );
       onSuccess();
       return postedReview;
     } catch (error) {
@@ -96,7 +92,7 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      let json = await axiosInstance.get(`/products?category=${category}`);
+      var json = await axiosInstance.get(`/products?category=${category}`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -104,107 +100,49 @@ export function getProductsByCategory(category) {
   };
 }
 
-export const filterByBrand = (brand) => {
-  return { type: FILTER_BY_BRAND, payload: brand };
+export const filterByBrand = (products, brand) => {
+  return function (dispatch) {
+    const filteredByBrand = products.filter((p) => p.brand === brand);
+    dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
+  };
 };
 
-export const sortByPrice = (priceOrder) => {
-  return { type: SORT_BY_PRICE, payload: priceOrder };
+export const filterByPrice = (products, max, min) => {
+  return function (dispatch) {
+    const filteredByPrice = products.filter(
+      (p) => p.price < max && p.price > min
+    );
+    dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
+  };
 };
 
-// export const filterByBrand = (products, brand) => {
-//   return function (dispatch) {
-//     const filteredByBrand = products.filter((p) => p.brand === brand);
-//     dispatch({ type: FILTER_BY_BRAND, payload: filteredByBrand });
-//   };
-// };
-
-// export const filterByPrice = (products, max, min) => {
-//   return function (dispatch) {
-//     const filteredByPrice = products.filter(
-//       (p) => p.price < max && p.price > min
-//     );
-//     dispatch({ type: FILTER_BY_PRICE, payload: filteredByPrice });
-//   };
-// };
-
-export function toggleDarkMode() {
-  return { type: TOGGLE_DARK_MODE };
-}
-
-// export const filterByPrice = (products, max, min) => {
-//     return function(dispatch){
-//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
-//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
-//     }
-// }
-
-// export const orderByPrice = (products, order) => {
-//   return function (dispatch) {
-//     if (order === "asc") {
-//       const asc = products.sort((a, b) => {
-//         if (a.price < b.price) return -1;
-//         if (a.price > b.price) return 1;
-//         else return 0;
-//       });
-//       dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
-//     }
-//     if (order === "desc") {
-//       const desc = products.sort((a, b) => {
-//         if (a.price > b.price) return -1;
-//         if (a.price < b.price) return 1;
-//         else return 0;
-//       });
-//       dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
-//     }
-//   };
-// };
-
-export function getUserById(user_id){
-  return async function(dispatch){
-    try{
-      let user = await axiosInstance.get(`/users/${user_id}`);
-      return dispatch({type: GET_USER_BY_ID, payload: user.data});
-    }catch(error){
-      console.log(error.message);
+export const orderByPrice = (products, order) => {
+  return function (dispatch) {
+    if (order === "asc") {
+      const asc = products.sort((a, b) => {
+        if (a.price < b.price) return -1;
+        if (a.price > b.price) return 1;
+        else return 0;
+      });
+      dispatch({ type: ORDER_BY_PRICE, payload: [...asc] });
     }
-  }
-}
-
-//REVISAAAAAR
-
-export const allFavoritesByUser = (user_id) => {
-  return async function(dispatch){
-    try{
-      let favorites = await axiosInstance.get(`/favorites/${user_id}`)
-      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data});
+    if (order === "desc") {
+      const desc = products.sort((a, b) => {
+        if (a.price > b.price) return -1;
+        if (a.price < b.price) return 1;
+        else return 0;
+      });
+      dispatch({ type: ORDER_BY_PRICE, payload: [...desc] });
     }
-catch(error){
-  console.log(error.message)
-}
-  }
-}
+  };
+};
 
 export const addFavorite = (payload) => {
-  return async function(){
-    try{
-      const response = await axiosInstance.post('/favorites' , payload)
-      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      console.log(response.data)
-    }
-    catch(error){
-      console.log(error.message)
-    }
-  }
-}
-
-//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA
-// export const addFavorite = (payload) => { 
-//   return {
-//     type: ADD_FAVORITE,
-//     payload,
-//   };
-// };
+  return {
+    type: ADD_FAVORITE,
+    payload,
+  };
+};
 
 export const removeFavorite = (id) => {
   return {
@@ -212,19 +150,7 @@ export const removeFavorite = (id) => {
     payload: id,
   };
 };
-// export const addCart = (payload) => {
-//   return async function(dispatch){
-//     try{
-//       let cart = await axiosInstance.post('/orders' , payload)
-//       return dispatch ({type: ADD_CART, payload: cart.data});
-//     }
-//     catch(error){
-//       console.log(error.message)
-//     }
-//   }
-// }
 
-//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
 export const addCart = (payload) => {
   return {
     type: ADD_CART,
@@ -239,49 +165,6 @@ export const removeCart = (id) => {
   };
 };
 
-export const getSearchResults = (products, searchTerm) => {
-  return function (dispatch) {
-    const results = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  };
-};
-
-// export const setSearchTerm = (searchTerm) => {
-//     return {
-//         type: SET_SEARCH_TERM, searchTerm
-//     }
-// }
-
-// export const setSearchResults = (results) => {
-//     return {
-//         type: SET_SEARCH_RESULTS, results
-//     }
-// }
-
-export const cleanDetail = () => {
-  return { type: CLEAN_DETAIL };
-};
-
-export const cleanCategoryProducts = () => {
-  return { type: CLEAN_CATEGORY_PRODUCTS };
-};
-
-// export const getUser = () => {
-//   return async function (dispatch) {
-//     const user = await axiosInstance.get("/");
-//   };
-// };
-
-export const setLoggedUser = (user) => {
-  console.log("action logded user");
-  try {
-    return {
-      type: SET_LOGGED_USER,
-      payload: user,
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+export function toggleDarkMode() {
+  return { type: TOGGLE_DARK_MODE };
+}
