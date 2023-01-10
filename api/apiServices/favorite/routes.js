@@ -1,9 +1,13 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
+const verifyJWT = require("../../middlewares/verifyJWT");
 
 const router = Router();
 
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+//router.use(requiredAccess(2));
 router.get("/:user_id", async (req, res) => {
   try {
     if (req.params.user_id)

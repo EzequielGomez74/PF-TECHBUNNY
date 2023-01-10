@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./NavBar.module.css";
-import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoon,
@@ -16,8 +15,11 @@ import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../redux/actions";
+import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
+import SearchBar from "../Search Bar/SearchBar";
+import logo from "../../Photos/loguito.png";
+import axios from "axios";
 
 function NavBar() {
   //para manejar el dropdown
@@ -50,7 +52,7 @@ function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
   const favs = useSelector((state) => state.favorites);
   const cart = useSelector((state) => state.cart);
-
+  const loggedUser = useSelector((state) => state.loggedUser);
   const results = useSelector((state) => state.results);
   //dark mode
   const dm = useSelector((state) => state.darkMode);
@@ -58,30 +60,15 @@ function NavBar() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const logOutHandler = async () => {
+    dispatch(setLoggedUser({}));
+    await axios.put("/enter/logout");
+  };
+
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
         <h4>TECHBUNNY</h4>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <div className="search1">
-          {searchTerm.length && results && results.length
-            ? results.map((p, i) => {
-                if (i < 15)
-                  return (
-                    <div className="hola123">
-                      <Link to={`/detail/${p.product_id}`}>
-                        {" "}
-                        <img className="imgsearch" src={p.image} alt={p.name} />
-                      </Link>
-                      <Link to={`/detail/${p.product_id}`}>
-                        {" "}
-                        <span className="NameSearch"> {p.name} </span>{" "}
-                      </Link>
-                    </div>
-                  );
-              })
-            : null}
-        </div>
         <Responsive />
       </section>
       <section className={DM ? s.DMone : s.one}>
@@ -90,6 +77,8 @@ function NavBar() {
           <h1>
             <a href="/home">TECHBUNNY</a>
           </h1>
+          <img src={logo} alt="logo" className="logo" />
+
           <div className={s.navDetail}>
             <button
               className={DM ? s.DMbtnMoon : s.btnMoon}
@@ -283,24 +272,43 @@ function NavBar() {
         </div> */}
 
       {/* INVITADO */}
-      <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-        <h3>INICIA SESIÓN</h3>
-        <span>Para una mejor experiencia</span>
-        <ul>
-          <Link to="/login">
-            <DropdownItem icon={faRightToBracket} text={"Log In"} />
-          </Link>
+      {!Object.keys(loggedUser).length ? (
+        <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
+          <h3>INICIA SESIÓN</h3>
+          <span>Para una mejor experiencia</span>
+          <ul>
+            <Link to="/login">
+              <DropdownItem icon={faRightToBracket} text={"Log In"} />
+            </Link>
 
-          <Link to="/register">
-            <DropdownItem icon={faUserPlus} text={"Check In"} />
-          </Link>
-        </ul>
-      </div>
+            <Link to="/register">
+              <DropdownItem icon={faUserPlus} text={"Check In"} />
+            </Link>
+          </ul>
+        </div>
+      ) : (
+        <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
+          <h3>BIENVENIDO {loggedUser.username}</h3>
+          <span>Para una mejor experiencia</span>
+          <ul>
+            <Link to="/login">
+              <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
+            </Link>
+            <Link to="/login">
+              <DropdownItem
+                onClick={() => logOutHandler()}
+                icon={faRightToBracket}
+                text={"Log Out"}
+              />
+            </Link>
+          </ul>
+        </div>
+      )}
 
       <div className="search1">
-        {searchTerm.length && results && results.length
+        {searchTerm.length && results.length
           ? results.map((p, i) => {
-              if (i < 30)
+              if (i < 7)
                 return (
                   <div className="hola123">
                     <Link to={`/detail/${p.product_id}`}>
@@ -314,7 +322,7 @@ function NavBar() {
                   </div>
                 );
             })
-          : ""}
+          : null}
       </div>
     </div>
   );

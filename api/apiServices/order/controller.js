@@ -7,12 +7,10 @@ async function createOrder({ status, user_id, products }) {
     const newOrder = { status, user_id };
     const order = await Order.create(newOrder);
     let suma = 0;
-
     await products.forEach(async (product) => {
       const productoDb = await Product.findByPk(product.product_id); // ACA TRAEMOS LOS PRODUCTOS CON SU PRICE
       await order.addProduct(product.product_id, {
         // CREA LOS DATOS DE LA TABLA INTERMEDIA
-
         through: {
           product_name: productoDb.name,
           count: product.count,
@@ -25,9 +23,8 @@ async function createOrder({ status, user_id, products }) {
         { where: { order_id: order.dataValues.order_id } }
       );
     });
-
-    // const object = { ...order, type: "order" }; //ENVIO DE EMAIL
-    // sendMail(user.email, object); //ENVIO DE EMAIL
+    const object = { ...order, type: "order" }; //ENVIO DE EMAIL
+    sendMail(user.email, object); //ENVIO DE EMAIL
     return order.order_id;
   } catch (error) {
     throw new Error(error.message);
