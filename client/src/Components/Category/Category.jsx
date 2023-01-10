@@ -38,7 +38,7 @@ function Category() {
     productBrands.push(productsBackup[i].brand);
   }
 
-  console.log(productBrands)
+  console.log(productBrands);
   let Brands = [];
 
   productBrands.forEach((b) => {
@@ -57,7 +57,7 @@ function Category() {
       setFilterPanel({
         price: "none",
         brand: "none",
-      })
+      });
     }
     console.log("hola");
     if (initialLoad.current) {
@@ -72,6 +72,8 @@ function Category() {
     dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
+
+  useEffect(() => () => dispatch(actions.cleanCategoryProducts()), []);
 
   const handleFiltersChange = (e) => {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
@@ -125,11 +127,10 @@ function Category() {
                 id={e.product_id}
                 brand={e.brand}
                 name={e.name}
-                image={e.image} 
+                image={e.image}
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}
-                
               />
             ))
           ) : (

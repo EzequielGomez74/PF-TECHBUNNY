@@ -15,6 +15,8 @@ export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const SORT_BY_PRICE = 'SORT_BY_PRICE';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
+export const CLEAN_CATEGORY_PRODUCTS = 'CLEAN_CATEGORY_PRODUCTS';
 
 // Funciones sincrónicas
 
@@ -24,3 +26,4 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 
 //Faltan actions
+

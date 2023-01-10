@@ -15,8 +15,10 @@ import {
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
-  SET_LOGGED_USER,
   GET_USER_BY_ID,
+  SET_LOGGED_USER,
+  CLEAN_DETAIL,
+  CLEAN_CATEGORY_PRODUCTS,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -103,19 +105,6 @@ export function getProductsByCategory(category) {
   };
 }
 
-export function getUserById(user_id){
-  return async function(dispatch){
-    try{
-      let user = await axiosInstance.get(`/users/${user_id}`);
-      return dispatch({type: GET_USER_BY_ID, payload: user.data});
-    }catch(error){
-      console.log(error.message);
-    }
-  }
-}
-
-
-
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -144,7 +133,12 @@ export function toggleDarkMode() {
   return { type: TOGGLE_DARK_MODE };
 }
 
-
+// export const filterByPrice = (products, max, min) => {
+//     return function(dispatch){
+//         const filteredByPrice = products.filter((p) => p.price < max && p.price > min)
+//         dispatch({type: FILTER_BY_PRICE, payload: filteredByPrice})
+//     }
+// }
 
 // export const orderByPrice = (products, order) => {
 //   return function (dispatch) {
@@ -166,6 +160,17 @@ export function toggleDarkMode() {
 //     }
 //   };
 // };
+
+export function getUserById(user_id){
+  return async function(dispatch){
+    try{
+      let user = await axiosInstance.get(`/users/${user_id}`);
+      return dispatch({type: GET_USER_BY_ID, payload: user.data});
+    }catch(error){
+      console.log(error.message);
+    }
+  }
+}
 
 // export const addFavorite = (payload) => {
 //   return async function(dispatch){
@@ -242,15 +247,27 @@ export const getSearchResults = (products, searchTerm) => {
 //     }
 // }
 
-export const getUser = () => {
-  return async function (dispatch) {
-    const user = await axiosInstance.get("/");
-  };
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
 };
 
-export const setLoggedUser = (user) => {
-  return {
-    type: SET_LOGGED_USER,
-    payload: user,
-  };
+export const cleanCategoryProducts = () => {
+  return { type: CLEAN_CATEGORY_PRODUCTS };
+};
+
+// export const getUser = () => {
+//   return async function (dispatch) {
+//     const user = await axiosInstance.get("/");
+//   };
+// };
+
+export const setLoggedUser = async (user) => {
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

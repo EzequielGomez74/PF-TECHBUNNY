@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GoogleLogin from 'react-google-login';
+import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
 import loginUser from "../../scripts/loginUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
