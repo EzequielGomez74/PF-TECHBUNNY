@@ -42,8 +42,6 @@ async function handleLogin({ username, password, twoFactorToken }) {
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
-    console.log("match ", match);
-    console.log("c foundUser ", foundUser.dataValues);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
         foundUser.dataValues,
@@ -55,7 +53,6 @@ async function handleLogin({ username, password, twoFactorToken }) {
       } else if (result.twoFactor) {
         return { twoFactor: true, username, password };
       } else {
-        console.log("3");
         //$ result === true
         const response = await generateTokens(foundUser);
         response.user = foundUser.dataValues;
@@ -108,9 +105,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
         };
         foundUser = await User.create(newUser);
       }
-      console.log("foundUser 1", foundUser);
       const response = await generateTokens(foundUser);
-      console.log("response ", response);
       response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
@@ -121,14 +116,14 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
   }
 }
 
-async function handleLoginWithRefresh(refreshToken) {
+async function handleLoginWithAccess(accessToken) {
   try {
     let result = false;
-    const foundUser = await User.findOne({ where: { refreshToken } });
+    const foundUser = await User.findOne({ where: { accessToken } });
     if (!foundUser) return { status: "Login Fail" };
     jwt.verify(
-      foundUser.refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
+      foundUser.accessToken,
+      process.env.ACCESS_TOKEN_SECRET,
       async (err, decode) => {
         if (err || foundUser.username !== decode.username)
           throw new Error("not found");
@@ -136,11 +131,9 @@ async function handleLoginWithRefresh(refreshToken) {
       }
     );
     if (result) {
-      const response = await generateTokens(foundUser);
-      response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
-      return response;
+      return { user: foundUser.dataValues, accessToken };
     } else {
       return { status: "Login Failed" };
     }
@@ -149,12 +142,13 @@ async function handleLoginWithRefresh(refreshToken) {
   }
 }
 
-async function handleLogout(refreshToken, savedSessionData) {
-  const foundUser = await User.findOne({ where: { refreshToken } });
-  if (!foundUser) throw new Error("User not found");
-  foundUser.refreshToken = "";
+async function handleLogout(user_id) {
+  const foundUser = await User.findOne({ where: { user_id } });
+  if (!foundUser) return "FAIL";
+  foundUser.accessToken = "";
   //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
+  return "SUCCESS";
 }
 
 async function handleRecoverPassword(username) {
@@ -177,16 +171,10 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "5m" }
+    { expiresIn: "10m" }
   );
-  const refreshToken = jwt.sign(
-    { username: foundUser.username },
-    process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "50m" }
-  );
-  //guardar el refreshToken en la DB
-  await foundUser.update({ refreshToken });
-  return { accessToken, refreshToken };
+  await foundUser.update({ accessToken });
+  return { accessToken };
 }
 async function verifyTwoFactorToken(foundUser, twoFactorToken) {
   try {
@@ -208,6 +196,6 @@ module.exports = {
   handleNewUser,
   handleLogout,
   handleGoogleLogin,
-  handleLoginWithRefresh,
+  handleLoginWithAccess,
   handleRecoverPassword,
 };

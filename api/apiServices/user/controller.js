@@ -49,8 +49,6 @@ async function compareGoogleAuth(user_id, token) {
   if (!response.googleAuth && response.verified)
     // VERIFICAMOS SI EL USER TIENE googleAuth ACTIVADO (TRUE O FALSE), SI ES FALSE, SE LO ACTIVAMOS
     User.update({ googleAuth: response.verified }, { where: { user_id } }); // GUARDAMOS EL SECRET DEL USER EN SU TABLA
-
-  console.log("el resultado de la verificacion es: ", response.verified);
   return response.verified;
 }
 

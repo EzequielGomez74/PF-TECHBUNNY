@@ -25,6 +25,7 @@
     height:100%;
     margin-left: 35%;
     margin: 5px;
+    
 }
 
 /* .bannerContainer{
@@ -69,6 +70,7 @@
         margin-left: -20%;
         height:80%;
         transform: translateY(-20px);
+        object-fit: cover;
         
     }
     

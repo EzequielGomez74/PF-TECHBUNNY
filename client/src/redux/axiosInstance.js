@@ -1,10 +1,17 @@
 import axios from "axios";
 import store from "./store.js";
 import loginUser from "../scripts/loginUser";
+import logoutUser from "../scripts/logoutUser.js";
+import { useSyncExternalStore } from "react";
+let base = "";
+if (process.env.REACT_APP_API)
+  base = "https://prueba1-production-4ff1.up.railway.app/";
+else base = "http://localhost:3001";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  //baseURL: "http://localhost:3001",
   //baseURL: "https://prueba1-production-4ff1.up.railway.app/",
+  baseURL: base,
   headers: {
     "Content-Type": "application/json",
   },
@@ -15,16 +22,11 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const state = store.getState();
     if (Object.keys(state.loggedUser).length === 0) {
-      let token = sessionStorage.getItem("accessToken");
-      if (token) {
-        config.headers["Authorization"] = "Bearer " + token;
-        await loginUser(null);
-      } else {
-        await loginUser(null);
-      }
+      await loginUser(null);
     } else {
-      let token = sessionStorage.getItem("accessToken");
+      let token = localStorage.getItem("accessToken");
       if (token) config.headers["Authorization"] = "Bearer " + token;
+      else logoutUser();
     }
     return config;
   },
@@ -42,24 +44,12 @@ axiosInstance.interceptors.response.use(
     if (originalConfig.url !== "/enter/login" && err.response) {
       // Access Token expiro . Mirar bien si 401 o 403 en el back
       if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
-        try {
-          const rs = await axiosInstance.get("/refresh");
-          const { accessToken } = rs.data;
-          if (accessToken) {
-            //si hay acces token es porque salio todo bien y lo renueva
-            sessionStorage.setItem("accessToken", accessToken);
-            console.log("NUEVO TOKEN");
-            return axiosInstance(originalConfig);
-          }
-        } catch (_error) {
-          //sino tiene que desloguear al user porque el refresh token esta vencido
-          //MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
-          //se deberia hacer un request de tipo /enter/logout
-          console.log("DESLOGUEAR");
-          sessionStorage.removeItem("accessToken");
-          // borra accessToken
-        }
+        //sino tiene que desloguear al user porque el access token esta vencido
+        //todo MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
+        //todo se deberia hacer un request de tipo /enter/logout
+        console.log("DESLOGUEAR");
+        console.log("entra logout");
+        await logoutUser();
       }
     }
     return Promise.reject(err);

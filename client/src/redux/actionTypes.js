@@ -14,6 +14,8 @@ export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const SORT_BY_PRICE = "SORT_BY_PRICE";
+export const ADD_OR_REMOVE_QUANTITY_FROM_CART =
+  "ADD_OR_REMOVE_QUANTITY_FROM_CART";
 
 // Funciones sincrónicas
 
