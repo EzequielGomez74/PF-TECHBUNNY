@@ -6,9 +6,7 @@ const loginUser = async (data) => {
   try {
     //const config = {Authorization:"Bearer "+}
     console.log("1 body ", data);
-    const response = await axios.put("/enter/login", data, {
-      withCredentials: true,
-    });
+    const response = await axios.put("/enter/login", data);
     if (response.data.accessToken) {
       console.log("acces token recibido", response.data.accessToken);
       sessionStorage.setItem("accessToken", response.data.accessToken);
