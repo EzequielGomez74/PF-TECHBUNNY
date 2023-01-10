@@ -13,12 +13,12 @@
 
  .dropdown-menu{
     position: absolute;
-    top: 8%;
-    right: 7%;
+    top: 60px;
+    right: 170px;
     background-color: #22262a;
     border-radius: var(--border-radius);
     padding: 10px 20px;
-    width: 140px;
+    width: 1px;
     
   }
 
