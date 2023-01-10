@@ -1,4 +1,3 @@
-import { CLEAN_CATEGORY_PRODUCTS } from "./actionTypes";
 const initialState = {
   products: [],
   detail: {},

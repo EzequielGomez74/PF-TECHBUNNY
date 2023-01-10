@@ -19,6 +19,7 @@ import {
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -223,9 +224,13 @@ export const cleanCategoryProducts = () => {
 //   };
 // };
 
-export const setLoggedUser = (user) => {
-  return {
-    type: SET_LOGGED_USER,
-    payload: user,
-  };
+export const setLoggedUser = async (user) => {
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
