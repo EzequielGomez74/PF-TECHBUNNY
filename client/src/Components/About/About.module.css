@@ -64,14 +64,14 @@
 }
 
 .gitHub{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: black;
 }
 
 .linkedin{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: black;
 }
 
@@ -94,17 +94,33 @@ a:visited {
    .backgroundAboutUs{
        height: 1600px;
    }
+   .dmbackgroundAboutUs{
+    height: 4000px;
+    background-color: #20232A;
+
+}
 }
 
 @media (max-width: 970px){
     .backgroundAboutUs{
         height: 2000px;
     }
+    .dmbackgroundAboutUs{
+        height: 4000px;
+        background-color: #20232A;
+
+    }
 }
 
 @media (max-width: 656px){
     .backgroundAboutUs{
          height: 4000px;
+         
+    }
+    .dmbackgroundAboutUs{
+        
+        background-color: #20232A;
+
     }
 }
 
@@ -112,6 +128,7 @@ a:visited {
 
 .dmbackgroundAboutUs{
     background-color: #20232A;
+    
 }
 
 .dmtituloEquipo{
@@ -180,14 +197,14 @@ a:visited {
 }
 
 .dmgitHub{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: white;
 }
 
 .dmlinkedin{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     color: white;
 }
 

@@ -15,3 +15,5 @@ async function verify(user_id, token) {
 }
 
 module.exports = verify;
+
+module.exports = verify;

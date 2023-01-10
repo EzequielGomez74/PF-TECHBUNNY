@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
 //router.use(requiredAccess(2));
 // GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 router.get("/:product_id", async (req, res) => {
+  const cookie = req.cookies;
   const { product_id } = req.params;
   console.log("id");
   try {
@@ -33,7 +34,7 @@ router.get("/:product_id", async (req, res) => {
       .status(200)
       .json(await controller.getProductById(product_id, req.username));
   } catch (error) {
-    res.status(400).json({ msg: "betin" });
+    res.status(400).json({ msg: "error" });
   }
 });
 

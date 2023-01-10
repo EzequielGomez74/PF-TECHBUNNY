@@ -15,16 +15,16 @@ function FollowUp(){
             <div className={dm ? s.dmbackgroundForm : s.backgroundForm}>
                 <div className={dm ? s.dmformStyle : s.formStyle}>
                     <div className={dm ? s.dmformTitle : s.formTitle}>
-                        <h1>SEGUIMIENTO DE PEDIDO</h1>
+                        <h1>VER ESTADO DE PEDIDO:</h1>
                     </div>
                     <form>
-                        <div className={dm ? s.dmformOptions : s.formOptions}>
+                        {/* <div className={dm ? s.dmformOptions : s.formOptions}>
                         <h2>Opción 1</h2>
                         <h3>Indicar código de seguimiento</h3>
                         <input type="search" placeholder={`Código de seguimiento(por ejemplo, 17NFP89XS7)`} />
-                        </div>
+                        </div> */}
                         <div className={dm ? s.dmformOptions : s.formOptions}>
-                        <h2>Opción 2</h2>
+                        <h2>Opción 1</h2>
                         <h3>Indicar número de pedido</h3>
                         <input type="search" placeholder={`Número de Pedido(por ejemplo, 444455)`}/>
                         </div>
