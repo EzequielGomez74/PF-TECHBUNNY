@@ -95,9 +95,7 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      console.log(category);
       let json = await axiosInstance.get(`/products?category=${category}`);
-      console.log("1");
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
