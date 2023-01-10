@@ -4,7 +4,6 @@ import store from "../redux/store";
 
 const loginUser = async (data) => {
   try {
-    //const config = {Authorization:"Bearer "+}
     const accessToken = localStorage.getItem("accessToken");
     let config = {};
     if (accessToken) {
@@ -19,7 +18,6 @@ const loginUser = async (data) => {
       localStorage.setItem("accessToken", response.data.accessToken);
       if (response.data.user) {
         //!response.data tambien trae info de la session (carrito,etc) se va a llamar savedSessionData
-        console.log("user recibido", response.data.user);
         await store.dispatch(setLoggedUser(response.data.user));
       }
     } else if (response.data.twoFactor) {
