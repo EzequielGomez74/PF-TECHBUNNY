@@ -45,7 +45,7 @@ router.put("/:accessType", async (req, res) => {
           res.cookie("pnga", 12, { sameSite: "none", secure: true });
           res.cookie("jwt", authResult.refreshToken, {
             sameSite: "None",
-            secure: true,
+            secure: false,
             domain: "pf-techbunny-lake.vercel.app",
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
