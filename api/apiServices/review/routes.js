@@ -19,6 +19,7 @@ router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));
 router.post("/", async (req, res) => {
+  console.log(req.body);
   const review = req.body;
   try {
     console.log(req.body);
