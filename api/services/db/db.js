@@ -3,19 +3,10 @@ const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 //const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
-<<<<<<< HEAD
-const { log } = require("console");
-=======
->>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
 
 /*
  */
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-<<<<<<< HEAD
-console.log(process.env.NODE_ENV);
-console.log(DB_PASSWORD);
-=======
->>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize(
@@ -25,23 +16,16 @@ let sequelize =
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
         }
       )
-<<<<<<< HEAD
-    : new Sequelize(`postgres://${DB_USER}:admin@${DB_HOST}/${DB_NAME}`, {
-        logging: false, // set to console.log to see the raw SQL queries
-        native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-      });
-=======
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        `postgres:${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
           logging: false, // set to console.log to see the raw SQL queries
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
         }
       );
->>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
 
 // const sequelize = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
+//   `postgres:${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
 //   {
 //     logging: false, // set to console.log to see the raw SQL queries
 //     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -52,11 +36,6 @@ const basename = path.basename(__filename);
 const modelDefiners = [];
 //const dbPath = __dirname.split("\\services\\db")[0];
 const dbPath = path.join(__dirname, "..", "..");
-<<<<<<< HEAD
-console.log("dirname", __dirname);
-console.log(dbPath);
-=======
->>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(dbPath, "apiServices")).forEach((file) => {
   if (fs.existsSync(path.join(dbPath, "apiServices", file, "model.js")))
@@ -120,10 +99,10 @@ User.belongsToMany(Product, {
   through: Favorite,
   foreignKey: "user_id",
 });
-Product.belongsToMany(User,{
+Product.belongsToMany(User, {
   through: Favorite,
-  foreignKey: "product_id"
-})
+  foreignKey: "product_id",
+});
 
 module.exports = {
   //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
