@@ -15,9 +15,7 @@ const loginUser = async (data) => {
       if (response.data.user) {
         //!response.data tambien trae info de la session (carrito,etc) se va a llamar savedSessionData
         console.log("user recibido", response.data.user);
-        //const u = response.data.user;
         await store.dispatch(setLoggedUser(response.data.user));
-        //store.dispatch(setLoggedUser(u));
       }
     } else if (response.data.twoFactor) {
       //? response.data === {twoFactor:true,(tokenId:..pa12.. || (username:"pepe",password:"123"))}
