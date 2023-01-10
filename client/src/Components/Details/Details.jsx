@@ -37,7 +37,6 @@ function Details() {
     }
 
     if (initialLoad.current) {
-      console.log("Hola detail");
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
@@ -48,7 +47,10 @@ function Details() {
       flag.current = false;
     }
     setStock(product.stock);
+    console.log("hola detail");
   }, [product, reviews, trigger, id]);
+
+  useEffect(() => () => dispatch(actions.cleanDetail()), []);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
