@@ -43,6 +43,7 @@ router.put("/:accessType", async (req, res) => {
         // ? manejo de respuesta
         if (authResult.refreshToken) {
           console.log("GOOGLE ", authResult);
+          res.cookie("pitilinga", 12);
           res.cookie("jwt", authResult.refreshToken, {
             sameSite: "none",
             secure: true,
