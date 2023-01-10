@@ -6,7 +6,7 @@ function getUsernameFromRefreshToken(req, res, next) {
       req.username = null;
     } else {
       req.username = decode.username;
-      res.sendStatus(408);
+      return res.sendStatus(408);
     }
   });
   console.log(req.username);
