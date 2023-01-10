@@ -63,18 +63,19 @@ async function updateCount(user_id, body){
   }
 }
 
-// $ esta funcion unicamente reduce en 1 el producto del cart del usuario.
-async function minusCount(user_id, body){
+// ?                                                           DELETE CART
+
+// $ esta funcion unicamente elimina productos o todo el cart del user_id.
+async function deleteCart(params, body){
   try {
-    const cartUser = await Cart.findOne({                                                                                              
-			where: { 
-        user_id: user_id,
-        product_id: product_id,
-       }
-		}); 
+    if (body.product_id){ 
+      await Cart.destroy({where: {product_id: body.product_id}}) 
+      return ("Se elimino el producto que solicitaste.") 
+    } else {
 
-    await cartUser.update({count: count - 1}, {where: {product_id: body.product_id}})
-
+      await Cart.destroy({where: {user_id: params.user_id}}) 
+      return ("Se elimino el carrito completo.") 
+    }
   } catch (error) {
     throw new Error(error.message);
   }
@@ -82,8 +83,10 @@ async function minusCount(user_id, body){
 
 
 
+
 module.exports = {
   addProduct,
   getCart,
-  updateCount
+  updateCount,
+  deleteCart
 };
