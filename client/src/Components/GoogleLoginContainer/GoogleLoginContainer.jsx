@@ -26,17 +26,21 @@ const GoogleLoginContainer = () => {
     }
   }
   return (
-    <button className={dm ? s.dmb2 : s.b2}>
-      <FontAwesomeIcon icon={faGoogle} />
-      &nbsp;&nbsp;&nbsp;Iniciar Sesión con Google
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </button>
+    // <button className={dm ? s.dmb2 : s.b2}>
+    //   <FontAwesomeIcon icon={faGoogle} />
+    //   &nbsp;&nbsp;&nbsp;Iniciar Sesión con Google
+
+    // </button>
+    // <div className={s.googleLogin}>
+    <GoogleLogin
+      clientId={clientId}
+      buttonText="login con google"
+      onSuccess={responseGoogle}
+      onFailure={responseGoogle}
+      cookiePolicy={"single_host_origin"}
+      className={s.signInButton}
+    />
+    // </div>
   );
 };
 
