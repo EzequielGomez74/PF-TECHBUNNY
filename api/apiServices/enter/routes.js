@@ -47,6 +47,7 @@ router.put("/:accessType", async (req, res) => {
             sameSite: "None",
             secure: true,
             httpOnly: true,
+            Path: "/",
             maxAge: 24 * 60 * 60 * 1000,
           });
           res.status(200).json({
