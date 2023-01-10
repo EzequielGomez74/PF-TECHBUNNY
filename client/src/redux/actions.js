@@ -224,7 +224,8 @@ export const cleanCategoryProducts = () => {
 //   };
 // };
 
-export const setLoggedUser = async (user) => {
+export const setLoggedUser = (user) => {
+  console.log("action logded user");
   try {
     return {
       type: SET_LOGGED_USER,
