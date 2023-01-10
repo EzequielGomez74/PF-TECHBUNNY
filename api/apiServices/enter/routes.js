@@ -42,13 +42,11 @@ router.put("/:accessType", async (req, res) => {
         // ? manejo de respuesta
         if (authResult.refreshToken) {
           console.log("GOOGLE ", authResult);
-          res.cookie("pitilinga", 12, { sameSite: "none" });
+          res.cookie("pnga", 12, { sameSite: "none", secure: true });
           res.cookie("jwt", authResult.refreshToken, {
             sameSite: "None",
             secure: true,
             httpOnly: true,
-            domain: "https://pf-techbunny-lake.vercel.app",
-            Path: "/",
             maxAge: 24 * 60 * 60 * 1000,
           });
           res.status(200).json({
