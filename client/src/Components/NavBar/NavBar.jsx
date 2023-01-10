@@ -61,8 +61,12 @@ function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const logOutHandler = async () => {
+    console.log("entra logout");
+    const response = await axios.put("/enter/logout", {
+      withCredentials: true,
+    });
+    console.log(response.data);
     dispatch(setLoggedUser({}));
-    await axios.put("/enter/logout");
   };
 
   return (
