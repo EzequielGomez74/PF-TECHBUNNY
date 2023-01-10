@@ -10,11 +10,11 @@ const loginUser = async (data) => {
       withCredentials: true,
     });
     if (response.data.accessToken) {
-      console.log("2 token ", response.data.accessToken);
+      console.log("acces token recibido", response.data.accessToken);
       sessionStorage.setItem("accessToken", response.data.accessToken);
       if (response.data.user) {
         //!response.data tambien trae info de la session (carrito,etc) se va a llamar savedSessionData
-        console.log("setL");
+        console.log("user recibido", response.data.user);
         await store.dispatch(setLoggedUser(response.data.user));
       }
     } else if (response.data.twoFactor) {
