@@ -11,7 +11,8 @@ import Pagination from "../Pagination/Pagination";
 function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
-
+  //Para usuario registrado
+  let user = useSelector(state => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
@@ -123,8 +124,9 @@ function Category() {
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <CardV
+                user_id={user.user_id}
                 key={e.product_id}
-                id={e.product_id}
+                product_id={e.product_id}
                 brand={e.brand}
                 name={e.name}
                 image={e.image}

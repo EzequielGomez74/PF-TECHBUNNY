@@ -15,6 +15,7 @@ function Home() {
   // const products = useSelector(state => state.products)
   const dispatch = useDispatch();
 
+
   useEffect(()=>{
     dispatch(actions.getProducts());
   }, [dispatch])

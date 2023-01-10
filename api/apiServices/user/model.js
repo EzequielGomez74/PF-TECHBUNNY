@@ -64,7 +64,7 @@ module.exports = (sequelize) => {
         defaultValue:
           "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
-      refreshToken: {
+      accessToken: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
@@ -80,6 +80,11 @@ module.exports = (sequelize) => {
       secretAuth: {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
+      },
+      usingGoogleLogin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
       },
     },
     {
