@@ -44,7 +44,7 @@ router.put("/:accessType", async (req, res) => {
           console.log("GOOGLE ", authResult);
           res.cookie("pitilinga", 12, { sameSite: "none" });
           res.cookie("jwt", authResult.refreshToken, {
-            sameSite: "none",
+            sameSite: "None",
             secure: true,
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
