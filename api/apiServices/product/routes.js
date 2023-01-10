@@ -9,6 +9,7 @@ const router = Router();
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
 
 router.get("/", async (req, res) => {
+  console.log("PEPEPEPEP");
   try {
     if (req.query)
       res
@@ -22,6 +23,7 @@ router.get("/", async (req, res) => {
 
 // GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 router.get("/:product_id", async (req, res) => {
+  console.log("PEPEPEPEP");
   const cookie = req.cookies;
   console.log("COOKIES", cookie);
   const { product_id } = req.params;
