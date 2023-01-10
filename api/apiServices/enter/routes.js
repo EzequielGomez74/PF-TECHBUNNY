@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
+const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
 router.post("/", async (req, res) => {
-  const { username, password } = req.body;
+  const data = req.body;
   try {
-    res.status(200).json(await controller.handleNewUser(username, password));
+    res.status(200).json(await controller.handleNewUser(data));
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -14,35 +15,51 @@ router.post("/", async (req, res) => {
 
 // PARAMS /enter/login   /enter/logout  /enter/recover
 router.put("/:accessType", async (req, res) => {
+  console.log("enter-login");
   const { accessType } = req.params;
   try {
     switch (accessType) {
       case "login":
         const { username, password } = req.body;
-        if (username && password) {
-          const { accessToken, refreshToken } = await controller.handleLogin(
-            username,
-            password
-          );
-          res.cookie("jwt", refreshToken, {
-            sameSite: "None",
-            secure: true,
-            httpOnly: true,
-            maxAge: 5 * 24 * 60 * 60 * 1000,
+        let authResult;
+        if (req.body?.tokenId) {
+          authResult = await controller.handleGoogleLogin(req.body);
+        } else if (username && password) {
+          authResult = await controller.handleLogin(req.body);
+        } else if (req.accessToken) {
+          authResult = await controller.handleLoginWithAccess(req.accessToken);
+        } else {
+          return res.sendStatus(202);
+        }
+        // ? manejo de respuesta
+        if (authResult.accessToken) {
+          res.status(200).json({
+            accessToken: authResult.accessToken,
+            user: authResult.user,
           });
-          res.status(200).json({ accessToken });
+        } else if (authResult === null || authResult.twoFactor) {
+          return res.status(200).json(authResult);
         } else {
           res.sendStatus(400);
         }
         break;
       case "logout":
-        const cookie = req.cookies?.jwt;
-        if (cookie) {
-          await controller.handleLogout(cookie);
-          res.sendStatus(200);
+        //! LOGOUT tiene que guardar data de la session - savedSessionData
+        // const cookie = req.cookies?.jwt;
+        // const savedSessionData = req.cookies?.savedSessionData;
+        if (req.body?.user_id) {
+          res.status(200).json({
+            status: await controller.handleLogout(req.body.user_id),
+          });
         } else res.sendStatus(400);
         break;
       case "recover":
+        //Entra un body = {username:"Pepito"}
+        if (req.body?.username) {
+          res.status(200).json({
+            status: await controller.handleRecoverPassword(req.body.username),
+          });
+        } else res.status(400).json({ status: "invalid username" });
       default:
         break;
     }

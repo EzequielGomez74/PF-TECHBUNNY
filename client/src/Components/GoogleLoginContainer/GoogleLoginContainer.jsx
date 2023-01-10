@@ -35,7 +35,11 @@ const GoogleLoginContainer = () => {
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
+<<<<<<< HEAD
        />
+=======
+      />
+>>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
     </button>
   );
 };

@@ -147,6 +147,12 @@ export default function reducer(state = initialState, action) {
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
+    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+      const productFound = state.cart.find((p) => p.id === action.payload.id);
+      if (productFound) {
+        productFound.totalQuantity -= action.payload.totalQuantity;
+      }
+      return { ...state, cart: [...state.cart] };
     default:
       return { ...state };
   }
