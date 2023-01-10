@@ -11,6 +11,7 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
+  if (!username) return products;
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
     const { user_id } = await getUser({ username });

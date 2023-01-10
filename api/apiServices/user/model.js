@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -36,32 +36,32 @@ module.exports = (sequelize) => {
       },
       defaultShippingAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       zipCode: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       role: {
-        //1=guest 2=user 3=admin
+        // 2=user 3=admin
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 1,
+        defaultValue: 2,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       needPasswordReset: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-        defaultvalue: false,
+        defaultValue: false,
       },
       profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultvalue:
+        defaultValue:
           "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
       },
       refreshToken: {
@@ -72,15 +72,9 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      //IS LOGGED ?????
-      isLogged: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
       googleAuth: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false,
       },
       secretAuth: {

@@ -1,8 +1,5 @@
 function accessControl(req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://pf-techbunny-lake.vercel.app"
-  ); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
   //res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -13,3 +10,6 @@ function accessControl(req, res, next) {
 }
 //a
 module.exports = accessControl;
+
+//! setear res.header("Access-Control-Allow-Origin","https://pf-techbunny-lake.vercel.app") para deploy
+//! setear res.header("Access-Control-Allow-Origin","http://localhost:3000") para local
