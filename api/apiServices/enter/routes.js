@@ -39,18 +39,17 @@ router.put("/:accessType", async (req, res) => {
         } else if (req.username === null) {
           return res.sendStatus(202);
         }
-        console.log("auth ", authResult);
         // ? manejo de respuesta
         if (authResult.refreshToken) {
           console.log("GOOGLE ", authResult);
           res.cookie("pitilinga", 12);
           res.cookie("jwt", authResult.refreshToken, {
-            sameSite: "none",
+            sameSite: "None",
             secure: true,
-            httpOnly: false,
+            httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
           });
-          return res.status(200).json({
+          res.status(200).json({
             accessToken: authResult.accessToken,
             user: authResult.user,
           });
