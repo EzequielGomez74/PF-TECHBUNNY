@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLoggedUser } from "../redux/actions";
+import setLoggedUser from "../redux/actions";
 import store from "../redux/store";
 
 const loginUser = async (data) => {
