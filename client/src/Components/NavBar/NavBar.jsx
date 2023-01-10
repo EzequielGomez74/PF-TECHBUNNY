@@ -299,11 +299,13 @@ function NavBar() {
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
             <Link to="/login">
-              <DropdownItem
-                onClick={() => logOutHandler()}
-                icon={faRightToBracket}
-                text={"Log Out"}
-              />
+              <button onClick={() => logOutHandler()}>
+                <DropdownItem
+                  // onClick={() => logOutHandler()}
+                  icon={faRightToBracket}
+                  text={"Log Out"}
+                />
+              </button>
             </Link>
           </ul>
         </div>
