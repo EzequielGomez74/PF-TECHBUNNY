@@ -14,4 +14,25 @@ router.get("/", async (req, res) => {
 	}
 });
 
+router.post("/", async (req, res) => {
+	try {
+		const {name}=req.body
+		if (name) {
+			res.status(200).json(await controller.createCategory(req.body));
+		}
+	} catch (error) {
+		res.sendStatus(400);
+	}
+});
+
+router.delete("/:categoryId", async (req, res) => {
+	const { categoryId } = req.params;
+	try {
+	  if (categoryId)
+		res.status(200).json(await controller.deleteCategory(categoryId));
+	} catch (error) {
+	  res.sendStatus(400);
+	}
+  });
+
 module.exports = router;
