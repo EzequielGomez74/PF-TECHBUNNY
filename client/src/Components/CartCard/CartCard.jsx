@@ -27,7 +27,7 @@ function CartCard({id, brand, name, image, price, stock, totalQuantity}) {
 
     return(
         <div className={s.card}>
-            <div className={s.close}><button onClick={() => dispatch(actions.removeCart(id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button onClick={() => dispatch(actions.removeCart(id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>
