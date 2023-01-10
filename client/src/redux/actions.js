@@ -16,7 +16,10 @@ import {
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
+  CLEAN_DETAIL,
+  CLEAN_CATEGORY_PRODUCTS,
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -92,9 +95,7 @@ export function getCategories() {
 export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
-      console.log(category);
       let json = await axiosInstance.get(`/products?category=${category}`);
-      console.log("1");
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -207,15 +208,28 @@ export const getSearchResults = (products, searchTerm) => {
 //     }
 // }
 
-export const getUser = () => {
-  return async function (dispatch) {
-    const user = await axiosInstance.get("/");
-  };
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
 };
 
+export const cleanCategoryProducts = () => {
+  return { type: CLEAN_CATEGORY_PRODUCTS };
+};
+
+// export const getUser = () => {
+//   return async function (dispatch) {
+//     const user = await axiosInstance.get("/");
+//   };
+// };
+
 export const setLoggedUser = (user) => {
-  return {
-    type: SET_LOGGED_USER,
-    payload: user,
-  };
+  console.log("action logded user");
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
