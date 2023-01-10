@@ -18,7 +18,7 @@ function Category() {
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
   let productsBackup = useSelector((state) => state.filtered);
-  const [filterPanel, setFileterPanel] = useState({
+  const [filterPanel, setFilterPanel] = useState({
     price: "none",
     brand: "none",
   });
@@ -38,6 +38,7 @@ function Category() {
     productBrands.push(productsBackup[i].brand);
   }
 
+  console.log(productBrands);
   let Brands = [];
 
   productBrands.forEach((b) => {
@@ -53,6 +54,10 @@ function Category() {
     if (nameChange.current !== name) {
       initialLoad.current = true;
       nameChange.current = name;
+      setFilterPanel({
+        price: "none",
+        brand: "none",
+      });
     }
     console.log("hola");
     if (initialLoad.current) {
@@ -64,12 +69,14 @@ function Category() {
     console.log("chau");
 
     dispatch(actions.filterByBrand(filterPanel.brand));
-    dispatch(actions.orderByPrice(filterPanel.price));
+    dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
+  useEffect(() => () => dispatch(actions.cleanCategoryProducts()), []);
+
   const handleFiltersChange = (e) => {
-    setFileterPanel({ ...filterPanel, [e.target.id]: e.target.value });
+    setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
   return (
@@ -120,7 +127,7 @@ function Category() {
                 id={e.product_id}
                 brand={e.brand}
                 name={e.name}
-                image={e.image} 
+                image={e.image}
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}
