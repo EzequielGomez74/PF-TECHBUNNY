@@ -19,7 +19,7 @@ import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import EditProfile from "./Components/Profile/EditProfile";
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
-
+axios.defaults.withCredentials = true;
 function App() {
   return (
     <div className="App">
