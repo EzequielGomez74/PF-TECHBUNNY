@@ -44,7 +44,7 @@ router.put("/:accessType", async (req, res) => {
         if (authResult.refreshToken) {
           console.log("GOOGLE ", authResult);
           res.cookie("jwt", authResult.refreshToken, {
-            sameSite: "None",
+            sameSite: "none",
             secure: true,
             httpOnly: false,
             maxAge: 24 * 60 * 60 * 1000,
