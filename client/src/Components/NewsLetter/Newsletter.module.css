@@ -16,8 +16,9 @@
 }
 
 .imgNewsletter{
-    width: 65%;
-    margin-top: 30px;
+    width: 75%;
+    margin-top: 7px;
+    transform: translateX(-50px);
 
 }
 .textandinput h2{
@@ -110,7 +111,7 @@
     .imgNewsletter{
         width: 70%;
         margin-top: 25px;
-        margin-left: -70px;
+       
     }
     .prueba{
         margin-bottom: 4%;

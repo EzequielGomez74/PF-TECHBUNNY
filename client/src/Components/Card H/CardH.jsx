@@ -11,7 +11,7 @@ function CardH({id, brand, name, image, price, stock}){
     let dispatch = useDispatch()
     return(
         <div className={s.card}>
-            <div className={s.close}><button className={s.icon} onClick={()=> dispatch(actions.removeFavorite(id))} ><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button className={s.icon} onClick={()=> dispatch(actions.removeFavorite(id))} ><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>

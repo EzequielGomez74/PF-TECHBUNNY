@@ -15,7 +15,7 @@ function CardV({id, brand, name, image, price, stock, category, subcategory}){
     return(
     <div>
         <div className={s.card}>
-            <div className={s.iconWrap}>
+            <div className={s.favContainer}>
                 <button className={s.heart} onClick={()=> dispatch(actions.addFavorite({id, brand, name, image, price, stock}))} ><FontAwesomeIcon icon={faHeart} /></button>
             </div>
             <Link to={`/detail/${id}`}><img className={s.img} src={image} alt={id} /></Link>
