@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productsByCategory: action.payload,
-        filtered: action.payload
+        filtered: action.payload,
       };
     case "GET_CATEGORIES":
       return {
@@ -44,39 +44,39 @@ export default function reducer(state = initialState, action) {
           ? allProductsByCategory
           : allProductsByCategory.filter((p) =>
               p.brand.includes(action.payload)
-          );
-        return {
-          ...state,
-          productsByCategory: filteredProducts,
-        };
+            );
+      return {
+        ...state,
+        productsByCategory: filteredProducts,
+      };
     case "SORT_BY_PRICE":
       const orderedProductsByPrice = state.productsByCategory.sort(function (
         a,
         b
       ) {
-          if (action.payload === "asc") {
-            if (a.price < b.price) {
-              return -1;
-            } else if (a.price > b.price) {
-              return 1;
-            } else {
-              return 0;
-            }
-          } else if (action.payload === "desc") {
-            if (a.price > b.price) {
-              return -1;
-            } else if (a.price < b.price) {
-              return 1;
-            } else {
-              return 0;
-            }
+        if (action.payload === "asc") {
+          if (a.price < b.price) {
+            return -1;
+          } else if (a.price > b.price) {
+            return 1;
+          } else {
+            return 0;
           }
-          return "Ordered";
-        });
-        return {
-          ...state,
-          productsByCategory: orderedProductsByPrice,
-        };
+        } else if (action.payload === "desc") {
+          if (a.price > b.price) {
+            return -1;
+          } else if (a.price < b.price) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+        return "Ordered";
+      });
+      return {
+        ...state,
+        productsByCategory: orderedProductsByPrice,
+      };
     // case "FILTER_BY_PRICE":
     //   return {
     //     ...state,
@@ -142,6 +142,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
+    case "CLEAN_DETAIL":
+      return { ...state, detail: {} };
+    case "CLEAN_CATEGORY_PRODUCTS":
+      return { ...state, productsByCategory: [] };
     default:
       return { ...state };
   }

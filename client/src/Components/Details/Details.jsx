@@ -37,7 +37,6 @@ function Details() {
     }
 
     if (initialLoad.current) {
-      console.log("Hola detail");
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
@@ -49,6 +48,11 @@ function Details() {
     }
     setStock(product.stock);
   }, [product, reviews, trigger, id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    return () => dispatch(actions.cleanDetail());
+  }, []);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
