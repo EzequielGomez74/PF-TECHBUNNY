@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
 const { OAuth2Client } = require("google-auth-library");
-
+const TokenManager = require("../../scripts/TokenManager");
 require("dotenv").config();
 
 async function handleNewUser(data) {
@@ -28,7 +28,7 @@ async function handleNewUser(data) {
     //GENERARA TOKEN Y GUARDAR EN DB
     //GENERA VERYFICATION CODE
     const userCreated = await User.create(newUser);
-    generateValidationAndSendMail(userCreated);
+    generateValidationAndSendMail(userCreated, "register", 2);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
@@ -55,12 +55,11 @@ async function handleLogin({ username, password, twoFactorToken }) {
       } else if (result.twoFactor) {
         return { twoFactor: true, username, password };
       } else {
-        console.log("3");
         //$ result === true
         const response = await generateTokens(foundUser);
         response.user = foundUser.dataValues;
         //todo mandar solo los valores correspondientes
-        //todo mandar datos de la sesion tambien
+        //todo SETEAR SAVED SESSION DATA
         return response;
       }
     } else throw new Error("LOGIN FAIL");
@@ -103,6 +102,8 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
           email: email,
           username: name,
           profilePicture: picture,
+          usingGoogleLogin: true,
+          isActive: true,
         };
         foundUser = await User.create(newUser);
       }
@@ -111,7 +112,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       console.log("response ", response);
       response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
-      //todo mandar datos de la sesion tambien
+      //todo SETEAR SAVED SESSION DATA
       return response;
     } else return { status: "bad credentials" };
   } catch (error) {
@@ -119,14 +120,14 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
   }
 }
 
-async function handleLoginWithRefresh(refreshToken) {
+async function handleLoginWithAccess(accessToken) {
   try {
     let result = false;
-    const foundUser = await User.findOne({ where: { refreshToken } });
+    const foundUser = await User.findOne({ where: { accessToken } });
     if (!foundUser) return { status: "Login Fail" };
     jwt.verify(
-      foundUser.refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
+      foundUser.accessToken,
+      process.env.ACCESS_TOKEN_SECRET,
       async (err, decode) => {
         if (err || foundUser.username !== decode.username)
           throw new Error("not found");
@@ -134,11 +135,9 @@ async function handleLoginWithRefresh(refreshToken) {
       }
     );
     if (result) {
-      const response = await generateTokens(foundUser);
-      response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
-      //todo mandar datos de la sesion tambien
-      return response;
+      //todo SETEAR SAVED SESSION DATA
+      return { user: foundUser.dataValues, accessToken };
     } else {
       return { status: "Login Failed" };
     }
@@ -147,33 +146,49 @@ async function handleLoginWithRefresh(refreshToken) {
   }
 }
 
-async function handleLogout(cookie) {
-  const foundUser = await User.findOne({ where: { refreshToken: cookie } });
-  if (!foundUser) throw new Error("User not found");
-  foundUser.refreshToken = "";
+async function handleLogout(accessToken) {
+  const foundUser = await User.findOne({ where: { accessToken } });
+  if (!foundUser) return "FAIL";
+  foundUser.accessToken = "";
+  //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
+  return "SUCCESS";
+}
+
+async function handleRecoverPassword(username) {
+  try {
+    const users = await User.findAll({ where: { username } });
+    let foundUser = null;
+    users.forEach((user) => {
+      if (!user.dataValues.usingGoogleLogin) foundUser = user;
+    });
+    if (!foundUser) return "FAIL";
+    foundUser.update({ password: "" });
+    generateValidationAndSendMail(foundUser, "recover", 1);
+    return "SUCCESS";
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "5m" }
+    { expiresIn: "1202s" }
   );
-  const refreshToken = jwt.sign(
-    { username: foundUser.username },
-    process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "50m" }
-  );
+  // const refreshToken = jwt.sign(
+  //   { username: foundUser.username },
+  //   process.env.REFRESH_TOKEN_SECRET,
+  //   { expiresIn: "50m" }
+  // );
   //guardar el refreshToken en la DB
-  await foundUser.update({ refreshToken: refreshToken });
-  return { accessToken, refreshToken };
+  await foundUser.update({ accessToken });
+  return { accessToken };
 }
 async function verifyTwoFactorToken(foundUser, twoFactorToken) {
   try {
-    console.log("v1");
     if (foundUser.googleAuth) {
-      console.log("v2");
       if (twoFactorToken) {
         //todo verificar twoFactorToken
         if ("si no se verifica") return false;
@@ -191,5 +206,6 @@ module.exports = {
   handleNewUser,
   handleLogout,
   handleGoogleLogin,
-  handleLoginWithRefresh,
+  handleLoginWithAccess,
+  handleRecoverPassword,
 };
