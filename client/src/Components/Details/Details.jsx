@@ -47,19 +47,10 @@ function Details() {
       flag.current = false;
     }
     setStock(product.stock);
-<<<<<<< HEAD
     console.log("hola detail");
   }, [product, reviews, trigger, id]);
 
   useEffect(() => () => dispatch(actions.cleanDetail()), []);
-=======
-  }, [product, reviews, trigger, id]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    return () => dispatch(actions.cleanDetail());
-  }, []);
->>>>>>> 54f7077a7faf5e6000b9cc5c6961af747c3d8813
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
