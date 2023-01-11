@@ -45,6 +45,7 @@ function Register() {
     e.preventDefault();
     if (register.username && register.password && register.email)
       postNewUser(register);
+      alert('Registro exitoso');
     console.log(register);
   };
 
