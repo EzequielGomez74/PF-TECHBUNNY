@@ -47,30 +47,101 @@ async function handleLogin({ username, password, token, guest }) {
     const foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
-    console.log("LLEGA");
-    //const match = await bcrypt.compare(password, password);
-    if (true) {
-      //SI TIENE 2FA
-      if (foundUser.googleAuth) {
-        if (token) {
-          if ("verify") {
-          } else return null;
+    const match = await bcrypt.compare(password, foundUser.dataValues.password);
+    if (match && foundUser.dataValues.isActive) {
+      const result = await verifyTwoFactorToken(
+        foundUser.dataValues,
+        twoFactorToken
+      );
+      console.log("c resultverify2FA ", result);
+      if (result === false) {
+        return null;
+      } else if (result.twoFactor) {
+        return { twoFactor: true, username, password };
+      } else {
+        //$ result === true
+        const response = await generateTokens(foundUser);
+        response.user = foundUser.dataValues;
+        //todo mandar solo los valores correspondientes
+        //todo SETEAR SAVED SESSION DATA
+        return response;
+      }
+    } else throw new Error("LOGIN FAIL");
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+async function handleGoogleLogin({ tokenId, twoFactorToken }) {
+  try {
+    const client = new OAuth2Client(process.env.GOOGLE_LOGIN_CLIENT_ID);
+    const ticket = await client.verifyIdToken({
+      idToken: tokenId,
+      audience: process.env.GOOGLE_LOGIN_CLIENT_ID,
+    });
+    const { name, email, picture } = ticket.getPayload();
+    let foundUser;
+    if (email) {
+      foundUser = await User.findOne({ where: { email } });
+      if (foundUser) {
+        if (foundUser.dataValues.isActive) {
+          //$ usuario encontrado y activo -> loguear usuario
+          const result = verifyTwoFactorToken(
+            foundUser.dataValues,
+            twoFactorToken
+          );
+          if (result === true) {
+            foundUser.update({ profilePicture: picture, username: name });
+          } else if (result === false) {
+            return null;
+          } else if (result.twoFactor) {
+            return { twoFactor: true, tokenId: tokenId };
+          }
         } else {
           return { twoFactor: true };
         }
       }
-      // ACA HAY QUE CREAR EL JWT VALIDATOR TOKEN !! json web token (access token - refresh token)
-      return generateTokens(foundUser, false);
-    } else throw new Error("Wrong Password");
+      const response = await generateTokens(foundUser);
+      response.user = foundUser.dataValues;
+      //todo mandar solo los valores correspondientes
+      //todo SETEAR SAVED SESSION DATA
+      return response;
+    } else return { status: "bad credentials" };
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-async function handleLogout(cookie) {
-  const foundUser = await User.findOne({ where: { refreshToken: cookie } });
-  if (!foundUser) throw new Error("User not found");
-  foundUser.refreshToken = "";
+async function handleLoginWithAccess(accessToken) {
+  try {
+    let result = false;
+    const foundUser = await User.findOne({ where: { accessToken } });
+    if (!foundUser) return { status: "Login Fail" };
+    jwt.verify(
+      foundUser.accessToken,
+      process.env.ACCESS_TOKEN_SECRET,
+      async (err, decode) => {
+        if (err || foundUser.username !== decode.username)
+          throw new Error("not found");
+        result = true;
+      }
+    );
+    if (result) {
+      //todo mandar solo los valores correspondientes
+      //todo SETEAR SAVED SESSION DATA
+      return { user: foundUser.dataValues, accessToken };
+    } else {
+      return { status: "Login Failed" };
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+async function handleLogout(user_id) {
+  const foundUser = await User.findOne({ where: { user_id } });
+  if (!foundUser) return "FAIL";
+  foundUser.accessToken = "";
+  //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
 }
 
@@ -78,17 +149,10 @@ async function generateTokens(foundUser, infinite) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "30s" }
+    { expiresIn: "10m" }
   );
-  const refreshToken = jwt.sign(
-    { username: foundUser.username },
-    process.env.REFRESH_TOKEN_SECRET,
-    infinite ? null : { expiresIn: "2m" }
-  );
-  //guardar el refreshToken en la DB
-  await foundUser.set({ refreshToken: refreshToken });
-  await foundUser.save();
-  return { accessToken, refreshToken };
+  await foundUser.update({ accessToken });
+  return { accessToken };
 }
 
 module.exports = { handleLogin, handleNewUser, handleLogout };

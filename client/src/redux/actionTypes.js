@@ -10,6 +10,10 @@ export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const TOGGLE_DARK_MODE = "TOGGLE_DARK_MODE";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
+export const SET_LOGGED_USER = "SET_LOGGED_USER";
+export const SORT_BY_PRICE = "SORT_BY_PRICE";
+export const ADD_OR_REMOVE_QUANTITY_FROM_CART =
+  "ADD_OR_REMOVE_QUANTITY_FROM_CART";
 
 // Funciones sincrónicas
 export const ADD_CART = "ADD_CART";

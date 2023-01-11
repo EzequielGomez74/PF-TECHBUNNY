@@ -77,12 +77,10 @@ body {
     margin: 140px;
   }
   .swiper-button-next{
-    background-color: #c5bcbc;
-   opacity: 0;
+    display: none;
 }
 .swiper-button-prev{
-  background-color: #c5bcbc;
- opacity: 0;
+ display: none;
 
 
 

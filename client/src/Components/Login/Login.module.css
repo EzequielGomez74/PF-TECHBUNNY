@@ -10,18 +10,8 @@
     font-family: 'Poppins';
 }
 
-.heroLogin{
-    height: 500px;
-    width: 900px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero{
-    background-image: url(../../images/login.png);
-    width: 600px;
-    height: 490px;
+.botongoogle{
+  background-color: red;
 }
 
 .loginCard{
@@ -205,4 +195,9 @@
     background-color: transparent;
     color: #f6f5fa;
     border: 1px solid #f6f5fa;
+}
+
+.dmimg {
+  width: 60%;
+  height: 60%;
 }
