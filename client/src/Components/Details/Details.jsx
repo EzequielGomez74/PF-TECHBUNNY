@@ -95,12 +95,8 @@ function Details() {
   function handleAddToFavorites() {
     dispatch(
       actions.addFavorite({
-        id: product.product_id,
-        brand: product.brand,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        stock: product.stock,
+        user_id: user.user_id,
+        product_id: product.product_id,
       })
     );
   }

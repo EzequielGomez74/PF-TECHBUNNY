@@ -17,16 +17,14 @@ function Favoritos() {
 
   let user = useSelector(state => state.loggedUser);
   let favoritos = useSelector(state => state.detail)
+  
+  const favs = useSelector(state => state.favorites);
+    console.log(favs);
 
   useEffect(() => {
     if(user.user_id) 
-    dispatch(actions.allFavoritesByUser(user.user_id));
-  
-  },[user.user_id])
-   
-
-    const favs = useSelector(state => state.favorites);
-    console.log(favs);
+    dispatch(actions.addFavorite(user.user_id));
+  },[])
 
     return (
         <div>

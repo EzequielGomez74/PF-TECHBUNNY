@@ -21,8 +21,19 @@ import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
+import {allFavoritesByUser} from "../../redux/actions";
 
 function NavBar() {
+  // Para saber cuantos elementos se agregaron a favoritos
+  const favs = useSelector((state) => state.favorites);
+  const cart = useSelector((state) => state.cart);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const results = useSelector((state) => state.results);
+  //dark mode
+  const dm = useSelector((state) => state.darkMode);
+  const DM = useSelector((state) => state.darkMode);
+
+  const [searchTerm, setSearchTerm] = useState("");
   //para manejar el dropdown
   const [open, setOpen] = useState(false);
   const [closed, setClosed] = useState(true);
@@ -30,6 +41,16 @@ function NavBar() {
   const [closedCat, setClosedCat] = useState(true);
 
   let menuRef = useRef();
+  let favsChange = useRef(favs);
+  let [prueba, setPrueba] = useState(0);
+  
+  
+
+  // useEffect(() => {
+  //   // if(favsChange.current.length !== favs.length)
+  //   dispatch(allFavoritesByUser(loggedUser.user_id))
+    
+  // }, [favs, prueba,])
 
   useEffect(() => {
     let handler = (e) => {
@@ -50,16 +71,7 @@ function NavBar() {
 
   let dispatch = useDispatch();
 
-  // Para saber cuantos elementos se agregaron a favoritos
-  const favs = useSelector((state) => state.favorites);
-  const cart = useSelector((state) => state.cart);
-  const loggedUser = useSelector((state) => state.loggedUser);
-  const results = useSelector((state) => state.results);
-  //dark mode
-  const dm = useSelector((state) => state.darkMode);
-  const DM = useSelector((state) => state.darkMode);
-
-  const [searchTerm, setSearchTerm] = useState("");
+  
 
   return (
     <div className={s.navBar}>

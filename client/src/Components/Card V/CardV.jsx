@@ -6,8 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, } from "react-redux";
 import * as actions from '../../redux/actions'
-import { Alert } from '@mui/material';
-import { AlertTitle } from '@mui/material';
+
 
 
 
@@ -19,6 +18,7 @@ function CardV({product_id, brand, name, image, price, stock, user_id}){
            alert("NO ESTAS LOGUEADO") 
         }else{
             dispatch(actions.addFavorite({user_id, product_id}))
+            //dispatch(actions.allFavoritesByUser(user_id))
             console.log('ESTOY ENVIANDO', user_id, product_id)
         }
     }

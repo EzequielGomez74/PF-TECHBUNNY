@@ -19,6 +19,7 @@ import {
   GET_USER_BY_ID,
   ALL_FAVORITES_BY_USER,
   CLEAN_FAVORITES,
+  ADD_FAVORITE,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -170,28 +171,17 @@ export function getUserById(user_id){
   }
 }
 
-//REVISAAAAAR
-
-export const allFavoritesByUser = (user_id) => {
-  return async function(dispatch){
-    try{
-      let favorites = await axiosInstance.get(`/favorites/${user_id}`)
-      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data});
-    }
-catch(error){
-  console.log(error.message)
-}
-  }
-}
 
 
 
 export const addFavorite = (payload) => {
-  return async function(){
+  return async function(dispatch){
     try{
       const response = await axiosInstance.post('/favorites' , payload)
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
       console.log(response.data)
+      const favorites = await axiosInstance.get(`/favorites/${payload.user_id}`)
+      return dispatch({type: ADD_FAVORITE, payload: favorites.data})
     }
     catch(error){
       console.log(error.message)

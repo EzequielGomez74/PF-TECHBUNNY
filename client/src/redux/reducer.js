@@ -87,7 +87,7 @@ export default function reducer(state = initialState, action) {
     //     ...state,
     //     filtered: action.payload,
     //   };
-    case "ALL_FAVORITES_BY_USER":
+    case "ADD_FAVORITE":
       return {
         ...state,
         favorites: action.payload,
