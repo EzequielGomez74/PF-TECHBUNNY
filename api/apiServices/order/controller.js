@@ -17,7 +17,6 @@ const controller = require("./controller.js");
 // $  status = "processed" ===> status = "completed" || status = "canceled"
 async function updateOrder(user_id, order_id, status ) {
   try {
-    console.log(user_id, order_id, status )
     const order = await Order.update({status: status}, {where: {user_id: user_id, order_id: order_id}}); //
     if(order.dataValues.status !== "onCart") sendMail(userdata);
     console.log("se cambio el estado de la orden nro° ", order_id, " perteneciente al user ", user_id, "al estado: ", status)

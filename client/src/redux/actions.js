@@ -19,6 +19,7 @@ import {
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
+  GET_PAYPREFERENCES_BY_ID,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -239,3 +240,15 @@ export const setLoggedUser = (user) => {
     console.log(error);
   }
 };
+
+
+export function getPayPreferencesById(order_id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`/orders/pagar/${order_id}`);
+      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}

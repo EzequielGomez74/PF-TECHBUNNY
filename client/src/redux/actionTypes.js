@@ -17,6 +17,7 @@ export const SORT_BY_PRICE = "SORT_BY_PRICE";
 export const ADD_OR_REMOVE_QUANTITY_FROM_CART =
   "ADD_OR_REMOVE_QUANTITY_FROM_CART";
 
+  export const GET_PAYPREFERENCES_BY_ID = "GET_PAYPREFERENCES_BY_ID";
 // Funciones sincrónicas
 
 export const ADD_CART = "ADD_CART";
