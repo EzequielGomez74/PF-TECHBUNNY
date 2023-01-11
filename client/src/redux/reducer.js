@@ -92,11 +92,17 @@ export default function reducer(state = initialState, action) {
         ...state,
         favorites: action.payload,
       };
-    case "REMOVE_FAVORITE":
-      return {
-        ...state,
-        favorites: state.favorites.filter((f) => f.product_id !== action.payload),
-      };
+      case "CLEAN_FAVORITES": {
+        return {
+          ...state,
+          favorites: [],
+        };
+      }
+    // case "REMOVE_FAVORITE":
+    //   return {
+    //     ...state,
+    //     favorites: state.favorites.filter((f) => f.product_id !== action.payload),
+    //   };
     case "ADD_CART":
       return {
         ...state,

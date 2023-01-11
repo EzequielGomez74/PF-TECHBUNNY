@@ -19,8 +19,9 @@ function Favoritos() {
   let favoritos = useSelector(state => state.detail)
 
   useEffect(() => {
-    dispatch(actions.allFavoritesByUser(user.user_id))
-    
+    if(user.user_id) 
+    dispatch(actions.allFavoritesByUser(user.user_id));
+  
   },[user.user_id])
    
 
@@ -31,8 +32,8 @@ function Favoritos() {
         <div>
             <NavBar />
             <section className={dm ? s.dmfavSection : s.favSection}>
-            {favs.length ? favs.map(p => <CardH 
-            
+            {favs.length ? favs.map(p => <CardH
+            user_id={user.user_id}
                 key={p.id} product_id={p.product_id}
                 stock={p.stock} brand={p.brand}
                 name={p.name} image={p.image} price={p.price}/>)

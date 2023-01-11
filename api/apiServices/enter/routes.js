@@ -23,27 +23,16 @@ router.put("/:accessType", async (req, res) => {
         const { username, password } = req.body;
         let authResult;
         if (req.body?.tokenId) {
-          //todo login with google
-          console.log("entro con google");
           authResult = await controller.handleGoogleLogin(req.body);
         } else if (username && password) {
           authResult = await controller.handleLogin(req.body);
-          console.log("r authResult ", authResult);
         } else if (req.accessToken) {
-          console.log("acces enter");
           authResult = await controller.handleLoginWithAccess(req.accessToken);
         } else {
           return res.sendStatus(202);
         }
         // ? manejo de respuesta
         if (authResult.accessToken) {
-          console.log("GOOGLE ", authResult);
-          // res.cookie("jwt", authResult.refreshToken, {
-          //   sameSite: "None",
-          //   secure: true,
-          //   httpOnly: true,
-          //   maxAge: 24 * 60 * 60 * 1000,
-          // });
           res.status(200).json({
             accessToken: authResult.accessToken,
             user: authResult.user,
@@ -58,9 +47,9 @@ router.put("/:accessType", async (req, res) => {
         //! LOGOUT tiene que guardar data de la session - savedSessionData
         // const cookie = req.cookies?.jwt;
         // const savedSessionData = req.cookies?.savedSessionData;
-        if (req.body?.accessToken) {
+        if (req.body?.user_id) {
           res.status(200).json({
-            status: await controller.handleLogout(req.body.accessToken),
+            status: await controller.handleLogout(req.body.user_id),
           });
         } else res.sendStatus(400);
         break;

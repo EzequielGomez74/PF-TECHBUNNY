@@ -10,7 +10,6 @@ import {
   SORT_BY_PRICE,
   ADD_CART,
   REMOVE_CART,
-  REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
@@ -19,6 +18,7 @@ import {
   CLEAN_CATEGORY_PRODUCTS,
   GET_USER_BY_ID,
   ALL_FAVORITES_BY_USER,
+  CLEAN_FAVORITES,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -199,19 +199,21 @@ export const addFavorite = (payload) => {
   }
 }
 
-//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA
-// export const addFavorite = (payload) => { 
-//   return {
-//     type: ADD_FAVORITE,
-//     payload,
-//   };
-// };
+export const cleanFavorite = () => {
+  return { type: CLEAN_FAVORITES };
+};
 
-export const removeFavorite = (id) => {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: id,
-  };
+export const removeFavorite = (payload) => {
+  return async function(){
+    try{
+      const response = await axiosInstance.post('/favorites' , payload)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
 };
 // export const addCart = (payload) => {
 //   return async function(dispatch){

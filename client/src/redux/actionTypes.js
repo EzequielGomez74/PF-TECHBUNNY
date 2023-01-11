@@ -26,6 +26,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_CATEGORY_PRODUCTS = "CLEAN_CATEGORY_PRODUCTS";
+export const CLEAN_FAVORITES = "CLEAN_FAVORITES";
 
 //Faltan actions
 

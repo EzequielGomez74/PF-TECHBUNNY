@@ -1,4 +1,4 @@
-const { User } = require("../../services/db/db.js");
+const { User, Op } = require("../../services/db/db.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
@@ -13,8 +13,11 @@ async function handleNewUser(data) {
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
-      where: { username: data.username },
+      where: {
+        [Op.or]: [{ username: data.username }, { email: data.email }],
+      },
     });
+
     if (duplicate) throw new Error("Username already exist"); //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
@@ -42,8 +45,6 @@ async function handleLogin({ username, password, twoFactorToken }) {
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
-    console.log("match ", match);
-    console.log("c foundUser ", foundUser.dataValues);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
         foundUser.dataValues,
@@ -107,9 +108,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
         };
         foundUser = await User.create(newUser);
       }
-      console.log("foundUser 1", foundUser);
       const response = await generateTokens(foundUser);
-      console.log("response ", response);
       response.user = foundUser.dataValues;
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
@@ -146,8 +145,8 @@ async function handleLoginWithAccess(accessToken) {
   }
 }
 
-async function handleLogout(accessToken) {
-  const foundUser = await User.findOne({ where: { accessToken } });
+async function handleLogout(user_id) {
+  const foundUser = await User.findOne({ where: { user_id } });
   if (!foundUser) return "FAIL";
   foundUser.accessToken = "";
   //todo GUARDAR SAVED SESSION DATA
@@ -175,14 +174,8 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "1202s" }
+    { expiresIn: "10m" }
   );
-  // const refreshToken = jwt.sign(
-  //   { username: foundUser.username },
-  //   process.env.REFRESH_TOKEN_SECRET,
-  //   { expiresIn: "50m" }
-  // );
-  //guardar el refreshToken en la DB
   await foundUser.update({ accessToken });
   return { accessToken };
 }
