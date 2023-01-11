@@ -11,6 +11,7 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
+  if (!username) return products;
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
     const { user_id } = await getUser({ username });
@@ -67,8 +68,8 @@ async function getProductById(product_id, username) {
 }
 
 async function updateProduct(product) {
-  // delete product.createdAt;
-  // delete product.updatedAt; porque eliminan esto? 
+  delete product.createdAt;
+  delete product.updatedAt; 
   try {
     await Product.update(
       {
