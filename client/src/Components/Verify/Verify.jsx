@@ -8,6 +8,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import exitosa from '../../Photos/conejofeliz.png'
 import fallida from '../../Photos/conejotriste.png'
+import './Verify.scss'
+
+
 function Verify() {
   const { token } = useParams();
   const [status, setStatus] = useState("");
