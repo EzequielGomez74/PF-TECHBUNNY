@@ -1,13 +1,15 @@
 const { User } = require("../../services/db/db.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
+const { OAuth2Client } = require("google-auth-library");
+const TokenManager = require("../../scripts/TokenManager");
 require("dotenv").config();
 
 async function handleNewUser(data) {
   if (!data.username || !data.password || !data.email)
-    throw new Error("Username , Password , Email are required");
+    throw new Error("Username and Password and email are required");
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
@@ -17,34 +19,26 @@ async function handleNewUser(data) {
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
+    console.log("pass", hashedPwd);
     const newUser = {
       ...data,
       password: hashedPwd,
     };
-    // verificationNumber es el numero para validar el email
-    let verificationNumber = require ("crypto").randomBytes(10).toString("hex")
-    const userdata = {...newUser, type:"register", verificationNumber: verificationNumber}
-    console.log("OBJETOOOO",userdata)
-    emailer.sendMail(userdata)
+    //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
+    //GENERARA TOKEN Y GUARDAR EN DB
+    //GENERA VERYFICATION CODE
     const userCreated = await User.create(newUser);
-    generateValidationAndSendMail(userCreated);
+    generateValidationAndSendMail(userCreated, "register", 2);
     return { success: `New user ${userCreated.username} created` };
   } catch (error) {
     throw new Error(error);
   }
 }
-
-
-
-async function handleLogin({ username, password, token, guest }) {
-  if (guest) {
-    const guestUser = await User.findByPk(1);
-    return generateTokens(guestUser, true);
-  }
+async function handleLogin({ username, password, twoFactorToken }) {
   if (!username || !password)
     throw new Error("Username and Password are required");
   try {
-    const foundUser = await User.findOne({ where: { username: username } });
+    let foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
     //evaluar password
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
@@ -97,8 +91,19 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
             return { twoFactor: true, tokenId: tokenId };
           }
         } else {
-          return { twoFactor: true };
+          //$ user found y a la espera de ser validado por email -> no puede loguearse (el mail esta en uso)
+          return { status: "email already in use" };
         }
+      } else {
+        //$ user not found -> crear nuevo usuario y loguearlo
+        const newUser = {
+          email: email,
+          username: name,
+          profilePicture: picture,
+          usingGoogleLogin: true,
+          isActive: true,
+        };
+        foundUser = await User.create(newUser);
       }
       const response = await generateTokens(foundUser);
       response.user = foundUser.dataValues;
@@ -107,7 +112,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       return response;
     } else return { status: "bad credentials" };
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error);
   }
 }
 
@@ -143,9 +148,26 @@ async function handleLogout(user_id) {
   foundUser.accessToken = "";
   //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
+  return "SUCCESS";
 }
 
-async function generateTokens(foundUser, infinite) {
+async function handleRecoverPassword(username) {
+  try {
+    const users = await User.findAll({ where: { username } });
+    let foundUser = null;
+    users.forEach((user) => {
+      if (!user.dataValues.usingGoogleLogin) foundUser = user;
+    });
+    if (!foundUser) return "FAIL";
+    foundUser.update({ password: "" });
+    generateValidationAndSendMail(foundUser, "recover", 1);
+    return "SUCCESS";
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
@@ -154,5 +176,26 @@ async function generateTokens(foundUser, infinite) {
   await foundUser.update({ accessToken });
   return { accessToken };
 }
-
-module.exports = { handleLogin, handleNewUser, handleLogout };
+async function verifyTwoFactorToken(foundUser, twoFactorToken) {
+  try {
+    if (foundUser.googleAuth) {
+      if (twoFactorToken) {
+        //todo verificar twoFactorToken
+        if ("si no se verifica") return false;
+      } else {
+        return { twoFactor: true };
+      }
+    }
+    return true;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+module.exports = {
+  handleLogin,
+  handleNewUser,
+  handleLogout,
+  handleGoogleLogin,
+  handleLoginWithAccess,
+  handleRecoverPassword,
+};

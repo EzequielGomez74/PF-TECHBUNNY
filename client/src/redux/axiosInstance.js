@@ -2,10 +2,10 @@ import axios from "axios";
 import store from "./store.js";
 import loginUser from "../scripts/loginUser";
 import logoutUser from "../scripts/logoutUser.js";
-// import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 // let base = "";
 // if (process.env.REACT_APP_API)
-  // base = "https://prueba1-production-4ff1.up.railway.app/";
+//   base = "https://prueba1-production-4ff1.up.railway.app/";
 // else base = "http://localhost:3001";
 
 const axiosInstance = axios.create({

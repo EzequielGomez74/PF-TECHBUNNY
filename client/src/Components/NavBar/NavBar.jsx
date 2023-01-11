@@ -19,6 +19,7 @@ import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
 import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
+import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
 
 function NavBar() {
@@ -215,33 +216,42 @@ function NavBar() {
       <section className={DM ? s.DMthree : s.three}>
         <div>
           <Link to="/category/Monitores%20y%20TV">
-            <p>Monitores</p>
+            <p>Monitores</p>{" "}
           </Link>
           <Link to="/category/Periféricos">
+            {" "}
             <p>Periféricos</p>
           </Link>
           <Link to="/category/Memorias">
+            {" "}
             <p>Memorias</p>
           </Link>
           <Link to="/category/Pendrives">
-            <p>Pendrives</p>
+            {" "}
+            <p>Pendrives</p>{" "}
           </Link>
           <Link to="/category/Notebooks">
+            {" "}
             <p>Notebooks</p>
           </Link>
           <Link to="/category/Consolas">
+            {" "}
             <p>Consolas</p>
           </Link>
           <Link to="/category/Gabinetes">
+            {" "}
             <p>Gabinetes</p>
           </Link>
           <Link to="/category/Motherboards">
+            {" "}
             <p>Motherboards</p>
           </Link>
           <Link to="/category/Procesadores">
+            {" "}
             <p>Procesadores</p>
           </Link>
           <Link to="/category/Cooling">
+            {" "}
             <p>Cooling</p>
           </Link>
         </div>
