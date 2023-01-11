@@ -5,18 +5,26 @@ const validate = require("../../scripts/bodyValidators/index.js");
 const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const createOrderCarrousel = require("../../scripts/analyticsScripts/createOrderCarrousel");
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
 mercadopago.configure({
   access_token:
     "TEST-3131783442482356-122810-8c7720ae26aa2dc8fc655b6acac2e721-240429259",
 });
 
-router.use(verifyJWT); // !validacion de JWT
+//router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));
+router.post("/carrousel", async (req, res) => {
+  try {
+    res.status(200).json({ res: await createOrderCarrousel(2) });
+  } catch (error) {
+    res.status(500).json({ err: error.message });
+  }
+});
 router.post("/", validate.order, async (req, res) => {
   // GENERAMOS UNA NUEVA ORDER
+  console.log("1");
   try {
     res.status(200).json({ order_id: await controller.createOrder(req.body) });
   } catch (error) {

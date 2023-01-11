@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       product_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      }
+      },
     },
     {
       timestamps: false,
