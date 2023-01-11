@@ -32,18 +32,18 @@ function Verify() {
     if (status === "SUCCESS") {
       setTimeout(function () {
         history.push("/login");
-      }, 6000);
+      }, 600000);
       return <div>
-        <img className="imgExitosa" src={exitosa} alt="exitosa" />
+        <img className="imgExitosa" src={exitosa} alt="" />
         <h1 className="ValidExitosa">Validación éxitosa</h1>
 
       </div>;
     } else {
       setTimeout(function () {
         history.push("/login");
-      }, 6000);
+      }, 600000);
       return <div>
-        <img className="imgFallida" src={fallida} alt="fallida" />
+        <img className="imgFallida" src={fallida} alt="" />
         <h1 className="ValidFallida">Validación fallida</h1>
         
         </div>;
