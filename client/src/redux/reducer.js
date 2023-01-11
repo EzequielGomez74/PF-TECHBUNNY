@@ -122,10 +122,20 @@ export default function reducer(state = initialState, action) {
     //         ...state,
     //         searchResults: action.results,
     //     }
+
     case "GET_SEARCH_RESULTS":
+      const backup = [...state.products];
+      const searched = backup.filter((p) =>
+        p.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
       return {
         ...state,
-        results: action.payload,
+        results: searched,
+      };
+    case "CLEAN_SEARCH_RESULTS":
+      return {
+        ...state,
+        results: [],
       };
     case "GET_LOGGED_USER": {
       return {

@@ -18,6 +18,7 @@ import {
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  CLEAN_SEARCH_RESULTS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -189,13 +190,14 @@ export const removeCart = (id) => {
   };
 };
 
-export const getSearchResults = (products, searchTerm) => {
-  return function (dispatch) {
-    const results = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  };
+export const getSearchResults = (searchTerm) => {
+  // return function (dispatch) {
+  //   const results = products.filter((p) =>
+  //     p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  // };
+  return { type: GET_SEARCH_RESULTS, payload: searchTerm };
 };
 
 // export const setSearchTerm = (searchTerm) => {
@@ -233,4 +235,8 @@ export const setLoggedUser = async (user) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const cleanSearchResults = () => {
+  return { type: CLEAN_SEARCH_RESULTS };
 };

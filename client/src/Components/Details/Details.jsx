@@ -50,8 +50,11 @@ function Details() {
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     return () => dispatch(actions.cleanDetail());
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   function removeCartProductsFromProduct() {

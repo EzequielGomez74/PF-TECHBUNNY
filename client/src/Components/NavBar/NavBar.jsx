@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
-import SearchBar from "../Search Bar/SearchBar";
+import SearchBar from "./SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 
@@ -58,13 +58,11 @@ function NavBar() {
   const dm = useSelector((state) => state.darkMode);
   const DM = useSelector((state) => state.darkMode);
 
-  const [searchTerm, setSearchTerm] = useState("");
-
   const logOutHandler = async () => {
     dispatch(setLoggedUser({}));
     await axios.put("/enter/logout");
   };
-
+  // console.log(searchTerm);
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -73,7 +71,7 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <SearchBar />
           <h1>
             <a href="/home">TECHBUNNY</a>
           </h1>
@@ -101,16 +99,31 @@ function NavBar() {
               </span>
             </Link>
 
-            <span
-              className={DM ? s.DMiconsbtn : s.iconsbtn}
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              <FontAwesomeIcon icon={faUser} />
-              &nbsp;&nbsp;
-              <FontAwesomeIcon icon={faCaretDown} />
-            </span>
+            {!Object.keys(loggedUser).length ? (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                &nbsp;&nbsp;
+                <FontAwesomeIcon icon={faCaretDown} />
+              </span>
+            ) : (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <img
+                  className={s.profilePicture}
+                  src={loggedUser.profilePicture}
+                  alt=""
+                />{" "}
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -306,7 +319,7 @@ function NavBar() {
       )}
 
       <div className="search1">
-        {searchTerm.length && results.length
+        {results.length
           ? results.map((p, i) => {
               if (i < 7)
                 return (
