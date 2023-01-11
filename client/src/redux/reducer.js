@@ -152,7 +152,14 @@ export default function reducer(state = initialState, action) {
       if (productFound) {
         productFound.totalQuantity -= action.payload.totalQuantity;
       }
-      return { ...state, cart: [...state.cart] };
+      return { ...state, cart: [...state.cart] 
+      };
+    case "GET_PAYPREFERENCES_BY_ID":
+      return {
+        ...state,
+        detail: action.payload,
+      };
+
     default:
       return { ...state };
   }

@@ -63,9 +63,9 @@ router.get("/pagar/:order_id", async (req, res) => {
 		let preference = {
 			items: carrito,
 			back_urls: {
-				success: "http://localhost:3000/feedback",
-				failure: "http://localhost:3000/feedback",
-				pending: "http://localhost:3000/feedback",
+				success: "http://localhost:3000/home", // ! ACA VA SI FUE PAGO EXITOSO
+				failure: "http://localhost:3000/home", // ! SI EL PAGO FALLA
+				pending: "http://localhost:3000/home", // ? PAGO PENDIENTE
 			},
 			auto_return: "approved",
 		};
