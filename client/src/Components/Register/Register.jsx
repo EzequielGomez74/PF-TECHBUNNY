@@ -10,6 +10,7 @@ import axios from "axios";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
+import { useAlert } from 'react-alert'
 
 function Register() {
   const [errors, setErrors] = useState({});
@@ -18,6 +19,8 @@ function Register() {
     email: "",
     password: "",
   });
+
+  const alert = useAlert();
 
   const handleChange = (e) => {
     setRegister({
@@ -45,7 +48,7 @@ function Register() {
     e.preventDefault();
     if (register.username && register.password && register.email)
       postNewUser(register);
-      alert('Registro exitoso');
+      alert.show('Registro exitoso');
     console.log(register);
   };
 
