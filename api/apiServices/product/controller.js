@@ -38,7 +38,8 @@ async function getAllProducts(username) {
       },
     };
     const products = await Product.findAll(condition);
-    return await setFavoriteStatus([...products], username);
+    // return await setFavoriteStatus([...products], username);
+    return products;
   } catch (error) {
     throw new Error(error.message);
   }

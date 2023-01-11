@@ -12,7 +12,7 @@ const access_token_mp = require("../../config/mercadopago.js");
 
 
 
-// $ Esta ruta retorna todas las orders del usuario por id con QUERY { user_id }
+// $  ESTA RUTA RECIBE por Query {user_id} y te devuelve todas las ordenes correspondientes a este usuario
 router.get("/", async (req, res) => {
 	const { user_id } = req.query;
 	try {
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// $ Esta ruta retorna los detalles de una orden por PARAMS { order_id }.
+//$ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
 router.get("/:order_id", async (req, res) => {
 	//retorna una sola por id con PARAMS
 	const { order_id } = req.params;
@@ -44,6 +44,7 @@ router.get("/:order_id", async (req, res) => {
 
 
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
+// $ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
 		mercadopago.configure({
