@@ -184,6 +184,8 @@ catch(error){
   }
 }
 
+
+
 export const addFavorite = (payload) => {
   return async function(){
     try{
