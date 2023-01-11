@@ -69,11 +69,11 @@ function Category() {
     console.log("chau");
 
     dispatch(actions.filterByBrand(filterPanel.brand));
-    dispatch(actions.orderByPrice(filterPanel.price));
+    dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
-  useEffect(() => dispatch(actions.cleanCategoryProducts()), []);
+  useEffect(() => () => dispatch(actions.cleanCategoryProducts()), []);
 
   const handleFiltersChange = (e) => {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
