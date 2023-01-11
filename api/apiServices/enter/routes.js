@@ -24,28 +24,36 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
     switch (accessType) { 
       case "login":
         const { username, password } = req.body;
-        if (username && password) {
-          const authResult = await controller.handleLogin(req.body);
-          if (authResult.refreshToken) {
-            res.cookie("jwt", authResult.refreshToken, {
-              sameSite: "None",
-              secure: true,
-              httpOnly: true,
-              maxAge: 24 * 60 * 60 * 1000,
-            });
-            res.status(200).json({ accessToken: authResult.accessToken });
-          } else {
-            res.status(200).json(authResult);
-          }
+        let authResult;
+        if (req.body?.tokenId) {
+          authResult = await controller.handleGoogleLogin(req.body);
+        } else if (username && password) {
+          authResult = await controller.handleLogin(req.body);
+        } else if (req.accessToken) {
+          authResult = await controller.handleLoginWithAccess(req.accessToken);
+        } else {
+          return res.sendStatus(202);
+        }
+        // ? manejo de respuesta
+        if (authResult.accessToken) {
+          res.status(200).json({
+            accessToken: authResult.accessToken,
+            user: authResult.user,
+          });
+        } else if (authResult === null || authResult.twoFactor) {
+          return res.status(200).json(authResult);
         } else {
           res.sendStatus(400);
         }
         break;
       case "logout":
-        const cookie = req.cookies?.jwt;
-        if (cookie) {
-          await controller.handleLogout(cookie);
-          res.sendStatus(200);
+        //! LOGOUT tiene que guardar data de la session - savedSessionData
+        // const cookie = req.cookies?.jwt;
+        // const savedSessionData = req.cookies?.savedSessionData;
+        if (req.body?.user_id) {
+          res.status(200).json({
+            status: await controller.handleLogout(req.body.user_id),
+          });
         } else res.sendStatus(400);
         break;
       case "recover":           //TODO IMPLEMENTAR RECOVERY VIA EMAIL

@@ -15,6 +15,10 @@ import {
   REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_REVIEWS_BY,
+  SET_LOGGED_USER,
+  CLEAN_DETAIL,
+  CLEAN_CATEGORY_PRODUCTS,
+  ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -165,6 +169,55 @@ export const removeCart = (id) => {
   };
 };
 
-export function toggleDarkMode() {
-  return { type: TOGGLE_DARK_MODE };
+export const getSearchResults = (products, searchTerm) => {
+  return function (dispatch) {
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
+  };
+};
+
+// export const setSearchTerm = (searchTerm) => {
+//     return {
+//         type: SET_SEARCH_TERM, searchTerm
+//     }
+// }
+
+// export const setSearchResults = (results) => {
+//     return {
+//         type: SET_SEARCH_RESULTS, results
+//     }
+// }
+
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
+};
+
+export const cleanCategoryProducts = () => {
+  return { type: CLEAN_CATEGORY_PRODUCTS };
+};
+
+// export const getUser = () => {
+//   return async function (dispatch) {
+//     const user = await axiosInstance.get("/");
+//   };
+// };
+export function addOrRemoveQuantityFromCart(id, totalQuantity) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, totalQuantity },
+  };
 }
+
+export const setLoggedUser = (user) => {
+  console.log("action logded user");
+  try {
+    return {
+      type: SET_LOGGED_USER,
+      payload: user,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};

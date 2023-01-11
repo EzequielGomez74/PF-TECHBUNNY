@@ -1,3 +1,4 @@
+import { CLEAN_CATEGORY_PRODUCTS } from "./actionTypes";
 const initialState = {
   products: [],
   detail: {},
@@ -83,6 +84,46 @@ export default function reducer(state = initialState, action) {
         ...state,
         darkMode: !state.darkMode,
       };
+    // case 'SET_SEARCH_TERM':
+    //     return {
+    //         ...state,
+    //         searchTerm: action.searchTerm
+    //     }
+    // case 'SET_SEARCH_RESULTS':
+    //     return {
+    //         ...state,
+    //         searchResults: action.results,
+    //     }
+    case "GET_SEARCH_RESULTS":
+      return {
+        ...state,
+        results: action.payload,
+      };
+    case "GET_LOGGED_USER": {
+      return {
+        ...state,
+      };
+    }
+    case "SET_LOGGED_USER":
+      return {
+        ...state,
+        loggedUser: action.payload,
+      };
+    case "GET_REVIEWS_BY":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "CLEAN_DETAIL":
+      return { ...state, detail: {} };
+    case "CLEAN_CATEGORY_PRODUCTS":
+      return { ...state, productsByCategory: [] };
+    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+      const productFound = state.cart.find((p) => p.id === action.payload.id);
+      if (productFound) {
+        productFound.totalQuantity -= action.payload.totalQuantity;
+      }
+      return { ...state, cart: [...state.cart] };
     default:
       return { ...state };
   }

@@ -26,7 +26,19 @@ function Details() {
       initialLoad.current = false;
     }
     setStock(product.stock);
-  }, [product, reviews, trigger]);
+    console.log("hola detail");
+  }, [product, reviews, trigger, id]);
+
+  useEffect(() => () => dispatch(actions.cleanDetail()), []);
+
+  function removeCartProductsFromProduct() {
+    const productFound = cart.find((p) => product.product_id === p.id);
+    console.log(productFound);
+    if (productFound) {
+      // console.log('Entré')
+      product.stock -= productFound.totalQuantity;
+    }
+  }
 
   function handlePost(review) {
     dispatch(

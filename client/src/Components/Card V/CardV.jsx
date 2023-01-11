@@ -21,28 +21,15 @@ function CardV({
 
   return (
     <div>
-      <div className={s.card}>
-        <div className={s.iconWrap}>
-          <button
-            className={s.heart}
-            onClick={() =>
-              dispatch(
-                actions.addFavorite({ id, brand, name, image, price, stock })
-              )
-            }
-          >
-            <FontAwesomeIcon icon={faHeart} />
-          </button>
+        <div className={s.card}>
+            <div className={s.favContainer}>
+                <button className={s.heart} onClick={()=> dispatch(actions.addFavorite({id, brand, name, image, price, stock}))} ><FontAwesomeIcon icon={faHeart} /></button>
+            </div>
+            <Link to={`/detail/${id}`}><img className={s.img} src={image} alt={id} /></Link>
+            <p className={s.brand}>{brand}</p>
+            <Link to={`/detail/${id}`}><p className={s.name}>{name}</p></Link>
+            <p className={s.price}>US${price}</p>
         </div>
-        <Link to={`/detail/${id}`}>
-          <img className={s.img} src={image} alt={id} />
-        </Link>
-        <p className={s.brand}>{brand}</p>
-        <Link to={`/detail/${id}`}>
-          <p className={s.name}>{name}</p>
-        </Link>
-        <p className={s.price}>US${price}</p>
-      </div>
     </div>
   );
 }
