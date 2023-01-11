@@ -35,7 +35,7 @@ function Verify() {
     if (status === "SUCCESS") {
       setTimeout(function () {
         history.push("/login");
-      }, 600000);
+      }, 6000);
       return <div>
         <img className="imgExitosa" src={exitosa} alt="" />
         <h1 className="ValidExitosa">Validación éxitosa</h1>
@@ -44,7 +44,7 @@ function Verify() {
     } else {
       setTimeout(function () {
         history.push("/login");
-      }, 600000);
+      }, 6000);
       return <div>
         <img className="imgFallida" src={fallida} alt="" />
         <h1 className="ValidFallida">Validación fallida</h1>
