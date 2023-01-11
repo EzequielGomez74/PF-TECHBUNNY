@@ -10,13 +10,6 @@
   font-family: 'Poppins';
 }
 
-.react-alert-custom {
-  background-color: blue;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-}
-
 .heroLogin {
   height: 500px;
   width: 900px;
