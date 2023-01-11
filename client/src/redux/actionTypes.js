@@ -14,6 +14,8 @@ export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const SORT_BY_PRICE = "SORT_BY_PRICE";
+export const ADD_OR_REMOVE_QUANTITY_FROM_CART =
+  "ADD_OR_REMOVE_QUANTITY_FROM_CART";
 
 // Funciones sincrónicas
 
@@ -23,6 +25,5 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_CATEGORY_PRODUCTS = "CLEAN_CATEGORY_PRODUCTS";
-export const CLEAN_SEARCH_RESULTS = "CLEAN_SEARCH_RESULTS";
 
 //Faltan actions

@@ -47,15 +47,10 @@ function Details() {
       flag.current = false;
     }
     setStock(product.stock);
+    console.log("hola detail");
   }, [product, reviews, trigger, id]);
 
-  useEffect(() => {
-    return () => dispatch(actions.cleanDetail());
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => () => dispatch(actions.cleanDetail()), []);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);

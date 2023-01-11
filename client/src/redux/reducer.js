@@ -1,3 +1,4 @@
+import { CLEAN_CATEGORY_PRODUCTS } from "./actionTypes";
 const initialState = {
   products: [],
   detail: {},
@@ -122,20 +123,10 @@ export default function reducer(state = initialState, action) {
     //         ...state,
     //         searchResults: action.results,
     //     }
-
     case "GET_SEARCH_RESULTS":
-      const backup = [...state.products];
-      const searched = backup.filter((p) =>
-        p.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
       return {
         ...state,
-        results: searched,
-      };
-    case "CLEAN_SEARCH_RESULTS":
-      return {
-        ...state,
-        results: [],
+        results: action.payload,
       };
     case "GET_LOGGED_USER": {
       return {
@@ -156,6 +147,12 @@ export default function reducer(state = initialState, action) {
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
+    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+      const productFound = state.cart.find((p) => p.id === action.payload.id);
+      if (productFound) {
+        productFound.totalQuantity -= action.payload.totalQuantity;
+      }
+      return { ...state, cart: [...state.cart] };
     default:
       return { ...state };
   }

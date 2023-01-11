@@ -27,9 +27,13 @@
   align-self: center;
   text-align: center;
   border: none;
-  font-style: poppins;
 }
 
 .signInButton div {
   margin: 1px 0 3px 0;
+}
+.dmb2 {
+  background-color: transparent;
+  color: #f6f5fa;
+  border: 1px solid #f6f5fa;
 }
