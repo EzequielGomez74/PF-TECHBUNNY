@@ -1,6 +1,6 @@
 .navBar{
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   font-family: 'Poppins', sans-serif;
 }
 

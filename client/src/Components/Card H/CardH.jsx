@@ -1,10 +1,10 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import s from "./CardH.module.css";
+import s from './CardH.module.css';
 import { useDispatch } from "react-redux";
-import * as actions from "../../redux/actions";
+import * as actions from '../../redux/actions'
 
 
 function CardH({id, brand, name, image, price, stock}){

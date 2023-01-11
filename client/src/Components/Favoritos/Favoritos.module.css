@@ -10,10 +10,10 @@
     padding-bottom: 60px;
 }
 
-.heroFav{
-    height: 338px;
-    width: 450px;
-    background-image: url(../../images/fav.png);
+.favorito{
+    height: 488px;
+    width: 550px;
+  
 }
 
 .message{
@@ -22,7 +22,6 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
-    color: #5e5d5d;
 }
 
 .dmfavSection{
@@ -50,5 +49,15 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 20px;
-    color: rgb(158, 158, 158);
+    color: white;
+}
+
+@media only screen and (max-width: 500px) {
+    .favorito{
+        width:60%;
+        height:60%;
+        max-height: 200px;
+    }
+    
+    
 }
