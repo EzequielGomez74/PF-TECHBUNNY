@@ -11,7 +11,6 @@ import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
 
-
 function Register() {
   const [errors, setErrors] = useState({});
   const [register, setRegister] = useState({
@@ -46,7 +45,6 @@ function Register() {
     e.preventDefault();
     if (register.username && register.password && register.email)
       postNewUser(register);
-      alert('Registro exitoso');
     console.log(register);
   };
 

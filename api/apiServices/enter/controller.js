@@ -1,4 +1,4 @@
-const { User } = require("../../services/db/db.js");
+const { User, Op } = require("../../services/db/db.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
@@ -13,8 +13,11 @@ async function handleNewUser(data) {
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
-      where: { username: data.username },
+      where: {
+        [Op.or]: [{ username: data.username }, { email: data.email }],
+      },
     });
+
     if (duplicate) throw new Error("Username already exist"); //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT

@@ -18,10 +18,11 @@ router.post("/", validate.enter, async (req, res) => {
 
 
 // $ PARAMS /enter/login   /enter/logout  /enter/recover   PARAMS { accessType }  ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
-router.put("/:accessType", validate.enterLogin, async (req, res) => {
+router.put("/:accessType", async (req, res) => {
+  console.log("enter-login");
   const { accessType } = req.params;
   try {
-    switch (accessType) { 
+    switch (accessType) {
       case "login":
         const { username, password } = req.body;
         let authResult;
@@ -56,7 +57,13 @@ router.put("/:accessType", validate.enterLogin, async (req, res) => {
           });
         } else res.sendStatus(400);
         break;
-      case "recover":           //TODO IMPLEMENTAR RECOVERY VIA EMAIL
+      case "recover":
+        //Entra un body = {username:"Pepito"}
+        if (req.body?.username) {
+          res.status(200).json({
+            status: await controller.handleRecoverPassword(req.body.username),
+          });
+        } else res.status(400).json({ status: "invalid username" });
       default:
         break;
     }

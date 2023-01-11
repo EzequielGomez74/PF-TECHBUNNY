@@ -12,11 +12,12 @@ function generateValidationAndSendMail(user) {
   user.save();
   //SE CREA MAIL DATA
   const object = {
-    ...user,
+    email: user.email,
+    username: user.username,
     verificationCode: verificationCode,
     type: "register",
   };
-  emailer.sendMail(user.email, object);
+  emailer.sendMail(object);
 }
 
 module.exports = generateValidationAndSendMail;
