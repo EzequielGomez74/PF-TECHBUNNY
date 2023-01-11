@@ -4,6 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { getPayPreferencesById } from '../../redux/actions'
 
 function Payment() {
     const dm = useSelector(state => state.darkMode);
@@ -34,7 +35,7 @@ function Payment() {
   async function pay() {
     try{
       const order_id = 1;
-      const preference = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`)        
+      const preference = getPayPreferencesById(order_id)        
       console.log("PREFERENCIAAAAS",preference);
       var script = document.createElement("script");
 

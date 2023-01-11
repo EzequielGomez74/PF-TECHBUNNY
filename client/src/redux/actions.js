@@ -222,6 +222,7 @@ export const cleanCategoryProducts = () => {
 //     const user = await axiosInstance.get("/");
 //   };
 // };
+
 export function addOrRemoveQuantityFromCart(id, totalQuantity) {
   return {
     type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
