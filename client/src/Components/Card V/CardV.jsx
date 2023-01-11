@@ -1,25 +1,18 @@
 import React from "react";
 // import ReactDOM from "react-dom";
-import s from "./CardV.module.css";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import s from './CardV.module.css';
+import { Link } from 'react-router-dom'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import * as actions from "../../redux/actions";
+import * as actions from '../../redux/actions'
 
-function CardV({
-  id,
-  brand,
-  name,
-  image,
-  price,
-  stock,
-  category,
-  subcategory,
-}) {
-  let dispatch = useDispatch();
 
-  return (
+function CardV({id, brand, name, image, price, stock, category, subcategory}){
+
+    let dispatch = useDispatch();
+
+    return(
     <div>
         <div className={s.card}>
             <div className={s.favContainer}>
@@ -31,7 +24,7 @@ function CardV({
             <p className={s.price}>US${price}</p>
         </div>
     </div>
-  );
-}
+    )
+};
 
 export default CardV;
