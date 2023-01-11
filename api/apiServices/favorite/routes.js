@@ -1,12 +1,14 @@
 // * En esta ruta se agregan productos a favoritos del usuario y se puede pedir por GET todos los favoritos por user_id.
 
-
-
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
-
+const verifyJWT = require("../../middlewares/verifyJWT");
 const router = Router();
+
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+//router.use(requiredAccess(2));
 
 //$ Esta ruta devuelve todas los productos favoritos del usuario por PARAMS (user_id)
 router.get("/:user_id", async (req, res) => {

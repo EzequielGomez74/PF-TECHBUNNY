@@ -1,18 +1,26 @@
-const bcrypt = require("bcrypt");
-const speakeasy = require('speakeasy')
-const qrcode = require('qrcode');
-var fs = require('fs');
+const bcrypt = require("bcryptjs");
+const speakeasy = require("speakeasy");
+const qrcode = require("qrcode");
+var fs = require("fs");
 const { User } = require("../../services/db/db.js");
 
 const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
-    console.log("a");
     const allUsers = await User.findAll();
     return allUsers;
   } catch (error) {
     throw new Error(error.message);
+  }
+}
+
+async function getUserBy(condition) {
+  try {
+    const user = await User.findOne({ where: condition });
+    return user;
+  } catch (error) {
+    throw new Error(error);
   }
 }
 
@@ -21,7 +29,6 @@ async function getQR(user_id) {
   var secret = speakeasy.generateSecret({
     name: "TechBunny_TEST",
   });
-  console.log(secret);
   const response = qrcode.toDataURL(secret.otpauth_url, function (err, data) {
     // RETORNA UNA IMAGEN QR PARA PONER EN ETIQUETA IMG COMO SRC <img src= ${response} />
     fs.writeFile("qr.html", `<img src="${data}"> </img>`, function (err) {
@@ -30,8 +37,6 @@ async function getQR(user_id) {
     });
   });
   User.update({ secretAuth: secret.hex }, { where: { user_id } }); // GUARDAMOS EL SECRET DEL USER EN SU TABLA
-
-  console.log("se genero el QR");
 
   return response; // RETORNAMOS EL QR PARA LA CONFIGURACION DEL 2FA
 }
@@ -44,8 +49,6 @@ async function compareGoogleAuth(user_id, token) {
   if (!response.googleAuth && response.verified)
     // VERIFICAMOS SI EL USER TIENE googleAuth ACTIVADO (TRUE O FALSE), SI ES FALSE, SE LO ACTIVAMOS
     User.update({ googleAuth: response.verified }, { where: { user_id } }); // GUARDAMOS EL SECRET DEL USER EN SU TABLA
-
-  console.log("el resultado de la verificacion es: ", response.verified);
   return response.verified;
 }
 
@@ -59,19 +62,13 @@ async function getUserById(user_id) {
     throw new Error(error.message);
   }
 }
-async function deleteUser(body) {
+
+async function deleteUser(user_id) {
   try {
-    const { user_id} = body;
-    const existe = await User.findOne({ where: { user_id }});
-    if (existe) {
-      const isTrue = await User.update({deleted:true},{
-        where: { user_id },
-      });
-      if (isTrue) {
-        await User.update({deleted:false},{
-          where: { user_id },
-        });
-      }
+    const deleteUserId = await User.destroy({
+      where: { user_id },
+    });
+    if (deleteUserId) {
       return "Usuario eliminado con exito!";
     } else {
       return "Usuario no encontrado!";
@@ -93,4 +90,12 @@ async function modifyUser(user_id, body) {
   }
 }
 
-module.exports = { getAllUsers , getUserById , modifyUser , deleteUser, getQR , compareGoogleAuth};
+module.exports = {
+  getAllUsers,
+  getUserById,
+  modifyUser,
+  deleteUser,
+  getQR,
+  compareGoogleAuth,
+  getUserBy,
+};

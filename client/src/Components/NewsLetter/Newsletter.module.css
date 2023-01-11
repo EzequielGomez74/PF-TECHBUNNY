@@ -1,0 +1,120 @@
+/* *{
+    border: 1px solid red;
+} */
+.maincointainer{
+    background-color: #D7F136;
+    display: flex;
+    height: 60%;
+}
+
+.prueba{
+    display: flex;
+    max-width: 70%;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.imgNewsletter{
+    width: 75%;
+    margin-top: 7px;
+    transform: translateX(-50px);
+
+}
+.textandinput h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 45px;
+    color: #20232a;
+    font-style: normal;
+    margin-top: 45px;
+    
+}
+
+.inputText{
+    width: 320px;
+    height: 39px;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    text-indent: 10px;
+    font-size: 15px;
+}
+
+.inputBtn{
+    width: 150px;
+    height: 39px;
+    background-color: #20232a;
+    color: #fefefe;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    border-radius: 0px 5px 5px 0px;
+    letter-spacing: 2px;
+    border: 1px solid black;
+    transform: translateY(-2px);
+}
+
+.inputBtn:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 1150px) {
+    .inputText{
+        width: 200px;
+        height: 30px;
+        font-size: 10px;
+       
+    }
+    .inputBtn{
+        width: 80px;
+        height: 29px;
+        font-size: 7px;
+        transform: translateY(-0.6px);
+    }
+    
+}
+
+@media (max-width: 815px) {
+    .inputText{
+        margin-left: -30px;
+        
+    }
+    .textandinput h2{
+        margin-top: 10%;
+        line-height: 28px;
+    }
+    
+}
+
+@media (max-width: 420px) {
+    .inputText{
+        width: 120px;
+        height: 16px;
+        font-size: 5px;
+        margin-left: 0px;
+        transform: translateX(-44px);
+    }
+    .inputBtn{
+        width: 50px;
+        height: 16px;
+        font-size: 3px;
+        transform: translateY(-20px) translateX(41px);
+        letter-spacing: 1.5px;
+    }
+    .textandinput h2{
+        font-size: 17px;
+        line-height: 20px;
+        margin-left: -20px;
+        margin-top: 26%;
+    }
+    .imgNewsletter{
+        width: 70%;
+        margin-top: 25px;
+       
+    }
+    .prueba{
+        margin-bottom: 4%;
+    }
+    
+}

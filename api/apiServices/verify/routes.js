@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
-
 const router = Router();
 
 router.put("/:code",validate.validateUser, async (req, res) => {

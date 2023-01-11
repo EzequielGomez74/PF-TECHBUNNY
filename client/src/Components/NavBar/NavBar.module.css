@@ -1,6 +1,6 @@
 .navBar{
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   font-family: 'Poppins', sans-serif;
 }
 
@@ -57,6 +57,7 @@
 .two div {
   max-width: 1500px;
   margin: auto;
+  margin-bottom: 10px;
   padding-left: 25px;
   padding-right: 25px;
   display: flex;
@@ -75,7 +76,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: black;
-  width: 300px;
+  width: 100px;
   height: 40px;
   display: flex;
   align-items: center;

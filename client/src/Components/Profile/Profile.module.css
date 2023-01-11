@@ -1,0 +1,90 @@
+.profileSection{
+    background-color: palegreen;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.profileForm{
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileForm input{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    background: #F6F5FA;
+}
+
+.profileForm button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #20232A;
+    color: #FFFFFF;
+    border: none;
+}
+
+.profileForm button:hover{
+    cursor: pointer;
+}
+
+.profileInfo{
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileInfo span{
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.profileInfo button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #20232A;
+    color: #FFFFFF;
+    border: none;
+}
+
+.profileInfo button:hover{
+    cursor: pointer;
+}
