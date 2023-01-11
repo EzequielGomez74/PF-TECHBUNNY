@@ -8,7 +8,6 @@ import {
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
   SORT_BY_PRICE,
-  ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
   REMOVE_FAVORITE,
@@ -18,8 +17,9 @@ import {
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  GET_USER_BY_ID,
+  ALL_FAVORITES_BY_USER,
 } from "./actionTypes";
-import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -159,12 +159,53 @@ export function toggleDarkMode() {
 //   };
 // };
 
+export function getUserById(user_id){
+  return async function(dispatch){
+    try{
+      let user = await axiosInstance.get(`/users/${user_id}`);
+      return dispatch({type: GET_USER_BY_ID, payload: user.data});
+    }catch(error){
+      console.log(error.message);
+    }
+  }
+}
+
+//REVISAAAAAR
+
+export const allFavoritesByUser = (user_id) => {
+  return async function(dispatch){
+    try{
+      let favorites = await axiosInstance.get(`/favorites/${user_id}`)
+      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data});
+    }
+catch(error){
+  console.log(error.message)
+}
+  }
+}
+
+
+
 export const addFavorite = (payload) => {
-  return {
-    type: ADD_FAVORITE,
-    payload,
-  };
-};
+  return async function(){
+    try{
+      const response = await axiosInstance.post('/favorites' , payload)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA
+// export const addFavorite = (payload) => { 
+//   return {
+//     type: ADD_FAVORITE,
+//     payload,
+//   };
+// };
 
 export const removeFavorite = (id) => {
   return {
@@ -172,7 +213,19 @@ export const removeFavorite = (id) => {
     payload: id,
   };
 };
+// export const addCart = (payload) => {
+//   return async function(dispatch){
+//     try{
+//       let cart = await axiosInstance.post('/orders' , payload)
+//       return dispatch ({type: ADD_CART, payload: cart.data});
+//     }
+//     catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
 
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
 export const addCart = (payload) => {
   return {
     type: ADD_CART,

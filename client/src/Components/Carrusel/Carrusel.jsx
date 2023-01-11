@@ -1,5 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useSelector } from 'react-redux';
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -133,6 +134,8 @@ const products = [
 
 
  function Carrusel() {
+    //Para usuario registrado
+    let user = useSelector(state => state.loggedUser);
     return (
         <div className='container'>
           <Swiper
@@ -150,8 +153,9 @@ const products = [
           >
             { products.map(p => (<SwiperSlide>
                 <CardV
+                user_id={user.user_id}
                 key={p.product_id}
-                id={p.product_id}
+                product_id={p.product_id}
                 brand={p.brand}
                 name={p.name}
                 image={p.image}

@@ -29,6 +29,7 @@ function Details() {
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
   const idChange = useRef(id);
+  const user = useSelector(state => state.loggedUser);
 
   useEffect(() => {
     if (idChange.current !== id) {
@@ -71,19 +72,26 @@ function Details() {
       })
     );
   }
+  
   function handleAddToCart() {
-    dispatch(
-      actions.addCart({
-        id: product.product_id,
-        brand: product.brand,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        stock: product.stock,
-        totalQuantity: quantity,
-      })
-    );
+    if(!user.user_id){
+      alert("NECESITAS INICIAR SESIÓN PARA COMPRAR")
+    }else{
+      dispatch(
+        actions.addCart({
+          user_id: user.user_id,
+          product_id: product.product_id,
+          brand: product.brand,
+          name: product.name,
+          image: product.image,
+          price: product.price,
+          stock: product.stock,
+          totalQuantity: quantity,
+        })
+      );
+    }
   }
+
   function handleAddToFavorites() {
     dispatch(
       actions.addFavorite({
