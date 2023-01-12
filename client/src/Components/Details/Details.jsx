@@ -79,7 +79,14 @@ function Details() {
   
   function handleAddToCart() {
     if(!user.user_id){
-      alert("NECESITAS INICIAR SESIÓN PARA COMPRAR")
+      Swal.fire({
+        title: '¡Alerta!',
+        text: 'Para agregar productos al carrito, necesitas ingresar a tu cuenta.',
+        icon: 'warning',
+        confirmButtonText: 'Iniciar sesión',
+      }).then(response => {
+        if (response.isConfirmed) history.push('/login')
+      })
     }else{
       dispatch(
         actions.addCart({
