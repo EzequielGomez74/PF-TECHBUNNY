@@ -12,8 +12,8 @@ import DisplayReview from "./DisplayReview";
 import {
   faHeart,
   faStar,
-  faTruck,
-  faStore,
+  // faTruck,
+  // faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from 'sweetalert2';
 
@@ -64,7 +64,7 @@ function Details() {
     console.log(productFound);
     if (productFound) {
       // console.log('Entré')
-      product.stock -= productFound.totalQuantity;
+      product.stock -= productFound.count;
     }
   }
 
@@ -90,15 +90,15 @@ function Details() {
     }else{
       dispatch(
         actions.addCart({
-          user_id: user.user_id,
+          // user_id: user.user_id,
           product_id: product.product_id,
-          brand: product.brand,
-          name: product.name,
-          image: product.image,
+          // brand: product.brand,
+          product_name: product.name,
+          // image: product.image,
           price: product.price,
-          stock: product.stock,
-          totalQuantity: quantity,
-        })
+          // stock: product.stock,
+          count: quantity,
+        }, user.user_id)
       );
     }
   }

@@ -49,6 +49,7 @@ function NavBar() {
     console.log("cualquier cosa");
     if(loggedUser.user_id){
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
+      dispatch(actions.allCartByUser(loggedUser.user_id));
       console.log("OTRA COSA");
     } 
   },[loggedUser])
@@ -102,10 +103,10 @@ function NavBar() {
               </span>
             </Link>
 
-            <Link to="/cart">
+            <Link to={loggedUser.user_id? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {cart.length}
+                &nbsp;&nbsp; {loggedUser.user_id? cart.length : 0}
               </span>
             </Link>
 

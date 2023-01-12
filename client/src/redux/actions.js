@@ -9,7 +9,7 @@ import {
   FILTER_BY_BRAND,
   SORT_BY_PRICE,
   ADD_CART,
-  REMOVE_CART,
+  ALL_CART_BY_USER,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
@@ -57,6 +57,7 @@ export function getProductById(id) {
     }
   };
 }
+
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
@@ -213,32 +214,58 @@ export const removeFavorite = (payload) => {
     }
   }
 };
-// export const addCart = (payload) => {
-//   return async function(dispatch){
-//     try{
-//       let cart = await axiosInstance.post('/orders' , payload)
-//       return dispatch ({type: ADD_CART, payload: cart.data});
-//     }
-//     catch(error){
-//       console.log(error.message)
-//     }
-//   }
-// }
+
+
+export const addCart = (payload, user_id) => {
+  return async function(dispatch){
+    try{
+      let response = await axiosInstance.post(`/carts/${user_id}`, payload)
+      // console.log(response.data)
+      let cart = await axiosInstance.get(`/carts/${user_id}`)
+      console.log(cart.data)
+      return dispatch ({type: ADD_CART, payload: cart.data});
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
 
 //MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
-export const addCart = (payload) => {
-  return {
-    type: ADD_CART,
-    payload,
-  };
-};
+// export const addCart = (payload) => {
+//   return {
+//     type: ADD_CART,
+//     payload,
+//   };
+// };
 
-export const removeCart = (id) => {
-  return {
-    type: REMOVE_CART,
-    payload: id,
-  };
-};
+export const removeCart = (user_id, product_id) => {
+  
+  return async function(){
+    try{
+      console.log(user_id, product_id, 'Eliminando de carrito')
+      const productDeleted = await axiosInstance.delete(`/carts/${user_id}`, { data: { product_id }})
+      console.log(productDeleted)
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+export const allCartByUser = (user_id) => {
+  return async function(dispatch){
+    const carts = await axiosInstance.get(`/carts/${user_id}`)
+    console.log(carts.data);
+      return dispatch({type: ALL_CART_BY_USER, payload: carts.data})
+  }
+}
+
+// export const removeCart = (id) => {
+//   return {
+//     type: REMOVE_CART,
+//     payload: id,
+//   };
+// };
 
 export const getSearchResults = (products, searchTerm) => {
   return function (dispatch) {
