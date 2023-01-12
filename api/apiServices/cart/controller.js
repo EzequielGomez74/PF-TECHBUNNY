@@ -2,8 +2,21 @@ const { Cart, Product } = require("../../services/db/db.js");
 
 async function getCart(user_id) {
   try {
-    let carro = await Cart.findAll({ where: { user_id } });
-    return carro;
+    let carro = await Cart.findAll({ where: { user_id } }); 
+    console.log("ASaasS",carro)
+    const result = [];
+    for (let i = 0; i < carro.length; i++) {
+        const productData = await Product.findOne({where:{product_id: carro[i].product_id}})
+        const resu = {
+            ...carro[i].dataValues,
+            image: productData.dataValues.image,
+            stock: productData.dataValues.stock,
+            brand: productData.dataValues.brand,
+        };
+        result.push(resu);
+    }
+    return result;
+
   } catch (error) {
     throw new Error(error.message);
   }
