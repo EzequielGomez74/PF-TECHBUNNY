@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
@@ -15,6 +15,7 @@ import {
   faTruck,
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
+import Swal from 'sweetalert2';
 
 function Details() {
   const { id } = useParams();
@@ -23,6 +24,7 @@ function Details() {
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
+  const history = useHistory();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
@@ -95,13 +97,24 @@ function Details() {
   }
 
   function handleAddToFavorites() {
-    dispatch(
-      actions.addFavorite({
-        user_id: user.user_id,
-        product_id: product.product_id,
+    if(!user.user_id){
+      Swal.fire({
+        title: '¡Alerta!',
+        text: 'Para agregar productos a favoritos, necesitas ingresar a tu cuenta.',
+        icon: 'warning',
+        confirmButtonText: 'Iniciar sesión',
+      }).then(response => {
+        if (response.isConfirmed) history.push('/login')
       })
-    );
-    setActive(!active)
+    } else {
+      dispatch(
+        actions.addFavorite({
+          user_id: user.user_id,
+          product_id: product.product_id,
+        })
+      );
+      setActive(!active)
+    }
   }
   // function removeCartProductsFromProduct(){
   //   const productFound = cart.find((product)=>id === product.product_id)

@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
@@ -71,9 +71,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
-
-  
-
+ 
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
