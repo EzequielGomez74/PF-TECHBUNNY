@@ -54,6 +54,16 @@
   color: #d7f136;
 }
 
+.favHeart{
+  color: #D7F136;
+  background: none;
+  border: none;
+  padding-top: 30px;
+  padding-right: 30px;
+  font-size: 25px;
+  transition: 0.5s;
+}
+
 .productImage img {
   width: 400px;
   height: auto;

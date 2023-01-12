@@ -57,10 +57,10 @@ async function getAllProductsBy(condition, username) {
 async function getProductById(product_id, username) {
   try {
     let product = await Product.findByPk(product_id);
-    product = await setFavoriteStatus([product.dataValues], username);
-    const newObj = { ...product[0] };
+    let arr = [product];
+    let newProduct = await setFavoriteStatus(arr, username);
+    const newObj = { ...newProduct[0].dataValues };
     newObj.description = productDescriptionParser(newObj.description);
-    console.log("pasa");
     return newObj;
   } catch (error) {
     throw new Error(error.message);
