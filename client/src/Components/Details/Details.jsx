@@ -25,7 +25,7 @@ function Details() {
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(1);
-  const [stock, setStock] = useState(product.stock);
+  const [stock, setStock] = useState(product.stock - 1 );
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
   const idChange = useRef(id);
