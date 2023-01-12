@@ -25,7 +25,7 @@ function Details() {
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(1);
-  const [stock, setStock] = useState(product.stock - 1 );
+  const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
   const idChange = useRef(id);
@@ -49,7 +49,7 @@ function Details() {
       flag.current = false;
     }
     setActive(product.favorite);
-    setStock(product.stock);
+    setStock(product.stock-1);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
