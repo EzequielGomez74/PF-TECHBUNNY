@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import s from './CardV.module.css';
 import { Link } from 'react-router-dom'
@@ -8,14 +8,18 @@ import { useDispatch, } from "react-redux";
 import * as actions from '../../redux/actions'
 
 
-function CardV({product_id, brand, name, image, price, stock, user_id}){
 
+
+function CardV({product_id, brand, name, image, price, favorite, user_id}){
+
+    let [active, setActive] = useState(favorite);
     let dispatch = useDispatch();
     let handleClick = () => {
         if(!user_id){
-            alert("NECESITAS INICIAR SESIÓN")
+           alert("NO ESTAS LOGUEADO") 
         }else{
             dispatch(actions.addFavorite({user_id, product_id}))
+            setActive(!active)
             console.log('ESTOY ENVIANDO', user_id, product_id)
         }
     }
@@ -24,7 +28,7 @@ function CardV({product_id, brand, name, image, price, stock, user_id}){
     <div>
         <div className={s.card}>
             <div className={s.iconWrap}>
-                <button className={s.heart} onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>
+                <button className={active? s.favHeart : s.heart} onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>
             </div>
             <Link to={`/detail/${product_id}`}><img className={s.img} src={image} alt={product_id} /></Link>
             <p className={s.brand}>{brand}</p>

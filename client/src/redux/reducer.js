@@ -92,11 +92,22 @@ export default function reducer(state = initialState, action) {
         ...state,
         favorites: action.payload,
       };
-    case "REMOVE_FAVORITE":
+    case "ADD_FAVORITE":
       return {
         ...state,
-        favorites: state.favorites.filter((f) => f.product_id !== action.payload),
+        favorites: action.payload,
       };
+      case "CLEAN_FAVORITES": {
+        return {
+          ...state,
+          favorites: [],
+        };
+      }
+    // case "REMOVE_FAVORITE":
+    //   return {
+    //     ...state,
+    //     favorites: state.favorites.filter((f) => f.product_id !== action.payload),
+    //   };
     case "ADD_CART":
       return {
         ...state,
@@ -142,6 +153,13 @@ export default function reducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
+      case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+        const productFound = state.cart.find((p) => p.id === action.payload.id);
+        if (productFound) {
+          productFound.totalQuantity -= action.payload.totalQuantity;
+        }
+        return { ...state, cart: [...state.cart] };
+
     case "CLEAN_DETAIL":
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":

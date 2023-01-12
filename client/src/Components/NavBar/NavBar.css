@@ -158,6 +158,13 @@
 
   }
 
+  .profilePicture {
+    max-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px black;
+  }
+  
   .hola123{
     background-color: #ffffff;
   }

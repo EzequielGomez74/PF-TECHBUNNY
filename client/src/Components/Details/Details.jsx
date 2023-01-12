@@ -30,6 +30,7 @@ function Details() {
   const flag = useRef(true);
   const idChange = useRef(id);
   const user = useSelector(state => state.loggedUser);
+  let [active, setActive] = useState(product.favorite);
 
   useEffect(() => {
     if (idChange.current !== id) {
@@ -47,6 +48,7 @@ function Details() {
       removeCartProductsFromProduct();
       flag.current = false;
     }
+    setActive(product.favorite);
     setStock(product.stock);
   }, [product, reviews, trigger, id]);
 
@@ -95,14 +97,11 @@ function Details() {
   function handleAddToFavorites() {
     dispatch(
       actions.addFavorite({
-        id: product.product_id,
-        brand: product.brand,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        stock: product.stock,
+        user_id: user.user_id,
+        product_id: product.product_id,
       })
     );
+    setActive(!active)
   }
   // function removeCartProductsFromProduct(){
   //   const productFound = cart.find((product)=>id === product.product_id)
@@ -153,7 +152,7 @@ function Details() {
         <div className={dm ? s.dmblock : s.block}>
           <div className={dm ? s.dmproductImage : s.productImage}>
             <div className={dm ? s.dmicon : s.icon}>
-              <button className={s.heart} onClick={handleAddToFavorites}>
+              <button className={active? s.favHeart : s.heart} onClick={handleAddToFavorites}>
                 <FontAwesomeIcon icon={faHeart} />
               </button>
             </div>

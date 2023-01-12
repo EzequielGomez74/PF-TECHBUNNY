@@ -10,7 +10,6 @@ import {
   SORT_BY_PRICE,
   ADD_CART,
   REMOVE_CART,
-  REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
@@ -19,6 +18,9 @@ import {
   CLEAN_CATEGORY_PRODUCTS,
   GET_USER_BY_ID,
   ALL_FAVORITES_BY_USER,
+  CLEAN_FAVORITES,
+  ADD_FAVORITE,
+  ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -170,23 +172,36 @@ export function getUserById(user_id){
   }
 }
 
-//REVISAAAAAR
 
 export const allFavoritesByUser = (user_id) => {
   return async function(dispatch){
-    try{
-      let favorites = await axiosInstance.get(`/favorites/${user_id}`)
-      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data});
-    }
-catch(error){
-  console.log(error.message)
-}
+    const favorites = await axiosInstance.get(`/favorites/${user_id}`)
+    console.log(favorites.data);
+      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data})
   }
 }
 
 
-
 export const addFavorite = (payload) => {
+  return async function(dispatch){
+    try{
+      const response = await axiosInstance.post('/favorites' , payload)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+      const favorites = await axiosInstance.get(`/favorites/${payload.user_id}`)
+      return dispatch({type: ADD_FAVORITE, payload: favorites.data})
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+export const cleanFavorite = () => {
+  return { type: CLEAN_FAVORITES };
+};
+
+export const removeFavorite = (payload) => {
   return async function(){
     try{
       const response = await axiosInstance.post('/favorites' , payload)
@@ -197,21 +212,6 @@ export const addFavorite = (payload) => {
       console.log(error.message)
     }
   }
-}
-
-//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA
-// export const addFavorite = (payload) => { 
-//   return {
-//     type: ADD_FAVORITE,
-//     payload,
-//   };
-// };
-
-export const removeFavorite = (id) => {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: id,
-  };
 };
 // export const addCart = (payload) => {
 //   return async function(dispatch){
@@ -285,4 +285,11 @@ export const setLoggedUser = (user) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export function addOrRemoveQuantityFromCart(id, totalQuantity) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, totalQuantity },
+  };
 };

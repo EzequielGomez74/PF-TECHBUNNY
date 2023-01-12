@@ -3,15 +3,25 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import s from './CardH.module.css';
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import * as actions from '../../redux/actions'
+import { useDispatch } from "react-redux";
 
 
 function CardH({product_id, brand, name, image, price, stock, user_id}){
     let dispatch = useDispatch()
+    let handleClick = () => {
+        if(!user_id){
+           alert("NO ESTAS LOGUEADO") 
+        }else{
+            console.log(product_id, user_id);
+            dispatch(actions.addFavorite({user_id, product_id}))
+            console.log('ESTOY ENVIANDO', user_id, product_id)
+        }
+    }
     return(
         <div className={s.card}>
-            <div className={s.close}><button className={s.icon} onClick={()=> dispatch(actions.removeFavorite(product_id))} ><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button className={s.icon} onClick={handleClick}  ><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${product_id}`}><img className={s.pImg} src={image} alt={product_id} /></Link>

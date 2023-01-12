@@ -1,36 +1,38 @@
-import React, { useState } from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
-import s from './CartCard.module.css'
-import { useDispatch } from 'react-redux';
-import * as actions from '../../redux/actions'
+import { Link } from "react-router-dom";
+import s from "./CartCard.module.css";
+import { useDispatch } from "react-redux";
+import * as actions from "../../redux/actions";
 
-function CartCard({product_id, brand, name, image, price, stock, totalQuantity}) {
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(totalQuantity)
-    const [total, setTotal] = useState(parseInt(stock))
+function CartCard({ id, brand, name, image, price, stock, totalQuantity }) {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(totalQuantity);
+  const [total, setTotal] = useState(parseInt(stock));
 
-    const handlePlus = () => {
-        if(quantity < total){
-            setQuantity(quantity + 1);
-            setTotal(total - 1);
-        }
+  const handlePlus = () => {
+    if (quantity < total) {
+      setQuantity(quantity + 1);
+      dispatch(actions.addOrRemoveQuantityFromCart(id, -1));
+      setTotal(total);
     }
+  };
 
-    const handleMinus = () => {
-        if(quantity > 1){
-            setQuantity(quantity - 1);
-            setTotal(total + 1);
-        }
+  const handleMinus = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      dispatch(actions.addOrRemoveQuantityFromCart(id, 1));
+      setTotal(total);
     }
+  };
 
     return(
         <div className={s.card}>
-            <div className={s.close}><button onClick={() => dispatch(actions.removeCart(product_id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button onClick={() => dispatch(actions.removeCart(id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
-                    <Link to={`/detail/${product_id}`}><img className={s.pImg} src={image} alt={product_id} /></Link>
+                    <Link to={`/detail/${id}`}><img className={s.pImg} src={image} alt={id} /></Link>
                 </div>
                 <div className={s.pInfo}>
                     <span className={s.pName}>{name}</span>
@@ -44,7 +46,8 @@ function CartCard({product_id, brand, name, image, price, stock, totalQuantity})
                 </div>
             </div>
         </div>
-    )
+       
+  );
 }
 
-export default CartCard
+export default CartCard;
