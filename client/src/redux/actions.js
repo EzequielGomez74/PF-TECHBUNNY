@@ -239,12 +239,14 @@ export const addCart = (payload, user_id) => {
 //   };
 // };
 
-export const removeCart = (user_id, product_id) => {
+export const removeCart = (user_id, product_id, onSuccess) => {
   
   return async function(){
     try{
       console.log(user_id, product_id, 'Eliminando de carrito')
       const productDeleted = await axiosInstance.delete(`/carts/${user_id}`, { data: { product_id }})
+      // await axiosInstance.get(`/carts/${user_id}`)
+      onSuccess();
       console.log(productDeleted)
     }catch(error){
       console.log(error)

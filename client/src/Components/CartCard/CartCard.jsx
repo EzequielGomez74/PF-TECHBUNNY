@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import s from "./CartCard.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 
 function CartCard({ user_id ,product_id, brand, product_name, image, price, stock, count }) {
+  const [trigger, setTrigger] = useState(false)
+  const cart = useSelector(state => state.cart);
+  let loggedUser = useSelector(state => state.loggedUser);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(count);
   const [total, setTotal] = useState(parseInt(stock));
@@ -27,9 +30,16 @@ function CartCard({ user_id ,product_id, brand, product_name, image, price, stoc
     }
   };
 
+
+  useEffect(()=>{
+    dispatch(actions.allCartByUser(loggedUser.user_id))
+  },[trigger])
+
     return(
         <div className={s.card}>
-            <div className={s.deleteX}><button onClick={() => dispatch(actions.removeCart(user_id, product_id))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button onClick={() => dispatch(actions.removeCart(user_id, product_id, ()=>{
+              setTrigger(!trigger)
+            }))} className={s.icon}><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${product_id}`}><img className={s.pImg} src={image} alt={product_id} /></Link>

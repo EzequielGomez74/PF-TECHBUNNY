@@ -11,7 +11,7 @@ import { allCartByUser } from '../../redux/actions'
 function Cart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
-  const loggedUser = useSelector(state => state.loggedUser);
+  let loggedUser = useSelector(state => state.loggedUser);
   const dm = useSelector(state => state.darkMode);
 
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
