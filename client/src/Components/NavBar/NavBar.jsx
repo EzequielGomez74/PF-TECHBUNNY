@@ -21,7 +21,7 @@ import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
-import {allFavoritesByUser} from "../../redux/actions";
+import { allFavoritesByUser } from "../../redux/actions";
 
 function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
@@ -44,13 +44,14 @@ function NavBar() {
   let favsChange = useRef(favs);
   let [prueba, setPrueba] = useState(0);
   
-  
-
-  // useEffect(() => {
-  //   // if(favsChange.current.length !== favs.length)
-  //   dispatch(allFavoritesByUser(loggedUser.user_id))
-    
-  // }, [favs, prueba,])
+  //Para que al recargar la pagina no se borre la cantidad de favoritos.
+  useEffect(() => {
+    console.log("cualquier cosa");
+    if(loggedUser.user_id){
+      dispatch(allFavoritesByUser(loggedUser.user_id));
+      console.log("OTRA COSA");
+    } 
+  },[loggedUser])
 
   useEffect(() => {
     let handler = (e) => {
@@ -95,10 +96,11 @@ function NavBar() {
               <FontAwesomeIcon icon={dm ? faSun : faMoon} />
             </button>
 
-            <Link to="/favorites">
+            {/* modificarlo por un alert + redirección */}
+            <Link to={loggedUser.user_id? "/favorites" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
-                &nbsp;&nbsp; {favs.length}
+                &nbsp;&nbsp; {loggedUser.user_id? favs.length : 0}
               </span>
             </Link>
 
@@ -109,16 +111,31 @@ function NavBar() {
               </span>
             </Link>
 
-            <span
-              className={DM ? s.DMiconsbtn : s.iconsbtn}
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              <FontAwesomeIcon icon={faUser} />
-              &nbsp;&nbsp;
-              <FontAwesomeIcon icon={faCaretDown} />
-            </span>
+            {!Object.keys(loggedUser).length ? (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                &nbsp;&nbsp;
+                <FontAwesomeIcon icon={faCaretDown} />
+              </span>
+            ) : (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <img
+                  className={s.profilePicture}
+                  src={loggedUser.profilePicture}
+                  alt=""
+                />{" "}
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -299,7 +316,7 @@ function NavBar() {
           <h3>BIENVENIDO {loggedUser.username}</h3>
           <span>Para una mejor experiencia</span>
           <ul>
-            <Link to="/login">
+            <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
             <Link to="/login">

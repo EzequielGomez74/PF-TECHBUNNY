@@ -172,6 +172,13 @@ export function getUserById(user_id){
 }
 
 
+export const allFavoritesByUser = (user_id) => {
+  return async function(dispatch){
+    const favorites = await axiosInstance.get(`/favorites/${user_id}`)
+    console.log(favorites.data);
+      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data})
+  }
+}
 
 
 export const addFavorite = (payload) => {

@@ -124,6 +124,7 @@ function Category() {
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <CardV
+              favorite={e.favorite}
                 user_id={user.user_id}
                 key={e.product_id}
                 product_id={e.product_id}

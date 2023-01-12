@@ -21,7 +21,7 @@ async function setFavoriteStatus(products, username) {
         (product) => product.product_id === fav.product_id
       );
       if (productFound) {
-        productFound.favorite = true;
+        productFound.dataValues.favorite = true;
       }
     });
   }
