@@ -11,14 +11,15 @@ import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
 
+
 function Register() {
   const [errors, setErrors] = useState({});
-  const [showError, setShowError] = useState(false);
   const [register, setRegister] = useState({
     username: "",
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     setRegister({
       ...register,
@@ -30,16 +31,11 @@ function Register() {
         [e.target.name]: e.target.value,
       })
     );
-    console.log(errors);
   };
 
   const postNewUser = async (user) => {
     try {
-      const response = await axios.post("/enter", user);
-      console.log(response.data);
-      //!manejar response
-      if (response.data.status === "SUCCES") alert("Registro exitoso");
-      else alert(response.data.status);
+      await axios.post("/enter", user);
     } catch (error) {
       console.log(error.message);
     }
@@ -48,14 +44,10 @@ function Register() {
   // Con botón local
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowError(true);
-    //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
-    //if (Object.keys(errors).length === 0) {
-    if (true) {
+    if (register.username && register.password && register.email)
       postNewUser(register);
-    }
+      alert('Registro exitoso');
     console.log(register);
-    console.log(errors);
   };
 
   // Pendiente con botón Google
@@ -78,11 +70,6 @@ function Register() {
         </div>
         <div className={dm ? s.dmloginCard : s.loginCard}>
           <h4>¡Regístrate!</h4>
-          {errors.username && showError ? (
-            <span className={s.error}>{errors.username}</span>
-          ) : (
-            <span className={s.hidden}>a</span>
-          )}
           <input
             type="text"
             name="username"
@@ -90,12 +77,6 @@ function Register() {
             onChange={handleChange}
             placeholder="Usuario"
           />
-
-          {errors.email && showError ? (
-            <span className={s.error}>{errors.email}</span>
-          ) : (
-            <span className={s.hidden}>a</span>
-          )}
           <input
             type="email"
             name="email"
@@ -103,12 +84,6 @@ function Register() {
             onChange={handleChange}
             placeholder="Email"
           />
-
-          {errors.password && showError ? (
-            <span className={s.error}>{errors.password}</span>
-          ) : (
-            <span className={s.hidden}>a</span>
-          )}
           <input
             type="password"
             name="password"
