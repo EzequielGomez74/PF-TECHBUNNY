@@ -1,23 +1,24 @@
+/* *{
+    border: 1px solid red;
+} */
 .maincointainer{
     background-color: #D7F136;
     display: flex;
-    justify-content: center;
     height: 60%;
 }
 
 .prueba{
     display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 70%;
+    margin-left: 10%;
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
 .imgNewsletter{
-    width: 75%;
-    margin-top: 7px;
-    transform: translateX(-50px);
+    width: 95%;
+    margin-top: 30px;
+    transform: translateX(-90px);
 
 }
 .textandinput h2{
@@ -27,7 +28,7 @@
     line-height: 45px;
     color: #20232a;
     font-style: normal;
-    margin-top: 45px;
+    margin-top: 115px;
     
 }
 
@@ -38,7 +39,6 @@
     border-radius: 5px 0px 0px 5px;
     text-indent: 10px;
     font-size: 15px;
-    margin-bottom: 10%;
 }
 
 .inputBtn{
@@ -109,9 +109,9 @@
         margin-top: 26%;
     }
     .imgNewsletter{
-        width: 70%;
+        width: 90%;
         margin-top: 25px;
-       
+        margin-left: 52px;
     }
     .prueba{
         margin-bottom: 4%;
