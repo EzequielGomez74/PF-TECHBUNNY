@@ -20,7 +20,7 @@ function CartCard({ id, brand, name, image, price, stock, totalQuantity }) {
   };
 
   const handleMinus = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
       dispatch(actions.addOrRemoveQuantityFromCart(id, 1));
       setTotal(total);
