@@ -7,12 +7,15 @@ import SearchBar from '../Search Bar/SearchBar';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../../redux/actions';
+import logoutUser from "../../scripts/logoutUser.js";
 
 const Responsive = () => {
 
   const [show, setShow] = useState(false)
   const parent = useRef(null)
   const dispatch = useDispatch()
+
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current)
@@ -44,26 +47,25 @@ const Responsive = () => {
             <Link to='/cart' ><p>CARRITO</p></Link>
             <Link to='/followUp'><p>VER ESTADO DE PEDIDO</p></Link>
         </div>
+
+
+        {!Object.keys(loggedUser).length ? (
         <div className={dm? s.dmsession :s.session} >
             <Link to='/login'><p>Inicar Sesión</p></Link>
             <Link to='/register'><p>Registrarse</p></Link>
         </div>
+        ) : (
+         <div className={dm? s.dmsession :s.session} >
+            <Link to='/profile'><p>Mi perfil</p></Link>
+            <Link to='/login'><p onClick={() => logoutUser()}>Cerrar sesión</p></Link>
+         </div>
+
+)}
+
+
+
     </div> }
   </div>
 }
 
 export default Responsive
-
-          {/* <div className={s.logo}>
-            <h4>TECHBUNNY</h4>
-          </div>
-          <nav>
-            <ul className={s.menuItems}>
-              <li>HOME</li>
-              <li>SOBRE TECHBUNNY</li>
-              <li>CATEGORIAS</li>
-              <li>VER ESTADO DE PEDIDO</li>
-            </ul>
-          </nav>
-          <FontAwesomeIcon name='cart' icon={faCartShopping} />
-        */}
