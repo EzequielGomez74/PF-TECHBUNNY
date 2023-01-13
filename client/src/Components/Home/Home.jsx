@@ -15,7 +15,6 @@ function Home() {
   // const products = useSelector(state => state.products)
   const dispatch = useDispatch();
 
-
   useEffect(()=>{
     dispatch(actions.getProducts());
   }, [dispatch])
@@ -46,13 +45,13 @@ function Home() {
                 </Link>
             </div>
             <div className={s.bannerTwo}>
-                <Link to='/category/Periféricos'>
+                <Link to='/category/Notebooks'>
                 <div className={s.d}></div>
                 </Link>
-                <Link to='/category/Impresoras'>
+                <Link to='/category/Cooling'>
                 <div className={s.e}></div>
                 </Link>
-                <Link to='/category/Periféricos'>
+                <Link to='/category/Consolas'>
                 <div className={s.f}></div>
                 </Link>
             </div>

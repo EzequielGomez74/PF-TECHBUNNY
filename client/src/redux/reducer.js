@@ -111,13 +111,18 @@ export default function reducer(state = initialState, action) {
     case "ADD_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: action.payload,
       };
-    case "REMOVE_CART":
+    case "ALL_CART_BY_USER":
       return {
         ...state,
-        cart: state.cart.filter((c) => c.id !== action.payload),
+        cart: action.payload,
       };
+    // case "REMOVE_CART":
+    //   return {
+    //     ...state,
+    //     cart: state.cart.filter((c) => c.id !== action.payload),
+    //   };
     case "TOGGLE_DARK_MODE":
       return {
         ...state,

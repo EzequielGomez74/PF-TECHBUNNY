@@ -3,10 +3,6 @@
 /node_modules
 /.pnp
 .pnp.js
-<<<<<<<< HEAD:api/.gitignore
-========
-# testing
->>>>>>>> master:.gitignore
 /coverage
 
 # production

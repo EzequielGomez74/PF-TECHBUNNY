@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
@@ -49,6 +49,7 @@ function NavBar() {
     console.log("cualquier cosa");
     if(loggedUser.user_id){
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
+      dispatch(actions.allCartByUser(loggedUser.user_id));
       console.log("OTRA COSA");
     } 
   },[loggedUser])
@@ -71,9 +72,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
-
-  
-
+ 
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -104,10 +103,10 @@ function NavBar() {
               </span>
             </Link>
 
-            <Link to="/cart">
+            <Link to={loggedUser.user_id? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {cart.length}
+                &nbsp;&nbsp; {loggedUser.user_id? cart.length : 0}
               </span>
             </Link>
 

@@ -17,6 +17,7 @@ export const SORT_BY_PRICE = "SORT_BY_PRICE";
 export const ADD_OR_REMOVE_QUANTITY_FROM_CART = "ADD_OR_REMOVE_QUANTITY_FROM_CART";
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const ALL_FAVORITES_BY_USER = 'ALL_FAVORITES_BY_USER';
+export const ALL_CART_BY_USER = 'ALL_CART_BY_USER';
 
 // Funciones sincrónicas
 
@@ -29,4 +30,3 @@ export const CLEAN_CATEGORY_PRODUCTS = "CLEAN_CATEGORY_PRODUCTS";
 export const CLEAN_FAVORITES = "CLEAN_FAVORITES";
 
 //Faltan actions
-

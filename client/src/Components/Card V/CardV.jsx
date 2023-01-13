@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import s from './CardV.module.css';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, } from "react-redux";
-import * as actions from '../../redux/actions'
-
-
-
+import * as actions from '../../redux/actions';
+import Swal from 'sweetalert2'
 
 function CardV({product_id, brand, name, image, price, favorite, user_id}){
-
     let [active, setActive] = useState(favorite);
     let dispatch = useDispatch();
+    let history = useHistory()
+
     let handleClick = () => {
         if(!user_id){
-           alert("NO ESTAS LOGUEADO") 
+            Swal.fire({
+                title: '¡Alerta!',
+                text: 'Para agregar productos a favoritos, necesitas ingresar a tu cuenta.',
+                icon: 'warning',
+                confirmButtonText: 'Iniciar sesión',
+            }).then(response => {
+                if (response.isConfirmed) history.push('/login')
+            })
         }else{
             dispatch(actions.addFavorite({user_id, product_id}))
             setActive(!active)
