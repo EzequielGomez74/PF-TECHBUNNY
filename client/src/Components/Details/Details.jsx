@@ -26,7 +26,7 @@ function Details() {
   const dispatch = useDispatch();
   const history = useHistory();
   const initialLoad = useRef(true);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
@@ -51,12 +51,12 @@ function Details() {
       flag.current = false;
     }
     setActive(product.favorite);
-    setStock(product.stock);
+    setStock(product.stock-1);
     setQuantity(1);
-    window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     return () => dispatch(actions.cleanDetail());
   }, []);
 
@@ -137,7 +137,7 @@ function Details() {
   };
 
   const handleMinus = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
       setStock(stock + 1);
     }

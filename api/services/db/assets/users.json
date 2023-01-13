@@ -4,7 +4,7 @@
     "name": "Anonimus",
     "surname": "without",
     "password": "anonimoforever",
-    "email": "srbetito85@gmail.com",
+    "email": "aaa@aaa.gmail.com",
     "defaultShippingAddress": "av siempre viva 742",
     "zipCode": 7600,
     "isActive": true
@@ -20,10 +20,10 @@
     "isActive": true
   },
   {
-    "username": "santi",
-    "name": "santi",
+    "username": "Santilocura",
+    "name": "Santi",
     "surname": "Larrique",
-    "password": "$2a$10$Qa5am9DR8Q.CGFreGqVQheJJl3.Rg9rh7aOzlsHA/Nqm3BUi3n/BC",
+    "password": "pepito1234",
     "email": "b@b.gmail.com",
     "defaultShippingAddress": "Colon 5432",
     "zipCode": 11200,

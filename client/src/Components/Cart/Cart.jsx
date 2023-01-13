@@ -5,12 +5,11 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
 import img from '../../Photos/bunnycart.png'
-import { Link, useHistory } from 'react-router-dom';
-import { allCartByUser, createOrder } from '../../redux/actions'
+import { Link } from 'react-router-dom';
+import { allCartByUser } from '../../redux/actions'
 
 function Cart() {
   const cart = useSelector(state => state.cart);
-  const history = useHistory()
   const dispatch = useDispatch();
   let loggedUser = useSelector(state => state.loggedUser);
   const dm = useSelector(state => state.darkMode);
@@ -23,12 +22,6 @@ function Cart() {
       console.log("OTRA COSA-desde Cart");
     } 
   },[loggedUser])
-
-  const handleNewOrder = () => {
-    dispatch(createOrder(loggedUser.user_id, () => {
-      history.push('/payment')
-    }));
-  }
 
   return (
     <div>
@@ -43,7 +36,7 @@ function Cart() {
               image={p.image} price={p.price}
             />)}
             </div>
-            <button onClick={handleNewOrder} className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
+            <Link to="/payment"> <button className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button> </Link>
           </div>:
           <div>
             <div>
