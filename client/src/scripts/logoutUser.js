@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLoggedUser } from "../redux/actions";
+import { cleanFavorite, setLoggedUser } from "../redux/actions";
 import store from "../redux/store";
 async function logoutUser() {
   const user_id = store.getState().loggedUser.user_id;
