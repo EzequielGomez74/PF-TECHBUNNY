@@ -8,7 +8,7 @@ const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
 const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
-const access_token_mp = require("../../config/mercadopago.js");
+const {access_token_mp} = require("../../config/mercadopago.js");
 
 
 
