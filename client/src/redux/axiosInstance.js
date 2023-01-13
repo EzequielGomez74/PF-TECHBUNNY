@@ -2,10 +2,16 @@ import axios from "axios";
 import store from "./store.js";
 import loginUser from "../scripts/loginUser";
 import logoutUser from "../scripts/logoutUser.js";
+import { useSyncExternalStore } from "react";
+let base = "";
+if (process.env.REACT_APP_API)
+  base = "https://prueba1-production-4ff1.up.railway.app/";
+else base = "http://localhost:3001";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
-  // baseURL: "https://prueba1-production-4ff1.up.railway.app/",
+  //baseURL: "http://localhost:3001",
+  //baseURL: "https://prueba1-production-4ff1.up.railway.app/",
+  baseURL: base,
   headers: {
     "Content-Type": "application/json",
   },
@@ -16,18 +22,11 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const state = store.getState();
     if (Object.keys(state.loggedUser).length === 0) {
-      let token = localStorage.getItem("accessToken");
-      if (token) {
-        config.headers["Authorization"] = "Bearer " + token;
-        await loginUser(null);
-        //!! COMO EL OJETE
-      } else {
-        console.log("entro por aca");
-        await loginUser(null);
-      }
+      await loginUser(null);
     } else {
       let token = localStorage.getItem("accessToken");
       if (token) config.headers["Authorization"] = "Bearer " + token;
+      else logoutUser();
     }
     return config;
   },
@@ -51,21 +50,6 @@ axiosInstance.interceptors.response.use(
         console.log("DESLOGUEAR");
         console.log("entra logout");
         await logoutUser();
-
-        //originalConfig._retry = true;
-        // try {
-        //   //const rs = await axiosInstance.get("/refresh");
-        //   //const { accessToken } = rs.data;
-        //   // if (accessToken) {
-        //   //   //si hay acces token es porque salio todo bien y lo renueva
-        //   //   localStorage.setItem("accessToken", accessToken);
-        //   //   console.log("NUEVO TOKEN");
-        //   //   return axiosInstance(originalConfig);
-        //   // }
-        // } catch (_error) {
-
-        //   // borra accessToken
-        // }
       }
     }
     return Promise.reject(err);

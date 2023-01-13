@@ -21,7 +21,7 @@ function CardH({product_id, brand, name, image, price, stock, user_id}){
     }
     return(
         <div className={s.card}>
-            <div className={s.close}><button className={s.icon} onClick={handleClick}  ><FontAwesomeIcon icon={faX} /></button></div>
+            <div className={s.deleteX}><button className={s.icon} onClick={handleClick}  ><FontAwesomeIcon icon={faX} /></button></div>
             <div className={s.cardInfo} >
                 <div>
                     <Link to={`/detail/${product_id}`}><img className={s.pImg} src={image} alt={product_id} /></Link>

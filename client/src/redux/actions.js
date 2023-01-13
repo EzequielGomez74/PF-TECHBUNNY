@@ -20,6 +20,7 @@ import {
   ALL_FAVORITES_BY_USER,
   CLEAN_FAVORITES,
   ADD_FAVORITE,
+  ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -284,4 +285,11 @@ export const setLoggedUser = (user) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export function addOrRemoveQuantityFromCart(id, totalQuantity) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, totalQuantity },
+  };
 };

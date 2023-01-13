@@ -25,6 +25,7 @@ router.get("/", async (req, res) => {
 router.get("/:product_id", async (req, res) => {
   const cookie = req.cookies;
   const { product_id } = req.params;
+  console.log("id");
   try {
     res
       .status(200)

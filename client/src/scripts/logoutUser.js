@@ -13,8 +13,6 @@ async function logoutUser() {
   );
   if (accessToken) localStorage.removeItem("accessToken");
   await store.dispatch(setLoggedUser({}));
-  await store.dispatch(cleanFavorite());
-  
   return response;
 }
 

@@ -21,7 +21,7 @@ import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
-import { allFavoritesByUser } from "../../redux/actions";
+import * as actions from "../../redux/actions";
 
 function NavBar() {
   // Para saber cuantos elementos se agregaron a favoritos
@@ -48,7 +48,7 @@ function NavBar() {
   useEffect(() => {
     console.log("cualquier cosa");
     if(loggedUser.user_id){
-      dispatch(allFavoritesByUser(loggedUser.user_id));
+      dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       console.log("OTRA COSA");
     } 
   },[loggedUser])
