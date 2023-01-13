@@ -5,11 +5,12 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './Cart.module.css'
 import img from '../../Photos/bunnycart.png'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { allCartByUser, createOrder } from '../../redux/actions'
 
 function Cart() {
   const cart = useSelector(state => state.cart);
+  const history = useHistory()
   const dispatch = useDispatch();
   let loggedUser = useSelector(state => state.loggedUser);
   const dm = useSelector(state => state.darkMode);
@@ -24,7 +25,9 @@ function Cart() {
   },[loggedUser])
 
   const handleNewOrder = () => {
-    dispatch(createOrder(loggedUser.user_id));
+    dispatch(createOrder(loggedUser.user_id, () => {
+      history.push('/payment')
+    }));
   }
 
   return (
@@ -40,7 +43,7 @@ function Cart() {
               image={p.image} price={p.price}
             />)}
             </div>
-            <Link to="/payment"> <button onClick={handleNewOrder} className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button> </Link>
+            <button onClick={handleNewOrder} className={dm ? s.dmmainButton : s.mainButton}>Procesar Compra</button>
           </div>:
           <div>
             <div>
@@ -57,3 +60,6 @@ function Cart() {
 }
 
 export default Cart
+
+// Recordatorio
+// Cuando se terminé el carrito de compra(se recibe por body el user_id, los products, review y rating) se debe despachar un action creator CREATE_ORDER(user_id, products: [{product_id: 0, quantity:0...}])

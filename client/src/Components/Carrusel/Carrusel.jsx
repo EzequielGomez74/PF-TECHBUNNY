@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -8,6 +8,7 @@ import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import CardV from '../Card V/CardV';
+import { getProducts } from '../../redux/actions'
 
 const products = [
     {
@@ -20,7 +21,8 @@ const products = [
       "brand": "Amd",
       "subcategory": "Equipos AMD",
       "category": "Equipos armados",
-      "active": true
+      "active": true,
+      "favorite": false,
     },
     {
     "product_id": 466,
@@ -32,7 +34,8 @@ const products = [
     "brand": "ViewSonic",
     "subcategory": "Monitores",
     "category": "Monitores y TV",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 680,
@@ -44,7 +47,8 @@ const products = [
     "brand": "Razer",
     "subcategory": "Auriculares",
     "category": "Periféricos",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 49,
@@ -56,7 +60,8 @@ const products = [
     "brand": "Asus",
     "subcategory": "Notebooks",
     "category": "Notebooks",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 254,
@@ -68,7 +73,8 @@ const products = [
     "brand": "Intel",
     "subcategory": "Procesadores INTEL",
     "category": "Procesadores",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 269,
@@ -80,7 +86,8 @@ const products = [
     "brand": "DeepCool",
     "subcategory": "Para CPU",
     "category": "Cooling",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 45,
@@ -92,7 +99,8 @@ const products = [
     "brand": "Xbox",
     "subcategory": "Consolas",
     "category": "Consolas",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id":  495,
@@ -104,7 +112,8 @@ const products = [
     "brand": "HHGears",
     "subcategory": "Sillas Gamer",
     "category": "Sillas",
-    "active": true
+    "active": true,
+    "favorite": null,
     },
     {
     "product_id": 548,
@@ -116,7 +125,8 @@ const products = [
     "brand": "Razer",
     "subcategory": "Teclados",
     "category": "Periféricos",
-    "active": true
+    "active": true,
+    "favorite": null,
 },
 {   "product_id": 658,
     "name": "Mouse Logitech PRO X Superlight Gaming Magenta",
@@ -127,12 +137,24 @@ const products = [
     "brand": "Logitech",
     "subcategory": "Mouse",
     "category": "Periféricos",
-    "active": true
+    "active": true,
+    "favorite": null,
   },
   ]
 
 
  function Carrusel() {
+    //Para usuario registrado
+    let dispatch = useDispatch()
+    let user = useSelector(state => state.loggedUser);
+    let allProducts = useSelector(state => state.products);
+    let pCarrusel = [allProducts[3], allProducts[466], allProducts[679], allProducts[48], allProducts[253], allProducts[268], allProducts[44], allProducts[494], allProducts[547], allProducts[657] ]
+
+
+    useEffect(()=>{
+      dispatch(getProducts())
+    },[])
+
     return (
         <div className='container'>
           <Swiper
@@ -150,8 +172,10 @@ const products = [
           >
             { products.map(p => (<SwiperSlide>
                 <CardV
+                favorite={p.favorite}
                 key={p.product_id}
-                id={p.product_id}
+                user_id={user.user_id}
+                product_id={p.product_id}
                 brand={p.brand}
                 name={p.name}
                 image={p.image}

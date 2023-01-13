@@ -1,4 +1,3 @@
-import { CLEAN_CATEGORY_PRODUCTS } from "./actionTypes";
 const initialState = {
   products: [],
   detail: {},
@@ -6,15 +5,15 @@ const initialState = {
   productsByCategory: [],
   filtered: [],
   cart: [],
-  orders: [],
   favorites: [],
   darkMode: false,
   reviews: [],
+  orders:[],
   // searchTerm:'',
   // searchResults:[],
   results: [],
   loggedUser: {},
-  preferences: {}
+  preferences:{}
 };
 
 export default function reducer(state = initialState, action) {
@@ -90,26 +89,42 @@ export default function reducer(state = initialState, action) {
     //     ...state,
     //     filtered: action.payload,
     //   };
+    case "ALL_FAVORITES_BY_USER":
+      return {
+        ...state,
+        favorites: action.payload,
+      };
     case "ADD_FAVORITE":
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: action.payload,
       };
-    case "REMOVE_FAVORITE":
-      return {
-        ...state,
-        favorites: state.favorites.filter((f) => f.id !== action.payload),
-      };
+      case "CLEAN_FAVORITES": {
+        return {
+          ...state,
+          favorites: [],
+        };
+      }
+    // case "REMOVE_FAVORITE":
+    //   return {
+    //     ...state,
+    //     favorites: state.favorites.filter((f) => f.product_id !== action.payload),
+    //   };
     case "ADD_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: action.payload,
       };
-    case "REMOVE_CART":
+    case "ALL_CART_BY_USER":
       return {
         ...state,
-        cart: state.cart.filter((c) => c.id !== action.payload),
+        cart: action.payload,
       };
+    // case "REMOVE_CART":
+    //   return {
+    //     ...state,
+    //     cart: state.cart.filter((c) => c.id !== action.payload),
+    //   };
     case "TOGGLE_DARK_MODE":
       return {
         ...state,
@@ -145,24 +160,18 @@ export default function reducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
+      case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+        const productFound = state.cart.find((p) => p.id === action.payload.id);
+        if (productFound) {
+          productFound.totalQuantity -= action.payload.totalQuantity;
+        }
+        return { ...state, cart: [...state.cart] };
+
     case "CLEAN_DETAIL":
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
-    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
-      const productFound = state.cart.find((p) => p.id === action.payload.id);
-      if (productFound) {
-        productFound.totalQuantity -= action.payload.totalQuantity;
-      }
-      return { ...state, cart: [...state.cart] 
-      };
-    case "GET_PAYPREFERENCES_BY_ID":
-      return {
-        ...state,
-        preferences: action.payload,
-      };
-
-      case 'CREATE_ORDER':
+    case 'CREATE_ORDER':
       return {
         ...state,
         orders: action.payload
@@ -172,18 +181,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         orders:action.payload
       }
-      case "ADD_CART":
-        return {
-          ...state,
-          cart: action.payload,
-        };
-      case "ALL_CART_BY_USER":
-        return {
-          ...state,
-          cart: action.payload,
-        };
-
-
+    case "GET_PAYPREFERENCES_BY_ID":
+      return {
+        ...state,
+        preferences: action.payload,
+      };
     default:
       return { ...state };
   }

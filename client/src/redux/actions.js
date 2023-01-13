@@ -16,10 +16,10 @@ import {
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
-  // GET_USER_BY_ID,
-  // ALL_FAVORITES_BY_USER,
-  // CLEAN_FAVORITES,
-  // ADD_FAVORITE,
+  GET_USER_BY_ID,
+  ALL_FAVORITES_BY_USER,
+  CLEAN_FAVORITES,
+  ADD_FAVORITE,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
   CREATE_ORDER,
   ALL_ORDERS_BY_USER,
@@ -178,33 +178,33 @@ export function getUserById(user_id){
 }
 
 
-// export const allFavoritesByUser = (user_id) => {
-//   return async function(dispatch){
-//     const favorites = await axiosInstance.get(`/favorites/${user_id}`)
-//     console.log(favorites.data);
-//       return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data})
-//   }
-// }
+export const allFavoritesByUser = (user_id) => {
+  return async function(dispatch){
+    const favorites = await axiosInstance.get(`/favorites/${user_id}`)
+    console.log(favorites.data);
+      return dispatch({type: ALL_FAVORITES_BY_USER, payload: favorites.data})
+  }
+}
 
 
-// export const addFavorite = (payload) => {
-//   return async function(dispatch){
-//     try{
-//       const response = await axiosInstance.post('/favorites' , payload)
-//       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-//       console.log(response.data)
-//       const favorites = await axiosInstance.get(`/favorites/${payload.user_id}`)
-//       return dispatch({type: ADD_FAVORITE, payload: favorites.data})
-//     }
-//     catch(error){
-//       console.log(error.message)
-//     }
-//   }
-// }
+export const addFavorite = (payload) => {
+  return async function(dispatch){
+    try{
+      const response = await axiosInstance.post('/favorites' , payload)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+      const favorites = await axiosInstance.get(`/favorites/${payload.user_id}`)
+      return dispatch({type: ADD_FAVORITE, payload: favorites.data})
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
 
-// export const cleanFavorite = () => {
-//   return { type: CLEAN_FAVORITES };
-// };
+export const cleanFavorite = () => {
+  return { type: CLEAN_FAVORITES };
+};
 
 export const removeFavorite = (payload) => {
   return async function(){
@@ -328,11 +328,35 @@ export function addOrRemoveQuantityFromCart(id, totalQuantity) {
   };
 };
 
+export const createOrder = (user_id, pushPayment) => {
+  return async function(dispatch){
+    try{
+      const response = await axiosInstance.post(`/orders/${user_id}`)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+      const orders = await axiosInstance.get(`/orders/${user_id}`)
+      pushPayment()
+      return dispatch({type: CREATE_ORDER, payload: orders.data})
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+export const allOrdersByUser = (user_id) => {
+  return async function(dispatch){
+    const orders = await axiosInstance.get(`/orders?user_id=${user_id}`)
+    console.log(orders.data);
+      return dispatch({type: ALL_ORDERS_BY_USER, payload: orders.data})
+  }
+}
 
 export function getPayPreferencesById(order_id) {
   return async function (dispatch) {
     try {
       var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
+      console.log('info payment' ,json.data)
       return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
     } catch (error) {
       alert(error);
