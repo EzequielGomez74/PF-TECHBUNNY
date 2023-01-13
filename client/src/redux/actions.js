@@ -219,6 +219,7 @@ export const removeFavorite = (payload) => {
 
 export const addCart = (payload, user_id) => {
   return async function(dispatch){
+    console.log(payload, "hola");
     try{
       let response = await axiosInstance.post(`/carts/${user_id}`, payload)
       // console.log(response.data)
