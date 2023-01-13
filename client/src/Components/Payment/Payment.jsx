@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './Payment.module.css';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getPayPreferencesById } from '../../redux/actions'
 
 function Payment() {
     const dm = useSelector(state => state.darkMode);
+	const preferences = useSelector(state => state.preferences)
+	const dispatch = useDispatch();
     const [payInfo, setPayInfo] = useState({
         datos: '',
         dni: '',
@@ -31,21 +33,27 @@ function Payment() {
         history.push('/cart');
     }
 
+useEffect(() => {
+	if (Object.keys(preferences).length !== 0) {
+		
+	console.log("PREFERENCIAAAAS",preferences);
+	var script = document.createElement("script");
+
+	// The source domain must be completed according to the site for which you are integrating.
+	// For example: for Argentina ".com.ar" or for Brazil ".com.br".
+	script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+	script.type = "text/javascript";
+	script.dataset.preferenceId = preferences;
+	document.getElementById("page-content").innerHTML = "";
+	document.querySelector("#page-content").appendChild(script);
+	}
+}, [preferences])
+
+
     
   async function pay() {
     try{
-      const order_id = 1;
-      const preference = getPayPreferencesById(order_id)        
-      console.log("PREFERENCIAAAAS",preference);
-      var script = document.createElement("script");
-
-        // The source domain must be completed according to the site for which you are integrating.
-        // For example: for Argentina ".com.ar" or for Brazil ".com.br".
-        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-        script.type = "text/javascript";
-        script.dataset.preferenceId = preference.data.preferenceId;
-        document.getElementById("page-content").innerHTML = "";
-        document.querySelector("#page-content").appendChild(script);
+    	dispatch( getPayPreferencesById(1))        
     }
     catch(error) {
       console.error(error.message)  
@@ -132,8 +140,8 @@ function Payment() {
 						{/* Los llevará a Mercado Pago */}
 					</div>
 					<div>
-						<button onClick={pay}> pagaaaar</button>
-						<h1>PEPITO RULES</h1>
+						<h1>MERCADOPAGO</h1>
+						<button onClick={pay}> GENERAR LINK DE PAGO</button>
 						<div className="page-content" id="page-content"></div>
 					</div>
 				</div>

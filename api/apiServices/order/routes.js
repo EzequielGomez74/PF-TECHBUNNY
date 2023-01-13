@@ -8,7 +8,7 @@ const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
 const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
-const access_token_mp = require("../../config/mercadopago.js");
+const {access_token_mp} = require("../../config/mercadopago");
 
 
 
@@ -46,6 +46,7 @@ router.get("/:order_id", async (req, res) => {
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
+
 		mercadopago.configure({
 			access_token: access_token_mp,
 		});
@@ -63,15 +64,16 @@ router.get("/pagar/:order_id", async (req, res) => {
 		let preference = {
 			items: carrito,
 			back_urls: {
-				success: "http://localhost:3000/home", // ! ACA VA SI FUE PAGO EXITOSO
-				failure: "http://localhost:3000/home", // ! SI EL PAGO FALLA
-				pending: "http://localhost:3000/home", // ? PAGO PENDIENTE
+				success: "http://localhost:3000/feedback",
+				failure: "http://localhost:3000/feedback", 
+				pending: "http://localhost:3000/feedback", 
 			},
 			auto_return: "approved",
 		};
 		const response = await mercadopago.preferences.create(preference);
 		const preferenceId = response.body.id;
-		res.send({ preferenceId });
+
+		res.send(preferenceId);
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
