@@ -51,7 +51,7 @@ const Responsive = () => {
 
         {!Object.keys(loggedUser).length ? (
         <div className={dm? s.dmsession :s.session} >
-            <Link to='/login'><p>Inicar Sesión</p></Link>
+            <Link to='/login'><p>Iniciar Sesión</p></Link>
             <Link to='/register'><p>Registrarse</p></Link>
         </div>
         ) : (
