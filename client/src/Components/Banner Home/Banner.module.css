@@ -1,7 +1,6 @@
 .cointainerBanner{
     background-color: #D7F136;
     display: flex;
-    justify-content: center;
     height: 60%;
 }
 .textBanner h2{
@@ -14,17 +13,14 @@
     margin-left: 30%;
 }
 .containerElements{
-   
     display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 70%;
+    margin-left: 10%;
     margin-top: 2%;
     margin-bottom: 2%;
    
 }
 .imgBanner{
-    
     width: 100%;
     height:100%;
     margin-left: 35%;
