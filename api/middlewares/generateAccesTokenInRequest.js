@@ -10,7 +10,6 @@ function generateAccesTokenInRequest(req, res, next) {
       if (decoded) {
         req.username = decoded.username;
         req.role = decoded.role;
-        next();
       }
     }
   );

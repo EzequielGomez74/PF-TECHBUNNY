@@ -8,19 +8,19 @@ import {
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
   SORT_BY_PRICE,
-  ADD_FAVORITE,
   ADD_CART,
   REMOVE_CART,
-  REMOVE_FAVORITE,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  GET_USER_BY_ID,
+  ALL_FAVORITES_BY_USER,
+  CLEAN_FAVORITES,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
 } from "./actionTypes";
-import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -103,6 +103,7 @@ export function getProductsByCategory(category) {
     }
   };
 }
+
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -159,20 +160,70 @@ export function toggleDarkMode() {
 //   };
 // };
 
+export function getUserById(user_id) {
+  return async function (dispatch) {
+    try {
+      let user = await axiosInstance.get(`/users/${user_id}`);
+      return dispatch({ type: GET_USER_BY_ID, payload: user.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+//REVISAAAAAR
+
+export const allFavoritesByUser = (user_id) => {
+  return async function (dispatch) {
+    try {
+      let favorites = await axiosInstance.get(`/favorites/${user_id}`);
+      return dispatch({ type: ALL_FAVORITES_BY_USER, payload: favorites.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const addFavorite = (payload) => {
-  return {
-    type: ADD_FAVORITE,
-    payload,
+  return async function () {
+    try {
+      const response = await axiosInstance.post("/favorites", payload);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
-export const removeFavorite = (id) => {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: id,
-  };
+export const cleanFavorite = () => {
+  return { type: CLEAN_FAVORITES };
 };
 
+export const removeFavorite = (payload) => {
+  return async function () {
+    try {
+      const response = await axiosInstance.post("/favorites", payload);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+// export const addCart = (payload) => {
+//   return async function(dispatch){
+//     try{
+//       let cart = await axiosInstance.post('/orders' , payload)
+//       return dispatch ({type: ADD_CART, payload: cart.data});
+//     }
+//     catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
+
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
 export const addCart = (payload) => {
   return {
     type: ADD_CART,
@@ -221,13 +272,13 @@ export const cleanCategoryProducts = () => {
 //     const user = await axiosInstance.get("/");
 //   };
 // };
+
 export function addOrRemoveQuantityFromCart(id, totalQuantity) {
   return {
     type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
     payload: { id, totalQuantity },
   };
 }
-
 export const setLoggedUser = (user) => {
   console.log("action logded user");
   try {

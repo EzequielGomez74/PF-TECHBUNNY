@@ -9,8 +9,10 @@ const {
 
 const getUser = require("../../scripts/getUser");
 const axios = require("axios");
+const { log } = require("console");
 
 async function setFavoriteStatus(products, username) {
+  console.log("ARRAY PRODUCTS ", products, username);
   if (!username) return products;
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
@@ -21,7 +23,8 @@ async function setFavoriteStatus(products, username) {
         (product) => product.product_id === fav.product_id
       );
       if (productFound) {
-        productFound.favorite = true;
+        console.log("ENTRA,", productFound);
+        productFound.dataValues.favorite = true;
       }
     });
   }
@@ -57,10 +60,10 @@ async function getAllProductsBy(condition, username) {
 async function getProductById(product_id, username) {
   try {
     let product = await Product.findByPk(product_id);
-    product = await setFavoriteStatus([product.dataValues], username);
-    const newObj = { ...product[0] };
+    let arr = [product];
+    let newProduct = await setFavoriteStatus(arr, username);
+    const newObj = { ...newProduct[0].dataValues };
     newObj.description = productDescriptionParser(newObj.description);
-    console.log("pasa");
     return newObj;
   } catch (error) {
     throw new Error(error.message);
