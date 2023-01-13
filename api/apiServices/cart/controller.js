@@ -76,7 +76,7 @@ async function updateCount(user_id, body){
 async function deleteCart(params, body){
   try {
     if (body.product_id){ 
-      await Cart.destroy({where: {product_id: body.product_id}}) 
+      await Cart.destroy({where: {product_id: body.product_id , user_id: params.user_id}}) 
       return ("Se elimino el producto que solicitaste.") 
     } else {
 

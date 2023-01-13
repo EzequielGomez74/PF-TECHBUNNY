@@ -55,7 +55,7 @@ router.delete("/deleteCart/:user_id", async (req, res) => {
 //? ESTE ELMIINA UNA SOLA FILA DE LA TABLA CART
 // $ Esta ruta recibe por BODY { user_id , product_id }
 // $ Y elimina  el producto COMPLETO del carrito . (Pero puede que haya mas productos asique el carrito sigue existiendo)
-router.delete("/", async (req, res) => {
+router.delete("/:user_id", async (req, res) => {
 	try {
 		res.status(200).json( await controller.deleteCart(req.params, req.body));
 	} catch (error) {
