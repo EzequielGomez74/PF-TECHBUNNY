@@ -42,7 +42,7 @@ const Responsive = () => {
             <Link to='/categories' ><p>CATEGORIAS</p></Link>
             <Link to='/favorites' ><p>FAVORITOS</p></Link>
             <Link to='/cart' ><p>CARRITO</p></Link>
-            <p>VER ESTADO DE PEDIDO</p>
+            <Link to='/followUp'><p>VER ESTADO DE PEDIDO</p></Link>
         </div>
         <div className={dm? s.dmsession :s.session} >
             <Link to='/login'><p>Inicar Sesión</p></Link>
