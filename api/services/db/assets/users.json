@@ -65,12 +65,12 @@
     "isActive": true
   },
   {
-    "username": "Eze",
+    "username": "eze",
     "name": "Eze",
     "surname": "Gomez",
-    "password": "123",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
     "email": "ezequiel.canob@gmail.com",
-    "defaultShippingAddress": "azucarame lamambreta 4545",
+    "defaultShippingAddress": "password 123",
     "zipCode": 2000,
     "isActive": true
   }
