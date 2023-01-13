@@ -1,3 +1,5 @@
+
+
 const { DataTypes } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
@@ -13,7 +15,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       status: {
-        type: DataTypes.ENUM(["processed", "complete", "canceled"]),
+        type: DataTypes.ENUM([ "processed", "completed", "canceled"]),
         allowNull: false,
         defaultValue: "processed",
       },
@@ -24,7 +26,7 @@ module.exports = (sequelize) => {
       total: {
         type: DataTypes.FLOAT,
         allowNull: true,
-      },
+      }
     },
     {
       timestamps: true,

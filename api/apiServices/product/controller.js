@@ -9,10 +9,8 @@ const {
 
 const getUser = require("../../scripts/getUser");
 const axios = require("axios");
-const { log } = require("console");
 
 async function setFavoriteStatus(products, username) {
-  console.log("ARRAY PRODUCTS ", products, username);
   if (!username) return products;
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
@@ -23,7 +21,6 @@ async function setFavoriteStatus(products, username) {
         (product) => product.product_id === fav.product_id
       );
       if (productFound) {
-        console.log("ENTRA,", productFound);
         productFound.dataValues.favorite = true;
       }
     });

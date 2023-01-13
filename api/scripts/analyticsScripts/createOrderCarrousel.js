@@ -117,6 +117,7 @@ async function findAndGeneratePosibleProducts(arrProductos) {
     }
   } while (!productFound);
 }
+function findBestProduct(posibleProducts) {}
 async function getRelativePos(product) {
   const products = await Product.findAll({
     where: { category: product.category },

@@ -2,7 +2,7 @@
     font-family: 'Poppins';
     background-color: rgb(255, 255, 255);
     width: 206px;
-    height: px;
+    height: 321px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -15,7 +15,7 @@
     margin-bottom: 10px;
 }
 
-.favContainer{
+.iconWrap{
     padding-left: 160px;
     padding-right: 10px;
 }
@@ -30,6 +30,14 @@
 .heart:hover{
     color: #D7F136;
     cursor: pointer;
+}
+
+.favHeart{
+    color: #D7F136;
+    background: none;
+    border: none;
+    font-size: 16px;
+    transition: 0.5s;
 }
 
 

@@ -93,6 +93,14 @@
   border: none;
 }
 
+.error{
+  color:red
+}
+
+.hidden{
+  color:white
+}
+
 @media only screen and (max-width: 800px) {}
 
 /* DARK MODE */
