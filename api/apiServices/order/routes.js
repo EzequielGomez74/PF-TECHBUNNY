@@ -72,7 +72,7 @@ router.get("/pagar/:order_id", async (req, res) => {
 		};
 		const response = await mercadopago.preferences.create(preference);
 		const preferenceId = response.body.id;
-		res.send({ preferenceId });
+		res.send( preferenceId );
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
