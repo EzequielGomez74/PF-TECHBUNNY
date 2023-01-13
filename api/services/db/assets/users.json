@@ -73,5 +73,25 @@
     "defaultShippingAddress": "password 123",
     "zipCode": 2000,
     "isActive": true
+  },
+  {
+    "username": "abi",
+    "name": "Abi",
+    "surname": "Breno",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
+    "email": "abibreno@gmail.com",
+    "defaultShippingAddress": "password 123",
+    "zipCode": 2000,
+    "isActive": true
+  },
+  {
+    "username": "ali",
+    "name": "Ali",
+    "surname": "Gamarra",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
+    "email": "alissagamarra@gmail.com",
+    "defaultShippingAddress": "password 123",
+    "zipCode": 2000,
+    "isActive": true
   }
 ]
