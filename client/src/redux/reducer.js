@@ -13,6 +13,7 @@ const initialState = {
   // searchResults:[],
   results: [],
   loggedUser: {},
+  preferences:{}
 };
 
 export default function reducer(state = initialState, action) {
@@ -180,6 +181,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         orders:action.payload
       }
+    case "GET_PAYPREFERENCES_BY_ID":
+      return {
+        ...state,
+        preferences: action.payload,
+      };
     default:
       return { ...state };
   }

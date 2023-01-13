@@ -22,8 +22,10 @@ import {
   ADD_FAVORITE,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
   CREATE_ORDER,
-  ALL_ORDERS_BY_USER
+  ALL_ORDERS_BY_USER,
+  GET_PAYPREFERENCES_BY_ID
 } from "./actionTypes";
+import axios from "axios";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
@@ -326,13 +328,14 @@ export function addOrRemoveQuantityFromCart(id, totalQuantity) {
   };
 };
 
-export const createOrder = (user_id) => {
+export const createOrder = (user_id, pushPayment) => {
   return async function(dispatch){
     try{
       const response = await axiosInstance.post(`/orders/${user_id}`)
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
       console.log(response.data)
       const orders = await axiosInstance.get(`/orders/${user_id}`)
+      pushPayment()
       return dispatch({type: CREATE_ORDER, payload: orders.data})
     }
     catch(error){
@@ -347,4 +350,16 @@ export const allOrdersByUser = (user_id) => {
     console.log(orders.data);
       return dispatch({type: ALL_ORDERS_BY_USER, payload: orders.data})
   }
+}
+
+export function getPayPreferencesById(order_id) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
+      console.log('info payment' ,json.data)
+      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
+  };
 }
