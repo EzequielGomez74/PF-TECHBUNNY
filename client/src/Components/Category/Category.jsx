@@ -80,6 +80,10 @@ function Category() {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  }, [currentPage])
+
   return (
     <div className={dm ? s.dmbackground : s.background}>
       <NavBar />

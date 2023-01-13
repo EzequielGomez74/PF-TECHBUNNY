@@ -18,11 +18,11 @@ async function handleNewUser(data) {
       },
     });
 
-    if (duplicate) throw new Error("Username already exist"); //409 = conflict
+    if (duplicate) return "USERNAME OR EMAIL ALREADY EXIST"; //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
+
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
-    console.log("pass", hashedPwd);
     const newUser = {
       ...data,
       password: hashedPwd,
@@ -32,7 +32,7 @@ async function handleNewUser(data) {
     //GENERA VERYFICATION CODE
     const userCreated = await User.create(newUser);
     generateValidationAndSendMail(userCreated, "register", 2);
-    return { success: `New user ${userCreated.username} created` };
+    return "SUCCESS";
   } catch (error) {
     throw new Error(error);
   }
@@ -43,14 +43,12 @@ async function handleLogin({ username, password, twoFactorToken }) {
   try {
     let foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
-    //evaluar password
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
         foundUser.dataValues,
         twoFactorToken
       );
-      console.log("c resultverify2FA ", result);
       if (result === false) {
         return null;
       } else if (result.twoFactor) {
@@ -63,7 +61,9 @@ async function handleLogin({ username, password, twoFactorToken }) {
         //todo SETEAR SAVED SESSION DATA
         return response;
       }
-    } else throw new Error("LOGIN FAIL");
+    } else if (!match) {
+      return "CONTRASEÑA INCORRECTA";
+    } else return "MAIL NO VALIDADO";
   } catch (error) {
     throw new Error(error.message);
   }
@@ -76,26 +76,34 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       audience: process.env.GOOGLE_LOGIN_CLIENT_ID,
     });
     const { name, email, picture } = ticket.getPayload();
-    let foundUser;
+    let foundUser = "pepe";
     if (email) {
-      foundUser = await User.findOne({ where: { email } });
+      foundUser = await User.findOne({
+        where: { email },
+      });
       if (foundUser) {
         if (foundUser.dataValues.isActive) {
-          //$ usuario encontrado y activo -> loguear usuario
-          const result = verifyTwoFactorToken(
-            foundUser.dataValues,
-            twoFactorToken
-          );
-          if (result === true) {
-            foundUser.update({ profilePicture: picture, username: name });
-          } else if (result === false) {
-            return null;
-          } else if (result.twoFactor) {
-            return { twoFactor: true, tokenId: tokenId };
+          //     //$ si usa google login ahi si lo logueo
+          if (foundUser.dataValues.usingGoogleLogin) {
+            //$ usuario encontrado y activo -> loguear usuario
+            const result = verifyTwoFactorToken(
+              foundUser.dataValues,
+              twoFactorToken
+            );
+            if (result === true) {
+              foundUser.update({ profilePicture: picture, username: name });
+            } else if (result === false) {
+              return null;
+            } else if (result.twoFactor) {
+              return { twoFactor: true, tokenId: tokenId };
+            }
+          } else {
+            //$ usuario activo pero no es de google
+            return "EMAIL ALREADY IN USE";
           }
         } else {
           //$ user found y a la espera de ser validado por email -> no puede loguearse (el mail esta en uso)
-          return { status: "email already in use" };
+          return "EMAIL ALREADY IN USE";
         }
       } else {
         //$ user not found -> crear nuevo usuario y loguearlo
@@ -113,7 +121,9 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
       return response;
-    } else return { status: "bad credentials" };
+    } else {
+      return "NO SE VALIDO EL TOKEN";
+    }
   } catch (error) {
     throw new Error(error);
   }
@@ -136,7 +146,7 @@ async function handleLoginWithAccess(accessToken) {
     if (result) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
-      return { user: foundUser.dataValues, accessToken };
+      return { user: accessToken };
     } else {
       return { status: "Login Failed" };
     }
@@ -174,7 +184,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "10m" }
+    { expiresIn: "40s" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

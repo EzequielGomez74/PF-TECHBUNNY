@@ -159,8 +159,8 @@ const products = [
         <div className='container'>
           <Swiper
             slidesPerView={5}
-            spaceBetween={15} 
-            slidesPerGroup={5} 
+            spaceBetween={15}
+            slidesPerGroup={5}
             loop={true} 
             loopFillGroupWithBlank={true} 
             pagination={{
