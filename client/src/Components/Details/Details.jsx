@@ -52,11 +52,11 @@ function Details() {
     }
     setActive(product.favorite);
     setStock(product.stock);
-    setQuantity(0);
+    setQuantity(1);
+    window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     return () => dispatch(actions.cleanDetail());
   }, []);
 

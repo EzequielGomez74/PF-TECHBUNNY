@@ -54,7 +54,7 @@ useEffect(() => {
     
   async function pay() {
     try{
-    	dispatch( getPayPreferencesById(1))        
+    	dispatch(getPayPreferencesById(1))        
     }
     catch(error) {
       console.error(error.message)  
