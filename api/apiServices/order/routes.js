@@ -48,7 +48,7 @@ router.get("/:order_id", async (req, res) => {
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
 		mercadopago.configure({
-			access_token: access_token_mp,
+			access_token: "TEST-3131783442482356-122810-8c7720ae26aa2dc8fc655b6acac2e721-240429259",
 		});
 		const productos = await OrderProduct.findAll({
 			where: { order_id: req.params.order_id },
@@ -64,15 +64,15 @@ router.get("/pagar/:order_id", async (req, res) => {
 		let preference = {
 			items: carrito,
 			back_urls: {
-				success: "http://localhost:3000/home", // ! ACA VA SI FUE PAGO EXITOSO
-				failure: "http://localhost:3000/home", // ! SI EL PAGO FALLA
-				pending: "http://localhost:3000/home", // ? PAGO PENDIENTE
+				success: "http://localhost:3000/feedback", // ! ACA VA SI FUE PAGO EXITOSO
+				failure: "http://localhost:3000/feedback", // ! SI EL PAGO FALLA
+				pending: "http://localhost:3000/feedback", // ? PAGO PENDIENTE
 			},
 			auto_return: "approved",
 		};
 		const response = await mercadopago.preferences.create(preference);
 		const preferenceId = response.body.id;
-		res.send( preferenceId );
+		res.send( {preferenceId} );
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -91,10 +91,11 @@ router.post("/:user_id", async (req, res) => {
 // $ Esta ruta modifica una orden para cambiar el estado de la misma. PARAMS { order_id } BODY { data } 
 router.put("/:order_id", async (req, res) => {
 	try {
-		const { status, user_id} = req.body;
 		const { order_id } = req.params
-		if (order_id)
-			res.status(200).send(await controller.updateOrder( user_id, order_id, status ));
+		if (order_id && req.body.status) // para cuando el admin use dashboard
+			res.status(200).send(await controller.updateOrder( req.body.user_id, order_id, req.body.status ));
+		if(order_id) // para la compra
+			res.status(200).send(await controller.updateOrderData( order_id, req.body ));
 	} catch (error) {
 		res.status(400).send(error.message);
 	}

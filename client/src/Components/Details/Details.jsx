@@ -52,7 +52,7 @@ function Details() {
     }
     setActive(product.favorite);
     setStock(product.stock);
-    setQuantity(1);
+    setQuantity(0);
     window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
@@ -61,7 +61,7 @@ function Details() {
   }, []);
 
   function removeCartProductsFromProduct() {
-    const productFound = cart.find((p) => product.product_id === p.id);
+    const productFound = cart.find((cart) => cart.product_id === product.product_id );
     console.log(productFound);
     if (productFound) {
       // console.log('Entré')

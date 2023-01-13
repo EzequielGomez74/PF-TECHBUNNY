@@ -335,6 +335,7 @@ export const createOrder = (user_id, pushPayment) => {
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
       console.log(response.data)
       const orders = await axiosInstance.get(`/orders/${user_id}`)
+      console.log(orders.data)
       pushPayment()
       return dispatch({type: CREATE_ORDER, payload: orders.data})
     }
@@ -352,6 +353,16 @@ export const allOrdersByUser = (user_id) => {
   }
 }
 
+
+//verificar si está bien la función
+export const updateOrderInfoById = (order_id, payInfo) => {
+    return async function () {
+      const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo)
+      console.log(userInfo.data)
+    }
+}
+
+
 export function getPayPreferencesById(order_id) {
   return async function (dispatch) {
     try {
@@ -363,3 +374,4 @@ export function getPayPreferencesById(order_id) {
     }
   };
 }
+
