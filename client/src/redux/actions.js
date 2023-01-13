@@ -21,6 +21,8 @@ import {
   CLEAN_FAVORITES,
   ADD_FAVORITE,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
+  CREATE_ORDER,
+  ALL_ORDERS_BY_USER
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -219,8 +221,9 @@ export const removeFavorite = (payload) => {
 export const addCart = (payload, user_id) => {
   return async function(dispatch){
     try{
+      console.log('entra a addCart',payload)
       let response = await axiosInstance.post(`/carts/${user_id}`, payload)
-      // console.log(response.data)
+      console.log('producto recibido',response.data)
       let cart = await axiosInstance.get(`/carts/${user_id}`)
       console.log(cart.data)
       return dispatch ({type: ADD_CART, payload: cart.data});
@@ -322,3 +325,26 @@ export function addOrRemoveQuantityFromCart(id, totalQuantity) {
     payload: { id, totalQuantity },
   };
 };
+
+export const createOrder = (user_id) => {
+  return async function(dispatch){
+    try{
+      const response = await axiosInstance.post(`/orders/${user_id}`)
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data)
+      const orders = await axiosInstance.get(`/orders/${user_id}`)
+      return dispatch({type: CREATE_ORDER, payload: orders.data})
+    }
+    catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+export const allOrdersByUser = (user_id) => {
+  return async function(dispatch){
+    const orders = await axiosInstance.get(`/orders?user_id=${user_id}`)
+    console.log(orders.data);
+      return dispatch({type: ALL_ORDERS_BY_USER, payload: orders.data})
+  }
+}

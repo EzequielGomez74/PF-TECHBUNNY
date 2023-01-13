@@ -52,6 +52,7 @@ function Details() {
     }
     setActive(product.favorite);
     setStock(product.stock);
+    setQuantity(0);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
