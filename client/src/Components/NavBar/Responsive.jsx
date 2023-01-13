@@ -56,7 +56,7 @@ const Responsive = () => {
         </div>
         ) : (
          <div className={dm? s.dmsession :s.session} >
-            <Link to='/profile'><p>Mi perfil</p></Link>
+            <Link to='*'><p>Mi perfil</p></Link>
             <Link to='/login'><p onClick={() => logoutUser()}>Cerrar sesión</p></Link>
          </div>
 
