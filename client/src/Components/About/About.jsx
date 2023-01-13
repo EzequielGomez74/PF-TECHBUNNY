@@ -60,17 +60,6 @@ function AboutUs() {
 
                 <a href="https://www.linkedin.com/in/alberto-martinez-a0242b260/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
             </div>
-                  <div className={dm ? s.dmcard : s.card}>
-                <div className={dm ? s.dmdivImg : s.divImg}>
-                <img className={dm ? s.dmimg : s.img} src={imgSanti} alt="img"/>
-                </div>
-                <h3 className={dm ? s.dmapodo : s.apodo}>SANTI</h3>
-                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Santiago Larrique</h2>
-
-                 <a href="https://github.com/SantiagoL1804"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/> </a>
-
-                <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
-            </div>
            
             <div className={dm ? s.dmcard : s.card}>
                 <div className={dm ? s.dmdivImg : s.divImg}>
@@ -84,6 +73,17 @@ function AboutUs() {
                 <a href="https://www.linkedin.com/in/alissa-gamarra/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
             </div>
 
+                  <div className={dm ? s.dmcard : s.card}>
+                <div className={dm ? s.dmdivImg : s.divImg}>
+                <img className={dm ? s.dmimg : s.img} src={imgSanti} alt="img"/>
+                </div>
+                <h3 className={dm ? s.dmapodo : s.apodo}>SANTI</h3>
+                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Santiago Larrique</h2>
+
+                 <a href="https://github.com/SantiagoL1804"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/> </a>
+
+                <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
+            </div>
 
             
 
