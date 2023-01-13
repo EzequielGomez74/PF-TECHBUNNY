@@ -63,5 +63,15 @@
     "profilePicture": "www.google.com",
     "billingAddress": "calle falsa 123",
     "isActive": true
+  },
+  {
+    "username": "Eze",
+    "name": "Eze",
+    "surname": "Gomez",
+    "password": "123",
+    "email": "ezequiel.canob@gmail.com",
+    "defaultShippingAddress": "azucarame lamambreta 4545",
+    "zipCode": 2000,
+    "isActive": true
   }
 ]
