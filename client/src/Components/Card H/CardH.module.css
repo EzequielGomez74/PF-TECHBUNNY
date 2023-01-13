@@ -81,7 +81,9 @@
 
     .pName{
         display: flex;
-        width: 250px;
+        width: 180px;
+        margin-left: 30px;
+
     }
 
     .pBrand{

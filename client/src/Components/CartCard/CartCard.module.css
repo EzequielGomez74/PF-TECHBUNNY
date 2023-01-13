@@ -67,7 +67,7 @@
 
 @media only screen and (max-width: 800px) {
     .card{
-        width: 420px;
+        width: 370px;
         background-color: white;
         font-family: 'Poppins';
         margin-bottom: 10px;
@@ -87,6 +87,7 @@
     .pBrand{
         padding-top: 8px;
         width: 250px;
+        margin-left: 20px;
     }
     
     .pStock{
