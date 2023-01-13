@@ -51,7 +51,7 @@ function Details() {
       flag.current = false;
     }
     setActive(product.favorite);
-    setStock(product.stock);
+    setStock(product.stock-1);
     setQuantity(1);
   }, [product, reviews, trigger, id]);
 
