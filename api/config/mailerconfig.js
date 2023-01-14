@@ -1,5 +1,4 @@
-//$ CONFIGURACION PARA USAR CON MAILTRAP.IO
-const configmailtrap = {
+const configmailtrap = {                                // CONFIGURACION PARA USAR CON MAILTRAP.IO
   host: "smtp.mailtrap.io",
   port: 2525,
   auth: {
@@ -8,14 +7,13 @@ const configmailtrap = {
   },
 };
 
-//$ CONFIGURACION PARA USAR CON GMAIL
-const configgmail = {
+const configgmail = {                                   // CONFIGURACION PARA USAR CON GMAIL
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    user: "techbunnypf@gmail.com",
-    pass: "eusceaijmmpwfkut",
+    user: "techbunnypf@gmail.com", 
+    pass: "eusceaijmmpwfkut", 
   },
 };
-module.exports = { configgmail, configmailtrap };
+module.exports = {configgmail, configmailtrap};

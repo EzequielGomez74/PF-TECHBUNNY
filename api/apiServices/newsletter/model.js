@@ -14,12 +14,8 @@ module.exports = (sequelize) => {
       },
       email: {
         type: DataTypes.STRING,
-      },
-      subscribed: {
-        type: DataTypes.BOOLEAN,
-        allowNull: true,
-        defaultvalue: true,
-      },
+        
+      }
     },
     {
       timestamps: true,

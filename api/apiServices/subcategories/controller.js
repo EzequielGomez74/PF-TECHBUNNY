@@ -1,4 +1,3 @@
-
 const { SubCategory } = require("../../services/db/db.js");
 
 async function getAllSubcategories() {
@@ -20,4 +19,28 @@ async function getSubcategoryByCategory(category) {
   }
 }
 
-module.exports = { getAllSubcategories, getSubcategoryByCategory };
+async function createSubcategory(subcategory) {
+  try {
+    await SubCategory.findOrCreate(
+      {where:{name:subcategory.name},defaults:{category:subcategory.category}}
+    );
+    return "Subcategory creado con exito!";
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+
+async function deleteSubcategory(subcategoryId) {
+  try {
+    const existe = await SubCategory.findOne({ where: { subcategory_id:subcategoryId }});
+    if (existe) {
+      await SubCategory.update({isActive:false},{ where: { subcategory_id:subcategoryId } });
+      return "Subcategory eliminada con exito!";
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+module.exports = { getAllSubcategories, getSubcategoryByCategory, deleteSubcategory, createSubcategory };

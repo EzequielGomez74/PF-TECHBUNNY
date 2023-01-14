@@ -1,4 +1,4 @@
-const { Product, Favorite } = require("../../services/db/db.js");
+const { Product, Favorite, Category } = require("../../services/db/db.js");
 const {
   productDescriptionParser,
 } = require("../../scripts/productDescriptionParser.js");
@@ -11,6 +11,7 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
+  if (!username) return products;
   if (products) {
     //traer un array de favoritos correspondiente al user que tiene el access token
     const { user_id } = await getUser({ username });
@@ -23,6 +24,7 @@ async function setFavoriteStatus(products, username) {
         productFound.favorite = true;
       }
     });
+
   }
   return products;
 }
@@ -39,10 +41,11 @@ async function getAllProducts(username) {
     };
     const products = await Product.findAll(condition);
     return await setFavoriteStatus([...products], username);
-  } catch (error) {
+  }   catch (error) {
     throw new Error(error.message);
   }
 }
+
 
 async function getAllProductsBy(condition, username) {
   try {
@@ -52,6 +55,7 @@ async function getAllProductsBy(condition, username) {
     throw new Error(error.message);
   }
 }
+
 
 async function getProductById(product_id, username) {
   try {
@@ -66,9 +70,10 @@ async function getProductById(product_id, username) {
   }
 }
 
+
 async function updateProduct(product) {
-  // delete product.createdAt;
-  // delete product.updatedAt; porque eliminan esto? 
+  delete product.createdAt;
+  delete product.updatedAt;
   try {
     await Product.update(
       {
