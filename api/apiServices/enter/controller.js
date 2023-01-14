@@ -146,7 +146,10 @@ async function handleLoginWithAccess(accessToken) {
     if (result) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
-      return { user: accessToken };
+      return {
+        user: foundUser.dataValues,
+        accessToken: foundUser.dataValues.accessToken,
+      };
     } else {
       return { status: "Login Failed" };
     }
@@ -184,7 +187,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "40s" }
+    { expiresIn: "10s" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

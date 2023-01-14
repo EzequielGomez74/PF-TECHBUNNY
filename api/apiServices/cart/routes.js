@@ -7,7 +7,7 @@ const verifyJWT = require("../../middlewares/verifyJWT");
 const router = Router();
 
 //$ Esta ru
-router.use(verifyJWT); // !validacion de JWT
+//router.use(verifyJWT); // !validacion de JWT
 router.get("/:user_id", async (req, res) => {
   try {
     res.status(200).json(await controller.getCart(req.params.user_id));

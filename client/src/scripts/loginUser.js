@@ -21,6 +21,7 @@ const loginUser = async (data, onResponse) => {
         await store.dispatch(setLoggedUser(response.data.user));
       }
       //TODO MANEJAR CALLBACK DE RESPUESTA OK
+      onResponse("SUCCESS");
     } else if (response.data.twoFactor) {
       //? response.data === {twoFactor:true,(tokenId:..pa12.. || (username:"pepe",password:"123"))}
       //generar un pop up para ingresar el codigo que te aparece en el celular

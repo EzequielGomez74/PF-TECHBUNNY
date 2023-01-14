@@ -7,10 +7,15 @@ const {
   OrderProduct,
 } = require("../../services/db/db");
 const prodController = require("../../apiServices/product/controller");
+const cartGenerator = require("./cartGenerator");
 
-const VARIATION = 15; //! 15 % de variacion
+//! SETTINGS
+const VARIATION = 35; //? % de variacion entre el target y los productos que le siguen mas caros
 async function createOrderCarrousel(user_id) {
   try {
+    if (!user_id) user_id = 1;
+    //$ testing
+    await cartGenerator();
     //$ agarro categorias
     let categories = await Category.findAll({ raw: true });
     categories = categories.map((c) => c.name);
@@ -40,7 +45,6 @@ async function createOrderCarrousel(user_id) {
     allProducts = newAllProducts;
     //$ seteo maximo  y transformo los productos mas caros a : su categoria + su posicion relativa
     let categoryCount = 0;
-    //console.log("allProducts ", allProducts);
     allProducts = await Promise.all(
       allProducts.map(async (p, i) => {
         if (!p)
@@ -57,7 +61,6 @@ async function createOrderCarrousel(user_id) {
         };
       })
     );
-    console.log("all products relative ", allProducts);
     //$ calculo el promedio total y seteo ese promedio en las categorias vacias si las hay
     let average;
     if (categoryCount === 0) average = 50;
@@ -75,24 +78,40 @@ async function createOrderCarrousel(user_id) {
     //$ y por cada categoria encuentra un producto mayor al relativePos
     const finalResults = [];
     for (let index = 0; index < 10; index++) {
-      let posibleProducts = findAndGeneratePosibleProducts(allProducts);
-      const choosenProduct = findBestProduct(posibleProducts); //!TERMINAR ESTO
+      let posibleProducts = await findAndGeneratePosibleProducts(allProducts);
+      console.log("posibleProducts ", posibleProducts.length);
+      const choosenProduct = findBestProduct(posibleProducts);
       finalResults.push(choosenProduct);
     }
-    return allProducts;
+    //$ failsafe en caso de que no exista algun producto rellena con un random
+    for (let i = 0; i < finalResults.length; i++) {
+      if (finalResults[i] === null) {
+        console.log(NULL);
+        const all = await Product.findAll();
+        const pos = Math.floor(Math.random() * all.length);
+        finalResults[i].push(all[pos].dataValues);
+      }
+    }
+    //$ get username + setFavoriteStatus
+    //!falta favorite status
+    //const foundUser
+    return finalResults;
   } catch (error) {
     throw new Error(error);
   }
 }
 
-async function findAndGeneratePosibleProducts(arrProductos) {
+//? HELPER FUNCTIONS
+async function findAndGeneratePosibleProducts(arrProducts) {
   //$ tiro random entre 0 y max products
   let productFound = false;
   do {
-    const pos = Math.floor(Math.random() * arrProductos.length);
-    if (!arrProductos[pos].selected) {
+    const pos = Math.floor(Math.random() * arrProducts.length);
+    console.log("Position rolled ", pos);
+    if (!arrProducts[pos].selected) {
+      arrProducts[pos].selected = true;
       productFound = true;
-      const prod = arrProductos[pos];
+      const prod = arrProducts[pos];
       //$ genero un array con productos entre la relativePos y la relativePos + amplitudMaxima
       const allProducts = await Product.findAll({
         where: { category: prod.category },
@@ -110,14 +129,23 @@ async function findAndGeneratePosibleProducts(arrProductos) {
         prod.relativePos + VARIATION
       );
       //$ entre el minValue y el maxValue obtengo todos los productos
-      const results = allProducts.forEach((p) => {
-        if (p.price > minValue && p.price < maxValue) results.push(p);
+      let results = [];
+      console.log("largo ", allProducts.length);
+      allProducts.forEach((p) => {
+        if (p.price > minValue - 1 && p.price <= maxValue) {
+          console.log("found ", p.price);
+          results.push(p);
+        }
       });
       return results;
     }
   } while (!productFound);
 }
-function findBestProduct(posibleProducts) {}
+function findBestProduct(posibleProducts) {
+  const pos = Math.floor(Math.random() * posibleProducts.length);
+  return posibleProducts[pos];
+}
+
 async function getRelativePos(product) {
   const products = await Product.findAll({
     where: { category: product.category },
