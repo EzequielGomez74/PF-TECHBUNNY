@@ -26,6 +26,7 @@ function Feedback() {
         <NavBar />
         <div className={dm ? s.dmfeedbackPage : s.feedbackPage}>
             <p className={dm ? s.dmmessage : s.message}>Proceso Completado</p>
+            {/* Cambiar Hero Image */}
             <div className={dm ? s.dmheroFeedback : s.heroFeedback}></div>
             <button className={dm ? s.dmmainButton : s.mainButton} onClick={handleClick}>Regresar al Home</button>
         </div>
