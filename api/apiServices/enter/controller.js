@@ -1,5 +1,4 @@
 const { User, Op } = require("../../services/db/db.js");
-const { User, Op } = require("../../services/db/db.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
