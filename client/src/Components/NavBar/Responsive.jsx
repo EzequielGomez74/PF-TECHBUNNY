@@ -62,8 +62,6 @@ const Responsive = () => {
 
 )}
 
-
-
     </div> }
   </div>
 }

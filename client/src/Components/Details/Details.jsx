@@ -26,7 +26,7 @@ function Details() {
   const dispatch = useDispatch();
   const history = useHistory();
   const initialLoad = useRef(true);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
@@ -52,15 +52,16 @@ function Details() {
     }
     setActive(product.favorite);
     setStock(product.stock);
+    setQuantity(0);
+    window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     return () => dispatch(actions.cleanDetail());
   }, []);
 
   function removeCartProductsFromProduct() {
-    const productFound = cart.find((p) => product.product_id === p.id);
+    const productFound = cart.find((cart) => cart.product_id === product.product_id );
     console.log(productFound);
     if (productFound) {
       // console.log('Entré')
@@ -136,7 +137,7 @@ function Details() {
   };
 
   const handleMinus = () => {
-    if (quantity > 1) {
+    if (quantity > 0) {
       setQuantity(quantity - 1);
       setStock(stock + 1);
     }

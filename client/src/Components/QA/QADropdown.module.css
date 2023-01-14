@@ -31,3 +31,15 @@
 .DMquestion:hover{
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    
+    .qa{
+        background-color: #D7F136;
+        border-radius: 5px;
+        width: 350px;
+        padding-bottom: 25px;
+        margin: 6px;
+    }
+    
+}

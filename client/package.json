@@ -18,6 +18,7 @@
     "bootstrap": "^5.2.3",
     "dropdown": "^0.2.0",
     "gapi-script": "^1.2.0",
+    "mercadopago": "^1.5.14",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
