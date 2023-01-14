@@ -469,35 +469,6 @@ hr {
   padding-right: 30px;
 }
 
-/* VER SI PUEDE SER QUE SEA "SCOPE" NO HAY CLASSNAME DELIVERY */
-
-/* .dmdelivery {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 30px;
-  padding-top: 15px;
-  padding-bottom: 20px;
-} */
-
-/* .delivery h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  color: #121212;
-}
-
-.delivery div label {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
-  color: #121212;
-} */
-
-
-
 hr {
   border: 0.5px solid #767676;
 }
@@ -596,24 +567,6 @@ hr {
   height: 10px;
 }
 
-/* Estilos de Carrusel */
-/* REVISAR ESTO TAMBIEEEN. EXISTE? */
-/* .carruselSection {
-  max-width: 1450px;
-  margin: auto;
-}
-
-.carrusel {
-  padding-top: 40px;
-}
-
-.currentProducts {
-  display: flex;
-  margin: auto;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
-} */
 
 /* Estilo de Comentarios */
 .dmcommentSection {
