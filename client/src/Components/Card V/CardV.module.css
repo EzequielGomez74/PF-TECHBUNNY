@@ -32,6 +32,14 @@
     cursor: pointer;
 }
 
+.favHeart{
+    color: #D7F136;
+    background: none;
+    border: none;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
 
 
 .img{

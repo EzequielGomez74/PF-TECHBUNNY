@@ -1,0 +1,21 @@
+[
+  {
+    "user_id":1,
+    "product_id":830,
+    "name":"JBL Sound Bar LINK Bar Google Assistant Chromecast 1000w",
+    "brand":"Jbl",
+    "price":125,
+    "image":"https://res.cloudinary.com/dkautckhj/image/upload/v1672963879/TechbunnyAssets/TechBunnyImgs/828.jpg",
+    "stock":12
+    },
+  {
+    "user_id":1,
+    "product_id":32,
+    "name":"JBL Sound Bar LINK Bar Google Assistant Chromecast 1000w",
+    "brand":"Jbl",
+    "price":125,
+    "image":"https://res.cloudinary.com/dkautckhj/image/upload/v1672963879/TechbunnyAssets/TechBunnyImgs/828.jpg",
+    "stock":12
+    }
+    
+]

@@ -11,14 +11,15 @@ import Pagination from "../Pagination/Pagination";
 function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
-
+  //Para usuario registrado
+  let user = useSelector(state => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
   let productsBackup = useSelector((state) => state.filtered);
-  const [filterPanel, setFileterPanel] = useState({
+  const [filterPanel, setFilterPanel] = useState({
     price: "none",
     brand: "none",
   });
@@ -38,6 +39,7 @@ function Category() {
     productBrands.push(productsBackup[i].brand);
   }
 
+  console.log(productBrands);
   let Brands = [];
 
   productBrands.forEach((b) => {
@@ -53,6 +55,10 @@ function Category() {
     if (nameChange.current !== name) {
       initialLoad.current = true;
       nameChange.current = name;
+      setFilterPanel({
+        price: "none",
+        brand: "none",
+      });
     }
     console.log("hola");
     if (initialLoad.current) {
@@ -64,13 +70,19 @@ function Category() {
     console.log("chau");
 
     dispatch(actions.filterByBrand(filterPanel.brand));
-    dispatch(actions.orderByPrice(filterPanel.price));
+    dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
+  useEffect(() => () => dispatch(actions.cleanCategoryProducts()), []);
+
   const handleFiltersChange = (e) => {
-    setFileterPanel({ ...filterPanel, [e.target.id]: e.target.value });
+    setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  }, [currentPage])
 
   return (
     <div className={dm ? s.dmbackground : s.background}>
@@ -116,11 +128,13 @@ function Category() {
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <CardV
+              favorite={e.favorite}
+                user_id={user.user_id}
                 key={e.product_id}
-                id={e.product_id}
+                product_id={e.product_id}
                 brand={e.brand}
                 name={e.name}
-                image={e.image} 
+                image={e.image}
                 price={e.price}
                 category={e.category}
                 subcategory={e.subcategory}

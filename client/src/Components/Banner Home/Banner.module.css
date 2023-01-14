@@ -2,6 +2,7 @@
     background-color: #D7F136;
     display: flex;
     height: 60%;
+    margin: 10px;
 }
 .textBanner h2{
     color: #20232a;
@@ -25,6 +26,7 @@
     height:100%;
     margin-left: 35%;
     margin: 5px;
+    
 }
 
 /* .bannerContainer{
@@ -69,6 +71,7 @@
         margin-left: -20%;
         height:80%;
         transform: translateY(-20px);
+        object-fit: cover;
         
     }
     

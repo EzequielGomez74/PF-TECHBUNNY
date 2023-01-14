@@ -1,5 +1,4 @@
 function productDescriptionParser(description) {
-  console.log("ENTRA");
   const splitDesc = description.split("##");
   const result = [];
   let ulRef;
