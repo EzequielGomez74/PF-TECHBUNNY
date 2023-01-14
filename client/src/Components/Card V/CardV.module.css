@@ -9,10 +9,12 @@
     margin-top: 10px;
     padding-top: 15px;
     padding-bottom: 22px;
-    
-    /* border: solid 1px #000000; */
     border-radius: 0px;
     margin-bottom: 10px;
+}
+
+.card:hover{
+    transform: translateY(-12px);
 }
 
 .iconWrap{

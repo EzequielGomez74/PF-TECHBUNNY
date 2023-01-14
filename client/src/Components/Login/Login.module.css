@@ -10,9 +10,6 @@
   font-family: 'Poppins';
 }
 
-
-
-
 .loginCard {
   background-color: white;
   height: 500px;
@@ -48,6 +45,7 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .m2:hover {
