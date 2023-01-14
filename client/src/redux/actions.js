@@ -334,7 +334,7 @@ export const createOrder = (user_id, pushPayment) => {
       const response = await axiosInstance.post(`/orders/${user_id}`)
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
       console.log(response.data)
-      const orders = await axiosInstance.get(`/orders/${user_id}`)
+      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`)
       console.log(orders.data)
       pushPayment()
       return dispatch({type: CREATE_ORDER, payload: orders.data})
