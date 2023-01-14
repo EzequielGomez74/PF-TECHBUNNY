@@ -10,9 +10,6 @@
   font-family: 'Poppins';
 }
 
-.botongoogle{
-  background-color: red;
-}
 
 
 
@@ -141,6 +138,7 @@
   text-indent: 8px;
   border: none;
   background: #22262A;
+  color: white;
 }
 
 .dmm2 {

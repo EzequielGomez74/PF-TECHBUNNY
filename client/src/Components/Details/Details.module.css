@@ -48,6 +48,7 @@
   padding-right: 30px;
   font-size: 25px;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .heart:hover {
@@ -662,4 +663,57 @@ hr {
   font-weight: 700;
   font-size: 15px;
   line-height: 20px;
+}
+
+@media only screen and (max-width: 500px) {
+  .dmpId {
+    padding-left: 0px;
+  }
+  .dmpName {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .dmquantity {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .dmmainButton {
+    width: 100%;
+  }
+  .dmsubTitles {
+    font-size: 18px;
+  }
+  .dmsubTitles h5 {
+    margin-left: 0px;
+  }
+  .dmsubTitles span {
+    margin-left: 0px;
+  }
+  .dmcommentSection {
+    width: 100%;
+  }
+  .dmallComments {
+    width: 100%;
+  }
+  .dmnewComment {
+    margin-left: 0px;
+  }
+  .dmuserId {
+    margin-left: 0px;
+  }
+  .dmrating {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .dmreview {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .dmcForm {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .dmcForm textarea {
+    width: 100%;
+  }
 }

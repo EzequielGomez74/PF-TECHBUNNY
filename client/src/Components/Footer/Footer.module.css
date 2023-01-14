@@ -75,5 +75,9 @@
         align-items: center;
     }
 
+    .main div h3{
+        text-align: center;
+    }
+
 
 }
