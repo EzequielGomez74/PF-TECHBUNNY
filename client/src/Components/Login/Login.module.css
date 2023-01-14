@@ -91,6 +91,14 @@
   height: 55%;
 }
 
+.error{
+  color:red
+}
+
+.hidden{
+  color:white
+}
+
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
     width: 60%;

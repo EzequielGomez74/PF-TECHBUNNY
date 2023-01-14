@@ -6,6 +6,10 @@ import Footer from "../Footer/Footer";
 import { statusRegister } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import exitosa from '../../Photos/conejofeliz.png'
+import fallida from '../../Photos/conejotriste.png'
+import './Verify.scss'
+
 
 function Verify() {
   const { token } = useParams();
@@ -31,14 +35,23 @@ function Verify() {
     if (status === "SUCCESS") {
       setTimeout(function () {
         history.push("/login");
-      }, 2000);
-      return <div>"Validación éxitosa"</div>;
+      }, 6000);
+      return <div>
+        <img className="imgExitosa" src={exitosa} alt="" />
+        <h1 className="ValidExitosa">Validación éxitosa</h1>
+
+      </div>;
     } else {
       setTimeout(function () {
         history.push("/login");
-      }, 2000);
-      return <div>"Validación fallida"</div>;
+      }, 6000);
+      return <div>
+        <img className="imgFallida" src={fallida} alt="" />
+        <h1 className="ValidFallida">Validación fallida</h1>
+        
+        </div>;
     }
   }
+  <Footer />
 }
 export default Verify;

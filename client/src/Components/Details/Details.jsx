@@ -1,20 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Details.module.css";
 import Carrusel from "../Carrusel/Carrusel";
+import CarruselDetail from "../Carrusel/CarruselDetail";
 import Dropdown from "../Dropdown/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayReview from "./DisplayReview";
 import {
   faHeart,
   faStar,
-  faTruck,
-  faStore,
+  // faTruck,
+  // faStore,
 } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 function Details() {
   const { id } = useParams();
@@ -23,16 +25,20 @@ function Details() {
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
+  const history = useHistory();
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
   const idChange = useRef(id);
+  const user = useSelector((state) => state.loggedUser);
+  let [active, setActive] = useState(product.favorite);
 
   useEffect(() => {
     if (idChange.current !== id) {
       dispatch(actions.getProductById(id));
+      window.scrollTo(0, 0);
       idChange.current = id;
     }
 
@@ -46,18 +52,21 @@ function Details() {
       removeCartProductsFromProduct();
       flag.current = false;
     }
+    setActive(product.favorite);
     setStock(product.stock);
-    console.log("hola detail");
+    setQuantity(1);
   }, [product, reviews, trigger, id]);
 
-  useEffect(() => () => dispatch(actions.cleanDetail()), []);
+  useEffect(() => {
+    return () => dispatch(actions.cleanDetail());
+  }, []);
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
     console.log(productFound);
     if (productFound) {
       // console.log('Entré')
-      product.stock -= productFound.totalQuantity;
+      product.stock -= productFound.count;
     }
   }
 
@@ -69,30 +78,55 @@ function Details() {
       })
     );
   }
+
   function handleAddToCart() {
-    dispatch(
-      actions.addCart({
-        id: product.product_id,
-        brand: product.brand,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        stock: product.stock,
-        totalQuantity: quantity,
-      })
-    );
+    if (!user.user_id) {
+      Swal.fire({
+        title: "¡Alerta!",
+        text: "Para agregar productos al carrito, necesitas ingresar a tu cuenta.",
+        icon: "warning",
+        confirmButtonText: "Iniciar sesión",
+      }).then((response) => {
+        if (response.isConfirmed) history.push("/login");
+      });
+    } else {
+      dispatch(
+        actions.addCart(
+          {
+            // user_id: user.user_id,
+            product_id: product.product_id,
+            // brand: product.brand,
+            product_name: product.name,
+            // image: product.image,
+            price: product.price,
+            // stock: product.stock,
+            count: quantity,
+          },
+          user.user_id
+        )
+      );
+    }
   }
+
   function handleAddToFavorites() {
-    dispatch(
-      actions.addFavorite({
-        id: product.product_id,
-        brand: product.brand,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        stock: product.stock,
-      })
-    );
+    if (!user.user_id) {
+      Swal.fire({
+        title: "¡Alerta!",
+        text: "Para agregar productos a favoritos, necesitas ingresar a tu cuenta.",
+        icon: "warning",
+        confirmButtonText: "Iniciar sesión",
+      }).then((response) => {
+        if (response.isConfirmed) history.push("/login");
+      });
+    } else {
+      dispatch(
+        actions.addFavorite({
+          user_id: user.user_id,
+          product_id: product.product_id,
+        })
+      );
+      setActive(!active);
+    }
   }
   // function removeCartProductsFromProduct(){
   //   const productFound = cart.find((product)=>id === product.product_id)
@@ -143,7 +177,10 @@ function Details() {
         <div className={dm ? s.dmblock : s.block}>
           <div className={dm ? s.dmproductImage : s.productImage}>
             <div className={dm ? s.dmicon : s.icon}>
-              <button className={s.heart} onClick={handleAddToFavorites}>
+              <button
+                className={active ? s.favHeart : s.heart}
+                onClick={handleAddToFavorites}
+              >
                 <FontAwesomeIcon icon={faHeart} />
               </button>
             </div>
@@ -201,7 +238,7 @@ function Details() {
           <span></span>
         </div>
       </div>
-      <Carrusel />
+      <CarruselDetail />
       <br />
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>

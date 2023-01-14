@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
@@ -21,8 +21,19 @@ import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
+import * as actions from "../../redux/actions";
 
 function NavBar() {
+  // Para saber cuantos elementos se agregaron a favoritos
+  const favs = useSelector((state) => state.favorites);
+  const cart = useSelector((state) => state.cart);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const results = useSelector((state) => state.results);
+  //dark mode
+  const dm = useSelector((state) => state.darkMode);
+  const DM = useSelector((state) => state.darkMode);
+
+  const [searchTerm, setSearchTerm] = useState("");
   //para manejar el dropdown
   const [open, setOpen] = useState(false);
   const [closed, setClosed] = useState(true);
@@ -30,10 +41,22 @@ function NavBar() {
   const [closedCat, setClosedCat] = useState(true);
 
   let menuRef = useRef();
+  let favsChange = useRef(favs);
+  let [prueba, setPrueba] = useState(0);
+
+  //Para que al recargar la pagina no se borre la cantidad de favoritos.
+  useEffect(() => {
+    console.log("cualquier cosa");
+    if (loggedUser.user_id) {
+      dispatch(actions.allFavoritesByUser(loggedUser.user_id));
+      dispatch(actions.allCartByUser(loggedUser.user_id));
+      console.log("OTRA COSA");
+    }
+  }, [loggedUser]);
 
   useEffect(() => {
     let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      if (!menuRef.current?.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
@@ -49,17 +72,6 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
-
-  // Para saber cuantos elementos se agregaron a favoritos
-  const favs = useSelector((state) => state.favorites);
-  const cart = useSelector((state) => state.cart);
-  const loggedUser = useSelector((state) => state.loggedUser);
-  const results = useSelector((state) => state.results);
-  //dark mode
-  const dm = useSelector((state) => state.darkMode);
-  const DM = useSelector((state) => state.darkMode);
-
-  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div className={s.navBar}>
@@ -83,30 +95,46 @@ function NavBar() {
               <FontAwesomeIcon icon={dm ? faSun : faMoon} />
             </button>
 
-            <Link to="/favorites">
+            {/* modificarlo por un alert + redirección */}
+            <Link to={loggedUser.user_id ? "/favorites" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
-                &nbsp;&nbsp; {favs.length}
+                &nbsp;&nbsp; {loggedUser.user_id ? favs.length : 0}
               </span>
             </Link>
 
-            <Link to="/cart">
+            <Link to={loggedUser.user_id ? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {cart.length}
+                &nbsp;&nbsp; {loggedUser.user_id ? cart.length : 0}
               </span>
             </Link>
 
-            <span
-              className={DM ? s.DMiconsbtn : s.iconsbtn}
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              <FontAwesomeIcon icon={faUser} />
-              &nbsp;&nbsp;
-              <FontAwesomeIcon icon={faCaretDown} />
-            </span>
+            {!Object.keys(loggedUser).length ? (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                &nbsp;&nbsp;
+                <FontAwesomeIcon icon={faCaretDown} />
+              </span>
+            ) : (
+              <span
+                className={DM ? s.DMiconsbtn : s.iconsbtn}
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <img
+                  className={s.profilePicture}
+                  src={loggedUser.profilePicture}
+                  alt=""
+                />{" "}
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -287,7 +315,7 @@ function NavBar() {
           <h3>BIENVENIDO {loggedUser.username}</h3>
           <span>Para una mejor experiencia</span>
           <ul>
-            <Link to="/login">
+            <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
             <Link to="/login">
