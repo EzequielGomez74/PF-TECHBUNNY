@@ -313,19 +313,16 @@ function NavBar() {
       ) : (
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
           <h3>BIENVENIDO {loggedUser.username}</h3>
-          <span>Para una mejor experiencia</span>
+          <span>Gracias por confiar en TECHBUNNY</span>
           <ul>
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
-            <Link to="/login">
-              <button onClick={() => logoutUser()}>
+            <Link to="/login" onClick={() => logoutUser()}>
                 <DropdownItem
-                  // onClick={() => logOutHandler()}
                   icon={faRightToBracket}
                   text={"Log Out"}
                 />
-              </button>
             </Link>
           </ul>
         </div>

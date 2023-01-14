@@ -8,10 +8,12 @@ const initialState = {
   favorites: [],
   darkMode: false,
   reviews: [],
+  orders:[],
   // searchTerm:'',
   // searchResults:[],
   results: [],
   loggedUser: {},
+  preferences:{}
 };
 
 export default function reducer(state = initialState, action) {
@@ -169,6 +171,21 @@ export default function reducer(state = initialState, action) {
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
+    case 'CREATE_ORDER':
+      return {
+        ...state,
+        orders: action.payload
+      }
+    case 'ALL_ORDERS_BY_USER':
+      return {
+        ...state,
+        orders:action.payload
+      }
+    case "GET_PAYPREFERENCES_BY_ID":
+      return {
+        ...state,
+        preferences: action.payload,
+      };
     default:
       return { ...state };
   }

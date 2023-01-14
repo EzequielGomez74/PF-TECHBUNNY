@@ -11,7 +11,6 @@ import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 function Login() {
-  
   const dispatch = useDispatch();
   const history = useHistory();
   const handleClick = () => {
@@ -43,7 +42,6 @@ function Login() {
       username: login.username,
       password: login.password,
     });
-    history.goBack(); 
     //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
   };
 
