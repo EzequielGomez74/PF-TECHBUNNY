@@ -91,6 +91,8 @@
   height: 55%;
 }
 
+
+
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
     width: 60%;
@@ -141,6 +143,7 @@
   text-indent: 8px;
   border: none;
   background: #22262A;
+  color: white;
 }
 
 .dmm2 {
@@ -177,6 +180,7 @@
   text-transform: uppercase;
 }
 
+
 .dmloginCard button {
   cursor: pointer;
 }
@@ -197,3 +201,4 @@
   width: 60%;
   height: 60%;
 }
+
