@@ -10,10 +10,6 @@
   font-family: 'Poppins';
 }
 
-
-
-
-
 .loginCard {
   background-color: white;
   height: 500px;
@@ -49,6 +45,7 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .m2:hover {
@@ -139,6 +136,7 @@
   text-indent: 8px;
   border: none;
   background: #22262A;
+  color: white;
 }
 
 .dmm2 {
@@ -192,6 +190,6 @@
 }
 
 .dmimg {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
 }

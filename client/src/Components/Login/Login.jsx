@@ -10,6 +10,7 @@ import loginUser from "../../scripts/loginUser";
 import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+
 function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,6 +19,7 @@ function Login() {
   };
   //dark mode
   const dm = useSelector((state) => state.darkMode);
+  const [showError, setShowError] = useState(false);
   const [errors, setErrors] = useState({});
   const [login, setLogin] = useState({
     username: "",
@@ -38,10 +40,26 @@ function Login() {
   };
 
   const handleLogin = (e) => {
-    loginUser({
-      username: login.username,
-      password: login.password,
-    });
+    setShowError(true);
+    //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
+    //if (Object.keys(errors).length === 0) {
+    if (true) {
+      loginUser(
+        {
+          username: login.username,
+          password: login.password,
+        },
+        (status) => {
+          if (status === "CONTRASEÑA INCORRECTA")
+            alert("CONTRASEÑA INCORRECTA");
+          else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
+          else if (status === "SUCCESS") {
+            alert("TE HAS LOGUEADO CON EXITO");
+            history.goBack();
+          }
+        }
+      );
+    }
     //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
   };
 
@@ -63,6 +81,11 @@ function Login() {
             onChange={handleChange}
             placeholder="Usuario"
           />
+          {errors.username && showError ? (
+            <span className={s.error}>{errors.username}</span>
+          ) : (
+            <span className={s.hidden}>a</span>
+          )}
           <input
             type="password"
             name="password"
@@ -70,6 +93,11 @@ function Login() {
             onChange={handleChange}
             placeholder="Contraseña"
           />
+          {errors.password && showError ? (
+            <span className={s.error}>{errors.password}</span>
+          ) : (
+            <span className={s.hidden}>a</span>
+          )}
           <span className={dm ? s.dmm1 : s.m1}>¿Olvidaste tu contraseña?</span>
           <button onClick={handleLogin} className={dm ? s.dmb1 : s.b1}>
             Iniciar Sesión

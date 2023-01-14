@@ -2,7 +2,7 @@
     background-color: transparent;
 }
 .qaSection{
-    background-color: transparent;
+    background-color: rgb(255, 255, 255);
     max-width: 1500px;
     margin: auto;
     display: flex;
@@ -54,4 +54,10 @@
 .dmqaSection div h4{
     display: flex;
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+   
+
+    
 }

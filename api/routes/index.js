@@ -13,6 +13,7 @@ const order = require("../apiServices/order/routes.js");
 const favorite = require("../apiServices/favorite/routes.js");
 const newsletter = require("../apiServices/newsletter/routes.js");
 const verify = require("../apiServices/verify/routes.js");
+const cart = require("../apiServices/cart/routes.js");
 const generateAccesTokenInRequest = require("../middlewares/generateAccesTokenInRequest.js");
 
 //router.use(generateTestUsername);
@@ -30,6 +31,7 @@ router.use("/reviews", review);
 router.use("/orders", order);
 router.use("/users", user);
 router.use("/favorites", favorite);
+router.use("/carts", cart)
 
 //router.use
 

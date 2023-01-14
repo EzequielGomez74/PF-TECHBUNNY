@@ -1,7 +1,9 @@
 .qa{
-    background-color: white;
+    background-color: #D7F136;
+    border-radius: 5px;
     width: 450px;
     padding-bottom: 25px;
+    margin: 6px;
 }
 
 .question:hover{
@@ -28,4 +30,16 @@
 
 .DMquestion:hover{
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .qa{
+        background-color: #D7F136;
+        border-radius: 5px;
+        width: 350px;
+        padding-bottom: 25px;
+        margin: 6px;
+    }
+    
 }
