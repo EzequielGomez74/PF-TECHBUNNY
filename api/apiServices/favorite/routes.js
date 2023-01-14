@@ -3,7 +3,6 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
-const verifyJWT = require("../../middlewares/verifyJWT");
 
 const router = Router();
 

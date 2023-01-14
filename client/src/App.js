@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/feedback" component={Feedback} />
         <Route exact path="*" component={Error} />
-      </Switch>
+       </Switch>
     </div>
   );
 }

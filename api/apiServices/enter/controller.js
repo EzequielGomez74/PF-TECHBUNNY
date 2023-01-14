@@ -1,4 +1,5 @@
 const { User, Op } = require("../../services/db/db.js");
+const { User, Op } = require("../../services/db/db.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailer = require("../../services/mailer/emailer.js");
@@ -13,6 +14,9 @@ async function handleNewUser(data) {
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
+      where: {
+        [Op.or]: [{ username: data.username }, { email: data.email }],
+      },
       where: {
         [Op.or]: [{ username: data.username }, { email: data.email }],
       },
