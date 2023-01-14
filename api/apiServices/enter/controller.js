@@ -16,9 +16,6 @@ async function handleNewUser(data) {
       where: {
         [Op.or]: [{ username: data.username }, { email: data.email }],
       },
-      where: {
-        [Op.or]: [{ username: data.username }, { email: data.email }],
-      },
     });
 
     if (duplicate) return "USERNAME OR EMAIL ALREADY EXIST"; //409 = conflict
