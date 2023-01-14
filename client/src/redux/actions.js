@@ -356,10 +356,14 @@ export const allOrdersByUser = (user_id) => {
 
 //verificar si está bien la función
 export const updateOrderInfoById = (order_id, payInfo) => {
-    return async function () {
+  return async function () {
+    try{
       const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo)
       console.log(userInfo.data)
+    }catch(error){
+      console.log(error)
     }
+  }
 }
 
 

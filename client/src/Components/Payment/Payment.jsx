@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import { useSelector , useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getPayPreferencesById, updateOrderInfoById } from '../../redux/actions'
+import { getPayPreferencesById, updateOrderInfoById, allOrdersByUser } from '../../redux/actions'
 
 function Payment() {
     const dm = useSelector(state => state.darkMode);
@@ -54,9 +54,9 @@ function Payment() {
     
   	async function pay() {
     	try{
-			
-    		dispatch(getPayPreferencesById(1))   
-			dispatch(updateOrderInfoById(1, payInfo))     
+    		dispatch(getPayPreferencesById(orderMp[0].order_id))   
+			dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo))
+			dispatch(allOrdersByUser(user.user_id))    
     	}
     	catch(error) {
       	console.error(error.message)  
