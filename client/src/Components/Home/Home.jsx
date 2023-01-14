@@ -64,7 +64,7 @@ function Home() {
         </div>
       </div>
 
-        <Carrusel/>
+        {/* <Carrusel/> */}
         <Newsletter/>
         <Footer/>
         

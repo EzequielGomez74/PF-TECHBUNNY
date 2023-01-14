@@ -19,7 +19,6 @@ import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
 import SearchBar from "../Search Bar/SearchBar";
 import logo from "../../Photos/loguito.png";
-import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
 import * as actions from "../../redux/actions";
 
@@ -315,7 +314,7 @@ function NavBar() {
           <h3>BIENVENIDO {loggedUser.username}</h3>
           <span>Para una mejor experiencia</span>
           <ul>
-            <Link to="/profile">
+            <Link to="*">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
             <Link to="/login">
