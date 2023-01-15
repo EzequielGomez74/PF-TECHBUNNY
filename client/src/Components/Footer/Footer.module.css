@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.dmfooter{
+    background-color: #1b1d23;
+}
+
 .main{
     max-width: 1500px;
     margin: auto;
@@ -33,6 +37,7 @@
     font-size: 13px;
     line-height: 20px;
     color: #F9F9F9;
+    text-align: left;
 }
 
 .main div p{
@@ -62,12 +67,17 @@
 
 @media only screen and (max-width: 600px) {
     .main div{
-        width: 400px;
+        width: 300px;
         padding-top: 20px;
         padding-bottom: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-}
 
+    .main div h3{
+        text-align: center;
+    }
+
+
+}

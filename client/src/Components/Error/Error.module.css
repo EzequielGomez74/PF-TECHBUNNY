@@ -1,0 +1,114 @@
+.errorPage{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+
+.heroError{
+    height: 338px;
+    width: 400px;
+    background-image: url(../../images/Conejo404.png);
+    background-repeat: no-repeat;
+}
+
+.message{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 45px;
+}
+
+.mainButton{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 360px;
+    height: 45px;
+    background-color: #20232A;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.mainButton:hover{
+    cursor: pointer;
+}
+
+/* Dark mode */
+.dmePage{
+    background-color: #20232A;
+}
+
+.dmerrorPage{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: #20232A;
+}
+
+.dmheroError{
+    height: 338px;
+    width: 400px;
+    background-image: url(../../images/Conejo404.png);
+    background-repeat: no-repeat;
+}
+
+.dmmessage{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 45px;
+    color: #FFFFFF;
+}
+
+.dmmainButton{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 360px;
+    height: 45px;
+    background-color: #D7F136;
+    border: none;
+    color: #20232A;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dmmainButton:hover{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .message{
+        font-size: 18px;
+       }
+   .dmmessage{
+    font-size: 18px;
+   }
+   .mainButton{
+    width: 300px; 
+}
+.dmmainButton{
+    width: 300px; 
+}
+}

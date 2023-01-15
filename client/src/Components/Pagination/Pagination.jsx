@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Pagination.css';
 
 export default function Pagination({productsPerPage, products, paginate, currentPage}){
@@ -13,7 +13,7 @@ export default function Pagination({productsPerPage, products, paginate, current
   
     return(
       <div className="btnPag">
-        <button
+        <button disabled={currentPage === 1}
           onClick={() => 
             paginate(currentPage === 1 ? pageNumbers.length : currentPage -1)}
             > « </button>
@@ -26,9 +26,14 @@ export default function Pagination({productsPerPage, products, paginate, current
           ))
         }
   
-        <button onClick={() => paginate(currentPage === 0 ? currentPage : currentPage + 1)}
+        <button disabled={currentPage === pageNumbers.length} onClick={() => 
+        paginate(currentPage === 0 ? currentPage : currentPage + 1)}
         > » </button>
       </div>
     )
   };
+  
+
+
+  
   

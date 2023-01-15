@@ -1,149 +1,154 @@
-.landing{
-    background-image: url('../../Photos/backgroundLanding2.jpg');
-    margin: 0;
+.landing {
+  background-image: url("../../Photos/imagenfondo3.png");
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.banner {
+  max-width: 45%;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+}
+
+.imgBanner {
+  display: none;
+}
+
+.banner:hover {
+  -webkit-transform: translateY(50%) scale(1.1);
+          transform: translateY(50%) scale(1.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-filter: brightness(1.2) saturate(1.2);
+          filter: brightness(1.2) saturate(1.2);
+}
+
+a {
+  text-decoration: none;
+  color: #20232a;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #d7f136;
+}
+
+.typing-animation {
+  font-size: 17px;
+  font-family: 'Poppins', sans-serif;
+  color: #d7f136;
+  background-color: #20232adc;
+  font-weight: 600;
+  margin-top: 55px;
+  margin: 20px;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-transform: translateY(105%) translateX(1%);
+          transform: translateY(105%) translateX(1%);
+  max-width: 95%;
+}
+
+@-webkit-keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 200vh;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 200vh;
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-animation: typing 3s steps(280, end);
+          animation: typing 3s steps(280, end);
+  -webkit-animation-iteration-count: alternate;
+          animation-iteration-count: alternate;
+  -webkit-animation-duration: 8s;
+          animation-duration: 8s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@media (max-width: 1366px) {
+  .divTitulo {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    max-width: 100%;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    flex-direction: column;
-    top: 0;
-    bottom: 0;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    font-size: 15px;
+  }
 }
 
-
-.landing h1{
-    font-family: 'Poppins', sans-serif;
-    color: #d7f136;
-    align-items: center;
-    margin-top: 230px;
-    background-color: #20232a;
-    border-radius: 5px;
-    width: 25%;
-    margin-left: 40%;
+@media (max-width: 900px) {
+  .divTitulo {
+    font-size: 12px;
+  }
 }
 
-.landing h1:hover{
-    color: #20232a;
-    background-color: #d7f136;
+@media (max-width: 500px) {
+  .landing h1 {
+    width: 200px;
+    margin-left: 15%;
+  }
 }
 
-.divBtn{
+@media only screen and (max-width: 800px) {
+  .banner {
+    max-width: 100%;
+    margin-top: 100px;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  .typing-animation {
+    display: none;
+  }
+  .landing {
+    background-image: 100vh;
+  }
+  .imgBanner {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    margin-top: -100px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 10px;
+    -webkit-transform: translateY(200px) translateX(85px);
+            transform: translateY(200px) translateX(85px);
+  }
 }
-
-.btnLogin{
-    margin-right: -250px;
-    font-family: 'Poppins', sans-serif;
-    color: #20232a;
-    align-items: center;
-    margin-top: 230px;
-    background-color: #d7f136;
-    border-radius: 5px;
-    width: 10%;
-    margin-left: 500px;
-    font-size: 15px;
-    height: 30px;
-}
-
-.btnLogin h2{
-    margin-top: -3px;
-}
-
-.btnLogin:hover{
-    color: #d7f136;
-    background-color: #20232a;
-}
-
-a{
-    text-decoration: none;
-    color: #20232a;
-}
-
-a:hover{
-    text-decoration: none;
-    color: #d7f136;
-}
-
-.btnInv{
-    margin-left: 50px;
-    margin-right: -260px;
-    font-family: 'Poppins', sans-serif;
-    color: #20232a;
-    align-items: center;
-    margin-top: 230px;
-    background-color: #d7f136;
-    border-radius: 5px;
-    width: 10%;
-    margin-left: 520px;
-    font-size: 15px;
-    height: 30px;
-}
-
-.btnInv h2{
-    margin-top: -3px;
-}
-
-.btnInv:hover{
-    color: #d7f136;
-    background-color: #20232a;
-}
-
-@media (max-width: 1366px){
-    .divBtn{
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        align-content: center;
-        max-width: 100%;
-        margin-left: -330px;
-    }
-    
-    .divTitulo{
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        align-content: center;
-        max-width: 100%;
-        width: 100%;
-        font-size: 15px;
-    }
- }
- 
- @media (max-width: 900px){
-    .divTitulo{
-        font-size: 12px;
-    }
-    .btnInv{
-        width: 120px;
-        
-    }
- }
- 
- @media (max-width: 500px){
-     .landing h1{
-        width: 200px;
-        margin-left: 15%;
-
-     }
-     .divBtn{
-        margin-right: 400px;
-        display: flex;
-        flex-direction: column;
-        margin-top: -150px;
-     }
-     .btnLogin{
-        width: 100px;
-        margin-left: 125%;
-     }
-     .btnInv{
-        width: 130px;
-        margin-left: 120%;
-        margin-top: 80px;
-     }
-     
-     
- }
+/*# sourceMappingURL=LandingPage.css.map */

@@ -28,3 +28,81 @@
 .mainButton:hover{
     cursor: pointer;
 }
+
+.none{
+    display: none;
+}
+
+.heroCart{
+    height: 338px;
+    width: 450px;
+    background-image: url(../../images/cart.png);
+}
+
+.message{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+/* DARK MODE */
+
+.dmcartSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: #20232A;
+}
+
+.dmmainButton{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 360px;
+    height: 45px;
+    background-color: #d7f136;
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: solid 1px #000000;
+}
+
+.dmmainButton:hover{
+    cursor: pointer;
+}
+
+.dmnone{
+    display: none;
+}
+
+.dmheroCart{
+    height: 338px;
+    width: 450px;
+    background-image: url(../../images/cart-dm.png);
+}
+
+.dmmessage{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 20px;
+    color: white;
+}
+
+.img {
+    width: 60%;
+    height: 60%;
+   
+}

@@ -6,9 +6,9 @@
     padding-bottom: 15px;
 }
 
-.close{
+.deleteX{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .icon{
@@ -65,7 +65,7 @@
     width: 100px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .card{
         width: 420px;
         background-color: white;

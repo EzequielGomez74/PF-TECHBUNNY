@@ -2,17 +2,23 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faBoxOpen, faBox, faTruckRampBox, faBagShopping, faListCheck, faPhoneVolume, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import s from './Footer.module.css';
+import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 function Footer() {
+
+  //dark mode
+  const dm = useSelector(state => state.darkMode);
+
   return (
-    <div className={s.footer}>
+    <div className={dm ? s.dmfooter : s.footer}>
       <section className={s.main}>
         {/* Maquetado completo. Falta linkear las preguntas frecuentes */}
         <div>
           <h3>SOPORTE</h3>
-          <p><FontAwesomeIcon icon={faComments} /> &nbsp;&nbsp;Preguntas frecuentes</p>
-          <p><FontAwesomeIcon icon={faBox} /> &nbsp;&nbsp; Política de cambios</p>
-          <p><FontAwesomeIcon icon={faBoxOpen} /> &nbsp;&nbsp;Política de devoluciones</p>
+          <Link to='/qa'><p><FontAwesomeIcon icon={faComments} /> &nbsp;&nbsp;Preguntas frecuentes</p></Link>
+          <Link to='/qa'><p><FontAwesomeIcon icon={faBox} /> &nbsp;&nbsp; Política de cambios</p></Link>
+          <Link to='/qa'><p><FontAwesomeIcon icon={faBoxOpen} /> &nbsp;&nbsp;Política de devoluciones</p></Link>
         </div>
         <div>
           <h3>SERVICIOS</h3>

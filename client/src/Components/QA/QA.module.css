@@ -1,0 +1,63 @@
+.qaPage{
+    background-color: transparent;
+}
+.qaSection{
+    background-color: rgb(255, 255, 255);
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-family: 'Poppins';
+    padding-top: 30px;
+    padding-bottom: 70px;
+}
+
+.qaSection h3{
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 45px;
+}
+
+.qaSection div h4{
+    display: flex;
+}
+
+/* Dark Mode */
+.dmqaPage{
+    background-color: #20232A;
+}
+
+.dmqaSection{
+    background-color: transparent;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-family: 'Poppins';
+    padding-top: 30px;
+    padding-bottom: 70px;
+}
+
+.dmqaSection h3{
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 45px;
+    color: white;
+}
+
+.dmqaSection div h4{
+    display: flex;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+   
+
+    
+}

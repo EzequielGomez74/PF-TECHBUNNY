@@ -3,7 +3,6 @@ const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 //const { DB_USER, DB_PASSWORD, DB_HOST } = require("../../config/default.js");
-const { log } = require("console");
 
 /*
  */
@@ -18,7 +17,7 @@ let sequelize =
         }
       )
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        `postgres:${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
           logging: false, // set to console.log to see the raw SQL queries
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -26,7 +25,7 @@ let sequelize =
       );
 
 // const sequelize = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
+//   `postgres:${DB_USER}:${DB_PASSWORD}@${DB_HOST}/techbunny_db`,
 //   {
 //     logging: false, // set to console.log to see the raw SQL queries
 //     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -66,9 +65,12 @@ const {
   Order,
   Product,
   Review,
+  Newsletter,
   SubCategory,
   User,
   OrderProduct,
+  Favorite,
+  Cart
 } = sequelize.models;
 
 // ----> CATEGORY & SUBCATEGORIES
@@ -94,6 +96,26 @@ Order.belongsTo(User, { foreignKey: "user_id" });
 Country.hasMany(User, { foreignKey: "country_id" });
 User.belongsTo(Country, { foreignKey: "country_id" });
 
+User.belongsToMany(Product, {
+  through: Favorite,
+  foreignKey: "user_id",
+});
+Product.belongsToMany(User, {
+  through: Favorite,
+  foreignKey: "product_id",
+});
+
+User.belongsToMany(Product, {
+  through: Cart,
+  foreignKey: "user_id",
+});
+Product.belongsToMany(User,{
+  through: Cart,
+  foreignKey: "product_id"
+})
+
+
+
 module.exports = {
   //...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   db: sequelize,
@@ -103,8 +125,11 @@ module.exports = {
   Brand,
   User,
   Review,
+  Newsletter,
   Country,
   Order,
   OrderProduct,
+  Favorite,
+  Cart,
   Op, // para importart la conexión { conn } = require('./db.js');
 };

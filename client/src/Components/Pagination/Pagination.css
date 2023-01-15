@@ -1,27 +1,66 @@
-.pagination {
+.btnPag {
     display: flex;
     justify-content: space-around;
     margin: 20px;
-    width: 80%;
-    margin-left: 10%;
-    
+    width: 3%;
+    margin-left: 50%;
+}
 
-    
 
-  }
-  
   .btnPag button {
-    border-radius: 15px;
-    background-color: #20232A;
-    color: #D7F136;
-    border-radius: 2px;
+    background-color: #1b1a1a; /* Color de fondo */
+    color: #acc120; /* Color del texto */
+    padding: 12px 20px; /* Espaciado del botón */
+    margin: 8px 0; /* Margen del botón */
+    border: none; /* Sin borde */
+    cursor: pointer; /* cursor de mano */
+    width: 100%; /* ancho completo del boton */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
    
-    margin: 2px;
+  }
+
+  .btnPag.active{
+    background-color: #acc120; /* Color de fondo */
+    color: rgb(0, 0, 0); /* Color del texto */
+    text-align: center;
   }
   
   .btnPag button:hover {
-    background-color: #D7F136;
-    color: #20232A; 
-    transform: translateY(-4px);
-    
+    background-color: #acc120;
+    color: #0b0b0b;
   }
+
+  .btnPag button b{
+    color: #fffbfb;
+  }
+  
+
+
+  @media only screen and (max-width: 600px) {
+    .btnPag{
+      width: 100%;
+    flex-wrap: wrap;
+    margin-left: 0%;
+    }
+     .btnPag button{
+      width: 1px;
+      margin: 1px;
+  }
+
+   .btnPag button b{
+    color: #fffbfb;
+
+  }
+}
+@media only screen and (max-width: 600px) {
+  .btnPag {
+    width: 100%;
+    flex-wrap: wrap;
+    margin-left: 0%;
+  }
+}

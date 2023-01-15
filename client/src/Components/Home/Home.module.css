@@ -2,6 +2,10 @@
     background-color: #F9F9F9;
 }
 
+.dmhome{
+    background-color: #20232a;
+}
+
 .heroSection{
     padding-top: 30px;
     background-color: #D7F136;
@@ -32,6 +36,10 @@
 
 .banners{
     background-color: #F9F9F9;
+}
+
+.dmbanners{
+    background-color: #20232a;
 }
 
 .bannerOne{
@@ -118,6 +126,30 @@
     height: 10px;
 }
 
+.dmsubTitles{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 20px;
+}
+
+.dmsubTitles h5{
+    color: white;
+    margin-left: 30px;
+    display: flex;
+}
+
+.dmsubTitles span{
+    width: 80px;
+    margin-left: 30px;
+    background-color: #D7F136;
+    height: 10px;
+}
+
+
 .d{
     color: aliceblue;
     background-image: url(../../images/bauriculares.png);
@@ -133,4 +165,7 @@
     background-image: url(../../images/bteclado.png);
 }
 
+
+        
+    
 /* Fin de los estilos para la sección del Banner */
