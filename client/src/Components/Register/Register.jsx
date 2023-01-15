@@ -38,8 +38,8 @@ function Register() {
       const response = await axios.post("/enter", user);
       console.log(response.data);
       //!manejar response
-      if (response.data.status === "SUCCES") alert("Registro exitoso");
-      else alert(response.data.status);
+      if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
+      else alert("REGISTRO FALLIDO");
     } catch (error) {
       console.log(error.message);
     }
