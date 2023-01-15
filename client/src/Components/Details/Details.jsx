@@ -30,7 +30,6 @@ function Details() {
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
-  const reviewChange = useRef(reviews.length);
   const user = useSelector((state) => state.loggedUser);
   let [active, setActive] = useState(product.favorite);
 
@@ -82,13 +81,9 @@ function Details() {
       dispatch(
         actions.addCart(
           {
-            // user_id: user.user_id,
             product_id: product.product_id,
-            // brand: product.brand,
             product_name: product.name,
-            // image: product.image,
             price: product.price,
-            // stock: product.stock,
             count: quantity,
           },
           user.user_id
@@ -123,7 +118,7 @@ function Details() {
   //     product.stock -= productFound.stock
   // }
   const handlePlus = () => {
-    if (quantity < product.stock) {
+    if (quantity < product.stock && stock > 0) {
       setQuantity(quantity + 1);
       setStock(stock - 1);
     }
