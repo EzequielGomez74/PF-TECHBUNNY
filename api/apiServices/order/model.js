@@ -53,7 +53,6 @@
       },
     },
     {
-    {
       timestamps: true,
       createdAt: true,
       updatedAt: true,

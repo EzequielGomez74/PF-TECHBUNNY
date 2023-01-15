@@ -23,11 +23,6 @@ function Details() {
   const reviews = useSelector((state) => state.reviews);
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
-  const { id } = useParams();
-  const product = useSelector((state) => state.detail);
-  const reviews = useSelector((state) => state.reviews);
-  const cart = useSelector((state) => state.cart);
-  const dm = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const history = useHistory();
   const initialLoad = useRef(true);
@@ -155,30 +150,16 @@ function Details() {
         );
       case "p":
         return <p>{value}</p>;
-      case "ul":
-        return (
-          <ul>
-            {value.map((data) => {
-              return <li>{data}</li>;
-            })}
-          </ul>
-        );
-      case "p":
-        return <p>{value}</p>;
       default:
         return <br />;
     }
   });
-  });
 
   // Inicio de Lógica Comentarios
-  // Inicio de Lógica Comentarios
 
-  // Fin de Lógica Comentarios
   // Fin de Lógica Comentarios
 
   return (
-    <div className={dm ? s.dmdetailPage : s.detailPage}>
     <div className={dm ? s.dmdetailPage : s.detailPage}>
       <NavBar />
       <section className={dm ? s.dmproductDetails : s.productDetails}>
@@ -193,11 +174,9 @@ function Details() {
               </button>
             </div>
             <div className={dm ? s.dmimgP : s.imgP}>
-            <div className={dm ? s.dmimgP : s.imgP}>
               <img src={product.image} alt={product.product_id} />
             </div>
           </div>
-          <div className={dm ? s.dmproductInfo : s.productInfo}>
           <div className={dm ? s.dmproductInfo : s.productInfo}>
             <div>
               <Dropdown description={description} />
@@ -218,32 +197,12 @@ function Details() {
             ) : (
               <span>Sin puntuación</span>
             )}
-        <div className={dm ? s.dmproductCart : s.productCart}>
-          <span className={dm ? s.dmpId : s.pId}>
-            ID Producto: {product.product_id}{" "}
-          </span>
-          <h2 className={dm ? s.dmpBrand : s.pBrand}>{product.brand}</h2>
-          <h1 className={dm ? s.dmpName : s.pName}>{product.name}</h1>
-          <div className={dm ? s.dmpScore : s.pScore}>
-            {reviews && reviews.length ? (
-              new Array(product.rating)
-                .fill(undefined)
-                .map((ele, idx) => <FontAwesomeIcon icon={faStar} key={idx} />)
-            ) : (
-              <span>Sin puntuación</span>
-            )}
           </div>
-
 
           <hr />
           <h2 className={dm ? s.dmprice : s.price}>US${product.price}</h2>
           <div className={dm ? s.dmquantity : s.quantity}>
-          <h2 className={dm ? s.dmprice : s.price}>US${product.price}</h2>
-          <div className={dm ? s.dmquantity : s.quantity}>
             <div>
-              <button onClick={handleMinus}>-</button>&nbsp;&nbsp;&nbsp;&nbsp;
-              {quantity}&nbsp;&nbsp;&nbsp;&nbsp;
-              <button onClick={handlePlus}>+</button>
               <button onClick={handleMinus}>-</button>&nbsp;&nbsp;&nbsp;&nbsp;
               {quantity}&nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={handlePlus}>+</button>
@@ -251,17 +210,7 @@ function Details() {
             <span className={dm ? s.dmstock : s.stock}>
               &nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {stock}{" "}
             </span>
-            <span className={dm ? s.dmstock : s.stock}>
-              &nbsp;&nbsp;&nbsp;&nbsp;Stock disponible: {stock}{" "}
-            </span>
           </div>
-          <button
-            type="submit"
-            className={dm ? s.dmmainButton : s.mainButton}
-            onClick={handleAddToCart}
-          >
-            Agregar al Carrito
-          </button>
           <button
             type="submit"
             className={dm ? s.dmmainButton : s.mainButton}
@@ -274,17 +223,12 @@ function Details() {
 
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
-      <div className={dm ? s.dmsub : s.sub}>
-        <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Recomendados</h5>
           <span></span>
         </div>
       </div>
       <Carrusel />
-      <Carrusel />
       <br />
-      <div className={dm ? s.dmsub : s.sub}>
-        <div className={dm ? s.dmsubTitles : s.subTitles}>
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
           <h5>Comentarios</h5>
@@ -296,15 +240,9 @@ function Details() {
         product_id={parseInt(id)}
         handlePost={handlePost}
       />
-      <DisplayReview
-        reviews={reviews}
-        product_id={parseInt(id)}
-        handlePost={handlePost}
-      />
       <br />
       <Footer />
     </div>
-  );
   );
 }
 

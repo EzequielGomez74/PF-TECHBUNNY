@@ -51,8 +51,6 @@ function CartCard({ user_id ,product_id, brand, product_name, image, price, stoc
                         <button onClick={handleMinus} ><FontAwesomeIcon icon={faMinus} /></button>
                         &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
                         <button onClick={handlePlus} ><FontAwesomeIcon icon={faPlus} /></button>
-                        &nbsp;&nbsp;&nbsp;&nbsp; {quantity} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button onClick={handlePlus} ><FontAwesomeIcon icon={faPlus} /></button>
                     </div>
                     <span className={s.pPrice}>US${price * quantity}</span>
                 </div>

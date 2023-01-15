@@ -28,8 +28,6 @@ router.use("/brands", brand);
 router.use("/countries", country);
 router.use("/products", products);
 router.use("/reviews", review);
-router.use("/products", products);
-router.use("/reviews", review);
 router.use("/orders", order);
 router.use("/users", user);
 router.use("/favorites", favorite);
