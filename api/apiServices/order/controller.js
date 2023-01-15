@@ -45,7 +45,7 @@ async function createOrder(user_id) {
           price: product.price,
         },
       });
-      const actual = await Product.findByPk(product.product_id)    //$ ACTUALIZA EL STOCK DEL PRODUCTO    (line 49-50)
+      const actual = await Product.findByPk(product.product_id)    //$ ACTUALIZA EL STOCK DEL PRODUCTO    (es linea y la prox)
       await Product.update({ stock: actual.dataValues.stock - product.dataValues.count }, { where: { product_id: product.product_id } })
     });
     await Order.update(
