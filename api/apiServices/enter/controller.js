@@ -42,7 +42,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
     throw new Error("Username and Password are required");
   try {
     let foundUser = await User.findOne({ where: { username: username } });
-    if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
+    if (!foundUser) return "USUARIO INEXISTENTE"; //401 = unauthorized
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
