@@ -1,10 +1,22 @@
 .detailPage {
   background-color: #f9f9f9;
   font-family: "Poppins";
+.detailPage {
+  background-color: #f9f9f9;
+  font-family: "Poppins";
 }
 
 /* Estilo de Producto */
 
+.productDetails {
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 40px;
+  padding-bottom: 40px;
 .productDetails {
   max-width: 1500px;
   margin: auto;
@@ -19,8 +31,17 @@
 .block {
   display: flex;
   flex-direction: column;
+.block {
+  display: flex;
+  flex-direction: column;
 }
 
+.productImage {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  width: 980px;
+  height: 610px;
 .productImage {
   display: flex;
   flex-direction: column;
@@ -32,8 +53,16 @@
 .icon {
   display: flex;
   justify-content: flex-end;
+.icon {
+  display: flex;
+  justify-content: flex-end;
 }
 
+.imgP {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 540px;
 .imgP {
   display: flex;
   justify-content: center;
@@ -68,8 +97,14 @@
 .productImage img {
   width: 400px;
   height: auto;
+.productImage img {
+  width: 400px;
+  height: auto;
 }
 
+.productInfo {
+  background: #ffffff;
+  width: 980px;
 .productInfo {
   background: #ffffff;
   width: 980px;
@@ -93,8 +128,26 @@
   line-height: 20px;
   color: #717171;
   padding-left: 30px;
+.pId {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  display: flex;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 20px;
+  color: #717171;
+  padding-left: 30px;
 }
 
+.pBrand {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #222222;
 .pBrand {
   font-style: normal;
   font-weight: 600;
@@ -124,8 +177,21 @@
   padding-left: 30px;
   padding-top: 15px;
   padding-bottom: 20px;
+.delivery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 30px;
+  padding-top: 15px;
+  padding-bottom: 20px;
 }
 
+.delivery h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #121212;
 .delivery h3 {
   font-style: normal;
   font-weight: 600;
@@ -140,8 +206,16 @@
   font-size: 15px;
   line-height: 20px;
   color: #121212;
+.delivery div label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #121212;
 }
 
+hr {
+  border: 1px solid #f6f5fa;
 hr {
   border: 1px solid #f6f5fa;
 }
@@ -151,8 +225,23 @@ hr {
   flex-direction: column;
   margin-left: 50px;
   margin-right: 50px;
+.quantity {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
+.price {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000000;
 .price {
   padding-top: 20px;
   padding-bottom: 10px;
@@ -174,13 +263,32 @@ hr {
   border: none;
   font-size: 15px;
   transition: 0.5s;
+.quantity div button {
+  width: 30px;
+  height: 45px;
+  background: #f6f5fa;
+  color: #20232a;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  transition: 0.5s;
 }
 
 .quantity div button:hover {
   background: #20232a;
   color: #f6f5fa;
+.quantity div button:hover {
+  background: #20232a;
+  color: #f6f5fa;
 }
 
+.stock {
+  padding-top: 15px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 20px;
+  color: #717171;
 .stock {
   padding-top: 15px;
   font-style: normal;
@@ -203,12 +311,32 @@ hr {
   line-height: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
+.mainButton {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 360px;
+  height: 45px;
+  background-color: #20232a;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .mainButton:hover {
   cursor: pointer;
+.mainButton:hover {
+  cursor: pointer;
 }
 
+.sub {
+  max-width: 1500px;
+  height: 70px;
+  margin: auto;
+  margin-bottom: 15px;
 .sub {
   max-width: 1500px;
   height: 70px;
@@ -224,13 +352,29 @@ hr {
   font-weight: 600;
   font-size: 22px;
   line-height: 20px;
+.subTitles {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 20px;
 }
 
 .subTitles h5 {
   margin-left: 30px;
   display: flex;
+.subTitles h5 {
+  margin-left: 30px;
+  display: flex;
 }
 
+.subTitles span {
+  width: 80px;
+  margin-left: 30px;
+  background-color: #d7f136;
+  height: 10px;
 .subTitles span {
   width: 80px;
   margin-left: 30px;
@@ -242,8 +386,13 @@ hr {
 .carruselSection {
   max-width: 1450px;
   margin: auto;
+.carruselSection {
+  max-width: 1450px;
+  margin: auto;
 }
 
+.carrusel {
+  padding-top: 40px;
 .carrusel {
   padding-top: 40px;
 }
@@ -254,9 +403,24 @@ hr {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
+.currentProducts {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 /* Estilo de Comentarios */
+.commentSection {
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 40px;
+  padding-bottom: 70px;
 .commentSection {
   max-width: 1500px;
   margin: auto;
@@ -283,8 +447,19 @@ hr {
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
+.allComments h5 {
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
 }
 
+.newComment {
+  padding-top: 10px;
 .newComment {
   padding-top: 10px;
 }
@@ -296,8 +471,19 @@ hr {
   font-weight: 600;
   font-size: 15px;
   line-height: 20px;
+.userId {
+  display: flex;
+  margin-left: 30px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
 }
 
+.rating {
+  display: flex;
+  margin-left: 30px;
+  margin-right: 30px;
 .rating {
   display: flex;
   margin-left: 30px;
@@ -313,12 +499,27 @@ hr {
   font-size: 14px;
   line-height: 20px;
   padding-bottom: 10px;
+.review {
+  display: flex;
+  margin-left: 30px;
+  margin-right: 30px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  padding-bottom: 10px;
 }
 
 .noReview {
   margin-top: 25px;
+.noReview {
+  margin-top: 25px;
 }
 
+.cForm {
+  margin-top: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
 .cForm {
   margin-top: 40px;
   margin-left: 30px;
@@ -335,8 +536,20 @@ hr {
   text-indent: 15px;
   background-color: #f6f5fa;
   resize: none;
+.cForm textarea {
+  display: flex;
+  width: 1380px;
+  margin-top: 20px;
+  border: none;
+  font-family: "Poppins";
+  padding-top: 10px;
+  text-indent: 15px;
+  background-color: #f6f5fa;
+  resize: none;
 }
 
+.cForm div {
+  display: flex;
 .cForm div {
   display: flex;
 }
@@ -346,8 +559,36 @@ hr {
   font-weight: 700;
   font-size: 15px;
   line-height: 20px;
+.cForm div label {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
 }
 
+@media only screen and (max-width: 800px) {
+  .productImage {
+    width: 420px;
+  }
+
+  .productInfo {
+    width: 420px;
+    margin-bottom: 30px;
+  }
+
+  .noReview {
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 14px;
+  }
+
+  .allComments {
+    width: 420px;
+  }
+
+  .cForm textarea {
+    width: 350px;
+  }
 @media only screen and (max-width: 800px) {
   .productImage {
     width: 420px;

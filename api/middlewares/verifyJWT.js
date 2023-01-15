@@ -10,6 +10,8 @@ function verifyJWT(req, res, next) {
     //forbidden invalid token
     req.username = decoded.username;
     req.role = decoded.role;
+    req.username = decoded.username;
+    req.role = decoded.role;
     next();
   });
 }

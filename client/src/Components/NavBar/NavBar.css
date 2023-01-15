@@ -10,6 +10,11 @@
   height: 74%;
   
 }
+.logo {
+  width: 6%;
+  height: 74%;
+  
+}
 
  .dropdown-menu{
     position: absolute;
@@ -78,6 +83,7 @@
   .dropdown-menu-cat{
     position: absolute;
     top: 120px;
+    right: 460px;
     right: 460px;
     background-color: #22262a;
     border-radius: var(--border-radius);

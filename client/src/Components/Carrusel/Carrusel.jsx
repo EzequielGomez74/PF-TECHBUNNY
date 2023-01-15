@@ -191,3 +191,4 @@ const products = [
 }
 
 export default Carrusel
+export default Carrusel

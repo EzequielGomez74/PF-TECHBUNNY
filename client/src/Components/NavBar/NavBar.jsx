@@ -11,6 +11,19 @@ import {
   faUserPlus,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import s from "./NavBar.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMoon,
+  faHeart,
+  faCartShopping,
+  faUser,
+  faCaretDown,
+  faRightToBracket,
+  faUserPlus,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -57,19 +70,27 @@ function NavBar() {
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
         setClosedCat(false);
+      }
       }
     };
 
     document.addEventListener("mousedown", handler);
 
     return () => {
+
+    return () => {
       document.removeEventListener("mousedown", handler);
     };
+    };
   });
+
+  let dispatch = useDispatch();
 
   let dispatch = useDispatch();
  
@@ -287,6 +308,8 @@ function NavBar() {
 
       {/* USUARIO REGISTRADO */}
       {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+      {/* USUARIO REGISTRADO */}
+      {/* <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
                     <h3>NOMBRE USUARIO</h3>
                     <span>Bienvenido/a a TECHBUNNY</span>
                     <ul>
@@ -347,7 +370,29 @@ function NavBar() {
             })
           : null}
       </div>
+      )}
+
+      <div className="search1">
+        {searchTerm.length && results.length
+          ? results.map((p, i) => {
+              if (i < 7)
+                return (
+                  <div className="hola123">
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <img className="imgsearch" src={p.image} alt={p.name} />
+                    </Link>
+                    <Link to={`/detail/${p.product_id}`}>
+                      {" "}
+                      <span className="NameSearch"> {p.name} </span>{" "}
+                    </Link>
+                  </div>
+                );
+            })
+          : null}
+      </div>
     </div>
+  );
   );
 }
 
@@ -359,8 +404,22 @@ function DropdownItem(props) {
       <a>{props.text}</a>
     </li>
   );
+function DropdownItem(props) {
+  return (
+    <li className={s.dropdownItem}>
+      {/* <img src={props.img}></img> */}
+      <FontAwesomeIcon icon={props.icon} />
+      <a>{props.text}</a>
+    </li>
+  );
 }
 
+function DropdownItemCat(props) {
+  return (
+    <li className={s.dropdownItem}>
+      <a>{props.text}</a>
+    </li>
+  );
 function DropdownItemCat(props) {
   return (
     <li className={s.dropdownItem}>

@@ -1,7 +1,16 @@
 .navBar{
   display: flex;
   flex-direction: column; 
+  flex-direction: column; 
   font-family: 'Poppins', sans-serif;
+}
+
+.navResponsive{
+  display: none;
+}
+
+.dmnavResponsive{
+  display: none;
 }
 
 .navResponsive{
@@ -82,7 +91,15 @@
   justify-content: center;
   margin-bottom: 0px;
   margin-top: 0px;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
+
 
 .two div p a{
   color: black;
@@ -141,6 +158,17 @@ a {
   cursor: pointer;
 }
 
+
+.two div a:hover{
+  color: #7e7e7e;
+  cursor: pointer;
+}
+
+.two div p:hover{
+  color: #7e7e7e;
+  cursor: pointer;
+}
+
 h3{
   width: 100%;
   text-align: center;
@@ -155,9 +183,18 @@ h3{
 }
 
 .iconsbtn{
+.iconsbtn{
   font-size: 14px;
   font-weight: 400;
   color: #20232a;
+}
+
+.btnMoon{
+  border: none;
+  background-color: transparent;
+  color: #20232a;
+  cursor: pointer;
+  padding: 12px;
 }
 
 .btnMoon{
@@ -254,7 +291,177 @@ h3{
       line-height: 16px;
       color: white;
     }
+    /* DARK MODE  */
+    .dmnavResponsive{
+      display: flex;
+      background-color: #1B1D23;
+      margin: auto;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
   
+    .dmnavResponsive h4{
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 16px;
+      color: white;
+    }
+  
+    .one {
+      display:none;
+    }
+    .two {
+      display:none;
+    }
+    .three{
+      display: none;
+    } 
+    .DMone {
+      display:none;
+    }
+    .DMtwo {
+      display:none;
+    }
+    .DMthree {
+      display:none;
+    }
+  }
+
+  /* DARK MODE COMPLETO */
+
+  .DMnavResponsive{
+    display: none;
+  }
+
+  .DMone div{
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    height: 75px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #1b1d23;
+  }
+
+  .DMone div h1 a{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 16px;
+    color: black;
+  }
+
+  .DMone div h1 a{
+    color: white;
+  }
+
+  .DMtwo{
+    cursor: pointer;
+  }
+
+  .DMtwo div {
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #1B1D23;
+  }
+
+  .DMtwo div p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .DMtwo div p a{
+    color: white;
+  }
+  
+  .DMtwo .categorias{
+    cursor: pointer;
+  }
+
+  .DMthree{
+    background-color: #fefefe;
+  }
+  
+  .DMthree div {
+    max-width: 1500px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .DMthree div p{
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    transition: 0.5s;
+  }
+
+  .DMthree div p:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .DMtwo div p{
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .DMtwo div a:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .DMtwo div p:hover{
+    color: #D7F136;
+    cursor: pointer;
+  }
+
+  .DMiconsbtn{
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+  }
+
+  .DMbtnMoon{
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 12px;
+  }
     .one {
       display:none;
     }

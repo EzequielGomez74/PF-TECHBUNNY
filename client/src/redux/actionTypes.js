@@ -33,3 +33,4 @@ export const CLEAN_CATEGORY_PRODUCTS = "CLEAN_CATEGORY_PRODUCTS";
 export const CLEAN_FAVORITES = "CLEAN_FAVORITES";
 
 //Faltan actions
+

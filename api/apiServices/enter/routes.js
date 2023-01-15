@@ -1,17 +1,26 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
+const validate = require("../../scripts/bodyValidators/index.js");
 
 const router = Router();
 //NEW USER
 router.post("/", async (req, res) => {
   const data = req.body;
+  const data = req.body;
   try {
+    res.status(200).json(await controller.handleNewUser(data));
     res.status(200).json(await controller.handleNewUser(data));
   } catch (error) {
     res.status(400).json(error.message);
+    res.status(400).json(error.message);
   }
 });
+
+// PARAMS /enter/login   /enter/logout  /enter/recover
+router.put("/:accessType", async (req, res) => {
+  console.log("enter-login");
+  const { accessType } = req.params;
 
 // PARAMS /enter/login   /enter/logout  /enter/recover
 router.put("/:accessType", async (req, res) => {
@@ -67,5 +76,6 @@ router.put("/:accessType", async (req, res) => {
     res.status(400).json(error.message);
   }
 });
+
 
 module.exports = router;

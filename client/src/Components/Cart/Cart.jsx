@@ -35,6 +35,8 @@ function Cart() {
       <NavBar />
       <section className={dm ? s.dmcartSection : s.cartSection}>
           {cart.length ?
+      <section className={dm ? s.dmcartSection : s.cartSection}>
+          {cart.length ?
           <div>
             <div>
               {cart.map(p => <CartCard 
@@ -51,6 +53,8 @@ function Cart() {
             </div>
               <p className={dm ? s.dmmessage : s.message}>¡Todavía no has agregado productos a tu carrito!</p>
           </div>
+          
+          }
           
           }
       </section>

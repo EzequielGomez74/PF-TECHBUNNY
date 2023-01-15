@@ -10,6 +10,18 @@ import axios from "axios";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
+import React, { useState } from "react";
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
+import s from "./Register.module.css";
+import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+import Control from "./Control";
+import img from "../../Photos/bunnylogin.png";
 
 function Register() {
   const [showError, setShowError] = useState(false);
@@ -128,6 +140,9 @@ function Register() {
       <Footer />
     </div>
   );
+  );
 }
+
+export default Register;
 
 export default Register;

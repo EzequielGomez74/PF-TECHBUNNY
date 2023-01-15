@@ -11,15 +11,31 @@
   },
   {
     "username": "beto",
+    "username": "anonimo",
+    "name": "Anonimus",
+    "surname": "without",
+    "password": "anonimoforever",
+    "email": "aaa@aaa.gmail.com",
+    "defaultShippingAddress": "av siempre viva 742",
+    "zipCode": 7600,
+    "isActive": true
+  },
+  {
+    "username": "beto",
     "name": "Beto",
     "surname": "Martinez",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
     "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
     "email": "a@a.gmail.com",
     "defaultShippingAddress": "password 123",
     "zipCode": 7600,
     "isActive": true
+    "defaultShippingAddress": "password 123",
+    "zipCode": 7600,
+    "isActive": true
   },
   {
+    "username": "Santilocura",
     "username": "Santilocura",
     "name": "Santi",
     "surname": "Larrique",
@@ -28,8 +44,11 @@
     "defaultShippingAddress": "Colon 5432",
     "zipCode": 11200,
     "isActive": true
+    "zipCode": 11200,
+    "isActive": true
   },
   {
+    "username": "Emilocura",
     "username": "Emilocura",
     "name": "Emi",
     "surname": "Hernandez",

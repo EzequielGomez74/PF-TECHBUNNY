@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import * as actions from "../../redux/actions";
 import * as actions from "../../redux/actions";
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
+import s from "./Category.module.css";
+import Pagination from "../Pagination/Pagination";
 import s from "./Category.module.css";
 import Pagination from "../Pagination/Pagination";
 
@@ -34,7 +38,20 @@ function Category() {
   let paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  let paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
+  for (let i = 0; i < productsBackup.length; i++) {
+    productBrands.push(productsBackup[i].brand);
+  }
+
+  console.log(productBrands);
+  let Brands = [];
+
+  productBrands.forEach((b) => {
+    if (!Brands.includes(b)) {
+      Brands.push(b);
   for (let i = 0; i < productsBackup.length; i++) {
     productBrands.push(productsBackup[i].brand);
   }
@@ -50,6 +67,10 @@ function Category() {
 
   let initialLoad = useRef(true);
   let nameChange = useRef(name);
+  });
+
+  let initialLoad = useRef(true);
+  let nameChange = useRef(name);
 
   useEffect(() => {
     if (nameChange.current !== name) {
@@ -59,7 +80,21 @@ function Category() {
         price: "none",
         brand: "none",
       });
+  useEffect(() => {
+    if (nameChange.current !== name) {
+      initialLoad.current = true;
+      nameChange.current = name;
+      setFilterPanel({
+        price: "none",
+        brand: "none",
+      });
     }
+    console.log("hola");
+    if (initialLoad.current) {
+      dispatch(actions.getCategories());
+      dispatch(actions.getProductsByCategory(name));
+      initialLoad.current = false;
+      return;
     console.log("hola");
     if (initialLoad.current) {
       dispatch(actions.getCategories());
@@ -84,6 +119,27 @@ function Category() {
     window.scrollTo(0, 0);
   }, [currentPage])
 
+  return (
+    <div className={dm ? s.dmbackground : s.background}>
+      <NavBar />
+      <div className={s.categoryPage}>
+        <div className={s.selectors}>
+          <select
+            name="brand"
+            // value={active.brand}
+            id="brand"
+            onChange={(e) => handleFiltersChange(e)}
+          >
+            <option value="none" selected className={s.option}>
+              Filtrar por marcas
+            </option>
+            {Brands &&
+              Brands.map((brand, i) => (
+                <option className={s.option} key={i} value={brand}>
+                  {brand}
+                </option>
+              ))}
+          </select>
   return (
     <div className={dm ? s.dmbackground : s.background}>
       <NavBar />

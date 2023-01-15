@@ -1,4 +1,5 @@
 const { Product, Favorite } = require("../../services/db/db.js");
+const { Product, Favorite } = require("../../services/db/db.js");
 const {
   productDescriptionParser,
 } = require("../../scripts/productDescriptionParser.js");
@@ -7,6 +8,7 @@ const {
   productDescriptionToString,
 } = require("../../scripts/productDescriptionToString.js");
 
+const getUser = require("../../scripts/getUser");
 const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
@@ -40,20 +42,26 @@ async function getAllProducts(username) {
     };
     const products = await Product.findAll(condition);
     return await setFavoriteStatus([...products], username);
+    return await setFavoriteStatus([...products], username);
   } catch (error) {
+    throw new Error(error.message);
     throw new Error(error.message);
   }
 }
 
 async function getAllProductsBy(condition, username) {
+async function getAllProductsBy(condition, username) {
   try {
     let products = await Product.findAll({ where: condition });
     return await setFavoriteStatus(products, username);
+    return await setFavoriteStatus(products, username);
   } catch (error) {
+    throw new Error(error.message);
     throw new Error(error.message);
   }
 }
 
+async function getProductById(product_id, username) {
 async function getProductById(product_id, username) {
   try {
     let product = await Product.findByPk(product_id);
@@ -61,8 +69,10 @@ async function getProductById(product_id, username) {
     let newProduct = await setFavoriteStatus(arr, username);
     const newObj = { ...newProduct[0].dataValues };
     newObj.description = productDescriptionParser(newObj.description);
+    console.log("pasa");
     return newObj;
   } catch (error) {
+    throw new Error(error.message);
     throw new Error(error.message);
   }
 }
@@ -76,6 +86,7 @@ async function updateProduct(product) {
         //buscar forma de destructurar toda la data
         ...product,
         description: product.description,
+        description: product.description,
       },
       {
         where: {
@@ -85,6 +96,7 @@ async function updateProduct(product) {
     );
     return "Producto actualizado con exito!";
   } catch (error) {
+    throw new Error(error.message);
     throw new Error(error.message);
   }
 }
@@ -96,6 +108,7 @@ async function createProduct(product) {
       {
         ...product,
         description: product.description,
+        description: product.description,
       }
     );
     return "Producto creado con exito!";
@@ -105,11 +118,13 @@ async function createProduct(product) {
 }
 
 async function deleteProduct(product_id) {
+async function deleteProduct(product_id) {
   try {
     await Product.update(
       { active: false },
       {
         where: {
+          product_id,
           product_id,
         },
       }

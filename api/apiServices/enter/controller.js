@@ -10,6 +10,9 @@ require("dotenv").config();
 async function handleNewUser(data) {
   if (!data.username || !data.password || !data.email)
     throw new Error("Username and Password and email are required");
+async function handleNewUser(data) {
+  if (!data.username || !data.password || !data.email)
+    throw new Error("Username and Password and email are required");
   //Buscar usernames duplicados en DB
   try {
     const duplicate = await User.findOne({
@@ -21,12 +24,18 @@ async function handleNewUser(data) {
     if (duplicate) return "USERNAME OR EMAIL ALREADY EXIST"; //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
+    const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
+    console.log("pass", hashedPwd);
     console.log("pass", hashedPwd);
     const newUser = {
       ...data,
+      ...data,
       password: hashedPwd,
     };
+    //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
+    //GENERARA TOKEN Y GUARDAR EN DB
+    //GENERA VERYFICATION CODE
     //TODO manejar el caso de que al user se le caduque el token y quiera solicitar uno nuevo
     //GENERARA TOKEN Y GUARDAR EN DB
     //GENERA VERYFICATION CODE
@@ -154,6 +163,7 @@ async function handleLoginWithAccess(accessToken) {
       return { status: "Login Failed" };
     }
   } catch (error) {
+    throw new Error(error);
     throw new Error(error);
   }
 }
