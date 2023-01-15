@@ -10,6 +10,12 @@
   font-family: 'Poppins';
 }
 
+.botongoogle{
+  background-color: red;
+}
+
+
+
 .loginCard {
   background-color: white;
   height: 500px;
@@ -45,7 +51,6 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
-  padding-bottom: 20px;
 }
 
 .m2:hover {
@@ -84,6 +89,14 @@
 .img {
   width: 55%;
   height: 55%;
+}
+
+.error{
+  color:red
+}
+
+.hidden{
+  color:white
 }
 
 @media only screen and (max-width: 500px) {
@@ -136,7 +149,6 @@
   text-indent: 8px;
   border: none;
   background: #22262A;
-  color: white;
 }
 
 .dmm2 {

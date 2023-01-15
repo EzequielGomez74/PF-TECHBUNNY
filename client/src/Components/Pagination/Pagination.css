@@ -4,9 +4,9 @@
     margin: 20px;
     width: 3%;
     margin-left: 50%;
+}
 
-  }
-  
+
   .btnPag button {
     background-color: #233623; /* Color de fondo */
     color: #acc120; /* Color del texto */
@@ -55,5 +55,12 @@
    .btnPag button b{
     color: #fffbfb;
 
+  }
+}
+@media only screen and (max-width: 600px) {
+  .btnPag {
+    width: 100%;
+    flex-wrap: wrap;
+    margin-left: 0%;
   }
 }
