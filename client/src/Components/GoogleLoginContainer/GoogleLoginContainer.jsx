@@ -20,7 +20,9 @@ const GoogleLoginContainer = () => {
   async function responseGoogle(response) {
     console.log(response);
     if (response?.tokenId) {
-      loginUser({ tokenId: response.tokenId });
+      loginUser({ tokenId: response.tokenId }, (status) => {
+        if (status === "EMAIL ALREADY IN USE") alert("EMAIL ALREADY IN USE");
+      });
     } else {
       throw new Error("Google login error");
     }

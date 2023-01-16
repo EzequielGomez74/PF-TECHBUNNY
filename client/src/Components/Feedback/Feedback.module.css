@@ -1,47 +1,47 @@
-.feedbackPage{
-    max-width: 1500px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 50px;
-    padding-bottom: 60px;
+.feedbackPage {
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 50px;
+  padding-bottom: 60px;
 }
 
-.heroFeedback{
-    height: 338px;
-    width: 400px;
-    background-image: url(../../images/Conejo404.png);
-    background-repeat: no-repeat;
+.heroFeedback {
+  height: 338px;
+  width: 400px;
+  background-image: url(../../images/comprabunny.png);
+  background-repeat: no-repeat;
 }
 
-.message{
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 25px;
-    line-height: 45px;
+.message {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 45px;
 }
 
-.mainButton{
-    margin-top: 30px;
-    margin-bottom: 40px;
-    width: 360px;
-    height: 45px;
-    background-color: #20232A;
-    color: #FFFFFF;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.mainButton {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 360px;
+  height: 45px;
+  background-color: #20232A;
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.mainButton:hover{
-    cursor: pointer;
+.mainButton:hover {
+  cursor: pointer;
 }
 
 /* Pendiente DarkMode */
