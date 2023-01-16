@@ -22,7 +22,6 @@ async function handleNewUser(data) {
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
-    console.log("pass", hashedPwd);
     const newUser = {
       ...data,
       password: hashedPwd,

@@ -11,21 +11,28 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
-  if (!username) return products;
-  if (products) {
-    //traer un array de favoritos correspondiente al user que tiene el access token
-    const { user_id } = await getUser({ username });
-    let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
-    favorites.forEach((fav) => {
-      const productFound = products.find(
-        (product) => product.product_id === fav.product_id
-      );
-      if (productFound) {
-        productFound.dataValues.favorite = true;
-      }
-    });
+  try {
+    console.log("-- >");
+    console.log("username F", username);
+    console.log("Products ", products.length, " ", products[0]);
+    if (!username) return products;
+    if (products) {
+      //traer un array de favoritos correspondiente al user que tiene el access token
+      const { user_id } = await getUser({ username });
+      let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
+      favorites.forEach((fav) => {
+        const productFound = products.find(
+          (product) => product.product_id === fav.product_id
+        );
+        if (productFound) {
+          productFound.dataValues.favorite = true;
+        }
+      });
+    }
+    return products;
+  } catch (error) {
+    throw new Error(error);
   }
-  return products;
 }
 
 async function getAllProducts(username) {
@@ -127,4 +134,5 @@ module.exports = {
   createProduct,
   deleteProduct,
   getAllProductsBy,
+  setFavoriteStatus,
 };

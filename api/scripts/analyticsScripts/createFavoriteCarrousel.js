@@ -13,14 +13,15 @@ const favoriteGenerator = require("./favoriteGenerator");
 
 async function createFavoriteCarrousel(user_id) {
   try {
-    if (!user_id) user_id = 1;
+    //if (!user_id) user_id = 1;
     //$ testing
-    await favoriteGenerator();
+    //await favoriteGenerator();
     //$ de todos los favoritos del user agarro 10 randoms  (si son menos relleno con null)
     let carrousel = [];
     let favoritesLoaded = await Favorite.findAll({
       where: { user_id },
     });
+
     favoritesLoaded = await Promise.all(
       favoritesLoaded.map(async (fav) => {
         const product = await Product.findByPk(fav.product_id, { raw: true });
@@ -33,6 +34,7 @@ async function createFavoriteCarrousel(user_id) {
       })
     );
     favoritesLoaded = pickRandomfavorites(favoritesLoaded);
+    const favoritesBackUp = [...favoritesLoaded];
     //$ por cada 1 me fijo de su BRAND y de su SUBCATEGORY todos los productos que encuentre sin contar el favorito inicial
     favoritesLoaded.forEach(async (fav) => {
       const mixed = await Product.findAll({
@@ -44,8 +46,10 @@ async function createFavoriteCarrousel(user_id) {
         raw: true,
       });
       //$ pickeo uno random en ese array y lo pusheo al carrousel final
-      const pos = Math.floor(Math.random() * mixed.length);
-      carrousel.push(mixed[pos]);
+      if (mixed.length > 0) {
+        const pos = Math.floor(Math.random() * mixed.length);
+        carrousel.push(mixed[pos]);
+      }
     });
     //$ los null que restan los completo con un producto aleatorio
     if (carrousel.length < 10) {
@@ -72,10 +76,28 @@ async function createFavoriteCarrousel(user_id) {
         return productFound;
       })
     );
+    //TODO arreglar los favoritos con id repetido
+    carrousel = checkDuplicates(favoritesBackUp, carrousel);
+    const products = await Product.findAll({ raw: true });
+    for (let i = 0; i < carrousel.length; i++) {
+      if (carrousel[i] === null) {
+        const pos = Math.floor(Math.random() * products.length);
+        carrousel[i] = products[pos];
+      }
+    }
     return carrousel;
   } catch (error) {
     throw new Error(error);
   }
+}
+
+function checkDuplicates(arrBackUp, arrOrigi) {
+  for (let i = 0; i < arrOrigi.length; i++) {
+    if (arrBackUp.find((pb) => pb?.product_id === arrOrigi[i]?.product_id)) {
+      arrOrigi[i] = null;
+    }
+  }
+  return arrOrigi;
 }
 
 function pickRandomfavorites(arr) {
