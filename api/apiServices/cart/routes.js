@@ -7,7 +7,9 @@ const verifyJWT = require("../../middlewares/verifyJWT");
 
 const router = Router();
 
-//router.use(verifyJWT); // !validacion de JWT
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+router.use(requiredAccess(2));
 //$ Esta ru
 router.get("/:user_id", async (req, res) => {
   try {
@@ -59,7 +61,5 @@ router.delete("/:user_id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-module.exports = router;
 
 module.exports = router;

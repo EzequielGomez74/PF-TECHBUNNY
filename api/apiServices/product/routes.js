@@ -36,7 +36,7 @@ router.get("/:product_id", async (req, res) => {
 
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
-//router.use(requiredAccess(3));
+router.use(requiredAccess(3));
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", async (req, res) => {
   try {

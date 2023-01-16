@@ -140,7 +140,7 @@ async function getOrderById(order_id) {
 }
 
 //? GET ORDERS BY USER ID
-async function getOrderByUserId(user_id) {
+async function getOrdersByUserId(user_id) {
   // BUSCA TODAS LAS ORDENES DEL USUARIO
   try {
     const orde1 = await Order.findAll({
@@ -177,6 +177,6 @@ module.exports = {
   getOrderById,
   updateOrder,
   getOrders,
-  getOrderByUserId,
+  getOrdersByUserId,
   updateOrderData,
 };
