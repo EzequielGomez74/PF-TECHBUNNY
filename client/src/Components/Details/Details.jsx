@@ -16,6 +16,7 @@ import {
   // faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 function Details() {
   const { id } = useParams();
@@ -43,6 +44,7 @@ function Details() {
     setActive(product.favorite);
     setQuantity(0);
     setStock(product.stock - getCartStock(product.product_id));
+    setStock(product.stock - getCartStock(product.product_id));
     window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
@@ -52,9 +54,13 @@ function Details() {
 
   function getCartStock(product_id) {
     const productFound = cart.find((c) => c.product_id === product_id);
+  function getCartStock(product_id) {
+    const productFound = cart.find((c) => c.product_id === product_id);
     if (productFound) {
       return productFound.count;
+      return productFound.count;
     }
+    return 0;
     return 0;
   }
 
@@ -67,9 +73,19 @@ function Details() {
     );
   }
 
+
   function handleAddToCart() {
     if (!user.user_id) {
+    if (!user.user_id) {
       Swal.fire({
+        title: "¡Alerta!",
+        text: "Para agregar productos al carrito, necesitas ingresar a tu cuenta.",
+        icon: "warning",
+        confirmButtonText: "Iniciar sesión",
+      }).then((response) => {
+        if (response.isConfirmed) history.push("/login");
+      });
+    } else {
         title: "¡Alerta!",
         text: "Para agregar productos al carrito, necesitas ingresar a tu cuenta.",
         icon: "warning",
@@ -94,7 +110,15 @@ function Details() {
 
   function handleAddToFavorites() {
     if (!user.user_id) {
+    if (!user.user_id) {
       Swal.fire({
+        title: "¡Alerta!",
+        text: "Para agregar productos a favoritos, necesitas ingresar a tu cuenta.",
+        icon: "warning",
+        confirmButtonText: "Iniciar sesión",
+      }).then((response) => {
+        if (response.isConfirmed) history.push("/login");
+      });
         title: "¡Alerta!",
         text: "Para agregar productos a favoritos, necesitas ingresar a tu cuenta.",
         icon: "warning",
@@ -109,6 +133,7 @@ function Details() {
           product_id: product.product_id,
         })
       );
+      setActive(!active);
       setActive(!active);
     }
   }
@@ -161,6 +186,10 @@ function Details() {
         <div className={dm ? s.dmblock : s.block}>
           <div className={dm ? s.dmproductImage : s.productImage}>
             <div className={dm ? s.dmicon : s.icon}>
+              <button
+                className={active ? s.favHeart : s.heart}
+                onClick={handleAddToFavorites}
+              >
               <button
                 className={active ? s.favHeart : s.heart}
                 onClick={handleAddToFavorites}

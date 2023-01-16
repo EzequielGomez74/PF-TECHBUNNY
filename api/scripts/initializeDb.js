@@ -1,5 +1,7 @@
 // "esta va a cargar jsons a la data base"
-
+const favoriteTestGenerator = require("../scripts/TestContentGenerators/favoriteTestGenerator");
+const reviewGenerator = require("../scripts/TestContentGenerators/reviewGenerator");
+const orderGenerator = require("../scripts/TestContentGenerators/orderGenerator");
 const brands = require("../services/db/assets/brands.json");
 const categories = require("../services/db/assets/categories.json");
 const subcategories = require("../services/db/assets/subcategories.json");
@@ -8,6 +10,7 @@ const countries = require("../services/db/assets/countries.json");
 const reviews = require("../services/db/assets/reviews.json");
 const users = require("../services/db/assets/users.json");
 const favorites = require("../services/db/assets/favorites.json");
+
 const {
   Category,
   SubCategory,
@@ -56,16 +59,25 @@ async function loadAllAssets() {
     );
     await loadtoDb(newArrayProducts, Product);
     await loadtoDb(users, User); //TEST
-    await loadtoDb(reviews, Review); // TEST
+    //await loadtoDb(reviews, Review); // TEST
+    //!!REVIEWS
+    for (let i = 2; i <= 9; i++) {
+      //await reviewGenerator(i);
+    }
+    //!!ORDERS
+    for (let i = 2; i <= 9; i++) {
+      await orderGenerator(i);
+    }
+    //!FAVORITES
+    for (let i = 2; i <= 9; i++) {
+      //await favoriteTestGenerator(i);
+    } //TEST
     await loadtoDb(favorites, Favorite); //TEST
-    setRatingOnProducts(); //TEST
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {
     throw new Error(error.message);
   }
 }
-
-function setRatingOnProducts() {}
 
 async function loadMockAsset(array, model) {
   const review = await Review.findByPk(1);

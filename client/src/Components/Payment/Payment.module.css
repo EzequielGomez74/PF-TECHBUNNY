@@ -138,22 +138,9 @@
     cursor: pointer;
 }
 
-.pageContent button {
-    width: 150px;
-    height: 40px;
-    margin-left: 10px;
-    background: #20232a;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 10px;
-    line-height: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
+#page-content{
+    background-color: red;
+}
 
 @media only screen and (max-width: 800px) {
     .allInfo{

@@ -52,8 +52,11 @@ router.delete("/deleteCart/:user_id", async (req, res) => {
 //? ESTE ELMIINA UNA SOLA FILA DE LA TABLA CART
 // $ PARAMS { user_id } BODY { product_id, order_id }
 router.delete("/:user_id", async (req, res) => {
+<<<<<<< HEAD
   console.log(req.params);
   console.log(req.body);
+=======
+>>>>>>> developer
   const { product_id } = req.body;
   try {
     res.status(200).json(await controller.deleteCart(req.params, product_id));
@@ -61,8 +64,13 @@ router.delete("/:user_id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+<<<<<<< HEAD
 
 module.exports = router;
+
+module.exports = router;
+=======
+>>>>>>> developer
 
 module.exports = router;
 
