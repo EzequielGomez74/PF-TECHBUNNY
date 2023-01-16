@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));

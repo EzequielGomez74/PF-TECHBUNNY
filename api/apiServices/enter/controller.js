@@ -21,8 +21,8 @@ async function handleNewUser(data) {
     if (duplicate) return "USERNAME OR EMAIL ALREADY EXIST"; //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
-
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
+    console.log("pass", hashedPwd);
     const newUser = {
       ...data,
       password: hashedPwd,
@@ -42,7 +42,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
     throw new Error("Username and Password are required");
   try {
     let foundUser = await User.findOne({ where: { username: username } });
-    if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
+    if (!foundUser) return "USUARIO INEXISTENTE"; //401 = unauthorized
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
@@ -146,7 +146,10 @@ async function handleLoginWithAccess(accessToken) {
     if (result) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
-      return { user: accessToken };
+      return {
+        user: foundUser.dataValues,
+        accessToken: foundUser.dataValues.accessToken,
+      };
     } else {
       return { status: "Login Failed" };
     }
@@ -184,7 +187,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "40s" }
+    { expiresIn: "25m" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

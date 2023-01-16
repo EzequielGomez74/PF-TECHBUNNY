@@ -4,7 +4,7 @@
     "name": "Anonimus",
     "surname": "without",
     "password": "anonimoforever",
-    "email": "srbetito85@gmail.com",
+    "email": "aaa@aaa.gmail.com",
     "defaultShippingAddress": "av siempre viva 742",
     "zipCode": 7600,
     "isActive": true
@@ -20,10 +20,10 @@
     "isActive": true
   },
   {
-    "username": "santi",
-    "name": "santi",
+    "username": "Santilocura",
+    "name": "Santi",
     "surname": "Larrique",
-    "password": "$2a$10$Qa5am9DR8Q.CGFreGqVQheJJl3.Rg9rh7aOzlsHA/Nqm3BUi3n/BC",
+    "password": "pepito1234",
     "email": "b@b.gmail.com",
     "defaultShippingAddress": "Colon 5432",
     "zipCode": 11200,
@@ -62,6 +62,26 @@
     "zipCode": "122",
     "profilePicture": "www.google.com",
     "billingAddress": "calle falsa 123",
+    "isActive": true
+  },
+  {
+    "username": "eze",
+    "name": "Eze",
+    "surname": "Gomez",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
+    "email": "aa@a.gmail.com",
+    "defaultShippingAddress": "password 123",
+    "zipCode": 2000,
+    "isActive": true
+  },
+  {
+    "username": "abi",
+    "name": "Abigail",
+    "surname": "Breno",
+    "password": "$2b$10$gS6T2ii2z4hq83WMZ/oTTOtORIaS8ih2Y.atU007c8WGpTWvtkeaK",
+    "email": "aaa@a.gmail.com",
+    "defaultShippingAddress": "password 123",
+    "zipCode": 2000,
     "isActive": true
   }
 ]

@@ -18,9 +18,35 @@ const controller = require("./controller.js");
 async function updateOrder(user_id, order_id, status) {
   try {
     const order = await Order.update({ status: status }, { where: { user_id: user_id, order_id: order_id } }); //
-    if (order.dataValues.status !== "onCart") sendMail(userdata);
+    // if (order.dataValues.status !== "onCart") sendMail(userdata);
     console.log("se cambio el estado de la orden nro° ", order_id, " perteneciente al user ", user_id, "al estado: ", status)
     return order;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+async function updateOrderData(order_id, body) {
+  try {
+    const dataUser = {
+      user_id: body.user_id,
+      name: body.name,
+      surname: body.surname,
+      email: body.email,
+      shippingAddress: body.shippingAddress,
+      zipCode: body.zipCode,
+      city: body.city
+    }
+    console.log(dataUser)
+
+
+    const order = await Order.update( dataUser, { where: { user_id: body.user_id, order_id: order_id } }); //
+    // if (order.dataValues.status !== "onCart") 
+    // {
+  // console.log("se mando el email de order")
+    // sendMail(userdata);
+    // }
+      return order;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -150,5 +176,5 @@ module.exports = {
   getOrderById,
   updateOrder,
   getOrders,
-  getOrderByUserId,
+  getOrderByUserId, updateOrderData
 };

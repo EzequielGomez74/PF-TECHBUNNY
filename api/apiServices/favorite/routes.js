@@ -6,6 +6,7 @@ const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
 
 const router = Router();
+
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));
