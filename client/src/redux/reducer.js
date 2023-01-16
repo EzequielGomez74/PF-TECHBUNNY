@@ -190,7 +190,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         preferences: action.payload,
       };
-    case GET_CARROUSEL:
+    case "GET_CARROUSEL":
       if (action.payload.carrouselType === "favorites")
         return {
           ...state,
@@ -201,6 +201,11 @@ export default function reducer(state = initialState, action) {
           ...state,
           ordersCarrousel: action.payload.carrouselData,
         };
+      case "UPDATE_USER_INFO":
+        return{
+          ...state,
+          loggedUser: action.payload
+        }
     default:
       return { ...state };
   }
