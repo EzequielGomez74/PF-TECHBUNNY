@@ -66,7 +66,7 @@ async function loadAllAssets() {
     }
     //!!ORDERS
     for (let i = 2; i <= 9; i++) {
-      await orderGenerator(i);
+      //await orderGenerator(i);
     }
     //!FAVORITES
     for (let i = 2; i <= 9; i++) {
