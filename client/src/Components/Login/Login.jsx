@@ -55,7 +55,7 @@ function Login() {
           else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
           else if (status === "SUCCESS") {
             alert("TE HAS LOGUEADO CON EXITO");
-            history.goBack();
+            history.push('/home');
           }
         }
       );
