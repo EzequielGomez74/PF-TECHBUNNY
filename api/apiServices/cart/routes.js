@@ -52,8 +52,6 @@ router.delete("/deleteCart/:user_id", async (req, res) => {
 //? ESTE ELMIINA UNA SOLA FILA DE LA TABLA CART
 // $ PARAMS { user_id } BODY { product_id, order_id }
 router.delete("/:user_id", async (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
   const { product_id } = req.body;
   try {
     res.status(200).json(await controller.deleteCart(req.params, product_id));
