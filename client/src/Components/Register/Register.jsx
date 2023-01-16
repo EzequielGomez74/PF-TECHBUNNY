@@ -36,7 +36,7 @@ function Register() {
   const postNewUser = async (user) => {
     try {
       const response = await axios.post("/enter", user);
-      console.log(response.data);
+      console.log(response.data.status);
       //!manejar response
       if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
       else alert("REGISTRO FALLIDO");
@@ -50,8 +50,8 @@ function Register() {
     e.preventDefault();
     setShowError(true);
     //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
-    //if (Object.keys(errors).length === 0) {
-    if (true) {
+    if (Object.keys(errors).length === 0) {
+    // if (true) {
       postNewUser(register);
     }
     console.log(register);

@@ -42,8 +42,8 @@ function Login() {
   const handleLogin = (e) => {
     setShowError(true);
     //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
-    //if (Object.keys(errors).length === 0) {
-    if (true) {
+    if (Object.keys(errors).length === 0) {
+    // if (true) {
       loginUser(
         {
           username: login.username,
@@ -55,7 +55,7 @@ function Login() {
           else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
           else if (status === "SUCCESS") {
             alert("TE HAS LOGUEADO CON EXITO");
-            history.goBack();
+            history.push('/home');
           }
         }
       );
