@@ -10,7 +10,7 @@ const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const { access_token_mp } = require("../../config/mercadopago.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const requiredAccess = require("../../middlewares/requiredAccess");
 //!TEST
 // const createOrderCarrousel = require("../../scripts/analyticsScripts/createOrderCarrousel");
 // const createFavoriteCarrousel = require("../../scripts/analyticsScripts/createFavoriteCarrousel");

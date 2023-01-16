@@ -4,7 +4,7 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const requiredAccess = require("../../middlewares/requiredAccess");
 const router = Router();
 
 router.use(verifyJWT); // !validacion de JWT
