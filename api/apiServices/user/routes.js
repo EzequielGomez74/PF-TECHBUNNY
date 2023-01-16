@@ -54,7 +54,7 @@ router.put("/:user_id", validate.user, async (req, res) => {
     const usernameDb = await User.findByPk(user_id);
     if (
       usernameDb &&
-      (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
+      (usernameDb.username === data.username || data.role === 3) // permisos para modificar si es admin
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {

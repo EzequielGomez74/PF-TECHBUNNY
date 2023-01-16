@@ -23,7 +23,8 @@ import {
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
   CREATE_ORDER,
   ALL_ORDERS_BY_USER,
-  GET_PAYPREFERENCES_BY_ID
+  GET_PAYPREFERENCES_BY_ID,
+  UPDATE_USER_INFO,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -377,5 +378,19 @@ export function getPayPreferencesById(order_id) {
       alert(error);
     }
   };
+}
+
+export function updateUserInfo(user_id, input){
+  return async function(dispatch){
+    try{
+      const userInfoGet = await axiosInstance.get(`/users/${user_id}`)
+      console.log(userInfoGet.data);
+      const userInfo = await axiosInstance.put(`/users/${user_id}` , input)
+      console.log(userInfo.data)
+      return dispatch({type: UPDATE_USER_INFO, payload: userInfo.data})
+    }catch(error){
+      console.log(error)
+    }
+  }
 }
 

@@ -9,9 +9,13 @@
     margin-top: 10px;
     padding-top: 15px;
     padding-bottom: 22px;
-    margin: 10px;
     border-radius: 0px;
     margin-bottom: 10px;
+}
+
+.card:hover{
+    transform: translateY(-12px);
+    transition: 0.8s;
 }
 
 .iconWrap{

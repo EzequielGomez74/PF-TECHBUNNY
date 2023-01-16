@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cleanFavorite, setLoggedUser } from "../redux/actions";
+import { setLoggedUser } from "../redux/actions";
 import store from "../redux/store";
 async function logoutUser() {
   const user_id = store.getState().loggedUser.user_id;
@@ -13,6 +13,7 @@ async function logoutUser() {
   );
   if (accessToken) localStorage.removeItem("accessToken");
   await store.dispatch(setLoggedUser({}));
+
   return response;
 }
 
