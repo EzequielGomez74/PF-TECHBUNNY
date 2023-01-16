@@ -10,11 +10,24 @@
   font-family: 'Poppins';
 }
 
-.botongoogle{
-  background-color: red;
+.heroLogin {
+  height: 500px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.hero {
+  background-image: url(../../images/register.png);
+  width: 676.45px;
+  height: 490px;
+}
 
+.img {
+  width: 55%;
+  height: 55%;
+}
 
 .loginCard {
   background-color: white;
@@ -42,15 +55,10 @@
   background: #F6F5FA;
 }
 
-.m1 {
-  font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
 .m2 {
   font-size: 12px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .m2:hover {
@@ -86,11 +94,6 @@
   border: none;
 }
 
-.img {
-  width: 55%;
-  height: 55%;
-}
-
 .error{
   color:red
 }
@@ -98,7 +101,6 @@
 .hidden{
   color:white
 }
-
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
     width: 60%;
