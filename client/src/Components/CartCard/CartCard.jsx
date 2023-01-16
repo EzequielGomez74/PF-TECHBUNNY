@@ -23,12 +23,12 @@ function CartCard({ user_id ,product_id, brand, product_name, image, price, stoc
   };
 
   const handleMinus = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-      dispatch(actions.addOrRemoveQuantityFromCart(product_id, 1));
-      setTotal(total);
-    }
-  };
+		if (quantity > 0) {
+			setQuantity(quantity - 1);
+			dispatch(actions.addOrRemoveQuantityFromCart(product_id, 1));
+			setTotal(total);
+		}
+	};
 
 
   useEffect(()=>{

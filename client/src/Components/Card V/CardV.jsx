@@ -16,13 +16,13 @@ function CardV({product_id, brand, name, image, price, favorite, user_id}){
     let handleClick = () => {
         if(!user_id){
             Swal.fire({
-                title: '¡Alerta!',
-                text: 'Para agregar productos a favoritos, necesitas ingresar a tu cuenta.',
-                icon: 'warning',
-                confirmButtonText: 'Iniciar sesión',
-            }).then(response => {
-                if (response.isConfirmed) history.push('/login')
-            })
+							title: "¡Alerta!",
+							text: "Para agregar productos a favoritos, necesitas ingresar a tu cuenta.",
+							icon: "warning",
+							confirmButtonText: "Iniciar sesión",
+						}).then((response) => {
+							if (response.isConfirmed) history.push("/login");
+						});
         }else{
             dispatch(actions.addFavorite({user_id, product_id}))
             setActive(!active)

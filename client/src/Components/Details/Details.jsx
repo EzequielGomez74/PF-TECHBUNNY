@@ -79,29 +79,32 @@ function Details() {
   }
   
   function handleAddToCart() {
-    if(!user.user_id){
-      Swal.fire({
-        title: '¡Alerta!',
-        text: 'Para agregar productos al carrito, necesitas ingresar a tu cuenta.',
-        icon: 'warning',
-        confirmButtonText: 'Iniciar sesión',
-      }).then(response => {
-        if (response.isConfirmed) history.push('/login')
-      })
-    }else{
-      dispatch(
-        actions.addCart({
-          // user_id: user.user_id,
-          product_id: product.product_id,
-          // brand: product.brand,
-          product_name: product.name,
-          // image: product.image,
-          price: product.price,
-          // stock: product.stock,
-          count: quantity,
-        }, user.user_id)
-      );
-    }
+    if (!user.user_id) {
+			Swal.fire({
+				title: "¡Alerta!",
+				text: "Para agregar productos al carrito, necesitas ingresar a tu cuenta.",
+				icon: "warning",
+				confirmButtonText: "Iniciar sesión",
+			}).then((response) => {
+				if (response.isConfirmed) history.push("/login");
+			});
+		} else {
+			dispatch(
+				actions.addCart(
+					{
+						// user_id: user.user_id,
+						product_id: product.product_id,
+						// brand: product.brand,
+						product_name: product.name,
+						// image: product.image,
+						price: product.price,
+						// stock: product.stock,
+						count: quantity,
+					},
+					user.user_id
+				)
+			);
+		}
   }
 
   function handleAddToFavorites() {

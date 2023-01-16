@@ -18,4 +18,4 @@ const Dropdown = ({ description }) => {
   </div>
 }
 
-export default Dropdown
+export default Dropdown;

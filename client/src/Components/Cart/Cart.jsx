@@ -25,9 +25,11 @@ function Cart() {
   },[loggedUser])
 
   const handleNewOrder = () => {
-    dispatch(createOrder(loggedUser.user_id, () => {
-      history.push('/payment')
-    }));
+    dispatch(
+			createOrder(loggedUser.user_id, () => {
+				history.push("/payment");
+			})
+		);
   }
 
   return (

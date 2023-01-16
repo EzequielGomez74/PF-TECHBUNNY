@@ -11,13 +11,13 @@ import { useDispatch } from "react-redux";
 function CardH({product_id, brand, name, image, price, stock, user_id}){
     let dispatch = useDispatch()
     let handleClick = () => {
-        if(!user_id){
-           alert("NO ESTAS LOGUEADO") 
-        }else{
-            console.log(product_id, user_id);
-            dispatch(actions.addFavorite({user_id, product_id}))
-            console.log('ESTOY ENVIANDO', user_id, product_id)
-        }
+        if (!user_id) {
+					alert("NO ESTAS LOGUEADO");
+				} else {
+					console.log(product_id, user_id);
+					dispatch(actions.addFavorite({ user_id, product_id }));
+					console.log("ESTOY ENVIANDO", user_id, product_id);
+				}
     }
     return(
         <div className={s.card}>
