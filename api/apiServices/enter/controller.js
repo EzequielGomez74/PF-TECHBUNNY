@@ -186,7 +186,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "25m" }
+    { expiresIn: "120m" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

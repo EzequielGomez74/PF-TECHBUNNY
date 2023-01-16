@@ -16,7 +16,7 @@ import {
   // faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-
+import CarruselDetail from "../Carrusel/CarruselDetail";
 function Details() {
   const { id } = useParams();
   const product = useSelector((state) => state.detail);
@@ -222,7 +222,7 @@ function Details() {
           <span></span>
         </div>
       </div>
-      <Carrusel />
+      <CarruselDetail />
       <br />
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
