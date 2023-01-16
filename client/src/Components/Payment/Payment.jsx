@@ -4,22 +4,22 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import { useSelector , useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getPayPreferencesById } from '../../redux/actions'
+import { getPayPreferencesById, updateOrderInfoById, allOrdersByUser } from '../../redux/actions'
 
 function Payment() {
     const dm = useSelector(state => state.darkMode);
 	const preferences = useSelector(state => state.preferences)
+	const user = useSelector(state => state.loggedUser)
 	const orderMp = useSelector(state => state.orders)
 	const dispatch = useDispatch();
     const [payInfo, setPayInfo] = useState({
-        datos: '',
-        dni: '',
+		user_id: user.user_id, 
+        name: '',
+        surname: '',
         email:'',
-        domicilio:'',
-        cp:'',
-        recibe:'',
-        ref1: '',
-        ref2:''
+        shippingAddress:'',
+        city:'',
+        zipCode:'',
     })
 
     const handleChange = (e) => {
@@ -34,34 +34,34 @@ function Payment() {
         history.push('/cart');
     }
 
-useEffect(() => {
-	if (Object.keys(preferences).length !== 0) {
+	useEffect(() => {
+		if (Object.keys(preferences).length !== 0) {
 		
-	console.log("PREFERENCIAAAAS",preferences);
-	var script = document.createElement("script");
+		console.log("PREFERENCIAAAAS",preferences);
+		var script = document.createElement("script");
 
-	// The source domain must be completed according to the site for which you are integrating.
-	// For example: for Argentina ".com.ar" or for Brazil ".com.br".
-	script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-	script.type = "text/javascript";
-	script.dataset.preferenceId = preferences;
-	document.getElementById("page-content").innerHTML = "";
-	document.querySelector("#page-content").appendChild(script);
-	}
-}, [preferences])
+		// The source domain must be completed according to the site for which you are 	integrating.
+		// For example: for Argentina ".com.ar" or for Brazil ".com.br".
+		script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+		script.type = "text/javascript";
+		script.dataset.preferenceId = preferences.preferenceId;
+		document.getElementById("page-content").innerHTML = "";
+		document.querySelector("#page-content").appendChild(script);
+		}
+	}, [preferences])
 
 
     
-  async function pay() {
-    try{
-    	dispatch(getPayPreferencesById(1))        
-    }
-    catch(error) {
-      console.error(error.message)  
-    }
-}
-
-
+  	async function pay() {
+    	try{
+    		dispatch(getPayPreferencesById(orderMp[0].order_id))   
+			dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo))
+			dispatch(allOrdersByUser(user.user_id))    
+    	}
+    	catch(error) {
+      	console.error(error.message)  
+    	}
+	}
 
   return (
 		<div className={dm ? s.dmpayPage : s.payPage}>
@@ -71,20 +71,20 @@ useEffect(() => {
 					<h2>Pago</h2>
 					<div className={dm ? s.dmallInfo : s.allInfo}>
 						<div className={dm ? s.dmrequired : s.required}>
-							<label>Detalles requeridos</label>
+							<label>Datos personales</label>
 							<input
 								type="text"
-								name="datos"
-								value={payInfo.datos}
+								name="name"
+								value={payInfo.name}
 								onChange={handleChange}
-								placeholder="Nombre y Apellido"
+								placeholder="Nombre"
 							/>
 							<input
 								type="text"
-								name="dni"
-								value={payInfo.dni}
+								name="surname"
+								value={payInfo.surname}
 								onChange={handleChange}
-								placeholder="DNI"
+								placeholder="Apellido"
 							/>
 							<input
 								type="text"
@@ -93,58 +93,45 @@ useEffect(() => {
 								onChange={handleChange}
 								placeholder="Correo electrónico"
 							/>
-							<input
-								type="text"
-								name="domicilio"
-								value={payInfo.domicilio}
-								onChange={handleChange}
-								placeholder="Domicilio"
-							/>
-							<input
-								type="text"
-								name="cp"
-								value={payInfo.cp}
-								onChange={handleChange}
-								placeholder="Código Postal"
-							/>
 						</div>
 						<div className={dm ? s.dmoptional : s.optional}>
-							<label>Referencias</label>
+							<label>Ubicación</label>
 							<input
 								type="text"
-								name="recibe"
-								value={payInfo.recibe}
+								name="shippingAddress"
+								value={payInfo.shippingAddress}
 								onChange={handleChange}
-								placeholder="Recibe"
+								placeholder="Dirección"
 							/>
 							<input
 								type="text"
-								name="ref1"
-								value={payInfo.ref1}
+								name="city"
+								value={payInfo.city}
 								onChange={handleChange}
-								placeholder="Referencia 1"
+								placeholder="Ciudad"
 							/>
 							<input
 								type="text"
-								name="ref2"
-								value={payInfo.ref2}
+								name="zipCode"
+								value={payInfo.zipCode}
 								onChange={handleChange}
-								placeholder="Referencia 2"
+								placeholder="Código Zip"
 							/>
 						</div>
 					</div>
 					<div className={dm ? s.dmbuttons : s.buttons}>
-						<button className={dm ? s.dmb2 : s.b2}>Mercado Pago</button>
+						<button onClick={pay} className={dm ? s.dmb2 : s.b2}>Mercado Pago</button>
 						<button className={dm ? s.dmb1 : s.b1} onClick={handleCart}>
 							Carrito
 						</button>
+						<div className="page-content" id="page-content"></div>
 						{/* Los llevará a Mercado Pago */}
 					</div>
-					<div>
+					{/* <div>
 						<h1>MERCADOPAGO</h1>
 						<button onClick={pay}> GENERAR LINK DE PAGO</button>
 						<div className="page-content" id="page-content"></div>
-					</div>
+					</div> */}
 				</div>
 			</section>
 			<Footer />

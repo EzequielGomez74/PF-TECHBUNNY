@@ -12,13 +12,14 @@ import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
 
 function Register() {
-  const [errors, setErrors] = useState({});
   const [showError, setShowError] = useState(false);
+  const [errors, setErrors] = useState({});
   const [register, setRegister] = useState({
     username: "",
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     setRegister({
       ...register,
@@ -30,7 +31,6 @@ function Register() {
         [e.target.name]: e.target.value,
       })
     );
-    console.log(errors);
   };
 
   const postNewUser = async (user) => {
@@ -38,8 +38,8 @@ function Register() {
       const response = await axios.post("/enter", user);
       console.log(response.data);
       //!manejar response
-      if (response.data.status === "SUCCES") alert("Registro exitoso");
-      else alert(response.data.status);
+      if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
+      else alert("REGISTRO FALLIDO");
     } catch (error) {
       console.log(error.message);
     }

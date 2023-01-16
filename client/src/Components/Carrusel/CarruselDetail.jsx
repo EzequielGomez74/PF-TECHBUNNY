@@ -15,7 +15,12 @@ import { useParams } from "react-router-dom";
 const addToSession = (seenProduct) => {
   let allSeenProducts =
     JSON.parse(sessionStorage.getItem("allSeenProducts")) || [];
-  allSeenProducts.push(seenProduct);
+  const repeated = allSeenProducts.find(
+    (product) => product.id === seenProduct.id
+  );
+  if (!repeated) {
+    allSeenProducts.push(seenProduct);
+  }
   sessionStorage.setItem("allSeenProducts", JSON.stringify(allSeenProducts));
 };
 

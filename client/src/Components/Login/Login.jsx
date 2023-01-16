@@ -10,6 +10,7 @@ import loginUser from "../../scripts/loginUser";
 import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+
 function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -51,7 +52,11 @@ function Login() {
         (status) => {
           if (status === "CONTRASEÑA INCORRECTA")
             alert("CONTRASEÑA INCORRECTA");
-          else alert("MAIL NO VALIDADO");
+          else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
+          else if (status === "SUCCESS") {
+            alert("TE HAS LOGUEADO CON EXITO");
+            history.goBack();
+          }
         }
       );
     }

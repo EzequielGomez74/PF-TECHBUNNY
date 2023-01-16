@@ -6,7 +6,6 @@ import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Details.module.css";
 import Carrusel from "../Carrusel/Carrusel";
-import CarruselDetail from "../Carrusel/CarruselDetail";
 import Dropdown from "../Dropdown/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayReview from "./DisplayReview";
@@ -31,43 +30,32 @@ function Details() {
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
-  const idChange = useRef(id);
   const user = useSelector((state) => state.loggedUser);
   let [active, setActive] = useState(product.favorite);
 
   useEffect(() => {
-    if (idChange.current !== id) {
-      dispatch(actions.getProductById(id));
-      window.scrollTo(0, 0);
-      idChange.current = id;
-    }
-
     if (initialLoad.current) {
       dispatch(actions.getProductById(id));
       dispatch(actions.getReviewsBy(id));
       initialLoad.current = false;
       return;
     }
-    if (flag.current) {
-      removeCartProductsFromProduct();
-      flag.current = false;
-    }
     setActive(product.favorite);
-    setStock(product.stock);
-    setQuantity(1);
+    setQuantity(0);
+    setStock(product.stock - getCartStock(product.product_id));
+    window.scrollTo(0, 0);
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
     return () => dispatch(actions.cleanDetail());
   }, []);
 
-  function removeCartProductsFromProduct() {
-    const productFound = cart.find((p) => product.product_id === p.id);
-    console.log(productFound);
+  function getCartStock(product_id) {
+    const productFound = cart.find((c) => c.product_id === product_id);
     if (productFound) {
-      // console.log('Entré')
-      product.stock -= productFound.count;
+      return productFound.count;
     }
+    return 0;
   }
 
   function handlePost(review) {
@@ -93,13 +81,9 @@ function Details() {
       dispatch(
         actions.addCart(
           {
-            // user_id: user.user_id,
             product_id: product.product_id,
-            // brand: product.brand,
             product_name: product.name,
-            // image: product.image,
             price: product.price,
-            // stock: product.stock,
             count: quantity,
           },
           user.user_id
@@ -134,7 +118,7 @@ function Details() {
   //     product.stock -= productFound.stock
   // }
   const handlePlus = () => {
-    if (quantity < product.stock) {
+    if (quantity < product.stock && stock > 0) {
       setQuantity(quantity + 1);
       setStock(stock - 1);
     }
@@ -238,7 +222,7 @@ function Details() {
           <span></span>
         </div>
       </div>
-      <CarruselDetail />
+      <Carrusel />
       <br />
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>

@@ -43,20 +43,20 @@ function NavBar() {
   let menuRef = useRef();
   let favsChange = useRef(favs);
   let [prueba, setPrueba] = useState(0);
-
+  
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
     console.log("cualquier cosa");
-    if (loggedUser.user_id) {
+    if(loggedUser.user_id){
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       dispatch(actions.allCartByUser(loggedUser.user_id));
       console.log("OTRA COSA");
-    }
-  }, [loggedUser]);
+    } 
+  },[loggedUser])
 
   useEffect(() => {
     let handler = (e) => {
-      if (!menuRef.current?.contains(e.target)) {
+      if (!menuRef.current.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
@@ -72,7 +72,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
-
+ 
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -96,17 +96,17 @@ function NavBar() {
             </button>
 
             {/* modificarlo por un alert + redirección */}
-            <Link to={loggedUser.user_id ? "/favorites" : "/login"}>
+            <Link to={loggedUser.user_id? "/favorites" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
-                &nbsp;&nbsp; {loggedUser.user_id ? favs.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id? favs.length : 0}
               </span>
             </Link>
 
-            <Link to={loggedUser.user_id ? "/cart" : "/login"}>
+            <Link to={loggedUser.user_id? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {loggedUser.user_id ? cart.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id? cart.length : 0}
               </span>
             </Link>
 
@@ -313,19 +313,16 @@ function NavBar() {
       ) : (
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
           <h3>BIENVENIDO {loggedUser.username}</h3>
-          <span>Para una mejor experiencia</span>
+          <span>Gracias por confiar en TECHBUNNY</span>
           <ul>
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
-            <Link to="/login">
-              <button onClick={() => logoutUser()}>
+            <Link to="/login" onClick={() => logoutUser()}>
                 <DropdownItem
-                  // onClick={() => logOutHandler()}
                   icon={faRightToBracket}
                   text={"Log Out"}
                 />
-              </button>
             </Link>
           </ul>
         </div>
