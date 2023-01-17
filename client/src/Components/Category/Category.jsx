@@ -68,7 +68,7 @@ function Category() {
       return;
     }
     console.log("chau");
-    setCurrentPage(1);
+
     dispatch(actions.filterByBrand(filterPanel.brand));
     dispatch(actions.sortByPrice(filterPanel.price));
     console.log(filterPanel.brand, filterPanel.price);

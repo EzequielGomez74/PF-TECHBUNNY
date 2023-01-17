@@ -124,11 +124,7 @@ function Payment() {
 						<button className={dm ? s.dmb1 : s.b1} onClick={handleCart}>
 							Carrito
 						</button>
-<<<<<<< HEAD
-						<div className={s.pageContent} id="page-content"></div>
-=======
 						<div className="page-content" id="page-content"></div>
->>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
 						{/* Los llevará a Mercado Pago */}
 					</div>
 					{/* <div>
@@ -147,8 +143,6 @@ export default Payment
 
 
 
-<<<<<<< HEAD
-=======
 
 // import React, { useState, useEffect } from 'react';
 // import s from './Payment.module.css';
@@ -266,4 +260,3 @@ export default Payment
 // // La página de carrito tiene que despachar una acción cuando clickee procesar compra. 
 // // Información que se recibirá en esta sección para tener el monto total de la compra
 // //Pendiente: Linkear el boton con el Mercado Pago y enviarle la info del cart como la de payment.
->>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb

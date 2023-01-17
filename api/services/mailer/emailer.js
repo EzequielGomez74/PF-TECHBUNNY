@@ -3,6 +3,7 @@ const { configmailtrap, configgmail } = require("../../config/mailerconfig"); //
 const { pedidotemplate } = require("./templates/pedidotemplate.js");
 const { welcometemplate } = require("./templates/welcometemplate.js");
 const { newslettertemplate } = require("./templates/newslettertemplate");
+const { recovertemplate } = require("./templates/recoverTemplate");
 
 const template = (userdata) => {
   if (userdata.type === "newsletter") {
@@ -27,6 +28,14 @@ const template = (userdata) => {
       to: `${userdata.email}`,
       subject: `Gracias por tu orden✔`, // Subject line
       html: pedidotemplate(userdata), //*
+    };
+  }
+  if (userdata.type === "recover") {
+    return {
+      from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
+      to: `${userdata.email}`,
+      subject: `Gracias por tu orden✔`, // Subject line
+      html: recovertemplate(userdata), //*
     };
   }
 };

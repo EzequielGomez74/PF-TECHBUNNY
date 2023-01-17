@@ -7,7 +7,7 @@ const router = Router();
 router.post("/", async (req, res) => {
   const data = req.body;
   try {
-    res.status(200).json({status: await controller.handleNewUser(data)});
+    res.status(200).json(await controller.handleNewUser(data));
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -47,6 +47,7 @@ router.put("/:accessType", async (req, res) => {
         //! LOGOUT tiene que guardar data de la session - savedSessionData
         // const cookie = req.cookies?.jwt;
         // const savedSessionData = req.cookies?.savedSessionData;
+        console.log(req.body);
         if (req.body?.user_id) {
           res.status(200).json({
             status: await controller.handleLogout(req.body.user_id),

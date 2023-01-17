@@ -3,6 +3,7 @@ import { setLoggedUser } from "../redux/actions";
 import store from "../redux/store";
 async function logoutUser() {
   const user_id = store.getState().loggedUser.user_id;
+  console.log("user_id ", user_id);
   const accessToken = localStorage.getItem("accessToken");
   const response = await axios.put(
     `/enter/logout`,

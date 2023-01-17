@@ -25,10 +25,7 @@ import {
   ALL_ORDERS_BY_USER,
   GET_PAYPREFERENCES_BY_ID,
   GET_CARROUSEL,
-<<<<<<< HEAD
   UPDATE_USER_INFO,
-=======
->>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -388,20 +385,17 @@ export function getCarrousel(carrouselType) {
     }
   };
 }
-<<<<<<< HEAD
 
-export function updateUserInfo(user_id, input){
-  return async function(dispatch){
-    try{
-      const userInfoGet = await axiosInstance.get(`/users/${user_id}`)
+export function updateUserInfo(user_id, input) {
+  return async function (dispatch) {
+    try {
+      const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
       console.log(userInfoGet.data);
-      const userInfo = await axiosInstance.put(`/users/${user_id}` , input)
-      console.log(userInfo.data)
-      return dispatch({type: UPDATE_USER_INFO, payload: userInfo.data})
-    }catch(error){
-      console.log(error)
+      const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
+      console.log(userInfo.data);
+      return dispatch({ type: UPDATE_USER_INFO, payload: userInfo.data });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 }
-=======
->>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
