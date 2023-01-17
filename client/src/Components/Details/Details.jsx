@@ -236,6 +236,7 @@ function Details() {
         handlePost={handlePost}
       />
       <br />
+      <Footer />
     </div>
   );
 }

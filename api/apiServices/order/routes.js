@@ -10,22 +10,6 @@ const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const { access_token_mp } = require("../../config/mercadopago.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
-//router.use(requiredAccess(2));
-// $  ESTA RUTA RECIBE por Query {user_id} y te devuelve todas las ordenes correspondientes a este usuario
-//router.use(verifyJWT); // !validacion de JWT
-router.get("/", async (req, res) => {
-  const { user_id } = req.query;
-  try {
-    if (user_id) {
-      res.status(200).json(await controller.getOrderByUserId(user_id));
-    } else {
-      res.status(200).json(await controller.getOrders());
-    }
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
 const requiredAccess = require("../../middlewares/requiredAccess");
 //!TEST
 // const createOrderCarrousel = require("../../scripts/analyticsScripts/createOrderCarrousel");
