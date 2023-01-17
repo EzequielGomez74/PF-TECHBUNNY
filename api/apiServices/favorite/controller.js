@@ -9,7 +9,6 @@ async function getAllFavorite(user_id) {
       const productData = await Product.findOne({ where: { product_id: favorites[i].product_id } })
       const favorite = {
         ...favorites[i].dataValues,
-        hola: "hola front, todo bien?",
         price: productData.dataValues.price,
         name: productData.dataValues.name,
         image: productData.dataValues.image,

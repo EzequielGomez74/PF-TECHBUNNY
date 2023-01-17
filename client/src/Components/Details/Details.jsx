@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import { useHistory, useParams } from "react-router-dom";
-=======
 import { useParams } from "react-router-dom";
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 import * as actions from "../../redux/actions";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
@@ -16,16 +12,9 @@ import DisplayReview from "./DisplayReview";
 import {
   faHeart,
   faStar,
-<<<<<<< HEAD
-  // faTruck,
-  // faStore,
-} from "@fortawesome/free-solid-svg-icons";
-import Swal from 'sweetalert2';
-=======
   faTruck,
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 
 function Details() {
   const { id } = useParams();
@@ -34,21 +23,12 @@ function Details() {
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const history = useHistory();
-=======
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
   const initialLoad = useRef(true);
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
   const flag = useRef(true);
   const idChange = useRef(id);
-<<<<<<< HEAD
-  const user = useSelector(state => state.loggedUser);
-  let [active, setActive] = useState(product.favorite);
-=======
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 
   useEffect(() => {
     if (idChange.current !== id) {
@@ -66,34 +46,18 @@ function Details() {
       removeCartProductsFromProduct();
       flag.current = false;
     }
-<<<<<<< HEAD
-    setActive(product.favorite);
-    setStock(product.stock);
-    setQuantity(1);
-    window.scrollTo(0, 0);
-  }, [product, reviews, trigger, id]);
-
-  useEffect(() => {
-    return () => dispatch(actions.cleanDetail());
-  }, []);
-=======
     setStock(product.stock);
     console.log("hola detail");
   }, [product, reviews, trigger, id]);
 
   useEffect(() => () => dispatch(actions.cleanDetail()), []);
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 
   function removeCartProductsFromProduct() {
     const productFound = cart.find((p) => product.product_id === p.id);
     console.log(productFound);
     if (productFound) {
       // console.log('Entré')
-<<<<<<< HEAD
-      product.stock -= productFound.count;
-=======
       product.stock -= productFound.totalQuantity;
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
     }
   }
 
@@ -105,57 +69,6 @@ function Details() {
       })
     );
   }
-<<<<<<< HEAD
-  
-  function handleAddToCart() {
-    if (!user.user_id) {
-			Swal.fire({
-				title: "¡Alerta!",
-				text: "Para agregar productos al carrito, necesitas ingresar a tu cuenta.",
-				icon: "warning",
-				confirmButtonText: "Iniciar sesión",
-			}).then((response) => {
-				if (response.isConfirmed) history.push("/login");
-			});
-		} else {
-			dispatch(
-				actions.addCart(
-					{
-						// user_id: user.user_id,
-						product_id: product.product_id,
-						// brand: product.brand,
-						product_name: product.name,
-						// image: product.image,
-						price: product.price,
-						// stock: product.stock,
-						count: quantity,
-					},
-					user.user_id
-				)
-			);
-		}
-  }
-
-  function handleAddToFavorites() {
-    if(!user.user_id){
-      Swal.fire({
-        title: '¡Alerta!',
-        text: 'Para agregar productos a favoritos, necesitas ingresar a tu cuenta.',
-        icon: 'warning',
-        confirmButtonText: 'Iniciar sesión',
-      }).then(response => {
-        if (response.isConfirmed) history.push('/login')
-      })
-    } else {
-      dispatch(
-        actions.addFavorite({
-          user_id: user.user_id,
-          product_id: product.product_id,
-        })
-      );
-      setActive(!active)
-    }
-=======
   function handleAddToCart() {
     dispatch(
       actions.addCart({
@@ -180,7 +93,6 @@ function Details() {
         stock: product.stock,
       })
     );
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
   }
   // function removeCartProductsFromProduct(){
   //   const productFound = cart.find((product)=>id === product.product_id)
@@ -231,11 +143,7 @@ function Details() {
         <div className={dm ? s.dmblock : s.block}>
           <div className={dm ? s.dmproductImage : s.productImage}>
             <div className={dm ? s.dmicon : s.icon}>
-<<<<<<< HEAD
-              <button className={active? s.favHeart : s.heart} onClick={handleAddToFavorites}>
-=======
               <button className={s.heart} onClick={handleAddToFavorites}>
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
                 <FontAwesomeIcon icon={faHeart} />
               </button>
             </div>
@@ -312,8 +220,4 @@ function Details() {
   );
 }
 
-<<<<<<< HEAD
 export default Details;
-=======
-export default Details;
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec

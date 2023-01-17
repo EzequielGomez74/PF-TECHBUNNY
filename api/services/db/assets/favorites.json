@@ -1,18 +1,6 @@
 [
   {
     "user_id":1,
-<<<<<<< HEAD
-    "product_id":830
-    },
-  {
-    "user_id":1,
-    "product_id":32
-    },
-    {
-      "user_id":1,
-      "product_id":12
-      }
-=======
     "product_id":830,
     "name":"JBL Sound Bar LINK Bar Google Assistant Chromecast 1000w",
     "brand":"Jbl",
@@ -29,5 +17,4 @@
     "image":"https://res.cloudinary.com/dkautckhj/image/upload/v1672963879/TechbunnyAssets/TechBunnyImgs/828.jpg",
     "stock":12
     }
->>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 ]
