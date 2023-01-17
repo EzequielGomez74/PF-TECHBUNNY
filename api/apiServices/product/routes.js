@@ -2,7 +2,6 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const requiredAccess = require("../../middlewares/requiredAccess.js");
 const validate = require("../../scripts/bodyValidators/index.js");
-const router = Router();
 const verifyJWT = require("../../middlewares/verifyJWT");
 
 //$ GET 	/products                                                                             <-- Trae todos los productos
@@ -10,7 +9,6 @@ const verifyJWT = require("../../middlewares/verifyJWT");
 //$ GET 	/products?category=Perifericos&subcategory=Mouse                                      <-- Trae todos los productos que tienen subcategoria Mouse
 // todo /products?offer=true      
 router.get("/", async (req, res) => {
-  
   try {
     if (req.query)
       res
@@ -22,8 +20,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-//!     ----- ACCESO USER  -----
-//router.use(requiredAccess(2));
 // GET 	/products/2							                                                              <-- Trae el producto de product_id = 2
 router.get("/:product_id", async (req, res) => {
   const { product_id } = req.params;
@@ -36,7 +32,6 @@ router.get("/:product_id", async (req, res) => {
     res.status(400).json({ msg: "betin" });
   }
 });
-
 
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
@@ -60,10 +55,6 @@ router.put("/", validate.product, async (req, res) => {
   }
 });
 
-
-
-//!     ----- ACCESO ADMIN  -----
-//router.use(requiredAccess(3));
 //DELETE	/products/3									                                                        <-- Borra el producto de product_id = 3 (El borrado es lógico)
 router.delete("/:productId", async (req, res) => {
   const { productId } = req.params;

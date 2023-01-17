@@ -12,9 +12,6 @@ const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
   try {
-    console.log("-- >");
-    console.log("username F", username);
-    console.log("Products ", products.length, " ", products[0]);
     if (!username) return products;
     if (products) {
       //traer un array de favoritos correspondiente al user que tiene el access token
