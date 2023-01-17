@@ -10,6 +10,7 @@ import axios from "axios";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
+import Swal from "sweetalert2";
 
 function Register() {
   const [showError, setShowError] = useState(false);
@@ -38,8 +39,20 @@ function Register() {
       const response = await axios.post("/enter", user);
       console.log(response.data);
       //!manejar response
-      if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
-      else alert("REGISTRO FALLIDO");
+      if (response.data.status === "SUCCESS") 
+      Swal.fire({
+        title: "Registro exitoso",
+        text: "¡Bienvenido a Techbunny! Por favor inicie sesión",
+        icon: "success",
+        confirmButtonText: "Ir al login",
+      }).then((response) => {
+        if (response.isConfirmed) history.push("/login");
+      });
+      else Swal.fire({
+        title: "¡Alerta!",
+        text: "Registro fallido",
+        icon: "error",
+      });
     } catch (error) {
       console.log(error.message);
     }

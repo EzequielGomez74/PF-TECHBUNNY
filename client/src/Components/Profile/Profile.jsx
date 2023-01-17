@@ -41,7 +41,7 @@ function Profile(){
         <div>
             <NavBar/>
             <div className={s.profileSection}>
-                { user.name && user.email && user.billingAddress ? 
+                { user.username && user.email ? 
                 <div className={s.profileInfo}>
                     <span><strong>Nombre de usuario:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.username} </span>
                     <span><strong>Nombre:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.name} </span>
