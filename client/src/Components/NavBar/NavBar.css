@@ -83,6 +83,7 @@
     border-radius: var(--border-radius);
     padding: 5px -2px;
     width: 370px;
+    z-index: 999;
   }
   
   
@@ -91,7 +92,6 @@
     visibility: visible;
     transform: translateY(0);
     transition: var(--speed) ease;
-    
   }
   
   .dropdown-menu-cat.inactive{
@@ -143,7 +143,7 @@
     position: absolute;
     overflow-y: scroll;
     overflow-x: hidden;
-    z-index: 1;
+    z-index: 100;
    
     transition: var(--speed) ease;
     

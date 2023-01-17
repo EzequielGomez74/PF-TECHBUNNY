@@ -21,7 +21,6 @@ async function handleNewUser(data) {
     if (duplicate) return "USERNAME OR EMAIL ALREADY EXIST"; //409 = conflict
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
-
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
     const newUser = {
       ...data,
@@ -42,7 +41,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
     throw new Error("Username and Password are required");
   try {
     let foundUser = await User.findOne({ where: { username: username } });
-    if (!foundUser) throw new Error("Unauthorized user"); //401 = unauthorized
+    if (!foundUser) return "USUARIO INEXISTENTE"; //401 = unauthorized
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
@@ -187,7 +186,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "10s" }
+    { expiresIn: "120m" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

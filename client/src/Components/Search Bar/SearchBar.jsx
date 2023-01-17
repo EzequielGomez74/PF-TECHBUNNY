@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import s from './SearchBar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { getProducts , getSearchResults } from '../../redux/actions'
+import { addFavorite, allFavoritesByUser, getProducts , getSearchResults } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
 
 function SearchBar({ searchTerm, setSearchTerm }) {
@@ -10,10 +10,13 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   const products = useSelector(state => state.products)
 
   const dm = useSelector(state => state.darkMode);
+  let user = useSelector(state => state.loggedUser);
 
 
   useEffect(()=>{
+    
     dispatch(getProducts())
+    
   }, [dispatch])
 
   const handleChange = (e) => {

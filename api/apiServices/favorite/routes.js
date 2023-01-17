@@ -4,11 +4,12 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const requiredAccess = require("../../middlewares/requiredAccess");
 const router = Router();
+
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
-//router.use(requiredAccess(2));
+router.use(requiredAccess(2));
 //$ Esta ruta devuelve todas los productos favoritos del usuario por PARAMS (user_id)
 router.get("/:user_id", async (req, res) => {
   try {

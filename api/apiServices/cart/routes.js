@@ -4,10 +4,13 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
+const requiredAccess = require("../../middlewares/requiredAccess");
 const router = Router();
 
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+router.use(requiredAccess(2));
 //$ Esta ru
-//router.use(verifyJWT); // !validacion de JWT
 router.get("/:user_id", async (req, res) => {
   try {
     res.status(200).json(await controller.getCart(req.params.user_id));

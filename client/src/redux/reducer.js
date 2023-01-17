@@ -1,3 +1,5 @@
+import { GET_CARROUSEL } from "./actionTypes";
+
 const initialState = {
   products: [],
   detail: {},
@@ -8,12 +10,14 @@ const initialState = {
   favorites: [],
   darkMode: false,
   reviews: [],
-  orders:[],
+  orders: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
   loggedUser: {},
-  preferences:{}
+  preferences: {},
+  favoritesCarrousel: [],
+  ordersCarrousel: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -99,12 +103,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         favorites: action.payload,
       };
-      case "CLEAN_FAVORITES": {
-        return {
-          ...state,
-          favorites: [],
-        };
-      }
+    case "CLEAN_FAVORITES": {
+      return {
+        ...state,
+        favorites: [],
+      };
+    }
     // case "REMOVE_FAVORITE":
     //   return {
     //     ...state,
@@ -160,32 +164,48 @@ export default function reducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-      case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
-        const productFound = state.cart.find((p) => p.id === action.payload.id);
-        if (productFound) {
-          productFound.totalQuantity -= action.payload.totalQuantity;
-        }
-        return { ...state, cart: [...state.cart] };
+    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+      const productFound = state.cart.find((p) => p.id === action.payload.id);
+      if (productFound) {
+        productFound.count = productFound.count - action.payload.count;
+      }
+      return { ...state, cart: [...state.cart] };
 
     case "CLEAN_DETAIL":
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
-    case 'CREATE_ORDER':
+    case "CREATE_ORDER":
       return {
         ...state,
-        orders: action.payload
-      }
-    case 'ALL_ORDERS_BY_USER':
+        orders: action.payload,
+      };
+    case "ALL_ORDERS_BY_USER":
       return {
         ...state,
-        orders:action.payload
-      }
+        orders: action.payload,
+      };
     case "GET_PAYPREFERENCES_BY_ID":
       return {
         ...state,
         preferences: action.payload,
       };
+    case "GET_CARROUSEL":
+      if (action.payload.carrouselType === "favorites")
+        return {
+          ...state,
+          favoritesCarrousel: action.payload.carrouselData,
+        };
+      else
+        return {
+          ...state,
+          ordersCarrousel: action.payload.carrouselData,
+        };
+      case "UPDATE_USER_INFO":
+        return{
+          ...state,
+          loggedUser: action.payload
+        }
     default:
       return { ...state };
   }
