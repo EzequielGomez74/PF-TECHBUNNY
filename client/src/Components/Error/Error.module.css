@@ -12,8 +12,9 @@
 
 .heroError{
     height: 338px;
-    width: 450px;
-    background-image: url(../../images/coffee.png);
+    width: 400px;
+    background-image: url(../../images/Conejo404.png);
+    background-repeat: no-repeat;
 }
 
 .message{
@@ -63,8 +64,9 @@
 
 .dmheroError{
     height: 338px;
-    width: 450px;
-    background-image: url(../../images/coffee-dm.png);
+    width: 400px;
+    background-image: url(../../images/Conejo404.png);
+    background-repeat: no-repeat;
 }
 
 .dmmessage{
@@ -94,4 +96,19 @@
 
 .dmmainButton:hover{
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .message{
+        font-size: 18px;
+       }
+   .dmmessage{
+    font-size: 18px;
+   }
+   .mainButton{
+    width: 300px; 
+}
+.dmmainButton{
+    width: 300px; 
+}
 }

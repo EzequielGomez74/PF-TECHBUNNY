@@ -11,21 +11,28 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
-  if (!username) return products;
-  if (products) {
-    //traer un array de favoritos correspondiente al user que tiene el access token
-    const { user_id } = await getUser({ username });
-    let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
-    favorites.forEach((fav) => {
-      const productFound = products.find(
-        (product) => product.product_id === fav.product_id
-      );
-      if (productFound) {
-        productFound.favorite = true;
-      }
-    });
+  try {
+    console.log("-- >");
+    console.log("username F", username);
+    console.log("Products ", products.length, " ", products[0]);
+    if (!username) return products;
+    if (products) {
+      //traer un array de favoritos correspondiente al user que tiene el access token
+      const { user_id } = await getUser({ username });
+      let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
+      favorites.forEach((fav) => {
+        const productFound = products.find(
+          (product) => product.product_id === fav.product_id
+        );
+        if (productFound) {
+          productFound.dataValues.favorite = true;
+        }
+      });
+    }
+    return products;
+  } catch (error) {
+    throw new Error(error);
   }
-  return products;
 }
 
 async function getAllProducts(username) {
@@ -58,10 +65,10 @@ async function getAllProductsBy(condition, username) {
 async function getProductById(product_id, username) {
   try {
     let product = await Product.findByPk(product_id);
-    product = await setFavoriteStatus([product.dataValues], username);
-    const newObj = { ...product[0] };
+    let arr = [product];
+    let newProduct = await setFavoriteStatus(arr, username);
+    const newObj = { ...newProduct[0].dataValues };
     newObj.description = productDescriptionParser(newObj.description);
-    console.log("pasa");
     return newObj;
   } catch (error) {
     throw new Error(error.message);
@@ -128,4 +135,5 @@ module.exports = {
   createProduct,
   deleteProduct,
   getAllProductsBy,
+  setFavoriteStatus,
 };

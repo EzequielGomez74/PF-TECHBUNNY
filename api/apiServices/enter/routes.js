@@ -44,7 +44,7 @@ router.put("/:accessType", async (req, res) => {
         } else if (authResult === null || authResult.twoFactor) {
           return res.status(200).json(authResult);
         } else {
-          res.sendStatus(400);
+          res.status(200).json({ status: authResult });
         }
         break;
       case "logout":
@@ -68,7 +68,7 @@ router.put("/:accessType", async (req, res) => {
         break;
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(400).json(error.message);
   }
 });
 

@@ -82,7 +82,6 @@ async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
     body.password = await bcrypt.hash(body.password, 10); // 10 salt
-
     await User.update(body, { where: { user_id } });
     return "usuario  modificado exitosamente.";
   } catch (error) {

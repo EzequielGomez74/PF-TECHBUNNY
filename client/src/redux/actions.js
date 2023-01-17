@@ -8,18 +8,23 @@ import {
   GET_PRODUCTS_BY_CATEGORY,
   FILTER_BY_BRAND,
   SORT_BY_PRICE,
-  ADD_FAVORITE,
   ADD_CART,
-  REMOVE_CART,
-  REMOVE_FAVORITE,
+  ALL_CART_BY_USER,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
   CLEAN_DETAIL,
   CLEAN_CATEGORY_PRODUCTS,
+  GET_USER_BY_ID,
+  ALL_FAVORITES_BY_USER,
+  CLEAN_FAVORITES,
+  ADD_FAVORITE,
   ADD_OR_REMOVE_QUANTITY_FROM_CART,
+  CREATE_ORDER,
+  ALL_ORDERS_BY_USER,
   GET_PAYPREFERENCES_BY_ID,
+  GET_CARROUSEL,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -57,6 +62,7 @@ export function getProductById(id) {
     }
   };
 }
+
 export const getReviewsBy = (productId, userId) => {
   return async function (dispatch) {
     try {
@@ -104,6 +110,7 @@ export function getProductsByCategory(category) {
     }
   };
 }
+
 export const filterByBrand = (brand) => {
   return { type: FILTER_BY_BRAND, payload: brand };
 };
@@ -160,33 +167,108 @@ export function toggleDarkMode() {
 //   };
 // };
 
+export function getUserById(user_id) {
+  return async function (dispatch) {
+    try {
+      let user = await axiosInstance.get(`/users/${user_id}`);
+      return dispatch({ type: GET_USER_BY_ID, payload: user.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export const allFavoritesByUser = (user_id) => {
+  return async function (dispatch) {
+    const favorites = await axiosInstance.get(`/favorites/${user_id}`);
+    return dispatch({ type: ALL_FAVORITES_BY_USER, payload: favorites.data });
+  };
+};
+
 export const addFavorite = (payload) => {
-  return {
-    type: ADD_FAVORITE,
-    payload,
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.post("/favorites", payload);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+      const favorites = await axiosInstance.get(
+        `/favorites/${payload.user_id}`
+      );
+      return dispatch({ type: ADD_FAVORITE, payload: favorites.data });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
-export const removeFavorite = (id) => {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: id,
+export const cleanFavorite = () => {
+  return { type: CLEAN_FAVORITES };
+};
+
+export const removeFavorite = (payload) => {
+  return async function () {
+    try {
+      const response = await axiosInstance.post("/favorites", payload);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
-export const addCart = (payload) => {
-  return {
-    type: ADD_CART,
-    payload,
+export const addCart = (payload, user_id) => {
+  return async function (dispatch) {
+    try {
+      console.log("entra a addCart", payload);
+      let response = await axiosInstance.post(`/carts/${user_id}`, payload);
+      console.log("producto recibido", response.data);
+      let cart = await axiosInstance.get(`/carts/${user_id}`);
+      console.log(cart.data);
+      return dispatch({ type: ADD_CART, payload: cart.data });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
-export const removeCart = (id) => {
-  return {
-    type: REMOVE_CART,
-    payload: id,
+//MODIFICAR ESTA ACCIÓN POR LA DE ARRIBA.
+// export const addCart = (payload) => {
+//   return {
+//     type: ADD_CART,
+//     payload,
+//   };
+// };
+
+export const removeCart = (user_id, product_id, onSuccess) => {
+  return async function () {
+    try {
+      console.log(user_id, product_id, "Eliminando de carrito");
+      const productDeleted = await axiosInstance.delete(`/carts/${user_id}`, {
+        data: { product_id },
+      });
+      // await axiosInstance.get(`/carts/${user_id}`)
+      onSuccess();
+      console.log(productDeleted);
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
+
+export const allCartByUser = (user_id) => {
+  return async function (dispatch) {
+    const carts = await axiosInstance.get(`/carts/${user_id}`);
+    return dispatch({ type: ALL_CART_BY_USER, payload: carts.data });
+  };
+};
+
+// export const removeCart = (id) => {
+//   return {
+//     type: REMOVE_CART,
+//     payload: id,
+//   };
+// };
 
 export const getSearchResults = (products, searchTerm) => {
   return function (dispatch) {
@@ -222,12 +304,6 @@ export const cleanCategoryProducts = () => {
 //     const user = await axiosInstance.get("/");
 //   };
 // };
-export function addOrRemoveQuantityFromCart(id, totalQuantity) {
-  return {
-    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
-    payload: { id, totalQuantity },
-  };
-}
 
 export const setLoggedUser = (user) => {
   console.log("action logded user");
@@ -241,14 +317,141 @@ export const setLoggedUser = (user) => {
   }
 };
 
+export function addOrRemoveQuantityFromCart(id, count) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, count },
+  };
+}
+
+export const createOrder = (user_id, pushPayment) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.post(`/orders/${user_id}`);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
+      console.log(orders.data);
+      pushPayment();
+      return dispatch({ type: CREATE_ORDER, payload: orders.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const allOrdersByUser = (user_id) => {
+  return async function (dispatch) {
+    const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
+    console.log(orders.data);
+    return dispatch({ type: ALL_ORDERS_BY_USER, payload: orders.data });
+  };
+};
+
+//verificar si está bien la función
+export const updateOrderInfoById = (order_id, payInfo) => {
+  return async function () {
+    try {
+      const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo);
+      console.log(userInfo.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export function getPayPreferencesById(order_id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`/orders/pagar/${order_id}`);
+      var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
+      console.log("info payment", json.data);
       return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
     } catch (error) {
       alert(error);
     }
   };
 }
+export function getCarrousel(carrouselType) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/carrousels/${carrouselType}`);
+      console.log("ALGO QUE LLEGO ", carrouselType, " ", json.data);
+      return dispatch({
+        type: GET_CARROUSEL,
+        payload: { carrouselData: json.data, carrouselType },
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export function addOrRemoveQuantityFromCart(id, count) {
+  return {
+    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
+    payload: { id, count },
+  };
+}
+
+export const createOrder = (user_id, pushPayment) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.post(`/orders/${user_id}`);
+      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
+      console.log(response.data);
+      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
+      console.log(orders.data);
+      pushPayment();
+      return dispatch({ type: CREATE_ORDER, payload: orders.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const allOrdersByUser = (user_id) => {
+  return async function (dispatch) {
+    const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
+    console.log(orders.data);
+    return dispatch({ type: ALL_ORDERS_BY_USER, payload: orders.data });
+  };
+};
+
+//verificar si está bien la función
+export const updateOrderInfoById = (order_id, payInfo) => {
+  return async function () {
+    try {
+      const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo);
+      console.log(userInfo.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export function getPayPreferencesById(order_id) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
+      console.log("info payment", json.data);
+      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export function getCarrousel(carrouselType) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/carrousels/${carrouselType}`);
+      console.log("ALGO QUE LLEGO ", carrouselType, " ", json.data);
+      return dispatch({
+        type: GET_CARROUSEL,
+        payload: { carrouselData: json.data, carrouselType },
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+

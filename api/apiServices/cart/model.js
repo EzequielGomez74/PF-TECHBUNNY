@@ -4,16 +4,16 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Cart",
     {
-      product_name: {                       // NOMBRE DEL PRODUCTO 
+      product_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      count: {                              // UNIDADES DE CADA PRODUCTO 
+      count: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      price: {                              // PRECIO DEL PRODUCTO
-        type: DataTypes.INTEGER,
+      price: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       }
     },
