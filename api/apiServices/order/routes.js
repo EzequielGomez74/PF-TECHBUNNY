@@ -2,10 +2,6 @@
 
 // todo hablar con back para ver si creamos un get all orders (limitado a 10 o 20 orders)
 
-// * En esta ruta se generan nuevas ordenes, se generan preferencias de mercadopago, modifica ordenes existentes y devuelven las ordenes solicitadas.
-
-// todo hablar con back para ver si creamos un get all orders (limitado a 10 o 20 orders)
-
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
@@ -14,37 +10,23 @@ const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
 const { access_token_mp } = require("../../config/mercadopago.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
+const requiredAccess = require("../../middlewares/requiredAccess");
+//!TEST
+// const createOrderCarrousel = require("../../scripts/analyticsScripts/createOrderCarrousel");
+// const createFavoriteCarrousel = require("../../scripts/analyticsScripts/createFavoriteCarrousel");
+// router.post("/carrousel", async (req, res) => {
+//   try {
+//     //res.status(200).json({ res: await createOrderCarrousel(2) });
+//     res.status(200).json({ res: await createFavoriteCarrousel(2) });
+//   } catch (error) {
+//     res.status(500).json({ err: error.message });
+//   }
+// });
+//!TEST
 
-//router.use(requiredAccess(2));
-// $  ESTA RUTA RECIBE por Query {user_id} y te devuelve todas las ordenes correspondientes a este usuario
-//router.use(verifyJWT); // !validacion de JWT
-router.get("/", async (req, res) => {
-  const { user_id } = req.query;
-  try {
-    if (user_id) {
-      res.status(200).json(await controller.getOrderByUserId(user_id));
-    } else {
-      res.status(200).json(await controller.getOrders());
-    }
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
-
-//$ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
-router.get("/:order_id", async (req, res) => {
-  //retorna una sola por id con PARAMS
-  const { order_id } = req.params;
-  try {
-    if (order_id) {
-      res.status(200).json(await controller.getOrderById(order_id));
-    } else {
-      res.status(400).send("esta orden no existe");
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+router.use(requiredAccess(2));
 
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
 // $ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
@@ -120,4 +102,32 @@ router.put("/:order_id", async (req, res) => {
   }
 });
 
+// /users?user_id=1&order_id=2  /users?user_id=1
+router.get("/", async (req, res) => {
+  const { user_id, order_id } = req.query;
+  try {
+    if (user_id) {
+      if (order_id) {
+        res.status(200).json(await controller.getOrderById(order_id));
+      } else {
+        res.status(200).json(await controller.getOrdersByUserId(user_id));
+      }
+    } else {
+      res.status(200).send({ status: "INVALID USER ID" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+//!     ----- ACCESO ADMIN  -----
+router.use(requiredAccess(3));
+
+router.get("/", async (req, res) => {
+  try {
+    res.status(200).json(await controller.getOrders());
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 module.exports = router;

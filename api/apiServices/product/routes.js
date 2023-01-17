@@ -9,7 +9,6 @@ const router = Router();
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
 
 router.get("/", async (req, res) => {
-  console.log("PEPEPEPEP");
   try {
     if (req.query)
       res
@@ -37,7 +36,7 @@ router.get("/:product_id", async (req, res) => {
 
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
-//router.use(requiredAccess(3));
+router.use(requiredAccess(3));
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", async (req, res) => {
   try {

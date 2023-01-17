@@ -4,10 +4,12 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const requiredAccess = require("../../middlewares/requiredAccess");
 const router = Router();
 
-//router.use(verifyJWT); // !validacion de JWT
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO USER  -----
+router.use(requiredAccess(2));
 //$ Esta ru
 router.get("/:user_id", async (req, res) => {
   try {
@@ -52,8 +54,6 @@ router.delete("/deleteCart/:user_id", async (req, res) => {
 //? ESTE ELMIINA UNA SOLA FILA DE LA TABLA CART
 // $ PARAMS { user_id } BODY { product_id, order_id }
 router.delete("/:user_id", async (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
   const { product_id } = req.body;
   try {
     res.status(200).json(await controller.deleteCart(req.params, product_id));
@@ -61,7 +61,5 @@ router.delete("/:user_id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-module.exports = router;
 
 module.exports = router;
