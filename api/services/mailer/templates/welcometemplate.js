@@ -1,4 +1,4 @@
-const welcometemplate = (userdata) => {
+const welcometemplate = (completePath) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:arial, 'helvetica neue', helvetica, sans-serif">
      <head>
@@ -61,7 +61,7 @@ const welcometemplate = (userdata) => {
                       <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:600px">
                        <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://pf-techbunny-lake.vercel.app/verify/${userdata.verificationCode}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img class="adapt-img" src="https://cdn.discordapp.com/attachments/1052645530112639087/1058107682160128151/chinesenewyearcelebrationwithrabbit_1.png" alt="We want to hear you" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="600" title="We want to hear you"></a></td>
+                          <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="${completePath}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img class="adapt-img" src="https://cdn.discordapp.com/attachments/1052645530112639087/1058107682160128151/chinesenewyearcelebrationwithrabbit_1.png" alt="We want to hear you" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="600" title="We want to hear you"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -97,7 +97,7 @@ const welcometemplate = (userdata) => {
                           <td align="center" class="es-m-p0r es-m-p0l" style="padding:0;Margin:0;padding-left:40px;padding-right:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px"><br></p></td>
                          </tr>
                          <tr>
-                          <td align="center" style="padding:0;Margin:0;padding-top:20px"><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#990000;border-width:0px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href="https://pf-techbunny-lake.vercel.app/verify/${userdata.verificationCode}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#990000;border-width:10px 30px 10px 30px;display:inline-block;background:#990000;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Verificar Email</a></span><!--<![endif]--></td>
+                          <td align="center" style="padding:0;Margin:0;padding-top:20px"><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#990000;border-width:0px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href="${completePath}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#990000;border-width:10px 30px 10px 30px;display:inline-block;background:#990000;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Verificar Email</a></span><!--<![endif]--></td>
                          </tr>
                        </table></td>
                      </tr>

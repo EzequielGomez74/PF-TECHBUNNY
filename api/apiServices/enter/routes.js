@@ -7,7 +7,7 @@ const router = Router();
 router.post("/", async (req, res) => {
   const data = req.body;
   try {
-    res.status(200).json(await controller.handleNewUser(data));
+    res.status(200).json({ status: await controller.handleNewUser(data) });
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -56,9 +56,9 @@ router.put("/:accessType", async (req, res) => {
         break;
       case "recover":
         //Entra un body = {username:"Pepito"}
-        if (req.body?.username) {
+        if (req.body?.email) {
           res.status(200).json({
-            status: await controller.handleRecoverPassword(req.body.username),
+            status: await controller.handleRecoverPassword(req.body.email),
           });
         } else res.status(400).json({ status: "invalid username" });
       default:

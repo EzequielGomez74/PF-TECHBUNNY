@@ -1,5 +1,4 @@
 const { User } = require("../../services/db/db.js");
-const { use } = require("./routes.js");
 const jwt = require("jsonwebtoken");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
 require("dotenv").config();

@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import s from "./Login.module.css";
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import loginUser from "../../scripts/loginUser";
 import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+import Swal from "sweetalert2";
 
 function Login() {
   const dispatch = useDispatch();
@@ -51,16 +50,33 @@ function Login() {
         },
         (status) => {
           if (status === "CONTRASEÑA INCORRECTA")
-            alert("CONTRASEÑA INCORRECTA");
-          else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "Contraseña incorrecta",
+            icon: "error",
+          });
+          else if (status === "MAIL NO VALIDADO") Swal.fire({
+            title: "¡Alerta!",
+            text: "Mail no válido",
+            icon: "error",
+          });
           else if (status === "SUCCESS") {
-            alert("TE HAS LOGUEADO CON EXITO");
-            history.goBack();
+            Swal.fire({
+              title: "¡Registro éxitoso!",
+              icon: "success",
+              confirmButtonText: "Ir al home",
+            }).then((response) => {
+              if (response.isConfirmed) history.push("/home");
+            });
           }
         }
       );
     }
     //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
+  };
+
+  const handleForgotPassword = () => {
+    history.push("/recover");
   };
 
   return (
@@ -98,7 +114,12 @@ function Login() {
           ) : (
             <span className={s.hidden}>a</span>
           )}
-          <span className={dm ? s.dmm1 : s.m1}>¿Olvidaste tu contraseña?</span>
+          <span
+            className={dm ? s.dmrecoverPass : s.recoverPass}
+            onClick={handleForgotPassword}
+          >
+            ¿Olvidaste tu contraseña?
+          </span>
           <button onClick={handleLogin} className={dm ? s.dmb1 : s.b1}>
             Iniciar Sesión
           </button>
