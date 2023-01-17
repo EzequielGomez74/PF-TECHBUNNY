@@ -25,7 +25,10 @@ import {
   ALL_ORDERS_BY_USER,
   GET_PAYPREFERENCES_BY_ID,
   GET_CARROUSEL,
+<<<<<<< HEAD
   UPDATE_USER_INFO,
+=======
+>>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -385,6 +388,7 @@ export function getCarrousel(carrouselType) {
     }
   };
 }
+<<<<<<< HEAD
 
 export function updateUserInfo(user_id, input){
   return async function(dispatch){
@@ -399,3 +403,5 @@ export function updateUserInfo(user_id, input){
     }
   }
 }
+=======
+>>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb

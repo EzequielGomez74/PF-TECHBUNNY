@@ -3,10 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import { useHistory } from "react-router-dom";
+<<<<<<< HEAD
 import exitosa from '../../Photos/conejofeliz.png'
 import fallida from '../../Photos/conejotriste.png'
 import './Verify.scss'
 import Swal from "sweetalert2";
+=======
+import { useDispatch, useSelector } from "react-redux";
+import exitosa from '../../Photos/conejofeliz.png'
+import fallida from '../../Photos/conejotriste.png'
+import './Verify.scss'
+>>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
 
 
 function Verify() {

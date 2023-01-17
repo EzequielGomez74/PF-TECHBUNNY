@@ -39,6 +39,7 @@ function Register() {
       const response = await axios.post("/enter", user);
       console.log(response.data);
       //!manejar response
+<<<<<<< HEAD
       if (response.data.status === "SUCCESS") 
       Swal.fire({
         title: "Registro exitoso",
@@ -53,6 +54,10 @@ function Register() {
         text: "Registro fallido",
         icon: "error",
       });
+=======
+      if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
+      else alert("REGISTRO FALLIDO");
+>>>>>>> 0c8f529ec3022ada6a2f7ba2e2cdb8a9921343eb
     } catch (error) {
       console.log(error.message);
     }
