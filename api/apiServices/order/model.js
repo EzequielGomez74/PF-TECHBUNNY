@@ -1,9 +1,9 @@
 
 
-const { DataTypes } = require("sequelize");
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
-module.exports = (sequelize) => {
+  const { DataTypes } = require("sequelize");
+  // Exportamos una funcion que define el modelo
+  // Luego le injectamos la conexion a sequelize.
+  module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
     "Order",
@@ -26,7 +26,31 @@ module.exports = (sequelize) => {
       total: {
         type: DataTypes.FLOAT,
         allowNull: true,
-      }
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      surname: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      shippingAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      zipCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: true,
@@ -35,4 +59,4 @@ module.exports = (sequelize) => {
       freezeTableName: true,
     }
   );
-};
+  };

@@ -1,7 +1,3 @@
-// * En esta ruta se solicitan las SubCategorias de los productos
-
-
-
 const { Router } = require("express");
 const controller = require("./controller.js");
 

@@ -81,15 +81,36 @@ async function deleteUser(user_id) {
 async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
-    body.password = await bcrypt.hash(body.password, 10); // 10 salt
-
-    await User.update(body, { where: { user_id } });
-    return "usuario  modificado exitosamente.";
+    //body.password = await bcrypt.hash(body.password, 10); // 10 salt
+    const userFound = await User.update(body, { where: { user_id } });
+    console.log("userFound ", userFound);
+    return setLoggedUserData(userFound.dataValues);
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
+function setLoggedUserData({
+  user_id,
+  username,
+  name,
+  surname,
+  billingAddress,
+  profilePicture,
+  zipCode,
+  email,
+}) {
+  return {
+    user_id,
+    username,
+    name,
+    surname,
+    billingAddress,
+    profilePicture,
+    zipCode,
+    email,
+  };
+}
 module.exports = {
   getAllUsers,
   getUserById,
@@ -98,4 +119,5 @@ module.exports = {
   getQR,
   compareGoogleAuth,
   getUserBy,
+  setLoggedUserData,
 };

@@ -1,23 +1,19 @@
-// * En esta ruta se registra y logean usuarios.
-
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
+
 const router = Router();
-
-
-// $ BODY  CREACION DE USUARIO { username, password }
-router.post("/", validate.enter, async (req, res) => {
+//NEW USER
+router.post("/", async (req, res) => {
   const data = req.body;
   try {
-    res.status(200).json(await controller.handleNewUser(data));
+    res.status(200).json({ status: await controller.handleNewUser(data) });
   } catch (error) {
     res.status(400).json(error.message);
   }
 });
 
-
-// $ PARAMS /enter/login   /enter/logout  /enter/recover   PARAMS { accessType }  ←-------------------- HACE LOGIN, LOGOUT O RECOVER PASSWORD
+// PARAMS /enter/login   /enter/logout  /enter/recover
 router.put("/:accessType", async (req, res) => {
   console.log("enter-login");
   const { accessType } = req.params;
@@ -44,13 +40,14 @@ router.put("/:accessType", async (req, res) => {
         } else if (authResult === null || authResult.twoFactor) {
           return res.status(200).json(authResult);
         } else {
-          res.sendStatus(400);
+          res.status(200).json({ status: authResult });
         }
         break;
       case "logout":
         //! LOGOUT tiene que guardar data de la session - savedSessionData
         // const cookie = req.cookies?.jwt;
         // const savedSessionData = req.cookies?.savedSessionData;
+        console.log(req.body);
         if (req.body?.user_id) {
           res.status(200).json({
             status: await controller.handleLogout(req.body.user_id),
@@ -59,16 +56,16 @@ router.put("/:accessType", async (req, res) => {
         break;
       case "recover":
         //Entra un body = {username:"Pepito"}
-        if (req.body?.username) {
+        if (req.body?.email) {
           res.status(200).json({
-            status: await controller.handleRecoverPassword(req.body.username),
+            status: await controller.handleRecoverPassword(req.body.email),
           });
         } else res.status(400).json({ status: "invalid username" });
       default:
         break;
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(400).json(error.message);
   }
 });
 

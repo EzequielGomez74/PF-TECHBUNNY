@@ -1,23 +1,9 @@
 const { Favorite, Product } = require("../../services/db/db.js");
-//$Esta ruta , te devuelve todos los productos favoritos de un usuario
-//$ Y se le suman los datos (name,price,image,stock,brand) para facilitar la incorporacion en el front
+
 async function getAllFavorite(user_id) {
   try {
     let favorites = await Favorite.findAll({ where: { user_id } });
-    const result = [];
-    for (let i = 0; i < favorites.length; i++) {
-      const productData = await Product.findOne({ where: { product_id: favorites[i].product_id } })
-      const favorite = {
-        ...favorites[i].dataValues,
-        price: productData.dataValues.price,
-        name: productData.dataValues.name,
-        image: productData.dataValues.image,
-        stock: productData.dataValues.stock,
-        brand: productData.dataValues.brand,
-      };
-      result.push(favorite);
-    }
-    return result;
+    return favorites;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -25,17 +11,22 @@ async function getAllFavorite(user_id) {
 
 async function createFavorite(body) {
   try {
-    const { product_id, user_id } = body;
-    const existe = await Favorite.findOne({ where: { product_id, user_id } });
+    const { product_id, user_id} = body;
+    const existe = await Favorite.findOne({ where: { product_id, user_id }});
     if (!existe) {
+      const productData = await Product.findOne({where:{product_id}})
       await Favorite.create({
-        product_id,
-        user_id
-      });
+        price: productData.dataValues.price, 
+        name: productData.dataValues.name, 
+        image: productData.dataValues.image, 
+        stock: productData.dataValues.stock,
+        brand: productData.dataValues.brand,
+        product_id, 
+        user_id});
 
       return "Producto agregado a favoritos!";
     } else {
-      await Favorite.destroy({ where: { product_id, user_id } });
+      await Favorite.destroy({ where: {product_id, user_id}});
       return "Producto eliminado a favoritos!";
     }
   } catch (error) {
