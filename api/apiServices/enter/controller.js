@@ -169,15 +169,14 @@ async function handleLogout(user_id) {
   return "SUCCESS";
 }
 
-async function handleRecoverPassword(username) {
+async function handleRecoverPassword(email) {
   try {
-    const users = await User.findAll({ where: { username } });
+    const users = await User.findAll({ where: { email } });
     let foundUser = null;
     users.forEach((user) => {
       if (!user.dataValues.usingGoogleLogin) foundUser = user;
     });
     if (!foundUser) return "FAIL";
-    foundUser.update({ password: "" });
     generateValidationAndSendMail(foundUser, "recover", 1);
     return "SUCCESS";
   } catch (error) {

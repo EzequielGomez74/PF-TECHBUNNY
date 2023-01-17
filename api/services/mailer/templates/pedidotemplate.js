@@ -1,4 +1,4 @@
-const pedidotemplate = (userdata) => {
+const pedidotemplate = (completePath, userdata) => {
   return `
 <table border="0" cellpadding="0" cellspacing="0" bgcolor="#F2F2F2" style="direction:ltr;width:100%;min-width:320px;text-align:center;color:#292c2e;font-family:Arial,Verdana,Heveltica,sans-serif;font-size:1em;">
 <tbody>
