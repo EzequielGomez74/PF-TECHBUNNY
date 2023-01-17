@@ -45,13 +45,13 @@ function Home() {
                 </Link>
             </div>
             <div className={s.bannerTwo}>
-                <Link to='/category/Notebooks'>
+                <Link to='/category/Periféricos'>
                 <div className={s.d}></div>
                 </Link>
-                <Link to='/category/Cooling'>
+                <Link to='/category/Impresoras'>
                 <div className={s.e}></div>
                 </Link>
-                <Link to='/category/Consolas'>
+                <Link to='/category/Periféricos'>
                 <div className={s.f}></div>
                 </Link>
             </div>

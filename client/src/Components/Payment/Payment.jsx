@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import s from './Payment.module.css';
 import NavBar from '../NavBar/NavBar';
@@ -11,6 +12,17 @@ function Payment() {
 	const preferences = useSelector(state => state.preferences)
 	const orderMp = useSelector(state => state.orders)
 	const dispatch = useDispatch();
+=======
+import React, { useState } from 'react';
+import s from './Payment.module.css';
+import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+function Payment() {
+    const dm = useSelector(state => state.darkMode);
+>>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
     const [payInfo, setPayInfo] = useState({
         datos: '',
         dni: '',
@@ -34,6 +46,7 @@ function Payment() {
         history.push('/cart');
     }
 
+<<<<<<< HEAD
 useEffect(() => {
 	if (Object.keys(preferences).length !== 0) {
 		
@@ -55,6 +68,23 @@ useEffect(() => {
   async function pay() {
     try{
     	dispatch(getPayPreferencesById(1))        
+=======
+    
+  async function pay() {
+    try{
+      const order_id = 1;
+      const preference = await axios.get(`http://localhost:3001/orders/pagar/${order_id}`)        
+      console.log("PREFERENCIAAAAS",preference);
+      var script = document.createElement("script");
+
+        // The source domain must be completed according to the site for which you are integrating.
+        // For example: for Argentina ".com.ar" or for Brazil ".com.br".
+        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+        script.type = "text/javascript";
+        script.dataset.preferenceId = preference.data.preferenceId;
+        document.getElementById("page-content").innerHTML = "";
+        document.querySelector("#page-content").appendChild(script);
+>>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
     }
     catch(error) {
       console.error(error.message)  
@@ -141,8 +171,13 @@ useEffect(() => {
 						{/* Los llevará a Mercado Pago */}
 					</div>
 					<div>
+<<<<<<< HEAD
 						<h1>MERCADOPAGO</h1>
 						<button onClick={pay}> GENERAR LINK DE PAGO</button>
+=======
+						<button onClick={pay}> pagaaaar</button>
+						<h1>PEPITO RULES</h1>
+>>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec
 						<div className="page-content" id="page-content"></div>
 					</div>
 				</div>
@@ -155,6 +190,7 @@ useEffect(() => {
 export default Payment
 
 
+<<<<<<< HEAD
 
 
 // import React, { useState, useEffect } from 'react';
@@ -273,3 +309,8 @@ export default Payment
 // // La página de carrito tiene que despachar una acción cuando clickee procesar compra. 
 // // Información que se recibirá en esta sección para tener el monto total de la compra
 // //Pendiente: Linkear el boton con el Mercado Pago y enviarle la info del cart como la de payment.
+=======
+// La página de carrito tiene que despachar una acción cuando clickee procesar compra. 
+// Información que se recibirá en esta sección para tener el monto total de la compra
+//Pendiente: Linkear el boton con el Mercado Pago y enviarle la info del cart como la de payment.
+>>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec

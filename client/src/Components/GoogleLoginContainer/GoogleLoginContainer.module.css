@@ -1,36 +1,7 @@
 .b2 {
-  background-color: #faf5f5;
-  color: #20232a;
+  background-color: #F6F5FA;
+  color: #20232A;
   border: none;
-}
-.dmb2 {
-  background-color: transparent;
-  color: #f6f5fa;
-  border: 1px solid #f6f5fa;
-}
-
-/* .googleLogin {
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-} */
-
-.signInButton {
-  float: none;
-  position: static;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  width: max-content;
-  width: 80%;
-  align-self: center;
-  text-align: center;
-  border: none;
-}
-
-.signInButton div {
-  margin: 1px 0 3px 0;
 }
 .dmb2 {
   background-color: transparent;

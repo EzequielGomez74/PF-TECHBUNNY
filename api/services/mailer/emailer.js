@@ -26,7 +26,7 @@ const template = (userdata) => {
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Gracias por tu orden✔`, // Subject line
-      html: pedidotemplate(userdata), //*
+      html: pedidotemplate(userdata), //* 
     };
   }
 };

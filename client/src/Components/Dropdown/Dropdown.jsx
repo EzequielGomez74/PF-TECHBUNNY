@@ -18,4 +18,8 @@ const Dropdown = ({ description }) => {
   </div>
 }
 
+<<<<<<< HEAD
 export default Dropdown;
+=======
+export default Dropdown
+>>>>>>> a81739dcfc51972965136dab2818ec451e6c18ec

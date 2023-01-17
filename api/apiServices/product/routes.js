@@ -7,6 +7,8 @@ const verifyJWT = require("../../middlewares/verifyJWT");
 
 //$ GET 	/products                                                                             <-- Trae todos los productos
 //$ GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
+//$ GET 	/products?category=Perifericos&subcategory=Mouse                                      <-- Trae todos los productos que tienen subcategoria Mouse
+// todo /products?offer=true      
 router.get("/", async (req, res) => {
   console.log("1");
   try {

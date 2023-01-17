@@ -6,62 +6,33 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-		"Order",
-		{
-			order_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				primaryKey: true,
-				autoIncrement: true,
-			},
-			status: {
-				type: DataTypes.ENUM(["processed", "completed", "canceled"]),
-				allowNull: false,
-				defaultValue: "processed",
-			},
-			user_id: {
-				type: DataTypes.INTEGER,
-				allowNull: true,
-			},
-			total: {
-				type: DataTypes.FLOAT,
-				allowNull: true,
-			},
-      		dni: {
-				type: DataTypes.INTEGER,
-				allowNull: true,
-			},
-			name: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-			surname: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-			email: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-			shippingAddress: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-			zipCode: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-			city: {
-				type: DataTypes.STRING,
-				allowNull: true,
-			},
-
-		},
-		{
-			timestamps: true,
-			createdAt: true,
-			updatedAt: true,
-			freezeTableName: true,
-		}
-	);
+    "Order",
+    {
+      order_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      status: {
+        type: DataTypes.ENUM([ "processed", "completed", "canceled"]),
+        allowNull: false,
+        defaultValue: "processed",
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      total: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      }
+    },
+    {
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
+      freezeTableName: true,
+    }
+  );
 };

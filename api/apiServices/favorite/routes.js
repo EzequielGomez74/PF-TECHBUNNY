@@ -21,7 +21,6 @@ router.get("/:user_id", async (req, res) => {
   }
 });
 
-
 //$ Esta ruta busca el producto en la tabla favoritos del usuario, si no existe, lo agrega. Si ya existe, lo quita. {body --- { product_id, user_id} }
 router.post("/", async (req, res) => {
   try {

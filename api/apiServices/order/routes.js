@@ -6,13 +6,13 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
-const { OrderProduct, Order } = require("../../services/db/db.js");
+const { OrderProduct } = require("../../services/db/db.js");
 const mercadopago = require("mercadopago");
-const {access_token_mp} = require("../../config/mercadopago");
+const access_token_mp = require("../../config/mercadopago.js");
 
 
 
-// $ Esta ruta retorna todas las orders del usuario por id con QUERY { user_id }
+// $  ESTA RUTA RECIBE por Query {user_id} y te devuelve todas las ordenes correspondientes a este usuario
 router.get("/", async (req, res) => {
 	const { user_id } = req.query;
 	try {
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// $ Esta ruta retorna los detalles de una orden por PARAMS { order_id }.
+//$ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
 router.get("/:order_id", async (req, res) => {
 	//retorna una sola por id con PARAMS
 	const { order_id } = req.params;
@@ -44,19 +44,15 @@ router.get("/:order_id", async (req, res) => {
 
 
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
+// $ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
 router.get("/pagar/:order_id", async (req, res) => {
 	try {
-
 		mercadopago.configure({
-			access_token: "TEST-3131783442482356-122810-8c7720ae26aa2dc8fc655b6acac2e721-240429259",
+			access_token: access_token_mp,
 		});
 		const productos = await OrderProduct.findAll({
 			where: { order_id: req.params.order_id },
 		});
-		
-		const userData = await Order.findOne({where: {order_id: req.params.order_id, user_id: productos[0].user_id }})
-
-
 		const carrito = productos.map((el) => {
 			return {
 				title: el.dataValues.product_name,
@@ -68,19 +64,15 @@ router.get("/pagar/:order_id", async (req, res) => {
 		let preference = {
 			items: carrito,
 			back_urls: {
-				success: "http://localhost:3000/feedback",
-				failure: "http://localhost:3000/feedback", 
-				pending: "http://localhost:3000/feedback", 
+				success: "http://localhost:3000/home", // ! ACA VA SI FUE PAGO EXITOSO
+				failure: "http://localhost:3000/home", // ! SI EL PAGO FALLA
+				pending: "http://localhost:3000/home", // ? PAGO PENDIENTE
 			},
-			payer: {
-				email: userData.dataValues.email,
-				},
 			auto_return: "approved",
 		};
 		const response = await mercadopago.preferences.create(preference);
 		const preferenceId = response.body.id;
-
-		res.send({preferenceId});
+		res.send({ preferenceId });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}

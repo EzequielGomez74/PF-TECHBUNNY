@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Footer from '../Footer/Footer'
 import NavBar from '../NavBar/NavBar'
 import QADropdown from './QADropdown'
@@ -7,11 +7,6 @@ import { useSelector } from 'react-redux';
 
 function QA() {
     const dm = useSelector(state => state.darkMode);
-
-    useEffect(()=>{
-        window.scrollTo(0, 0);
-    }, [])
-    
   return (
     <div className={dm? s.dmqaPage : s.qaPage}>
         <NavBar />

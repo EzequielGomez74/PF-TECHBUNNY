@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './Pagination.css';
 
 export default function Pagination({productsPerPage, products, paginate, currentPage}){

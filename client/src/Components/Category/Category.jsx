@@ -11,8 +11,7 @@ import Pagination from "../Pagination/Pagination";
 function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
-  //Para usuario registrado
-  let user = useSelector(state => state.loggedUser);
+
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
@@ -80,10 +79,6 @@ function Category() {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
-  useEffect(()=>{
-    window.scrollTo(0, 0);
-  }, [currentPage])
-
   return (
     <div className={dm ? s.dmbackground : s.background}>
       <NavBar />
@@ -128,10 +123,8 @@ function Category() {
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <CardV
-              favorite={e.favorite}
-                user_id={user.user_id}
                 key={e.product_id}
-                product_id={e.product_id}
+                id={e.product_id}
                 brand={e.brand}
                 name={e.name}
                 image={e.image}
