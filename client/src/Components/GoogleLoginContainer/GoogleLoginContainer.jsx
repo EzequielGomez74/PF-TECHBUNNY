@@ -20,23 +20,29 @@ const GoogleLoginContainer = () => {
   async function responseGoogle(response) {
     console.log(response);
     if (response?.tokenId) {
-      loginUser({ tokenId: response.tokenId });
+      loginUser({ tokenId: response.tokenId }, (status) => {
+        if (status === "EMAIL ALREADY IN USE") alert("EMAIL ALREADY IN USE");
+      });
     } else {
       throw new Error("Google login error");
     }
   }
   return (
-    <button className={dm ? s.dmb2 : s.b2}>
-      <FontAwesomeIcon icon={faGoogle} />
-      &nbsp;&nbsp;&nbsp;Iniciar Sesión con Google
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </button>
+    // <button className={dm ? s.dmb2 : s.b2}>
+    //   <FontAwesomeIcon icon={faGoogle} />
+    //   &nbsp;&nbsp;&nbsp;Iniciar Sesión con Google
+
+    // </button>
+    // <div className={s.googleLogin}>
+    <GoogleLogin
+      clientId={clientId}
+      buttonText="login con google"
+      onSuccess={responseGoogle}
+      onFailure={responseGoogle}
+      cookiePolicy={"single_host_origin"}
+      className={s.signInButton}
+    />
+    // </div>
   );
 };
 

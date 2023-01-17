@@ -2,20 +2,23 @@
     font-family: 'Poppins';
     background-color: rgb(255, 255, 255);
     width: 206px;
-    height: px;
+    height: 344px;
     display: flex;
     align-items: center;
     flex-direction: column;
     margin-top: 10px;
     padding-top: 15px;
     padding-bottom: 22px;
-    
-    /* border: solid 1px #000000; */
     border-radius: 0px;
     margin-bottom: 10px;
 }
 
-.favContainer{
+.card:hover{
+    transform: translateY(-12px);
+    transition: 0.8s;
+}
+
+.iconWrap{
     padding-left: 160px;
     padding-right: 10px;
 }
@@ -30,6 +33,14 @@
 .heart:hover{
     color: #D7F136;
     cursor: pointer;
+}
+
+.favHeart{
+    color: #D7F136;
+    background: none;
+    border: none;
+    font-size: 16px;
+    transition: 0.5s;
 }
 
 

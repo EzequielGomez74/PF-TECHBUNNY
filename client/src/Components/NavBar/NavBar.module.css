@@ -57,7 +57,6 @@
 .two div {
   max-width: 1500px;
   margin: auto;
-  margin-bottom: 10px;
   padding-left: 25px;
   padding-right: 25px;
   display: flex;
@@ -76,7 +75,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: black;
-  width: 100px;
+  width: 300px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -189,6 +188,13 @@ h3{
   font-weight: 500;
 }
 
+.profilePicture {
+  max-width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px black;
+}
+
 
   @media handheld, only screen and (max-width: 767px) {
     .three {
@@ -224,6 +230,8 @@ h3{
       line-height: 16px;
       color: #20232A;
     }
+
+    
   
     /* DARK MODE  */
     .dmnavResponsive{

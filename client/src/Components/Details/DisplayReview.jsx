@@ -149,7 +149,7 @@ function DisplayReview({ reviews, product_id, handlePost }) {
         </div>
       </section>
       <br />
-      <Footer />
+   
     </div>
   );
 }
