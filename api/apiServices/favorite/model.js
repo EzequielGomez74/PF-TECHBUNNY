@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-
+      //! VERIFICAR SI ESTA BIEN ESTE MODELO O LE SOBRAN LAS SIGUIENTES COSAS : name , img , price , stock , brand
 module.exports = (sequelize) => {
   sequelize.define(
     "Favorite",
@@ -12,28 +12,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       }
-      //! VERIFICAR SI ESTA BIEN ESTE MODELO O LE SOBRAN LAS SIGUIENTES COSAS :
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      price: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
-      stock: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0,
-      },
-      brand: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
     },
     {
       timestamps: false,

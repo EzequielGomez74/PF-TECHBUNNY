@@ -371,75 +371,8 @@ export function getPayPreferencesById(order_id) {
     }
   };
 }
-export function getCarrousel(carrouselType) {
-  return async function (dispatch) {
-    try {
-      var json = await axiosInstance.get(`/carrousels/${carrouselType}`);
-      console.log("ALGO QUE LLEGO ", carrouselType, " ", json.data);
-      return dispatch({
-        type: GET_CARROUSEL,
-        payload: { carrouselData: json.data, carrouselType },
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
-}
 
-export function addOrRemoveQuantityFromCart(id, count) {
-  return {
-    type: ADD_OR_REMOVE_QUANTITY_FROM_CART,
-    payload: { id, count },
-  };
-}
 
-export const createOrder = (user_id, pushPayment) => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.post(`/orders/${user_id}`);
-      //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      console.log(response.data);
-      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
-      console.log(orders.data);
-      pushPayment();
-      return dispatch({ type: CREATE_ORDER, payload: orders.data });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-export const allOrdersByUser = (user_id) => {
-  return async function (dispatch) {
-    const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
-    console.log(orders.data);
-    return dispatch({ type: ALL_ORDERS_BY_USER, payload: orders.data });
-  };
-};
-
-//verificar si está bien la función
-export const updateOrderInfoById = (order_id, payInfo) => {
-  return async function () {
-    try {
-      const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo);
-      console.log(userInfo.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export function getPayPreferencesById(order_id) {
-  return async function (dispatch) {
-    try {
-      var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
-      console.log("info payment", json.data);
-      return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
-    } catch (error) {
-      alert(error);
-    }
-  };
-}
 export function getCarrousel(carrouselType) {
   return async function (dispatch) {
     try {
