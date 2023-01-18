@@ -330,7 +330,7 @@ function NavBar() {
         </div>
       )}
 
-      <div className="search1">
+      {/* <div className="search1">
         {searchTerm.length && results.length
           ? results.map((p, i) => {
               if (i < 7)
@@ -348,7 +348,7 @@ function NavBar() {
                 );
             })
           : null}
-      </div>
+      </div> */}
     </div>
   );
 }

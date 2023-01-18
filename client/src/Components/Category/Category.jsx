@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import * as actions from "../../redux/actions";
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
@@ -15,6 +15,9 @@ function Category() {
   let user = useSelector((state) => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
+
+  let location = useLocation();
+
   let dispatch = useDispatch();
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
