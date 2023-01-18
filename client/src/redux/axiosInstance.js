@@ -50,6 +50,7 @@ axiosInstance.interceptors.response.use(
         console.log("DESLOGUEAR");
         console.log("entra logout");
         await logoutUser();
+        window.location.href = "/Login";
       }
     }
     return Promise.reject(err);

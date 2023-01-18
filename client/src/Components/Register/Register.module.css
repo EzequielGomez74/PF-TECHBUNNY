@@ -58,6 +58,7 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .m2:hover {
@@ -91,6 +92,14 @@
   background-color: #F6F5FA;
   color: #20232A;
   border: none;
+}
+
+.error{
+  color:red
+}
+
+.hidden{
+  color:white
 }
 
 @media only screen and (max-width: 800px) {}

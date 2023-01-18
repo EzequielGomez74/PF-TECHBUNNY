@@ -18,6 +18,7 @@ import Payment from "./Components/Payment/Payment";
 import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import EditProfile from "./Components/Profile/EditProfile";
+import Feedback from "./Components/Feedback/Feedback";
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 function App() {
@@ -40,22 +41,9 @@ function App() {
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />
         <Route exact path="/verify/:token" component={Verify} />
+        <Route exact path="/feedback" component={Feedback} />
         <Route exact path="*" component={Error} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/editProfile" component={EditProfile} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/detail/:id" component={Details} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/favorites" component={Favoritos} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/categories" component={Categories} />
-        <Route exact path="/category/:name" component={Category} />
-        <Route exact path="/followUp" component={FollowUp} />
-        <Route exact path="/payment" component={Payment} />
-        <Route exact path="/qa" component={QA} />
-        <Route exact path="/verify/:token" component={Verify} />
-        <Route exact path="*" component={Error} />
-      </Switch>
+       </Switch>
     </div>
   );
 }
