@@ -146,19 +146,19 @@ function Carrusel({ products }) {
   //Para usuario registrado
   let dispatch = useDispatch();
   let user = useSelector((state) => state.loggedUser);
-  let allProducts = useSelector((state) => state.products);
-  let pCarrusel = [
-    allProducts[3],
-    allProducts[466],
-    allProducts[679],
-    allProducts[48],
-    allProducts[253],
-    allProducts[268],
-    allProducts[44],
-    allProducts[494],
-    allProducts[547],
-    allProducts[657],
-  ];
+  // let allProducts = useSelector((state) => state.products);
+  // let pCarrusel = [
+  //   allProducts[3],
+  //   allProducts[466],
+  //   allProducts[679],
+  //   allProducts[48],
+  //   allProducts[253],
+  //   allProducts[268],
+  //   allProducts[44],
+  //   allProducts[494],
+  //   allProducts[547],
+  //   allProducts[657],
+  // ];
 
   useEffect(() => {
     dispatch(getProducts());
