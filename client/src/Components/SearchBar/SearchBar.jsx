@@ -19,10 +19,12 @@ function SearchBar() {
   const noTerm = useRef(true);
   const initialSearch = useRef(true);
 
+  const dm = useSelector((state) => state.darkMode);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (searchTerm.length <= 2 && !initialSearch.current) {
+    if (searchTerm.length > 0 && searchTerm.length <= 2 && !initialSearch.current) {
       dispatch(cleanSearchResults());
     }
     // if (noTerm.current && searchTerm.length) {
@@ -68,49 +70,49 @@ function SearchBar() {
   };
 
   return (
-    <form className={s.searchContainer}>
-      <span className={s.inputContainer}>
+    <form className={dm? s.dmsearchContainer : s.searchContainer}>
+      <span className={dm? s.dminputContainer : s.inputContainer}>
         <input
           type="text"
           value={searchTerm}
           onChange={handleChange}
-          className={s.input}
+          className={dm? s.dminput : s.input}
           placeholder={`Buscar productos`}
         />
         {searchTerm.length > 0 && (
           <button
             onClick={handleDeleteSearchTerm}
-            class={s.inputCloseButton}
+            class={dm? s.dminputCloseButton: s.inputCloseButton}
             onclick="clearInput()"
           >
             X
           </button>
         )}
       </span>
-      <button className={s.inputIcon} onClick={handleClick}>
+      <button className={dm? s.dminputIcon : s.inputIcon} onClick={handleClick}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-      <span className={s.searchScroll}>
-        <ul className={s.searchElement}>
+      <span className={dm? s.dmsearchScroll : s.searchScroll}>
+        <ul className={dm? s.dmsearchElement : s.searchElement}>
           {searchTerm.length > 0 &&
             results.length > 0 &&
             results.map((p, i) => {
               if (i < 15)
                 return (
-                  <span className={s.searchChildContainer}>
+                  <span className={dm? s.dmsearchChildContainer : s.searchChildContainer}>
                     <NavLink to={`/detail/${p.product_id}`}>
                       <li>
                         {/* <Link to={`/detail/${p.product_id}`}> */}{" "}
                         <img
-                          className={s.imgsearch}
+                          className={dm? s.dmimgsearch : s.imgsearch}
                           src={p.image}
                           alt={p.name}
                         />
                         {/* </Link>
                     <Link to={`/detail/${p.product_id}`}> */}{" "}
-                        <span className={s.nameAndPrice}>
-                          <p className={s.NameSearch}> {p.name} </p>{" "}
-                          <p className={s.priceSearch}> US$ {p.price} </p>{" "}
+                        <span className={dm? s.dmnameAndPrince : s.nameAndPrice}>
+                          <p className={dm? s.dmNameSearch : s.NameSearch}> {p.name} </p>{" "}
+                          <p className={dm? s.dmpriceSearch : s.priceSearch}> US$ {p.price} </p>{" "}
                         </span>
                         {/* </Link> */}
                       </li>
@@ -122,7 +124,7 @@ function SearchBar() {
             <span>
               {" "}
               <Link to={`/results/${searchTerm}`}>
-                <li className={s.allResults}>
+                <li className={dm? s.dmallResults : s.allResults}>
                   Ver todos los resultados de busqueda
                 </li>
               </Link>
@@ -131,13 +133,13 @@ function SearchBar() {
         </ul>
 
         {notFound === true && results.length === 0 && (
-          <ul className={s.notFound}>
+          <ul className={dm? s.dmnotFound : s.notFound}>
             <li>No se encontraron resultados</li>
           </ul>
         )}
 
         {noTerm && results?.length === 0 && (
-          <ul className={s.hiden}>
+          <ul className={dm? s.dmhiden : s.hiden}>
             <li> </li>
           </ul>
         )}

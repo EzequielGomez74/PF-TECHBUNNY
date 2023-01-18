@@ -35,6 +35,7 @@ function Details() {
 
   const flag = useRef(true);
   const initialLoad = useRef(true);
+  const idChange = useRef(id);
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -47,6 +48,11 @@ function Details() {
     setQuantity(0);
     setStock(product.stock - getCartStock(product.product_id));
     window.scrollTo(0, 0);
+    if (idChange.current !== id) {
+      dispatch(actions.getProductById(id));
+      dispatch(actions.getReviewsBy(id));
+      idChange.current = id;
+    }
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {

@@ -81,7 +81,9 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
+          <div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          </div>
           <h1>
             <a href="/home">TECHBUNNY</a>
           </h1>

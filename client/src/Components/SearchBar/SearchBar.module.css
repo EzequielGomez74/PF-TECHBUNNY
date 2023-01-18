@@ -11,7 +11,6 @@
   width: 250px;
   border: none;
   text-indent: 10px;
-  /* border-radius: 5px 0px 0px 5px; */
   border: 1px solid #20232a;
 }
 
@@ -42,38 +41,6 @@
   cursor: pointer;
   color: #d7f136;
   transition: 0.5s;
-}
-
-/* DARK MODE  */
-
-.dminput {
-  height: 40px;
-  width: 250px;
-  border: none;
-  text-indent: 10px;
-  background-color: #1b1d23;
-  border: 1px solid #fefefe;
-  border-radius: 5px 0px 0px 5px;
-}
-
-.dminput:focus {
-  outline: none;
-  color: white;
-}
-
-.dminputIcon {
-  height: 40px;
-  width: 40px;
-  background-color: #fefefe;
-  color: #20232a;
-  border: 1px solid #fefefe;
-  border-radius: 0px 5px 5px 0px;
-}
-
-.dminputIcon:hover {
-  color: #d7f136;
-  transition: 0.5s;
-  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -133,8 +100,7 @@ button[type="submit"] {
   border: solid 1px;
 }
 
-.searchChildContainer {
-}
+
 
 li {
   padding: 0.5em;
@@ -214,6 +180,146 @@ li:hover p {
 }
 
 .hiden {
+  display: none;
+  border: none;
+}
+
+/* DARK MODE  */
+.dminputContainer {
+  position: relative;
+}
+
+.dminput {
+  height: 40px;
+  width: 250px;
+  border: none;
+  text-indent: 10px;
+  border: 1px solid #20232a;
+  background-color: #292a2e;
+  color: white;
+}
+
+.dminputCloseButton {
+  position: absolute;
+  transform: translate(-10px, 20px);
+  border: none;
+  color: white;
+  background-color: #292a2e;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.dminput:focus {
+  outline: none;
+  color: white;
+}
+
+.dminputIcon {
+  height: 55px;
+  width: 44px;
+  background-color: #fefefe;
+  color: black;
+  transition: 0.5s;
+}
+
+.dminputIcon:hover {
+  color: #d7f136;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.dmsearchNavLink {
+  border-bottom: #7e7e7e;
+}
+
+.dmsearchElement {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+}
+
+
+.dmnameAndPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dmNameSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+}
+
+.dmpriceSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 400;
+  text-align: start;
+  transition: 0.5s;
+  margin-top: 0;
+}
+
+
+.dmimgsearch {
+  width: 70px;
+  max-height: 70px;
+}
+
+.dmallResults {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+  cursor: pointer;
+  align-items: center;
+}
+
+.dmallResults:hover {
+  color: #d7f136;
+}
+
+.dmnotFound {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  max-width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  width: 337px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+  display: flex;
+}
+
+.dmhiden {
   display: none;
   border: none;
 }

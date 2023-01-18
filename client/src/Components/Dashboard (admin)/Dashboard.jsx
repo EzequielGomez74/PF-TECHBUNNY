@@ -32,12 +32,14 @@ function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Jenny Chan</td>
-              <td>3 waterfoot road</td>
-              <td>333-962-7516</td>
-              <td>jenny.chan@email.com</td>
-            </tr>
+            {contacts.map(contact => (
+              <tr>
+                <td>{contact.fullName}</td>
+                <td>{contact.address}</td>
+                <td>{contact.phoneNumber}</td>
+                <td>{contact.email}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
