@@ -2,6 +2,8 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 
 const router = Router();
+
+
 router.get("/", async (req, res) => {
   const { category } = req.query;
   try {
