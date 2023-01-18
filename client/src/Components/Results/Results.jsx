@@ -6,6 +6,7 @@ import CardV from "../Card V/CardV";
 import { useState, useEffect, useRef } from "react";
 import s from "../Category/Category.module.css";
 import Pagination from "../Pagination/Pagination";
+import a from "../Results/Results.module.css";
 import { getResults, getSearchResults } from "../../redux/actions";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 
@@ -38,8 +39,8 @@ function Results() {
     <div>
       <NavBar />
       <section>
-        <h4>
-          {resultsLocal.length} resultados para ''{searchTerm}''{" "}
+        <h4 className={a.ResultadosPara}>
+          {resultsLocal.length} resultados para: ''{searchTerm}''{" "}
         </h4>
         <div className={s.results}>
           {currentResults.length ? (
