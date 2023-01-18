@@ -60,6 +60,7 @@ let totalVolume = 0;
     let emails = [];
     const newsletterData = await Newsletter.findAll()
     newsletterData.map((el) => { emails.push(el.dataValues.email) })
+    const activeOffers = await Category.count({where: {isOffer: true}})
 
 
 
@@ -81,7 +82,8 @@ let totalVolume = 0;
       },
       newsletterData : {
         subscriberCount : subscriberCount,
-        subscribers : newsletterData,
+        subscribers : emails,
+        activeOffers: activeOffers,
       }
     }
   
