@@ -51,22 +51,19 @@ let totalVolume = 0;
 
 
 
+
     // TODO - Aca va PRODUCTSDATA
     const productsCount = await Product.count()
     const productsOutOfStock = await Product.count({ where: { stock: 0 }})
     const productsData = await Product.findAll()
 
-    console.log("total de productos activos", productsCount)
-    console.log("cantidad de productos sin stock", productsOutOfStock)
+
 
 
     // TODO - Aca va NEWSLETTER
 
     const subscriberCount = await Newsletter.count()
     const newsletterData = await Newsletter.findAll()
-
-    console.log("total de emails subscriptos", subscriberCount)
-    console.log("estos son los emails subscritos al newsletter: ", newsletterData)
 
 
 
