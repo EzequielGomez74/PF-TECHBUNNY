@@ -4,10 +4,12 @@ import Footer from "../Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateUserInfo } from '../../redux/actions';
-import s from './Profile.module.css'
+import s from "./Profile.module.css";
 
 function Profile(){
     const user = useSelector(state => state.loggedUser)
+    const dm = useSelector(state => state.darkMode);
+
     const [input, setInput] = useState({
         profilePicture:"",
         username: "",
@@ -40,9 +42,9 @@ function Profile(){
     return(
         <div>
             <NavBar/>
-            <div className={s.profileSection}>
+            <div className={dm? s.dmprofileSection : s.profileSection}>
                 { user.username && user.email ? 
-                <div className={s.profileInfo}>
+                <div className={dm? s.dmprofileInfo : s.profileInfo}>
                     <span><strong>Nombre de usuario:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.username} </span>
                     <span><strong>Nombre:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.name} </span>
                     <span><strong>Apellido:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.surname} </span>
@@ -51,7 +53,7 @@ function Profile(){
                     <span><strong>Código ZIP:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.zipCode} </span>
                     <button onClick={handleEditProfile} >Editar información</button>
                 </div> : 
-                <form onSubmit={handleSubmit} className={s.profileForm} >
+                <form onSubmit={handleSubmit} className={dm? s.dmprofileForm : s.profileForm} >
                     <input type="text" name="username" value={input.username} onChange={handleChange} placeholder="Nombre de usuario"></input>
                     <input type="text" name="name" value={input.name} onChange={handleChange} placeholder="Nombre"></input>
                     <input type="text" name="surname" value={input.surname} onChange={handleChange} placeholder="Apellido"></input>

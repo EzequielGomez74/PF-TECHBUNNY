@@ -66,7 +66,7 @@ function CarruselDetail() {
         slidesPerView={5}
         spaceBetween={15}
         slidesPerGroup={5}
-        loop={true}
+        loop={false}
         loopFillGroupWithBlank={true}
         pagination={{
           clickable: true,
