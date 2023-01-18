@@ -16,6 +16,7 @@
 .card:hover{
     transform: translateY(-12px);
     transition: 0.8s;
+    box-shadow: 4px 15px 20px #494c53;
 }
 
 .iconWrap{
