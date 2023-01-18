@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import axios from "axios";
+import img from "../../Photos/conejotriste.png";
 
 function Recover() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,12 @@ function Recover() {
   return (
     <div>
       <NavBar />
-      <div>
+      <div className="recoverContainer">
+      <div className="imgContainer">
+            <div className="imgBunny">
+              <img src={img} alt="bunny login"  />
+            </div>
+            </div>
         <h3>¿Te olvidaste tu contraseña?</h3>
         <h4>
           ¡No te preocupes! Escribe el email de tu cuenta{" "}

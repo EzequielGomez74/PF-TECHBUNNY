@@ -73,10 +73,10 @@ function SearchBar() {
     <form className={dm? s.dmsearchContainer : s.searchContainer}>
       <span className={dm? s.dminputContainer : s.inputContainer}>
         <input
+          className={dm? s.dminput : s.input}
           type="text"
           value={searchTerm}
           onChange={handleChange}
-          className={dm? s.dminput : s.input}
           placeholder={`Buscar productos`}
         />
         {searchTerm.length > 0 && (

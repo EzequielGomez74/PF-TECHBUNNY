@@ -194,11 +194,9 @@ li:hover p {
 .dminput {
   height: 40px;
   width: 250px;
-  border: none;
   text-indent: 10px;
-  border: 1px solid #20232a;
   background-color: #292a2e;
-  color: white;
+  color: #292a2e;
 }
 
 .dminputCloseButton {
@@ -215,11 +213,13 @@ li:hover p {
 .dminput:focus {
   outline: none;
   color: white;
+  border: #292a2e;
 }
 
 .dminputIcon {
   height: 55px;
   width: 44px;
+  border: none;
   background-color: #fefefe;
   color: black;
   transition: 0.5s;
