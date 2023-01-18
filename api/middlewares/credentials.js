@@ -6,7 +6,8 @@ function credentials(req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
     next();
   } else {
-    res.sendStatus(401);
+    next()
+    // res.sendStatus(451);
   }
 }
 
