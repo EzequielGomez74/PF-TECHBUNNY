@@ -1,6 +1,7 @@
 const { User, Product  , Order, Newsletter } = require("../../services/db/db.js");
 const emailer = require("../../services/mailer/emailer.js");
 
+
 async function dashboardData() {
   try {
 
@@ -38,12 +39,11 @@ async function dashboardData() {
 let totalVolume = 0;
     proceso = await Order.sum("total", { where: { status: "completed" } });
     !proceso ? totalVolume=0 : totalVolume=proceso
-    const soldProducts = await Product.sum('soldCount')
+    const soldProducs = await Product.sum('soldCount')
     const ordersData = await Order.findAll()
 
-    console.log("cantidad de productos vendidos: ", soldProducts)
+    console.log("cantidad de productos vendidos: ", soldProducs)
     console.log("cantidad de ordenes completadas", totalVolume)
-
 
 
 
@@ -52,13 +52,20 @@ let totalVolume = 0;
     const productsOutOfStock = await Product.count({ where: { stock: 0 }})
     const productsData = await Product.findAll()
 
-
+    console.log("total de productos activos", productsCount)
+    console.log("cantidad de productos sin stock", productsOutOfStock)
 
 
     // TODO - Aca va NEWSLETTER
 
     const subscriberCount = await Newsletter.count()
+    let emails = [];
     const newsletterData = await Newsletter.findAll()
+    newsletterData.map((el) => { emails.push(el.dataValues.email) })
+
+    console.log("total de emails subscriptos", subscriberCount)
+    console.log("estos son los emails subscritos al newsletter: ", newsletterData)
+    console.log("newsletter: ", emails)
 
 
 
@@ -71,7 +78,7 @@ let totalVolume = 0;
       },
       ordersData : {
         salesVolume: totalVolume,
-        soldProducts: soldProducts,
+        soldProducs: soldProducs,
         orders: ordersData
       },
       productsData : {
@@ -81,9 +88,27 @@ let totalVolume = 0;
       },
       newsletterData : {
         subscriberCount : subscriberCount,
-        subscribers : newsletterData,
+        subscribers : emails,
       }
     }
+    
+  // ordersdata:{
+  // soldproducts:
+  // sales volume:
+  // orders[...]
+  // }
+  
+  // productsdata{
+  // productscount: 830.
+  // productOutOfStock :
+  // products[...]
+  // }
+  
+  // newsletterdata{
+  // suscriberscount:
+  // offersactive:
+  // suscribers[...]
+  // }
   
     return dashboard
   } catch (error) {
