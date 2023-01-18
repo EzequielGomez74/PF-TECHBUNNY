@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-      //! VERIFICAR SI ESTA BIEN ESTE MODELO O LE SOBRAN LAS SIGUIENTES COSAS : name , img , price , stock , brand
 module.exports = (sequelize) => {
   sequelize.define(
     "Favorite",
