@@ -12,7 +12,7 @@ function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
   //Para usuario registrado
-  let user = useSelector(state => state.loggedUser);
+  let user = useSelector((state) => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
@@ -22,8 +22,10 @@ function Category() {
   const [filterPanel, setFilterPanel] = useState({
     price: "none",
     brand: "none",
+    subcategory: "none",
   });
   let productBrands = [];
+  let productSubcategories = [];
   let [currentPage, setCurrentPage] = useState(1);
   let [productsPerPage] = useState(12);
   let indexLastProduct = currentPage * productsPerPage;
@@ -41,12 +43,26 @@ function Category() {
 
   console.log(productBrands);
   let Brands = [];
+  let Subcategories = [];
 
   productBrands.forEach((b) => {
     if (!Brands.includes(b)) {
       Brands.push(b);
     }
   });
+
+  //Array con subcategorias para Perifericos
+  if (name === "Periféricos") {
+    for (let i = 0; i < productsBackup.length; i++) {
+      productSubcategories.push(productsBackup[i].subcategory);
+    }
+
+    productSubcategories.forEach((b) => {
+      if (!Subcategories.includes(b)) {
+        Subcategories.push(b);
+      }
+    });
+  }
 
   let initialLoad = useRef(true);
   let nameChange = useRef(name);
@@ -58,6 +74,7 @@ function Category() {
       setFilterPanel({
         price: "none",
         brand: "none",
+        subcategory: "none",
       });
     }
     console.log("hola");
@@ -69,8 +86,12 @@ function Category() {
     }
     console.log("chau");
 
-    dispatch(actions.filterByBrand(filterPanel.brand));
+    setCurrentPage(1);
+    if (name === "Periféricos")
+      dispatch(actions.filterBy(filterPanel.subcategory, filterPanel.brand));
+    else dispatch(actions.filterBy("none", filterPanel.brand));
     dispatch(actions.sortByPrice(filterPanel.price));
+
     console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
@@ -80,9 +101,9 @@ function Category() {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage])
+  }, [currentPage]);
 
   return (
     <div className={dm ? s.dmbackground : s.background}>
@@ -106,6 +127,25 @@ function Category() {
               ))}
           </select>
 
+          {name === "Periféricos" && (
+            <select
+              name="subcategory"
+              // value={active.brand}
+              id="subcategory"
+              onChange={(e) => handleFiltersChange(e)}
+            >
+              <option value="none" selected className={s.option}>
+                Filtrar por subcategoría
+              </option>
+              {Subcategories &&
+                Subcategories.map((subcategory, i) => (
+                  <option className={s.option} key={i} value={subcategory}>
+                    {subcategory}
+                  </option>
+                ))}
+            </select>
+          )}
+
           <select
             name="price"
             id="price"
@@ -127,18 +167,20 @@ function Category() {
         <div className={s.results}>
           {currentProduct.length ? (
             currentProduct.map((e) => (
-              <CardV
-              favorite={e.favorite}
-                user_id={user.user_id}
-                key={e.product_id}
-                product_id={e.product_id}
-                brand={e.brand}
-                name={e.name}
-                image={e.image}
-                price={e.price}
-                category={e.category}
-                subcategory={e.subcategory}
-              />
+              <div className={s.cardShadow}>
+                <CardV
+                  favorite={e.favorite}
+                  user_id={user.user_id}
+                  key={e.product_id}
+                  product_id={e.product_id}
+                  brand={e.brand}
+                  name={e.name}
+                  image={e.image}
+                  price={e.price}
+                  category={e.category}
+                  subcategory={e.subcategory}
+                />
+              </div>
             ))
           ) : (
             <img
@@ -162,3 +204,5 @@ function Category() {
 }
 
 export default Category;
+
+//eze le manda las imagenes de brands a ger para que las meta en cloudinary y que se agregue un atributo nuevo l modelo products que sea brandimages, en este componente se hace lo mismo para el array brands solo que con las imagenes

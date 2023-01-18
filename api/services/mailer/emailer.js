@@ -1,16 +1,24 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 const { configmailtrap, configgmail } = require("../../config/mailerconfig"); //$ configuracion para envio de mails con GMAIL o con MAILTRAP //
 const { pedidotemplate } = require("./templates/pedidotemplate.js");
 const { welcometemplate } = require("./templates/welcometemplate.js");
 const { newslettertemplate } = require("./templates/newslettertemplate");
+const { recoverTemplate } = require("./templates/recoverTemplate");
 
 const template = (userdata) => {
+  let path = "http://localhost:3000";
+  if (process.env.NODE_ENV === "production") {
+    path = "https://pf-techbunny-lake.vercel.app";
+  }
   if (userdata.type === "newsletter") {
     return {
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Gracias por suscribirte al newsletter ✔`, // Subject line
-      html: newslettertemplate(userdata), //*
+      html: newslettertemplate(
+        `${path}/newsletter/${userdata.verificationCode}`
+      ), //*
     };
   }
   if (userdata.type === "register") {
@@ -18,7 +26,7 @@ const template = (userdata) => {
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Hola Bienvenido a TechBunny ✔`, // Subject line
-      html: welcometemplate(userdata), //*
+      html: welcometemplate(`${path}/verify/${userdata.verificationCode}`), //*
     };
   }
   if (userdata.type === "order") {
@@ -26,7 +34,18 @@ const template = (userdata) => {
       from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
       to: `${userdata.email}`,
       subject: `Gracias por tu orden✔`, // Subject line
-      html: pedidotemplate(userdata), //*
+      html: pedidotemplate(
+        `${path}/order/${userdata.verificationCode}`,
+        userdata
+      ), //*
+    };
+  }
+  if (userdata.type === "recover") {
+    return {
+      from: '"🐰 TechBunny 🐰" <info@techbunny.com>', // sender address
+      to: `${userdata.email}`,
+      subject: `Gracias por tu orden✔`, // Subject line
+      html: recoverTemplate(`${path}/newPassword/${userdata.verificationCode}`), //*
     };
   }
 };

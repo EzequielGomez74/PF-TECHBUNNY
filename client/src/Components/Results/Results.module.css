@@ -1,0 +1,9 @@
+.results {
+  padding-top: 10px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

@@ -29,11 +29,18 @@ function CarruselDetail() {
   let dispatch = useDispatch();
   let user = useSelector((state) => state.loggedUser);
   let catProducts = useSelector((state) => state.filtered);
+  let allProducts = useSelector((state) => state.products);
   let detail = useSelector((state) => state.detail);
   const changeCatProducts = useRef(catProducts);
   const [carruselProducts, setCarruselProducts] = useState([]);
+  // const [restOfProducts, setRestOfProducts] = useState([]);
   const [carruselProductsExtended, setCarruselProductsExtended] = useState([]);
   const [sessionProducts, setSessionProducts] = useState([]);
+
+  // let restOfProducts = allProducts
+  //   .sort((a, b) => 0.5 - Math.random())
+  //   .slice(0, 10 - carruselProducts.length);
+  // console.log("rest of products", restOfProducts);
 
   useEffect(() => {
     dispatch(actions.getProductsByCategory(detail.category));
@@ -42,6 +49,7 @@ function CarruselDetail() {
 
   useEffect(() => {
     // if (changeCatProducts.current.length !== catProducts.length) {
+
     setCarruselProducts(
       catProducts
         .filter((product) => product.subcategory === detail.subcategory)
@@ -49,16 +57,20 @@ function CarruselDetail() {
         .slice(0, 10)
     );
     // if (carruselProducts.length)
-    setCarruselProductsExtended(
-      carruselProducts.concat(
-        catProducts
-          .sort((a, b) => 0.5 - Math.random())
-          .slice(0, 10 - carruselProducts.length)
-      )
-    );
-    // }
-    console.log(carruselProductsExtended);
   }, [catProducts]);
+
+  useEffect(() => {
+    setCarruselProductsExtended(
+      [
+        ...carruselProducts,
+        ...allProducts
+          .sort((a, b) => 0.5 - Math.random())
+          .slice(0, 10 - carruselProducts.length),
+      ].sort((a, b) => 0.5 - Math.random())
+    );
+
+    console.log("carrusel products extended", carruselProductsExtended);
+  }, [carruselProducts]);
 
   return (
     <div className="container">
@@ -67,6 +79,7 @@ function CarruselDetail() {
         spaceBetween={15}
         slidesPerGroup={5}
         loop={true}
+        initialSlide={1}
         loopFillGroupWithBlank={true}
         pagination={{
           clickable: true,

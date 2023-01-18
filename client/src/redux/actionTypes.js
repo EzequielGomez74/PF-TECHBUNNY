@@ -11,6 +11,7 @@ export const TOGGLE_DARK_MODE = "TOGGLE_DARK_MODE";
 export const SET_SEARCH_TERM = "SET_SEARCH_TERM";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
+export const CLEAN_SEARCH_RESULTS = "CLEAN_SEARCH_RESULTS";
 export const GET_REVIEWS_BY = "GET_REVIEWS_BY";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const SORT_BY_PRICE = "SORT_BY_PRICE";
@@ -23,6 +24,8 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const ALL_ORDERS_BY_USER = "ALL_ORDERS_BY_USER";
 export const GET_PAYPREFERENCES_BY_ID = "GET_PAYPREFERENCES_BY_ID";
 export const GET_CARROUSEL = "GET_CARROUSEL";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
+export const FILTER_BY = "FILTER_BY";
 // Funciones sincrónicas
 
 export const ADD_CART = "ADD_CART";

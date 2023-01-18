@@ -63,6 +63,10 @@ function Login() {
     //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
   };
 
+  const handleForgotPassword = () => {
+    history.push("/recover");
+  };
+
   return (
     <div>
       <NavBar />
@@ -98,7 +102,12 @@ function Login() {
           ) : (
             <span className={s.hidden}>a</span>
           )}
-          <span className={dm ? s.dmm1 : s.m1}>¿Olvidaste tu contraseña?</span>
+          <span
+            className={dm ? s.dmrecoverPass : s.recoverPass}
+            onClick={handleForgotPassword}
+          >
+            ¿Olvidaste tu contraseña?
+          </span>
           <button onClick={handleLogin} className={dm ? s.dmb1 : s.b1}>
             Iniciar Sesión
           </button>
