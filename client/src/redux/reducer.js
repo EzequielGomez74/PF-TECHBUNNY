@@ -1,4 +1,4 @@
-import { GET_CARROUSEL } from "./actionTypes";
+// import { GET_CARROUSEL } from "./actionTypes";
 
 const initialState = {
   products: [],
@@ -43,18 +43,40 @@ export default function reducer(state = initialState, action) {
         ...state,
         categories: action.payload,
       };
-    case "FILTER_BY_BRAND":
-      const allProductsByCategory = [...state.filtered];
-      const filteredProducts =
-        action.payload === "none"
-          ? allProductsByCategory
-          : allProductsByCategory.filter((p) =>
-              p.brand.includes(action.payload)
-            );
-      return {
-        ...state,
-        productsByCategory: filteredProducts,
-      };
+      case "FILTER_BY":
+        const allProductsByCategory = [...state.filtered];
+        const filteredProducts =
+          action.payload.subcategory === "none" && action.payload.brand === "none"
+            ? allProductsByCategory
+            : action.payload.subcategory !== "none" &&
+              action.payload.brand === "none"
+            ? allProductsByCategory.filter((p) =>
+                p.subcategory.includes(action.payload.subcategory)
+              )
+            : action.payload.subcategory === "none" &&
+              action.payload.brand !== "none"
+            ? allProductsByCategory.filter((p) =>
+                p.brand.includes(action.payload.brand)
+              )
+            : allProductsByCategory
+                .filter((p) => p.subcategory.includes(action.payload.subcategory))
+                .filter((p) => p.brand.includes(action.payload.brand));
+        return {
+          ...state,
+          productsByCategory: filteredProducts,
+        };  
+    // case "FILTER_BY_BRAND":
+    //   const allProductsByCategory = [...state.filtered];
+    //   const filteredProducts =
+    //     action.payload === "none"
+    //       ? allProductsByCategory
+    //       : allProductsByCategory.filter((p) =>
+    //           p.brand.includes(action.payload)
+    //         );
+    //   return {
+    //     ...state,
+    //     productsByCategory: filteredProducts,
+    //   };
     case "SORT_BY_PRICE":
       const orderedProductsByPrice = state.productsByCategory.sort(function (
         a,
