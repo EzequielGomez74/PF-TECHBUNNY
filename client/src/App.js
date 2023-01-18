@@ -22,6 +22,7 @@ import Feedback from "./Components/Feedback/Feedback";
 import NewPassword from "./Components/NewPassword/NewPassword";
 import Recover from "./Components/Recover/Recover";
 import Dashboard from "./Components/Dashboard (admin)/Dashboard";
+import Results from "./Components/Results/Results";
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/feedback" component={Feedback} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/results/:searchTerm" component={Results} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateUserInfo } from '../../redux/actions';
 import s from "./Profile.module.css";
+import img from "../../Photos/conejoperfil.png";
 
 function Profile(){
     const user = useSelector(state => state.loggedUser)
@@ -43,6 +44,11 @@ function Profile(){
         <div>
             <NavBar/>
             <div className={dm? s.dmprofileSection : s.profileSection}>
+            <div className="imgContainer">
+            <div className="imgBunny">
+              <img src={img} alt="bunny login" className={dm ? s.dmimg : s.img} />
+            </div>
+            </div>
                 { user.username && user.email ? 
                 <div className={dm? s.dmprofileInfo : s.profileInfo}>
                     <span><strong>Nombre de usuario:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.username} </span>
@@ -64,6 +70,7 @@ function Profile(){
                 </form>
                 }
             </div>
+           
             <Footer/>
         </div>
     )
