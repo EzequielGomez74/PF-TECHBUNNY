@@ -15,6 +15,7 @@ const newsletter = require("../apiServices/newsletter/routes.js");
 const verify = require("../apiServices/verify/routes.js");
 const cart = require("../apiServices/cart/routes.js");
 const carrousel = require("../apiServices/carrousel/routes.js");
+const recoverPassword = require("../apiServices/recoverPassword/routes.js");
 const generateAccesTokenInRequest = require("../middlewares/generateAccesTokenInRequest.js");
 
 //router.use(generateTestUsername);
@@ -34,6 +35,7 @@ router.use("/users", user);
 router.use("/favorites", favorite);
 router.use("/carts", cart);
 router.use("/carrousels", carrousel);
+router.use("/recoverPassword", recoverPassword);
 
 //router.use
 

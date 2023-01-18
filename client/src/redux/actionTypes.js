@@ -23,6 +23,7 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const ALL_ORDERS_BY_USER = "ALL_ORDERS_BY_USER";
 export const GET_PAYPREFERENCES_BY_ID = "GET_PAYPREFERENCES_BY_ID";
 export const GET_CARROUSEL = "GET_CARROUSEL";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 // Funciones sincrónicas
 
 export const ADD_CART = "ADD_CART";

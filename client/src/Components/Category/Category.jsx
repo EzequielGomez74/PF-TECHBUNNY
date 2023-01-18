@@ -12,7 +12,7 @@ function Category() {
   //DARK MODE
   const dm = useSelector((state) => state.darkMode);
   //Para usuario registrado
-  let user = useSelector(state => state.loggedUser);
+  let user = useSelector((state) => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
   let dispatch = useDispatch();
@@ -80,9 +80,9 @@ function Category() {
     setFilterPanel({ ...filterPanel, [e.target.id]: e.target.value });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage])
+  }, [currentPage]);
 
   return (
     <div className={dm ? s.dmbackground : s.background}>
@@ -128,7 +128,7 @@ function Category() {
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <CardV
-              favorite={e.favorite}
+                favorite={e.favorite}
                 user_id={user.user_id}
                 key={e.product_id}
                 product_id={e.product_id}
