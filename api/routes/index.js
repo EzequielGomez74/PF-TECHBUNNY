@@ -34,7 +34,7 @@ router.use("/users", user);
 router.use("/favorites", favorite);
 router.use("/carts", cart);
 router.use("/carrousels", carrousel);
-
+router.use("/dashboard", dashboard);
 //router.use
 
 module.exports = router;
