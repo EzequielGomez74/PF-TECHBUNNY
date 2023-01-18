@@ -42,6 +42,11 @@ function Dashboard() {
             ))}
           </tbody>
         </table>
+
+        <h2>Add a Contact</h2>
+        <form>
+          
+        </form>
       </div>
     </div>
   )
