@@ -1,4 +1,4 @@
-const { User, Product  , Order, Newsletter } = require("../../services/db/db.js");
+const { User, Product  , Order, Newsletter, Category } = require("../../services/db/db.js");
 const emailer = require("../../services/mailer/emailer.js");
 
 
@@ -62,11 +62,12 @@ let totalVolume = 0;
     let emails = [];
     const newsletterData = await Newsletter.findAll()
     newsletterData.map((el) => { emails.push(el.dataValues.email) })
+    const activeOffers = await Category.count({where: {isOffer: true}})
 
+
+    console.log("cantidad de ofertas activas", activeOffers)
     console.log("total de emails subscriptos", subscriberCount)
-    console.log("estos son los emails subscritos al newsletter: ", newsletterData)
-    console.log("newsletter: ", emails)
-
+    console.log("estos son los emails subscritos al newsletter: ", emails)
 
 
 
@@ -89,6 +90,7 @@ let totalVolume = 0;
       newsletterData : {
         subscriberCount : subscriberCount,
         subscribers : emails,
+        activeOffers: activeOffers,
       }
     }
     
