@@ -28,8 +28,6 @@ router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 router.use(requiredAccess(2));
 
-
-
 // $ Esta ruta genera las preferencias de mercadopago para proseguir con el pago. PARAMS { order_id }
 // $ ESTA RUTA RECIBE POR PARAMS { order_id } , Y RETORNA LOS DETALLES DE ESA ORDEN
 router.get("/pagar/:order_id", async (req, res) => {

@@ -24,6 +24,7 @@ async function getCart(user_id) {
 
 // $ esta ruta suma un producto  al carrito del usuario
 // $ Puede recibir solo un product_id pero este puede tener mas de una unidad {producto_id: 720 , count: x }
+// $ esta ruta suma un producto al cart del usuario
 async function addProduct(body, user_id) {
   try {
     const { product_id, price, count, product_name } = body;
@@ -58,9 +59,7 @@ async function addProduct(body, user_id) {
   }
 }
 
-// $ esta funcion unicamente reduce o aumenta en 1u el producto del cart del usuario.
-// $ Verifica si el stock del producto es igual a la cantidad que hay en el carrito no le deja sumar . 
-// $ Verifica si la cantidad que tiene en el carrito es 1u no l odeja restar
+// $ esta funcion unicamente reduce o aumenta en 1 el producto del cart del usuario.
 async function updateCount(user_id, body) {
   try {
     const { product_id, action } = body;

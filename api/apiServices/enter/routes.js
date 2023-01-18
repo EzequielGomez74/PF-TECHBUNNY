@@ -1,13 +1,10 @@
-// * En esta ruta se registra y logean usuarios.
-
 const { Router } = require("express");
 const controller = require("./controller.js");
 const validate = require("../../scripts/bodyValidators/index.js");
+
 const router = Router();
-
-
-// $ BODY  CREACION DE USUARIO { username, password }
-router.post("/", validate.enter, async (req, res) => {
+//NEW USER
+router.post("/", async (req, res) => {
   const data = req.body;
   try {
     res.status(200).json({ status: await controller.handleNewUser(data) });

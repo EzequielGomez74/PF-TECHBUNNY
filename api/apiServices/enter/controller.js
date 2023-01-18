@@ -163,7 +163,7 @@ async function handleLogout(user_id) {
   const foundUser = await User.findOne({ where: { user_id } });
   console.log("foundUser ", foundUser);
   if (!foundUser) return "FAIL";
-  foundUser.accessToken = "";
+  foundUser.accessToken = null;
   //todo GUARDAR SAVED SESSION DATA
   foundUser.save();
   return "SUCCESS";

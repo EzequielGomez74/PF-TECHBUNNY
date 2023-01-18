@@ -43,8 +43,7 @@ async function getAllProducts(username) {
       },
     };
     const products = await Product.findAll(condition);
-    // return await setFavoriteStatus([...products], username);
-    return products;
+    return await setFavoriteStatus([...products], username);
   } catch (error) {
     throw new Error(error.message);
   }
@@ -74,7 +73,7 @@ async function getProductById(product_id, username) {
 
 async function updateProduct(product) {
   delete product.createdAt;
-  delete product.updatedAt; 
+  delete product.updatedAt;
   try {
     await Product.update(
       {

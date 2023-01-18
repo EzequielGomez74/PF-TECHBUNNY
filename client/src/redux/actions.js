@@ -371,8 +371,6 @@ export function getPayPreferencesById(order_id) {
     }
   };
 }
-
-
 export function getCarrousel(carrouselType) {
   return async function (dispatch) {
     try {

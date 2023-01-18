@@ -36,6 +36,8 @@ function Payment() {
 
 	useEffect(() => {
 		if (Object.keys(preferences).length !== 0) {
+		
+		console.log("PREFERENCIAAAAS",preferences);
 		var script = document.createElement("script");
 
 		// The source domain must be completed according to the site for which you are 	integrating.

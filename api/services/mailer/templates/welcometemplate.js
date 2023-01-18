@@ -141,7 +141,7 @@ const welcometemplate = (completePath) => {
        </table>
       </div>
      </body>
-    </html>`
-}
+    </html>`;
+};
 
-module.exports = {welcometemplate}
+module.exports = { welcometemplate };
