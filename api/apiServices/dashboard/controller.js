@@ -2,6 +2,10 @@ const { User, Product  , Order, Newsletter } = require("../../services/db/db.js"
 const emailer = require("../../services/mailer/emailer.js");
 
 
+
+
+
+
 async function dashboardData() {
   try {
 
@@ -39,10 +43,10 @@ async function dashboardData() {
 let totalVolume = 0;
     proceso = await Order.sum("total", { where: { status: "completed" } });
     !proceso ? totalVolume=0 : totalVolume=proceso
-    const soldProducs = await Product.sum('soldCount')
+    const soldProducts = await Product.sum('soldCount')
     const ordersData = await Order.findAll()
 
-    console.log("cantidad de productos vendidos: ", soldProducs)
+    console.log("cantidad de productos vendidos: ", soldProducts)
     console.log("cantidad de ordenes completadas", totalVolume)
 
 
@@ -75,7 +79,7 @@ let totalVolume = 0;
       },
       ordersData : {
         salesVolume: totalVolume,
-        soldProducs: soldProducs,
+        soldProducts: soldProducts,
         orders: ordersData
       },
       productsData : {
@@ -88,24 +92,6 @@ let totalVolume = 0;
         subscribers : newsletterData,
       }
     }
-    
-  // ordersdata:{
-  // soldproducts:
-  // sales volume:
-  // orders[...]
-  // }
-  
-  // productsdata{
-  // productscount: 830.
-  // productOutOfStock :
-  // products[...]
-  // }
-  
-  // newsletterdata{
-  // suscriberscount:
-  // offersactive:
-  // suscribers[...]
-  // }
   
     return dashboard
   } catch (error) {
