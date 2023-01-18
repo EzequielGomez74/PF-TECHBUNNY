@@ -1,5 +1,5 @@
 .profileSection{
-    background-color: palegreen;
+    background-color: #ececec;
     max-width: 1500px;
     margin: auto;
     display: flex;
@@ -14,10 +14,12 @@
 
 .profileForm{
     background-color: white;
-    height: 500px;
-    width: 400px;
+    height: 360px;
+    width: 450px;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
 }
 
 .profileForm input{
@@ -48,4 +50,160 @@
 
 .profileForm button:hover{
     cursor: pointer;
+}
+
+/* DARK MODE */
+
+.dmprofileSection{
+    background-color: #20232A;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.dmprofileForm{
+    background-color: #2B3036;
+    height: 360px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
+}
+
+.dmprofileForm input{
+    display: flex;
+    margin-bottom: 10px;
+    background-color: #1b1d23;
+    margin-left: 40px;
+    margin-right: 40px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    
+}
+
+.dmprofileForm button{
+    margin-left: 40px;
+    margin-right: 40px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #d7f136;
+    border: none;
+    color: black;
+}
+
+.dmprofileForm button:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 500px){
+    .profileInfo{
+       width: 85%;
+       height: 300px;
+    }
+    .profileInfo span{
+        display: flex;
+        margin-bottom: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    .profileInfo button{
+        height: 30px;
+        width: 200px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        transform: translateX(25px);
+    }
+
+    .dmprofileInfo{
+        width: 85%;
+        height: 300px;
+     }
+     .dmprofileInfo span{
+         display: flex;
+         margin-bottom: 20px;
+         margin-left: 40px;
+         margin-right: 40px;
+         font-style: normal;
+         font-weight: 400;
+         font-size: 11px;
+         line-height: 15px;
+     }
+ 
+     .dmprofileInfo button{
+         height: 30px;
+         width: 200px;
+         font-style: normal;
+         font-weight: 600;
+         font-size: 10px;
+         transform: translateX(25px);
+     }
+
+
+}
+
+@media (max-width: 500px){
+    .profileForm{
+       width: 85%;
+       height: 300px;
+    }
+    .profileForm input{
+        margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    background: #F6F5FA;
+    }
+
+    .profileForm button{
+        height: 30px;
+        width: 200px;
+        font-size: 10px;
+        transform: translateX(25px);
+    }
+
+    .dmprofileForm{
+        width: 85%;
+        height: 300px;
+     }
+     .dmprofileForm input{
+         margin-left: 40px;
+     margin-right: 40px;
+     margin-bottom: 10px;
+     height: 40px;
+     text-indent: 8px;
+     border: none;
+     background: #1b1d23;
+     }
+ 
+     .dmprofileForm button{
+         height: 30px;
+         width: 200px;
+         font-size: 10px;
+         transform: translateX(25px);
+     }
+
+    
+
 }
