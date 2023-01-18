@@ -81,7 +81,7 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-          <div>
+         <div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
           <h1>
@@ -330,7 +330,7 @@ function NavBar() {
         </div>
       )}
 
-      {/* <div className="search1">
+      <div className="search1">
         {searchTerm.length && results.length
           ? results.map((p, i) => {
               if (i < 7)
@@ -348,7 +348,7 @@ function NavBar() {
                 );
             })
           : null}
-      </div> */}
+      </div>
     </div>
   );
 }

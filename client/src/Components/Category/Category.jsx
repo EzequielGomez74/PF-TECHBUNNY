@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as actions from "../../redux/actions";
 import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Category.module.css";
+import loading from '../../images/loadingg.gif'
 import Pagination from "../Pagination/Pagination";
 
 function Category() {
@@ -15,9 +16,6 @@ function Category() {
   let user = useSelector((state) => state.loggedUser);
   // let [order, setOrder] = useState("All");
   let { name } = useParams();
-
-  let location = useLocation();
-
   let dispatch = useDispatch();
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
@@ -186,10 +184,9 @@ function Category() {
               </div>
             ))
           ) : (
-            <img
-              src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-              alt=""
-            />
+            <div className={s.loading}>
+            <img  src={loading} alt="" />
+            </div>
           )}
         </div>
         <div className={s.paginate}>

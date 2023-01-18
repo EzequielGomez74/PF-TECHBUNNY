@@ -1,0 +1,239 @@
+.recoverContainer{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
+.divForm{
+    background-color: white;
+    padding: 5%;
+    width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+}
+
+.divForm h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    line-height: 20px;
+    color: black;
+}
+
+.divForm h5{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 30px;
+}
+
+.divInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.divForm input{
+    background-color: #F6F5FA;
+    width: 50%;
+    height: 10px;
+    border: none;
+    padding: 15px;
+}
+
+::placeholder{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 20px;
+    color: #8f8f8f;
+    font-style: normal;
+}
+
+.imgBunny img{
+    width: 30%;
+    height: auto;
+}
+
+.divBtnRecover{
+    display: flex;
+    justify-content: right;
+}
+
+.btnRecover{
+    width: 240px;
+    height: 40px;
+    background-color:#20232A;
+}
+
+.btnRecover:hover{
+    cursor: pointer;
+}
+
+.btnRecover p{
+    margin-top: 9px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2px;
+    
+}
+
+/* DARK MODE */
+
+.dmrecoverContainer{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #20232A;
+}
+
+.dmimgBunny img{
+    width: 30%;
+    height: auto;
+}
+
+.dmdivForm{
+    background-color: #2B3036;
+    padding: 5%;
+    width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.dmdivForm h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    line-height: 20px;
+    color: white;
+}
+
+.dmdivForm h5{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 30px;
+    color: #fefefe;
+}
+
+.dmdivInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.dmdivForm input{
+    background-color: #1b1d23;
+    width: 50%;
+    height: 10px;
+    border: none;
+    padding: 15px;
+    color: white;
+}
+
+input:focus{
+    outline: none;
+}
+
+::placeholder{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 20px;
+    color: #8f8f8f;
+    font-style: normal;
+}
+
+.dmdivBtnRecover{
+    display: flex;
+    justify-content: right;
+}
+
+.dmbtnRecover{
+    width: 240px;
+    height: 40px;
+    background-color:#d7f136;
+  
+}
+
+.dmbtnRecover:hover{
+    cursor: pointer;
+}
+
+.dmbtnRecover p{
+    margin-top: 9px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2px; 
+}
+
+
+@media (max-width: 400px){
+    .divForm{
+        width: 300px;
+        height: 600px;
+    }
+    .divForm input{
+        width: 60%;
+        height: 1px;
+    }
+    .divBtnRecover{
+        justify-content: center;
+    }
+    .divBtnRecover p{
+        font-size: 6px;
+        margin-top: 5px;
+    }
+    .btnRecover{
+        width: 100%;
+        height: 30px;
+    }
+    .imgBunny img{
+        width: 100%;
+    }
+    .dmdivForm{
+        width: 300px;
+        height: 600px;
+    }
+    .dmdivForm input{
+        width: 60%;
+        height: 1px;
+    }
+    .dmdivBtnRecover{
+        justify-content: center;
+    }
+    .dmdivBtnRecover p{
+        font-size: 6px;
+        margin-top: 5px;
+    }
+    .dmbtnRecover{
+        width: 100%;
+        height: 30px;
+    }
+    .dmimgBunny img{
+        width: 100%;
+    }
+}
