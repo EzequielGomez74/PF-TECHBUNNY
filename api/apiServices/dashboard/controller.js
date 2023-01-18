@@ -1,11 +1,6 @@
 const { User, Product  , Order, Newsletter } = require("../../services/db/db.js");
 const emailer = require("../../services/mailer/emailer.js");
 
-
-
-
-
-
 async function dashboardData() {
   try {
 
