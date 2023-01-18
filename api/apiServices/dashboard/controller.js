@@ -36,8 +36,7 @@ async function dashboardData() {
       return obj
     }) 
 
-    console.log("usuarios logeados", loggedUsers)
-    console.log("total de usuarios registrados", totalUsers.count)
+
 
     // TODO - Aca va ORDERS
 let totalVolume = 0;
@@ -52,17 +51,17 @@ let totalVolume = 0;
     const productsOutOfStock = await Product.count({ where: { stock: 0 }})
     const productsData = await Product.findAll()
 
-    console.log("total de productos activos", productsCount)
-    console.log("cantidad de productos sin stock", productsOutOfStock)
+
 
 
     // TODO - Aca va NEWSLETTER
 
     const subscriberCount = await Newsletter.count()
+    let emails = [];
     const newsletterData = await Newsletter.findAll()
+    newsletterData.map((el) => { emails.push(el.dataValues.email) })
 
-    console.log("total de emails subscriptos", subscriberCount)
-    console.log("estos son los emails subscritos al newsletter: ", newsletterData)
+
 
     let dashboard = {
       usersData : {
