@@ -1,3 +1,4 @@
+
 .results {
   padding-top: 10px;
   max-width: 1400px;
@@ -8,10 +9,21 @@
   justify-content: space-around;
 }
 
-.ResultadosPara{
-  font-size: 15px;
- transform: translateX(40px);
- margin-top: 40px;
- 
- max-width: 15%;
+.dmresults{
+  padding-top: 10px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #20232A;
+}
+
+.dmresultsContainer{
+  background-color: #20232A;
+}
+
+.dmresultsContainer h4{
+  color: white;
 }

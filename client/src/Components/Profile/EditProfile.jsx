@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import s from './EditProfile.module.css';
 import { useSelector } from 'react-redux';
+import img from "../../Photos/conejoperfil.png";
 
 function EditProfile () {
     const user = useSelector(state => state.loggedUser)
@@ -38,6 +39,11 @@ function EditProfile () {
     <div>
         <NavBar />
         <div className={dm? s.dmprofileSection : s.profileSection}>
+        <div className="imgContainer">
+            <div className="imgBunny">
+              <img src={img} alt="bunny login" className={dm ? s.dmimg : s.img} />
+            </div>
+            </div>
         <form className={dm? s.dmprofileForm : s.profileForm}>
                     <input type="text" name="name" value={input.name} onChange={handleChange} placeholder="Nombre"></input>
                     <input type="text" name="surname" value={input.surname} onChange={handleChange} placeholder="Apellido"></input>

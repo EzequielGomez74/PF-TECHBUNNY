@@ -3,7 +3,7 @@
     max-width: 1500px;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -59,7 +59,7 @@
     max-width: 1500px;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -93,6 +93,7 @@
 .dmprofileForm button{
     margin-left: 40px;
     margin-right: 40px;
+    margin-top: 12px;
     height: 40px;
     font-style: normal;
     font-weight: 600;

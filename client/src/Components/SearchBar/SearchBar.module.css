@@ -43,7 +43,7 @@
   transition: 0.5s;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
   background: #e7e7e7;
 }
@@ -54,28 +54,31 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #7e7e7e;
-}
+} */
 
-form {
+/* EX FORM */
+.searchContainer {
   display: flex;
   align-items: center;
 }
 
-input[type="text"] {
+/* EX INPUT DE TIPO TEXT */
+.input{
   width: 280px;
   padding: 0.5em;
   border: 1px solid;
   /* border-radius: 4px 0 0 4px; */
 }
 
-button[type="submit"] {
+/* EX BUTTON DE TIPO SUBMIT */
+/* button[type="submit"] {
   padding: 0.5em 1em;
   border: none;
   border-radius: 4px;
   background-color: #4caf50;
   color: white;
   cursor: pointer;
-}
+} */
 
 .searchNavLink {
   border-bottom: #7e7e7e;
@@ -101,8 +104,7 @@ button[type="submit"] {
 }
 
 
-
-li {
+.liSearchBar {
   padding: 0.5em;
   border-bottom: 1px solid #ccc;
   display: flex;
@@ -192,11 +194,9 @@ li:hover p {
 .dminput {
   height: 40px;
   width: 250px;
-  border: none;
   text-indent: 10px;
-  border: 1px solid #20232a;
   background-color: #292a2e;
-  color: white;
+  color: #292a2e;
 }
 
 .dminputCloseButton {
@@ -213,11 +213,13 @@ li:hover p {
 .dminput:focus {
   outline: none;
   color: white;
+  border: #292a2e;
 }
 
 .dminputIcon {
   height: 55px;
   width: 44px;
+  border: none;
   background-color: #fefefe;
   color: black;
   transition: 0.5s;
@@ -322,4 +324,18 @@ li:hover p {
 .dmhiden {
   display: none;
   border: none;
+}
+
+/* EX FORM */
+.dmsearchContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* EX INPUT DE TIPO TEXT */
+.dminput{
+  width: 280px;
+  padding: 0.5em;
+  border: 1px solid;
+  /* border-radius: 4px 0 0 4px; */
 }

@@ -3,7 +3,6 @@ import s from './Payment.module.css';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import { useSelector , useDispatch} from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { getPayPreferencesById, updateOrderInfoById, allOrdersByUser } from '../../redux/actions'
 
 function Payment() {
@@ -27,11 +26,6 @@ function Payment() {
             ...payInfo,
             [e.target.name]: e.target.value
         })
-    }
-
-    const history = useHistory();
-    const handleCart = () => {
-        history.push('/cart');
     }
 
 	useEffect(() => {
@@ -121,9 +115,6 @@ function Payment() {
 					</div>
 					<div className={dm ? s.dmbuttons : s.buttons}>
 						<button onClick={pay} className={dm ? s.dmb2 : s.b2}>Mercado Pago</button>
-						<button className={dm ? s.dmb1 : s.b1} onClick={handleCart}>
-							Carrito
-						</button>
 						<div className="page-content" id="page-content"></div>
 						{/* Los llevará a Mercado Pago */}
 					</div>

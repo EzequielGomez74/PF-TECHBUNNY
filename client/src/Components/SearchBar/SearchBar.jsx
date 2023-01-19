@@ -24,7 +24,7 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (searchTerm.length > 0 && searchTerm.length <= 2 && !initialSearch.current) {
+    if (searchTerm.length <= 2 && !initialSearch.current) {
       dispatch(cleanSearchResults());
     }
     // if (noTerm.current && searchTerm.length) {
@@ -73,10 +73,10 @@ function SearchBar() {
     <form className={dm? s.dmsearchContainer : s.searchContainer}>
       <span className={dm? s.dminputContainer : s.inputContainer}>
         <input
+          className={dm? s.dminput : s.input}
           type="text"
           value={searchTerm}
           onChange={handleChange}
-          className={dm? s.dminput : s.input}
           placeholder={`Buscar productos`}
         />
         {searchTerm.length > 0 && (
@@ -101,7 +101,7 @@ function SearchBar() {
                 return (
                   <span className={dm? s.dmsearchChildContainer : s.searchChildContainer}>
                     <NavLink to={`/detail/${p.product_id}`}>
-                      <li>
+                      <li className={s.liSearchBar}>
                         {/* <Link to={`/detail/${p.product_id}`}> */}{" "}
                         <img
                           className={dm? s.dmimgsearch : s.imgsearch}

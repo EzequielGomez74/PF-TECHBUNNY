@@ -3,7 +3,7 @@
     max-width: 1500px;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -95,6 +95,15 @@
     cursor: pointer;
 }
 
+.profileContainer{
+    display: flex;
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+  }
+
 /* DARK MODE */
 
 .dmprofileSection{
@@ -102,7 +111,7 @@
     max-width: 1500px;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;

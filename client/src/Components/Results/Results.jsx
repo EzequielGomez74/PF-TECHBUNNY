@@ -1,19 +1,19 @@
 import React from "react";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CardV from "../Card V/CardV";
-import { useState, useEffect, useRef } from "react";
-import s from "../Category/Category.module.css";
+import { useState, useEffect } from "react";
+import s from "../Results/Results.module.css";
 import Pagination from "../Pagination/Pagination";
-import a from "../Results/Results.module.css";
-import { getResults, getSearchResults } from "../../redux/actions";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 function Results() {
   const results = useSelector((state) => state.results);
   // const st = useSelector((state) => state.searchTerm);
   let { searchTerm } = useParams();
+  //DARK MODE
+  const dm = useSelector((state) => state.darkMode);
 
   const [resultsLocal, setResultsLocal] = useState([]);
 
@@ -36,13 +36,14 @@ function Results() {
   };
 
   return (
-    <div>
+    <div className={dm? s.dmresultsContainer : s.resultsContainer}>
       <NavBar />
+      <div >
       <section>
-        <h4 className={a.ResultadosPara}>
-          {resultsLocal.length} resultados para: ''{searchTerm}''{" "}
-        </h4>
-        <div className={s.results}>
+         <h4>
+          {resultsLocal.length} resultados para ''{searchTerm}''{" "}
+         </h4>
+        <div className={dm? s.dmresults : s.results}>
           {currentResults.length ? (
             currentResults.map((p) => (
               <CardV
@@ -63,6 +64,7 @@ function Results() {
             />
           )}
         </div>
+
         <div>
           <Pagination
             productsPerPage={productsPerPage}
@@ -72,6 +74,8 @@ function Results() {
           />
         </div>
       </section>
+
+      </div>
       <Footer />
     </div>
   );

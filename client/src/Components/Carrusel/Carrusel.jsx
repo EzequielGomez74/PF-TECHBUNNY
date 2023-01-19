@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import CardV from "../Card V/CardV";
+import CardCarrusel from "../CardCarrusel/CardCarrusel";
 import { getProducts } from "../../redux/actions";
 
 // const products = [
@@ -182,7 +182,7 @@ function Carrusel({ products }) {
         {products &&
           products.map((p) => (
             <SwiperSlide>
-              <CardV
+              <CardCarrusel
                 favorite={p.favorite}
                 key={p.product_id}
                 user_id={user.user_id}
