@@ -220,7 +220,7 @@ function Details() {
           <button
           disabled={quantity === 0}
             type="submit"
-            // className={dm ? s.dmmainButton : s.mainButton}
+           
             className={quantity !== 0 && dm ? s.dmmainButton:quantity !== 0 && !dm?s.mainButton: quantity === 0 && dm? s.dmmainButtonDisabled:s.mainButtonDisabled}
             onClick={handleAddToCart}
           >

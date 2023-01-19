@@ -550,10 +550,13 @@ hr {
   line-height: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  transition: 0.5s;
 }
 
 .dmmainButton:hover {
   cursor: pointer;
+  transition: 0.5s;
+  color: rgb(155, 155, 155);
 }
 
 .dmmainButtonDisabled {
@@ -569,6 +572,7 @@ hr {
   line-height: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  transition: 0.5s;
 }
 
 .dmsub {
