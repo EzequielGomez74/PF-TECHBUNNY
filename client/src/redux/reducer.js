@@ -1,5 +1,4 @@
 // import { GET_CARROUSEL } from "./actionTypes";
-
 const initialState = {
   products: [],
   detail: {},

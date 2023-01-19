@@ -113,6 +113,7 @@ export function getProductsByCategory(category) {
   };
 }
 
+//Marcas de Periféricos
 export function getProductsByBrand() {
   return async function (dispatch) {
     try {

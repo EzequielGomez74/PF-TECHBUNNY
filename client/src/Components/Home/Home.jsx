@@ -68,6 +68,7 @@ function Home() {
 
       <Carrusel products={ordersCarrousel} />
 
+      {/* Marcas */}
       <section className={dm ? s.dmbanners : s.banners}>
         <div className={s.bannerOne}>
           <Link to="/brand/Razer">

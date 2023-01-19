@@ -7,6 +7,7 @@ import { getProductsByBrand } from '../../redux/actions'
 import CardV from '../Card V/CardV'
 
 function Marca() {
+   
     const dispatch = useDispatch()
     const { marca } = useParams()
 
