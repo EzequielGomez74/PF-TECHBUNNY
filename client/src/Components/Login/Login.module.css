@@ -125,9 +125,8 @@
   background-color: #20232A;
 }
 
-.recoverPass{
-cursor: pointer;
-}
+
+
 
 .dmloginCard {
   background-color: #2B3036;
@@ -160,20 +159,10 @@ cursor: pointer;
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
+  padding-bottom: 20px;
 }
 
 .dmm2:hover {
-  cursor: pointer;
-}
-
-.dmm1 {
-  font-size: 12px;
-  color: #f6f5fa;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.dmm1:hover {
   cursor: pointer;
 }
 
@@ -207,6 +196,14 @@ cursor: pointer;
 }
 
 .dmimg {
-  width: 60%;
-  height: 60%;
+  width: 55%;
+  height: 55%;
+}
+
+.dmheroLogin {
+  height: 500px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
