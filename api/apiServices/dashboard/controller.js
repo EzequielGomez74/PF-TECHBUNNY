@@ -75,21 +75,21 @@ let totalVolume = 0;
       usersData : {
         totalUsers:   totalUsers.count,
         loggedUsers: loggedUsers,
-        users: userData // reducir informacion
+        // users: userData // reducir informacion // TODO : separar en subrutas para cada vista.  --- esta ya existe, es un GET a "/users"
       },
       ordersData : {
         salesVolume: totalVolume,
-        soldProducs: soldProducs,
-        orders: ordersData
+        soldProducs: soldProducs, 
+        // orders: ordersData // TODO : separar en subrutas para cada vista. --- esta ya existe, es un GET a "/orders"
       },
       productsData : {
         productsCount: productsCount,
         productsOutOfStock: productsOutOfStock,
-        products: productsData
+        // products: productsData // TODO : separar en subrutas para cada vista. --- esta ya existe, es un GET a "/products"
       },
       newsletterData : {
         subscriberCount : subscriberCount,
-        subscribers : emails,
+        // subscribers : emails, // TODO : separar en subrutas para cada vista. --- esta ya existe, es un GET a "/newsletters/"
         activeOffers: activeOffers,
       }
     }

@@ -363,6 +363,7 @@ export const updateOrderInfoById = (order_id, payInfo) => {
 export function getPayPreferencesById(order_id) {
   return async function (dispatch) {
     try {
+      console.log("ORDERIDDDDDD", order_id)
       var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
       console.log("info payment", json.data);
       return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
