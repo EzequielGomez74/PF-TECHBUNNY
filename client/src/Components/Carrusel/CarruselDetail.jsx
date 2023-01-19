@@ -42,6 +42,7 @@ function CarruselDetail() {
 
   useEffect(() => {
     // if (changeCatProducts.current.length !== catProducts.length) {
+
     setCarruselProducts(
       catProducts
         .filter((product) => product.subcategory === detail.subcategory)
@@ -50,11 +51,13 @@ function CarruselDetail() {
     );
     // if (carruselProducts.length)
     setCarruselProductsExtended(
-      carruselProducts.concat(
-        catProducts
-          .sort((a, b) => 0.5 - Math.random())
-          .slice(0, 10 - carruselProducts.length)
-      )
+      carruselProducts
+        .concat(
+          catProducts
+            .sort((a, b) => 0.5 - Math.random())
+            .slice(0, 10 - carruselProducts.length)
+        )
+        .sort((a, b) => 0.5 - Math.random())
     );
     // }
     console.log(carruselProductsExtended);

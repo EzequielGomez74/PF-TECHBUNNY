@@ -68,9 +68,7 @@ router.get("/pagar/:order_id", async (req, res) => {
 router.post("/:user_id", async (req, res) => {
   try {
     res.status(200).json({
-      Mensaje: `La orden N° ${await controller.createOrder(
-        req.params.user_id
-      )} se creo con exito`,
+      order_id: await controller.createOrder(req.params.user_id),
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -105,6 +103,7 @@ router.put("/:order_id", async (req, res) => {
 // /users?user_id=1&order_id=2  /users?user_id=1
 router.get("/", async (req, res) => {
   const { user_id, order_id } = req.query;
+  console.log(req.query);
   try {
     if (user_id) {
       if (order_id) {

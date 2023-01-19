@@ -1,7 +1,7 @@
-const { Product, Review, Cart } = require("../../services/db/db.js");
-const orderTest = require("./reviews.json");
-const cartController = require("../../apiServices/cart/controller");
-const orderController = require("../../apiServices/order/controller");
+const { Product, Review, Cart } = require("../../../services/db/db.js");
+const orderTest = require("../reviewGenerator/reviews.json");
+const cartController = require("../../../apiServices/cart/controller");
+const orderController = require("../../../apiServices/order/controller");
 let MAX = null;
 async function maxProducts() {
   const products = await Product.findAll();
@@ -11,6 +11,13 @@ async function maxProducts() {
   MAX = await maxProducts();
   console.log(MAX);
 })();
+
+//? por cada user del 10 al 93
+//? rollear el product_id y el count entre entre 1 y 3 productos, (si existe estock)
+//? usando cartController.addproduct() agregar todo al user_id
+//? usando orderController.createOrder() crear la order para el user_id
+//? usando orderController.updateOrder() la paso a "completed"
+
 async function orderGenerator(user_id) {
   const cant = Math.floor(Math.random() * 10 + 1);
   for (let i = 0; i < cant; i++) {

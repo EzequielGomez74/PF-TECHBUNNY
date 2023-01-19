@@ -1,4 +1,4 @@
-const favoriteController = require("../../apiServices/favorite/controller");
+const favoriteController = require("../../../apiServices/favorite/controller");
 const favoritesToAdd = require("./favorites.json");
 
 async function favoriteTestGenerator(user_id) {
