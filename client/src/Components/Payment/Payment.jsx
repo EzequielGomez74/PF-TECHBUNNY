@@ -54,15 +54,14 @@ function Payment() {
 
     
   	async function pay() {
-    	try{
-    		dispatch(getPayPreferencesById(orderMp[0].order_id))   
-			dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo))
-			dispatch(allOrdersByUser(user.user_id))    
-    	}
-    	catch(error) {
-      	console.error(error.message)  
-    	}
-	}
+    try {
+      dispatch(getPayPreferencesById(orderMp[0].order_id));
+      dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
+      //dispatch(allOrdersByUser(user.user_id))
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 
   return (
 		<div className={dm ? s.dmpayPage : s.payPage}>

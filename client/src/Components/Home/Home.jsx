@@ -33,7 +33,10 @@ function Home() {
           <span></span>
         </div>
       </div>
+
       <Carrusel products={favoritesCarrousel} />
+
+      
       <section className={dm ? s.dmbanners : s.banners}>
         <div className={s.bannerOne}>
           <Link to="/category/Periféricos">
@@ -61,12 +64,39 @@ function Home() {
 
       <div className={s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
-          <h5>Recomendados</h5>
+          <h5>Los más vendidos</h5>
           <span></span>
         </div>
       </div>
 
       <Carrusel products={ordersCarrousel} />
+
+      {/* Marcas */}
+      <section className={dm ? s.dmbanners : s.banners}>
+        <div className={s.bannerOne}>
+          <Link to="/brand/Razer">
+            <div className={s.razer}></div>
+          </Link>
+          <Link to="/brand/HyperX">
+            <div className={s.hyperx}></div>
+          </Link>
+          <Link to="/brand/Logitech">
+            <div className={s.logitech}></div>
+          </Link>
+        </div>
+        <div className={s.bannerTwo}>
+          <Link to="/brand/Redragon">
+            <div className={s.redragon}></div>
+          </Link>
+          <Link to="/brand/CoolerMaster">
+            <div className={s.coolermaster}></div>
+          </Link>
+          <Link to="/brand/Nintendo">
+            <div className={s.nintendo}></div>
+          </Link>
+        </div>
+      </section>
+
       <Newsletter />
       <Footer />
     </div>

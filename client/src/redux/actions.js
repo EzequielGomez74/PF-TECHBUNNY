@@ -27,6 +27,7 @@ import {
   GET_PAYPREFERENCES_BY_ID,
   GET_CARROUSEL,
   UPDATE_USER_INFO,
+  GET_PRODUCTS_BY_BRAND,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -106,6 +107,18 @@ export function getProductsByCategory(category) {
     try {
       let json = await axiosInstance.get(`/products?category=${category}`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+//Marcas de Periféricos
+export function getProductsByBrand() {
+  return async function (dispatch) {
+    try {
+      let json = await axiosInstance.get(`/products?category=Periféricos`);
+      return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }
@@ -333,11 +346,15 @@ export const createOrder = (user_id, pushPayment) => {
     try {
       const response = await axiosInstance.post(`/orders/${user_id}`);
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      console.log(response.data);
-      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
-      console.log(orders.data);
-      pushPayment();
-      return dispatch({ type: CREATE_ORDER, payload: orders.data });
+      const order_id = response.data.order_id;
+      if (order_id) {
+        const orders = await axiosInstance.get(
+          `/orders?user_id=${user_id}&order_id=${order_id}`
+        );
+        console.log(orders.data);
+        pushPayment();
+        return dispatch({ type: CREATE_ORDER, payload: orders.data });
+      } else throw new Error("CREATE ORDER FAILED");
     } catch (error) {
       console.log(error.message);
     }

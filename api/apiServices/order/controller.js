@@ -8,31 +8,21 @@ const controller = require("./controller.js");
 // $ esta funcion actualiza el estado de las ordenes (
 // $  status = "created" ===> status = "processed"
 // $  status = "processed" ===> status = "completed" || status = "canceled"
-async function updateOrder(order_id, status) {
+async function updateOrder(user_id, order_id, status) {
   try {
     const order = await Order.update(
       { status: status },
-      { where: { order_id: order_id } }
-    ); 
-    
-    console.log("se cambio el estado de la orden nro° ", order_id, "al estado: ", status
-		);
-      
-    const productos = await OrderProduct.findAll({where: {order_id}, raw: true})
-    if(status === "canceled") {
-      productos.map( async (p) => {
-        console.log(p)
-        const actual = await Product.findOne({where: {product_id: p.product_id}})
-        await Product.update({stock: actual.stock + p.count},{where: {product_id: p.product_id}})
-      })
-    }
-    if(status === "completed") {
-      productos.map( async (p) => {
-        const actual = await Product.findOne({where: {product_id: p.product_id}, raw: true})
-        await Product.update({soldCount: actual.soldCount + p.count},{where: {product_id: p.product_id}})
-      })
-      // sendMail(userdata); //! su pago fue recibido
-    }
+      { where: { user_id: user_id, order_id: order_id } }
+    ); //
+    // if (order.dataValues.status !== "onCart") sendMail(userdata);
+    console.log(
+      "se cambio el estado de la orden nro° ",
+      order_id,
+      " perteneciente al user ",
+      user_id,
+      "al estado: ",
+      status
+    );
     return order;
   } catch (error) {
     throw new Error(error.message);
