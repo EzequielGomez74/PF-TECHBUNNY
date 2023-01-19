@@ -27,6 +27,7 @@ import {
   GET_PAYPREFERENCES_BY_ID,
   GET_CARROUSEL,
   UPDATE_USER_INFO,
+  GET_PRODUCTS_BY_BRAND,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -106,6 +107,17 @@ export function getProductsByCategory(category) {
     try {
       let json = await axiosInstance.get(`/products?category=${category}`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getProductsByBrand() {
+  return async function (dispatch) {
+    try {
+      let json = await axiosInstance.get(`/products?category=Periféricos`);
+      return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
       console.log(error.message);
     }

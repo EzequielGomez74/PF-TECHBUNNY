@@ -85,7 +85,7 @@ function NavBar() {
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
           <h1>
-            <a href="/home">TECHBUNNY</a>
+            <a href="#">TECHBUNNY </a>
           </h1>
           <img src={logo} alt="logo" className="logo" />
 

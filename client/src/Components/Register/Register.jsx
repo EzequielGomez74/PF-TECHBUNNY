@@ -81,7 +81,7 @@ function Register() {
           {errors.username && showError ? (
             <span className={s.error}>{errors.username}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="text"
@@ -94,7 +94,7 @@ function Register() {
           {errors.email && showError ? (
             <span className={s.error}>{errors.email}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="email"
@@ -107,7 +107,7 @@ function Register() {
           {errors.password && showError ? (
             <span className={s.error}>{errors.password}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="password"

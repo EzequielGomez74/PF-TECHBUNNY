@@ -5,6 +5,7 @@ const initialState = {
   detail: {},
   categories: [],
   productsByCategory: [],
+  productsByBrand: [],
   filtered: [],
   cart: [],
   favorites: [],
@@ -37,6 +38,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         productsByCategory: action.payload,
         filtered: action.payload,
+      };
+    case "GET_PRODUCTS_BY_BRAND":
+      return {
+        ...state,
+        productsByBrand: action.payload,
+        // filtered: action.payload,
       };
     case "GET_CATEGORIES":
       return {
