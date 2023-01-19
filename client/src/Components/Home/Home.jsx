@@ -33,7 +33,10 @@ function Home() {
           <span></span>
         </div>
       </div>
+
       <Carrusel products={favoritesCarrousel} />
+
+      
       <section className={dm ? s.dmbanners : s.banners}>
         <div className={s.bannerOne}>
           <Link to="/category/Periféricos">

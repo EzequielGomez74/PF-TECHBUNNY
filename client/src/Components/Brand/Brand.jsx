@@ -5,11 +5,13 @@ import Footer from '../Footer/Footer'
 import NavBar from '../NavBar/NavBar'
 import { getProductsByBrand } from '../../redux/actions'
 import CardV from '../Card V/CardV'
+import s from './Brand.module.css'
 
-function Marca() {
+function Brand() {
    
     const dispatch = useDispatch()
     const { marca } = useParams()
+    const dm = useSelector((state) => state.darkMode);
 
     const perifericos = useSelector(state => state.productsByBrand)
     const user = useSelector((state) => state.loggedUser);
@@ -24,12 +26,14 @@ function Marca() {
     //razer, hiperx, logitech, redDragon, coolerMaster, Nintendo
    useEffect(()=> {
         dispatch(getProductsByBrand())
+        window.scrollTo(0, 0);
    }, [dispatch])
 
   return (
     <div>
         <NavBar/>
-        <section>
+        <section className={dm ? s.dmbrandPage : s.brandPage}>
+        <div className={s.brandProducts}>
             {marca === 'Razer' ? Razer.map(e => <CardV
                 favorite={e.favorite ? e.favorite : ""}
                 user_id={user.user_id}
@@ -97,10 +101,11 @@ function Marca() {
                 category={e.category}
                 subcategory={e.subcategory}
              />) }
+        </div>
         </section>
         <Footer />
     </div>
   )
 }
 
-export default Marca
+export default Brand

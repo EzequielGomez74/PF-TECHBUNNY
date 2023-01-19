@@ -1,0 +1,14 @@
+.brandProducts{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    max-width: 1400px;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.dmbrandPage{
+    background-color: #20232a;
+}
