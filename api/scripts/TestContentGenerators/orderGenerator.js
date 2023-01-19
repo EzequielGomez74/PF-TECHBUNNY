@@ -23,7 +23,7 @@ async function orderGenerator(user_id) {
       count,
       product_name: product.name,
     };
-    console.log(obj);
+    // console.log(obj);
     await cartController.addProduct(obj, user_id);
   }
   await orderController.createOrder(user_id);

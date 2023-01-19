@@ -81,22 +81,14 @@ router.post("/:user_id", async (req, res) => {
 router.put("/:order_id", async (req, res) => {
   try {
     const { order_id } = req.params;
-    if (order_id && req.body.status)
-      // para cuando el admin use dashboard
-      res
-        .status(200)
-        .send(
-          await controller.updateOrder(
-            req.body.user_id,
-            order_id,
-            req.body.status
-          )
-        );
-    if (order_id)
+    if (order_id && req.body.status){
+      // para cuando el admin use dashboard  // en el /feedback. va a enviar el status por body.
+      return res.status(200).send(await controller.updateOrder(order_id, req.body.status));
+  }
+    if (order_id){
       // para la compra
-      res
-        .status(200)
-        .send(await controller.updateOrderData(order_id, req.body));
+      return res.status(200).send(await controller.updateOrderData(order_id, req.body));
+    } 
   } catch (error) {
     res.status(400).send(error.message);
   }
