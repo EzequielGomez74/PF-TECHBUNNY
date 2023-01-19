@@ -48,13 +48,16 @@
 .loginCard input {
   margin-left: 40px;
   margin-right: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   height: 40px;
   text-indent: 8px;
   border: none;
   background: #F6F5FA;
 }
 
+.recoverPass{
+  cursor: pointer;
+}
 .m2 {
   font-size: 12px;
   margin-top: 20px;
@@ -99,7 +102,8 @@
 }
 
 .hidden{
-  color:white
+ color:white;
+  
 }
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
@@ -143,6 +147,11 @@
   line-height: 45px;
   padding-top: 20px;
   color: #f6f5fa;
+}
+
+.dmrecoverPass{
+  cursor: pointer;
+  color:white;
 }
 
 .dmloginCard input {
@@ -206,4 +215,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dmhidden{
+  color:#2B3036;
 }

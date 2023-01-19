@@ -88,7 +88,7 @@ function Login() {
           {errors.username && showError ? (
             <span className={s.error}>{errors.username}</span>
           ) : (
-            <span className={s.hidden}></span>
+            <span className={dm ? s.dmhidden : s.hidden}>.</span>
           )}
           <input
             type="password"
@@ -100,7 +100,7 @@ function Login() {
           {errors.password && showError ? (
             <span className={s.error}>{errors.password}</span>
           ) : (
-            <span className={s.hidden}></span>
+            <span className={dm ? s.dmhidden : s.hidden}>.</span>
           )}
           <span
             className={dm ? s.dmrecoverPass : s.recoverPass}
