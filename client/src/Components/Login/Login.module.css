@@ -125,6 +125,9 @@
   background-color: #20232A;
 }
 
+.recoverPass{
+cursor: pointer;
+}
 
 .dmloginCard {
   background-color: #2B3036;

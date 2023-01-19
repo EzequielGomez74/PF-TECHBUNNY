@@ -1,0 +1,341 @@
+/* .searchContainer {
+  box-shadow: 5px 5px 15px #20232a;
+} */
+
+.inputContainer {
+  position: relative;
+}
+
+.input {
+  height: 40px;
+  width: 250px;
+  border: none;
+  text-indent: 10px;
+  border: 1px solid #20232a;
+}
+
+.inputCloseButton {
+  position: absolute;
+  transform: translate(-10px, 20px);
+  border: none;
+  background-color: white;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.input:focus {
+  outline: none;
+  color: black;
+}
+
+.inputIcon {
+  height: 55px;
+  width: 44px;
+  background-color: #20232a;
+  color: white;
+  transition: 0.5s;
+}
+
+.inputIcon:hover {
+  cursor: pointer;
+  color: #d7f136;
+  transition: 0.5s;
+}
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+  background: #e7e7e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7e7e7e;
+} */
+
+/* EX FORM */
+.searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* EX INPUT DE TIPO TEXT */
+.input{
+  width: 280px;
+  padding: 0.5em;
+  border: 1px solid;
+  /* border-radius: 4px 0 0 4px; */
+}
+
+/* EX BUTTON DE TIPO SUBMIT */
+/* button[type="submit"] {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+} */
+
+.searchNavLink {
+  border-bottom: #7e7e7e;
+}
+
+.searchElement {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+}
+
+
+.liSearchBar {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  transition: 0.5s;
+}
+
+.nameAndPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.NameSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+}
+
+.priceSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 400;
+  text-align: start;
+  transition: 0.5s;
+  margin-top: 0;
+}
+
+li:hover p {
+  color: #d7f136;
+  transition: 0.5s;
+}
+
+.imgsearch {
+  width: 70px;
+  max-height: 70px;
+}
+
+.allResults {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+  cursor: pointer;
+  align-items: center;
+}
+
+.allResults:hover {
+  color: #d7f136;
+}
+
+.notFound {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  max-width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  width: 337px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+  display: flex;
+}
+
+.hiden {
+  display: none;
+  border: none;
+}
+
+/* DARK MODE  */
+.dminputContainer {
+  position: relative;
+}
+
+.dminput {
+  height: 40px;
+  width: 250px;
+  text-indent: 10px;
+  background-color: #292a2e;
+  color: #292a2e;
+}
+
+.dminputCloseButton {
+  position: absolute;
+  transform: translate(-10px, 20px);
+  border: none;
+  color: white;
+  background-color: #292a2e;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.dminput:focus {
+  outline: none;
+  color: white;
+  border: #292a2e;
+}
+
+.dminputIcon {
+  height: 55px;
+  width: 44px;
+  border: none;
+  background-color: #fefefe;
+  color: black;
+  transition: 0.5s;
+}
+
+.dminputIcon:hover {
+  color: #d7f136;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.dmsearchNavLink {
+  border-bottom: #7e7e7e;
+}
+
+.dmsearchElement {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+}
+
+
+.dmnameAndPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dmNameSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+}
+
+.dmpriceSearch {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 400;
+  text-align: start;
+  transition: 0.5s;
+  margin-top: 0;
+}
+
+
+.dmimgsearch {
+  width: 70px;
+  max-height: 70px;
+}
+
+.dmallResults {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: start;
+  transition: 0.5s;
+  cursor: pointer;
+  align-items: center;
+}
+
+.dmallResults:hover {
+  color: #d7f136;
+}
+
+.dmnotFound {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  max-width: 337px;
+  max-height: 406px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 400px;
+  width: 337px;
+  overflow-y: auto;
+  background-color: white;
+  transform: translate(-339px, 26px);
+  border: solid 1px;
+  display: flex;
+}
+
+.dmhiden {
+  display: none;
+  border: none;
+}
+
+/* EX FORM */
+.dmsearchContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* EX INPUT DE TIPO TEXT */
+.dminput{
+  width: 280px;
+  padding: 0.5em;
+  border: 1px solid;
+  /* border-radius: 4px 0 0 4px; */
+}

@@ -1,0 +1,29 @@
+
+.results {
+  padding-top: 10px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.dmresults{
+  padding-top: 10px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #20232A;
+}
+
+.dmresultsContainer{
+  background-color: #20232A;
+}
+
+.dmresultsContainer h4{
+  color: white;
+}

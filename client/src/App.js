@@ -19,6 +19,10 @@ import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import EditProfile from "./Components/Profile/EditProfile";
 import Feedback from "./Components/Feedback/Feedback";
+import NewPassword from "./Components/NewPassword/NewPassword";
+import Recover from "./Components/Recover/Recover";
+import Dashboard from './Components/Dashboard (admin)/Dashboard'
+import Results from './Components/Results/Results'
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 function App() {
@@ -40,10 +44,14 @@ function App() {
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />
+        <Route exact path="/results/:searchTerm" component={Results} />
+        <Route exact path="/recover" component={Recover} />
+        <Route exact path="/newPassword/:token" component={NewPassword} />
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/feedback" component={Feedback} />
+        <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="*" component={Error} />
-       </Switch>
+      </Switch>
     </div>
   );
 }
