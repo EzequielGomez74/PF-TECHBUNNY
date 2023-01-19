@@ -36,6 +36,7 @@
 
 .banners{
     background-color: #F9F9F9;
+
 }
 
 .dmbanners{
@@ -165,7 +166,29 @@
     background-image: url(../../images/bteclado.png);
 }
 
+.razer{
+    background-image: url(../../images/razer.png);
+}
 
+.hyperx{
+    background-image: url(../../images/hyperx.png);
+}
+
+.logitech{
+    background-image: url(../../images/logitech.png);
+}
+
+.redragon{
+    background-image: url(../../images/redragon.png);
+}
+
+.coolermaster{
+    background-image: url(../../images/coolermaster.png);
+}
+
+.nintendo{
+    background-image: url(../../images/nintendo.png);
+}
         
     
 /* Fin de los estilos para la sección del Banner */
