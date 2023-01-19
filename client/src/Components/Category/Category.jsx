@@ -164,7 +164,7 @@ function Category() {
             </option>
           </select>
         </div>
-        <div className={s.results}>
+        <div className={dm? s.dmresults : s.results}>
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <div className={s.cardShadow}>
