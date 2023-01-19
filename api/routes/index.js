@@ -15,6 +15,7 @@ const newsletter = require("../apiServices/newsletter/routes.js");
 const verify = require("../apiServices/verify/routes.js");
 const cart = require("../apiServices/cart/routes.js");
 const carrousel = require("../apiServices/carrousel/routes.js");
+const dashboard = require("../apiServices/dashboard/routes.js");
 const generateAccesTokenInRequest = require("../middlewares/generateAccesTokenInRequest.js");
 
 //router.use(generateTestUsername);
