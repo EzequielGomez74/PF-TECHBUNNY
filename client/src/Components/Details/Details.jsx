@@ -98,6 +98,7 @@ function Details() {
           user.user_id
         )
       );
+      setQuantity(0);
     }
   }
 

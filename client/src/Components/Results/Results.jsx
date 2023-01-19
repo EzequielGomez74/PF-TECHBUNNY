@@ -7,9 +7,11 @@ import { useState, useEffect } from "react";
 import s from "../Results/Results.module.css";
 import Pagination from "../Pagination/Pagination";
 import { useParams, useLocation } from "react-router-dom";
+import loading from '../../images/loadingg.gif'
 
 function Results() {
   const results = useSelector((state) => state.results);
+  const loggedUser = useSelector((state) => state.loggedUser);
   // const st = useSelector((state) => state.searchTerm);
   let { searchTerm } = useParams();
   //DARK MODE
@@ -48,27 +50,28 @@ function Results() {
             currentResults.map((p) => (
               <CardV
                 key={p.product_id}
-                id={p.product_id}
+                product_id={p.product_id}
                 brand={p.brand}
                 name={p.name}
                 image={p.image}
                 price={p.price}
                 category={p.category}
                 subcategory={p.subcategory}
+                user_id={loggedUser.user_id}
+                favorite={p.favorite}
               />
             ))
           ) : (
-            <img
-              src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-              alt=""
-            />
+            <div className={s.loading}>
+            <img  src={loading} alt="" />
+            </div>
           )}
         </div>
 
         <div>
           <Pagination
             productsPerPage={productsPerPage}
-            products={results.length}
+            products={resultsLocal.length}
             paginate={paginate}
             currentPage={currentPage}
           />
