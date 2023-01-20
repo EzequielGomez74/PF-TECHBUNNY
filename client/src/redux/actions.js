@@ -28,6 +28,8 @@ import {
   GET_CARROUSEL,
   UPDATE_USER_INFO,
   GET_PRODUCTS_BY_BRAND,
+  POST_PRODUCT,
+  UPDATE_PRODUCT,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -39,6 +41,38 @@ export const getProducts = (id) => {
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
     }
+  };
+};
+
+export const postProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.post('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto creado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log('No se pudo insertar el producto')
+    } 
+  };
+};
+
+export const updateProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.put('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto actualizado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
   };
 };
 
