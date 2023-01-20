@@ -9,6 +9,11 @@
   justify-content: space-around;
 }
 
+.loading img {
+  width: 269px;
+  height: 258px;
+}
+
 .dmresults{
   padding-top: 10px;
   max-width: 1400px;

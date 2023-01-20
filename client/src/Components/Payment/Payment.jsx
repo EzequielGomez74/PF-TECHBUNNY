@@ -3,8 +3,8 @@ import s from './Payment.module.css';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import { useSelector , useDispatch} from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { getPayPreferencesById, updateOrderInfoById, allOrdersByUser } from '../../redux/actions'
+import { useHistory } from 'react-router-dom';
 
 function Payment() {
     const dm = useSelector(state => state.darkMode);
@@ -12,6 +12,12 @@ function Payment() {
 	const user = useSelector(state => state.loggedUser)
 	const orderMp = useSelector(state => state.orders)
 	const dispatch = useDispatch();
+	const history = useHistory();
+	const handleCart = () => {
+	  history.push("/cart");
+	};
+
+
     const [payInfo, setPayInfo] = useState({
 		user_id: user.user_id, 
         name: '',
@@ -27,11 +33,6 @@ function Payment() {
             ...payInfo,
             [e.target.name]: e.target.value
         })
-    }
-
-    const history = useHistory();
-    const handleCart = () => {
-        history.push('/cart');
     }
 
 	useEffect(() => {
@@ -53,15 +54,14 @@ function Payment() {
 
     
   	async function pay() {
-    	try{
-    		dispatch(getPayPreferencesById(orderMp[0].order_id))   
-			dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo))
-			dispatch(allOrdersByUser(user.user_id))    
-    	}
-    	catch(error) {
-      	console.error(error.message)  
-    	}
-	}
+    try {
+      dispatch(getPayPreferencesById(orderMp[0].order_id));
+      dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
+      //dispatch(allOrdersByUser(user.user_id))
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 
   return (
 		<div className={dm ? s.dmpayPage : s.payPage}>
@@ -120,18 +120,15 @@ function Payment() {
 						</div>
 					</div>
 					<div className={dm ? s.dmbuttons : s.buttons}>
-						<button onClick={pay} className={dm ? s.dmb2 : s.b2}>Mercado Pago</button>
-						<button className={dm ? s.dmb1 : s.b1} onClick={handleCart}>
-							Carrito
-						</button>
-						<div className="page-content" id="page-content"></div>
-						{/* Los llevará a Mercado Pago */}
-					</div>
-					{/* <div>
-						<h1>MERCADOPAGO</h1>
-						<button onClick={pay}> GENERAR LINK DE PAGO</button>
-						<div className="page-content" id="page-content"></div>
-					</div> */}
+            <button onClick={pay} className={dm ? s.dmb2 : s.b2}>
+              Mercado Pago
+            </button>
+            <button className={dm ? s.dmb1 : s.b1} onClick={handleCart}>
+              Carrito
+            </button>
+            <div className={s.pageContent} id="page-content"></div>
+            {/* Los llevará a Mercado Pago */}
+          </div>
 				</div>
 			</section>
 			<Footer />

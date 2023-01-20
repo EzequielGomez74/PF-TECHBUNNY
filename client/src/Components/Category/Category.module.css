@@ -73,3 +73,8 @@
     font-size: 16px;
     background-color: #f5f5f5;
   }
+
+  .loading img {
+    width: 269px;
+    height: 258px;
+  }

@@ -98,6 +98,7 @@ function Details() {
           user.user_id
         )
       );
+      setQuantity(0);
     }
   }
 
@@ -217,8 +218,10 @@ function Details() {
             </span>
           </div>
           <button
+          disabled={quantity === 0}
             type="submit"
-            className={dm ? s.dmmainButton : s.mainButton}
+           
+            className={quantity !== 0 && dm ? s.dmmainButton:quantity !== 0 && !dm?s.mainButton: quantity === 0 && dm? s.dmmainButtonDisabled:s.mainButtonDisabled}
             onClick={handleAddToCart}
           >
             Agregar al Carrito
@@ -228,6 +231,7 @@ function Details() {
 
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
+        
           <h5>Recomendados</h5>
           <span></span>
         </div>

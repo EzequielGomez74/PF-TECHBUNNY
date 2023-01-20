@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import CardV from "../Card V/CardV";
+import CardCarrusel from "../CardCarrusel/CardCarrusel";
 import { getProducts } from "../../redux/actions";
 import * as actions from "../../redux/actions";
 import { useParams } from "react-router-dom";
@@ -91,8 +91,8 @@ function CarruselDetail() {
         {carruselProducts.length === 10
           ? carruselProducts.map((p) => (
               <SwiperSlide>
-                <CardV
-                  favorite={p.favorite}
+                <CardCarrusel
+                  favorite={p.favorite ? p.favorite : ""}
                   key={p.product_id}
                   user_id={user.user_id}
                   product_id={p.product_id}
@@ -108,8 +108,8 @@ function CarruselDetail() {
             ))
           : carruselProductsExtended.map((p) => (
               <SwiperSlide>
-                <CardV
-                  favorite={p.favorite}
+                <CardCarrusel
+                 favorite={p.favorite ? p.favorite : ""}
                   key={p.product_id}
                   user_id={user.user_id}
                   product_id={p.product_id}

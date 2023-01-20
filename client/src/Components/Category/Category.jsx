@@ -6,6 +6,7 @@ import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Category.module.css";
+import loading from '../../images/loadingg.gif'
 import Pagination from "../Pagination/Pagination";
 
 function Category() {
@@ -164,7 +165,7 @@ function Category() {
             </option>
           </select>
         </div>
-        <div className={dm? s.dmresults : s.results}>
+        <div className={s.results}>
           {currentProduct.length ? (
             currentProduct.map((e) => (
               <div className={s.cardShadow}>
@@ -183,10 +184,9 @@ function Category() {
               </div>
             ))
           ) : (
-            <img
-              src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-              alt=""
-            />
+            <div className={s.loading}>
+            <img  src={loading} alt="" />
+            </div>
           )}
         </div>
         <div className={s.paginate}>
