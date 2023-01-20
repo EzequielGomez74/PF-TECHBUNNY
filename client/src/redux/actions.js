@@ -28,6 +28,8 @@ import {
   GET_CARROUSEL,
   UPDATE_USER_INFO,
   GET_PRODUCTS_BY_BRAND,
+  POST_PRODUCT,
+  UPDATE_PRODUCT,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -39,6 +41,38 @@ export const getProducts = (id) => {
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
     }
+  };
+};
+
+export const postProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.post('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto creado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log('No se pudo insertar el producto')
+    } 
+  };
+};
+
+export const updateProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.put('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto actualizado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
   };
 };
 
@@ -346,15 +380,11 @@ export const createOrder = (user_id, pushPayment) => {
     try {
       const response = await axiosInstance.post(`/orders/${user_id}`);
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      const order_id = response.data.order_id;
-      if (order_id) {
-        const orders = await axiosInstance.get(
-          `/orders?user_id=${user_id}&order_id=${order_id}`
-        );
-        console.log(orders.data);
-        pushPayment();
-        return dispatch({ type: CREATE_ORDER, payload: orders.data });
-      } else throw new Error("CREATE ORDER FAILED");
+      console.log(response.data);
+      const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
+      console.log(orders.data);
+      pushPayment();
+      return dispatch({ type: CREATE_ORDER, payload: orders.data });
     } catch (error) {
       console.log(error.message);
     }
