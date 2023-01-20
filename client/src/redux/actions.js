@@ -30,6 +30,7 @@ import {
   GET_PRODUCTS_BY_BRAND,
   POST_PRODUCT,
   UPDATE_PRODUCT,
+  DELETE_PRODUCT,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -75,6 +76,26 @@ export const updateProduct = (productInfo) => {
     } 
   };
 };
+
+export const deleteProduct = (product_id) => {
+  console.log(product_id)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.delete(`/products/${product_id}`)
+      console.log(response.data)
+      if(response.data === "Producto deshabilitado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
+      } else {
+        const allProducts = await axiosInstance.get('/products')
+        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
+  };
+};
+
 
 // export function getProducts() {
 //   return async function (dispatch) {

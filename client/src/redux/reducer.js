@@ -37,6 +37,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,

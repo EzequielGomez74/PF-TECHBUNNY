@@ -110,14 +110,29 @@ async function createProduct(product) {
 
 async function deleteProduct(product_id) {
   try {
-    await Product.update(
-      { active: false },
-      {
-        where: {
-          product_id,
-        },
-      }
-    );
+    const existe = await Product.findOne({ where: { product_id } });
+    if (existe.active === false) {
+      await Product.update(
+        { active: true },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+
+      return "Producto habilitado con exito!";
+    } if(existe.active === true) {
+      await Product.update(
+        { active: false },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+    }
+    
     return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error);

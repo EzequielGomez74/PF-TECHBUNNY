@@ -6,9 +6,12 @@ import Toolbar from '../Toolbar/Toolbar'
 import { getProducts } from '../../redux/actions'
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
-import { Edit, Delete } from '@mui/icons-material';
+import { Edit, Delete, ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
-import { postProduct, updateProduct } from '../../redux/actions'
+import Paper from "@material-ui/core/Paper";
+// import SearchBar from "material-ui-search-bar";
+import { postProduct, updateProduct, deleteProduct } from '../../redux/actions'
+import { useRef } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }));
-
 
 function Dashboard() {
   //Sidebar
@@ -92,6 +94,8 @@ function Dashboard() {
   }
 
   const peticionDelete=async()=>{
+    dispatch(deleteProduct(productSelected.product_id))
+    abrirCerrarModalEliminar();
     // await axios.delete(baseUrl+consolaSeleccionada.id)
     // .then(response=>{
     //   setData(data.filter(consola=>consola.id!==consolaSeleccionada.id));
@@ -181,7 +185,7 @@ function Dashboard() {
 
   const bodyEliminar=(
     <div className={styles.modal}>
-      <p>Estás seguro que deseas eliminar la consola <b>{productSelected && productSelected.name}</b> ? </p>
+      <p>Estás seguro que deseas cambiar el 'status' de <b>{productSelected && productSelected.name}</b> ? </p>
       <div align="right">
         <Button color="secondary" onClick={()=>peticionDelete()} >Sí</Button>
         <Button onClick={()=>abrirCerrarModalEliminar()}>No</Button>
@@ -189,16 +193,62 @@ function Dashboard() {
     </div>
   )
 
-  // useEffect(async()=>{
-  //   await peticionGet();
-  // },[])
 
   useEffect(()=>{
     dispatch(getProducts())
   },[dispatch])
 
   //Search Input
-  const [searchTerm, setSearchTerm] = useState()
+  // const [searchTerm, setSearchTerm] = useState()
+
+  // Sort 
+  const initialSort = useRef(true)
+  const sortedAsc = useRef(false)
+  const sortedDesc = useRef(false)
+  // const [sortedAsc, setSortedAsc] = useState(false)
+  // const [sortedDesc, setSortedDesc] = useState(false)
+
+  const sortByBrand = () => {
+    if(initialSort.current === true) {
+      console.log('ENTRE A INITIAL')
+      initialSort.current = false
+      console.log('...')
+      sortedAsc.current = true
+      // setSortedAsc(true)
+    }
+
+    products.sort(function (
+      a,
+      b
+    ) {
+      if (sortedAsc.current) {
+        if (a.brand < b.brand) {
+          return -1;
+        } else if (a.brand > b.brand) {
+          return 1;
+        } else {
+          return 0;
+        }
+
+      } else if (sortedDesc.current) {
+        if (a.brand > b.brand) {
+          return -1;
+        } else if (a.brand < b.brand) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+      return "Ordered";
+    });
+
+    sortedAsc.current = false
+    sortedDesc.current = true
+  }
+
+  useEffect(()=>{
+    console.log(sortedAsc, sortedDesc)
+  },[sortedAsc, sortedDesc])
 
   //Paginación de Tabla
   const [page, setPage] = useState(0)
@@ -222,12 +272,12 @@ function Dashboard() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div>
-        <input
+        {/* <input
           type='text'
           placeholder='Buscar productos'
           className='search'
           onChange={e => setSearchTerm(e.target.value)}
-        />
+        /> */}
         <br />
         <Button onClick={abrirCerrarModalInsertar} >Insertar</Button>
         <br /><br />
@@ -270,59 +320,65 @@ function Dashboard() {
         <br/>
         <br/>
         <h2>Productos TECHBUNNY</h2>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Id de Producto</TableCell>
-                <TableCell>Nombre de Producto</TableCell>
-                <TableCell>Marca</TableCell>
-                <TableCell>Precio</TableCell>
-                <TableCell>Cantidad Vendida</TableCell>
-                <TableCell>Stock</TableCell>
-                <TableCell>Editar</TableCell>
-                <TableCell>Eliminar</TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {products
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                // .filter(f => {
-                //   return searchTerm.toLowerCase() === '' ? f : f.name.toLowerCase().includes(searchTerm)
-                // })
-                .map(product => (
+        <Paper>
+          <TableContainer>
+            <Table>
+              <TableHead>
                 <TableRow>
-                  <TableCell>{product.product_id}</TableCell>
-                  <TableCell>{product.name}</TableCell>
-                  <TableCell>{product.brand}</TableCell>
-                  <TableCell>{product.price}</TableCell>
-                  <TableCell>{product.soldCount}</TableCell>
-                  <TableCell>{product.stock}</TableCell>
-                  <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
-                  <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
+                  <TableCell>Id de Producto</TableCell>
+                  <TableCell>Nombre de Producto</TableCell>
+                  <TableCell onClick={()=> sortByBrand()}> Marca 
+                    {!sortedAsc.current && !sortedDesc.current ? '' : sortedAsc.current && !sortedDesc.current ?
+                    <ArrowUpward className={styles.iconos} onClick={()=> sortByBrand()}/> : <ArrowDownward className={styles.iconos} onClick={()=> sortByBrand()}/>}
+                  </TableCell>
+                  <TableCell>Precio</TableCell>
+                  <TableCell>Cantidad Vendida</TableCell>
+                  <TableCell>Stock</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Editar</TableCell>
+                  <TableCell>Eliminar</TableCell>
                 </TableRow>
-              ))}
+              </TableHead>
 
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={products.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+              <TableBody>
+                {products
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .filter(f => {
+                //   return searchTerm === '' ? f : f.name.toLowerCase().includes(searchTerm)
+                // })
+                  .map(product => (
+                  <TableRow key={product.product_id} >
+                    <TableCell>{product.product_id}</TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.brand}</TableCell>
+                    <TableCell>{product.price}</TableCell>
+                    <TableCell>{product.soldCount}</TableCell>
+                    <TableCell>{product.stock}</TableCell>
+                    <TableCell>{product.active ? 'Activo' : 'Inactivo'}</TableCell>
+                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola  (product, 'Editar')}/></TableCell>
+                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola (product, 'Eliminar')}/></TableCell>
+                  </TableRow>
+                ))}
 
-        </TableContainer>
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={products.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
 
+          </TableContainer>
+        </Paper>
         <Modal
           open={modalInsertar}
           onClose={abrirCerrarModalInsertar}>

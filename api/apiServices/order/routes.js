@@ -68,9 +68,7 @@ router.get("/pagar/:order_id", async (req, res) => {
 router.post("/:user_id", async (req, res) => {
   try {
     res.status(200).json({
-      Mensaje: `La orden N° ${await controller.createOrder(
-        req.params.user_id
-      )} se creo con exito`,
+      order_id: await controller.createOrder(req.params.user_id),
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
