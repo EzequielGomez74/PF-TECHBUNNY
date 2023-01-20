@@ -7,6 +7,7 @@ import { getProducts } from '../../redux/actions'
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
 import { Edit, Delete } from '@mui/icons-material';
+import TablePagination from "@material-ui/core/TablePagination";
 import { postProduct, updateProduct } from '../../redux/actions'
 
 const useStyles = makeStyles((theme) => ({
@@ -188,7 +189,6 @@ function Dashboard() {
     </div>
   )
 
-
   // useEffect(async()=>{
   //   await peticionGet();
   // },[])
@@ -196,6 +196,23 @@ function Dashboard() {
   useEffect(()=>{
     dispatch(getProducts())
   },[dispatch])
+
+  //Search Input
+  const [searchTerm, setSearchTerm] = useState()
+
+  //Paginación de Tabla
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0)
+  };
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, products.length - page * rowsPerPage);
 
   return (
     <div>
@@ -205,9 +222,54 @@ function Dashboard() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div>
+        <input
+          type='text'
+          placeholder='Buscar productos'
+          className='search'
+          onChange={e => setSearchTerm(e.target.value)}
+        />
         <br />
         <Button onClick={abrirCerrarModalInsertar} >Insertar</Button>
         <br /><br />
+
+        {/* { searchTerm ? 
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id de Producto</TableCell>
+                  <TableCell>Nombre de Producto</TableCell>
+                  <TableCell>Marca</TableCell>
+                  <TableCell>Precio</TableCell>
+                  <TableCell>Cantidad Vendida</TableCell>
+                  <TableCell>Stock</TableCell>
+                  <TableCell>Editar</TableCell>
+                  <TableCell>Eliminar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products
+                  .filter(p => p.name.toLowerCase().includes(searchTerm))
+                  .map(product => (
+                  <TableRow>
+                    <TableCell>{product.product_id}</TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.brand}</TableCell>
+                    <TableCell>{product.price}</TableCell>
+                    <TableCell>{product.soldCount}</TableCell>
+                    <TableCell>{product.stock}</TableCell>
+                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
+                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        : ''} */}
+
+        <br/>
+        <br/>
+        <h2>Productos TECHBUNNY</h2>
         <TableContainer>
           <Table>
             <TableHead>
@@ -224,7 +286,12 @@ function Dashboard() {
             </TableHead>
 
             <TableBody>
-              {products.map(product => (
+              {products
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .filter(f => {
+                //   return searchTerm.toLowerCase() === '' ? f : f.name.toLowerCase().includes(searchTerm)
+                // })
+                .map(product => (
                 <TableRow>
                   <TableCell>{product.product_id}</TableCell>
                   <TableCell>{product.name}</TableCell>
@@ -236,8 +303,24 @@ function Dashboard() {
                   <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
                 </TableRow>
               ))}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+                </TableRow>
+              )}
             </TableBody>
           </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={products.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+
         </TableContainer>
 
         <Modal
