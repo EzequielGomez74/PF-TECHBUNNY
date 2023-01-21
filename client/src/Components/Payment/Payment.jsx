@@ -121,7 +121,7 @@ function Payment() {
 					</div>
 					<div className={dm ? s.dmbuttons : s.buttons}>
             <button onClick={pay} className={dm ? s.dmb2 : s.b2}>
-              Mercado Pago
+              Confirmar Datos
             </button>
             
 			<div className={dm? s.dmpageContent : s.pageContent} id="page-content"></div>

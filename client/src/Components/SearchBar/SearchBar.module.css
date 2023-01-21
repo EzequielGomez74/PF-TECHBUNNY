@@ -101,6 +101,7 @@
   background-color: white;
   transform: translate(-339px, 26px);
   border: solid 1px;
+  z-index: 999;
 }
 
 
