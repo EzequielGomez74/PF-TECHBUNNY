@@ -31,6 +31,9 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
+  UPDATE_USER,
+  DELETE_USER,
+  GET_USERS,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -96,6 +99,54 @@ export const deleteProduct = (product_id) => {
   };
 };
 
+// Para el Dashboard
+
+export const getUsers = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/users");
+      console.log('usuarios son', response.data);
+      return dispatch({ type: GET_USERS, payload: response.data });
+    } catch (error) {
+      console.log("Falla para traer usuarios");
+    }
+  };
+};
+
+export const updateUser = (user_id, userInfo) => {
+  console.log(userInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.put(`/users/${user_id}`, userInfo)
+      console.log(response.data)
+      if(Object.keys(response.data).length > 0){
+      const allUsers = await axiosInstance.get('/users')
+      return dispatch({ type: UPDATE_USER, payload: allUsers.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
+  };
+};
+
+export const deleteUser = (user_id) => {
+  console.log(user_id)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.delete(`/users/${user_id}`)
+      console.log(response.data)
+      if(response.data === "Usuario habilitado con exito!") {
+       const allUsers = await axiosInstance.get('/users')
+       return dispatch({ type: DELETE_USER, payload: allUsers.data });
+      } else {
+        const allUsers = await axiosInstance.get('/users')
+        return dispatch({ type: DELETE_USER, payload: allUsers.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
+  };
+};
 
 // export function getProducts() {
 //   return async function (dispatch) {

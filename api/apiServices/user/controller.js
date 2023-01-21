@@ -65,14 +65,30 @@ async function getUserById(user_id) {
 
 async function deleteUser(user_id) {
   try {
-    const deleteUserId = await User.destroy({
-      where: { user_id },
-    });
-    if (deleteUserId) {
-      return "Usuario eliminado con exito!";
-    } else {
-      return "Usuario no encontrado!";
+    const userFound = await User.findOne({ where: { user_id } });
+    if (userFound.isDeleted === false) {
+      await User.update(
+        { isDeleted: true },
+        {
+          where: {
+            user_id,
+          },
+        }
+      );
+
+      return "Usuario habilitado con exito!";
+    } if(userFound.isDeleted === true) {
+      await User.update(
+        { isDeleted: false },
+        {
+          where: {
+            user_id,
+          },
+        }
+      );
     }
+    
+    return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error.message);
   }

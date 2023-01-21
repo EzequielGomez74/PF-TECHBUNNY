@@ -18,6 +18,7 @@ const initialState = {
   preferences: {},
   favoritesCarrousel: [],
   ordersCarrousel: [],
+  usersDashboard: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -41,6 +42,21 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+      };
+    case "GET_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "DELETE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
       };
     case "GET_PRODUCT_BY_ID":
       return {
