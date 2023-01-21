@@ -62,7 +62,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
         defaultValue:
-          "https://images.pagina12.com.ar/styles/focal_3_2_470x313/public/2022-10/663621-47230-hasbulla_0.png",
+          "https://pf-techbunny-lake.vercel.app/static/media/loguito.b42dbcb28081749618dd.png",
       },
       accessToken: {
         type: DataTypes.TEXT,

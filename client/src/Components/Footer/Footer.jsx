@@ -11,7 +11,7 @@ function Footer() {
   const dm = useSelector(state => state.darkMode);
 
   return (
-    <div className={dm ? s.dmfooter : s.footer}>
+    <div className={s.footer}>
       <section className={s.main}>
         {/* Maquetado completo. Falta linkear las preguntas frecuentes */}
         <div>

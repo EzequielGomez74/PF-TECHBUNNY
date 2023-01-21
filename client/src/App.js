@@ -49,7 +49,7 @@ function App() {
         <Route exact path="/qa" component={QA} />
         <Route exact path="/results/:searchTerm" component={Results} />
         <Route exact path="/recover" component={Recover} />
-        <Route exact path="/newPassword/:token" component={NewPassword} />
+        <Route exact path="/newPassword" component={NewPassword} />
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/feedback" component={Feedback} />
         <Route exact path="/dashboard" component={Dashboard} />

@@ -38,7 +38,7 @@
 }
 
 .one div h1 a:hover{
-  cursor: pointer;
+  cursor: default;
 }
 
 .logo{

@@ -314,7 +314,7 @@ function NavBar() {
         </div>
       ) : (
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-          <h3>BIENVENIDO {loggedUser.username}</h3>
+          <h3>BIENVENID@ {loggedUser.username}</h3>
           <span>Gracias por confiar en TECHBUNNY</span>
           <ul>
             <Link to="/profile">
