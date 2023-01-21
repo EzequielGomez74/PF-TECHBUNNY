@@ -74,7 +74,7 @@ async function createOrderCarrousel(user_id) {
     });
     //$ buscar 10 categorias random dentro del array
     //$ y por cada categoria encuentra un producto mayor al relativePos
-    const finalResults = [];
+    let finalResults = [];
     for (let index = 0; index < 10; index++) {
       let posibleProducts = await findAndGeneratePosibleProducts(allProducts);
       const choosenProduct = findBestProduct(posibleProducts);
@@ -88,6 +88,13 @@ async function createOrderCarrousel(user_id) {
         finalResults[i].push(all[pos].dataValues);
       }
     }
+    //!test
+    let aux = 0;
+    for (let j = 0; j < finalResults.length; j++) {
+      if (finalResults[j] === null) aux++;
+      console.log(finalResults[j]);
+    }
+    console.log(aux);
     // //$ get username + setFavoriteStatus
     const usernameAux = await getUserName(user_id);
     finalResults = await prodController.setFavoriteStatus(
