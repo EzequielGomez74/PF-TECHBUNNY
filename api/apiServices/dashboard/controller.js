@@ -10,27 +10,7 @@ async function dashboardData() {
     let loggedUsers = 0;
     const totalUsers = await User.findAndCountAll()
     totalUsers.rows.map((el) => {  if (el.accessToken !== null) loggedUsers++ }) // cuenta usuarios activos
-    const userData = totalUsers.rows.map((u) => {
-      let obj = {
-        user_id : u.user_id,
-        username : u.username,
-        name : u.name,
-        surname : u.surname,
-        email : u.email,
-        billingAddress : u.billingAddress,
-        zipCode : u.zipCode,
-        role : u.role,
-        isActive : u.isActive,
-        createdAt : u.createdAt,
-      }
-
-      if(u.accessToken){
-        obj = {
-          ...obj
-          ,isLogged : true};
-      }
-      return obj
-    }) 
+    
 
     console.log("usuarios logeados", loggedUsers)
     console.log("total de usuarios registrados", totalUsers.count)

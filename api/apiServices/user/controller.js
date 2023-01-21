@@ -8,8 +8,31 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
-    const allUsers = await User.findAll();
-    return allUsers;
+    let allUsers = await User.findAll();
+    const userData = allUsers.map((u) => {
+      let obj = {
+				user_id: u.user_id,
+				username: u.username,
+				name: u.name,
+				surname: u.surname,
+				email: u.email,
+				billingAddress: u.billingAddress,
+				zipCode: u.zipCode,
+				role: u.role,
+				isActive: u.isActive,
+				createdAt: u.createdAt,
+        isDeleted: u.isDeleted
+			};
+
+      if(u.accessToken){
+        obj = {
+          ...obj
+          ,isLogged : true};
+      }
+      return obj
+    }) 
+
+    return userData;
   } catch (error) {
     throw new Error(error.message);
   }

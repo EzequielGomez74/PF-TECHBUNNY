@@ -14,9 +14,12 @@ router.get("/:user_id", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-router.get("/", async (req, res) => {
-  console.log(req.query);
+
+router.get("/", async (req, res, next) => {
   try {
+    if(Object.keys(req.query).length === 0){
+      return next();
+    }
     res.status(200).json(await controller.getUserBy(req.query));
   } catch (error) {
     res.status(400).send(error.message);
@@ -52,9 +55,7 @@ router.put("/:user_id", async (req, res) => {
   try {
     const data = req.body;
     const { user_id } = req.params;
-    console.log("1");
     const foundUser = await getUser({ user_id });
-    console.log("2");
     if (
       foundUser &&
       (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
@@ -89,27 +90,5 @@ router.delete("/:user_id", async (req, res) => {
   }
 });
 
-// router.put("/:user_id", async (req, res) => {
-//   const { username, name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture } = req.body
-//   const { user_id } = req.params;
-//   const { userRole } = req.role;
-//   const { userDb } = req.username
-
-//   try {
-//     if ( user_id === userDb) { // ES USER
-//       let obj = { name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, profilePicture }
-//       res.status(200).send(await controller.editByUser(user_id, obj))
-//     }
-
-//     if (userRole === 3) { // ES ADMIN
-//       let obj = { username , name, surname, password, email, billingAddress, defaultShippingAddress, zipCode, role, isActive, needPasswordReset, profilePicture }
-//       res.status(200).send(await controller.editByAdmin(user_id, obj))
-//     }
-
-//   } catch (error) {
-//     throw new Error(error);
-
-//   }
-// })
 
 module.exports = router;
