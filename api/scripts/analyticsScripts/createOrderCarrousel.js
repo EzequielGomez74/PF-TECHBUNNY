@@ -82,7 +82,7 @@ async function createOrderCarrousel(user_id) {
     }
     //$ failsafe en caso de que no exista algun producto rellena con un random
     for (let i = 0; i < finalResults.length; i++) {
-      if (finalResults[i] === null) {
+      if (!finalResults[i]) {
         const all = await Product.findAll();
         const pos = Math.floor(Math.random() * all.length);
         finalResults[i].push(all[pos].dataValues);
@@ -91,7 +91,7 @@ async function createOrderCarrousel(user_id) {
     //!test
     let aux = 0;
     for (let j = 0; j < finalResults.length; j++) {
-      if (finalResults[j] === null) aux++;
+      if (!finalResults[j]) aux++;
       console.log(finalResults[j]);
     }
     console.log(aux);
@@ -102,7 +102,7 @@ async function createOrderCarrousel(user_id) {
       usernameAux
     );
     for (let i = 0; i < finalResults.length; i++) {
-      if (finalResults[i] === null) console.log("FINAL RESULT FAIL");
+      if (!finalResults[i]) console.log("FINAL RESULT FAIL");
     }
     return finalResults;
   } catch (error) {
