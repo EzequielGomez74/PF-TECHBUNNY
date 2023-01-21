@@ -197,7 +197,9 @@
 }
 
 
-
+.dmformOptions input:focus{
+    color: white;
+}
 
 
 
