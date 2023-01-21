@@ -73,6 +73,8 @@ function Users() {
     username: '',
     email: '',
     role: '',
+    isDeleted: '',
+    isLogged: ''
   })
 
   let initialLoad=useRef(true)
@@ -84,7 +86,7 @@ function Users() {
   //   return;
   // }
   console.log(users);
-  },[dispatch])
+  },[])
 
   const peticionPut =async()=>{
     dispatch(updateUser(userSelected.user_id, userSelected))

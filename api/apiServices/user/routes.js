@@ -14,6 +14,7 @@ router.get("/:user_id", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
 router.get("/", async (req, res, next) => {
   console.log('ENTRE A USERS ACÁ');
   try {

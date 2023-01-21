@@ -12,6 +12,13 @@
     font-family: 'Poppins';
 }
 
+.profileImgInfoSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .profileForm{
     background-color: white;
     height: 360px;
@@ -103,6 +110,77 @@
 .img {
     width: 100%;
   }
+
+.profileOrdersHistory{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.profileOrdersHistory h3{
+    font-weight: 900;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.orderContainer{
+    background-color: white;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    width: 80%;
+    border-radius: 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.orderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #dee6e9;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.orderTotal{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+    margin:0 40px 10px 0;
+}
+
+.orderProductsContainer{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.productOrderImage{
+    width: 8%;
+    height: 8%;
+}
+
+.liOrderElement{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.productOrderInfo{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 /* DARK MODE */
 

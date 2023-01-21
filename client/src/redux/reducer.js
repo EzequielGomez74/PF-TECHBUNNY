@@ -11,6 +11,7 @@ const initialState = {
   darkMode: false,
   reviews: [],
   orders: [],
+  ordersByUser: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
@@ -43,7 +44,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
-    case "GET_USER":
+    case "GET_USERS":
       return {
         ...state,
         usersDashboard: action.payload,
@@ -250,7 +251,7 @@ export default function reducer(state = initialState, action) {
     case "ALL_ORDERS_BY_USER":
       return {
         ...state,
-        orders: action.payload,
+        ordersByUser: action.payload,
       };
     case "GET_PAYPREFERENCES_BY_ID":
       return {
