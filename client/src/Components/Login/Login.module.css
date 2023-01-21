@@ -48,13 +48,16 @@
 .loginCard input {
   margin-left: 40px;
   margin-right: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   height: 40px;
   text-indent: 8px;
   border: none;
   background: #F6F5FA;
 }
 
+.recoverPass{
+  cursor: pointer;
+}
 .m2 {
   font-size: 12px;
   margin-top: 20px;
@@ -99,7 +102,8 @@
 }
 
 .hidden{
-  color:white
+ color:white;
+  
 }
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
@@ -125,9 +129,8 @@
   background-color: #20232A;
 }
 
-.recoverPass{
-cursor: pointer;
-}
+
+
 
 .dmloginCard {
   background-color: #2B3036;
@@ -146,6 +149,11 @@ cursor: pointer;
   color: #f6f5fa;
 }
 
+.dmrecoverPass{
+  cursor: pointer;
+  color:white;
+}
+
 .dmloginCard input {
   margin-left: 40px;
   margin-right: 40px;
@@ -160,20 +168,10 @@ cursor: pointer;
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
+  padding-bottom: 20px;
 }
 
 .dmm2:hover {
-  cursor: pointer;
-}
-
-.dmm1 {
-  font-size: 12px;
-  color: #f6f5fa;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.dmm1:hover {
   cursor: pointer;
 }
 
@@ -207,6 +205,18 @@ cursor: pointer;
 }
 
 .dmimg {
-  width: 60%;
-  height: 60%;
+  width: 55%;
+  height: 55%;
+}
+
+.dmheroLogin {
+  height: 500px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dmhidden{
+  color:#2B3036;
 }

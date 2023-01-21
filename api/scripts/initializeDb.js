@@ -63,18 +63,18 @@ async function loadAllAssets() {
     //!! USERS
     await loadtoDb(users, User);
     await loadtoDb(mockUsers, User);
+    //await orderGenerator();
+    //await favoriteTestGenerator();
     //!! REVIEWS
     //await reviewGenerator();
     // for (let i = 10; i <= 94; i++) {
     // }
     //!! ORDERS
-    for (let i = 2; i <= 9; i++) {
-      //await orderGenerator(i);
-    }
+    //for (let i = 2; i <= 9; i++) {
+    //}
     //!! FAVORITES
-    for (let i = 2; i <= 9; i++) {
-      //await favoriteTestGenerator(i);
-    } //TEST
+    //for (let i = 2; i <= 9; i++) {
+    //} //TEST
     await loadtoDb(favorites, Favorite); //TEST
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {

@@ -5,7 +5,7 @@ import * as actions from "../../redux/actions";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Details.module.css";
-import Carrusel from "../Carrusel/Carrusel";
+import CarruselDetail from "../Carrusel/CarruselDetail";
 import Dropdown from "../Dropdown/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayReview from "./DisplayReview";
@@ -16,22 +16,26 @@ import {
   // faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import CarruselDetail from "../Carrusel/CarruselDetail";
+
 function Details() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const user = useSelector((state) => state.loggedUser);
   const product = useSelector((state) => state.detail);
   const reviews = useSelector((state) => state.reviews);
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const initialLoad = useRef(true);
-  const [quantity, setQuantity] = useState(0);
+
+  let [active, setActive] = useState(product.favorite);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+
   const flag = useRef(true);
-  const user = useSelector((state) => state.loggedUser);
-  let [active, setActive] = useState(product.favorite);
+  const initialLoad = useRef(true);
+  const idChange = useRef(id);
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -44,6 +48,11 @@ function Details() {
     setQuantity(0);
     setStock(product.stock - getCartStock(product.product_id));
     window.scrollTo(0, 0);
+    if (idChange.current !== id) {
+      dispatch(actions.getProductById(id));
+      dispatch(actions.getReviewsBy(id));
+      idChange.current = id;
+    }
   }, [product, reviews, trigger, id]);
 
   useEffect(() => {
@@ -89,6 +98,7 @@ function Details() {
           user.user_id
         )
       );
+      setQuantity(0);
     }
   }
 
@@ -117,6 +127,7 @@ function Details() {
   //   if(productFound)
   //     product.stock -= productFound.stock
   // }
+
   const handlePlus = () => {
     if (quantity < product.stock && stock > 0) {
       setQuantity(quantity + 1);
@@ -207,8 +218,10 @@ function Details() {
             </span>
           </div>
           <button
+          disabled={quantity === 0}
             type="submit"
-            className={dm ? s.dmmainButton : s.mainButton}
+           
+            className={quantity !== 0 && dm ? s.dmmainButton:quantity !== 0 && !dm?s.mainButton: quantity === 0 && dm? s.dmmainButtonDisabled:s.mainButtonDisabled}
             onClick={handleAddToCart}
           >
             Agregar al Carrito
@@ -218,6 +231,7 @@ function Details() {
 
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
+        
           <h5>Recomendados</h5>
           <span></span>
         </div>

@@ -15,9 +15,9 @@ function Feedback() {
   const dm = useSelector((state) => state.darkMode);
 
   useEffect(() => {
-    //let query = new URLSearchParams(location.search);
-    // let collection_status = query.get("collection_status");
-    // let status = query.get("status");
+    // let query = new URLSearchParams(location.search);
+    // // let collection_status = query.get("collection_status");
+    // // let status = query.get("status");
   }, [location]);
 
   return (

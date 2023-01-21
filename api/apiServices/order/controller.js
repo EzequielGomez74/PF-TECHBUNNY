@@ -1,4 +1,10 @@
-const { Order, Product, User, Cart } = require("../../services/db/db.js");
+const {
+  Order,
+  OrderProduct,
+  Product,
+  User,
+  Cart,
+} = require("../../services/db/db.js");
 const { sendMail } = require("../../services/mailer/emailer.js");
 const controller = require("./controller.js");
 const moment = require("moment");
@@ -16,12 +22,12 @@ async function updateOrder(order_id, status) {
       { where: { order_id: order_id } }
     );
 
-    console.log(
-      "se cambio el estado de la orden nro° ",
-      order_id,
-      "al estado: ",
-      status
-    );
+    // console.log(
+    //   "se cambio el estado de la orden nro° ",
+    //   order_id,
+    //   "al estado: ",
+    //   status
+    // );
 
     const productos = await OrderProduct.findAll({
       where: { order_id },
@@ -29,7 +35,7 @@ async function updateOrder(order_id, status) {
     });
     if (status === "canceled") {
       productos.map(async (p) => {
-        console.log(p);
+        //console.log(p);
         const actual = await Product.findOne({
           where: { product_id: p.product_id },
         });

@@ -46,7 +46,8 @@ router.post("/", async (req, res) => {
   }
 });
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
-router.put("/", validate.product, async (req, res) => {
+//validate.product
+router.put("/", async (req, res) => {
   try {
     res.status(200).send(await controller.updateProduct(req.body));
   } catch (error) {

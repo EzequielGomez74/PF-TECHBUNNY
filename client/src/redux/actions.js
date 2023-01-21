@@ -6,12 +6,13 @@ import {
   GET_CATEGORIES,
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
-  FILTER_BY_BRAND,
+  FILTER_BY,
   SORT_BY_PRICE,
   ADD_CART,
   ALL_CART_BY_USER,
   TOGGLE_DARK_MODE,
   GET_SEARCH_RESULTS,
+  CLEAN_SEARCH_RESULTS,
   GET_REVIEWS_BY,
   SET_LOGGED_USER,
   CLEAN_DETAIL,
@@ -26,6 +27,9 @@ import {
   GET_PAYPREFERENCES_BY_ID,
   GET_CARROUSEL,
   UPDATE_USER_INFO,
+  GET_PRODUCTS_BY_BRAND,
+  POST_PRODUCT,
+  UPDATE_PRODUCT,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -37,6 +41,38 @@ export const getProducts = (id) => {
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
     }
+  };
+};
+
+export const postProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.post('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto creado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log('No se pudo insertar el producto')
+    } 
+  };
+};
+
+export const updateProduct = (productInfo) => {
+  console.log(productInfo)
+  return async function (dispatch) {
+    try{
+      const response = await axiosInstance.put('/products', productInfo)
+      console.log(response.data)
+      if(response.data === "Producto actualizado con exito!") {
+       const allProducts = await axiosInstance.get('/products')
+       return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
+      }
+    } catch (error) {
+      console.log(error.message)
+    } 
   };
 };
 
@@ -104,7 +140,6 @@ export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
       let json = await axiosInstance.get(`/products?category=${category}`);
-      //let json = await axiosInstance.get(`/products?brand=Redragon`);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -112,9 +147,26 @@ export function getProductsByCategory(category) {
   };
 }
 
-export const filterByBrand = (brand) => {
-  return { type: FILTER_BY_BRAND, payload: brand };
+//Marcas de Periféricos
+export function getProductsByBrand() {
+  return async function (dispatch) {
+    try {
+      let json = await axiosInstance.get(`/products?category=Periféricos`);
+      return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export const filterBy = (subcategory, brand) => {
+  return { type: FILTER_BY, payload: { subcategory, brand } };
 };
+
+// export const filterByBrand = (brand) => {
+//   return { type: FILTER_BY_BRAND, payload: brand };
+// };
+
 
 export const sortByPrice = (priceOrder) => {
   return { type: SORT_BY_PRICE, payload: priceOrder };
@@ -271,15 +323,13 @@ export const allCartByUser = (user_id) => {
 //   };
 // };
 
-export const getSearchResults = (products, searchTerm) => {
-  return function (dispatch) {
-    const results = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    dispatch({ type: GET_SEARCH_RESULTS, payload: results });
-  };
+export const getSearchResults = (searchTerm) => {
+  return { type: GET_SEARCH_RESULTS, payload: searchTerm };
 };
 
+export const cleanSearchResults = () => {
+  return { type: CLEAN_SEARCH_RESULTS };
+};
 // export const setSearchTerm = (searchTerm) => {
 //     return {
 //         type: SET_SEARCH_TERM, searchTerm

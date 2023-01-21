@@ -3,6 +3,7 @@ import React from 'react'
 import s from "../Banner Home/Banner.module.css";
 // import imgBannerOferta from "../../Photos/BANNEROFERTA.png";
 import img from '../../Photos/loguito.png'
+import img2 from '../../Photos/loguito.png'
 
 
 function BannerHome() {
@@ -15,6 +16,8 @@ function BannerHome() {
         <div className={s.bannerContainer}>
             
             <img className={s.imgBanner} src={img}  alt="not found" />
+            <img className={s.imgBanner2} src={img2}  alt="not found" />
+           
         </div>
         <div className={s.textBanner}>
             <h2>¡Todo lo que buscas, en un solo lugar!</h2>

@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import CardV from "../Card V/CardV";
+import CardCarrusel from "../CardCarrusel/CardCarrusel";
 import { getProducts } from "../../redux/actions";
 
 // const products = [
@@ -146,19 +146,19 @@ function Carrusel({ products }) {
   //Para usuario registrado
   let dispatch = useDispatch();
   let user = useSelector((state) => state.loggedUser);
-  let allProducts = useSelector((state) => state.products);
-  let pCarrusel = [
-    allProducts[3],
-    allProducts[466],
-    allProducts[679],
-    allProducts[48],
-    allProducts[253],
-    allProducts[268],
-    allProducts[44],
-    allProducts[494],
-    allProducts[547],
-    allProducts[657],
-  ];
+  // let allProducts = useSelector((state) => state.products);
+  // let pCarrusel = [
+  //   allProducts[3],
+  //   allProducts[466],
+  //   allProducts[679],
+  //   allProducts[48],
+  //   allProducts[253],
+  //   allProducts[268],
+  //   allProducts[44],
+  //   allProducts[494],
+  //   allProducts[547],
+  //   allProducts[657],
+  // ];
 
   useEffect(() => {
     dispatch(getProducts());
@@ -170,7 +170,7 @@ function Carrusel({ products }) {
         slidesPerView={5}
         spaceBetween={15}
         slidesPerGroup={5}
-        loop={true}
+        loop={false}
         loopFillGroupWithBlank={true}
         pagination={{
           clickable: true,
@@ -182,8 +182,8 @@ function Carrusel({ products }) {
         {products &&
           products.map((p) => (
             <SwiperSlide>
-              <CardV
-                favorite={p.favorite}
+              <CardCarrusel
+                favorite={p.favorite ? p.favorite : ""}
                 key={p.product_id}
                 user_id={user.user_id}
                 product_id={p.product_id}
