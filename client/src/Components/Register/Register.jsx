@@ -49,7 +49,7 @@ function Register() {
       Swal.fire({
         title: "¡Alerta!",
         text: "REGISTRO FALLIDO",
-        icon: "success",
+        icon: "warning",
       });
     } catch (error) {
       console.log(error.message);
