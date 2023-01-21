@@ -9,6 +9,7 @@ import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal
 import { Edit, Delete, ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 // import SearchBar from "material-ui-search-bar";
 import { postProduct, updateProduct, deleteProduct } from '../../redux/actions'
 import { useRef } from 'react';
@@ -33,6 +34,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function descendingComparator(a,b,orderBy){
+  if(b[orderBy] < a[orderBy]) return -1
+  if(b[orderBy] > a[orderBy]) return 1
+  return 0
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc' 
+  ? (a,b) => descendingComparator(a,b,orderBy)
+  : (a,b) => -descendingComparator(a,b,orderBy)
+}
+
+const sortedRowInformation = (rowArray, comparator) => {
+  const stabilizedRowArray = rowArray.map((el, index) => [el, index])
+  stabilizedRowArray.sort((a,b)=>{
+    const order = comparator(a[0], b[0])
+    if (order !== 0) return order
+    return a[1] - b[1]
+  })
+  return stabilizedRowArray.map((el) => el[0])
+}
+
 function Dashboard() {
   //Sidebar
   const [sidebar, setSidebar] = useState(false)
@@ -54,53 +77,19 @@ function Dashboard() {
     category: ''
   })
 
-  //Peticiones --> actualizar en las actions
-
-  // const peticionGet=async()=>{
-  //   await axios.get(baseUrl)
-  //   .then(response=>{
-  //     setData(response.data);
-  //   })
-  // }
-
-
   const peticionPost =async()=>{
     dispatch(postProduct({...productSelected, product_id: products.length + 1}))
     abrirCerrarModalInsertar()
-    // await axios.post(baseUrl, consolaSeleccionada)
-    // .then(response=>{
-    //   setData(data.concat(response.data))
-    //   abrirCerrarModalInsertar()
-    // })
   }
 
   const peticionPut =async()=>{
     dispatch(updateProduct({...productSelected, image: 'https://www.uba.ar/internacionales/archivos/TEST.jpg'}))
     abrirCerrarModalEditar();
-    // await axios.put(baseUrl+consolaSeleccionada.id, consolaSeleccionada)
-    // .then(response=>{
-    //   var dataNueva=data;
-    //   dataNueva.map(consola=>{
-    //     if(consolaSeleccionada.id===consola.id){
-    //       consola.nombre=consolaSeleccionada.nombre;
-    //       consola.lanzamiento=consolaSeleccionada.lanzamiento;
-    //       consola.empresa=consolaSeleccionada.empresa;
-    //       consola.unidades_vendidas=consolaSeleccionada.unidades_vendidas;
-    //     }
-    //   })
-    //   setData(dataNueva);
-    //   abrirCerrarModalEditar();
-    // })
   }
 
   const peticionDelete=async()=>{
     dispatch(deleteProduct(productSelected.product_id))
     abrirCerrarModalEliminar();
-    // await axios.delete(baseUrl+consolaSeleccionada.id)
-    // .then(response=>{
-    //   setData(data.filter(consola=>consola.id!==consolaSeleccionada.id));
-    //   abrirCerrarModalEliminar();
-    // })
   }
 
 
@@ -202,53 +191,18 @@ function Dashboard() {
   // const [searchTerm, setSearchTerm] = useState()
 
   // Sort 
-  const initialSort = useRef(true)
-  const sortedAsc = useRef(false)
-  const sortedDesc = useRef(false)
-  // const [sortedAsc, setSortedAsc] = useState(false)
-  // const [sortedDesc, setSortedDesc] = useState(false)
+  const [orderDirection, setOrderDirection] = useState('asc')
+  const [valueToOrderBy, setValueToOrderBy] = useState('product_id')
 
-  const sortByBrand = () => {
-    if(initialSort.current === true) {
-      console.log('ENTRE A INITIAL')
-      initialSort.current = false
-      console.log('...')
-      sortedAsc.current = true
-      // setSortedAsc(true)
-    }
-
-    products.sort(function (
-      a,
-      b
-    ) {
-      if (sortedAsc.current) {
-        if (a.brand < b.brand) {
-          return -1;
-        } else if (a.brand > b.brand) {
-          return 1;
-        } else {
-          return 0;
-        }
-
-      } else if (sortedDesc.current) {
-        if (a.brand > b.brand) {
-          return -1;
-        } else if (a.brand < b.brand) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-      return "Ordered";
-    });
-
-    sortedAsc.current = false
-    sortedDesc.current = true
+  const handleRequestSort = (event, property) => {
+    const isAscending = (valueToOrderBy === property && orderDirection === 'asc')
+    setValueToOrderBy(property)
+    setOrderDirection(isAscending ? 'desc' : 'asc')
   }
 
-  useEffect(()=>{
-    console.log(sortedAsc, sortedDesc)
-  },[sortedAsc, sortedDesc])
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property)
+  }
 
   //Paginación de Tabla
   const [page, setPage] = useState(0)
@@ -325,27 +279,63 @@ function Dashboard() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Id de Producto</TableCell>
-                  <TableCell>Nombre de Producto</TableCell>
-                  <TableCell onClick={()=> sortByBrand()}> Marca 
-                    {!sortedAsc.current && !sortedDesc.current ? '' : sortedAsc.current && !sortedDesc.current ?
-                    <ArrowUpward className={styles.iconos} onClick={()=> sortByBrand()}/> : <ArrowDownward className={styles.iconos} onClick={()=> sortByBrand()}/>}
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'product_id'}
+                      direction= {valueToOrderBy === 'product_id' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('product_id')}
+                    >
+                      Id de Producto
+                    </TableSortLabel>
                   </TableCell>
-                  <TableCell>Precio</TableCell>
-                  <TableCell>Cantidad Vendida</TableCell>
-                  <TableCell>Stock</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'name'}
+                      direction= {valueToOrderBy === 'name' ? orderDirection : 'asc'}
+                      onClick={createSortHandler('name')}
+                    >
+                      Nombre de Producto
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell> 
+                    <TableSortLabel
+                     active={valueToOrderBy === 'brand'}
+                     direction={valueToOrderBy === 'brand' ? orderDirection : 'asc'}
+                     onClick={createSortHandler('brand')}
+                    >
+                      Marca 
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'price'}
+                      direction= {valueToOrderBy === 'price' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('price')}
+                    >
+                    Precio</TableSortLabel></TableCell>
+                  <TableCell><TableSortLabel
+                      active={valueToOrderBy === 'soldCount'}
+                      direction= {valueToOrderBy === 'soldCount' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('soldCount')}
+                    >Cantidad Vendida</TableSortLabel></TableCell>
+                  <TableCell><TableSortLabel
+                      active={valueToOrderBy === 'stock'}
+                      direction= {valueToOrderBy === 'stock' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('stock')}
+                    >Stock</TableSortLabel></TableCell>
+                  <TableCell><TableSortLabel
+                      active={valueToOrderBy === 'active'}
+                      direction= {valueToOrderBy === 'active' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('active')}
+                    >Status</TableSortLabel></TableCell>
                   <TableCell>Editar</TableCell>
                   <TableCell>Eliminar</TableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
-                {products
+                {sortedRowInformation(products, getComparator(orderDirection, valueToOrderBy) ) 
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                // .filter(f => {
-                //   return searchTerm === '' ? f : f.name.toLowerCase().includes(searchTerm)
-                // })
                   .map(product => (
                   <TableRow key={product.product_id} >
                     <TableCell>{product.product_id}</TableCell>
