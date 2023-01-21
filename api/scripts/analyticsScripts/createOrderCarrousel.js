@@ -89,21 +89,12 @@ async function createOrderCarrousel(user_id) {
       }
     }
     //!test
-    let aux = 0;
-    for (let j = 0; j < finalResults.length; j++) {
-      if (!finalResults[j]) aux++;
-      console.log(finalResults[j]);
-    }
-    console.log(aux);
     // //$ get username + setFavoriteStatus
-    const usernameAux = await getUserName(user_id);
-    finalResults = await prodController.setFavoriteStatus(
-      finalResults,
-      usernameAux
-    );
-    for (let i = 0; i < finalResults.length; i++) {
-      if (!finalResults[i]) console.log("FINAL RESULT FAIL");
-    }
+    //const usernameAux = await getUserName(user_id);
+    // finalResults = await prodController.setFavoriteStatus(
+    //   finalResults,
+    //   usernameAux
+    // );
     return finalResults;
   } catch (error) {
     throw new Error(error);
