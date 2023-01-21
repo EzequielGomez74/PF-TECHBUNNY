@@ -82,9 +82,9 @@ async function createOrderCarrousel(user_id) {
     }
     //$ failsafe en caso de que no exista algun producto rellena con un random
     for (let i = 0; i < finalResults.length; i++) {
-      if (!finalResults[i]) {
+      if (finalResults[i] === null) {
         const all = await Product.findAll();
-        const pos = Math.floor(Math.random() * all.length);
+        const pos = Math.floor(Math.random() * (all.length - 1));
         finalResults[i].push(all[pos].dataValues);
       }
     }
