@@ -90,8 +90,14 @@ async function createOrderCarrousel(user_id) {
     }
     // //$ get username + setFavoriteStatus
     const usernameAux = await getUserName(user_id);
-    const a = await prodController.setFavoriteStatus(finalResults, usernameAux);
-    return a;
+    finalResults = await prodController.setFavoriteStatus(
+      finalResults,
+      usernameAux
+    );
+    for (let i = 0; i < finalResults.length; i++) {
+      if (finalResults[i] === null) console.log("FINAL RESULT FAIL");
+    }
+    return finalResults;
   } catch (error) {
     throw new Error(error);
   }
