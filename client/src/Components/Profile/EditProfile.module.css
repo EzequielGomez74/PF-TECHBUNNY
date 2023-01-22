@@ -162,7 +162,7 @@
 
 }
 
-@media (max-width: 500px){
+@media (max-width: 450px){
     .profileForm{
        width: 85%;
        height: 300px;

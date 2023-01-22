@@ -164,7 +164,7 @@ function NavBar() {
           </Link>
         </div>
       </section>
-      {/* CATEGORIA DROPDOWN */}
+      {/* CATEGORIA DROPDOWN WEB*/}
       <div
         className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
         onMouseEnter={() => {
