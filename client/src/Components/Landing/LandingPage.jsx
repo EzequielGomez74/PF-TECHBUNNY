@@ -32,7 +32,7 @@ export default function LandingPage() {
       </div>
 
       <div className="secondarytext">
-        <p className="Secondtext" >Todo la tecnología en un solo lugar.</p>
+        <p className="Secondtext" >Toda la tecnología en un solo lugar.</p>
       </div>
 
       <div className="btncointainer">
