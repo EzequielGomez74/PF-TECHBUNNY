@@ -5,11 +5,11 @@ import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, Select, MenuItem} from '@material-ui/core';
-import { Edit, Delete } from '@mui/icons-material';
+import { Edit, Delete, Search } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-// import SearchBar from "material-ui-search-bar";
+import InputAdornment from '@mui/material/InputAdornment';
 import { getUsers, updateUser, deleteUser } from '../../../redux/actions'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -174,18 +174,16 @@ function Users() {
 
   //Search Input
   const [userRows, setUserRows] = useState(users)
-  const [searched, setSearched] = useState('')
+  // const [searched, setSearched] = useState('')
 
-  const requestSearch = (event) => {
-    setSearched(event.target.value)
-    console.log(searched)
-    if(!searched){
-      return setUserRows(users)
+  const requestSearch = (searchedVal) => {
+    const filteredRows = users.filter((row) => {
+      return row.name.toString().toLowerCase().includes(searchedVal.toString().toLowerCase())
+    })
+    if(searchedVal.length < 1) {
+      setUserRows(users)
     } else {
-      const filteredRows = users.filter(row => {
-        return row.name.toLowerCase().includes(searched.toLowerCase())
-      });
-      setUserRows(filteredRows);
+      setUserRows(filteredRows)
     }
   }
 
@@ -230,59 +228,23 @@ function Users() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div className={s.TableUsersInfo}>
-        {/* <input
-          type='text'
-          placeholder='Buscar productos'
-          className='search'
-          onChange={e => setSearchTerm(e.target.value)}
-        /> */}
-        {/* { searchTerm ? 
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Id de Producto</TableCell>
-                  <TableCell>Nombre de Producto</TableCell>
-                  <TableCell>Marca</TableCell>
-                  <TableCell>Precio</TableCell>
-                  <TableCell>Cantidad Vendida</TableCell>
-                  <TableCell>Stock</TableCell>
-                  <TableCell>Editar</TableCell>
-                  <TableCell>Eliminar</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {products
-                  .filter(p => p.name.toLowerCase().includes(searchTerm))
-                  .map(product => (
-                  <TableRow>
-                    <TableCell>{product.product_id}</TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>{product.brand}</TableCell>
-                    <TableCell>{product.price}</TableCell>
-                    <TableCell>{product.soldCount}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
-                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
-                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        : ''} */}
         <div className={s.outerItems}>
           <h2>Usuarios TECHBUNNY</h2>
         </div>
         <Paper className={s.paper}>
+          <br />
           <TextField
-            onChange={(event) => requestSearch(event)}
-            // onCancelSearch={() => cancelSearch() }
+            className={s.usersSearchbar}
+            onChange={(e) => requestSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
           />
-          {/* <SearchBar
-            value={searched}
-            onChange={(searchVal) => requestSearch(searchVal)}
-            onCancelSearch={() => cancelSearch() }
-          /> */}
+          <br />
           <TableContainer>
             <Table>
               <TableHead>
