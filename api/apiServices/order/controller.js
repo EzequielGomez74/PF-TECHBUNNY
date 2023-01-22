@@ -222,6 +222,53 @@ async function checkOrderStatus() {
   }
 }
 
+//!! ------------------------------------------
+//!! COPIA DE CREATE ORDER PARA ORDER GENERATOR
+// $ esta funcion siempre creara carritos
+async function createRelativeOrder(user_id, relativeDateAdded) {
+  try {
+    const userCart = await Cart.findAll({ where: { user_id } });
+    const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
+    const newOrder = { user_id };
+    const order = await Order.create(newOrder); //
+    let suma = 0;
+    await userCart.forEach(async (product) => {
+      // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
+
+      suma += product.count * product.price; // $ CALCULA EL TOTAL DE LA ORDER
+      await order.addProduct(product.product_id, {
+        through: {
+          // $ CREA LOS DATOS DE LA TABLA INTERMEDIA
+          product_name: product.product_name,
+          count: product.count,
+          price: product.price,
+        },
+      });
+      const actual = await Product.findByPk(product.product_id); //$ ACTUALIZA EL STOCK DEL PRODUCTO    (line 49-50)
+      await Product.update(
+        { stock: actual.dataValues.stock - product.dataValues.count },
+        { where: { product_id: product.product_id } }
+      );
+    });
+    await Order.update(
+      { total: suma, relativeDateAdded },
+      { where: { order_id: order.dataValues.order_id } }
+    );
+    const datos = await Order.findByPk(order.order_id); //Informacion que necesita para el mail
+    const userdata = {
+      ...user.dataValues,
+      ...order.dataValues,
+      ...datos.dataValues,
+      type: "order",
+    };
+    // sendMail(userdata);                                                        // Envia el mail
+    await Cart.destroy({ where: { user_id: user_id } }); // Elimina el carrito ya se transformo en una orden
+    return order.order_id;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 module.exports = {
   createOrder,
   getOrderById,
@@ -230,4 +277,5 @@ module.exports = {
   getOrdersByUserId,
   updateOrderData,
   checkOrderStatus,
+  createRelativeOrder,
 };

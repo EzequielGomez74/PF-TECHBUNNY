@@ -83,7 +83,6 @@ async function modifyUser(user_id, body) {
   try {
     //body.password = await bcrypt.hash(body.password, 10); // 10 salt
     const userFound = await User.update(body, { where: { user_id } });
-    console.log("userFound ", userFound);
     return setLoggedUserData(userFound.dataValues);
   } catch (error) {
     throw new Error(error.message);
@@ -99,6 +98,7 @@ function setLoggedUserData({
   profilePicture,
   zipCode,
   email,
+  role,
 }) {
   return {
     user_id,
@@ -109,6 +109,7 @@ function setLoggedUserData({
     profilePicture,
     zipCode,
     email,
+    role,
   };
 }
 module.exports = {

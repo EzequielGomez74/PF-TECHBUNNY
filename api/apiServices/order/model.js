@@ -49,6 +49,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      relativeDateAdded: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
     },
     {
       timestamps: true,

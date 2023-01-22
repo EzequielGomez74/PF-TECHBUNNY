@@ -44,6 +44,10 @@
     transform: translateX(0%);
 }
 
+.sidebarNavLink{
+    color: white;
+}
+
 .backdrop{
     position: fixed;
     top: 0;

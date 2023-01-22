@@ -46,7 +46,7 @@ class UserClass {
     this.#desire = 1 + Math.random() * 0.5;
     this.#lazy = Math.random() > 0.5 ? false : true;
     this.cancelOrderRatio = 1 + Math.random() * 10;
-    this.moneyAvailable = 6000 + Math.random() * 9000;
+    this.moneyAvailable = 6000 + Math.random() * 12000;
   }
   spendTime(ammountOfTime) {
     if (this.#lazy) {
@@ -70,9 +70,11 @@ class UserClass {
 
 async function orderGenerator() {
   try {
+    console.log("START");
+    const MAX_USERS_SHOW = 21;
     const CURRENT_TIME = Date.now();
     const TIME_TO_SPEND = (604800 + 302400) * 1000; // 1 semana y media
-    for (let user_id = 10; user_id < 20; user_id++) {
+    for (let user_id = 10; user_id < MAX_USERS_SHOW; user_id++) {
       let user = await UserClass.fetchUser(user_id);
       //$ va a realizar  desde 10 hasta 50 - aproximadamente 1 por semana
       //let ordersLeft = Math.floor(Math.random() * 50 + 10);
@@ -101,7 +103,10 @@ async function orderGenerator() {
           if (Math.random() < 0.7) await reviewGenerator(user_id, product_id);
         }
         //? usando orderController.createOrder() crear la order para el user_id
-        const order_id = await orderController.createOrder(user_id);
+        const order_id = await orderController.createRelativeOrder(
+          user_id,
+          user.time
+        );
         //? usando orderController.updateOrder() la paso a "completed"
         if (Math.random() * 100 > user.cancelOrderRatio) {
           await orderController.updateOrder(order_id, "completed");

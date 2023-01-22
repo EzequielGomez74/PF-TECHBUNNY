@@ -63,7 +63,7 @@ async function loadAllAssets() {
     //!! USERS
     await loadtoDb(users, User);
     await loadtoDb(mockUsers, User);
-    //await orderGenerator();
+    await orderGenerator();
     //await favoriteTestGenerator();
     //!! REVIEWS
     //await reviewGenerator();
