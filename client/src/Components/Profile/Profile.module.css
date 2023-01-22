@@ -355,5 +355,9 @@
         transform: translateX(50px);
      }
 
+     .dmimg {
+        width: 100%;
+      }
+
 
 }
