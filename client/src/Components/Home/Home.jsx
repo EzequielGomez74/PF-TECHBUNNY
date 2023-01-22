@@ -32,6 +32,7 @@ function Home() {
         carrousel[i] = products[pos];
       }
     }
+    return carrousel;
   }
 
   return (
