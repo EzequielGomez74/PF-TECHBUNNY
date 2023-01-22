@@ -8,7 +8,6 @@ import s from "./Profile.module.css";
 import img from "../../Photos/conejoperfil.png";
 import { useEffect,useRef } from "react";
 import { allOrdersByUser } from '../../redux/actions'
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
 
 function Profile(){
     const user = useSelector(state => state.loggedUser)

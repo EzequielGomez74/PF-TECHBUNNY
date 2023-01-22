@@ -8,6 +8,9 @@ export const GET_USERS= 'GET_USERS';
 export const UPDATE_USER= 'UPDATE_USER';
 export const DELETE_USER= 'DELETE_USER';
 
+export const GET_ORDERS = 'GET_ORDERS';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
+
 export const POST_NEWSLETTER = "POST_NEWSLETTER";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";

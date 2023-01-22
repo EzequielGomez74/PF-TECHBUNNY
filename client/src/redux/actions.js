@@ -34,6 +34,8 @@ import {
   UPDATE_USER,
   DELETE_USER,
   GET_USERS,
+  GET_ORDERS,
+  UPDATE_ORDER,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -99,7 +101,7 @@ export const deleteProduct = (product_id) => {
   };
 };
 
-// Para el Dashboard
+// Para el Dashboard | Users
 
 export const getUsers = () => {
   return async function (dispatch) {
@@ -147,6 +149,35 @@ export const deleteUser = (user_id) => {
     } 
   };
 };
+
+// Para el Dashboard  | Orders
+export const getOrders = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/orders");
+      console.log('orders son', response.data);
+      return dispatch({ type: GET_ORDERS, payload: response.data });
+    } catch (error) {
+      console.log("Falla para traer ordenes");
+    }
+  };
+};
+
+export const updateOrder = (order_id, orderInfo) => {
+  
+  return async function (dispatch) {
+    try{
+      console.log(orderInfo)
+      const response = await axiosInstance.put(`/orders/${order_id}`, orderInfo)
+      console.log(response.data)
+      const allOrders = await axiosInstance.get('/orders')
+      return dispatch({ type: UPDATE_ORDER, payload: allOrders.data });
+    } catch (error) {
+      console.log('Falla en actualizar la orden')
+    } 
+  };
+};
+
 
 // export function getProducts() {
 //   return async function (dispatch) {

@@ -77,7 +77,7 @@ function Users() {
     isLogged: ''
   })
 
-  let initialLoad=useRef(true)
+  // let initialLoad=useRef(true)
 
   useEffect(()=>{
     // if(initialLoad.current){
@@ -144,7 +144,11 @@ function Users() {
       <br />
       <TextField name="email" className={styles.inputMaterial} label="Email" onChange={handleChange} value={userSelected && userSelected.email}/>
       <br />
-      <TextField name="role" className={styles.inputMaterial} label="Role" onChange={handleChange} value={userSelected && userSelected.role}/>      
+      <TextField name="role" className={styles.inputMaterial} label="Role" onChange={handleChange} value={userSelected && userSelected.role}/>
+      <br />
+      <TextField name="isDeleted" className={styles.inputMaterial} label="Deleted" onChange={handleChange} value={userSelected && userSelected.isDeleted}/>
+      <br />
+      <TextField name="isLogged" className={styles.inputMaterial} label="Logged?" onChange={handleChange} value={userSelected && userSelected.isLogged}/>     
       <br /><br />
       <div align="right">
         <Button color="primary" onClick={()=>peticionPut()}>Editar</Button>
@@ -246,7 +250,6 @@ function Users() {
         : ''} */}
         <div className={s.outerItems}>
           <h2>Usuarios TECHBUNNY</h2>
-          <Button onClick={abrirCerrarModalInsertar} >Insertar</Button>
         </div>
         <Paper className={s.paper}>
           <TableContainer>
@@ -268,40 +271,59 @@ function Users() {
                       direction= {valueToOrderBy === 'name' ? orderDirection : 'asc'}
                       onClick={createSortHandler('name')}
                     >
-                      Nombre de Usuario
+                      Nombre
                     </TableSortLabel>
                   </TableCell>
                   <TableCell> 
                     <TableSortLabel
-                     active={valueToOrderBy === 'brand'}
-                     direction={valueToOrderBy === 'brand' ? orderDirection : 'asc'}
-                     onClick={createSortHandler('brand')}
+                     active={valueToOrderBy === 'surname'}
+                     direction={valueToOrderBy === 'surname' ? orderDirection : 'asc'}
+                     onClick={createSortHandler('surname')}
                     >
-                      Marca 
+                      Apellido 
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
                     <TableSortLabel
-                      active={valueToOrderBy === 'price'}
-                      direction= {valueToOrderBy === 'price' ? orderDirection : 'asc'}
-                      onClick= {createSortHandler('price')}
+                      active={valueToOrderBy === 'username'}
+                      direction= {valueToOrderBy === 'username' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('username')}
                     >
-                    Precio</TableSortLabel></TableCell>
-                  <TableCell><TableSortLabel
-                      active={valueToOrderBy === 'soldCount'}
-                      direction= {valueToOrderBy === 'soldCount' ? orderDirection : 'asc'}
-                      onClick= {createSortHandler('soldCount')}
-                    >Cantidad Vendida</TableSortLabel></TableCell>
-                  <TableCell><TableSortLabel
-                      active={valueToOrderBy === 'stock'}
-                      direction= {valueToOrderBy === 'stock' ? orderDirection : 'asc'}
-                      onClick= {createSortHandler('stock')}
-                    >Stock</TableSortLabel></TableCell>
-                  <TableCell><TableSortLabel
-                      active={valueToOrderBy === 'active'}
-                      direction= {valueToOrderBy === 'active' ? orderDirection : 'asc'}
-                      onClick= {createSortHandler('active')}
-                    >Status</TableSortLabel></TableCell>
+                    Nombre de Usuario
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'email'}
+                      direction= {valueToOrderBy === 'email' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('email')}
+                    >Email
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'role'}
+                      direction= {valueToOrderBy === 'role' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('role')}
+                    >Rol
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'isDeleted'}
+                      direction= {valueToOrderBy === 'isDeleted' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('isDeleted')}
+                    >isDeleted
+                    </TableSortLabel>
+                  </TableCell>
+                  <TableCell>
+                    <TableSortLabel
+                      active={valueToOrderBy === 'isLogged'}
+                      direction= {valueToOrderBy === 'isLogged' ? orderDirection : 'asc'}
+                      onClick= {createSortHandler('isLogged')}
+                    >isLogged
+                    </TableSortLabel>
+                  </TableCell>
                   <TableCell>Editar</TableCell>
                   <TableCell>Eliminar</TableCell>
                 </TableRow>
@@ -318,6 +340,8 @@ function Users() {
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.role}</TableCell>
+                    <TableCell>{user.isDeleted}</TableCell>
+                    <TableCell>{user.isLogged}</TableCell>
                     <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola  (user, 'Editar')}/></TableCell>
                     <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola (user, 'Eliminar')}/></TableCell>
                   </TableRow>

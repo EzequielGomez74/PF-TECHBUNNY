@@ -12,6 +12,7 @@ const initialState = {
   reviews: [],
   orders: [],
   ordersByUser: [],
+  allOrders: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
@@ -59,6 +60,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         usersDashboard: action.payload,
       };
+    case 'GET_ORDERS':
+      return {
+        ...state,
+        allOrders: action.payload,
+      }
+    case 'UPDATE_ORDER':
+      return {
+        ...state,
+        allOrders: action.payload,
+      }
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,

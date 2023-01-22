@@ -10,6 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
+  faScrewdriverWrench
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -320,6 +321,17 @@ function NavBar() {
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
+            {loggedUser?.role === 3 && (
+              <Link to="/dashboard">
+                <DropdownItem
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  icon={faScrewdriverWrench}
+                  text={"Dashboard"}
+                />
+              </Link>
+            )}
             <Link to="/login" onClick={() => logoutUser()}>
                 <DropdownItem
                   icon={faRightToBracket}
