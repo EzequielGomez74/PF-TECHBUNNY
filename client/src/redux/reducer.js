@@ -11,6 +11,8 @@ const initialState = {
   darkMode: false,
   reviews: [],
   orders: [],
+  ordersByUser: [],
+  allOrders: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
@@ -18,6 +20,7 @@ const initialState = {
   preferences: {},
   favoritesCarrousel: [],
   ordersCarrousel: [],
+  usersDashboard: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -37,6 +40,36 @@ export default function reducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "GET_USERS":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "DELETE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case 'GET_ORDERS':
+      return {
+        ...state,
+        allOrders: action.payload,
+      }
+    case 'UPDATE_ORDER':
+      return {
+        ...state,
+        allOrders: action.payload,
+      }
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,
@@ -229,7 +262,7 @@ export default function reducer(state = initialState, action) {
     case "ALL_ORDERS_BY_USER":
       return {
         ...state,
-        orders: action.payload,
+        ordersByUser: action.payload,
       };
     case "GET_PAYPREFERENCES_BY_ID":
       return {

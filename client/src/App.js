@@ -24,6 +24,9 @@ import Recover from "./Components/Recover/Recover";
 import Dashboard from './Components/Dashboard (admin)/Dashboard'
 import Results from './Components/Results/Results'
 import Brand from "./Components/Brand/Brand";
+import Products from './Components/Dashboard (admin)/Products/Products'
+import Users from './Components/Dashboard (admin)/Users/Users'
+import Orders from './Components/Dashboard (admin)/Orders/Orders'
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
@@ -53,6 +56,9 @@ function App() {
         <Route exact path="/verify/:token" component={Verify} />
         <Route exact path="/feedback" component={Feedback} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard/products" component={Products} />
+        <Route exact path="/dashboard/users" component={Users} />
+        <Route exact path="/dashboard/orders" component={Orders} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>

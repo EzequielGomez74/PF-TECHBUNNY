@@ -81,7 +81,7 @@ router.put("/:order_id", async (req, res) => {
     const { order_id } = req.params;
     if (order_id && req.body.status)
       // para cuando el admin use dashboard
-      res
+      return res
         .status(200)
         .send(
           await controller.updateOrder(
@@ -101,9 +101,13 @@ router.put("/:order_id", async (req, res) => {
 });
 
 // /users?user_id=1&order_id=2  /users?user_id=1
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   const { user_id, order_id } = req.query;
   try {
+    if(Object.keys(req.query).length === 0) {
+      console.log('entré en GET ORDERS');
+      return next()
+    }
     if (user_id) {
       if (order_id) {
         res.status(200).json(await controller.getOrderById(order_id));
@@ -123,6 +127,7 @@ router.use(requiredAccess(3));
 
 router.get("/", async (req, res) => {
   try {
+    console.log('ENTRÉ AL GET CORRECTO')
     res.status(200).json(await controller.getOrders());
   } catch (error) {
     res.status(400).send(error.message);

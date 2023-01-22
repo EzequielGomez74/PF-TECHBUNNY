@@ -96,33 +96,72 @@ async function updateProduct(product) {
 
 async function createProduct(product) {
   try {
+    await Brand.findOrCreate({where: {name: product.brand }})
+  
     await Product.create(
       // create o findorcreate para que no se repita en la base de datos
       {
         ...product,
         description: product.description,
+
       }
     );
     return "Producto creado con exito!";
   } catch (error) {
-    throw new Error(error);
+    throw new Error({error: error.message});
   }
 }
 
 async function deleteProduct(product_id) {
   try {
-    await Product.update(
-      { active: false },
-      {
-        where: {
-          product_id,
-        },
-      }
-    );
+    const existe = await Product.findOne({ where: { product_id } });
+    if (existe.active === false) {
+      await Product.update(
+        { active: true },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+
+      return "Producto habilitado con exito!";
+    } if(existe.active === true) {
+      await Product.update(
+        { active: false },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+    }
+    
     return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error);
   }
+}
+
+function uploadImage(body, file) {
+  return new Promise((resolve, reject) => {
+    try {
+      const stream = cloudinary.uploader.upload_stream({ resource_type: "image", folder: "techbunny", format: 'png' },
+        function (error, result) {
+          if(error) {
+            reject(new Error(error.message));
+          }
+          body = {
+            ...body,
+            image: result.url,
+          }
+          resolve(body);
+        });
+      stream.end(file.buffer);
+    } catch (error) {
+      reject(new Error({error: error.message}));
+    }
+  });
 }
 
 module.exports = {
@@ -133,4 +172,5 @@ module.exports = {
   deleteProduct,
   getAllProductsBy,
   setFavoriteStatus,
+  uploadImage
 };
