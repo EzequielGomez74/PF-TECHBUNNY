@@ -12,7 +12,7 @@
     flex-direction: column;
     
     transition: 5s;
-    background:  url("../../images/background4.jpg") no-repeat;
+    background:  url("../../images/background4.png") no-repeat;
     /* background-size: cover;
 	
 	background-position: center; */
@@ -26,7 +26,7 @@
 }
 @keyframes animate{
 0%{
-    background:  url("../../images/background4.jpg") no-repeat;
+    background:  url("../../images/background4.png") no-repeat;
     /* background-size: cover;
 	background-attachment: fixed;
 	background-position: center; */
@@ -66,10 +66,9 @@
 }
 
 .Maintext:hover{
-    color: #20232A;
-    border-color: #D7F136;
-    background-color: #D7F136;
+    color: #D7F136;
     transition: all 250ms linear; 
+    cursor: default; 
 }
 
 
@@ -83,10 +82,9 @@
 }
 
 .Secondtext:hover{
-    color: #20232A;
-    border-color: #D7F136;
-    background-color: #D7F136;
+    color: #D7F136;
     transition: all 250ms linear; 
+    cursor: default;
 }
 
 .btncointainer{
@@ -121,11 +119,11 @@ cursor: pointer;
     transition: all 250ms linear; 
 }
 
-html{
-    scroll-behavior: smooth;
-}
+// html{
+//     scroll-behavior: smooth;
+// }
 
-a{
+.landingcard a{
     color: white;
 }
 .ourteam{
