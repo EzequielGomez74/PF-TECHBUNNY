@@ -120,10 +120,8 @@ async function deleteUser(user_id) {
 async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
-    //body.password = await bcrypt.hash(body.password, 10); // 10 salt
-    const userFound = await User.update(body, { where: { user_id } });
-    console.log("userFound ", userFound);
-    return setLoggedUserData(userFound.dataValues);
+    await User.update(body, { where: { user_id } });
+    return 'SUCCESS'
   } catch (error) {
     throw new Error(error.message);
   }

@@ -543,11 +543,12 @@ export function getCarrousel(carrouselType) {
 export function updateUserInfo(user_id, input) {
   return async function (dispatch) {
     try {
-      const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
-      console.log(userInfoGet.data);
+      // const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
+      // console.log(userInfoGet.data);
       const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
       console.log(userInfo.data);
-      return dispatch({ type: UPDATE_USER_INFO, payload: userInfo.data });
+
+      return dispatch({ type: UPDATE_USER_INFO, payload: input });
     } catch (error) {
       console.log(error);
     }
