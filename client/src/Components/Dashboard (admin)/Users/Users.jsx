@@ -4,7 +4,7 @@ import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, InputLabel, Select, MenuItem} from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, Select, MenuItem} from '@material-ui/core';
 import { Edit, Delete } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
@@ -89,7 +89,7 @@ function Users() {
   //   return;
   // }
   console.log(users);
-  },[])
+  },[dispatch, users])
 
   const peticionPut =async()=>{
     console.log(userSelected)
@@ -172,10 +172,27 @@ function Users() {
     </div>
   )
 
-  
-
   //Search Input
-  // const [searchTerm, setSearchTerm] = useState()
+  const [userRows, setUserRows] = useState(users)
+  const [searched, setSearched] = useState('')
+
+  const requestSearch = (event) => {
+    setSearched(event.target.value)
+    console.log(searched)
+    if(!searched){
+      return setUserRows(users)
+    } else {
+      const filteredRows = users.filter(row => {
+        return row.name.toLowerCase().includes(searched.toLowerCase())
+      });
+      setUserRows(filteredRows);
+    }
+  }
+
+  // const cancelSearch = () => {
+  //   setSearched('');
+  //   requestSearch(searched);
+  // }
 
   // Sort 
   const [orderDirection, setOrderDirection] = useState('asc')
@@ -203,7 +220,7 @@ function Users() {
     setPage(0)
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, userRows.length - page * rowsPerPage);
 
   return (
     <div>
@@ -257,6 +274,15 @@ function Users() {
           <h2>Usuarios TECHBUNNY</h2>
         </div>
         <Paper className={s.paper}>
+          <TextField
+            onChange={(event) => requestSearch(event)}
+            // onCancelSearch={() => cancelSearch() }
+          />
+          {/* <SearchBar
+            value={searched}
+            onChange={(searchVal) => requestSearch(searchVal)}
+            onCancelSearch={() => cancelSearch() }
+          /> */}
           <TableContainer>
             <Table>
               <TableHead>
@@ -335,7 +361,7 @@ function Users() {
               </TableHead>
 
               <TableBody>
-                {sortedRowInformation(users, getComparator(orderDirection, valueToOrderBy) ) 
+                {sortedRowInformation(userRows, getComparator(orderDirection, valueToOrderBy) ) 
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(user => (
                   <TableRow key={user.user_id} >
@@ -362,7 +388,7 @@ function Users() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={users.length}
+              count={userRows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
