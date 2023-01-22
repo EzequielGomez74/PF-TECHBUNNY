@@ -12,7 +12,7 @@
     flex-direction: column;
     
     transition: 5s;
-    background:  url("../../images/background4.jpg") no-repeat;
+    background:  url("../../images/background4.png") no-repeat;
     /* background-size: cover;
 	
 	background-position: center; */
@@ -26,7 +26,7 @@
 }
 @keyframes animate{
 0%{
-    background:  url("../../images/background4.jpg") no-repeat;
+    background:  url("../../images/background4.png") no-repeat;
     /* background-size: cover;
 	background-attachment: fixed;
 	background-position: center; */
@@ -271,4 +271,23 @@ a:visited {
 
 .landinggitHub:hover{
     color:rgb(101, 101, 101);
+}
+
+@media (max-width: 450px){
+    .about{
+        display: none;
+    }
+    .dropdown{
+        display: none;
+    }
+   .Maintext{
+    transform: translateY(-80px)  translateX(-10px);
+   }
+   .Secondtext{
+    transform: translateY(-100px)  translateX(20px);
+    width: 300px;
+   }
+   .joinbtn{
+    transform: translateY(-100px)  translateX(100px);
+   }
 }
