@@ -95,7 +95,7 @@ function Profile(){
                         <h3>Historial de Ordenes</h3>
                         <br />
                         { orders.length ? orders.map(o => <div className={s.orderContainer}>
-                                <div className={s.orderByUserInfo}>
+                                <div className={dm ? s.dmorderByUserInfo :s.orderByUserInfo}>
                                     <span>Order N° {o.order_id}</span>
                                     <span>Status: {o.status === "processed"?"Procesado":o.status === "canceled"?"Cancelado":"Completado"}</span>
                                 </div> 

@@ -281,6 +281,19 @@
     cursor: pointer;
 }
 
+.dmorderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #d7f136;
+    border-radius: 20px 20px 0px 0px;
+}
+
 
 @media (max-width: 500px){
     .profileInfo{

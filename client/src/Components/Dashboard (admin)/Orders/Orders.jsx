@@ -55,6 +55,9 @@ const sortedRowInformation = (rowArray, comparator) => {
   return stabilizedRowArray.map((el) => el[0])
 }
 
+//! ACA ARRANCA EL COMPONENTE
+
+
 function Orders() {
   //Sidebar
   const [sidebar, setSidebar] = useState(false)
@@ -64,6 +67,10 @@ function Orders() {
 
   const dispatch = useDispatch()
   const allOrders = useSelector(state => state.allOrders)
+
+  useEffect(()=>{
+    dispatch(getOrders())
+  },[dispatch])
 
   const [orderSelected, setOrderSelected] = useState({
     order_id: '',
@@ -131,9 +138,7 @@ function Orders() {
     </div>
   )
 
-  useEffect(()=>{
-    dispatch(getOrders())
-  },[dispatch])
+ 
 
   //Search Input
   // const [searchTerm, setSearchTerm] = useState()

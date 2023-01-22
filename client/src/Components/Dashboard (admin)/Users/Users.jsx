@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
@@ -80,14 +80,14 @@ function Users() {
     isLogged: false
   })
 
-  // let initialLoad=useRef(true)
+  let initialLoad=useRef(true)
 
   useEffect(()=>{
-    // if(initialLoad.current){
+    if(initialLoad.current){
     dispatch(getUsers())
-  //   initialLoad.current=false
-  //   return;
-  // }
+    initialLoad.current=false
+    return;
+  }
   console.log(users);
   },[])
 

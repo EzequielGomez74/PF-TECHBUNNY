@@ -405,3 +405,7 @@ h3{
     cursor: pointer;
     padding: 12px;
   }
+
+  .DMone div h1 a:hover{
+    cursor: default;
+  }
