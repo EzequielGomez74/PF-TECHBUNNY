@@ -22,3 +22,11 @@
     margin: 30px 0 30px 130px;
     width: 1300px;
   }
+
+  .logged{
+    color: green;
+  }
+
+  .notlogged{
+    color: red;
+  }

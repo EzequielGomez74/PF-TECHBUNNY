@@ -283,7 +283,7 @@ export default function reducer(state = initialState, action) {
       case "UPDATE_USER_INFO":
         return{
           ...state,
-          loggedUser: action.payload
+          loggedUser: {...state.loggedUser, ...action.payload}
         }
     default:
       return { ...state };

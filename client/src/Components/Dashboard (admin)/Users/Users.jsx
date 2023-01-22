@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, InputLabel, Select, MenuItem} from '@material-ui/core';
 import { Edit, Delete } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 // import SearchBar from "material-ui-search-bar";
 import { getUsers, updateUser, deleteUser } from '../../../redux/actions'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircle, faBan, faCheck
+} from "@fortawesome/free-solid-svg-icons";
 import s from "./Users.module.css"
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +68,6 @@ function Users() {
 
   const dispatch = useDispatch()
   const users = useSelector(state => state.usersDashboard)
-  console.log('componente Users', users)
 
   const [userSelected, setUserSelected] = useState({
     user_id: '',
@@ -73,8 +76,8 @@ function Users() {
     username: '',
     email: '',
     role: '',
-    isDeleted: '',
-    isLogged: ''
+    isDeleted: false,
+    isLogged: false
   })
 
   // let initialLoad=useRef(true)
@@ -89,6 +92,7 @@ function Users() {
   },[])
 
   const peticionPut =async()=>{
+    console.log(userSelected)
     dispatch(updateUser(userSelected.user_id, userSelected))
     abrirCerrarModalEditar();
   }
@@ -102,13 +106,8 @@ function Users() {
   // Estilos predeterminados
   const styles = useStyles();
   //Modales
-  const [modalInsertar, setModalInsertar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
   const [modalEliminar, setModalEliminar]=useState(false);
-
-  const abrirCerrarModalInsertar=()=>{
-    setModalInsertar(!modalInsertar);
-  }
 
   const abrirCerrarModalEditar=()=>{
     setModalEditar(!modalEditar);
@@ -145,10 +144,16 @@ function Users() {
       <TextField name="email" className={styles.inputMaterial} label="Email" onChange={handleChange} value={userSelected && userSelected.email}/>
       <br />
       <TextField name="role" className={styles.inputMaterial} label="Role" onChange={handleChange} value={userSelected && userSelected.role}/>
-      <br />
-      <TextField name="isDeleted" className={styles.inputMaterial} label="Deleted" onChange={handleChange} value={userSelected && userSelected.isDeleted}/>
-      <br />
-      <TextField name="isLogged" className={styles.inputMaterial} label="Logged?" onChange={handleChange} value={userSelected && userSelected.isLogged}/>     
+      <br /><br />
+      <Select
+        name='isDeleted'
+        value={userSelected && userSelected.isDeleted}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={false}>Sin Ban</MenuItem>
+        <MenuItem value={true}>Baneado</MenuItem>
+      </Select>
       <br /><br />
       <div align="right">
         <Button color="primary" onClick={()=>peticionPut()}>Editar</Button>
@@ -313,7 +318,7 @@ function Users() {
                       active={valueToOrderBy === 'isDeleted'}
                       direction= {valueToOrderBy === 'isDeleted' ? orderDirection : 'asc'}
                       onClick= {createSortHandler('isDeleted')}
-                    >isDeleted
+                    >Status
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>
@@ -321,7 +326,7 @@ function Users() {
                       active={valueToOrderBy === 'isLogged'}
                       direction= {valueToOrderBy === 'isLogged' ? orderDirection : 'asc'}
                       onClick= {createSortHandler('isLogged')}
-                    >isLogged
+                    >Loggeado
                     </TableSortLabel>
                   </TableCell>
                   <TableCell>Editar</TableCell>
@@ -339,9 +344,9 @@ function Users() {
                     <TableCell>{user.surname}</TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.role}</TableCell>
-                    <TableCell>{user.isDeleted}</TableCell>
-                    <TableCell>{user.isLogged}</TableCell>
+                    <TableCell>{user.role === 3 ? 'Admin' : 'Usuario'}</TableCell>
+                    <TableCell>{user.isDeleted ? <FontAwesomeIcon className={s.banned} icon={faBan} /> : <FontAwesomeIcon className={s.notbanned} icon={faCheck} />}</TableCell>
+                    <TableCell>{user.isLogged ? <FontAwesomeIcon className={s.logged} icon={faCircle} /> : <FontAwesomeIcon className={s.notlogged} icon={faCircle} /> }</TableCell>
                     <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola  (user, 'Editar')}/></TableCell>
                     <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola (user, 'Eliminar')}/></TableCell>
                   </TableRow>

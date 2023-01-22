@@ -64,7 +64,7 @@ router.put("/:user_id", async (req, res) => {
       foundUser &&
       (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
-      res.status(200).send(await controller.modifyUser(user_id, data));
+      res.status(200).send({status: await controller.modifyUser(user_id,data)});
     } else {
       throw new Error(
         "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
