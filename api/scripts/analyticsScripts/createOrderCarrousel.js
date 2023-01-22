@@ -90,11 +90,11 @@ async function createOrderCarrousel(user_id) {
     }
     //!test
     // //$ get username + setFavoriteStatus
-    //const usernameAux = await getUserName(user_id);
-    // finalResults = await prodController.setFavoriteStatus(
-    //   finalResults,
-    //   usernameAux
-    // );
+    const usernameAux = await getUserName(user_id);
+    finalResults = await prodController.setFavoriteStatus(
+      finalResults,
+      usernameAux
+    );
     return finalResults;
   } catch (error) {
     throw new Error(error);
