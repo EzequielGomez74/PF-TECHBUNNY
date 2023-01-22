@@ -136,6 +136,7 @@ function setLoggedUserData({
   profilePicture,
   zipCode,
   email,
+  role
 }) {
   return {
     user_id,
@@ -146,6 +147,7 @@ function setLoggedUserData({
     profilePicture,
     zipCode,
     email,
+    role
   };
 }
 module.exports = {

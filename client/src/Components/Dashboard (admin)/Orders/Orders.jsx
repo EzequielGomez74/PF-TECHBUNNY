@@ -4,7 +4,7 @@ import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField,Select, MenuItem} from '@material-ui/core';
 import { Edit } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
@@ -109,7 +109,16 @@ function Orders() {
       <h3>Editar Order</h3>
       <TextField name="order_id" className={styles.inputMaterial} label="Id de Pedido" onChange={handleChange} value={orderSelected && orderSelected.order_id}/>
       <br />
-      <TextField name="status" className={styles.inputMaterial} label="Status" onChange={handleChange} value={orderSelected && orderSelected.status}/>
+      <Select
+        name='status'
+        value={orderSelected && orderSelected.status}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={"processed"}>Procesado</MenuItem>
+        <MenuItem value={"canceled"}>Cancelado</MenuItem>
+        <MenuItem value={"completed"}>Completado</MenuItem>
+      </Select>
       <br />
       <TextField name="user_id" className={styles.inputMaterial} label="Id de Usuario" onChange={handleChange} value={orderSelected && orderSelected.user_id}/>
       <br />
@@ -259,7 +268,7 @@ function Orders() {
                   .map(order => (
                   <TableRow key={order.order_id} >
                     <TableCell>{order.order_id}</TableCell>
-                    <TableCell>{order.status}</TableCell>
+                    <TableCell>{order.status==="processed"?"Procesado":order.status==="completed"?"Completado":"Cancelado"}</TableCell>
                     <TableCell>{order.user_id}</TableCell>
                     <TableCell>${order.total}</TableCell>
                     <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola  (order, 'Editar')}/></TableCell>
