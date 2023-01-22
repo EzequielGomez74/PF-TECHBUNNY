@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
+const cloudinary = require("../../services/cloudinary/index")
 const requiredAccess = require("../../middlewares/requiredAccess.js");
 const validate = require("../../scripts/bodyValidators/index.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
@@ -7,6 +8,10 @@ const verifyJWT = require("../../middlewares/verifyJWT");
 const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
+
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.get("/", async (req, res) => {
   try {
@@ -37,18 +42,33 @@ router.get("/:product_id", async (req, res) => {
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
 router.use(requiredAccess(3));
+
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
-router.post("/", async (req, res) => {
+router.post("/", upload.single('image'), async (req, res) => {
   try {
-    res.status(200).send(await controller.createProduct(req.body));
+    if(req.file) {
+      const newBody = await controller.uploadImage(req.body, req.file)
+      res.status(200).send(await controller.createProduct(newBody));
+    } else {
+      res.status(200).send(await controller.createProduct(req.body));
+    }
+
   } catch (error) {
-    res.status(400).json({ msg: "algo falló al crear el producto" });
+    res.status(400).json({ error: error.message });
   }
 });
+
+
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
-router.put("/", validate.product, async (req, res) => {
+router.put("/", upload.single('image'), async (req, res) => {
   try {
-    res.status(200).send(await controller.updateProduct(req.body));
+    if(req.file) {
+      const newBody = await controller.uploadImage(req.body, req.file)
+      res.status(200).send(await controller.updateProduct(newBody));
+    } else {
+      res.status(200).send(await controller.updateProduct(req.body));
+    }
+    
   } catch (error) {
     res.status(400).send(error);
   }
