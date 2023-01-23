@@ -10,11 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
-<<<<<<< HEAD
   faScrewdriverWrench
-=======
-  faScrewdriverWrench,
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -77,11 +73,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
-<<<<<<< HEAD
  
-=======
-
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -90,13 +82,8 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-<<<<<<< HEAD
          <div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-=======
-          <div>
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
           </div>
           <h1>
             <a href="#">TECHBUNNY </a>
@@ -334,7 +321,6 @@ function NavBar() {
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
-<<<<<<< HEAD
             {loggedUser?.role === 3 && (
               <Link to="/dashboard">
                 <DropdownItem
@@ -347,10 +333,6 @@ function NavBar() {
               </Link>
             )}
             <Link to="/login" onClick={() => logoutUser()}>
-=======
-            {loggedUser && loggedUser.role === 3 && (
-              <Link to="/dashboard">
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
                 <DropdownItem
                   onClick={() => {
                     setOpen(false);
@@ -359,7 +341,7 @@ function NavBar() {
                   text={"Dashboard"}
                 />
               </Link>
-            )}
+            
             <Link to="/login" onClick={() => logoutUser()}>
               <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>
@@ -408,8 +390,4 @@ function DropdownItemCat(props) {
   );
 }
 
-<<<<<<< HEAD
 export default NavBar;
-=======
-export default NavBar;
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
