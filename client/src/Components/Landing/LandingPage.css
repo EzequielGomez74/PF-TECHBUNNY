@@ -1,6 +1,6 @@
-/* *{
+ /* *{
     outline: solid red 1px;
-} */
+}  */
 
 .Landing{
     margin: 0px;
@@ -10,12 +10,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    
     transition: 5s;
     background:  url("../../images/background4.jpg") no-repeat;
-    /* background-size: cover;
-	
-	background-position: center; */
     animation-name: animate;
     animation-direction:alternate-reverse;
     animation-duration: 15s;
@@ -27,23 +23,15 @@
 @keyframes animate{
 0%{
     background:  url("../../images/background4.jpg") no-repeat;
-    /* background-size: cover;
-	background-attachment: fixed;
-	background-position: center; */
 }
 33%{
     background:  url("../../images/background7.jpg") no-repeat;
-    /* background-size: cover;
-	background-attachment: fixed;
-	background-position: center; */
 }
 66%{
     background:  url("../../images/background6.jpg") no-repeat;
-    /* background-size: cover;
-	background-attachment: fixed;
-	background-position: center; */
 }
 }
+
 
 .topspace{
     height: 20%;
@@ -57,18 +45,19 @@
     align-items:flex-start;
     flex-direction: column;
     color: white;
-
 }
+.firsttext{
+    padding-bottom: 20px;
+}
+.firsttext , .secondarytext , .btncointainer{
+    height: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .Maintext{
     font-size: 60px;
-    transform: translateX(-100px);
-    margin-top: 165px;
-}
-
-.Maintext:hover{
-    color: #D7F136;
-    transition: all 250ms linear; 
-    cursor: default; 
 }
 
 
@@ -76,24 +65,17 @@
     font-size: 22px;
     display: flex;
     background-color: transparent;
+    height: 33%;
     width: 100%;
-    transform: translateX(-108px);
     
 }
 
-.Secondtext:hover{
+.Secondtext:hover , .Maintext:hover {
     color: #D7F136;
     transition: all 250ms linear; 
     cursor: default;
 }
 
-.btncointainer{
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    margin-top: 35px;
-    transform: translateX(-20px);
-}
 
 .joinbtn{
     
@@ -119,13 +101,13 @@ cursor: pointer;
     transition: all 250ms linear; 
 }
 
-// html{
-//     scroll-behavior: smooth;
-// }
-
-.landingcard a{
+html{
+     scroll-behavior: smooth;
+}
+a{
     color: white;
 }
+
 .ourteam{
     height: 30%;
     display: flex;
@@ -272,20 +254,33 @@ a:visited {
 }
 
 @media (max-width: 450px){
-    .about{
+    .about , .ourteam , .topspace{
         display: none;
     }
-    .dropdown{
-        display: none;
+    .Landing{
+        display: flex;
+        justify-content: center;
+        /* background:  #20232A; */
+        background:  url("../../images/background-mobile.jpg") no-repeat;
+        background-size: cover;
+	    background-attachment: fixed;
+	    background-position: center;
+        animation: none;
     }
-   .Maintext{
-    transform: translateY(-80px)  translateX(-10px);
-   }
-   .Secondtext{
-    transform: translateY(-100px)  translateX(20px);
-    width: 300px;
-   }
-   .joinbtn{
-    transform: translateY(-100px)  translateX(100px);
-   }
+   
+    .TextandButton{
+        width: 100%;
+        margin-left: 0px;
+        
+       
+    }
+    .firsttext , .secondarytext , .btncointainer , .Maintext ,.Secondtext {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 33%;
+        width: 100%;
+        padding: 0px; 
+    }
+   
 }

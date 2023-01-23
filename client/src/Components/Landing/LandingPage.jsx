@@ -8,7 +8,7 @@ import imgMati from "../../Photos/mati.png";
 import imgGer from "../../Photos/ger.png";
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./LandingPage.scss";
+import "./LandingPage.css";
 import {FontAwesomeIcon  } from "@fortawesome/react-fontawesome";
 import { faAngleDown , faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import {faGithub, faLinkedin  } from "@fortawesome/free-brands-svg-icons";
@@ -21,7 +21,7 @@ export default function LandingPage() {
     
     <div className="maincontainer">
 
-      <section id="tolanding">
+      <section id="top">
       <div className="Landing">
     <div className="topspace">
     </div>
@@ -44,17 +44,17 @@ export default function LandingPage() {
     </div>
         <div  className="ourteam" >
 
-            <a className="dropdown" href="#aboutid">
+            <a className="dropdown" href="#about">
               <FontAwesomeIcon icon={faAngleDown} /></a>
         </div>
   </div>
       </section>
   
-    <section id="aboutid" className="about" >
+    <section id="about" className="about" >
        {/* <div className="landingtituloEquipo">Nuestro Equipo</div> */}
         <div className="landingbackgroundAboutUs">
         <div  className="ourteam" >
-          <a className="uptolanding" href="#tolanding"><FontAwesomeIcon icon={faAngleUp} /></a>
+          <a className="uptolanding" href="#top"><FontAwesomeIcon icon={faAngleUp} /></a>
         </div>   
         
         <div className="landingcardsContainer">

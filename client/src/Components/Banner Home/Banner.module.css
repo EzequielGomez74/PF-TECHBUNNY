@@ -2,7 +2,6 @@
     background-color: #D7F136;
     display: flex;
     height: 60%;
-    
 }
 .textBanner h2{
     color: #20232a;
@@ -12,7 +11,6 @@
     line-height: 42px;
     align-items: center;
     transform: translateX(-230px);
-   
 }
 .containerElements{
     display: flex;
@@ -27,14 +25,12 @@
     height:100%;
     margin-left: -35%;
     margin: 5px;
-    
 }
 .imgBanner2{
     width: 100%;
     height:100%;
     transform: translateX(500px);
     margin: 5px;
-    
 }
 
 .bannerContainer {
@@ -96,6 +92,6 @@
     }
 
     .cointainerBanner{
-        height: 180px;
+        height: 180px; 
     }
 }
