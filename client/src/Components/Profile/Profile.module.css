@@ -1,9 +1,9 @@
 .profileSection{
-    background-color: palegreen;
+    background-color: #ececec;
     max-width: 1500px;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -12,12 +12,21 @@
     font-family: 'Poppins';
 }
 
+.profileImgInfoSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .profileForm{
     background-color: white;
-    height: 500px;
-    width: 400px;
+    height: 360px;
+    width: 450px;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
 }
 
 .profileForm input{
@@ -52,10 +61,12 @@
 
 .profileInfo{
     background-color: white;
-    height: 500px;
-    width: 400px;
+    height: 360px;
+    width: 450px;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
 }
 
 .profileInfo span{
@@ -68,6 +79,8 @@
     font-size: 16px;
     line-height: 20px;
 }
+
+
 
 .profileInfo button{
     margin-left: 40px;
@@ -87,4 +100,249 @@
 
 .profileInfo button:hover{
     cursor: pointer;
+}
+
+.profileContainer{
+    display: flex;
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+  }
+
+.profileOrdersHistory{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.profileOrdersHistory h3{
+    font-weight: 900;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.orderContainer{
+    background-color: white;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    width: 80%;
+    border-radius: 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.orderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #dee6e9;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.orderTotal{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+    margin:0 40px 10px 0;
+}
+
+.orderProductsContainer{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.productOrderImage{
+    width: 8%;
+    height: 8%;
+}
+
+.liOrderElement{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.productOrderInfo{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* DARK MODE */
+
+.dmprofileSection{
+    background-color: #20232A;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.dmprofileForm{
+    background-color: white;
+    height: 360px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
+}
+
+.dmprofileForm input{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+    text-indent: 8px;
+    border: none;
+    background: #F6F5FA;
+}
+
+.dmprofileForm button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #20232A;
+    color: #FFFFFF;
+    border: none;
+}
+
+.dmprofileForm button:hover{
+    cursor: pointer;
+}
+
+.dmprofileInfo{
+    background-color: #2B3036;
+    height: 360px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding-top: 50px;
+}
+
+.dmprofileInfo span{
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+}
+
+
+
+.dmprofileInfo button{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #d7f136;
+    border: none;
+}
+
+.dmprofileInfo button:hover{
+    cursor: pointer;
+}
+
+.dmorderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #d7f136;
+    border-radius: 20px 20px 0px 0px;
+}
+
+
+@media (max-width: 500px){
+    .profileInfo{
+       width: 85%;
+       height: 300px;
+    }
+    .profileInfo span{
+        display: flex;
+        margin-bottom: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    .profileInfo button{
+        height: 30px;
+        width: 200px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        transform: translateX(25px);
+    }
+
+    .dmprofileInfo{
+        width: 85%;
+        height: 300px;
+     }
+     .dmprofileInfo span{
+         display: flex;
+         margin-bottom: 20px;
+         margin-left: 40px;
+         margin-right: 40px;
+         font-style: normal;
+         font-weight: 400;
+         font-size: 11px;
+         line-height: 15px;
+     }
+ 
+     .dmprofileInfo button{
+         height: 30px;
+         width: 200px;
+         font-style: normal;
+         font-weight: 600;
+         font-size: 10px;
+         transform: translateX(25px);
+     }
+
+
 }

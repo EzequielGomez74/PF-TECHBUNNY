@@ -203,10 +203,28 @@ hr {
   line-height: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  transition: 0.5s;
 }
 
 .mainButton:hover {
+  color: #d7f136;
+  transition: 0.5s;
   cursor: pointer;
+}
+
+.mainButtonDisabled {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 360px;
+  height: 45px;
+  background-color: #20232a;
+  color: #717171;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .sub {
@@ -532,10 +550,29 @@ hr {
   line-height: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  transition: 0.5s;
 }
 
 .dmmainButton:hover {
   cursor: pointer;
+  transition: 0.5s;
+  color: rgb(155, 155, 155);
+}
+
+.dmmainButtonDisabled {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 360px;
+  height: 45px;
+  background-color: #819036;
+  color: #717171;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: 0.5s;
 }
 
 .dmsub {
@@ -651,6 +688,7 @@ hr {
   padding-top: 10px;
   text-indent: 15px;
   background-color: #1b1d23;
+  color:white;
   resize: none;
 }
 

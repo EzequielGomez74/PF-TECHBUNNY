@@ -10,6 +10,7 @@ import axios from "axios";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
 import Control from "./Control";
 import img from "../../Photos/bunnylogin.png";
+import Swal from "sweetalert2";
 
 function Register() {
   const [showError, setShowError] = useState(false);
@@ -38,8 +39,18 @@ function Register() {
       const response = await axios.post("/enter", user);
       console.log(response.data);
       //!manejar response
-      if (response.data.status === "SUCCESS") alert("REGISTRO EXITOSO");
-      else alert("REGISTRO FALLIDO");
+      if (response.data.status === "SUCCESS")
+      Swal.fire({
+        title: "¡Alerta!",
+        text: "REGISTRADO CON EXITO",
+        icon: "success",
+      });
+      else 
+      Swal.fire({
+        title: "¡Alerta!",
+        text: "REGISTRO FALLIDO",
+        icon: "warning",
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -81,7 +92,7 @@ function Register() {
           {errors.username && showError ? (
             <span className={s.error}>{errors.username}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="text"
@@ -94,7 +105,7 @@ function Register() {
           {errors.email && showError ? (
             <span className={s.error}>{errors.email}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="email"
@@ -107,7 +118,7 @@ function Register() {
           {errors.password && showError ? (
             <span className={s.error}>{errors.password}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={s.hidden}></span>
           )}
           <input
             type="password"

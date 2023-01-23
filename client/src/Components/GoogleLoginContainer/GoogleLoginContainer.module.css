@@ -30,8 +30,10 @@
 }
 
 .signInButton div {
-  margin: 1px 0 3px 0;
+  margin-bottom: 18px;
+  height: 0px;
 }
+
 .dmb2 {
   background-color: transparent;
   color: #f6f5fa;

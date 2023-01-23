@@ -1,19 +1,26 @@
+// import { GET_CARROUSEL } from "./actionTypes";
 const initialState = {
   products: [],
   detail: {},
   categories: [],
   productsByCategory: [],
+  productsByBrand: [],
   filtered: [],
   cart: [],
   favorites: [],
   darkMode: false,
   reviews: [],
-  orders:[],
+  orders: [],
+  ordersByUser: [],
+  allOrders: [],
   // searchTerm:'',
   // searchResults:[],
   results: [],
   loggedUser: {},
-  preferences:{}
+  preferences: {},
+  favoritesCarrousel: [],
+  ordersCarrousel: [],
+  usersDashboard: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -22,6 +29,46 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+      };
+    case "POST_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "UPDATE_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "GET_USERS":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "DELETE_USER":
+      return {
+        ...state,
+        usersDashboard: action.payload,
+      };
+    case "GET_ORDERS":
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case "UPDATE_ORDER":
+      return {
+        ...state,
+        allOrders: action.payload,
       };
     case "GET_PRODUCT_BY_ID":
       return {
@@ -34,23 +81,57 @@ export default function reducer(state = initialState, action) {
         productsByCategory: action.payload,
         filtered: action.payload,
       };
+    case "GET_PRODUCTS_BY_BRAND":
+      return {
+        ...state,
+        productsByBrand: action.payload,
+        // filtered: action.payload,
+      };
     case "GET_CATEGORIES":
       return {
         ...state,
         categories: action.payload,
       };
-    case "FILTER_BY_BRAND":
+    case "FILTER_BY":
       const allProductsByCategory = [...state.filtered];
       const filteredProducts =
-        action.payload === "none"
+        action.payload.subcategory === "none" && action.payload.brand === "none"
           ? allProductsByCategory
-          : allProductsByCategory.filter((p) =>
-              p.brand.includes(action.payload)
-            );
+          : action.payload.subcategory !== "none" &&
+            action.payload.brand === "none"
+          ? allProductsByCategory.filter(
+              (p) =>
+                p.subcategory.toLowerCase() ===
+                action.payload.subcategory.toLowerCase()
+            )
+          : action.payload.subcategory === "none" &&
+            action.payload.brand !== "none"
+          ? allProductsByCategory.filter((p) =>
+              p.brand.includes(action.payload.brand)
+            )
+          : allProductsByCategory
+              .filter(
+                (p) =>
+                  p.subcategory.toLowerCase() ===
+                  action.payload.subcategory.toLowerCase()
+              )
+              .filter((p) => p.brand.includes(action.payload.brand));
       return {
         ...state,
         productsByCategory: filteredProducts,
       };
+    // case "FILTER_BY_BRAND":
+    //   const allProductsByCategory = [...state.filtered];
+    //   const filteredProducts =
+    //     action.payload === "none"
+    //       ? allProductsByCategory
+    //       : allProductsByCategory.filter((p) =>
+    //           p.brand.includes(action.payload)
+    //         );
+    //   return {
+    //     ...state,
+    //     productsByCategory: filteredProducts,
+    //   };
     case "SORT_BY_PRICE":
       const orderedProductsByPrice = state.productsByCategory.sort(function (
         a,
@@ -99,12 +180,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         favorites: action.payload,
       };
-      case "CLEAN_FAVORITES": {
-        return {
-          ...state,
-          favorites: [],
-        };
-      }
+    case "CLEAN_FAVORITES": {
+      return {
+        ...state,
+        favorites: [],
+      };
+    }
     // case "REMOVE_FAVORITE":
     //   return {
     //     ...state,
@@ -141,9 +222,17 @@ export default function reducer(state = initialState, action) {
     //         searchResults: action.results,
     //     }
     case "GET_SEARCH_RESULTS":
+      const searched = state.products.filter((p) =>
+        p.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
       return {
         ...state,
-        results: action.payload,
+        results: searched,
+      };
+    case "CLEAN_SEARCH_RESULTS":
+      return {
+        ...state,
+        results: [],
       };
     case "GET_LOGGED_USER": {
       return {
@@ -160,31 +249,47 @@ export default function reducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-      case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
-        const productFound = state.cart.find((p) => p.id === action.payload.id);
-        if (productFound) {
-          productFound.totalQuantity -= action.payload.totalQuantity;
-        }
-        return { ...state, cart: [...state.cart] };
+    case "ADD_OR_REMOVE_QUANTITY_FROM_CART":
+      const productFound = state.cart.find((p) => p.id === action.payload.id);
+      if (productFound) {
+        productFound.count = productFound.count - action.payload.count;
+      }
+      return { ...state, cart: [...state.cart] };
 
     case "CLEAN_DETAIL":
       return { ...state, detail: {} };
     case "CLEAN_CATEGORY_PRODUCTS":
       return { ...state, productsByCategory: [] };
-    case 'CREATE_ORDER':
+    case "CREATE_ORDER":
       return {
         ...state,
-        orders: action.payload
-      }
-    case 'ALL_ORDERS_BY_USER':
+        orders: action.payload,
+      };
+    case "ALL_ORDERS_BY_USER":
       return {
         ...state,
-        orders:action.payload
-      }
+        ordersByUser: action.payload,
+      };
     case "GET_PAYPREFERENCES_BY_ID":
       return {
         ...state,
         preferences: action.payload,
+      };
+    case "GET_CARROUSEL":
+      if (action.payload.carrouselType === "favorites")
+        return {
+          ...state,
+          favoritesCarrousel: action.payload.carrouselData,
+        };
+      else
+        return {
+          ...state,
+          ordersCarrousel: action.payload.carrouselData,
+        };
+    case "UPDATE_USER_INFO":
+      return {
+        ...state,
+        loggedUser: { ...state.loggedUser, ...action.payload },
       };
     default:
       return { ...state };

@@ -10,23 +10,17 @@
   font-family: 'Poppins';
 }
 
+.img {
+  width: 55%;
+  height: 55%;
+}
+
 .heroLogin {
   height: 500px;
   width: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.hero {
-  background-image: url(../../images/register.png);
-  width: 676.45px;
-  height: 490px;
-}
-
-.img {
-  width: 55%;
-  height: 55%;
 }
 
 .loginCard {
@@ -55,10 +49,13 @@
   background: #F6F5FA;
 }
 
+.recoverPass{
+  cursor: pointer;
+}
 .m2 {
   font-size: 12px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .m2:hover {
@@ -88,18 +85,15 @@
   border: none;
 }
 
-.b2 {
-  background-color: #F6F5FA;
-  color: #20232A;
-  border: none;
-}
+
 
 .error{
   color:red
 }
 
 .hidden{
-  color:white
+ color:white;
+  
 }
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
@@ -126,6 +120,8 @@
 }
 
 
+
+
 .dmloginCard {
   background-color: #2B3036;
   height: 500px;
@@ -143,6 +139,11 @@
   color: #f6f5fa;
 }
 
+.dmrecoverPass{
+  cursor: pointer;
+  color:white;
+}
+
 .dmloginCard input {
   margin-left: 40px;
   margin-right: 40px;
@@ -153,24 +154,18 @@
   background: #22262A;
 }
 
+.dmloginCard input:focus{
+  color: white;
+}
+
 .dmm2 {
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
+  padding-bottom: 40px;
 }
 
 .dmm2:hover {
-  cursor: pointer;
-}
-
-.dmm1 {
-  font-size: 12px;
-  color: #f6f5fa;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.dmm1:hover {
   cursor: pointer;
 }
 
@@ -197,13 +192,21 @@
   border: none;
 }
 
-.dmb2 {
-  background-color: transparent;
-  color: #f6f5fa;
-  border: 1px solid #f6f5fa;
-}
+
 
 .dmimg {
-  width: 60%;
-  height: 60%;
+  width: 55%;
+  height: 55%;
+}
+
+.dmheroLogin {
+  height: 500px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dmhidden{
+  color:#2B3036;
 }

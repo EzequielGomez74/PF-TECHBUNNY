@@ -58,7 +58,7 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .m2:hover {
@@ -160,10 +160,16 @@
   background: #22262A;
 }
 
+.dmloginCard input:focus{
+  color: white;
+}
+
 .dmm2 {
   font-size: 12px;
   margin-top: 20px;
+  padding-bottom: 40px;
   color: #f6f5fa;
+  
 }
 
 .dmm2:hover {

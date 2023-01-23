@@ -1,38 +1,31 @@
 import React from "react";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CardV from "../Card V/CardV";
-import { useState, useEffect, useRef } from "react";
-import s from "../Category/Category.module.css";
+import { useState, useEffect } from "react";
+import s from "../Results/Results.module.css";
 import Pagination from "../Pagination/Pagination";
-import { getResults, getSearchResults } from "../../redux/actions";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import loading from '../../images/loadingg.gif'
 
 function Results() {
   const results = useSelector((state) => state.results);
+  const loggedUser = useSelector((state) => state.loggedUser);
   // const st = useSelector((state) => state.searchTerm);
   let { searchTerm } = useParams();
-  const dispatch = useDispatch();
+  //DARK MODE
+  const dm = useSelector((state) => state.darkMode);
 
   const [resultsLocal, setResultsLocal] = useState([]);
-  const initialLoad = useRef(true);
-  let searchTermChange = useRef(searchTerm);
 
-
+  const {
+    state: { resultado },
+  } = useLocation();
   useEffect(() => {
-    if (searchTermChange.current !== searchTerm) {
-      console.log("1");
-      initialLoad.current = true;
-      searchTermChange.current = searchTerm;
-    }
-    if (initialLoad.current) {
-      console.log("2");
-      setResultsLocal([...results]);
-      dispatch(getSearchResults(searchTerm));
-      initialLoad.current = false;
-    }
-  }, [results, searchTerm]);
+    console.log("RESULTADO ", resultado);
+    setResultsLocal(resultado);
+  }, [resultado]); //results, searchTerm]);
 
   let [currentPage, setCurrentPage] = useState(1);
   let [productsPerPage] = useState(12);
@@ -45,42 +38,47 @@ function Results() {
   };
 
   return (
-    <div>
+    <div className={dm? s.dmresultsContainer : s.resultsContainer}>
       <NavBar />
+      <div >
       <section>
-        <h4>
+         <h4>
           {resultsLocal.length} resultados para ''{searchTerm}''{" "}
-        </h4>
-        <div className={s.results}>
+         </h4>
+        <div className={dm? s.dmresults : s.results}>
           {currentResults.length ? (
             currentResults.map((p) => (
               <CardV
                 key={p.product_id}
-                id={p.product_id}
+                product_id={p.product_id}
                 brand={p.brand}
                 name={p.name}
                 image={p.image}
                 price={p.price}
                 category={p.category}
                 subcategory={p.subcategory}
+                user_id={loggedUser.user_id}
+                favorite={p.favorite}
               />
             ))
           ) : (
-            <img
-              src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-              alt=""
-            />
+            <div className={s.loading}>
+            <img  src={loading} alt="" />
+            </div>
           )}
         </div>
+
         <div>
           <Pagination
             productsPerPage={productsPerPage}
-            products={results.length}
+            products={resultsLocal.length}
             paginate={paginate}
             currentPage={currentPage}
           />
         </div>
       </section>
+
+      </div>
       <Footer />
     </div>
   );

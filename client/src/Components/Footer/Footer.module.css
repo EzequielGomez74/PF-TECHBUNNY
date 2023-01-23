@@ -1,13 +1,11 @@
 .footer{
     display: flex;
     flex-direction: column;
-    background-color: #20232A;
+    background-color: #1b1d23;
     font-family: 'Poppins', sans-serif;
 }
 
-.dmfooter{
-    background-color: #1b1d23;
-}
+
 
 .main{
     max-width: 1500px;

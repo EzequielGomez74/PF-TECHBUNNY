@@ -10,6 +10,7 @@ import loginUser from "../../scripts/loginUser";
 import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+import Swal from "sweetalert2";
 
 function Login() {
   const dispatch = useDispatch();
@@ -51,16 +52,33 @@ function Login() {
         },
         (status) => {
           if (status === "CONTRASEÑA INCORRECTA")
-            alert("CONTRASEÑA INCORRECTA");
-          else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "CONTRASEÑA INCORRECTA",
+            icon: "warning",
+          });
+          else if (status === "MAIL NO VALIDADO") 
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "MAIL NO VALIDO",
+            icon: "warning",
+          });
           else if (status === "SUCCESS") {
-            alert("TE HAS LOGUEADO CON EXITO");
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "LOGUEADO CON EXITO",
+              icon: "success",
+            });
             history.goBack();
           }
         }
       );
     }
     //TODO MANEJAR LOS ERRORES DE CREACION DE FORMULARIO PARA ESTE INPUT
+  };
+
+  const handleForgotPassword = () => {
+    history.push("/recover");
   };
 
   return (
@@ -84,7 +102,7 @@ function Login() {
           {errors.username && showError ? (
             <span className={s.error}>{errors.username}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={dm ? s.dmhidden : s.hidden}>.</span>
           )}
           <input
             type="password"
@@ -96,9 +114,14 @@ function Login() {
           {errors.password && showError ? (
             <span className={s.error}>{errors.password}</span>
           ) : (
-            <span className={s.hidden}>a</span>
+            <span className={dm ? s.dmhidden : s.hidden}>.</span>
           )}
-          <span className={dm ? s.dmm1 : s.m1}>¿Olvidaste tu contraseña?</span>
+          <span
+            className={dm ? s.dmrecoverPass : s.recoverPass}
+            onClick={handleForgotPassword}
+          >
+            ¿Olvidaste tu contraseña?
+          </span>
           <button onClick={handleLogin} className={dm ? s.dmb1 : s.b1}>
             Iniciar Sesión
           </button>

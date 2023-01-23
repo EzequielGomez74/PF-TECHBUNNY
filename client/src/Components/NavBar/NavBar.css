@@ -46,6 +46,7 @@
     visibility: visible;
     transform: translateY(0);
     transition: var(--speed) ease;
+    z-index: 999;
   }
   
   .dropdown-menu.inactive{
@@ -53,6 +54,7 @@
     visibility: hidden;
     transform: translateY(-20px);
     transition: var(--speed) ease;
+    z-index: 999;
   }
   
   .dropdown-menu ul li{
@@ -160,7 +162,7 @@
   }
 
   .profilePicture {
-    max-width: 35px;
+    max-width: 50px;
     height: 35px;
     border-radius: 50%;
     border: 1px black;

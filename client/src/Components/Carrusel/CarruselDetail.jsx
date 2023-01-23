@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "./styles2.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import CardV from "../Card V/CardV";
+import CardCarrusel from "../CardCarrusel/CardCarrusel";
 import { getProducts } from "../../redux/actions";
 import * as actions from "../../redux/actions";
 import { useParams } from "react-router-dom";
@@ -29,11 +29,18 @@ function CarruselDetail() {
   let dispatch = useDispatch();
   let user = useSelector((state) => state.loggedUser);
   let catProducts = useSelector((state) => state.filtered);
+  let allProducts = useSelector((state) => state.products);
   let detail = useSelector((state) => state.detail);
   const changeCatProducts = useRef(catProducts);
   const [carruselProducts, setCarruselProducts] = useState([]);
+  // const [restOfProducts, setRestOfProducts] = useState([]);
   const [carruselProductsExtended, setCarruselProductsExtended] = useState([]);
   const [sessionProducts, setSessionProducts] = useState([]);
+
+  // let restOfProducts = allProducts
+  //   .sort((a, b) => 0.5 - Math.random())
+  //   .slice(0, 10 - carruselProducts.length);
+  // console.log("rest of products", restOfProducts);
 
   useEffect(() => {
     dispatch(actions.getProductsByCategory(detail.category));
@@ -42,6 +49,7 @@ function CarruselDetail() {
 
   useEffect(() => {
     // if (changeCatProducts.current.length !== catProducts.length) {
+
     setCarruselProducts(
       catProducts
         .filter((product) => product.subcategory === detail.subcategory)
@@ -49,16 +57,20 @@ function CarruselDetail() {
         .slice(0, 10)
     );
     // if (carruselProducts.length)
-    setCarruselProductsExtended(
-      carruselProducts.concat(
-        catProducts
-          .sort((a, b) => 0.5 - Math.random())
-          .slice(0, 10 - carruselProducts.length)
-      )
-    );
-    // }
-    console.log(carruselProductsExtended);
   }, [catProducts]);
+
+  useEffect(() => {
+    setCarruselProductsExtended(
+      [
+        ...carruselProducts,
+        ...allProducts
+          .sort((a, b) => 0.5 - Math.random())
+          .slice(0, 10 - carruselProducts.length),
+      ].sort((a, b) => 0.5 - Math.random())
+    );
+
+    console.log("carrusel products extended", carruselProductsExtended);
+  }, [carruselProducts]);
 
   return (
     <div className="container">
@@ -67,6 +79,7 @@ function CarruselDetail() {
         spaceBetween={15}
         slidesPerGroup={5}
         loop={true}
+        initialSlide={1}
         loopFillGroupWithBlank={true}
         pagination={{
           clickable: true,
@@ -78,8 +91,8 @@ function CarruselDetail() {
         {carruselProducts.length === 10
           ? carruselProducts.map((p) => (
               <SwiperSlide>
-                <CardV
-                  favorite={p.favorite}
+                <CardCarrusel
+                  favorite={p.favorite ? p.favorite : ""}
                   key={p.product_id}
                   user_id={user.user_id}
                   product_id={p.product_id}
@@ -95,8 +108,8 @@ function CarruselDetail() {
             ))
           : carruselProductsExtended.map((p) => (
               <SwiperSlide>
-                <CardV
-                  favorite={p.favorite}
+                <CardCarrusel
+                 favorite={p.favorite ? p.favorite : ""}
                   key={p.product_id}
                   user_id={user.user_id}
                   product_id={p.product_id}

@@ -10,6 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
+  faScrewdriverWrench
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -17,7 +18,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode, setLoggedUser } from "../../redux/actions";
 import Responsive from "./Responsive";
-import SearchBar from "../Search Bar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import logo from "../../Photos/loguito.png";
 import axios from "axios";
 import logoutUser from "../../scripts/logoutUser.js";
@@ -81,9 +82,11 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
+         <div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          </div>
           <h1>
-            <a href="/home">TECHBUNNY</a>
+            <a href="#">TECHBUNNY </a>
           </h1>
           <img src={logo} alt="logo" className="logo" />
 
@@ -312,12 +315,23 @@ function NavBar() {
         </div>
       ) : (
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-          <h3>BIENVENIDO {loggedUser.username}</h3>
+          <h3>BIENVENID@ {loggedUser.username}</h3>
           <span>Gracias por confiar en TECHBUNNY</span>
           <ul>
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
+            {loggedUser?.role === 3 && (
+              <Link to="/dashboard">
+                <DropdownItem
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  icon={faScrewdriverWrench}
+                  text={"Dashboard"}
+                />
+              </Link>
+            )}
             <Link to="/login" onClick={() => logoutUser()}>
                 <DropdownItem
                   icon={faRightToBracket}
