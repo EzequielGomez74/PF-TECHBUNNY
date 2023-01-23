@@ -7,7 +7,7 @@ function ResponsiveAreaBumpCategories({ data }) {
       <ResponsiveAreaBump
         data={data}
         margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
-        spacing={3}
+        spacing={12}
         xPadding={0.5}
         colors={{ scheme: "category10" }}
         blendMode="multiply"

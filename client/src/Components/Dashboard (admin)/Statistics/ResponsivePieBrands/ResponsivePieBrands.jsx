@@ -6,6 +6,7 @@ const ResponsivePieBrands = ({ data }) => {
     <div style={{ width: "1600px", height: "900px", backgroundColor: "white" }}>
       <ResponsivePie
         data={data}
+        sortByValue={true}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         cornerRadius={3}
         activeOuterRadiusOffset={8}

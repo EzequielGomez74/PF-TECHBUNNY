@@ -523,11 +523,12 @@ export function updateUserInfo(user_id, input) {
   };
 }
 
-export function getAllStatistics() {
+export function getAllStatistics(onSuccess) {
   return async function (dispatch) {
     try {
       const allStatistics = await axiosInstance.get(`/statistics`);
       console.log("allStatistics.data ", allStatistics.data);
+      onSuccess();
       return dispatch({
         type: GET_ALL_STATISTICS,
         payload: allStatistics.data,
