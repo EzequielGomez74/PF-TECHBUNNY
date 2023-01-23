@@ -2,9 +2,8 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
-const { User } = require("../../services/db/db.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const getUser = require("../../scripts/getUser");
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));
@@ -15,9 +14,14 @@ router.get("/:user_id", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-router.get("/", async (req, res) => {
-  console.log(req.query);
+
+router.get("/", async (req, res, next) => {
+  console.log('ENTRE A USERS ACÁ');
   try {
+    if(Object.keys(req.query).length === 0){
+      console.log('ENTRE A USERS al IF');
+      return next();
+    }
     res.status(200).json(await controller.getUserBy(req.query));
   } catch (error) {
     res.status(400).send(error.message);
@@ -47,16 +51,20 @@ router.put("/googleAuth/:user_id", async (req, res) => {
 });
 
 // /users/3   body={surname:"beto",username:"pepe"}
-router.put("/:user_id", validate.user, async (req, res) => {
+//validate.user
+//TODO CHECKEAR LA VALIDACION DE USER (DESACTIVADA POR EL MOMENTO)
+router.put("/:user_id", async (req, res) => {
   try {
     const data = req.body;
     const { user_id } = req.params;
-    const usernameDb = await User.findByPk(user_id);
+    console.log("1");
+    const foundUser = await getUser({ user_id });
+    console.log("2");
     if (
-      usernameDb &&
-      (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
+      foundUser &&
+      (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
-      res.status(200).send(await controller.modifyUser(user_id, data));
+      res.status(200).send({status: await controller.modifyUser(user_id,data)});
     } else {
       throw new Error(
         "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"
@@ -71,6 +79,7 @@ router.put("/:user_id", validate.user, async (req, res) => {
 //router.use(requiredAccess(3));
 router.get("/", async (req, res) => {
   try {
+    console.log('Entré al get de users')
     res.status(200).json(await controller.getAllUsers());
   } catch (error) {
     res.status(400).send(error.message);

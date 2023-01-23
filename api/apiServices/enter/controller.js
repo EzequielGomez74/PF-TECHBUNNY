@@ -5,6 +5,7 @@ const emailer = require("../../services/mailer/emailer.js");
 const generateValidationAndSendMail = require("../../scripts/generateValidationAndSendMail.js");
 const { OAuth2Client } = require("google-auth-library");
 const TokenManager = require("../../scripts/TokenManager");
+const userController = require("../user/controller");
 require("dotenv").config();
 
 async function handleNewUser(data) {
@@ -22,7 +23,6 @@ async function handleNewUser(data) {
     //Encryptar el password
     const hashedPwd = await bcrypt.hash(data.password, 10); //10 es la cantidad de SALT
     //Agregar el nuevo usuario en la DB nececita muchos mas datos para que respete el modelo. Atencion aca!
-    console.log("pass", hashedPwd);
     const newUser = {
       ...data,
       password: hashedPwd,
@@ -56,7 +56,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
       } else {
         //$ result === true
         const response = await generateTokens(foundUser);
-        response.user = foundUser.dataValues;
+        response.user = userController.setLoggedUserData(foundUser.dataValues); //foundUser.dataValues;
         //todo mandar solo los valores correspondientes
         //todo SETEAR SAVED SESSION DATA
         return response;
@@ -117,7 +117,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
         foundUser = await User.create(newUser);
       }
       const response = await generateTokens(foundUser);
-      response.user = foundUser.dataValues;
+      response.user = userController.setLoggedUserData(foundUser.dataValues); //foundUser.dataValues;
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
       return response;
@@ -147,7 +147,7 @@ async function handleLoginWithAccess(accessToken) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
       return {
-        user: foundUser.dataValues,
+        user: userController.setLoggedUserData(foundUser.dataValues),
         accessToken: foundUser.dataValues.accessToken,
       };
     } else {
@@ -159,7 +159,9 @@ async function handleLoginWithAccess(accessToken) {
 }
 
 async function handleLogout(user_id) {
+  console.log("user_id ", user_id);
   const foundUser = await User.findOne({ where: { user_id } });
+  console.log("foundUser ", foundUser);
   if (!foundUser) return "FAIL";
   foundUser.accessToken = "";
   //todo GUARDAR SAVED SESSION DATA
@@ -167,15 +169,14 @@ async function handleLogout(user_id) {
   return "SUCCESS";
 }
 
-async function handleRecoverPassword(username) {
+async function handleRecoverPassword(email) {
   try {
-    const users = await User.findAll({ where: { username } });
+    const users = await User.findAll({ where: { email } });
     let foundUser = null;
     users.forEach((user) => {
       if (!user.dataValues.usingGoogleLogin) foundUser = user;
     });
     if (!foundUser) return "FAIL";
-    foundUser.update({ password: "" });
     generateValidationAndSendMail(foundUser, "recover", 1);
     return "SUCCESS";
   } catch (error) {
@@ -187,7 +188,7 @@ async function generateTokens(foundUser) {
   const accessToken = jwt.sign(
     { username: foundUser.username, role: foundUser.role },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "25m" }
+    { expiresIn: "120m" }
   );
   await foundUser.update({ accessToken });
   return { accessToken };

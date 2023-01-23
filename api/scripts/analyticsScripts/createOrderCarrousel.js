@@ -13,9 +13,8 @@ const cartGenerator = require("./cartGenerator");
 const VARIATION = 35; //? % de variacion entre el target y los productos que le siguen mas caros
 async function createOrderCarrousel(user_id) {
   try {
-    if (!user_id) user_id = 1;
     //$ testing
-    await cartGenerator();
+    //await cartGenerator();
     //$ agarro categorias
     let categories = await Category.findAll({ raw: true });
     categories = categories.map((c) => c.name);
@@ -70,33 +69,31 @@ async function createOrderCarrousel(user_id) {
           if (product.relativePos) return prev + product.relativePos;
           return prev;
         }, 0) / categoryCount;
-    console.log("average ", average);
     allProducts.forEach((p) => {
       if (!p.relativePos) p.relativePos = average;
     });
     //$ buscar 10 categorias random dentro del array
     //$ y por cada categoria encuentra un producto mayor al relativePos
-    const finalResults = [];
+    let finalResults = [];
     for (let index = 0; index < 10; index++) {
       let posibleProducts = await findAndGeneratePosibleProducts(allProducts);
-      console.log("posibleProducts ", posibleProducts.length);
       const choosenProduct = findBestProduct(posibleProducts);
       finalResults.push(choosenProduct);
     }
     //$ failsafe en caso de que no exista algun producto rellena con un random
     for (let i = 0; i < finalResults.length; i++) {
       if (finalResults[i] === null) {
-        console.log(NULL);
         const all = await Product.findAll();
-        const pos = Math.floor(Math.random() * all.length);
+        const pos = Math.floor(Math.random() * (all.length - 1));
         finalResults[i].push(all[pos].dataValues);
       }
     }
-    //$ get username + setFavoriteStatus
-    //!falta favorite status
-    finalResults = prodController.setFavoriteStatus(
+    //!test
+    // //$ get username + setFavoriteStatus
+    const usernameAux = await getUserName(user_id);
+    finalResults = await prodController.setFavoriteStatus(
       finalResults,
-      getUserName(user_id)
+      usernameAux
     );
     return finalResults;
   } catch (error) {
@@ -110,7 +107,6 @@ async function findAndGeneratePosibleProducts(arrProducts) {
   let productFound = false;
   do {
     const pos = Math.floor(Math.random() * arrProducts.length);
-    console.log("Position rolled ", pos);
     if (!arrProducts[pos].selected) {
       arrProducts[pos].selected = true;
       productFound = true;
@@ -133,10 +129,9 @@ async function findAndGeneratePosibleProducts(arrProducts) {
       );
       //$ entre el minValue y el maxValue obtengo todos los productos
       let results = [];
-      console.log("largo ", allProducts.length);
+
       allProducts.forEach((p) => {
         if (p.price > minValue - 1 && p.price <= maxValue) {
-          console.log("found ", p.price);
           results.push(p);
         }
       });

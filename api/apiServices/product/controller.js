@@ -11,21 +11,26 @@ const getUser = require("../../scripts/getUser");
 const axios = require("axios");
 
 async function setFavoriteStatus(products, username) {
-  if (!username) return products;
-  if (products) {
-    //traer un array de favoritos correspondiente al user que tiene el access token
-    const { user_id } = await getUser({ username });
-    let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
-    favorites.forEach((fav) => {
-      const productFound = products.find(
-        (product) => product.product_id === fav.product_id
-      );
-      if (productFound) {
-        productFound.dataValues.favorite = true;
-      }
-    });
+  try {
+    if (!username) return products;
+    const newProducts = [...products];
+    if (newProducts) {
+      //traer un array de favoritos correspondiente al user que tiene el access token
+      const { user_id } = await getUser({ username });
+      let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
+      favorites.forEach((fav) => {
+        const productFound = newProducts.find(
+          (product) => product.product_id === fav.product_id
+        );
+        if (productFound) {
+          productFound.dataValues.favorite = true;
+        }
+      });
+    }
+    return newProducts;
+  } catch (error) {
+    throw new Error(error);
   }
-  return products;
 }
 
 async function getAllProducts(username) {
@@ -91,33 +96,72 @@ async function updateProduct(product) {
 
 async function createProduct(product) {
   try {
+    await Brand.findOrCreate({where: {name: product.brand }})
+  
     await Product.create(
       // create o findorcreate para que no se repita en la base de datos
       {
         ...product,
         description: product.description,
+
       }
     );
     return "Producto creado con exito!";
   } catch (error) {
-    throw new Error(error);
+    throw new Error({error: error.message});
   }
 }
 
 async function deleteProduct(product_id) {
   try {
-    await Product.update(
-      { active: false },
-      {
-        where: {
-          product_id,
-        },
-      }
-    );
+    const existe = await Product.findOne({ where: { product_id } });
+    if (existe.active === false) {
+      await Product.update(
+        { active: true },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+
+      return "Producto habilitado con exito!";
+    } if(existe.active === true) {
+      await Product.update(
+        { active: false },
+        {
+          where: {
+            product_id,
+          },
+        }
+      );
+    }
+    
     return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error);
   }
+}
+
+function uploadImage(body, file) {
+  return new Promise((resolve, reject) => {
+    try {
+      const stream = cloudinary.uploader.upload_stream({ resource_type: "image", folder: "techbunny", format: 'png' },
+        function (error, result) {
+          if(error) {
+            reject(new Error(error.message));
+          }
+          body = {
+            ...body,
+            image: result.url,
+          }
+          resolve(body);
+        });
+      stream.end(file.buffer);
+    } catch (error) {
+      reject(new Error({error: error.message}));
+    }
+  });
 }
 
 module.exports = {
@@ -127,4 +171,6 @@ module.exports = {
   createProduct,
   deleteProduct,
   getAllProductsBy,
+  setFavoriteStatus,
+  uploadImage
 };
