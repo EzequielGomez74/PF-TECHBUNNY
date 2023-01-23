@@ -14,6 +14,19 @@ async function subscribe(email) {
   }
 }
 
+async function getSubscribers() {
+  try {
+    let emails = [];
+    const newsletterData = await Newsletter.findAll();
+    newsletterData.map((el) => {
+      emails.push(el.dataValues.email);
+    });
+    return emails;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 async function unsubscribe(newsletter_id) {
   try {
     await Newsletter.destroy({ where: newsletter_id });
@@ -26,4 +39,5 @@ async function unsubscribe(newsletter_id) {
 module.exports = {
   subscribe,
   unsubscribe,
+  getSubscribers,
 };

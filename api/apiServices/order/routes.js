@@ -103,6 +103,7 @@ router.put("/:order_id", async (req, res) => {
 // /users?user_id=1&order_id=2  /users?user_id=1
 router.get("/", async (req, res, next) => {
   const { user_id, order_id } = req.query;
+  console.log(req.query);
   try {
     if(Object.keys(req.query).length === 0) {
       console.log('entré en GET ORDERS');

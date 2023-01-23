@@ -48,9 +48,3 @@ module.exports = {
   createFavorite,
   getAllFavorite,
 };
-
-
-module.exports = {
-  createFavorite,
-  getAllFavorite,
-};
