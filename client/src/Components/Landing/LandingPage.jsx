@@ -51,7 +51,6 @@ export default function LandingPage() {
       </section>
   
     <section id="about" className="about" >
-       {/* <div className="landingtituloEquipo">Nuestro Equipo</div> */}
         <div className="landingbackgroundAboutUs">
         <div  className="ourteam" >
           <a className="uptolanding" href="#top"><FontAwesomeIcon icon={faAngleUp} /></a>
