@@ -17,6 +17,10 @@ router.get("/:user_id", async (req, res) => {
 router.get("/", async (req, res) => {
   console.log(req.query);
   try {
+    if(Object.keys(req.query).length === 0){
+      console.log('ENTRE A USERS al IF');
+      return next();
+    }
     res.status(200).json(await controller.getUserBy(req.query));
   } catch (error) {
     res.status(400).send(error.message);
