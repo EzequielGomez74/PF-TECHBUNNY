@@ -64,7 +64,7 @@ async function loadAllAssets() {
     await loadtoDb(users, User);
     await loadtoDb(mockUsers, User);
     await orderGenerator();
-    //await favoriteTestGenerator();
+    await favoriteTestGenerator();
     //!! REVIEWS
     //await reviewGenerator();
     // for (let i = 10; i <= 94; i++) {
