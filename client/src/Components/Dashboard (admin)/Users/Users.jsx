@@ -4,12 +4,12 @@ import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, InputLabel, Select, MenuItem} from '@material-ui/core';
-import { Edit, Delete } from '@mui/icons-material';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, Select, MenuItem} from '@material-ui/core';
+import { Edit, Delete, Search } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-// import SearchBar from "material-ui-search-bar";
+import InputAdornment from '@mui/material/InputAdornment';
 import { getUsers, updateUser, deleteUser } from '../../../redux/actions'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -89,7 +89,7 @@ function Users() {
     return;
   }
   console.log(users);
-  },[])
+  },[dispatch, users])
 
   const peticionPut =async()=>{
     console.log(userSelected)
@@ -172,10 +172,25 @@ function Users() {
     </div>
   )
 
-  
-
   //Search Input
-  // const [searchTerm, setSearchTerm] = useState()
+  const [userRows, setUserRows] = useState(users)
+  // const [searched, setSearched] = useState('')
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = users.filter((row) => {
+      return row.name.toString().toLowerCase().includes(searchedVal.toString().toLowerCase())
+    })
+    if(searchedVal.length < 1) {
+      setUserRows(users)
+    } else {
+      setUserRows(filteredRows)
+    }
+  }
+
+  // const cancelSearch = () => {
+  //   setSearched('');
+  //   requestSearch(searched);
+  // }
 
   // Sort 
   const [orderDirection, setOrderDirection] = useState('asc')
@@ -203,7 +218,7 @@ function Users() {
     setPage(0)
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, userRows.length - page * rowsPerPage);
 
   return (
     <div>
@@ -213,50 +228,23 @@ function Users() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div className={s.TableUsersInfo}>
-        {/* <input
-          type='text'
-          placeholder='Buscar productos'
-          className='search'
-          onChange={e => setSearchTerm(e.target.value)}
-        /> */}
-        {/* { searchTerm ? 
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Id de Producto</TableCell>
-                  <TableCell>Nombre de Producto</TableCell>
-                  <TableCell>Marca</TableCell>
-                  <TableCell>Precio</TableCell>
-                  <TableCell>Cantidad Vendida</TableCell>
-                  <TableCell>Stock</TableCell>
-                  <TableCell>Editar</TableCell>
-                  <TableCell>Eliminar</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {products
-                  .filter(p => p.name.toLowerCase().includes(searchTerm))
-                  .map(product => (
-                  <TableRow>
-                    <TableCell>{product.product_id}</TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>{product.brand}</TableCell>
-                    <TableCell>{product.price}</TableCell>
-                    <TableCell>{product.soldCount}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
-                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
-                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        : ''} */}
         <div className={s.outerItems}>
           <h2>Usuarios TECHBUNNY</h2>
         </div>
         <Paper className={s.paper}>
+          <br />
+          <TextField
+            className={s.usersSearchbar}
+            onChange={(e) => requestSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <br />
           <TableContainer>
             <Table>
               <TableHead>
@@ -335,7 +323,7 @@ function Users() {
               </TableHead>
 
               <TableBody>
-                {sortedRowInformation(users, getComparator(orderDirection, valueToOrderBy) ) 
+                {sortedRowInformation(userRows, getComparator(orderDirection, valueToOrderBy) ) 
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(user => (
                   <TableRow key={user.user_id} >
@@ -362,7 +350,7 @@ function Users() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={users.length}
+              count={userRows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}

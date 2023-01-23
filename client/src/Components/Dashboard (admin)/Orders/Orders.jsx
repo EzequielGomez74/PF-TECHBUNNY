@@ -4,12 +4,12 @@ import Backdrop from '../../../Components/Toolbar/Backdrop'
 import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField,Select, MenuItem} from '@material-ui/core';
-import { Edit } from '@mui/icons-material';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
+import { Edit, Search } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-// import SearchBar from "material-ui-search-bar";
+import InputAdornment from '@mui/material/InputAdornment';
 import { getOrders, updateOrder } from '../../../redux/actions';
 import s from "./Orders.module.css"
 
@@ -141,7 +141,18 @@ function Orders() {
  
 
   //Search Input
-  // const [searchTerm, setSearchTerm] = useState()
+  const [orderRows, setOrderRows] = useState(allOrders)
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = allOrders.filter((row) => {
+      return row.order_id.toString().toLowerCase().includes(searchedVal.toString().toLowerCase())
+    })
+    if(searchedVal.length < 1) {
+      setOrderRows(allOrders)
+    } else {
+      setOrderRows(filteredRows)
+    }
+  }
 
   // Sort 
   const [orderDirection, setOrderDirection] = useState('asc')
@@ -169,7 +180,7 @@ function Orders() {
     setPage(0)
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, allOrders.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, orderRows.length - page * rowsPerPage);
 
   return (
     <div>
@@ -179,50 +190,23 @@ function Orders() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div className={s.TableOrdersInfo}>
-        {/* <input
-          type='text'
-          placeholder='Buscar productos'
-          className='search'
-          onChange={e => setSearchTerm(e.target.value)}
-        /> */}
-        {/* { searchTerm ? 
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Id de Producto</TableCell>
-                  <TableCell>Nombre de Producto</TableCell>
-                  <TableCell>Marca</TableCell>
-                  <TableCell>Precio</TableCell>
-                  <TableCell>Cantidad Vendida</TableCell>
-                  <TableCell>Stock</TableCell>
-                  <TableCell>Editar</TableCell>
-                  <TableCell>Eliminar</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {products
-                  .filter(p => p.name.toLowerCase().includes(searchTerm))
-                  .map(product => (
-                  <TableRow>
-                    <TableCell>{product.product_id}</TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>{product.brand}</TableCell>
-                    <TableCell>{product.price}</TableCell>
-                    <TableCell>{product.soldCount}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
-                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
-                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        : ''} */}
         <div className={s.outerItems}>
           <h2>Pedidos TECHBUNNY</h2>
         </div>
         <Paper className={s.paper}>
+          <br />
+          <TextField
+            className={s.ordersSearchbar}
+            onChange={(e) => requestSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <br />
           <TableContainer>
             <Table>
               <TableHead>
@@ -268,7 +252,7 @@ function Orders() {
               </TableHead>
 
               <TableBody>
-                {sortedRowInformation(allOrders, getComparator(orderDirection, valueToOrderBy) ) 
+                {sortedRowInformation(orderRows, getComparator(orderDirection, valueToOrderBy) ) 
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(order => (
                   <TableRow key={order.order_id} >
@@ -290,7 +274,7 @@ function Orders() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={allOrders.length}
+              count={orderRows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
