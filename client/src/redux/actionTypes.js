@@ -4,12 +4,18 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
+<<<<<<< HEAD
 export const GET_USERS= 'GET_USERS';
 export const UPDATE_USER= 'UPDATE_USER';
 export const DELETE_USER= 'DELETE_USER';
 
 export const GET_ORDERS = 'GET_ORDERS';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
+=======
+export const GET_USERS = "GET_USERS";
+export const UPDATE_USER = "UPDATE_USER";
+export const DELETE_USER = "DELETE_USER";
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
 export const POST_NEWSLETTER = "POST_NEWSLETTER";
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -48,4 +54,5 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_CATEGORY_PRODUCTS = "CLEAN_CATEGORY_PRODUCTS";
 export const CLEAN_FAVORITES = "CLEAN_FAVORITES";
 
+export const GET_ALL_STATISTICS = "GET_ALL_STATISTICS";
 //Faltan actions

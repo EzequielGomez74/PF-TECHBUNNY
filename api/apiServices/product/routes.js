@@ -9,10 +9,6 @@ const router = Router();
 //GET 	/products                                                                             <-- Trae todos los productos
 //GET 	/products?category=Monitores&brand=Razer	query={category:"Monitores",brand:"Razer"}	<-- Trae todos los Monitores de marca razer
 
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
 router.get("/", async (req, res) => {
   try {
     if (req.query)
@@ -42,7 +38,6 @@ router.get("/:product_id", async (req, res) => {
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
 router.use(requiredAccess(3));
-
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
 router.post("/", upload.single('image'), async (req, res) => {
   try {
@@ -60,7 +55,8 @@ router.post("/", upload.single('image'), async (req, res) => {
 
 
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product
-router.put("/", upload.single('image'), async (req, res) => {
+//validate.product
+router.put("/", async (req, res) => {
   try {
     if(req.file) {
       const newBody = await controller.uploadImage(req.body, req.file)

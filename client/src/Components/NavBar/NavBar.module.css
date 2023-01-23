@@ -405,8 +405,11 @@ h3{
     color: white;
     cursor: pointer;
     padding: 12px;
+<<<<<<< HEAD
   }
 
   .DMone div h1 a:hover{
     cursor: default;
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   }

@@ -24,6 +24,7 @@ function Home() {
 
   const dm = useSelector((state) => state.darkMode);
 
+<<<<<<< HEAD
   function setCarrouselProducts(carrousel) {
     for (let i = 0; i < carrousel.length; i++) {
       if (carrousel[i] === null) {
@@ -35,6 +36,8 @@ function Home() {
     return carrousel;
   }
 
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   return (
     <div className={dm ? s.dmhome : s.home}>
       <NavBar />
@@ -46,8 +49,14 @@ function Home() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <Carrusel products={setCarrouselProducts(favoritesCarrousel)} />
 
+=======
+      <Carrusel products={favoritesCarrousel} />
+
+      
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
       <section className={dm ? s.dmbanners : s.banners}>
         <div className={s.bannerOne}>
           <Link to="/category/Periféricos">
@@ -80,7 +89,11 @@ function Home() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <Carrusel products={setCarrouselProducts(ordersCarrousel)} />
+=======
+      <Carrusel products={ordersCarrousel} />
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
       {/* Marcas */}
       <section className={dm ? s.dmbanners : s.banners}>

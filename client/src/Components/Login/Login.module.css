@@ -42,7 +42,7 @@
 .loginCard input {
   margin-left: 40px;
   margin-right: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   height: 40px;
   text-indent: 8px;
   border: none;
@@ -162,7 +162,11 @@
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
+<<<<<<< HEAD
   padding-bottom: 40px;
+=======
+  padding-bottom: 20px;
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 }
 
 .dmm2:hover {

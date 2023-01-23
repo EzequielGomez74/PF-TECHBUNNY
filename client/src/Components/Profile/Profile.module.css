@@ -111,6 +111,7 @@
     width: 100%;
   }
 
+<<<<<<< HEAD
 .profileOrdersHistory{
     display: flex;
     align-items: center;
@@ -182,6 +183,8 @@
     align-items: flex-start;
 }
 
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 /* DARK MODE */
 
 .dmprofileSection{
@@ -275,13 +278,17 @@
     text-transform: uppercase;
     background-color: #d7f136;
     border: none;
+<<<<<<< HEAD
     color: black;
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 }
 
 .dmprofileInfo button:hover{
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 .dmorderByUserInfo{
     padding-top: 20px;
     padding-bottom: 15px;
@@ -297,6 +304,10 @@
 
 
 @media (max-width: 450px){
+=======
+
+@media (max-width: 500px){
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     .profileInfo{
        width: 85%;
        height: 300px;
@@ -322,7 +333,11 @@
     }
 
     .dmprofileInfo{
+<<<<<<< HEAD
         width: 75%;
+=======
+        width: 85%;
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
         height: 300px;
      }
      .dmprofileInfo span{
@@ -344,6 +359,7 @@
          font-size: 10px;
          transform: translateX(25px);
      }
+<<<<<<< HEAD
      .productOrderImage{
         width:40%;
         height: 40%;
@@ -358,6 +374,8 @@
      .dmimg {
         width: 100%;
       }
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
 
 }

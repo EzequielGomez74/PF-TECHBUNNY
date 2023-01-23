@@ -11,7 +11,7 @@ async function getAllCategories() {
 
 async function getAllOffers() {
   try {
-    const ofertas =Category.findAll({where:{isOffer:true}})
+    const ofertas = Category.findAll({ where: { isOffer: true } });
     return ofertas;
   } catch (error) {
     throw new Error(error.message);
@@ -20,7 +20,10 @@ async function getAllOffers() {
 
 async function createOffer(offer) {
   try {
-    await Category.update({isOffer:true,cantDescuento: offer.cantDescuento},{where:{category_id: offer.category_id}})
+    await Category.update(
+      { isOffer: true, cantDescuento: offer.cantDescuento },
+      { where: { category_id: offer.category_id } }
+    );
     return "Oferta creada con exito!";
   } catch (error) {
     throw new Error(error);
@@ -29,7 +32,10 @@ async function createOffer(offer) {
 
 async function deleteOffer(category_id) {
   try {
-    await Category.update({isOffer:false,cantDescuento:0},{where:{category_id:category_id}})
+    await Category.update(
+      { isOffer: false, cantDescuento: 0 },
+      { where: { category_id: category_id } }
+    );
     return "Oferta eliminada con exito!";
   } catch (error) {
     throw new Error(error);
@@ -38,21 +44,23 @@ async function deleteOffer(category_id) {
 
 async function createCategory(category) {
   try {
-    await Category.findOrCreate(
-      {where:{name: category.name}}
-    );
+    await Category.findOrCreate({ where: { name: category.name } });
     return "Category creada con exito!";
   } catch (error) {
     throw new Error(error);
   }
 }
 
-
 async function deleteCategory(categoryId) {
   try {
-    const existe = await Category.findOne({ where: { category_id:categoryId }});
+    const existe = await Category.findOne({
+      where: { category_id: categoryId },
+    });
     if (existe) {
-      await Category.update({isActive:false},{ where: { category_id:categoryId } });
+      await Category.update(
+        { isActive: false },
+        { where: { category_id: categoryId } }
+      );
       return "Category eliminada con exito!";
     }
   } catch (error) {
@@ -60,5 +68,11 @@ async function deleteCategory(categoryId) {
   }
 }
 
-
-module.exports = { getAllCategories , deleteCategory, createCategory,getAllOffers, deleteOffer, createOffer};
+module.exports = {
+  getAllCategories,
+  deleteCategory,
+  createCategory,
+  getAllOffers,
+  deleteOffer,
+  createOffer,
+};

@@ -14,14 +14,9 @@ router.get("/:user_id", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-
-router.get("/", async (req, res, next) => {
-  console.log('ENTRE A USERS ACÁ');
+router.get("/", async (req, res) => {
+  console.log(req.query);
   try {
-    if(Object.keys(req.query).length === 0){
-      console.log('ENTRE A USERS al IF');
-      return next();
-    }
     res.status(200).json(await controller.getUserBy(req.query));
   } catch (error) {
     res.status(400).send(error.message);
@@ -57,14 +52,14 @@ router.put("/:user_id", async (req, res) => {
   try {
     const data = req.body;
     const { user_id } = req.params;
-    console.log("1");
     const foundUser = await getUser({ user_id });
-    console.log("2");
     if (
       foundUser &&
       (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
-      res.status(200).send({status: await controller.modifyUser(user_id,data)});
+      res
+        .status(200)
+        .send({ status: await controller.modifyUser(user_id, data) });
     } else {
       throw new Error(
         "el usuario que realizo la peticion no tiene permisos de admin o no es el propietario de la cuenta a modificar"

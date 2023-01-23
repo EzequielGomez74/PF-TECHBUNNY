@@ -10,7 +10,11 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
+<<<<<<< HEAD
   faScrewdriverWrench
+=======
+  faScrewdriverWrench,
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -44,16 +48,16 @@ function NavBar() {
   let menuRef = useRef();
   let favsChange = useRef(favs);
   let [prueba, setPrueba] = useState(0);
-  
+
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
     console.log("cualquier cosa");
-    if(loggedUser.user_id){
+    if (loggedUser.user_id) {
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       dispatch(actions.allCartByUser(loggedUser.user_id));
       console.log("OTRA COSA");
-    } 
-  },[loggedUser])
+    }
+  }, [loggedUser]);
 
   useEffect(() => {
     let handler = (e) => {
@@ -73,7 +77,11 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -82,8 +90,13 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
+<<<<<<< HEAD
          <div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+=======
+          <div>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
           </div>
           <h1>
             <a href="#">TECHBUNNY </a>
@@ -99,17 +112,17 @@ function NavBar() {
             </button>
 
             {/* modificarlo por un alert + redirección */}
-            <Link to={loggedUser.user_id? "/favorites" : "/login"}>
+            <Link to={loggedUser.user_id ? "/favorites" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
-                &nbsp;&nbsp; {loggedUser.user_id? favs.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id ? favs.length : 0}
               </span>
             </Link>
 
-            <Link to={loggedUser.user_id? "/cart" : "/login"}>
+            <Link to={loggedUser.user_id ? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {loggedUser.user_id? cart.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id ? cart.length : 0}
               </span>
             </Link>
 
@@ -321,6 +334,7 @@ function NavBar() {
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
+<<<<<<< HEAD
             {loggedUser?.role === 3 && (
               <Link to="/dashboard">
                 <DropdownItem
@@ -333,10 +347,21 @@ function NavBar() {
               </Link>
             )}
             <Link to="/login" onClick={() => logoutUser()}>
+=======
+            {loggedUser && loggedUser.role === 3 && (
+              <Link to="/dashboard">
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
                 <DropdownItem
-                  icon={faRightToBracket}
-                  text={"Log Out"}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  icon={faScrewdriverWrench}
+                  text={"Dashboard"}
                 />
+              </Link>
+            )}
+            <Link to="/login" onClick={() => logoutUser()}>
+              <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>
           </ul>
         </div>
@@ -383,4 +408,8 @@ function DropdownItemCat(props) {
   );
 }
 
+<<<<<<< HEAD
 export default NavBar;
+=======
+export default NavBar;
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198

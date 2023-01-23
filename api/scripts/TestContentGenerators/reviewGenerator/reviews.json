@@ -1,0 +1,342 @@
+[
+  {
+    "description": "No estoy satisfecho.",
+    "rating": 1
+  },
+  {
+    "description": "No es como se describe.",
+    "rating": 2
+  },
+  {
+    "description": "Mala calidad.",
+    "rating": 2
+  },
+  {
+    "description": "No lo recomendaría.",
+    "rating": 1
+  },
+  {
+    "description": "No vale la pena.",
+    "rating": 2
+  },
+  {
+    "description": "No cumple con las expectativas.",
+    "rating": 1
+  },
+  {
+    "description": "No es lo que esperaba.",
+    "rating": 2
+  },
+  {
+    "description": "No me gustó.",
+    "rating": 1
+  },
+  {
+    "description": "No funciona bien.",
+    "rating": 2
+  },
+  {
+    "description": "No estoy contento con la compra.",
+    "rating": 1
+  },
+  {
+    "description": "Estoy decepcionado con este producto. Era difícil de usar y no tan eficiente como esperaba",
+    "rating": 1
+  },
+  {
+    "description": "No me impresionó este producto. Tenía muchos errores y no era fácil de usar",
+    "rating": 2
+  },
+  {
+    "description": "Este producto fue una gran decepción. No estuvo a la altura de las expectativas y no era como lo anunciaban",
+    "rating": 2
+  },
+  {
+    "description": "Quedé extremadamente decepcionado con este producto. No estaba bien diseñado y no funcionó como esperaba",
+    "rating": 1
+  },
+  {
+    "description": "No estoy satisfecho con este producto. No era fácil de usar y tenía muchos problemas técnicos",
+    "rating": 1
+  },
+  {
+    "description": "Este producto no cumplió con mis expectativas. Era difícil de usar y no tan eficiente como se anunciaba",
+    "rating": 3
+  },
+  {
+    "description": "Estaba decepcionado con este producto. No estaba bien diseñado y no funcionaba como se esperaba",
+    "rating": 2
+  },
+  {
+    "description": "No me impresionó este producto. Tenía muchos errores y no era confiable",
+    "rating": 1
+  },
+  {
+    "description": "Quedé extremadamente decepcionado con el rendimiento de este producto. Era lento y poco confiable",
+    "rating": 2
+  },
+  {
+    "description": "Encontré que este producto está mal diseñado y es difícil de usar",
+    "rating": 3
+  },
+  {
+    "description": "No me gusto la atención al cliente de este producto. Fueron inútiles y no respondieron",
+    "rating": 1
+  },
+  {
+    "description": "El software de este producto estaba lleno de errores y fallaba con frecuencia",
+    "rating": 2
+  },
+  {
+    "description": "Este producto no estuvo a la altura de las expectativas y no cumplió sus promesas",
+    "rating": 1
+  },
+  {
+    "description": "Me decepcionó la calidad de construcción de este producto. Se sentía barato y endeble",
+    "rating": 2
+  },
+  {
+    "description": "Tuve problemas para que este producto funcionara correctamente y tuve que buscar ayuda del servicio de atención al cliente varias veces",
+    "rating": 3
+  },
+  {
+    "description": "Las instrucciones de este producto me parecieron poco claras e inútiles",
+    "rating": 1
+  },
+  {
+    "description": "Me decepcionó la durabilidad de este producto. Se rompió después de solo unos meses de uso",
+    "rating": 2
+  },
+  {
+    "description": "Encontré que el diseño de este producto es poco atractivo y desagradable",
+    "rating": 3
+  },
+  {
+    "description": "Tuve problemas con la conectividad de este producto y se desconectaba con frecuencia",
+    "rating": 1
+  },
+  {
+    "description": "Este producto tenía una alta tasa de defectos y tuve que devolverlo varias veces",
+    "rating": 1
+  },
+  {
+    "description": "Me decepcionó la velocidad y el rendimiento de este producto",
+    "rating": 2
+  },
+  {
+    "description": "Creo que el servicio de atención al cliente de este producto es poco útil y poco profesional",
+    "rating": 3
+  },
+  {
+    "description": "Encontré que el diseño de este producto es voluminoso y poco atractivo",
+    "rating": 1
+  },
+  {
+    "description": "Encontré que la compatibilidad de este producto es limitada",
+    "rating": 2
+  },
+  {
+    "description": "Me decepcionó el tamaño de este producto. Era más grande de lo que esperaba",
+    "rating": 1
+  },
+  {
+    "description": "Encontré que el precio de este producto no era razonable en relación con sus características y rendimiento",
+    "rating": 3
+  },
+  {
+    "description": "La durabilidad de este producto era pobre y se rompía fácilmente",
+    "rating": 2
+  },
+  {
+    "description": "Me decepcionó la falta de características y opciones de este producto. Era básico y no versátil",
+    "rating": 1
+  },
+  {
+    "description": "Estoy extremadamente satisfecho con el desempeño de este producto. Superó mis expectativas",
+    "rating": 3
+  },
+  {
+    "description": "Este producto es increíblemente fácil de usar y eficiente. Lo recomiendo mucho",
+    "rating": 4
+  },
+  {
+    "description": "Estoy impresionado con el diseño y la funcionalidad de este producto. Es intuitivo y está bien hecho",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y estoy muy impresionado. Es confiable y consistente",
+    "rating": 4
+  },
+  {
+    "description": "Me encanta este producto. Tiene excelentes características y es muy versátil",
+    "rating": 3
+  },
+  {
+    "description": "Dudé en probar este producto, pero estoy muy contenta de haberlo hecho. Es increíble y superó mis expectativas",
+    "rating": 5
+  },
+  {
+    "description": "Este producto es imprescindible para cualquiera que busque mejorar su productividad",
+    "rating": 3
+  },
+  {
+    "description": "Estoy muy impresionado con este producto. Es lo último en tecnología y no puedo imaginar mi vida sin él",
+    "rating": 4
+  },
+  {
+    "description": "Este producto es uno de los mejores que he usado. Es intuitivo y fácil de usar",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y debo decir que estoy muy impresionado. Es de alta calidad y se lo recomendaría a cualquiera",
+    "rating": 3
+  },
+  {
+    "description": "Este producto cambia las reglas del juego. Es innovador y poderoso y realmente ha revolucionado mi trabajo",
+    "rating": 4
+  },
+  {
+    "description": "Este producto es imprescindible. Está bien diseñado y bien hecho, y funciona de maravilla",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y tengo que decir que estoy muy satisfecho con su rendimiento. Es eficiente y fácil de usar",
+    "rating": 4
+  },
+  {
+    "description": "Este producto ha superado mis expectativas en términos de diseño, funcionalidad y rendimiento",
+    "rating": 3
+  },
+  {
+    "description": "La atención al cliente para este producto es sobresaliente. Fueron útiles y respondieron a mis necesidades",
+    "rating": 4
+  },
+  {
+    "description": "Este producto ha tenido un impacto significativo en mi trabajo y ha aumentado mi productividad",
+    "rating": 5
+  },
+  {
+    "description": "Estoy impresionado con las características innovadoras de este producto y cómo ha hecho que mi trabajo sea más eficiente",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y puedo decir con confianza que es un producto de primera línea",
+    "rating": 3
+  },
+  {
+    "description": "No he encontrado ningún problema con este producto y ha sido una adición confiable y consistente a mi rutina de trabajo",
+    "rating": 4
+  },
+  {
+    "description": "Este producto superó mis expectativas. Es increíblemente fácil de usar y eficiente. Lo recomiendo mucho",
+    "rating": 3
+  },
+  {
+    "description": "Estoy muy impresionado con el rendimiento de este producto. Ha hecho que mi trabajo sea mucho más fácil y eficiente",
+    "rating": 3
+  },
+  {
+    "description": "Este producto cambia las reglas del juego. Nunca antes había visto algo así. Es verdaderamente revolucionario",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y estoy muy satisfecho con su desempeño. Es confiable y consistente",
+    "rating": 5
+  },
+  {
+    "description": "Me encanta este producto. Es fácil de usar, tiene excelentes funciones y es muy versátil. Se lo recomendaría a cualquiera",
+    "rating": 4
+  },
+  {
+    "description": "Tenía dudas sobre si probar este producto, pero estoy muy contenta de haberlo hecho. Es increíble y ha superado mis expectativas",
+    "rating": 5
+  },
+  {
+    "description": "Este producto es imprescindible. Está bien diseñado, bien hecho y funciona de maravilla",
+    "rating": 4
+  },
+  {
+    "description": "Estoy muy impresionado con este producto. Es lo último en tecnología y no puedo imaginar mi vida sin él",
+    "rating": 5
+  },
+  {
+    "description": "Este producto es imprescindible. Está bien diseñado, bien hecho y funciona de maravilla",
+    "rating": 5
+  },
+  {
+    "description": "Este producto es uno de los mejores que he usado. Es intuitivo y fácil de usar, y ha facilitado mucho mi trabajo",
+    "rating": 3
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y debo decir que estoy muy impresionado. Es un producto de alta calidad que recomendaría a cualquiera",
+    "rating": 3
+  },
+  {
+    "description": "Este producto cambia las reglas del juego. Es innovador y poderoso, y realmente ha revolucionado mi trabajo",
+    "rating": 4
+  },
+  {
+    "description": "Este producto es imprescindible para cualquiera que busque mejorar su productividad. Está bien diseñado, bien hecho y funciona de maravilla",
+    "rating": 5
+  },
+  {
+    "description": "He estado usando este producto por un tiempo y debo decir que estoy muy impresionado. Está bien diseñado, bien hecho y funciona de maravilla",
+    "rating": 5
+  },
+  {
+    "description": "Estoy muy impresionado con este producto. Es lo último en tecnología y no puedo imaginar mi vida sin él",
+    "rating": 3
+  },
+  {
+    "description": "Este producto cambia las reglas del juego. Es innovador y poderoso, y realmente ha revolucionado mi trabajo",
+    "rating": 4
+  },
+  {
+    "description": "Mejor de lo que esperaba.",
+    "rating": 3
+  },
+  {
+    "description": "Excelente producto, recomendado.",
+    "rating": 3
+  },
+  {
+    "description": "Me encanta, lo recomendaría.",
+    "rating": 4
+  },
+  {
+    "description": "Muy satisfecho con la compra.",
+    "rating": 4
+  },
+  {
+    "description": "Producto de alta calidad.",
+    "rating": 5
+  },
+  {
+    "description": "Mejor de lo esperado.",
+    "rating": 3
+  },
+  {
+    "description": "Muy bueno, lo volvería a comprar.",
+    "rating": 5
+  },
+  {
+    "description": "Una gran compra.",
+    "rating": 4
+  },
+  {
+    "description": "Me encanta, muy útil.",
+    "rating": 3
+  },
+  {
+    "description": "Muy bueno, lo volvería a comprar.",
+    "rating": 5
+  },
+  {
+    "description": "Producto impresionante.",
+    "rating": 3
+  },
+  {
+    "description": "Mejor de lo que esperaba.",
+    "rating": 4
+  }
+]

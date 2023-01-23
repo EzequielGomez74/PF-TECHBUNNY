@@ -8,31 +8,8 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
-    let allUsers = await User.findAll();
-    const userData = allUsers.map((u) => {
-      let obj = {
-                user_id: u.user_id,
-                username: u.username,
-                name: u.name,
-                surname: u.surname,
-                email: u.email,
-                billingAddress: u.billingAddress,
-                zipCode: u.zipCode,
-                role: u.role,
-                isActive: u.isActive,
-                createdAt: u.createdAt,
-        isDeleted: u.isDeleted
-            };
-
-      if(u.accessToken){
-        obj = {
-          ...obj
-          ,isLogged : true};
-      }
-      return obj
-    }) 
-
-    return userData;
+    const allUsers = await User.findAll();
+    return allUsers;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -120,8 +97,9 @@ async function deleteUser(user_id) {
 async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
+    //body.password = await bcrypt.hash(body.password, 10); // 10 salt
     await User.update(body, { where: { user_id } });
-    return 'SUCCESS'
+    return "SUCCESS"; //"setLoggedUserData(userFound.dataValues);"
   } catch (error) {
     throw new Error(error.message);
   }
@@ -136,7 +114,7 @@ function setLoggedUserData({
   profilePicture,
   zipCode,
   email,
-  role
+  role,
 }) {
   return {
     user_id,
@@ -147,7 +125,7 @@ function setLoggedUserData({
     profilePicture,
     zipCode,
     email,
-    role
+    role,
   };
 }
 module.exports = {
