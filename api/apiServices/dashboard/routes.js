@@ -1,23 +1,11 @@
-//!                    ESTA RUTA DE TIPO GET RETORNA UN OBJETO COMO EL SIGUIENTE : 
+//!                    ESTA RUTA DE TIPO GET RETORNA UN OBJETO COMO EL SIGUIENTE :
 //! dashboard = {
 //!  usersData : {
 //!     totalUsers:   totalUsers.count,
 //      totalUsers : Numero   que hace referencia a la cantidad de usuarios registrados en la pagina (activos y inactivos)
 //!    loggedUsers: loggedUsers,
-//     loggedUsers : Numero   que hace referencia a la cantidad de usuarios que actualmente tienen un accestoken . por lo que se supone que estan logeados. 
+//     loggedUsers : Numero   que hace referencia a la cantidad de usuarios que actualmente tienen un accestoken . por lo que se supone que estan logeados.
 //!     users: userData // reducir informacion
-//      users : Es un array de objetos [{..},{..},{..}....{..}], cada objeto corresponde a un usuarios {
-                                                                            //   user_id : u.user_id,
-                                                                            //   username : u.username,
-                                                                            //   name : u.name,
-                                                                            //   surname : u.surname,
-                                                                            //   email : u.email,
-                                                                            //   billingAddress : u.billingAddress,
-                                                                            //   zipCode : u.zipCode,
-                                                                            //   role : u.role,
-                                                                            //   isActive : u.isActive,
-                                                                            //   createdAt : u.createdAt,
-                                                                            // }
 //!   },
 //!   ordersData : {
 //!     salesVolume: totalVolume,
@@ -25,21 +13,18 @@
 //!     soldProducts: soldProducs,
 //      soldProducts:  Numero  que hace referencia a cantidad de productos vendidos .
 //!     orders: ordersData
-//      orders : Es un Array  de objetos [{..},{..},{..}....{..}] que en cada objeto contiene los datos de una orden.
 //!   },
 //!   productsData : {
 //!     productsCount: productsCount,
 //      productsCount :  Numero que hace referencia a la cantidad de productos (activos y inactivos) de la bd.
 //!     productsOutOfStock: productsOutOfStock,
-//      productsOutOfStock : Numero que hace referencia a la cantidad de productos con stock = 0 en la bd. 
+//      productsOutOfStock : Numero que hace referencia a la cantidad de productos con stock = 0 en la bd.
 //!     products: productsData
-//      products : Es un Array  de objetos [{..},{..},{..}....{..}] que en cada objeto contiene un producto de la bd .
 //!   },
 //!   newsletterData : {
 //!     subscriberCount : subscriberCount,
 //      subscriberCount :  Numero que hace referencia a la cantidad de gente suscripta al newsletter
-//!     subscribers : newsletterData,
-//      subscribers : es un array [] que contiene el mail de cada uno de los suscriptores .
+//!     subscribers : newsletterData
 //!   }
 //! }
 
@@ -55,5 +40,7 @@ router.get("/", async (req, res) => {
     res.status(400).json(error.message);
   }
 });
+
+module.exports = router;
 
 module.exports = router;

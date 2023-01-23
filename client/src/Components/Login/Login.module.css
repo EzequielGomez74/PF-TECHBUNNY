@@ -162,7 +162,11 @@
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
+<<<<<<< HEAD
   padding-bottom: 40px;
+=======
+  padding-bottom: 20px;
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 }
 
 .dmm2:hover {

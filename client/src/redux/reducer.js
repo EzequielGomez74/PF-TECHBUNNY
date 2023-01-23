@@ -21,6 +21,10 @@ const initialState = {
   favoritesCarrousel: [],
   ordersCarrousel: [],
   usersDashboard: [],
+<<<<<<< HEAD
+=======
+  allStatistics: {},
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 };
 
 export default function reducer(state = initialState, action) {
@@ -60,6 +64,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         usersDashboard: action.payload,
       };
+<<<<<<< HEAD
     case 'GET_ORDERS':
       return {
         ...state,
@@ -70,6 +75,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         allOrders: action.payload,
       }
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,
@@ -92,6 +99,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         categories: action.payload,
       };
+<<<<<<< HEAD
       case "FILTER_BY":
         const allProductsByCategory = [...state.filtered];
         const filteredProducts =
@@ -114,6 +122,30 @@ export default function reducer(state = initialState, action) {
           ...state,
           productsByCategory: filteredProducts,
         };  
+=======
+    case "FILTER_BY":
+      const allProductsByCategory = [...state.filtered];
+      const filteredProducts =
+        action.payload.subcategory === "none" && action.payload.brand === "none"
+          ? allProductsByCategory
+          : action.payload.subcategory !== "none" &&
+            action.payload.brand === "none"
+          ? allProductsByCategory.filter((p) =>
+              p.subcategory.includes(action.payload.subcategory)
+            )
+          : action.payload.subcategory === "none" &&
+            action.payload.brand !== "none"
+          ? allProductsByCategory.filter((p) =>
+              p.brand.includes(action.payload.brand)
+            )
+          : allProductsByCategory
+              .filter((p) => p.subcategory.includes(action.payload.subcategory))
+              .filter((p) => p.brand.includes(action.payload.brand));
+      return {
+        ...state,
+        productsByCategory: filteredProducts,
+      };
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     // case "FILTER_BY_BRAND":
     //   const allProductsByCategory = [...state.filtered];
     //   const filteredProducts =
@@ -280,11 +312,24 @@ export default function reducer(state = initialState, action) {
           ...state,
           ordersCarrousel: action.payload.carrouselData,
         };
+<<<<<<< HEAD
       case "UPDATE_USER_INFO":
         return{
           ...state,
           loggedUser: {...state.loggedUser, ...action.payload}
         }
+=======
+    case "UPDATE_USER_INFO":
+      return {
+        ...state,
+        loggedUser: action.payload,
+      };
+    case "GET_ALL_STATISTICS":
+      return {
+        ...state,
+        allStatistics: action.payload,
+      };
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     default:
       return { ...state };
   }

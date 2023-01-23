@@ -10,7 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
-  faScrewdriverWrench
+  faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -73,7 +73,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
- 
+
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -82,8 +82,8 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-         <div>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <div>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
           <h1>
             <a href="#">TECHBUNNY </a>
@@ -321,7 +321,7 @@ function NavBar() {
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
-            {loggedUser?.role === 3 && (
+            {loggedUser && loggedUser.role === 3 && (
               <Link to="/dashboard">
                 <DropdownItem
                   onClick={() => {
@@ -332,8 +332,6 @@ function NavBar() {
                 />
               </Link>
             )}
-           
-            
             <Link to="/login" onClick={() => logoutUser()}>
               <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>

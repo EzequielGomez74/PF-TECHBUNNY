@@ -21,12 +21,13 @@ import EditProfile from "./Components/Profile/EditProfile";
 import Feedback from "./Components/Feedback/Feedback";
 import NewPassword from "./Components/NewPassword/NewPassword";
 import Recover from "./Components/Recover/Recover";
-import Dashboard from './Components/Dashboard (admin)/Dashboard'
-import Results from './Components/Results/Results'
+import Dashboard from "./Components/Dashboard (admin)/Dashboard";
+import Results from "./Components/Results/Results";
 import Brand from "./Components/Brand/Brand";
-import Products from './Components/Dashboard (admin)/Products/Products'
-import Users from './Components/Dashboard (admin)/Users/Users'
-import Orders from './Components/Dashboard (admin)/Orders/Orders'
+import Products from "./Components/Dashboard (admin)/Products/Products";
+import Users from "./Components/Dashboard (admin)/Users/Users";
+import Orders from "./Components/Dashboard (admin)/Orders/Orders";
+import Statistics from "./Components/Dashboard (admin)/Statistics/Statistics";
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
@@ -59,6 +60,7 @@ function App() {
         <Route exact path="/dashboard/products" component={Products} />
         <Route exact path="/dashboard/users" component={Users} />
         <Route exact path="/dashboard/orders" component={Orders} />
+        <Route exact path="/dashboard/statistics" component={Statistics} />
         <Route exact path="*" component={Error} />
       </Switch>
     </div>

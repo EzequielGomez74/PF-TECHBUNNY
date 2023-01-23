@@ -21,10 +21,13 @@
 .paper{
   margin: 30px 0 30px 130px;
   width: 1300px;
+<<<<<<< HEAD
 }
 
 .productsSearchbar{
   display: flex;
   margin-right: 20px;
   margin-left: 20px;
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 }

@@ -5,11 +5,19 @@ import Sidebar from '../../../Components/Toolbar/Sidebar'
 import Toolbar from '../../../Components/Toolbar/Toolbar'
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField} from '@material-ui/core';
+<<<<<<< HEAD
 import { Edit, Delete, Search } from '@mui/icons-material';
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import InputAdornment from '@mui/material/InputAdornment';
+=======
+import { Edit, Delete } from '@mui/icons-material';
+import TablePagination from "@material-ui/core/TablePagination";
+import Paper from "@material-ui/core/Paper";
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+// import SearchBar from "material-ui-search-bar";
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 import { getProducts, postProduct, updateProduct, deleteProduct } from '../../../redux/actions'
 import s from "./Products.module.css"
 
@@ -187,6 +195,7 @@ function Products() {
   },[dispatch])
 
   //Search Input
+<<<<<<< HEAD
   const [productRows, setUserRows] = useState(products)
 
   const requestSearch = (searchedVal) => {
@@ -200,6 +209,9 @@ function Products() {
     }
   }  
 
+=======
+  // const [searchTerm, setSearchTerm] = useState()
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
   // Sort 
   const [orderDirection, setOrderDirection] = useState('asc')
@@ -227,7 +239,11 @@ function Products() {
     setPage(0)
   };
 
+<<<<<<< HEAD
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, productRows.length - page * rowsPerPage);
+=======
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, products.length - page * rowsPerPage);
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
   return (
     <div>
@@ -237,11 +253,55 @@ function Products() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div className={s.TableProductInfo}>
+<<<<<<< HEAD
+=======
+        {/* <input
+          type='text'
+          placeholder='Buscar productos'
+          className='search'
+          onChange={e => setSearchTerm(e.target.value)}
+        /> */}
+        {/* { searchTerm ? 
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id de Producto</TableCell>
+                  <TableCell>Nombre de Producto</TableCell>
+                  <TableCell>Marca</TableCell>
+                  <TableCell>Precio</TableCell>
+                  <TableCell>Cantidad Vendida</TableCell>
+                  <TableCell>Stock</TableCell>
+                  <TableCell>Editar</TableCell>
+                  <TableCell>Eliminar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products
+                  .filter(p => p.name.toLowerCase().includes(searchTerm))
+                  .map(product => (
+                  <TableRow>
+                    <TableCell>{product.product_id}</TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.brand}</TableCell>
+                    <TableCell>{product.price}</TableCell>
+                    <TableCell>{product.soldCount}</TableCell>
+                    <TableCell>{product.stock}</TableCell>
+                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
+                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        : ''} */}
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
         <div className={s.outerItems}>
           <h2>Productos TECHBUNNY</h2>
           <Button onClick={abrirCerrarModalInsertar} >Insertar</Button>
         </div>
         <Paper className={s.paper}>
+<<<<<<< HEAD
           <br />
           <TextField
             className={s.productsSearchbar}
@@ -255,6 +315,8 @@ function Products() {
             }}
           />
           <br />
+=======
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
           <TableContainer>
             <Table>
               <TableHead>
@@ -314,7 +376,11 @@ function Products() {
               </TableHead>
 
               <TableBody>
+<<<<<<< HEAD
                 {sortedRowInformation(productRows, getComparator(orderDirection, valueToOrderBy) ) 
+=======
+                {sortedRowInformation(products, getComparator(orderDirection, valueToOrderBy) ) 
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(product => (
                   <TableRow key={product.product_id} >
@@ -340,7 +406,11 @@ function Products() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
+<<<<<<< HEAD
               count={productRows.length}
+=======
+              count={products.length}
+>>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
