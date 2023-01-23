@@ -10,6 +10,7 @@ import loginUser from "../../scripts/loginUser";
 import img from "../../Photos/bunnylogin.png";
 import Control from "./Control";
 import GoogleLoginContainer from "../GoogleLoginContainer/GoogleLoginContainer";
+import Swal from "sweetalert2";
 
 function Login() {
   const dispatch = useDispatch();
@@ -51,10 +52,23 @@ function Login() {
         },
         (status) => {
           if (status === "CONTRASEÑA INCORRECTA")
-            alert("CONTRASEÑA INCORRECTA");
-          else if (status === "MAIL NO VALIDADO") alert("MAIL NO VALIDADO");
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "CONTRASEÑA INCORRECTA",
+            icon: "warning",
+          });
+          else if (status === "MAIL NO VALIDADO") 
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "MAIL NO VALIDO",
+            icon: "warning",
+          });
           else if (status === "SUCCESS") {
-            alert("TE HAS LOGUEADO CON EXITO");
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "LOGUEADO CON EXITO",
+              icon: "success",
+            });
             history.goBack();
           }
         }

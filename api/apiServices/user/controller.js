@@ -8,8 +8,31 @@ const verify = require("../../scripts/2FA/verify2fa.js");
 
 async function getAllUsers() {
   try {
-    const allUsers = await User.findAll();
-    return allUsers;
+    let allUsers = await User.findAll();
+    const userData = allUsers.map((u) => {
+      let obj = {
+                user_id: u.user_id,
+                username: u.username,
+                name: u.name,
+                surname: u.surname,
+                email: u.email,
+                billingAddress: u.billingAddress,
+                zipCode: u.zipCode,
+                role: u.role,
+                isActive: u.isActive,
+                createdAt: u.createdAt,
+        isDeleted: u.isDeleted
+            };
+
+      if(u.accessToken){
+        obj = {
+          ...obj
+          ,isLogged : true};
+      }
+      return obj
+    }) 
+
+    return userData;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -65,14 +88,30 @@ async function getUserById(user_id) {
 
 async function deleteUser(user_id) {
   try {
-    const deleteUserId = await User.destroy({
-      where: { user_id },
-    });
-    if (deleteUserId) {
-      return "Usuario eliminado con exito!";
-    } else {
-      return "Usuario no encontrado!";
+    const userFound = await User.findOne({ where: { user_id } });
+    if (userFound.isDeleted === false) {
+      await User.update(
+        { isDeleted: true },
+        {
+          where: {
+            user_id,
+          },
+        }
+      );
+
+      return "Usuario habilitado con exito!";
+    } if(userFound.isDeleted === true) {
+      await User.update(
+        { isDeleted: false },
+        {
+          where: {
+            user_id,
+          },
+        }
+      );
     }
+    
+    return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error.message);
   }
@@ -81,10 +120,8 @@ async function deleteUser(user_id) {
 async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
-    //body.password = await bcrypt.hash(body.password, 10); // 10 salt
-    const userFound = await User.update(body, { where: { user_id } });
-    console.log("userFound ", userFound);
-    return setLoggedUserData(userFound.dataValues);
+    await User.update(body, { where: { user_id } });
+    return 'SUCCESS'
   } catch (error) {
     throw new Error(error.message);
   }

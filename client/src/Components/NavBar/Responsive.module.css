@@ -7,10 +7,12 @@
     cursor: pointer;
 }
 
-.menuItems{
+
+
+.menuItems p{
+    color: black;
     margin-top: 20px;
 }
-
 .menuItems a:hover{
     color: black;
 }
@@ -24,6 +26,7 @@
 
 .userItems span{
     margin-left: 30px;
+    color: black;
 }
 
 .userItems button{
@@ -46,6 +49,7 @@
 .session p {
     margin: 5px;
     width: 120px;
+    color: black;
 }
 
 .session p:hover {

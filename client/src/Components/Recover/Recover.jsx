@@ -5,6 +5,7 @@ import axios from "axios";
 import img from "../../Photos/conejotriste.png";
 import s from "../Recover/Recover.module.css";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 function Recover() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,11 @@ function Recover() {
     setEmail(e.target.value);
   };
   const handleSendEmail = async () => {
+    Swal.fire({
+      title: 'MAIL ENVIADO!',
+      icon: 'success',
+      showConfirmButton: false,
+  })
     await axios.put("/enter/recover", { email });
   };
 

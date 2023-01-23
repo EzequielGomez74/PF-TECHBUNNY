@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import s from "./Feedback.module.css";
+import img from "../../images/comprabunny.png"
 
 function Feedback() {
   let location = useLocation();
@@ -26,14 +27,17 @@ function Feedback() {
       <div className={dm ? s.dmfeedbackPage : s.feedbackPage}>
         <p className={dm ? s.dmmessage : s.message}>Proceso Completado</p>
         {/* Cambiar Hero Image */}
-        <div className={dm ? s.dmheroFeedback : s.heroFeedback}></div>
+        <div className={dm ? s.dmheroFeedback : s.heroFeedback}>
+        <img src={img} alt="bunny feedback" />
+        </div>
         <button
           className={dm ? s.dmmainButton : s.mainButton}
           onClick={handleClick}
         >
           Regresar al Home
         </button>
-      </div>
+        </div>
+      
       <Footer />
     </div>
   );

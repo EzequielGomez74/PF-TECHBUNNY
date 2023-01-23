@@ -10,6 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
+  faScrewdriverWrench
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -43,16 +44,16 @@ function NavBar() {
   let menuRef = useRef();
   let favsChange = useRef(favs);
   let [prueba, setPrueba] = useState(0);
-  
+
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
     console.log("cualquier cosa");
-    if(loggedUser.user_id){
+    if (loggedUser.user_id) {
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       dispatch(actions.allCartByUser(loggedUser.user_id));
       console.log("OTRA COSA");
-    } 
-  },[loggedUser])
+    }
+  }, [loggedUser]);
 
   useEffect(() => {
     let handler = (e) => {
@@ -98,17 +99,17 @@ function NavBar() {
             </button>
 
             {/* modificarlo por un alert + redirección */}
-            <Link to={loggedUser.user_id? "/favorites" : "/login"}>
+            <Link to={loggedUser.user_id ? "/favorites" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon icon={faHeart} />
-                &nbsp;&nbsp; {loggedUser.user_id? favs.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id ? favs.length : 0}
               </span>
             </Link>
 
-            <Link to={loggedUser.user_id? "/cart" : "/login"}>
+            <Link to={loggedUser.user_id ? "/cart" : "/login"}>
               <span className={DM ? s.DMiconsbtn : s.iconsbtn}>
                 <FontAwesomeIcon name="cart" icon={faCartShopping} />
-                &nbsp;&nbsp; {loggedUser.user_id? cart.length : 0}
+                &nbsp;&nbsp; {loggedUser.user_id ? cart.length : 0}
               </span>
             </Link>
 
@@ -163,7 +164,7 @@ function NavBar() {
           </Link>
         </div>
       </section>
-      {/* CATEGORIA DROPDOWN */}
+      {/* CATEGORIA DROPDOWN WEB*/}
       <div
         className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
         onMouseEnter={() => {
@@ -314,17 +315,27 @@ function NavBar() {
         </div>
       ) : (
         <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-          <h3>BIENVENIDO {loggedUser.username}</h3>
+          <h3>BIENVENID@ {loggedUser.username}</h3>
           <span>Gracias por confiar en TECHBUNNY</span>
           <ul>
             <Link to="/profile">
               <DropdownItem icon={faRightToBracket} text={"Mi perfil"} />
             </Link>
-            <Link to="/login" onClick={() => logoutUser()}>
+            {loggedUser?.role === 3 && (
+              <Link to="/dashboard">
                 <DropdownItem
-                  icon={faRightToBracket}
-                  text={"Log Out"}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  icon={faScrewdriverWrench}
+                  text={"Dashboard"}
                 />
+              </Link>
+            )}
+           
+            
+            <Link to="/login" onClick={() => logoutUser()}>
+              <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>
           </ul>
         </div>

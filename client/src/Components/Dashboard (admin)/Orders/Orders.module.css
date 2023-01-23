@@ -1,0 +1,30 @@
+.TableOrdersInfo{
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  font-family: 'Poppins';
+}
+  
+.outerItems{
+  display: flex;
+  margin: 0 0 0 130px;
+  width: 1300px;
+  justify-content: space-between;
+}
+  
+.paper{
+  margin: 30px 0 30px 130px;
+  width: 1300px;
+}
+
+.ordersSearchbar{
+  display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
+}

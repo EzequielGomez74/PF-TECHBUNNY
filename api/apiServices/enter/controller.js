@@ -147,7 +147,7 @@ async function handleLoginWithAccess(accessToken) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
       return {
-        user: foundUser.dataValues,
+        user: userController.setLoggedUserData(foundUser.dataValues),
         accessToken: foundUser.dataValues.accessToken,
       };
     } else {
