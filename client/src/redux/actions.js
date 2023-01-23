@@ -52,53 +52,53 @@ export const getProducts = (id) => {
 };
 
 export const postProduct = (productInfo) => {
-  console.log(productInfo)
+  console.log(productInfo);
   return async function (dispatch) {
-    try{
-      const response = await axiosInstance.post('/products', productInfo)
-      console.log(response.data)
-      if(response.data === "Producto creado con exito!") {
-       const allProducts = await axiosInstance.get('/products')
-       return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
+    try {
+      const response = await axiosInstance.post("/products", productInfo);
+      console.log(response.data);
+      if (response.data === "Producto creado con exito!") {
+        const allProducts = await axiosInstance.get("/products");
+        return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
-      console.log('No se pudo insertar el producto')
-    } 
+      console.log("No se pudo insertar el producto");
+    }
   };
 };
 
 export const updateProduct = (productInfo) => {
-  console.log(productInfo)
+  console.log(productInfo);
   return async function (dispatch) {
-    try{
-      const response = await axiosInstance.put('/products', productInfo)
-      console.log(response.data)
-      if(response.data === "Producto actualizado con exito!") {
-       const allProducts = await axiosInstance.get('/products')
-       return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
+    try {
+      const response = await axiosInstance.put("/products", productInfo);
+      console.log(response.data);
+      if (response.data === "Producto actualizado con exito!") {
+        const allProducts = await axiosInstance.get("/products");
+        return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
-      console.log(error.message)
-    } 
+      console.log(error.message);
+    }
   };
 };
 
 export const deleteProduct = (product_id) => {
-  console.log(product_id)
+  console.log(product_id);
   return async function (dispatch) {
-    try{
-      const response = await axiosInstance.delete(`/products/${product_id}`)
-      console.log(response.data)
-      if(response.data === "Producto deshabilitado con exito!") {
-       const allProducts = await axiosInstance.get('/products')
-       return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
+    try {
+      const response = await axiosInstance.delete(`/products/${product_id}`);
+      console.log(response.data);
+      if (response.data === "Producto deshabilitado con exito!") {
+        const allProducts = await axiosInstance.get("/products");
+        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
       } else {
-        const allProducts = await axiosInstance.get('/products')
+        const allProducts = await axiosInstance.get("/products");
         return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
-      console.log(error.message)
-    } 
+      console.log(error.message);
+    }
   };
 };
 
@@ -108,7 +108,8 @@ export const getUsers = () => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/users");
-      console.log('usuarios son', response.data);
+
+      console.log("usuarios son", response.data);
       return dispatch({ type: GET_USERS, payload: response.data });
     } catch (error) {
       console.log("Falla para traer usuarios");
@@ -117,37 +118,37 @@ export const getUsers = () => {
 };
 
 export const updateUser = (user_id, userInfo) => {
-  console.log(userInfo)
+  console.log(userInfo);
   return async function (dispatch) {
-    try{
-      const response = await axiosInstance.put(`/users/${user_id}`, userInfo)
-      console.log(response.data)
-      if(Object.keys(response.data).length > 0){
-      const allUsers = await axiosInstance.get('/users')
-      return dispatch({ type: UPDATE_USER, payload: allUsers.data });
+    try {
+      const response = await axiosInstance.put(`/users/${user_id}`, userInfo);
+      console.log(response.data);
+      if (Object.keys(response.data).length > 0) {
+        const allUsers = await axiosInstance.get("/users");
+        return dispatch({ type: UPDATE_USER, payload: allUsers.data });
       }
     } catch (error) {
-      console.log(error.message)
-    } 
+      console.log(error.message);
+    }
   };
 };
 
 export const deleteUser = (user_id) => {
-  console.log(user_id)
+  console.log(user_id);
   return async function (dispatch) {
-    try{
-      const response = await axiosInstance.delete(`/users/${user_id}`)
-      console.log(response.data)
-      if(response.data === "Usuario habilitado con exito!") {
-       const allUsers = await axiosInstance.get('/users')
-       return dispatch({ type: DELETE_USER, payload: allUsers.data });
+    try {
+      const response = await axiosInstance.delete(`/users/${user_id}`);
+      console.log(response.data);
+      if (response.data === "Usuario habilitado con exito!") {
+        const allUsers = await axiosInstance.get("/users");
+        return dispatch({ type: DELETE_USER, payload: allUsers.data });
       } else {
-        const allUsers = await axiosInstance.get('/users')
+        const allUsers = await axiosInstance.get("/users");
         return dispatch({ type: DELETE_USER, payload: allUsers.data });
       }
     } catch (error) {
-      console.log(error.message)
-    } 
+      console.log(error.message);
+    }
   };
 };
 
@@ -156,7 +157,7 @@ export const getOrders = () => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/orders");
-      console.log('orders son', response.data);
+      console.log("orders son", response.data);
       return dispatch({ type: GET_ORDERS, payload: response.data });
     } catch (error) {
       console.log("Falla para traer ordenes");
@@ -165,20 +166,21 @@ export const getOrders = () => {
 };
 
 export const updateOrder = (order_id, orderInfo) => {
-  
   return async function (dispatch) {
-    try{
-      console.log(orderInfo)
-      const response = await axiosInstance.put(`/orders/${order_id}`, orderInfo)
-      console.log(response.data)
-      const allOrders = await axiosInstance.get('/orders')
+    try {
+      console.log(orderInfo);
+      const response = await axiosInstance.put(
+        `/orders/${order_id}`,
+        orderInfo
+      );
+      console.log(response.data);
+      const allOrders = await axiosInstance.get("/orders");
       return dispatch({ type: UPDATE_ORDER, payload: allOrders.data });
     } catch (error) {
-      console.log('Falla en actualizar la orden')
-    } 
+      console.log("Falla en actualizar la orden");
+    }
   };
 };
-
 
 // export function getProducts() {
 //   return async function (dispatch) {

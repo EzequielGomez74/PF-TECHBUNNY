@@ -14,15 +14,15 @@ import {
   Modal,
   Button,
   TextField,
+  InputLabel,
   Select,
   MenuItem,
-  useScrollTrigger,
 } from "@material-ui/core";
-import { Edit, Delete, Search } from "@mui/icons-material";
+import { Edit, Delete } from "@mui/icons-material";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import InputAdornment from "@mui/material/InputAdornment";
+// import SearchBar from "material-ui-search-bar";
 import { getUsers, updateUser, deleteUser } from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faBan, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -99,10 +99,8 @@ function Users() {
       initialLoad.current = false;
       return;
     }
-    //console.log(users);
-
-    setUserRows(users);
-  }, [dispatch, users]);
+    console.log(users);
+  }, []);
 
   const peticionPut = async () => {
     console.log(userSelected);
@@ -223,27 +221,7 @@ function Users() {
   );
 
   //Search Input
-  const [userRows, setUserRows] = useState([]);
-  // const [searched, setSearched] = useState('')
-
-  const requestSearch = (searchedVal) => {
-    const filteredRows = users.filter((row) => {
-      return row.name
-        .toString()
-        .toLowerCase()
-        .includes(searchedVal.toString().toLowerCase());
-    });
-    if (searchedVal.length < 1) {
-      setUserRows(users);
-    } else {
-      setUserRows(filteredRows);
-    }
-  };
-
-  // const cancelSearch = () => {
-  //   setSearched('');
-  //   requestSearch(searched);
-  // }
+  // const [searchTerm, setSearchTerm] = useState()
 
   // Sort
   const [orderDirection, setOrderDirection] = useState("asc");
@@ -272,9 +250,7 @@ function Users() {
   };
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, userRows.length - page * rowsPerPage);
-
-  //EMPIEZA RENDER USERS
+    rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
 
   return (
     <div>
@@ -284,24 +260,50 @@ function Users() {
         <Sidebar SideBar={sidebar} />
       </div>
       <div className={s.TableUsersInfo}>
+        {/* <input
+          type='text'
+          placeholder='Buscar productos'
+          className='search'
+          onChange={e => setSearchTerm(e.target.value)}
+        /> */}
+        {/* { searchTerm ? 
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Id de Producto</TableCell>
+                  <TableCell>Nombre de Producto</TableCell>
+                  <TableCell>Marca</TableCell>
+                  <TableCell>Precio</TableCell>
+                  <TableCell>Cantidad Vendida</TableCell>
+                  <TableCell>Stock</TableCell>
+                  <TableCell>Editar</TableCell>
+                  <TableCell>Eliminar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products
+                  .filter(p => p.name.toLowerCase().includes(searchTerm))
+                  .map(product => (
+                  <TableRow>
+                    <TableCell>{product.product_id}</TableCell>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>{product.brand}</TableCell>
+                    <TableCell>{product.price}</TableCell>
+                    <TableCell>{product.soldCount}</TableCell>
+                    <TableCell>{product.stock}</TableCell>
+                    <TableCell><Edit className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Editar')}/></TableCell>
+                    <TableCell><Delete  className={styles.iconos} onClick={()=>seleccionarConsola(product, 'Eliminar')}/></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        : ''} */}
         <div className={s.outerItems}>
           <h2>Usuarios TECHBUNNY</h2>
         </div>
         <Paper className={s.paper}>
-          <br />
-          <TextField
-            className={s.usersSearchbar}
-            onChange={(e) => requestSearch(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <br />
-
           <TableContainer>
             <Table>
               <TableHead>
@@ -401,7 +403,7 @@ function Users() {
 
               <TableBody>
                 {sortedRowInformation(
-                  userRows,
+                  users,
                   getComparator(orderDirection, valueToOrderBy)
                 )
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -463,7 +465,7 @@ function Users() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={userRows.length}
+              count={users.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
