@@ -18,38 +18,12 @@ import {faGithub, faLinkedin  } from "@fortawesome/free-brands-svg-icons";
 export default function LandingPage() {
  
   return (
-<<<<<<< HEAD
     
     <div className="maincontainer">
 
       <section id="tolanding">
       <div className="Landing">
     <div className="topspace">
-=======
-    <div className="landing">
-      <div className="divTitulo">
-        <Link to="/home">
-          <img src={img} className="banner" />
-        </Link>
-      </div>
-
-      <p class="typing-animation">
-        ¡Bienvenido a nuestro ecommerce de tecnología! <br />
-        Somos una empresa líder en la venta de productos de alta calidad.
-        <br />
-        Nuestro objetivo es ofrecerte lo mejor de la tecnología al mejor precio{" "}
-        <br />y con un servicio de atención al cliente excepcional.
-        <br />
-        Ingresa y mira nuestro catalogo de mas de 800 productos y <br />
-        descubrir todo lo que tenemos para ofrecerte. ¡Que lo disfrutes!
-      </p>
-
-      <div>
-        <img class="imgBanner" src={img1} />
-        <img class="imgBanner" src={img2} />
-        <img class="imgBanner" src={img3} />
-      </div>
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     </div>
     <div className="TextandButton">
 
@@ -188,8 +162,4 @@ export default function LandingPage() {
 
   </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198

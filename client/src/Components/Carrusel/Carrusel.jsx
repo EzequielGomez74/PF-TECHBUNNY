@@ -183,11 +183,7 @@ function Carrusel({ products }) {
           products.map((p) => (
             <SwiperSlide>
               <CardCarrusel
-<<<<<<< HEAD
-                favorite={p.favorite ? true : false}
-=======
                 favorite={p.favorite ? p.favorite : ""}
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
                 key={p.product_id}
                 user_id={user.user_id}
                 product_id={p.product_id}
