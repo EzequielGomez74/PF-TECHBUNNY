@@ -36,6 +36,7 @@ import {
   GET_USERS,
   GET_ORDERS,
   UPDATE_ORDER,
+  GET_ALL_STATISTICS,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -552,6 +553,22 @@ export function updateUserInfo(user_id, input) {
       console.log(userInfo.data);
 
       return dispatch({ type: UPDATE_USER_INFO, payload: input });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getAllStatistics(onSuccess) {
+  return async function (dispatch) {
+    try {
+      const allStatistics = await axiosInstance.get(`/statistics`);
+      console.log("allStatistics.data ", allStatistics.data);
+      onSuccess();
+      return dispatch({
+        type: GET_ALL_STATISTICS,
+        payload: allStatistics.data,
+      });
     } catch (error) {
       console.log(error);
     }
