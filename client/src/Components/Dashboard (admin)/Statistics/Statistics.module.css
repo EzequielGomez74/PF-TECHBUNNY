@@ -1,0 +1,7 @@
+.statisticsContainer {
+  z-index: -1;
+}
+
+.toolBarComponents {
+  z-index: 1;
+}
