@@ -13,11 +13,9 @@ function BannerHome() {
         {/* <div className={s.ContainerOferta}>
         <img className={s.imgBannerOferta} src={imgBannerOferta} />
         </div> */}
-        <div className={s.bannerContainer}>
-            
+        <div className={s.bannerContainer}>     
             <img className={s.imgBanner} src={img}  alt="not found" />
             <img className={s.imgBanner2} src={img2}  alt="not found" />
-           
         </div>
         <div className={s.textBanner}>
             <h2>¡Todo lo que buscas, en un solo lugar!</h2>
@@ -26,7 +24,6 @@ function BannerHome() {
         {/* <div className={s.ContainerOferta2}>
         <img className={s.imgBannerOferta2} src={imgBannerOferta} />
         </div> */}
-            
     </div>
   )
 }

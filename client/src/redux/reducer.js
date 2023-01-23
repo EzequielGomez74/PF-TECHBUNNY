@@ -1,3 +1,4 @@
+import { GET_ALL_STATISTICS } from "./actionTypes";
 // import { GET_CARROUSEL } from "./actionTypes";
 const initialState = {
   products: [],
@@ -21,6 +22,7 @@ const initialState = {
   favoritesCarrousel: [],
   ordersCarrousel: [],
   usersDashboard: [],
+  allStatistics: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -60,16 +62,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         usersDashboard: action.payload,
       };
-    case 'GET_ORDERS':
+    case "GET_ORDERS":
       return {
         ...state,
         allOrders: action.payload,
-      }
-    case 'UPDATE_ORDER':
+      };
+    case "UPDATE_ORDER":
       return {
         ...state,
         allOrders: action.payload,
-      }
+      };
     case "GET_PRODUCT_BY_ID":
       return {
         ...state,
@@ -92,28 +94,28 @@ export default function reducer(state = initialState, action) {
         ...state,
         categories: action.payload,
       };
-      case "FILTER_BY":
-        const allProductsByCategory = [...state.filtered];
-        const filteredProducts =
-          action.payload.subcategory === "none" && action.payload.brand === "none"
-            ? allProductsByCategory
-            : action.payload.subcategory !== "none" &&
-              action.payload.brand === "none"
-            ? allProductsByCategory.filter((p) =>
-                p.subcategory.includes(action.payload.subcategory)
-              )
-            : action.payload.subcategory === "none" &&
-              action.payload.brand !== "none"
-            ? allProductsByCategory.filter((p) =>
-                p.brand.includes(action.payload.brand)
-              )
-            : allProductsByCategory
-                .filter((p) => p.subcategory.includes(action.payload.subcategory))
-                .filter((p) => p.brand.includes(action.payload.brand));
-        return {
-          ...state,
-          productsByCategory: filteredProducts,
-        };  
+    case "FILTER_BY":
+      const allProductsByCategory = [...state.filtered];
+      const filteredProducts =
+        action.payload.subcategory === "none" && action.payload.brand === "none"
+          ? allProductsByCategory
+          : action.payload.subcategory !== "none" &&
+            action.payload.brand === "none"
+          ? allProductsByCategory.filter((p) =>
+              p.subcategory.includes(action.payload.subcategory)
+            )
+          : action.payload.subcategory === "none" &&
+            action.payload.brand !== "none"
+          ? allProductsByCategory.filter((p) =>
+              p.brand.includes(action.payload.brand)
+            )
+          : allProductsByCategory
+              .filter((p) => p.subcategory.includes(action.payload.subcategory))
+              .filter((p) => p.brand.includes(action.payload.brand));
+      return {
+        ...state,
+        productsByCategory: filteredProducts,
+      };
     // case "FILTER_BY_BRAND":
     //   const allProductsByCategory = [...state.filtered];
     //   const filteredProducts =
@@ -280,11 +282,16 @@ export default function reducer(state = initialState, action) {
           ...state,
           ordersCarrousel: action.payload.carrouselData,
         };
-      case "UPDATE_USER_INFO":
-        return{
-          ...state,
-          loggedUser: {...state.loggedUser, ...action.payload}
-        }
+    case "UPDATE_USER_INFO":
+      return {
+        ...state,
+        loggedUser: { ...state.loggedUser, ...action.payload },
+      };
+    case "GET_ALL_STATISTICS":
+      return {
+        ...state,
+        allStatistics: action.payload,
+      };
     default:
       return { ...state };
   }

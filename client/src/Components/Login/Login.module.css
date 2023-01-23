@@ -10,23 +10,17 @@
   font-family: 'Poppins';
 }
 
+.img {
+  width: 55%;
+  height: 55%;
+}
+
 .heroLogin {
   height: 500px;
   width: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.hero {
-  background-image: url(../../images/register.png);
-  width: 676.45px;
-  height: 490px;
-}
-
-.img {
-  width: 55%;
-  height: 55%;
 }
 
 .loginCard {
@@ -61,7 +55,7 @@
 .m2 {
   font-size: 12px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .m2:hover {
@@ -91,11 +85,7 @@
   border: none;
 }
 
-.b2 {
-  background-color: #F6F5FA;
-  color: #20232A;
-  border: none;
-}
+
 
 .error{
   color:red
@@ -164,11 +154,15 @@
   background: #22262A;
 }
 
+.dmloginCard input:focus{
+  color: white;
+}
+
 .dmm2 {
   font-size: 12px;
   margin-top: 20px;
   color: #f6f5fa;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .dmm2:hover {
@@ -198,11 +192,7 @@
   border: none;
 }
 
-.dmb2 {
-  background-color: transparent;
-  color: #f6f5fa;
-  border: 1px solid #f6f5fa;
-}
+
 
 .dmimg {
   width: 55%;

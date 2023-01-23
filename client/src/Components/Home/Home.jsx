@@ -15,6 +15,7 @@ function Home() {
   const dispatch = useDispatch();
   const favoritesCarrousel = useSelector((state) => state.favoritesCarrousel);
   const ordersCarrousel = useSelector((state) => state.ordersCarrousel);
+  const products = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(actions.getProducts());
     dispatch(actions.getCarrousel("favorites"));
@@ -22,6 +23,17 @@ function Home() {
   }, [dispatch]);
 
   const dm = useSelector((state) => state.darkMode);
+
+  function setCarrouselProducts(carrousel) {
+    for (let i = 0; i < carrousel.length; i++) {
+      if (carrousel[i] === null) {
+        console.log("FIXED");
+        const pos = Math.floor(Math.random() * 820);
+        carrousel[i] = products[pos];
+      }
+    }
+    return carrousel;
+  }
 
   return (
     <div className={dm ? s.dmhome : s.home}>
@@ -34,9 +46,8 @@ function Home() {
         </div>
       </div>
 
-      <Carrusel products={favoritesCarrousel} />
+      <Carrusel products={setCarrouselProducts(favoritesCarrousel)} />
 
-      
       <section className={dm ? s.dmbanners : s.banners}>
         <div className={s.bannerOne}>
           <Link to="/category/Periféricos">
@@ -69,7 +80,7 @@ function Home() {
         </div>
       </div>
 
-      <Carrusel products={ordersCarrousel} />
+      <Carrusel products={setCarrouselProducts(ordersCarrousel)} />
 
       {/* Marcas */}
       <section className={dm ? s.dmbanners : s.banners}>

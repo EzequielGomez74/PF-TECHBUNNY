@@ -9,6 +9,7 @@
   padding-top: 50px;
   padding-bottom: 60px;
   font-family: 'Poppins';
+  
 }
   
 .outerItems{
@@ -16,11 +17,13 @@
   margin: 0 0 0 130px;
   width: 1300px;
   justify-content: space-between;
+  
 }
   
 .paper{
   margin: 30px 0 30px 130px;
   width: 1300px;
+  
 }
 
 .logged{
@@ -36,3 +39,4 @@
   margin-right: 20px;
   margin-left: 20px;
 }
+

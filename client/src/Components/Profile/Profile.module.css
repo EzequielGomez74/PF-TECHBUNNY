@@ -275,14 +275,28 @@
     text-transform: uppercase;
     background-color: #d7f136;
     border: none;
+    color: black;
 }
 
 .dmprofileInfo button:hover{
     cursor: pointer;
 }
 
+.dmorderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #d7f136;
+    border-radius: 20px 20px 0px 0px;
+}
 
-@media (max-width: 500px){
+
+@media (max-width: 450px){
     .profileInfo{
        width: 85%;
        height: 300px;
@@ -308,7 +322,7 @@
     }
 
     .dmprofileInfo{
-        width: 85%;
+        width: 75%;
         height: 300px;
      }
      .dmprofileInfo span{
@@ -330,6 +344,20 @@
          font-size: 10px;
          transform: translateX(25px);
      }
+     .productOrderImage{
+        width:40%;
+        height: 40%;
+     }
+     .price{
+        transform: translateX(35px);
+     }
+     .dmprice{
+        transform: translateX(50px);
+     }
+
+     .dmimg {
+        width: 100%;
+      }
 
 
 }

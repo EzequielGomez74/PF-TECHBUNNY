@@ -95,7 +95,7 @@ function Profile(){
                         <h3>Historial de Ordenes</h3>
                         <br />
                         { orders.length ? orders.map(o => <div className={s.orderContainer}>
-                                <div className={s.orderByUserInfo}>
+                                <div className={dm ? s.dmorderByUserInfo :s.orderByUserInfo}>
                                     <span>Order N° {o.order_id}</span>
                                     <span>Status: {o.status === "processed"?"Procesado":o.status === "canceled"?"Cancelado":"Completado"}</span>
                                 </div> 
@@ -104,7 +104,7 @@ function Profile(){
                                         <img className={s.productOrderImage} src={p.image} alt={p.product_id} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <div className={s.productOrderInfo}>
                                             <span>{p.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span>US${p.price}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span className={dm? s.dmprice : s.price}>US${p.price}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <span>{p.count}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </div>  
                                     </li>

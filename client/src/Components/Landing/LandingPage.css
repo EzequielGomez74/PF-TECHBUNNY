@@ -1,154 +1,283 @@
-.landing {
-  background-image: url("../../Photos/imagenfondo3.png");
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  top: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.banner {
-  max-width: 45%;
-  -webkit-transform: translateY(50%);
-          transform: translateY(50%);
-}
-
-.imgBanner {
-  display: none;
-}
-
-.banner:hover {
-  -webkit-transform: translateY(50%) scale(1.1);
-          transform: translateY(50%) scale(1.1);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  -webkit-filter: brightness(1.2) saturate(1.2);
-          filter: brightness(1.2) saturate(1.2);
-}
-
-a {
-  text-decoration: none;
-  color: #20232a;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #d7f136;
-}
-
-.typing-animation {
-  font-size: 17px;
-  font-family: 'Poppins', sans-serif;
-  color: #d7f136;
-  background-color: #20232adc;
-  font-weight: 600;
-  margin-top: 55px;
-  margin: 20px;
-  text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-  -webkit-transform: translateY(105%) translateX(1%);
-          transform: translateY(105%) translateX(1%);
-  max-width: 95%;
-}
-
-@-webkit-keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 200vh;
-  }
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 200vh;
-  }
-}
-
-.typing-animation {
-  overflow: hidden;
-  white-space: nowrap;
-  -webkit-animation: typing 3s steps(280, end);
-          animation: typing 3s steps(280, end);
-  -webkit-animation-iteration-count: alternate;
-          animation-iteration-count: alternate;
-  -webkit-animation-duration: 8s;
-          animation-duration: 8s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@media (max-width: 1366px) {
-  .divTitulo {
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    text-align: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    max-width: 100%;
+.Landing{
+    margin: 0px;
+    padding: 0px;
     width: 100%;
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 900px) {
-  .divTitulo {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 500px) {
-  .landing h1 {
-    width: 200px;
-    margin-left: 15%;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .banner {
-    max-width: 100%;
-    margin-top: 100px;
-    -webkit-transform: translateY(100px);
-            transform: translateY(100px);
-  }
-  .typing-animation {
-    display: none;
-  }
-  .landing {
-    background-image: 100vh;
-  }
-  .imgBanner {
-    width: 50%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    margin: 10px;
-    -webkit-transform: translateY(200px) translateX(85px);
-            transform: translateY(200px) translateX(85px);
-  }
+    flex-direction: column;
+    transition: 5s;
+    background:  url("../../images/background4.jpg") no-repeat;
+    animation-name: animate;
+    animation-direction:alternate-reverse;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-play-state: runing;
+    animation-timing-function: ease-in-out;
+    user-select: none;
+   
 }
-/*# sourceMappingURL=LandingPage.css.map */
+@keyframes animate{
+0%{
+    background:  url("../../images/background4.jpg") no-repeat;
+}
+33%{
+    background:  url("../../images/background7.jpg") no-repeat;
+}
+66%{
+    background:  url("../../images/background6.jpg") no-repeat;
+}
+}
+
+
+.topspace{
+    height: 20%;
+}
+.TextandButton{
+    margin-left: 10%;
+    display: flex;
+    height: 50%;
+    width: 25%;
+    justify-content: flex-start;
+    align-items:flex-start;
+    flex-direction: column;
+    color: white;
+}
+.firsttext{
+    padding-bottom: 20px;
+}
+.firsttext , .secondarytext , .btncointainer{
+    height: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Maintext{
+    font-size: 60px;
+}
+
+
+.Secondtext{
+    font-size: 22px;
+    display: flex;
+    background-color: transparent;
+    height: 33%;
+    width: 100%;
+    
+}
+
+.Secondtext:hover , .Maintext:hover {
+    color: #D7F136;
+    transition: all 250ms linear; 
+    cursor: default;
+}
+
+
+.joinbtn{
+    
+text-decoration:none;
+font-weight: 600;
+font-size: 20px;
+color:white;
+padding-top:10px;
+padding-bottom:10px;
+padding-left:45px;
+padding-right:45px;
+background-color: transparent;
+border-width: 3px;
+border-style: solid;
+border-color: white;
+transition: all 400ms linear; 
+cursor: pointer;
+}
+.joinbtn:hover{
+    color: #20232A;
+    border-color: #D7F136;
+    background-color: #D7F136;
+    transition: all 250ms linear; 
+}
+
+html{
+     scroll-behavior: smooth;
+}
+a{
+    color: white;
+}
+
+.ourteam{
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 43px;
+    color: white;
+}
+
+.dropdown{
+    width: 100%;
+    height: 50px;
+    animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+.about{
+    width: 100%;
+    height: 100vh;
+    background-color: #20232A;
+}
+
+.uptolanding{
+    height: 5px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+a:link{
+    text-decoration: none }
+
+a:visited {
+    text-decoration: none }
+
+
+
+
+/* DARK MODE */
+
+.landingbackgroundAboutUs{
+    background-color: #20232A;
+    user-select: none;
+    
+}
+
+.landingtituloEquipo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 45px;
+    color: white;
+    height: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    background-color: #20232A;
+    
+}
+.landingtituloEquipo:hover{
+    transform: translateY(-6px);
+}
+.landingcardsContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 1500px;
+    
+}
+
+.landingcard{
+    width: 300px;
+    height: 430px;
+    background-color: transparent;
+    float: left;
+    margin: 5px ;
+}
+
+.landingimg{
+    width: 249px;
+    height: 260px;
+}
+
+.landingdivImg{
+    background-color: #2B3036;
+    border-radius: 50%;
+    width: 83%;
+    height: 60%;
+    margin-left: 25px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.landingdivImg:hover{
+    transform: translateY(-6px);
+}
+
+.landingcard h3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    font-style: normal;
+    color: #ababab;
+    margin-top: 10px;
+}
+
+.landingcard h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    font-style: normal;
+    color: white;
+}
+
+.landinggitHub{
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.landinglinkedin{
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.landinglinkedin:hover{
+    color: #0077B5;
+}
+
+.landinggitHub:hover{
+    color:rgb(101, 101, 101);
+}
+
+@media (max-width: 450px){
+    .about , .ourteam , .topspace{
+        display: none;
+    }
+    .Landing{
+        display: flex;
+        justify-content: center;
+        background:  url("../../images/background4.jpg") no-repeat;;
+        background-size: cover;
+	    background-attachment: fixed;
+	    background-position: center;
+        animation: none;
+        animation-play-state:paused;
+    }
+   
+    .TextandButton{
+        width: 100%;
+        margin-left: 0px;
+        
+       
+    }
+    .firsttext , .secondarytext , .btncointainer , .Maintext ,.Secondtext {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 33%;
+        width: 100%;
+        padding: 0px; 
+    }
+   
+}

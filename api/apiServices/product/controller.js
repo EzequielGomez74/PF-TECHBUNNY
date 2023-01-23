@@ -13,12 +13,13 @@ const axios = require("axios");
 async function setFavoriteStatus(products, username) {
   try {
     if (!username) return products;
-    if (products) {
+    const newProducts = [...products];
+    if (newProducts) {
       //traer un array de favoritos correspondiente al user que tiene el access token
       const { user_id } = await getUser({ username });
       let favorites = await Favorite.findAll({ where: { user_id }, raw: true });
       favorites.forEach((fav) => {
-        const productFound = products.find(
+        const productFound = newProducts.find(
           (product) => product.product_id === fav.product_id
         );
         if (productFound) {
@@ -26,7 +27,7 @@ async function setFavoriteStatus(products, username) {
         }
       });
     }
-    return products;
+    return newProducts;
   } catch (error) {
     throw new Error(error);
   }

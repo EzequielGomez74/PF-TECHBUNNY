@@ -11,26 +11,27 @@ async function getAllUsers() {
     let allUsers = await User.findAll();
     const userData = allUsers.map((u) => {
       let obj = {
-                user_id: u.user_id,
-                username: u.username,
-                name: u.name,
-                surname: u.surname,
-                email: u.email,
-                billingAddress: u.billingAddress,
-                zipCode: u.zipCode,
-                role: u.role,
-                isActive: u.isActive,
-                createdAt: u.createdAt,
-        isDeleted: u.isDeleted
-            };
+        user_id: u.user_id,
+        username: u.username,
+        name: u.name,
+        surname: u.surname,
+        email: u.email,
+        billingAddress: u.billingAddress,
+        zipCode: u.zipCode,
+        role: u.role,
+        isActive: u.isActive,
+        createdAt: u.createdAt,
+        isDeleted: u.isDeleted,
+      };
 
-      if(u.accessToken){
+      if (u.accessToken) {
         obj = {
-          ...obj
-          ,isLogged : true};
+          ...obj,
+          isLogged: true,
+        };
       }
-      return obj
-    }) 
+      return obj;
+    });
 
     return userData;
   } catch (error) {
@@ -100,7 +101,8 @@ async function deleteUser(user_id) {
       );
 
       return "Usuario habilitado con exito!";
-    } if(userFound.isDeleted === true) {
+    }
+    if (userFound.isDeleted === true) {
       await User.update(
         { isDeleted: false },
         {
@@ -110,7 +112,7 @@ async function deleteUser(user_id) {
         }
       );
     }
-    
+
     return "Producto deshabilitado con exito!";
   } catch (error) {
     throw new Error(error.message);
@@ -121,7 +123,7 @@ async function modifyUser(user_id, body) {
   //  los admins usan este controller
   try {
     await User.update(body, { where: { user_id } });
-    return 'SUCCESS'
+    return "SUCCESS";
   } catch (error) {
     throw new Error(error.message);
   }
@@ -136,6 +138,7 @@ function setLoggedUserData({
   profilePicture,
   zipCode,
   email,
+  role,
 }) {
   return {
     user_id,
@@ -146,6 +149,7 @@ function setLoggedUserData({
     profilePicture,
     zipCode,
     email,
+    role,
   };
 }
 module.exports = {

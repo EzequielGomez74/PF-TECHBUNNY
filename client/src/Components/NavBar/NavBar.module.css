@@ -38,7 +38,7 @@
 }
 
 .one div h1 a:hover{
-  cursor: pointer;
+  cursor: default;
 }
 
 .logo{
@@ -346,6 +346,7 @@ h3{
   .DMthree{
     background-color: #fefefe;
   }
+
   
   .DMthree div {
     max-width: 1500px;
@@ -404,4 +405,8 @@ h3{
     color: white;
     cursor: pointer;
     padding: 12px;
+  }
+
+  .DMone div h1 a:hover{
+    cursor: default;
   }
