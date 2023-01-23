@@ -2,9 +2,8 @@ const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
 const validate = require("../../scripts/bodyValidators/index.js");
-const { User } = require("../../services/db/db.js");
 const verifyJWT = require("../../middlewares/verifyJWT");
-
+const getUser = require("../../scripts/getUser");
 router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO USER  -----
 //router.use(requiredAccess(2));
@@ -47,14 +46,16 @@ router.put("/googleAuth/:user_id", async (req, res) => {
 });
 
 // /users/3   body={surname:"beto",username:"pepe"}
-router.put("/:user_id", validate.user, async (req, res) => {
+//validate.user
+//TODO CHECKEAR LA VALIDACION DE USER (DESACTIVADA POR EL MOMENTO)
+router.put("/:user_id", async (req, res) => {
   try {
     const data = req.body;
     const { user_id } = req.params;
-    const usernameDb = await User.findByPk(user_id);
+    const foundUser = await getUser({ user_id });
     if (
-      usernameDb &&
-      (usernameDb.username === req.username || req.role === 3) // permisos para modificar si es admin
+      foundUser &&
+      (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
     ) {
       res.status(200).send(await controller.modifyUser(user_id, data));
     } else {

@@ -8,4 +8,12 @@ async function getAllCountries() {
   }
 }
 
-module.exports = { getAllCountries };
+async function getCountriesById(id) {
+  try {
+    return await Country.findOne({where:{country_id:id}});
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+module.exports = { getAllCountries,getCountriesById };

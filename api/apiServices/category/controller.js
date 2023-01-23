@@ -20,7 +20,7 @@ async function getAllOffers() {
 
 async function createOffer(offer) {
   try {
-    await Category.update({isOffer:true,cantDescuento:offer.cantDescuento},{where:{category_id:offer.category_id}})
+    await Category.update({isOffer:true,cantDescuento: offer.cantDescuento},{where:{category_id: offer.category_id}})
     return "Oferta creada con exito!";
   } catch (error) {
     throw new Error(error);

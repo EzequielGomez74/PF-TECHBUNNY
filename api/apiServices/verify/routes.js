@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
+const validate = require("../../scripts/bodyValidators/index.js");
+
 
 router.put("/:code", async (req, res) => {
   const code = req.params.code;
@@ -11,7 +13,7 @@ router.put("/:code", async (req, res) => {
   }
 });
 //todo crear ruta de refresh del validation code del email
-router.put("/", async (req, res) => {
+router.put("/",validate.newsletter, async (req, res) => {
   const { email } = req.body;
   try {
     res.status(200).json({ status: await controller.refreshValidation(email) });

@@ -52,7 +52,7 @@ async function updateReviews(review) {
 
 async function deleteReviews(review_id) {
   try {
-    await Review.destroy({ where: { review_id } });
+    await Review.update({isActive:false},{ where: { review_id } });
     return "Reseña eliminada con exito!";
   } catch (error) {
     throw new Error(error);
