@@ -13,6 +13,7 @@ function Sidebar({ SideBar }) {
       <NavLink className="sidebarNavLink" to='/dashboard/products'><li><FontAwesomeIcon icon={faBox} /> Productos</li></NavLink>
       <NavLink className="sidebarNavLink" to='/dashboard/orders'><li><FontAwesomeIcon icon={faTruck} /> Pedidos</li></NavLink>
       <NavLink className="sidebarNavLink" to='/dashboard/newletters'><li><FontAwesomeIcon icon={faBullhorn} /> Newsletter</li></NavLink>
+      <NavLink className="sidebarNavLink" to='/statistics'><li><FontAwesomeIcon icon={faHouse} /> Statistics</li></NavLink>
       <NavLink className="sidebarNavLink" to='/home'><li><FontAwesomeIcon icon={faHouse} /> Volver al inicio</li></NavLink>
     </div>
   )

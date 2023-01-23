@@ -332,15 +332,7 @@ function NavBar() {
                 />
               </Link>
             )}
-            <Link to="/login" onClick={() => logoutUser()}>
-                <DropdownItem
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                  icon={faScrewdriverWrench}
-                  text={"Dashboard"}
-                />
-              </Link>
+           
             
             <Link to="/login" onClick={() => logoutUser()}>
               <DropdownItem icon={faRightToBracket} text={"Log Out"} />
