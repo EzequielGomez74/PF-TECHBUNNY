@@ -1,4 +1,4 @@
-const { Order, Product, User, Cart } = require("../../services/db/db.js");
+const { Order, Product, User, Cart, OrderProduct  } = require("../../services/db/db.js");
 const { sendMail } = require("../../services/mailer/emailer.js");
 const controller = require("./controller.js");
 
@@ -60,7 +60,7 @@ async function createOrder(user_id) {
     const userCart = await Cart.findAll({ where: { user_id } });
     const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
     const newOrder = { user_id };
-    const order = await Order.create(newOrder); //
+    let order = await Order.create(newOrder); //
     let suma = 0;
     await userCart.forEach(async (product) => {
       // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
@@ -84,14 +84,18 @@ async function createOrder(user_id) {
       { total: suma },
       { where: { order_id: order.dataValues.order_id } }
     );
+    order = await Order.findOne({where: {order_id: order.dataValues.order_id}})
     const datos = await Order.findByPk(order.order_id); //Informacion que necesita para el mail
+    const productos = await OrderProduct.findAll({ where: { order_id: order.dataValues.order_id } });
     const userdata = {
-      ...user.dataValues,
+      
       ...order.dataValues,
       ...datos.dataValues,
+      ...user.dataValues,
+      productos: productos,
       type: "order",
     };
-    // sendMail(userdata);                                                        // Envia el mail
+    sendMail(userdata);                                                    // Envia el mail
     await Cart.destroy({ where: { user_id: user_id } }); // Elimina el carrito ya se transformo en una orden
     return order.order_id;
   } catch (error) {

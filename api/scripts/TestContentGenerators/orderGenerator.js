@@ -3,14 +3,14 @@ const orderTest = require("./reviews.json");
 const cartController = require("../../apiServices/cart/controller");
 const orderController = require("../../apiServices/order/controller");
 let MAX = null;
-async function maxProducts() {
-  const products = await Product.findAll();
-  return products.length;
-}
-(async () => {
-  MAX = await maxProducts();
-  console.log(MAX);
-})();
+// async function maxProducts() {
+//   const products = await Product.findAll();
+//   return products.length;
+// }
+// (async () => {
+//   MAX = await maxProducts();
+//   console.log(MAX);
+// })();
 async function orderGenerator(user_id) {
   const cant = Math.floor(Math.random() * 10 + 1);
   for (let i = 0; i < cant; i++) {
