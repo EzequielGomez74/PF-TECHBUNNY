@@ -110,14 +110,21 @@ async function createOrder(user_id) {
       { total: suma },
       { where: { order_id: order.dataValues.order_id } }
     );
+    order = await Order.findOne({
+      where: { order_id: order.dataValues.order_id },
+    });
     const datos = await Order.findByPk(order.order_id); //Informacion que necesita para el mail
+    const productos = await OrderProduct.findAll({
+      where: { order_id: order.dataValues.order_id },
+    });
     const userdata = {
-      ...user.dataValues,
       ...order.dataValues,
       ...datos.dataValues,
+      ...user.dataValues,
+      productos: productos,
       type: "order",
     };
-    // sendMail(userdata);                                                        // Envia el mail
+    sendMail(userdata); // Envia el mail
     await Cart.destroy({ where: { user_id: user_id } }); // Elimina el carrito ya se transformo en una orden
     return order.order_id;
   } catch (error) {
