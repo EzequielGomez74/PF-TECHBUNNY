@@ -58,6 +58,11 @@
     width: 40%; 
 }
 
+.loading img {
+    width: 269px;
+    height: 258px;
+  }
+
 @media (max-width: 420px){
     .textBanner h2{
         color: #20232a;

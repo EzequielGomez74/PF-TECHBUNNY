@@ -37,20 +37,19 @@ function Register() {
   const postNewUser = async (user) => {
     try {
       const response = await axios.post("/enter", user);
-      console.log(response.data);
       //!manejar response
       if (response.data.status === "SUCCESS")
-      Swal.fire({
-        title: "¡Alerta!",
-        text: "REGISTRADO CON EXITO",
-        icon: "success",
-      });
-      else 
-      Swal.fire({
-        title: "¡Alerta!",
-        text: "REGISTRO FALLIDO",
-        icon: "warning",
-      });
+        Swal.fire({
+          title: "¡Alerta!",
+          text: "REGISTRADO CON EXITO",
+          icon: "success",
+        });
+      else
+        Swal.fire({
+          title: "¡Alerta!",
+          text: "REGISTRO FALLIDO",
+          icon: "warning",
+        });
     } catch (error) {
       console.log(error.message);
     }
@@ -65,8 +64,6 @@ function Register() {
     if (true) {
       postNewUser(register);
     }
-    console.log(register);
-    console.log(errors);
   };
 
   // Pendiente con botón Google

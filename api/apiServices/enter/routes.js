@@ -15,7 +15,6 @@ router.post("/", async (req, res) => {
 
 // PARAMS /enter/login   /enter/logout  /enter/recover
 router.put("/:accessType", async (req, res) => {
-  console.log("enter-login");
   const { accessType } = req.params;
   try {
     switch (accessType) {
@@ -47,7 +46,6 @@ router.put("/:accessType", async (req, res) => {
         //! LOGOUT tiene que guardar data de la session - savedSessionData
         // const cookie = req.cookies?.jwt;
         // const savedSessionData = req.cookies?.savedSessionData;
-        console.log(req.body);
         if (req.body?.user_id) {
           res.status(200).json({
             status: await controller.handleLogout(req.body.user_id),

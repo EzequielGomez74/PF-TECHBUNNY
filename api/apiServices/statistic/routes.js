@@ -6,6 +6,8 @@ const requiredAccess = require("../../middlewares/requiredAccess.js");
 const router = Router();
 
 router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO ADMIN  -----
+router.use(requiredAccess(3));
 router.get("/", async (req, res) => {
   try {
     res.status(200).json(await controller.getAllStatistics());

@@ -23,7 +23,6 @@ async function handleRefreshToken(cookie) {
         );
       }
     );
-    console.log("----> ACCESS TOKEN GENERADO");
     return accessToken;
   } catch (error) {
     return accessToken;

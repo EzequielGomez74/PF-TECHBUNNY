@@ -17,7 +17,6 @@ async function cartGenerator() {
   );
 
   // productsToAdd.forEach(async (p) => {
-  //   console.log(p);
   // });
   await orderController.createOrder(2);
 }

@@ -4,7 +4,6 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   try {
-    console.log("body ", req.body);
     if (req.body)
       res
         .status(200)

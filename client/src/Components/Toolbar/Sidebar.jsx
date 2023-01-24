@@ -9,6 +9,7 @@ import {
   faUser,
   faChartSimple,
   faHouse,
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar({ SideBar }) {
@@ -34,14 +35,14 @@ function Sidebar({ SideBar }) {
           <FontAwesomeIcon icon={faTruck} /> Pedidos
         </li>
       </NavLink>
-      <NavLink className="sidebarNavLink" to="/dashboard/newletters">
+      {/* <NavLink className="sidebarNavLink" to="/dashboard/newletters">
         <li>
           <FontAwesomeIcon icon={faBullhorn} /> Newsletter
         </li>
-      </NavLink>
+      </NavLink> */}
       <NavLink className="sidebarNavLink" to="/dashboard/statistics">
         <li>
-          <FontAwesomeIcon icon={faHouse} /> Statistics
+          <FontAwesomeIcon icon={faChartLine} /> Statistics
         </li>
       </NavLink>
       <NavLink className="sidebarNavLink" to="/home">

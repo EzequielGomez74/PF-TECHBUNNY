@@ -10,20 +10,20 @@ const cartController = require("../../../apiServices/cart/controller");
 const orderController = require("../../../apiServices/order/controller");
 const reviewGenerator = require("../reviewGenerator/reviewGenerator");
 
-async function maxProducts() {
-  const products = await Product.findAll();
-  return products.length;
-}
-async function maxUsers() {
-  const users = await User.findAll();
-  return users.length;
-}
-const MAX_PRODUCTS = (async () => {
-  return await maxProducts();
-})();
-const MAX_USERS = (async () => {
-  return await maxUsers();
-})();
+// async function maxProducts() {
+//   const products = await Product.findAll();
+//   return products.length;
+// }
+// async function maxUsers() {
+//   const users = await User.findAll();
+//   return users.length;
+// }
+// const MAX_PRODUCTS = (async () => {
+//   return await maxProducts();
+// })();
+// const MAX_USERS = (async () => {
+//   return await maxUsers();
+// })();
 
 //? del 10 al 93 (user_id) crear un USER
 //? rollear el product_id y el count entre entre (1 y 3)
@@ -70,7 +70,6 @@ class UserClass {
 
 async function orderGenerator() {
   try {
-    console.log("START");
     const MAX_USERS_SHOW = 21;
     const CURRENT_TIME = Date.now();
     const TIME_TO_SPEND = (604800 + 302400) * 1000; // 1 semana y media
@@ -85,7 +84,6 @@ async function orderGenerator() {
         const timestamp = user.time; // Unix timestamp in milliseconds
         const date = new Date(timestamp);
         const iso8601 = date.toISOString();
-        console.log("------ ", iso8601, " -------");
 
         const productsToBuy = Math.floor(Math.random() * 3 + 1); // entre 1 y 4 productos
         for (let i = 0; i < productsToBuy; i++) {
@@ -112,45 +110,16 @@ async function orderGenerator() {
           await orderController.updateOrder(order_id, "completed");
           const currentOrder = await Order.findOne({ where: { order_id } });
           user.moneyAvailable -= currentOrder.dataValues.total;
-          console.log(" complete");
-          console.log("money: $", user.moneyAvailable);
         } else {
           await orderController.updateOrder(order_id, "canceled");
-          console.log("->  CANCELED  ");
         }
         //? avanzar X cantidad de tiempo  entre ( 1 semana y media aprox ) * userDesire
         user.spendTime(TIME_TO_SPEND);
       }
-      //!TEST
-      if (user.time < CURRENT_TIME)
-        console.log("- > USER FINALIZADO ", user_id, " < - ON TIME = FALSE");
-      else console.log("- > USER FINALIZADO ", user_id, " < - ON TIME = TRUE");
     }
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-// const cant = Math.floor(Math.random() * 10 + 1);
-// for (let i = 0; i < cant; i++) {
-//   const id = Math.floor(Math.random() * MAX + 1);
-//   let product = await Product.findByPk(id, { raw: true });
-//   const count = Math.floor(Math.random() * (product.stock - 1) + 1);
-//   const obj = {
-//     product_id: product.product_id,
-//     price: product.price,
-//     count,
-//     product_name: product.name,
-//   };
-//   console.log(obj);
-//   await cartController.addProduct(obj, user_id);
-// }
-// await orderController.createOrder(user_id);
-/*{
-  "product_id": 6,
-	"price": 123,
-	"count": 2,
-	"product_name": "asd"
-}
-*/
 module.exports = orderGenerator;

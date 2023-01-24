@@ -10,7 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
-  faScrewdriverWrench
+  faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -47,17 +47,15 @@ function NavBar() {
 
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
-    console.log("cualquier cosa");
     if (loggedUser.user_id) {
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       dispatch(actions.allCartByUser(loggedUser.user_id));
-      console.log("OTRA COSA");
     }
   }, [loggedUser]);
 
   useEffect(() => {
     let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      if (!menuRef.current?.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
@@ -73,7 +71,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
- 
+
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -82,8 +80,8 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-         <div>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <div>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
           <h1>
             <a href="#">TECHBUNNY </a>
@@ -150,14 +148,17 @@ function NavBar() {
             <p>SOBRE TECHBUNNY</p>
           </Link>
           <p
-            onMouseOver={() => {
+            // onMouseOver={() => {
+            //   setOpenCat(!openCat);
+            // }}
+            // onMouseOut={() => {
+            //   setOpenCat(!closedCat);
+            // }}
+            onClick={() => {
               setOpenCat(!openCat);
             }}
-            onMouseOut={() => {
-              setOpenCat(!closedCat);
-            }}
           >
-            CATEGORIAS
+            CATEGORIAS<FontAwesomeIcon icon={faCaretDown} />
           </p>
           <Link to="/followUp">
             <p>VER ESTADO DE PEDIDO</p>
@@ -167,12 +168,7 @@ function NavBar() {
       {/* CATEGORIA DROPDOWN WEB*/}
       <div
         className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
-        onMouseEnter={() => {
-          setOpenCat(!open);
-        }}
-        onMouseLeave={() => {
-          setOpenCat(!closedCat);
-        }}
+       
       >
         <ul>
           <Link to="/category/Equipos%20armados">
@@ -309,7 +305,7 @@ function NavBar() {
             </Link>
 
             <Link to="/register">
-              <DropdownItem icon={faUserPlus} text={"Check In"} />
+              <DropdownItem icon={faUserPlus} text={"Register"} />
             </Link>
           </ul>
         </div>
@@ -324,16 +320,13 @@ function NavBar() {
             {loggedUser?.role === 3 && (
               <Link to="/dashboard">
                 <DropdownItem
-                  onClick={() => {
-                    setOpen(false);
-                  }}
+                 
                   icon={faScrewdriverWrench}
                   text={"Dashboard"}
                 />
               </Link>
             )}
-           
-            
+
             <Link to="/login" onClick={() => logoutUser()}>
               <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>

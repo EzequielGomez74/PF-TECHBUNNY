@@ -47,7 +47,7 @@ function App() {
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/category/:name" component={Category} />
-        <Route exact path="/brand/:marca" component={Brand} />
+        <Route exact path="/brand/:brand" component={Brand} />
         <Route exact path="/followUp" component={FollowUp} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />

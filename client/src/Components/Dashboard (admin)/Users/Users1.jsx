@@ -99,11 +99,9 @@ function Users() {
       initialLoad.current = false;
       return;
     }
-    console.log(users);
   }, []);
 
   const peticionPut = async () => {
-    console.log(userSelected);
     dispatch(updateUser(userSelected.user_id, userSelected));
     abrirCerrarModalEditar();
   };

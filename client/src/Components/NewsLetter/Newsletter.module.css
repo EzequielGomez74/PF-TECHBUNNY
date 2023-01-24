@@ -60,6 +60,17 @@
     cursor: pointer;
 }
 
+.newsText{
+    color: #20232a;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 42px;
+    align-items: center;
+    margin-top: 8%;
+
+}
+
 @media (max-width: 1150px) {
     .inputText{
         width: 200px;

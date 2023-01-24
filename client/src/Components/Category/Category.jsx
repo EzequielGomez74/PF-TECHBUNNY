@@ -6,7 +6,7 @@ import CardV from "../Card V/CardV";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import s from "./Category.module.css";
-import loading from '../../images/loadingg.gif'
+import loading from "../../images/loadingg.gif";
 import Pagination from "../Pagination/Pagination";
 
 function Category() {
@@ -42,7 +42,6 @@ function Category() {
     productBrands.push(productsBackup[i].brand);
   }
 
-  console.log(productBrands);
   let Brands = [];
   let Subcategories = [];
 
@@ -78,22 +77,18 @@ function Category() {
         subcategory: "none",
       });
     }
-    console.log("hola");
     if (initialLoad.current) {
       dispatch(actions.getCategories());
       dispatch(actions.getProductsByCategory(name));
       initialLoad.current = false;
       return;
     }
-    console.log("chau");
 
     setCurrentPage(1);
     if (name === "Periféricos")
       dispatch(actions.filterBy(filterPanel.subcategory, filterPanel.brand));
     else dispatch(actions.filterBy("none", filterPanel.brand));
     dispatch(actions.sortByPrice(filterPanel.price));
-
-    console.log(filterPanel.brand, filterPanel.price);
   }, [dispatch, name, filterPanel, nameChange]);
 
   useEffect(() => () => dispatch(actions.cleanCategoryProducts()), []);
@@ -185,7 +180,7 @@ function Category() {
             ))
           ) : (
             <div className={s.loading}>
-            <img  src={loading} alt="" />
+              <img src={loading} alt="" />
             </div>
           )}
         </div>

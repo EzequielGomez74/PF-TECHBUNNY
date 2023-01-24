@@ -16,10 +16,8 @@ router.get("/:user_id", async (req, res) => {
 });
 
 router.get("/", async (req, res, next) => {
-  console.log("ENTRE A USERS ACÁ");
   try {
     if (Object.keys(req.query).length === 0) {
-      console.log("ENTRE A USERS al IF");
       return next();
     }
     res.status(200).json(await controller.getUserBy(req.query));
@@ -57,9 +55,7 @@ router.put("/:user_id", async (req, res) => {
   try {
     const data = req.body;
     const { user_id } = req.params;
-    console.log("1");
     const foundUser = await getUser({ user_id });
-    console.log("2");
     if (
       foundUser &&
       (foundUser.username === req.username || req.role === 3) // permisos para modificar si es admin
@@ -81,7 +77,6 @@ router.put("/:user_id", async (req, res) => {
 //router.use(requiredAccess(3));
 router.get("/", async (req, res) => {
   try {
-    console.log("Entré al get de users");
     res.status(200).json(await controller.getAllUsers());
   } catch (error) {
     res.status(400).send(error.message);

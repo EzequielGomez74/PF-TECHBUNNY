@@ -40,7 +40,6 @@ function CarruselDetail() {
   // let restOfProducts = allProducts
   //   .sort((a, b) => 0.5 - Math.random())
   //   .slice(0, 10 - carruselProducts.length);
-  // console.log("rest of products", restOfProducts);
 
   useEffect(() => {
     dispatch(actions.getProductsByCategory(detail.category));
@@ -68,8 +67,6 @@ function CarruselDetail() {
           .slice(0, 10 - carruselProducts.length),
       ].sort((a, b) => 0.5 - Math.random())
     );
-
-    console.log("carrusel products extended", carruselProductsExtended);
   }, [carruselProducts]);
 
   return (
@@ -109,7 +106,7 @@ function CarruselDetail() {
           : carruselProductsExtended.map((p) => (
               <SwiperSlide>
                 <CardCarrusel
-                 favorite={p.favorite ? p.favorite : ""}
+                  favorite={p.favorite ? p.favorite : ""}
                   key={p.product_id}
                   user_id={user.user_id}
                   product_id={p.product_id}

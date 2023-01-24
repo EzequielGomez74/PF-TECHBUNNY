@@ -11,7 +11,6 @@ async function getCarrousel(carrouselType, username) {
     user_id = 1;
   }
   let results;
-  console.log("userID ", user_id);
   if (carrouselType === "favorites") {
     results = await createFavoriteCarrousel(user_id);
   } else {

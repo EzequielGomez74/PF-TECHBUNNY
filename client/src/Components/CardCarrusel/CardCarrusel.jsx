@@ -34,7 +34,6 @@ function CardCarrusel({
     } else {
       dispatch(actions.addFavorite({ user_id, product_id }));
       setActive(!active);
-      console.log("ESTOY ENVIANDO", user_id, product_id);
     }
   };
 
@@ -56,7 +55,7 @@ function CardCarrusel({
         <Link to={`/detail/${product_id}`}>
           <p className={s.name}>{name}</p>
         </Link>
-        <p className={s.price}>US${price}</p>
+        <p className={s.price}>US$ {price}</p>
       </div>
     </div>
   );

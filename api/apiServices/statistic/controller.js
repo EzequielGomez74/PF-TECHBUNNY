@@ -21,9 +21,11 @@ async function createCategoriesData() {
   const aMonth = 2629743 * 1000;
   let time;
   const categories = await Category.findAll();
-  const orders = await Order.findAll({
+  const mappedProducts = await getProductsArray();
+  const orders = await Order.findAll();
+  /*{
     order: [["order_id", "ASC"]],
-  });
+  }*/
   const months = [
     "FEB",
     "MAR",
@@ -50,7 +52,8 @@ async function createCategoriesData() {
       let monthlyTotalProducts = await getMonthlyProducts(
         orders,
         categoryName,
-        time
+        time,
+        mappedProducts
       );
       categoryData.data.push({ x: months[month], y: monthlyTotalProducts });
       time += aMonth;
@@ -60,7 +63,8 @@ async function createCategoriesData() {
   return data;
 }
 
-async function getMonthlyProducts(orders, categoryName, time) {
+//! fast
+async function getMonthlyProducts(orders, categoryName, time, products) {
   try {
     let results = [];
     for (let i = 0; i < orders.length; i++) {
@@ -77,11 +81,8 @@ async function getMonthlyProducts(orders, categoryName, time) {
     }
     const allProducts = await Promise.all(
       results.map(async (orderProduct) => {
-        const product = await Product.findByPk(orderProduct.product_id, {
-          raw: true,
-        });
-        if (product.category === categoryName)
-          return product.price * orderProduct.count;
+        if (products[orderProduct.product_id].category === categoryName)
+          return products[orderProduct.product_id].price * orderProduct.count;
         else return 0;
       })
     );
@@ -91,46 +92,9 @@ async function getMonthlyProducts(orders, categoryName, time) {
     }
     return total;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error);
   }
 }
-
-// async function getMonthlyProducts(orders, categoryName, time) {
-//   //TODO REHACER TRABAJAR EN BASE A ORDERPRODUCT
-//   //TODO RECOLECTAR TODOS LOS ORDER PRODUCTS DE ESE ORDER ID
-//   //TODO FILTRAR POR CATEGORY Y TENER EN CUENNTA EL COUNT Y SUMAR
-//   let results = [];
-//   console.log("1");
-//   for (let i = 0; i < orders.length; i++) {
-//     const order = orders[i];
-//     if (
-//       order.dataValues.relativeDateAdded < time &&
-//       orders.dataValues.status === "completed"
-//     ) {
-//       const orderProducts = await OrderProduct.findAll({
-//         where: { order_id: order.dataValues.order_id },
-//       });
-//       console.log("2", orderProducts[0].dataValues);
-//       const monthlyProductsTotal = await Promise.all(
-//         orderProducts.map(async (oProd) => {
-//           const product = await Product.findByPk(oProd.dataValues.product_id);
-//           if (product.dataValues.category == categoryName) {
-//             console.log("ENTRA");
-//             return product.dataValues.price * oProd.dataValues.count;
-//           }
-//           return 0;
-//         })
-//       );
-//       console.log("3", monthlyProductsTotal);
-//       results = [...results, ...monthlyProductsTotal];
-//     }
-//   }
-//   console.log("4", results);
-//   const total = results.reduce((prev, curr) => {
-//     prev + curr;
-//   }, 0);
-//   return total;
-// }
 
 async function createBrandsData() {
   const data = [];
@@ -176,18 +140,15 @@ async function createUserData() {
 //? helpers
 async function getBrandRevenue(brand) {
   let totalRevenue = 0;
-  //console.log("ALL ORDER PRODUCTS ", allOrderProducts);
   const allOrderProducts = await OrderProduct.findAll();
   for (let i = 0; i < allOrderProducts.length; i++) {
     const product = await Product.findByPk(
       allOrderProducts[i].dataValues.product_id
     );
     if (product.dataValues.brand === brand) {
-      //console.log("<--------------------------ENTRA");
       totalRevenue +=
         allOrderProducts[i].dataValues.price *
         allOrderProducts[i].dataValues.count;
-      //console.log("TOTAL ", totalRevenue);
     }
   }
   return totalRevenue;
@@ -207,4 +168,21 @@ function getMoneySpent(orders, time) {
   return totalMoney;
 }
 
+async function getProductsArray() {
+  const results = [];
+  const products = await Product.findAll();
+  results.push({
+    product_id: products[0].dataValues.product_id,
+    price: products[0].dataValues.price,
+    category: products[0].dataValues.category,
+  });
+  for (let i = 0; i < products.length; i++) {
+    results.push({
+      product_id: products[i].dataValues.product_id,
+      price: products[i].dataValues.price,
+      category: products[i].dataValues.category,
+    });
+  }
+  return results;
+}
 module.exports = { getAllStatistics };

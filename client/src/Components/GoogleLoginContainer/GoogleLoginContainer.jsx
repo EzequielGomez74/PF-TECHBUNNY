@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useSelector } from "react-redux";
 import s from "./GoogleLoginContainer.module.css";
+import Swal from "sweetalert2";
 
 const GoogleLoginContainer = () => {
   const dm = useSelector((state) => state.darkMode);
@@ -18,10 +19,20 @@ const GoogleLoginContainer = () => {
   }, []);
 
   async function responseGoogle(response) {
-    console.log(response);
     if (response?.tokenId) {
       loginUser({ tokenId: response.tokenId }, (status) => {
-        if (status === "EMAIL ALREADY IN USE") alert("EMAIL ALREADY IN USE");
+        if (status === "EMAIL ALREADY IN USE") {
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "EMAIL YA ESTA EN USO",
+            icon: "warning",
+          });
+        } else if (status === "CUENTA DESHABILITADA")
+          Swal.fire({
+            title: "¡Alerta!",
+            text: "CUENTA DESHABILITADA",
+            icon: "warning",
+          });
       });
     } else {
       throw new Error("Google login error");

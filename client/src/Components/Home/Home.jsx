@@ -27,7 +27,6 @@ function Home() {
   function setCarrouselProducts(carrousel) {
     for (let i = 0; i < carrousel.length; i++) {
       if (carrousel[i] === null) {
-        console.log("FIXED");
         const pos = Math.floor(Math.random() * 820);
         carrousel[i] = products[pos];
       }
@@ -99,7 +98,7 @@ function Home() {
           <Link to="/brand/Redragon">
             <div className={s.redragon}></div>
           </Link>
-          <Link to="/brand/CoolerMaster">
+          <Link to="/brand/Cooler master">
             <div className={s.coolermaster}></div>
           </Link>
           <Link to="/brand/Nintendo">
