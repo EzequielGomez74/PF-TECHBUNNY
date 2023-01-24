@@ -37,13 +37,13 @@ import {
   GET_ORDERS,
   UPDATE_ORDER,
   GET_ALL_STATISTICS,
+  GET_SUBCATEGORY_BY_CATEGORY,
 } from "./actionTypes";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
-      console.log("Mostrando productos");
       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
@@ -52,11 +52,13 @@ export const getProducts = (id) => {
 };
 
 export const postProduct = (productInfo) => {
-  console.log(productInfo);
   return async function (dispatch) {
     try {
-      const response = await axiosInstance.post("/products", productInfo);
-      console.log(response.data);
+      const response = await axiosInstance.post("/products", productInfo, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.data === "Producto creado con exito!") {
         const allProducts = await axiosInstance.get("/products");
         return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
@@ -68,11 +70,9 @@ export const postProduct = (productInfo) => {
 };
 
 export const updateProduct = (productInfo) => {
-  console.log(productInfo);
   return async function (dispatch) {
     try {
       const response = await axiosInstance.put("/products", productInfo);
-      console.log(response.data);
       if (response.data === "Producto actualizado con exito!") {
         const allProducts = await axiosInstance.get("/products");
         return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
@@ -84,11 +84,9 @@ export const updateProduct = (productInfo) => {
 };
 
 export const deleteProduct = (product_id) => {
-  console.log(product_id);
   return async function (dispatch) {
     try {
       const response = await axiosInstance.delete(`/products/${product_id}`);
-      console.log(response.data);
       if (response.data === "Producto deshabilitado con exito!") {
         const allProducts = await axiosInstance.get("/products");
         return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
@@ -109,7 +107,6 @@ export const getUsers = () => {
     try {
       const response = await axiosInstance.get("/users");
 
-      console.log("usuarios son", response.data);
       return dispatch({ type: GET_USERS, payload: response.data });
     } catch (error) {
       console.log("Falla para traer usuarios");
@@ -118,11 +115,9 @@ export const getUsers = () => {
 };
 
 export const updateUser = (user_id, userInfo) => {
-  console.log(userInfo);
   return async function (dispatch) {
     try {
       const response = await axiosInstance.put(`/users/${user_id}`, userInfo);
-      console.log(response.data);
       if (Object.keys(response.data).length > 0) {
         const allUsers = await axiosInstance.get("/users");
         return dispatch({ type: UPDATE_USER, payload: allUsers.data });
@@ -134,11 +129,9 @@ export const updateUser = (user_id, userInfo) => {
 };
 
 export const deleteUser = (user_id) => {
-  console.log(user_id);
   return async function (dispatch) {
     try {
       const response = await axiosInstance.delete(`/users/${user_id}`);
-      console.log(response.data);
       if (response.data === "Usuario habilitado con exito!") {
         const allUsers = await axiosInstance.get("/users");
         return dispatch({ type: DELETE_USER, payload: allUsers.data });
@@ -157,7 +150,6 @@ export const getOrders = () => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/orders");
-      console.log("orders son", response.data);
       return dispatch({ type: GET_ORDERS, payload: response.data });
     } catch (error) {
       console.log("Falla para traer ordenes");
@@ -168,12 +160,10 @@ export const getOrders = () => {
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
     try {
-      console.log(orderInfo);
       const response = await axiosInstance.put(
         `/orders/${order_id}`,
         orderInfo
       );
-      console.log(response.data);
       const allOrders = await axiosInstance.get("/orders");
       return dispatch({ type: UPDATE_ORDER, payload: allOrders.data });
     } catch (error) {
@@ -196,7 +186,6 @@ export const updateOrder = (order_id, orderInfo) => {
 export function getProductById(id) {
   return async function (dispatch) {
     try {
-      console.log("#");
       var json = await axiosInstance.get(`/products/${id}`);
       return dispatch({ type: GET_PRODUCT_BY_ID, payload: json.data });
     } catch (error) {
@@ -221,7 +210,6 @@ export const getReviewsBy = (productId, userId) => {
 export const postReview = (review, onSuccess) => {
   return async function () {
     try {
-      console.log("review", review);
       const postedReview = await axiosInstance.post("/reviews", review);
       onSuccess();
       return postedReview;
@@ -236,6 +224,20 @@ export function getCategories() {
     try {
       var json = await axiosInstance.get("/categories");
       return dispatch({ type: GET_CATEGORIES, payload: json.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getSubcategoriesByCategory(category) {
+  return async function (dispatch) {
+    try {
+      var json = await axiosInstance.get(`/subcategories?category=${category}`);
+      return dispatch({
+        type: GET_SUBCATEGORY_BY_CATEGORY,
+        payload: json.data,
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -348,7 +350,6 @@ export const addFavorite = (payload) => {
     try {
       const response = await axiosInstance.post("/favorites", payload);
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      console.log(response.data);
       const favorites = await axiosInstance.get(
         `/favorites/${payload.user_id}`
       );
@@ -368,7 +369,6 @@ export const removeFavorite = (payload) => {
     try {
       const response = await axiosInstance.post("/favorites", payload);
       //return dispatch ({type: ADD_FAVORITE, payload: fav.data});
-      console.log(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -378,11 +378,8 @@ export const removeFavorite = (payload) => {
 export const addCart = (payload, user_id) => {
   return async function (dispatch) {
     try {
-      console.log("entra a addCart", payload);
       let response = await axiosInstance.post(`/carts/${user_id}`, payload);
-      console.log("producto recibido", response.data);
       let cart = await axiosInstance.get(`/carts/${user_id}`);
-      console.log(cart.data);
       return dispatch({ type: ADD_CART, payload: cart.data });
     } catch (error) {
       console.log(error.message);
@@ -401,13 +398,11 @@ export const addCart = (payload, user_id) => {
 export const removeCart = (user_id, product_id, onSuccess) => {
   return async function () {
     try {
-      console.log(user_id, product_id, "Eliminando de carrito");
       const productDeleted = await axiosInstance.delete(`/carts/${user_id}`, {
         data: { product_id },
       });
       // await axiosInstance.get(`/carts/${user_id}`)
       onSuccess();
-      console.log(productDeleted);
     } catch (error) {
       console.log(error);
     }
@@ -462,7 +457,6 @@ export const cleanCategoryProducts = () => {
 // };
 
 export const setLoggedUser = (user) => {
-  console.log("action logded user");
   try {
     return {
       type: SET_LOGGED_USER,
@@ -490,7 +484,6 @@ export const createOrder = (user_id, pushPayment) => {
         const orders = await axiosInstance.get(
           `/orders?user_id=${user_id}&order_id=${order_id}`
         );
-        console.log(orders.data);
         pushPayment();
         return dispatch({ type: CREATE_ORDER, payload: orders.data });
       } else throw new Error("CREATE ORDER FAILED");
@@ -503,7 +496,6 @@ export const createOrder = (user_id, pushPayment) => {
 export const allOrdersByUser = (user_id) => {
   return async function (dispatch) {
     const orders = await axiosInstance.get(`/orders?user_id=${user_id}`);
-    console.log(orders.data);
     return dispatch({ type: ALL_ORDERS_BY_USER, payload: orders.data });
   };
 };
@@ -513,7 +505,6 @@ export const updateOrderInfoById = (order_id, payInfo) => {
   return async function () {
     try {
       const userInfo = await axiosInstance.put(`/orders/${order_id}`, payInfo);
-      console.log(userInfo.data);
     } catch (error) {
       console.log(error);
     }
@@ -524,7 +515,6 @@ export function getPayPreferencesById(order_id) {
   return async function (dispatch) {
     try {
       var json = await axiosInstance.get(`/orders/pagar/${order_id}`);
-      console.log("info payment", json.data);
       return dispatch({ type: GET_PAYPREFERENCES_BY_ID, payload: json.data });
     } catch (error) {
       alert(error);
@@ -535,7 +525,6 @@ export function getCarrousel(carrouselType) {
   return async function (dispatch) {
     try {
       var json = await axiosInstance.get(`/carrousels/${carrouselType}`);
-      console.log("ALGO QUE LLEGO ", carrouselType, " ", json.data);
       return dispatch({
         type: GET_CARROUSEL,
         payload: { carrouselData: json.data, carrouselType },
@@ -552,7 +541,6 @@ export function updateUserInfo(user_id, input) {
       // const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
       // console.log(userInfoGet.data);
       const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
-      console.log(userInfo.data);
 
       return dispatch({ type: UPDATE_USER_INFO, payload: input });
     } catch (error) {
@@ -565,7 +553,6 @@ export function getAllStatistics(onSuccess) {
   return async function (dispatch) {
     try {
       const allStatistics = await axiosInstance.get(`/statistics`);
-      console.log("allStatistics.data ", allStatistics.data);
       onSuccess();
       return dispatch({
         type: GET_ALL_STATISTICS,

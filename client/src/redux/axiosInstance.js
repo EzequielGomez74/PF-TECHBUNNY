@@ -47,8 +47,6 @@ axiosInstance.interceptors.response.use(
         //sino tiene que desloguear al user porque el access token esta vencido
         //todo MANDAR DESDE EL FRONT A LA RUTA LOGIN Y SI QUIERE SE RELOGUEA DE NUEVO, YA QUE LA SESSION EXPIRO
         //todo se deberia hacer un request de tipo /enter/logout
-        console.log("DESLOGUEAR");
-        console.log("entra logout");
         await logoutUser();
         window.location.href = "/Login";
       }

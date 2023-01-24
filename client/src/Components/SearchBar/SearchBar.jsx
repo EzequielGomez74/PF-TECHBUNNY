@@ -28,8 +28,6 @@ function SearchBar() {
       dispatch(cleanSearchResults());
     }
     // if (noTerm.current && searchTerm.length) {
-    //   console.log("1 search");
-    //   console.log(searchTerm);
     //   noTerm.current = false;
     // } else if (!noTerm.current && !searchTerm.length) {
     //   noTerm.current = true;
@@ -37,14 +35,11 @@ function SearchBar() {
     // if (!notFound.current && searchTerm.length) {
     //   notFound.current = true;
     // }
-    console.log("2 search");
     if (initialLoad.current) {
       dispatch(getProducts());
       initialLoad.current = false;
       initialSearch.current = false;
     }
-
-    console.log(searchTerm);
 
     if (searchTerm.length > 2) dispatch(getSearchResults(searchTerm));
   }, [dispatch, searchTerm]);
@@ -70,10 +65,10 @@ function SearchBar() {
   };
 
   return (
-    <form className={dm? s.dmsearchContainer : s.searchContainer}>
-      <span className={dm? s.dminputContainer : s.inputContainer}>
+    <form className={dm ? s.dmsearchContainer : s.searchContainer}>
+      <span className={dm ? s.dminputContainer : s.inputContainer}>
         <input
-          className={dm? s.dminput : s.input}
+          className={dm ? s.dminput : s.input}
           type="text"
           value={searchTerm}
           onChange={handleChange}
@@ -82,37 +77,52 @@ function SearchBar() {
         {searchTerm.length > 0 && (
           <button
             onClick={handleDeleteSearchTerm}
-            class={dm? s.dminputCloseButton: s.inputCloseButton}
+            class={dm ? s.dminputCloseButton : s.inputCloseButton}
             onclick="clearInput()"
           >
             X
           </button>
         )}
       </span>
-      <button className={dm? s.dminputIcon : s.inputIcon} onClick={handleClick}>
+      <button
+        className={dm ? s.dminputIcon : s.inputIcon}
+        onClick={handleClick}
+      >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-      <span className={dm? s.dmsearchScroll : s.searchScroll}>
-        <ul className={dm? s.dmsearchElement : s.searchElement}>
+      <span className={dm ? s.dmsearchScroll : s.searchScroll}>
+        <ul className={dm ? s.dmsearchElement : s.searchElement}>
           {searchTerm.length > 0 &&
             results.length > 0 &&
             results.map((p, i) => {
               if (i < 15)
                 return (
-                  <span className={dm? s.dmsearchChildContainer : s.searchChildContainer}>
+                  <span
+                    className={
+                      dm ? s.dmsearchChildContainer : s.searchChildContainer
+                    }
+                  >
                     <NavLink to={`/detail/${p.product_id}`}>
                       <li className={s.liSearchBar}>
                         {/* <Link to={`/detail/${p.product_id}`}> */}{" "}
                         <img
-                          className={dm? s.dmimgsearch : s.imgsearch}
+                          className={dm ? s.dmimgsearch : s.imgsearch}
                           src={p.image}
                           alt={p.name}
                         />
                         {/* </Link>
                     <Link to={`/detail/${p.product_id}`}> */}{" "}
-                        <span className={dm? s.dmnameAndPrince : s.nameAndPrice}>
-                          <p className={dm? s.dmNameSearch : s.NameSearch}> {p.name} </p>{" "}
-                          <p className={dm? s.dmpriceSearch : s.priceSearch}> US$ {p.price} </p>{" "}
+                        <span
+                          className={dm ? s.dmnameAndPrince : s.nameAndPrice}
+                        >
+                          <p className={dm ? s.dmNameSearch : s.NameSearch}>
+                            {" "}
+                            {p.name}{" "}
+                          </p>{" "}
+                          <p className={dm ? s.dmpriceSearch : s.priceSearch}>
+                            {" "}
+                            US$ {p.price}{" "}
+                          </p>{" "}
                         </span>
                         {/* </Link> */}
                       </li>
@@ -124,7 +134,7 @@ function SearchBar() {
             <span>
               {" "}
               <Link to={`/results/${searchTerm}`}>
-                <li className={dm? s.dmallResults : s.allResults}>
+                <li className={dm ? s.dmallResults : s.allResults}>
                   Ver todos los resultados de busqueda
                 </li>
               </Link>
@@ -133,13 +143,13 @@ function SearchBar() {
         </ul>
 
         {notFound === true && results.length === 0 && (
-          <ul className={dm? s.dmnotFound : s.notFound}>
+          <ul className={dm ? s.dmnotFound : s.notFound}>
             <li>No se encontraron resultados</li>
           </ul>
         )}
 
         {noTerm && results?.length === 0 && (
-          <ul className={dm? s.dmhiden : s.hiden}>
+          <ul className={dm ? s.dmhiden : s.hiden}>
             <li> </li>
           </ul>
         )}

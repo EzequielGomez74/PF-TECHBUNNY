@@ -34,7 +34,6 @@ function CardCarrusel({
     } else {
       dispatch(actions.addFavorite({ user_id, product_id }));
       setActive(!active);
-      console.log("ESTOY ENVIANDO", user_id, product_id);
     }
   };
 

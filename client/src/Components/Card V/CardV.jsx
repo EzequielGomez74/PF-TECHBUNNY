@@ -26,7 +26,6 @@ function CardV({product_id, brand, name, image, price, favorite, user_id}){
         }else{
             dispatch(actions.addFavorite({user_id, product_id}))
             setActive(!active)
-            console.log('ESTOY ENVIANDO', user_id, product_id)
         }
     }
 

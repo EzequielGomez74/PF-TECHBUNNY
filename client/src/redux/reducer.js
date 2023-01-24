@@ -1,4 +1,4 @@
-import { GET_ALL_STATISTICS } from "./actionTypes";
+import { GET_ALL_STATISTICS, GET_SUBCATEGORY_BY_CATEGORY } from "./actionTypes";
 // import { GET_CARROUSEL } from "./actionTypes";
 const initialState = {
   products: [],
@@ -23,6 +23,7 @@ const initialState = {
   ordersCarrousel: [],
   usersDashboard: [],
   allStatistics: {},
+  subcategoriesByCategory: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -291,6 +292,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         allStatistics: action.payload,
+      };
+    case "GET_SUBCATEGORY_BY_CATEGORY":
+      return {
+        ...state,
+        subcategoriesByCategory: action.payload,
       };
     default:
       return { ...state };

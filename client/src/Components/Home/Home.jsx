@@ -27,7 +27,6 @@ function Home() {
   function setCarrouselProducts(carrousel) {
     for (let i = 0; i < carrousel.length; i++) {
       if (carrousel[i] === null) {
-        console.log("FIXED");
         const pos = Math.floor(Math.random() * 820);
         carrousel[i] = products[pos];
       }

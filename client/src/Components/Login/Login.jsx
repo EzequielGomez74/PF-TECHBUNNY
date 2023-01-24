@@ -52,17 +52,23 @@ function Login() {
         },
         (status) => {
           if (status === "CONTRASEÑA INCORRECTA")
-          Swal.fire({
-            title: "¡Alerta!",
-            text: "CONTRASEÑA INCORRECTA",
-            icon: "warning",
-          });
-          else if (status === "MAIL NO VALIDADO") 
-          Swal.fire({
-            title: "¡Alerta!",
-            text: "MAIL NO VALIDO",
-            icon: "warning",
-          });
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "CONTRASEÑA INCORRECTA",
+              icon: "warning",
+            });
+          else if (status === "MAIL NO VALIDADO")
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "MAIL NO VALIDO",
+              icon: "warning",
+            });
+          else if (status === "CUENTA DESHABILITADA")
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "CUENTA DESHABILITADA",
+              icon: "warning",
+            });
           else if (status === "SUCCESS") {
             Swal.fire({
               title: "¡Alerta!",

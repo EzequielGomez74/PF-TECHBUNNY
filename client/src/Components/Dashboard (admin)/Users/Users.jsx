@@ -99,13 +99,11 @@ function Users() {
       initialLoad.current = false;
       return;
     }
-    //console.log(users);
 
     setUserRows(users);
   }, [dispatch, users]);
 
   const peticionPut = async () => {
-    console.log(userSelected);
     dispatch(updateUser(userSelected.user_id, userSelected));
     abrirCerrarModalEditar();
   };
@@ -193,8 +191,8 @@ function Users() {
         label="Status"
         onChange={handleChange}
       >
-        <MenuItem value={false}>Sin Ban</MenuItem>
-        <MenuItem value={true}>Baneado</MenuItem>
+        <MenuItem value={false}>Habilitar</MenuItem>
+        <MenuItem value={true}>Deshabilitar</MenuItem>
       </Select>
       <br />
       <br />

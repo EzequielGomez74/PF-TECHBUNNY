@@ -44,7 +44,6 @@ function Profile(){
         }
         o.Products=orderProducts
     })
-    console.log(orders)
     if(orders.length>0)
     setCheck(Object.keys(orders[0].Products[0]).length)
 }, [dispatch, orders, user.user_id, products, orders.length, check])

@@ -10,7 +10,7 @@ import {
   faRightToBracket,
   faUserPlus,
   faSun,
-  faScrewdriverWrench
+  faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 import { useState, useEffect, useRef } from "react";
@@ -47,17 +47,15 @@ function NavBar() {
 
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
-    console.log("cualquier cosa");
     if (loggedUser.user_id) {
       dispatch(actions.allFavoritesByUser(loggedUser.user_id));
       dispatch(actions.allCartByUser(loggedUser.user_id));
-      console.log("OTRA COSA");
     }
   }, [loggedUser]);
 
   useEffect(() => {
     let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      if (!menuRef.current?.contains(e.target)) {
         setOpen(false);
         setClosed(false);
         setOpenCat(false);
@@ -73,7 +71,7 @@ function NavBar() {
   });
 
   let dispatch = useDispatch();
- 
+
   return (
     <div className={s.navBar}>
       <section className={dm ? s.dmnavResponsive : s.navResponsive}>
@@ -82,8 +80,8 @@ function NavBar() {
       </section>
       <section className={DM ? s.DMone : s.one}>
         <div>
-         <div>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <div>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
           <h1>
             <a href="#">TECHBUNNY </a>
@@ -332,8 +330,7 @@ function NavBar() {
                 />
               </Link>
             )}
-           
-            
+
             <Link to="/login" onClick={() => logoutUser()}>
               <DropdownItem icon={faRightToBracket} text={"Log Out"} />
             </Link>
