@@ -11,7 +11,7 @@ function verifyJWT(req, res, next) {
     //forbidden invalid token
     req.username = decoded.username;
     req.role = decoded.role;
-    const user = await userController.getUserBy(decoded.username);
+    const user = await userController.getUserBy({ username: decoded.username });
     if (user.isDeleted) return res.sendStatus(401); // !!LOGOUT
     next();
   });
