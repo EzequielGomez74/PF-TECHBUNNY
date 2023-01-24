@@ -10,20 +10,20 @@ const cartController = require("../../../apiServices/cart/controller");
 const orderController = require("../../../apiServices/order/controller");
 const reviewGenerator = require("../reviewGenerator/reviewGenerator");
 
-async function maxProducts() {
-  const products = await Product.findAll();
-  return products.length;
-}
-async function maxUsers() {
-  const users = await User.findAll();
-  return users.length;
-}
-const MAX_PRODUCTS = (async () => {
-  return await maxProducts();
-})();
-const MAX_USERS = (async () => {
-  return await maxUsers();
-})();
+// async function maxProducts() {
+//   const products = await Product.findAll();
+//   return products.length;
+// }
+// async function maxUsers() {
+//   const users = await User.findAll();
+//   return users.length;
+// }
+// const MAX_PRODUCTS = (async () => {
+//   return await maxProducts();
+// })();
+// const MAX_USERS = (async () => {
+//   return await maxUsers();
+// })();
 
 //? del 10 al 93 (user_id) crear un USER
 //? rollear el product_id y el count entre entre (1 y 3)
