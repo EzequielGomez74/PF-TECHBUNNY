@@ -10,6 +10,10 @@ import { useRef, useState } from "react";
 import Backdrop from "../../Toolbar/Backdrop";
 import Sidebar from "../../Toolbar/Sidebar";
 import Toolbar from "../../Toolbar/Toolbar";
+import loadingStat from "../../../images/loadingStat.gif";
+
+
+
 const Statistics = () => {
   const dispatch = useDispatch();
   const allStatistics = useSelector((state) => state.allStatistics);
@@ -65,7 +69,9 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <span>Loading...</span>
+        <div className={s.loadingStat}>
+              <img src={loadingStat} alt="" />
+            </div>
       )}
     </div>
   );

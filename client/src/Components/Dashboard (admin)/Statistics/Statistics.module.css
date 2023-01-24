@@ -5,3 +5,9 @@
 .toolBarComponents {
   z-index: 1;
 }
+
+.loadingStat img {
+  width: 469px;
+  height: 458px;
+  transform: translateY(130px);
+}

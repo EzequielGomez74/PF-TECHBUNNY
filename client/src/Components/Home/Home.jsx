@@ -98,7 +98,7 @@ function Home() {
           <Link to="/brand/Redragon">
             <div className={s.redragon}></div>
           </Link>
-          <Link to="/brand/CoolerMaster">
+          <Link to="/brand/Cooler master">
             <div className={s.coolermaster}></div>
           </Link>
           <Link to="/brand/Nintendo">

@@ -80,11 +80,11 @@
   .dropdown-menu-cat{
     position: absolute;
     top: 120px;
-    right: 460px;
+    right: 405px;
     background-color: #22262a;
     border-radius: var(--border-radius);
-    padding: 5px -2px;
-    width: 370px;
+    transition: var(--speed) ease;
+    width: 356px;
     z-index: 999;
   }
   

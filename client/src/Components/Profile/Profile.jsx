@@ -144,7 +144,7 @@ function Profile() {
                           </li>
                         ))}
                       </ul>
-                      <span className={s.orderTotal}>Total: US$ {o.total}</span>
+                      <span className={s.orderTotal}>Total: US$ {o.total.toFixed(2)}</span>
                     </div>
                   ))
                 : "Está vacio"}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../CartCard/CartCard";
 import Footer from "../Footer/Footer";
@@ -14,13 +14,25 @@ function Cart() {
   const dispatch = useDispatch();
   let loggedUser = useSelector((state) => state.loggedUser);
   const dm = useSelector((state) => state.darkMode);
+  let [total,setTotal] = useState(0)
+  let initialLoad =useRef(true)
 
   //Para que al recargar la pagina no se borre la cantidad de favoritos.
   useEffect(() => {
     if (loggedUser.user_id) {
+if(initialLoad.current){
       dispatch(allCartByUser(loggedUser.user_id));
+      initialLoad.current=false
+      return
     }
-  }, [loggedUser]);
+    }
+if(cart.length >0){
+  console.log("me meti aqui en el useeffect de cart")
+setTotal(cart.reduce((tot,curr)=>{
+return tot + (curr.price* curr.count)
+},0))
+}
+  }, [loggedUser,cart]);
 
   const handleNewOrder = () => {
     dispatch(
@@ -50,6 +62,9 @@ function Cart() {
                   price={p.price}
                 />
               ))}
+            </div>
+            <div>
+              <span>Total: US$ {total.toFixed(2)}</span>
             </div>
             <button
               onClick={handleNewOrder}

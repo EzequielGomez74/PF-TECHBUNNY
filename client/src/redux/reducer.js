@@ -88,7 +88,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         productsByBrand: action.payload,
-        // filtered: action.payload,
       };
     case "GET_CATEGORIES":
       return {

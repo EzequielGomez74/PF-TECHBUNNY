@@ -13,7 +13,7 @@ function Newsletter() {
             alt="not found"
           />
         </div>
-        <div className={s.textandinput}>
+        {/* <div className={s.textandinput}>
           <h2>Suscríbete al Newsletter</h2>
           <input
             type="search"
@@ -21,7 +21,8 @@ function Newsletter() {
             placeholder={`Correo electrónico`}
           />
           <button className={s.inputBtn}>SUSCRIBIRSE</button>
-        </div>
+        </div> */}
+        <h2 className={s.newsText}>¡Todo lo que buscas, en un solo lugar!</h2>
       </div>
     </div>
   );

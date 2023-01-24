@@ -38,6 +38,7 @@ import {
   UPDATE_ORDER,
   GET_ALL_STATISTICS,
   GET_SUBCATEGORY_BY_CATEGORY,
+  CLEAN_PRODUCTS_BY_BRAND
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -256,10 +257,11 @@ export function getProductsByCategory(category) {
 }
 
 //Marcas de Periféricos
-export function getProductsByBrand() {
+export function getProductsByBrand(brand) {
   return async function (dispatch) {
     try {
-      let json = await axiosInstance.get(`/products?category=Periféricos`);
+      console.log("brand",brand);
+      let json = await axiosInstance.get(`/products?brand=${brand}`);
       return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -562,4 +564,10 @@ export function getAllStatistics(onSuccess) {
       console.log(error);
     }
   };
+}
+
+export const cleanProductsByBrand=()=>{
+  
+    return { type: CLEAN_PRODUCTS_BY_BRAND };
+  
 }

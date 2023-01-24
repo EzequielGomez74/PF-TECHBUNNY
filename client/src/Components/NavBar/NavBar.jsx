@@ -307,7 +307,7 @@ function NavBar() {
             </Link>
 
             <Link to="/register">
-              <DropdownItem icon={faUserPlus} text={"Check In"} />
+              <DropdownItem icon={faUserPlus} text={"Register"} />
             </Link>
           </ul>
         </div>
