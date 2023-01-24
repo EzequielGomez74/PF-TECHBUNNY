@@ -44,6 +44,4 @@ function productDescriptionToString(description) {
 //   },
 // ];
 
-// console.log(productDescriptionToString(description));
-
 module.exports = { productDescriptionToString };

@@ -22,20 +22,12 @@ async function updateOrder(order_id, status) {
       { where: { order_id: order_id } }
     );
 
-    // console.log(
-    //   "se cambio el estado de la orden nro° ",
-    //   order_id,
-    //   "al estado: ",
-    //   status
-    // );
-
     const productos = await OrderProduct.findAll({
       where: { order_id },
       raw: true,
     });
     if (status === "canceled") {
       productos.map(async (p) => {
-        //console.log(p);
         const actual = await Product.findOne({
           where: { product_id: p.product_id },
         });
@@ -80,7 +72,6 @@ async function updateOrderData(order_id, body) {
     }); //
     // if (order.dataValues.status !== "onCart")
     // {
-    // console.log("se mando el email de order")
     // sendMail(userdata);
     // }
     return order;
@@ -211,7 +202,6 @@ async function checkOrderStatus() {
     if (foundOrders) {
       foundOrders.forEach((order) => {
         let timestamp = moment(order.createdAt).unix();
-        console.log("Diferencia ", Date.now() / 1000 - timestamp);
         if (Date.now() / 1000 - timestamp > 120) {
           updateOrder(order.user_id, order.order_id, "canceled");
         }

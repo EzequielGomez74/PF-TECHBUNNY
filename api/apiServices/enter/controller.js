@@ -43,6 +43,7 @@ async function handleLogin({ username, password, twoFactorToken }) {
   try {
     let foundUser = await User.findOne({ where: { username: username } });
     if (!foundUser) return "USUARIO INEXISTENTE"; //401 = unauthorized
+    if (foundUser.isDeleted === true) return "CUENTA DESHABILITADA";
     const match = await bcrypt.compare(password, foundUser.dataValues.password);
     if (match && foundUser.dataValues.isActive) {
       const result = await verifyTwoFactorToken(
@@ -81,7 +82,7 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       foundUser = await User.findOne({
         where: { email },
       });
-      if (foundUser) {
+      if (foundUser && !foundUser.isDeleted) {
         if (foundUser.dataValues.isActive) {
           //     //$ si usa google login ahi si lo logueo
           if (foundUser.dataValues.usingGoogleLogin) {
@@ -107,14 +108,18 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
         }
       } else {
         //$ user not found -> crear nuevo usuario y loguearlo
-        const newUser = {
-          email: email,
-          username: name,
-          profilePicture: picture,
-          usingGoogleLogin: true,
-          isActive: true,
-        };
-        foundUser = await User.create(newUser);
+        if (!foundUser) {
+          const newUser = {
+            email: email,
+            username: name,
+            profilePicture: picture,
+            usingGoogleLogin: true,
+            isActive: true,
+          };
+          foundUser = await User.create(newUser);
+        } else {
+          return "CUENTA DESHABILITADA";
+        }
       }
       const response = await generateTokens(foundUser);
       response.user = userController.setLoggedUserData(foundUser.dataValues); //foundUser.dataValues;
@@ -159,9 +164,7 @@ async function handleLoginWithAccess(accessToken) {
 }
 
 async function handleLogout(user_id) {
-  console.log("user_id ", user_id);
   const foundUser = await User.findOne({ where: { user_id } });
-  console.log("foundUser ", foundUser);
   if (!foundUser) return "FAIL";
   foundUser.accessToken = "";
   //todo GUARDAR SAVED SESSION DATA

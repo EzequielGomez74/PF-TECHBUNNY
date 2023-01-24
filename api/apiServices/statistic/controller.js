@@ -95,78 +95,6 @@ async function getMonthlyProducts(orders, categoryName, time, products) {
     throw new Error(error);
   }
 }
-//! slow
-// async function getMonthlyProducts(orders, categoryName, time) {
-//   try {
-//     let results = [];
-//     for (let i = 0; i < orders.length; i++) {
-//       if (
-//         orders[i].dataValues.relativeDateAdded < time &&
-//         orders[i].dataValues.status === "completed"
-//       ) {
-//         const orderProducts = await OrderProduct.findAll({
-//           raw: true,
-//           where: { order_id: orders[i].dataValues.order_id },
-//         });
-//         results = [...results, ...orderProducts];
-//       }
-//     }
-//     const allProducts = await Promise.all(
-//       results.map(async (orderProduct) => {
-//         const product = await Product.findByPk(orderProduct.product_id, {
-//           raw: true,
-//         });
-//         if (product.category === categoryName)
-//           return product.price * orderProduct.count;
-//         else return 0;
-//       })
-//     );
-//     let total = 0;
-//     for (let i = 0; i < allProducts.length; i++) {
-//       total += allProducts[i];
-//     }
-//     return total;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// }
-
-// async function getMonthlyProducts(orders, categoryName, time) {
-//   //TODO REHACER TRABAJAR EN BASE A ORDERPRODUCT
-//   //TODO RECOLECTAR TODOS LOS ORDER PRODUCTS DE ESE ORDER ID
-//   //TODO FILTRAR POR CATEGORY Y TENER EN CUENNTA EL COUNT Y SUMAR
-//   let results = [];
-//   console.log("1");
-//   for (let i = 0; i < orders.length; i++) {
-//     const order = orders[i];
-//     if (
-//       order.dataValues.relativeDateAdded < time &&
-//       orders.dataValues.status === "completed"
-//     ) {
-//       const orderProducts = await OrderProduct.findAll({
-//         where: { order_id: order.dataValues.order_id },
-//       });
-//       console.log("2", orderProducts[0].dataValues);
-//       const monthlyProductsTotal = await Promise.all(
-//         orderProducts.map(async (oProd) => {
-//           const product = await Product.findByPk(oProd.dataValues.product_id);
-//           if (product.dataValues.category == categoryName) {
-//             console.log("ENTRA");
-//             return product.dataValues.price * oProd.dataValues.count;
-//           }
-//           return 0;
-//         })
-//       );
-//       console.log("3", monthlyProductsTotal);
-//       results = [...results, ...monthlyProductsTotal];
-//     }
-//   }
-//   console.log("4", results);
-//   const total = results.reduce((prev, curr) => {
-//     prev + curr;
-//   }, 0);
-//   return total;
-// }
 
 async function createBrandsData() {
   const data = [];
@@ -212,18 +140,15 @@ async function createUserData() {
 //? helpers
 async function getBrandRevenue(brand) {
   let totalRevenue = 0;
-  //console.log("ALL ORDER PRODUCTS ", allOrderProducts);
   const allOrderProducts = await OrderProduct.findAll();
   for (let i = 0; i < allOrderProducts.length; i++) {
     const product = await Product.findByPk(
       allOrderProducts[i].dataValues.product_id
     );
     if (product.dataValues.brand === brand) {
-      //console.log("<--------------------------ENTRA");
       totalRevenue +=
         allOrderProducts[i].dataValues.price *
         allOrderProducts[i].dataValues.count;
-      //console.log("TOTAL ", totalRevenue);
     }
   }
   return totalRevenue;

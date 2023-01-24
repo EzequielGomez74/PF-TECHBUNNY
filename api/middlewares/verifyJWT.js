@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
+const userController = require("../apiServices/user/controller");
 function verifyJWT(req, res, next) {
   const authHeader = req.headers["authorization"];
   if (!authHeader) return res.sendStatus(402); //!!unauthorized
@@ -10,6 +10,8 @@ function verifyJWT(req, res, next) {
     //forbidden invalid token
     req.username = decoded.username;
     req.role = decoded.role;
+    const user = userController.getUserBy(decoded.username);
+    if (user.isDeleted) return res.sendStatus(401); // !!LOGOUT
     next();
   });
 }

@@ -8,7 +8,6 @@ function getUsernameFromRefreshToken(req, res, next) {
       req.username = decode.username;
     }
   });
-  console.log(req.username);
   next();
 }
 module.exports = getUsernameFromRefreshToken;

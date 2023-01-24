@@ -81,6 +81,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: "2FADisabled",
       },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       usingGoogleLogin: {
         type: DataTypes.BOOLEAN,
         allowNull: true,

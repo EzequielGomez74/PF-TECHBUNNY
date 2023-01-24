@@ -57,7 +57,6 @@ const createTrans = () => {
 const sendMail = async (userdata) => {
   const transporter = createTrans();
   const info = await transporter.sendMail(template(userdata));
-  console.log("Message sent: %s", info.messageId);
   return;
 };
 

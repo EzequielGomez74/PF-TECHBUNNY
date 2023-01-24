@@ -20,8 +20,8 @@ async function getAllUsers() {
         zipCode: u.zipCode,
         role: u.role,
         isActive: u.isActive,
-        createdAt: u.createdAt,
         isDeleted: u.isDeleted,
+        createdAt: u.createdAt,
       };
 
       if (u.accessToken) {
@@ -57,7 +57,6 @@ async function getQR(user_id) {
     // RETORNA UNA IMAGEN QR PARA PONER EN ETIQUETA IMG COMO SRC <img src= ${response} />
     fs.writeFile("qr.html", `<img src="${data}"> </img>`, function (err) {
       if (err) throw err;
-      console.log("File is created successfully.");
     });
   });
   User.update({ secretAuth: secret.hex }, { where: { user_id } }); // GUARDAMOS EL SECRET DEL USER EN SU TABLA
@@ -92,7 +91,7 @@ async function deleteUser(user_id) {
     const userFound = await User.findOne({ where: { user_id } });
     if (userFound.isDeleted === false) {
       await User.update(
-        { isDeleted: true },
+        { isDeleted: true, accessToken: null },
         {
           where: {
             user_id,
@@ -113,7 +112,7 @@ async function deleteUser(user_id) {
       );
     }
 
-    return "Producto deshabilitado con exito!";
+    return "Usuario deshabilitado con exito!";
   } catch (error) {
     throw new Error(error.message);
   }
