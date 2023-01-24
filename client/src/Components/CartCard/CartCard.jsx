@@ -99,7 +99,7 @@ function CartCard({
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <span className={s.pPrice}>US${(price * quantity).toFixed(2)}</span>
+          <span className={s.pPrice}>US$ {(price * quantity).toFixed(2)}</span>
         </div>
       </div>
     </div>

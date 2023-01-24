@@ -36,7 +36,6 @@ function DisplayReview({ reviews, product_id, handlePost }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handlePost({
-      product_id: localReviews.product_id,
       description: localReviews.description,
       user_id: localReviews.user_id,
       rating: ratingToNumber(localReviews.rating),
@@ -149,7 +148,6 @@ function DisplayReview({ reviews, product_id, handlePost }) {
         </div>
       </section>
       <br />
-   
     </div>
   );
 }

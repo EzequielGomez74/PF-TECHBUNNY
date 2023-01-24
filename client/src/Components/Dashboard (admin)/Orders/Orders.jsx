@@ -315,7 +315,7 @@ function Orders() {
                           : "Cancelado"}
                       </TableCell>
                       <TableCell>{order.user_id}</TableCell>
-                      <TableCell>${order.total}</TableCell>
+                      <TableCell>US$ {order.total}</TableCell>
                       <TableCell>
                         <Edit
                           className={styles.iconos}

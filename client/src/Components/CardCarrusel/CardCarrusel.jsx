@@ -55,7 +55,7 @@ function CardCarrusel({
         <Link to={`/detail/${product_id}`}>
           <p className={s.name}>{name}</p>
         </Link>
-        <p className={s.price}>US${price}</p>
+        <p className={s.price}>US$ {price}</p>
       </div>
     </div>
   );

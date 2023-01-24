@@ -53,7 +53,7 @@ function Details() {
       dispatch(actions.getReviewsBy(id));
       idChange.current = id;
     }
-  }, [product, reviews, trigger, id]);
+  }, [product, trigger, id]);
 
   useEffect(() => {
     return () => dispatch(actions.cleanDetail());
@@ -69,7 +69,7 @@ function Details() {
 
   function handlePost(review) {
     dispatch(
-      actions.postReview(review, () => {
+      actions.postReview({ ...review, product_id: id }, () => {
         initialLoad.current = true;
         setTrigger(!trigger);
       })
@@ -206,7 +206,7 @@ function Details() {
           </div>
 
           <hr />
-          <h2 className={dm ? s.dmprice : s.price}>US${product.price}</h2>
+          <h2 className={dm ? s.dmprice : s.price}>US$ {product.price}</h2>
           <div className={dm ? s.dmquantity : s.quantity}>
             <div>
               <button onClick={handleMinus}>-</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -218,10 +218,17 @@ function Details() {
             </span>
           </div>
           <button
-          disabled={quantity === 0}
+            disabled={quantity === 0}
             type="submit"
-           
-            className={quantity !== 0 && dm ? s.dmmainButton:quantity !== 0 && !dm?s.mainButton: quantity === 0 && dm? s.dmmainButtonDisabled:s.mainButtonDisabled}
+            className={
+              quantity !== 0 && dm
+                ? s.dmmainButton
+                : quantity !== 0 && !dm
+                ? s.mainButton
+                : quantity === 0 && dm
+                ? s.dmmainButtonDisabled
+                : s.mainButtonDisabled
+            }
             onClick={handleAddToCart}
           >
             Agregar al Carrito
@@ -231,7 +238,6 @@ function Details() {
 
       <div className={dm ? s.dmsub : s.sub}>
         <div className={dm ? s.dmsubTitles : s.subTitles}>
-        
           <h5>Recomendados</h5>
           <span></span>
         </div>
