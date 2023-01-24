@@ -57,6 +57,12 @@ function Login() {
               text: "CONTRASEÑA INCORRECTA",
               icon: "warning",
             });
+          else if (status === "USUARIO INEXISTENTE")
+            Swal.fire({
+              title: "¡Alerta!",
+              text: "USUARIO INEXISTENTE",
+              icon: "warning",
+            });
           else if (status === "MAIL NO VALIDADO")
             Swal.fire({
               title: "¡Alerta!",
