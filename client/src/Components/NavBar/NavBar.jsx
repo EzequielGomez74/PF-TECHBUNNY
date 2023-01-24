@@ -158,7 +158,7 @@ function NavBar() {
               setOpenCat(!openCat);
             }}
           >
-            CATEGORIAS
+            CATEGORIAS<FontAwesomeIcon icon={faCaretDown} />
           </p>
           <Link to="/followUp">
             <p>VER ESTADO DE PEDIDO</p>
@@ -320,9 +320,7 @@ function NavBar() {
             {loggedUser?.role === 3 && (
               <Link to="/dashboard">
                 <DropdownItem
-                  onClick={() => {
-                    setOpen(false);
-                  }}
+                 
                   icon={faScrewdriverWrench}
                   text={"Dashboard"}
                 />
