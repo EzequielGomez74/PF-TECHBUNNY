@@ -210,7 +210,7 @@ async function checkOrderStatus() {
       foundOrders.forEach((order) => {
         let timestamp = moment(order.createdAt).unix();
         if (Date.now() / 1000 - timestamp > 120) {
-          updateOrder(order.user_id, order.order_id, "canceled");
+          updateOrder(order.order_id, "canceled");
         }
       });
     }
