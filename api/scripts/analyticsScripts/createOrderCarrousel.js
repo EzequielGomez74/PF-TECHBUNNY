@@ -9,97 +9,111 @@ const {
 const prodController = require("../../apiServices/product/controller");
 const cartGenerator = require("./cartGenerator");
 
-//! SETTINGS
-const VARIATION = 35; //? % de variacion entre el target y los productos que le siguen mas caros
 async function createOrderCarrousel(user_id) {
   try {
-    //$ testing
-    //await cartGenerator();
-    //$ agarro categorias
-    let categories = await Category.findAll({ raw: true });
-    categories = categories.map((c) => c.name);
-    //$ Obtengo todos los productos de todas las orders
-    const allOrders = await Order.findAll({
-      where: { user_id },
-      include: { model: Product },
-    });
-    let allProducts = [];
-    allOrders.forEach((order) => {
-      order.dataValues.Products.forEach((p) => {
-        allProducts.push(p.dataValues);
-      });
-    });
-    //$agarro de todos los productos solo los mas caros sin repetir la categoria
-    let newAllProducts = [];
-    categories.forEach((category) => {
-      let maxProduct = null;
-      allProducts.forEach((p) => {
-        if (p.category === category) {
-          if (!maxProduct) maxProduct = p;
-          else if (p.price > maxProduct.price) maxProduct = p;
-        }
-      });
-      newAllProducts.push(maxProduct);
-    });
-    allProducts = newAllProducts;
-    //$ seteo maximo  y transformo los productos mas caros a : su categoria + su posicion relativa
-    let categoryCount = 0;
-    allProducts = await Promise.all(
-      allProducts.map(async (p, i) => {
-        if (!p)
-          return {
-            category: categories[i],
-            relativePos: null,
-            selected: false,
-          };
-        categoryCount++;
-        return {
-          category: p.category,
-          relativePos: await getRelativePos(p),
-          selected: false,
-        };
-      })
-    );
-    //$ calculo el promedio total y seteo ese promedio en las categorias vacias si las hay
-    let average;
-    if (categoryCount === 0) average = 50;
-    else
-      average =
-        allProducts.reduce((prev, product) => {
-          if (product.relativePos) return prev + product.relativePos;
-          return prev;
-        }, 0) / categoryCount;
-    allProducts.forEach((p) => {
-      if (!p.relativePos) p.relativePos = average;
-    });
-    //$ buscar 10 categorias random dentro del array
-    //$ y por cada categoria encuentra un producto mayor al relativePos
-    let finalResults = [];
-    for (let index = 0; index < 10; index++) {
-      let posibleProducts = await findAndGeneratePosibleProducts(allProducts);
-      const choosenProduct = findBestProduct(posibleProducts);
-      finalResults.push(choosenProduct);
+    const results = [];
+    const products = await Product.findAll({ raw: true });
+    for (let i = 0; i < 10; i++) {
+      const pos = Math.floor(Math.random() * products.length);
+      results.push(products[pos]);
     }
-    //$ failsafe en caso de que no exista algun producto rellena con un random
-    for (let i = 0; i < finalResults.length; i++) {
-      if (finalResults[i] === null) {
-        const all = await Product.findAll();
-        const pos = Math.floor(Math.random() * (all.length - 1));
-        finalResults[i].push(all[pos].dataValues);
-      }
-    }
-    //!test
-    // //$ get username + setFavoriteStatus
-    const usernameAux = await getUserName(user_id);
-    finalResults = await prodController.setFavoriteStatus(
-      finalResults,
-      usernameAux
-    );
-    return finalResults;
+    return results;
   } catch (error) {
     throw new Error(error);
   }
 }
+
+//! SETTINGS
+// const VARIATION = 35; //? % de variacion entre el target y los productos que le siguen mas caros
+// async function createOrderCarrousel(user_id) {
+//   try {
+//     //$ testing
+//     //await cartGenerator();
+//     //$ agarro categorias
+//     let categories = await Category.findAll({ raw: true });
+//     categories = categories.map((c) => c.name);
+//     //$ Obtengo todos los productos de todas las orders
+//     const allOrders = await Order.findAll({
+//       where: { user_id },
+//       include: { model: Product },
+//     });
+//     let allProducts = [];
+//     allOrders.forEach((order) => {
+//       order.dataValues.Products.forEach((p) => {
+//         allProducts.push(p.dataValues);
+//       });
+//     });
+//     //$agarro de todos los productos solo los mas caros sin repetir la categoria
+//     let newAllProducts = [];
+//     categories.forEach((category) => {
+//       let maxProduct = null;
+//       allProducts.forEach((p) => {
+//         if (p.category === category) {
+//           if (!maxProduct) maxProduct = p;
+//           else if (p.price > maxProduct.price) maxProduct = p;
+//         }
+//       });
+//       newAllProducts.push(maxProduct);
+//     });
+//     allProducts = newAllProducts;
+//     //$ seteo maximo  y transformo los productos mas caros a : su categoria + su posicion relativa
+//     let categoryCount = 0;
+//     allProducts = await Promise.all(
+//       allProducts.map(async (p, i) => {
+//         if (!p)
+//           return {
+//             category: categories[i],
+//             relativePos: null,
+//             selected: false,
+//           };
+//         categoryCount++;
+//         return {
+//           category: p.category,
+//           relativePos: await getRelativePos(p),
+//           selected: false,
+//         };
+//       })
+//     );
+//     //$ calculo el promedio total y seteo ese promedio en las categorias vacias si las hay
+//     let average;
+//     if (categoryCount === 0) average = 50;
+//     else
+//       average =
+//         allProducts.reduce((prev, product) => {
+//           if (product.relativePos) return prev + product.relativePos;
+//           return prev;
+//         }, 0) / categoryCount;
+//     allProducts.forEach((p) => {
+//       if (!p.relativePos) p.relativePos = average;
+//     });
+//     //$ buscar 10 categorias random dentro del array
+//     //$ y por cada categoria encuentra un producto mayor al relativePos
+//     let finalResults = [];
+//     for (let index = 0; index < 10; index++) {
+//       let posibleProducts = await findAndGeneratePosibleProducts(allProducts);
+//       const choosenProduct = findBestProduct(posibleProducts);
+//       finalResults.push(choosenProduct);
+//     }
+//     //$ failsafe en caso de que no exista algun producto rellena con un random
+//     for (let i = 0; i < finalResults.length; i++) {
+//       if (finalResults[i] === null) {
+//         const all = await Product.findAll();
+//         const pos = Math.floor(Math.random() * (all.length - 1));
+//         finalResults[i].push(all[pos].dataValues);
+//       }
+//     }
+//     //!test
+//     // //$ get username + setFavoriteStatus
+//     const usernameAux = await getUserName(user_id);
+//     finalResults = await prodController.setFavoriteStatus(
+//       finalResults,
+//       usernameAux
+//     );
+//     return finalResults;
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// }
 
 //? HELPER FUNCTIONS
 async function findAndGeneratePosibleProducts(arrProducts) {
