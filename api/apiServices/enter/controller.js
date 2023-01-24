@@ -76,7 +76,6 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
       audience: process.env.GOOGLE_LOGIN_CLIENT_ID,
     });
     const { name, email, picture } = ticket.getPayload();
-    let foundUser = "pepe";
     if (email) {
       foundUser = await User.findOne({
         where: { email },
