@@ -3,12 +3,21 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import { useSelector } from 'react-redux';
 import s from './FollowUp.module.css';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 
 function FollowUp(){
-
     const dm = useSelector(state => state.darkMode);
 
+    const user = useSelector((state) => state.loggedUser);
+    const history = useHistory()
+    const [orderId, setOrderId] = useState('')
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        history.push(`/followUp/${user.user_id}/${orderId}`)
+    }
+    
     return(
         <div>
             <NavBar />
@@ -17,7 +26,7 @@ function FollowUp(){
                     <div className={dm ? s.dmformTitle : s.formTitle}>
                         <h1>VER ESTADO DE PEDIDO:</h1>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         {/* <div className={dm ? s.dmformOptions : s.formOptions}>
                         <h2>Opción 1</h2>
                         <h3>Indicar código de seguimiento</h3>
@@ -26,15 +35,14 @@ function FollowUp(){
                         <div className={dm ? s.dmformOptions : s.formOptions}>
                         <h2>Opción 1</h2>
                         <h3>Indicar número de pedido</h3>
-                        <input type="search" placeholder={`Número de Pedido(por ejemplo, 444455)`}/>
+                        <input type="search" value={orderId} onChange={e => setOrderId(e.target.value)} placeholder={`Número de Pedido(por ejemplo, 444455)`}/>
                         </div>
                         <div className={dm ? s.dmbtnDiv : s.btnDiv}>
                         <button className={dm ? s.dmbtnFollowUp : s.btnFollowUp} type="submit">
-                        <p> ENCONTRAR PEDIDO </p>
+                            ENCONTRAR PEDIDO
                         </button>
                         </div>
                     </form>
-
                 </div>
 
             </div>

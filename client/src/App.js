@@ -28,6 +28,7 @@ import Products from "./Components/Dashboard (admin)/Products/Products";
 import Users from "./Components/Dashboard (admin)/Users/Users";
 import Orders from "./Components/Dashboard (admin)/Orders/Orders";
 import Statistics from "./Components/Dashboard (admin)/Statistics/Statistics";
+import Status from "./Components/Estado de Orden/Status";
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
@@ -49,6 +50,7 @@ function App() {
         <Route exact path="/category/:name" component={Category} />
         <Route exact path="/brand/:brand" component={Brand} />
         <Route exact path="/followUp" component={FollowUp} />
+        <Route exact path="/followUp/:userId/:orderId" component={Status} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/qa" component={QA} />
         <Route exact path="/results/:searchTerm" component={Results} />

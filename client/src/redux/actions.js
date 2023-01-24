@@ -38,7 +38,8 @@ import {
   UPDATE_ORDER,
   GET_ALL_STATISTICS,
   GET_SUBCATEGORY_BY_CATEGORY,
-  CLEAN_PRODUCTS_BY_BRAND
+  CLEAN_PRODUCTS_BY_BRAND,
+  GET_ORDER_STATUS
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -157,6 +158,17 @@ export const getOrders = () => {
     }
   };
 };
+
+export const getOrderStatus = (user_id, order_id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get(`/orders?user_id=${user_id}&order_id=${order_id}`);
+      return dispatch({ type: GET_ORDER_STATUS, payload: response.data });
+    }catch(error){
+      console.log('No se encontró el order')
+    }
+  }
+}
 
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
