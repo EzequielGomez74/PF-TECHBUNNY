@@ -34,12 +34,9 @@ import {
   UPDATE_USER,
   DELETE_USER,
   GET_USERS,
-<<<<<<< HEAD
   GET_ORDERS,
   UPDATE_ORDER,
-=======
   GET_ALL_STATISTICS,
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -55,7 +52,6 @@ export const getProducts = (id) => {
 };
 
 export const postProduct = (productInfo) => {
-<<<<<<< HEAD
   console.log(productInfo)
   return async function (dispatch) {
     try{
@@ -64,32 +60,6 @@ export const postProduct = (productInfo) => {
       if(response.data === "Producto creado con exito!") {
        const allProducts = await axiosInstance.get('/products')
        return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
-=======
-  console.log(productInfo);
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.post("/products", productInfo);
-      console.log(response.data);
-      if (response.data === "Producto creado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
-      }
-    } catch (error) {
-      console.log("No se pudo insertar el producto");
-    }
-  };
-};
-
-export const updateProduct = (productInfo) => {
-  console.log(productInfo);
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.put("/products", productInfo);
-      console.log(response.data);
-      if (response.data === "Producto actualizado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: UPDATE_PRODUCT, payload: allProducts.data });
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
       }
     } catch (error) {
       console.log('No se pudo insertar el producto')
@@ -97,7 +67,6 @@ export const updateProduct = (productInfo) => {
   };
 };
 
-<<<<<<< HEAD
 export const updateProduct = (productInfo) => {
   console.log(productInfo)
   return async function (dispatch) {
@@ -143,28 +112,10 @@ export const getUsers = () => {
       return dispatch({ type: GET_USERS, payload: response.data });
     } catch (error) {
       console.log("Falla para traer usuarios");
-=======
-export const deleteProduct = (product_id) => {
-  console.log(product_id);
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.delete(`/products/${product_id}`);
-      console.log(response.data);
-      if (response.data === "Producto deshabilitado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
-      } else {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
-      }
-    } catch (error) {
-      console.log(error.message);
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     }
   };
 };
 
-<<<<<<< HEAD
 export const updateUser = (user_id, userInfo) => {
   console.log(userInfo)
   return async function (dispatch) {
@@ -178,54 +129,6 @@ export const updateUser = (user_id, userInfo) => {
     } catch (error) {
       console.log(error.message)
     } 
-=======
-// Para el Dashboard
-
-export const getUsers = () => {
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.get("/users");
-      console.log("usuarios son", response.data);
-      return dispatch({ type: GET_USERS, payload: response.data });
-    } catch (error) {
-      console.log("Falla para traer usuarios");
-    }
-  };
-};
-
-export const updateUser = (user_id, userInfo) => {
-  console.log(userInfo);
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.put(`/users/${user_id}`, userInfo);
-      console.log(response.data);
-      if (Object.keys(response.data).length > 0) {
-        const allUsers = await axiosInstance.get("/users");
-        return dispatch({ type: UPDATE_USER, payload: allUsers.data });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-export const deleteUser = (user_id) => {
-  console.log(user_id);
-  return async function (dispatch) {
-    try {
-      const response = await axiosInstance.delete(`/users/${user_id}`);
-      console.log(response.data);
-      if (response.data === "Usuario habilitado con exito!") {
-        const allUsers = await axiosInstance.get("/users");
-        return dispatch({ type: DELETE_USER, payload: allUsers.data });
-      } else {
-        const allUsers = await axiosInstance.get("/users");
-        return dispatch({ type: DELETE_USER, payload: allUsers.data });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   };
 };
 
@@ -368,10 +271,6 @@ export const filterBy = (subcategory, brand) => {
 //   return { type: FILTER_BY_BRAND, payload: brand };
 // };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 export const sortByPrice = (priceOrder) => {
   return { type: SORT_BY_PRICE, payload: priceOrder };
 };
@@ -644,27 +543,16 @@ export function getCarrousel(carrouselType) {
 export function updateUserInfo(user_id, input) {
   return async function (dispatch) {
     try {
-<<<<<<< HEAD
       // const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
       // console.log(userInfoGet.data);
       const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
       console.log(userInfo.data);
 
       return dispatch({ type: UPDATE_USER_INFO, payload: input });
-=======
-      const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
-      console.log(userInfoGet.data);
-      const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
-      console.log(userInfo.data);
-      return dispatch({ type: UPDATE_USER_INFO, payload: userInfo.data });
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     } catch (error) {
       console.log(error);
     }
   };
-<<<<<<< HEAD
-}
-=======
 }
 
 export function getAllStatistics(onSuccess) {
@@ -682,4 +570,3 @@ export function getAllStatistics(onSuccess) {
     }
   };
 }
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198

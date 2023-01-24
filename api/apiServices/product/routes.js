@@ -39,19 +39,19 @@ router.use(verifyJWT); // !validacion de JWT
 //!     ----- ACCESO ADMIN  -----
 router.use(requiredAccess(3));
 //POST	/products					body={name:"Mouse Pepito",image:"asd.png"...}	                      <-- Crea un nuevo producto. el body debe respetar el modelo Product
-router.post("/", upload.single('image'), async (req, res) => {
-  try {
-    if(req.file) {
-      const newBody = await controller.uploadImage(req.body, req.file)
-      res.status(200).send(await controller.createProduct(newBody));
-    } else {
-      res.status(200).send(await controller.createProduct(req.body));
-    }
+// router.post("/", upload.single('image'), async (req, res) => {
+//   try {
+//     if(req.file) {
+//       const newBody = await controller.uploadImage(req.body, req.file)
+//       res.status(200).send(await controller.createProduct(newBody));
+//     } else {
+//       res.status(200).send(await controller.createProduct(req.body));
+//     }
 
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 
 
 //PUT	/products					body={product_id:1,name:"Mouse Pepe"...}	                            <-- Modifica un producto existente . el body debe respetar el modelo Product

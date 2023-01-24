@@ -110,11 +110,7 @@
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 @media (max-width: 450px){
-=======
-@media (max-width: 500px){
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     .profileInfo{
        width: 85%;
        height: 300px;
@@ -166,11 +162,7 @@
 
 }
 
-<<<<<<< HEAD
 @media (max-width: 450px){
-=======
-@media (max-width: 500px){
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     .profileForm{
        width: 85%;
        height: 300px;

@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { updateUserInfo } from '../../redux/actions';
 import s from "./Profile.module.css";
 import img from "../../Photos/conejoperfil.png";
-<<<<<<< HEAD
 import { useEffect,useRef } from "react";
 import { allOrdersByUser } from '../../redux/actions'
 
@@ -19,12 +18,6 @@ function Profile(){
     const dispatch = useDispatch()
     const history = useHistory()
     const [check,setCheck]=useState(0)
-=======
-
-function Profile(){
-    const user = useSelector(state => state.loggedUser)
-    const dm = useSelector(state => state.darkMode);
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
     const [input, setInput] = useState({
         profilePicture:"",
@@ -36,7 +29,6 @@ function Profile(){
         zipCode: "",
     })
 
-<<<<<<< HEAD
     
 
     useEffect(() => {
@@ -79,32 +71,10 @@ function Profile(){
 
    
 
-=======
-    const dispatch = useDispatch()
-    const history = useHistory()
-
-    const handleChange = e => {
-        setInput({
-            ...input,
-            [e.target.name]:e.target.value
-        })
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(updateUserInfo(user.user_id, input))
-    }
-
-    const handleEditProfile = () => {
-        history.push('/editProfile');
-    }
-
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     return(
         <div>
             <NavBar/>
             <div className={dm? s.dmprofileSection : s.profileSection}>
-<<<<<<< HEAD
                 { user.username && user.email ? 
                 <div>
                     <section className={s.profileImgInfoSection}>
@@ -144,22 +114,6 @@ function Profile(){
                             </div>) :
                              'Está vacio'}
                     </section>
-=======
-            <div className="imgContainer">
-            <div className="imgBunny">
-              <img src={img} alt="bunny login" className={dm ? s.dmimg : s.img} />
-            </div>
-            </div>
-                { user.username && user.email ? 
-                <div className={dm? s.dmprofileInfo : s.profileInfo}>
-                    <span><strong>Nombre de usuario:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.username} </span>
-                    <span><strong>Nombre:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.name} </span>
-                    <span><strong>Apellido:</strong>&nbsp;&nbsp;&nbsp;&nbsp;  {user.surname} </span>
-                    <span><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.email} </span>
-                    <span><strong>Dirección:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.billingAddress} </span>
-                    <span><strong>Código ZIP:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {user.zipCode} </span>
-                    <button onClick={handleEditProfile} >Editar información</button>
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
                 </div> : 
                 <form onSubmit={handleSubmit} className={dm? s.dmprofileForm : s.profileForm} >
                     <input type="text" name="username" value={input.username} onChange={handleChange} placeholder="Nombre de usuario"></input>

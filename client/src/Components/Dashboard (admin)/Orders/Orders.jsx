@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Backdrop from '../../../Components/Toolbar/Backdrop'
@@ -293,13 +292,6 @@ function Orders() {
 
       </div>
     </div>
-=======
-import React from 'react'
-
-function Orders() {
-  return (
-    <div>Orders</div>
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   )
 }
 

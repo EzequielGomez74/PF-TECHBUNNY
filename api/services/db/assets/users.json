@@ -1,21 +1,12 @@
 [
   {
     "username": "anonimo",
-<<<<<<< HEAD
-    "name": "Anonimus",
-    "surname": "without",
-    "password": "anonimoforever",
-    "email": "aaa@aaa.gmail.com",
-    "defaultShippingAddress": "av siempre viva 742",
-    "zipCode": 7600,
-=======
     "name": "anonimo",
     "surname": "anonimo",
     "password": "anonimo",
     "email": "a@a.com",
     "billingAddress": "anonimo",
     "zipCode": 0,
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "isActive": true
   },
   {
@@ -24,13 +15,8 @@
     "role": "3",
     "surname": "Martinez",
     "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
-<<<<<<< HEAD
-    "email": "srbetito85@gmail.com",
-    "defaultShippingAddress": "password 123",
-=======
     "email": "a@gmail.com",
     "billingAddress": "Rodriguez Peña 1234",
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "zipCode": 7600,
     "isActive": true
   },
@@ -47,35 +33,20 @@
   },
   {
     "username": "emi",
-<<<<<<< HEAD
-    "name": "Emi",
-    "role": "3",
-    "surname": "Hernandez",
-    "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
-    "email": "chess@gmail.com",
-    "defaultShippingAddress": "Jose Marti 132",
-=======
     "name": "Emiliano",
     "role": "3",
     "surname": "Hernandez",
     "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
     "email": "c@gmail.com",
     "billingAddress": "Jose Marti 1234",
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "zipCode": 1722,
     "isActive": true
   },
   {
     "username": "gerlini",
-<<<<<<< HEAD
-    "email": "gerfer@gmail.com",
-    "name": "ger",
-    "surname": "fernandez",
-=======
     "email": "d@gmail.com",
     "name": "German",
     "surname": "Fernandez",
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
     "role": "3",
     "zipCode": 1050,
@@ -84,26 +55,14 @@
   },
   {
     "username": "maty",
-<<<<<<< HEAD
-    "name": "matias",
-=======
     "name": "Matias",
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
     "surname": "Gimenez",
     "role": "3",
-<<<<<<< HEAD
-    "email": "abc@gmail.com",
-    "defaultShippingAddress": "calle falsa 123",
-    "zipCode": "122",
-    "profilePicture": "www.google.com",
-    "billingAddress": "calle falsa 123",
-=======
     "email": "e@gmail.com",
     "billingAddress": "Rivadavia 1234",
     "zipCode": "122",
     "profilePicture": "www.google.com",
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
     "isActive": true
   },
   {

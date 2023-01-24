@@ -4,7 +4,6 @@ import NavBar from "../NavBar/NavBar";
 import axios from "axios";
 import validate from "./validate";
 import { useHistory, useParams } from "react-router-dom";
-<<<<<<< HEAD
 import img from "../../images/recoverpassword.png";
 import s from "./NewPassword.module.css";
 import { useSelector } from "react-redux";
@@ -13,10 +12,6 @@ import { useSelector } from "react-redux";
 
 function NewPassword() {
   const dm = useSelector(state => state.darkMode);
-=======
-
-function NewPassword() {
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
   const { token } = useParams();
   const [input, setInput] = useState({
     newPassword: "",
@@ -53,7 +48,6 @@ function NewPassword() {
   return (
     <div>
       <NavBar />
-<<<<<<< HEAD
       <div className={dm ? s.dmnewPasswordContainer : s.newPasswordContainer}>
       <div className={dm ? s.dmdivForm : s.divForm}>
       <div className={dm ? s.dmimgBunny : s.imgBunny}>
@@ -61,10 +55,6 @@ function NewPassword() {
             </div>
         <h3>Ingrese Nueva Contraseña</h3>
         <div className={dm? s.dmdivInput : s.divInput}>
-=======
-      <div>
-        <h3>Nueva Contraseña</h3>
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
         <input
           type="password"
           name="newPassword"
@@ -81,13 +71,9 @@ function NewPassword() {
           onChange={(e) => handleChange(e)}
         />
         {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
-<<<<<<< HEAD
         <button className={dm ? s.dmbtnRecover : s.btnRecover} onClick={handlepasswordChange}> <p>Nueva contraseña</p></button>
         </div>
       </div>
-=======
-        <button onClick={handlepasswordChange}>Guardar nueva contraseña</button>
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
       </div>
       <Footer />
     </div>

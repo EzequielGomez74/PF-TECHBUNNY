@@ -171,7 +171,6 @@
     text-transform: uppercase;
     cursor: pointer;
   }
-<<<<<<< HEAD
 
   .dmpageContent button{
     background-color: #D7F136;
@@ -189,8 +188,6 @@
     text-transform: uppercase;
     cursor: pointer;
 }
-=======
->>>>>>> b687dc0fca529212cc210a60788a56ca71e2c198
 
 @media only screen and (max-width: 800px) {
     .allInfo{
