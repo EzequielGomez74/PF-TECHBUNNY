@@ -148,11 +148,14 @@ function NavBar() {
             <p>SOBRE TECHBUNNY</p>
           </Link>
           <p
-            onMouseOver={() => {
+            // onMouseOver={() => {
+            //   setOpenCat(!openCat);
+            // }}
+            // onMouseOut={() => {
+            //   setOpenCat(!closedCat);
+            // }}
+            onClick={() => {
               setOpenCat(!openCat);
-            }}
-            onMouseOut={() => {
-              setOpenCat(!closedCat);
             }}
           >
             CATEGORIAS
@@ -165,12 +168,7 @@ function NavBar() {
       {/* CATEGORIA DROPDOWN WEB*/}
       <div
         className={`dropdown-menu-cat ${openCat ? "active" : "inactive"}`}
-        onMouseEnter={() => {
-          setOpenCat(!open);
-        }}
-        onMouseLeave={() => {
-          setOpenCat(!closedCat);
-        }}
+       
       >
         <ul>
           <Link to="/category/Equipos%20armados">
