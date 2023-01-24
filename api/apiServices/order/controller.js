@@ -86,7 +86,7 @@ async function createOrder(user_id) {
     const userCart = await Cart.findAll({ where: { user_id } });
     const user = await User.findByPk(user_id); //BUSCAMOS LOS DATOS DEL USER PARA EL EMAIL
     const newOrder = { user_id };
-    const order = await Order.create(newOrder); //
+    let order = await Order.create(newOrder); //
     let suma = 0;
     await userCart.forEach(async (product) => {
       // $ EMPIEZA A RECORRER EL ARRAY DE PRODUCTOS DE LA ORDER
