@@ -69,18 +69,30 @@
     width: 240px;
     height: 40px;
     background-color:#20232A;
+<<<<<<< HEAD
+=======
+    color: white;
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+<<<<<<< HEAD
+=======
+    transition: 0.5s;
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
 }
 
 .btnFollowUp:hover{
     cursor: pointer;
+    background-color: #d7f136;
+    color: #20232A;
+    transition: 0.5s;
 }
 
+<<<<<<< HEAD
 .btnFollowUp p{
     margin-top: 9px;
     color: #ffffff;
@@ -92,6 +104,8 @@
     
 }
 
+=======
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
 @media (max-width: 450px){
     .formStyle{
         width: 90%;
@@ -192,11 +206,17 @@
 .dmbtnFollowUp{
     width: 240px;
     height: 40px;
+<<<<<<< HEAD
     background-color:#d7f136;
+=======
+    background-color: #d7f136;
+    color: #1b1d23;
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
+<<<<<<< HEAD
     letter-spacing: 2px;
     text-transform: uppercase;
 }
@@ -214,11 +234,28 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 10px;
+=======
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
     letter-spacing: 2px;
-    
-    
+    text-transform: uppercase;
+    transition: 0.5s;
 }
 
+<<<<<<< HEAD
+=======
+.dmbtnFollowUp:hover{
+    background-color: black;
+    color: #d7f136;
+    font-size: 12px;
+    transition: 0.5s;
+}
+
+.dmformOptions input:focus{
+    color: white;
+}
+
+
+>>>>>>> a233e1608eac87343dea40b49bdf6818eb6d88fa
 @media (max-width: 450px){
     .dmformStyle{
         width: 80%;

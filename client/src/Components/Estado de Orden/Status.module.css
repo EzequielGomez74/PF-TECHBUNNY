@@ -1,0 +1,233 @@
+.profileSection{
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.profileOrdersHistory{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+.orderContainer{
+    background-color: white;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    width: 80%;
+    border-radius: 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.orderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #dee6e9;
+    border-radius: 20px 20px 0px 0px;
+}
+
+
+.orderTotal{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+    margin:0 40px 10px 0;
+}
+
+.orderProductsContainer{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.productOrderImage{
+    width: 8%;
+    height: 8%;
+}
+
+.liOrderElement{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.productOrderInfo{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* DARK MODE */
+.dmstatusPage{
+    background-color: #20232A;
+}
+
+.dmprofileSection{
+    background-color: #20232A;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    font-family: 'Poppins';
+}
+
+.dmprofileOrdersHistory{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+.dmorderContainer{
+    background-color: white;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    width: 80%;
+    border-radius: 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.dmorderByUserInfo{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: transparent;
+    display: flex;
+    font-family: 'Poppins';
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #d7f136;
+    border-radius: 20px 20px 0px 0px;
+}
+
+
+.dmorderTotal{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+    margin:0 40px 10px 0;
+}
+
+.dmorderProductsContainer{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.dmproductOrderImage{
+    width: 8%;
+    height: 8%;
+}
+
+.dmliOrderElement{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.dmproductOrderInfo{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 450px){
+    .profileInfo{
+       width: 85%;
+       height: 300px;
+    }
+    .profileInfo span{
+        display: flex;
+        margin-bottom: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    .profileInfo button{
+        height: 30px;
+        width: 200px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        transform: translateX(25px);
+    }
+
+    .dmprofileInfo{
+        width: 75%;
+        height: 300px;
+     }
+     .dmprofileInfo span{
+         display: flex;
+         margin-bottom: 20px;
+         margin-left: 40px;
+         margin-right: 40px;
+         font-style: normal;
+         font-weight: 400;
+         font-size: 11px;
+         line-height: 15px;
+     }
+ 
+     .dmprofileInfo button{
+         height: 30px;
+         width: 200px;
+         font-style: normal;
+         font-weight: 600;
+         font-size: 10px;
+         transform: translateX(25px);
+     }
+     .productOrderImage{
+        width:40%;
+        height: 40%;
+     }
+     .price{
+        transform: translateX(35px);
+     }
+     .dmprice{
+        transform: translateX(50px);
+     }
+
+     .dmimg {
+        width: 100%;
+      }
+}

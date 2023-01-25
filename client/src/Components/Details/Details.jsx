@@ -16,6 +16,7 @@ import {
   // faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import 'animate.css'
 
 function Details() {
   const { id } = useParams();
@@ -98,6 +99,22 @@ function Details() {
           user.user_id
         )
       );
+      Swal.fire({
+        title: 'El artículo fue agregado correctamente al carrito',
+        icon: "success",
+        timer: 2000,
+        timerProgressBar: true,
+        toast: true,
+        position: "top-end",
+        background: "#fff",
+        showConfirmButton: false,
+        showClass: {
+          popup: "animate__animated animate__fadeInRight",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutRight",
+        },
+      });
       setQuantity(0);
     }
   }

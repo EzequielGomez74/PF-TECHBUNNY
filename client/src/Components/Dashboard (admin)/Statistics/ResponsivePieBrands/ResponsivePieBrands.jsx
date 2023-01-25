@@ -3,7 +3,7 @@ import { ResponsivePie } from "@nivo/pie";
 
 const ResponsivePieBrands = ({ data }) => {
   return (
-    <div style={{ width: "1600px", height: "900px", backgroundColor: "white" }}>
+    <div style={{ width: "1200px", height: "500px", backgroundColor: "white" }}>
       <ResponsivePie
         data={data}
         sortByValue={true}

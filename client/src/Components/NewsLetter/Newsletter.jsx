@@ -22,7 +22,7 @@ function Newsletter() {
           />
           <button className={s.inputBtn}>SUSCRIBIRSE</button>
         </div> */}
-        <h2 className={s.newsText}>¡Todo lo que buscas, en un solo lugar!</h2>
+        <h2 className={s.newsText}>¡Amplia variedad de productos tecnológicos!</h2>
       </div>
     </div>
   );

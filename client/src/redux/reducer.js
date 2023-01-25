@@ -12,6 +12,7 @@ const initialState = {
   darkMode: false,
   reviews: [],
   orders: [],
+  orderStatus: [],
   ordersByUser: [],
   allOrders: [],
   // searchTerm:'',
@@ -68,6 +69,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         allOrders: action.payload,
       };
+    case 'GET_ORDER_STATUS':
+      return {
+        ...state,
+        orderStatus: action.payload,
+      }
     case "UPDATE_ORDER":
       return {
         ...state,

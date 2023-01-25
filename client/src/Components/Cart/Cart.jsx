@@ -43,7 +43,7 @@ return tot + (curr.price* curr.count)
   };
 
   return (
-    <div>
+    <div className={dm ? s.dmcartPage : s.cartPage}>
       <NavBar />
       <section className={dm ? s.dmcartSection : s.cartSection}>
         {cart.length ? (
@@ -63,8 +63,8 @@ return tot + (curr.price* curr.count)
                 />
               ))}
             </div>
-            <div>
-              <span>Total: US$ {total.toFixed(2)}</span>
+            <div className={dm ? s.dmcartTotal : s.cartTotal}>
+              <span> <strong>Total:</strong> US$ {total.toFixed(2)}</span>
             </div>
             <button
               onClick={handleNewOrder}

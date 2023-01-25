@@ -38,33 +38,42 @@ const Statistics = () => {
         <Backdrop SideBar={sidebar} closeSidebar={toggleSidebar} />
         <Sidebar SideBar={sidebar} />
       </div>
+      <section className={s.statSection}>
       {trigger.current ? (
         <div className={s.statisticsContainer}>
           <div
+            className={s.stat}
             style={{
-              width: "1600px",
-              height: "900px",
+              width: "1300px",
+              height: "600px",
               backgroundColor: "white",
             }}
           >
+            <h3>Compras totales de clientes TECHBUNNY</h3>
             <ResponsiveLineUsers data={allStatistics.usersData} />
           </div>
+          <br />
           <div
+            className={s.stat}
             style={{
-              width: "1600px",
-              height: "900px",
+              width: "1300px",
+              height: "600px",
               backgroundColor: "white",
             }}
           >
+            <h3>Ingresos brutos por marcas</h3>
             <ResponsivePieBrands data={allStatistics.brandsData} />
           </div>
+          <br />
           <div
+            className={s.stat}
             style={{
-              width: "1600px",
-              height: "900px",
+              width: "1300px",
+              height: "600px",
               backgroundColor: "white",
             }}
           >
+            <h3>Ingresos acumulados por categorías en un año</h3>
             <ResponsiveAreaBumpCategories data={allStatistics.categoriesData} />
           </div>
         </div>
@@ -73,6 +82,7 @@ const Statistics = () => {
               <img src={loadingStat} alt="" />
             </div>
       )}
+      </section>
     </div>
   );
 };

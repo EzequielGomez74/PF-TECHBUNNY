@@ -20,6 +20,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "animate.css": "^4.1.1",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "dropdown": "^0.2.0",

@@ -3,7 +3,7 @@ import { ResponsiveAreaBump } from "@nivo/bump";
 
 function ResponsiveAreaBumpCategories({ data }) {
   return (
-    <div style={{ width: "1600px", height: "900px", backgroundColor: "white" }}>
+    <div style={{ width: "1200px", height: "500px", backgroundColor: "white" }}>
       <ResponsiveAreaBump
         data={data}
         margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
