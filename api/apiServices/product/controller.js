@@ -9,7 +9,7 @@ const cloudinary = require("../../services/cloudinary/index")
 function uploadImage(body, file) {
   return new Promise((resolve, reject) => {
     try {
-      const stream = cloudinary.uploader.upload_stream({ resource_type: "image", folder: "techbunny", format: 'png' },
+      const stream = cloudinary.uploader.upload_stream({ resource_type: "image", folder: "techbunny", width: 300, crop: "scale", format: 'png' },
         function (error, result) {
           if(error) {
             reject(new Error(error.message));
