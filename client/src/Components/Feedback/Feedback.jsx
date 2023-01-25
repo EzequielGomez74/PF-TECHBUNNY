@@ -27,7 +27,7 @@ function Feedback() {
     console.log("status ", status);
     if (status === "approved") {
       const order_id = localStorage.getItem("order_id");
-      console.log("order_id ", localStorage.getItem("order_id"));
+      console.log("order_id -> ", order_id);
       dispatch(updateOrder(order_id, "completed"));
     }
   }, [location]);
