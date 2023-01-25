@@ -56,9 +56,9 @@ router.get("/pagar/:order_id", async (req, res) => {
     let preference = {
       items: carrito,
       back_urls: {
-        success: "http://localhost:3000/feedback", // ! ACA VA SI FUE PAGO EXITOSO
-        failure: "http://localhost:3000/feedback", // ! SI EL PAGO FALLA
-        pending: "http://localhost:3000/feedback", // ? PAGO PENDIENTE
+        success: "https://pf-techbunny-lake.vercel.app/feedback", // ! ACA VA SI FUE PAGO EXITOSO
+        failure: "https://pf-techbunny-lake.vercel.app/feedback", // ! SI EL PAGO FALLA
+        pending: "https://pf-techbunny-lake.vercel.app/feedback", // ? PAGO PENDIENTE
       },
       auto_return: "approved",
     };
