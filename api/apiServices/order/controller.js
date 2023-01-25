@@ -50,6 +50,7 @@ async function updateOrder(order_id, status) {
       });
       // sendMail(userdata); //! su pago fue recibido
     }
+    console.log("sale");
     return order;
   } catch (error) {
     throw new Error(error.message);
