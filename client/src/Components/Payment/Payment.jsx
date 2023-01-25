@@ -10,6 +10,7 @@ import {
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { useRef } from "react";
+import Control from "./Control";
 
 function Payment() {
   const dm = useSelector((state) => state.darkMode);
@@ -18,6 +19,7 @@ function Payment() {
   const orderMp = useSelector((state) => state.orders);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const handleCart = () => {
     history.push("/cart");
   };
@@ -32,12 +34,20 @@ function Payment() {
     zipCode: "",
     preference_id: "",
   });
+  const [errors, setErrors] = useState({});
+  const [showError, setShowError] = useState(false);
 
   const handleChange = (e) => {
     setPayInfo({
       ...payInfo,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      Control({
+        ...payInfo,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
   const flag = useRef(true);
   useEffect(() => {
@@ -65,10 +75,15 @@ function Payment() {
   }, [preferences, payInfo.preference_id]);
 
   async function pay() {
+    console.log(Object.keys(errors));
     try {
-      dispatch(getPayPreferencesById(orderMp[0].order_id));
-      //dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
-      //dispatch(allOrdersByUser(user.user_id))
+      setShowError(true);
+      if (Object.keys(errors).length === 0) {
+        console.log("Entre a dispatch pay");
+        dispatch(getPayPreferencesById(orderMp[0].order_id));
+        //dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
+        //dispatch(allOrdersByUser(user.user_id))
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -90,6 +105,11 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Nombre"
               />
+              {errors.name && showError ? (
+                <span className={s.error}>{errors.name}</span>
+              ) : (
+                <br />
+              )}
               <input
                 type="text"
                 name="surname"
@@ -97,6 +117,11 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Apellido"
               />
+              {errors.surname && showError ? (
+                <span className={s.error}>{errors.surname}</span>
+              ) : (
+                <br />
+              )}
               <input
                 type="text"
                 name="email"
@@ -104,6 +129,11 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Correo electrónico"
               />
+              {errors.email && showError ? (
+                <span className={s.error}>{errors.email}</span>
+              ) : (
+                <br />
+              )}
             </div>
             <div className={dm ? s.dmoptional : s.optional}>
               <label>Ubicación</label>
@@ -114,6 +144,11 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Dirección"
               />
+              {errors.shippingAddress && showError ? (
+                <span className={s.error}>{errors.shippingAddress}</span>
+              ) : (
+                <br />
+              )}
               <input
                 type="text"
                 name="city"
@@ -121,6 +156,11 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Ciudad"
               />
+              {errors.city && showError ? (
+                <span className={s.error}>{errors.city}</span>
+              ) : (
+                <br />
+              )}
               <input
                 type="text"
                 name="zipCode"
@@ -128,12 +168,28 @@ function Payment() {
                 onChange={handleChange}
                 placeholder="Código Zip"
               />
+              {errors.zipCode && showError ? (
+                <span className={s.error}>{errors.zipCode}</span>
+              ) : (
+                <br />
+              )}
             </div>
           </div>
           <div className={dm ? s.dmbuttons : s.buttons}>
-            <button onClick={pay} className={dm ? s.dmb2 : s.b2}>
-              Confirmar Datos
-            </button>
+            {payInfo.name === "" &&
+            payInfo.surname === "" &&
+            payInfo.email === "" &&
+            payInfo.shippingAddress === "" &&
+            payInfo.city === "" &&
+            payInfo.zipCode === "" ? (
+              <button className={dm ? s.dmb2Disabled : s.b2Disabled}>
+                Confirmar Datos
+              </button>
+            ) : (
+              <button onClick={pay} className={dm ? s.dmb2 : s.b2}>
+                Confirmar Datos
+              </button>
+            )}
 
             <div
               className={dm ? s.dmpageContent : s.pageContent}

@@ -56,25 +56,28 @@ function Login() {
               title: "¡Error!",
               text: "Contraseña incorrecta",
               icon: "error",
+              confirmButtonColor: "#2B3036",
             });
           else if (status === "MAIL NO VALIDADO")
             Swal.fire({
               title: "¡Error!",
               text: "Correo electrónico no validado",
               icon: "error",
+              confirmButtonColor: "#2B3036",
             });
           else if (status === "CUENTA DESHABILITADA")
             Swal.fire({
               title: "¡Alerta!",
               text: "Tu cuenta ha sido deshabilitada",
               icon: "warning",
+              confirmButtonColor: "#2B3036",
             });
           else if (status === "SUCCESS") {
             Swal.fire({
               title: "¡Éxito!",
               text: "Logueado con éxito",
               icon: "success",
-              confirmButtonColor: '#d7f136',
+              confirmButtonColor: "#d7f136",
             });
             history.goBack();
           }
@@ -89,7 +92,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className={dm ? s.dmloginPage : s.loginPage}>
       <NavBar />
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
@@ -109,7 +112,7 @@ function Login() {
           {errors.username && showError ? (
             <span className={s.error}>{errors.username}</span>
           ) : (
-            <span className={dm ? s.dmhidden : s.hidden}>.</span>
+            <br />
           )}
           <input
             type="password"
@@ -133,8 +136,14 @@ function Login() {
             Iniciar Sesión
           </button>
           <GoogleLoginContainer />
-          <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>
-            ¿No tienes cuenta? <strong>¡Regístrate aquí!</strong>
+          <span className={dm ? s.dmm2 : s.m2}>
+            ¿No tienes cuenta?{" "}
+            <strong
+              onClick={handleClick}
+              className={dm ? s.dmregister : s.register}
+            >
+              ¡Regístrate aquí!
+            </strong>
           </span>
         </div>
       </section>

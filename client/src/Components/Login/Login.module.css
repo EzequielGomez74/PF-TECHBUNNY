@@ -7,7 +7,7 @@
   justify-content: space-around;
   padding-top: 50px;
   padding-bottom: 60px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .img {
@@ -46,12 +46,20 @@
   height: 40px;
   text-indent: 8px;
   border: none;
-  background: #F6F5FA;
+  background: #f6f5fa;
 }
 
-.recoverPass{
+.recoverPass {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.recoverPass:hover {
+  color: #9e9e9e;
+  transition: 0.5s;
   cursor: pointer;
 }
+
 .m2 {
   font-size: 12px;
   margin-top: 20px;
@@ -80,31 +88,38 @@
 }
 
 .b1 {
-  background-color: #20232A;
-  color: #FFFFFF;
+  background-color: #20232a;
+  color: #ffffff;
   border: none;
+  transition: 0.5s;
 }
 
-
-
-.error{
-  color:red
+.b1:hover {
+  background-color: #d7f136;
+  color: #20232a;
+  border: none;
+  transition: 0.5s;
 }
 
-.hidden{
- color:white;
-  
+.error {
+  color: red;
+}
+
+.hidden {
+  color: white;
 }
 @media only screen and (max-width: 500px) {
   .dmheroLogin {
     width: 60%;
     height: 60%;
   }
-
-
 }
 
 /* DARK MODE */
+
+.dmloginPage {
+  background-color: #20232a;
+}
 
 .dmloginSection {
   max-width: 1500px;
@@ -115,15 +130,12 @@
   justify-content: space-around;
   padding-top: 50px;
   padding-bottom: 60px;
-  font-family: 'Poppins';
-  background-color: #20232A;
+  font-family: "Poppins";
+  background-color: #20232a;
 }
 
-
-
-
 .dmloginCard {
-  background-color: #2B3036;
+  background-color: #2b3036;
   height: 500px;
   width: 400px;
   display: flex;
@@ -139,9 +151,16 @@
   color: #f6f5fa;
 }
 
-.dmrecoverPass{
+.dmrecoverPass {
   cursor: pointer;
-  color:white;
+  color: white;
+  transition: 0.5s;
+}
+
+.dmrecoverPass:hover {
+  color: #d7f136;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 .dmloginCard input {
@@ -151,10 +170,10 @@
   height: 40px;
   text-indent: 8px;
   border: none;
-  background: #22262A;
+  background: #22262a;
 }
 
-.dmloginCard input:focus{
+.dmloginCard input:focus {
   color: white;
 }
 
@@ -165,7 +184,13 @@
   padding-bottom: 40px;
 }
 
-.dmm2:hover {
+.register {
+  transition: 0.5s;
+}
+
+.register:hover {
+  color: #9e9e9e;
+  transition: 0.5s;
   cursor: pointer;
 }
 
@@ -187,12 +212,18 @@
 }
 
 .dmb1 {
-  background-color: #D7F136;
-  color: #20232A;
+  background-color: #d7f136;
+  color: #20232a;
   border: none;
+  transition: 0.5s;
 }
 
-
+.dmb1:hover {
+  background-color: #20232a;
+  color: #f6f5fa;
+  border: none;
+  transition: 0.5s;
+}
 
 .dmimg {
   width: 55%;
@@ -207,10 +238,20 @@
   justify-content: center;
 }
 
-.dmhidden{
-  color:#2B3036;
+.dmhidden {
+  color: #2b3036;
 }
 
-.successButton{
-  color:#2B3036;
+.successButton {
+  color: #2b3036;
+}
+
+.dmregister {
+  transition: 0.5s;
+}
+
+.dmregister:hover {
+  transition: 0.5s;
+  color: #d7f136;
+  cursor: pointer;
 }
