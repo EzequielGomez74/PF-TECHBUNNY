@@ -19,9 +19,25 @@ function SearchBar() {
   const noTerm = useRef(true);
   const initialSearch = useRef(true);
 
+  let menuRef = useRef(null);
+  const [open, setOpen] = useState(false)
+
   const dm = useSelector((state) => state.darkMode);
 
   const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    let handler = (e) => {
+      if (menuRef.current && !menuRef.current?.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [menuRef]);
 
   useEffect(() => {
     if (searchTerm.length <= 2 && !initialSearch.current) {
@@ -46,7 +62,9 @@ function SearchBar() {
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
+    setOpen(true)
   };
+
   const handleClick = (e) => {
     e.preventDefault();
     // setSearchTerm(e.target.value);
@@ -69,6 +87,7 @@ function SearchBar() {
       <span className={dm ? s.dminputContainer : s.inputContainer}>
         <input
           className={dm ? s.dminput : s.input}
+          ref={menuRef}
           type="text"
           value={searchTerm}
           onChange={handleChange}
@@ -91,8 +110,8 @@ function SearchBar() {
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
       <span className={dm ? s.dmsearchScroll : s.searchScroll}>
-        <ul className={dm ? s.dmsearchElement : s.searchElement}>
-          {searchTerm.length > 0 &&
+        <ul ref={menuRef} className={dm ? s.dmsearchElement : s.searchElement}>
+          {open && searchTerm.length > 0 &&
             results.length > 0 &&
             results.map((p, i) => {
               if (i < 15)
@@ -130,7 +149,7 @@ function SearchBar() {
                   </span>
                 );
             })}
-          {results.length >= 15 && searchTerm.length > 0 && (
+          {open && results.length >= 15 && searchTerm.length > 0 && (
             <span>
               {" "}
               <Link to={`/results/${searchTerm}`}>

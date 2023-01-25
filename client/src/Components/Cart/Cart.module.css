@@ -10,6 +10,17 @@
     padding-bottom: 60px;
 }
 
+.cartTotal{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cartTotal span{
+    /* font-weight: 600; */
+    font-size: 20px;
+}
+
 .mainButton{
     margin-top: 30px;
     margin-bottom: 40px;
@@ -23,10 +34,14 @@
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    transition: 0.5s;
 }
 
 .mainButton:hover{
     cursor: pointer;
+    background-color: #d7f136;
+    color: #20232A;
+    transition: 0.5s;
 }
 
 .none{
@@ -48,6 +63,9 @@
 }
 
 /* DARK MODE */
+.dmcartPage{
+    background-color: #20232A;
+}
 
 .dmcartSection{
     max-width: 1500px;
@@ -60,6 +78,14 @@
     padding-top: 50px;
     padding-bottom: 60px;
     background-color: #20232A;
+}
+
+.dmcartTotal{
+    color: white;
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .dmmainButton{
@@ -76,10 +102,14 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     border: solid 1px #000000;
+    transition: 0.5s;
 }
 
 .dmmainButton:hover{
+    background-color: #20232A;
+    color: #d7f136;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 .dmnone{

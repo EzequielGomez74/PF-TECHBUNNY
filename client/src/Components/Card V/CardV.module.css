@@ -11,11 +11,12 @@
     padding-bottom: 22px;
     border-radius: 0px;
     margin-bottom: 10px;
+    transition: 0.5s;
 }
 
 .card:hover{
     transform: translateY(-12px);
-    transition: 0.8s;
+    transition: 0.5s;
     box-shadow: 4px 15px 20px #494c53;
 }
 

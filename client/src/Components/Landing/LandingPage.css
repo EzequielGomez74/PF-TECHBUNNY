@@ -17,6 +17,7 @@
     user-select: none;
    
 }
+
 @keyframes animate{
 0%{
     background:  url("../../images/background4.jpg") no-repeat;
@@ -58,13 +59,18 @@
 }
 
 
+.secondarytext{
+    justify-content: left;
+}
+
 .Secondtext{
     font-size: 22px;
     display: flex;
     background-color: transparent;
-    height: 33%;
-    width: 100%;
-    
+    height: 60%;
+    width: 70%;
+    text-align: left;
+    margin-top: -20px;
 }
 
 .Secondtext:hover , .Maintext:hover {

@@ -24,7 +24,7 @@ function Footer() {
           <h3>SERVICIOS</h3>
           <p><FontAwesomeIcon icon={faTruckRampBox} /> &nbsp;&nbsp; Envío gratis</p>
           <p><FontAwesomeIcon icon={faBagShopping} /> &nbsp;&nbsp; Pago a través de Mercado Pago</p>
-          <p><FontAwesomeIcon icon={faListCheck} /> &nbsp;&nbsp; Verificación de Estado de Pedido</p>
+          <Link to='/followUp'><p><FontAwesomeIcon icon={faListCheck} /> &nbsp;&nbsp; Verificación de Estado de Pedido</p></Link>
         </div>
         <div>
           <h3>CONTACTO</h3>

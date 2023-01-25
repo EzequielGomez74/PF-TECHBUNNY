@@ -79,7 +79,9 @@ function Status() {
                       <span className={s.orderTotal}>Total: US$ {o.total.toFixed(2)}</span>
                     </div>
                   ))
-                : "Está vacio"
+                : <div className={s.orderContainer}>
+                  No se encontró una order con el id indicado.
+                </div>
             }
         </div>
         </section>

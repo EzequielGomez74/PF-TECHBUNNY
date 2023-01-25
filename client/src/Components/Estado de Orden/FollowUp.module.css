@@ -69,27 +69,21 @@
     width: 240px;
     height: 40px;
     background-color:#20232A;
+    color: white;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    transition: 0.5s;
 }
 
 .btnFollowUp:hover{
     cursor: pointer;
-}
-
-.btnFollowUp p{
-    margin-top: 9px;
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 10px;
-    letter-spacing: 2px;
-    
-    
+    background-color: #d7f136;
+    color: #20232A;
+    transition: 0.5s;
 }
 
 @media (max-width: 450px){
@@ -192,32 +186,28 @@
 .dmbtnFollowUp{
     width: 240px;
     height: 40px;
-    background-color:#d7f136;
+    background-color: #d7f136;
+    color: #1b1d23;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    transition: 0.5s;
 }
 
+.dmbtnFollowUp:hover{
+    background-color: black;
+    color: #d7f136;
+    font-size: 12px;
+    transition: 0.5s;
+}
 
 .dmformOptions input:focus{
     color: white;
 }
 
-
-
-.dmbtnFollowUp p{
-    margin-top: 9px;
-    color: black;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 10px;
-    letter-spacing: 2px;
-    
-    
-}
 
 @media (max-width: 450px){
     .dmformStyle{

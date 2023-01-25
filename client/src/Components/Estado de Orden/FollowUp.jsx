@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import s from './FollowUp.module.css';
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 function FollowUp(){
@@ -15,7 +16,25 @@ function FollowUp(){
     const [orderId, setOrderId] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-        history.push(`/followUp/${user.user_id}/${orderId}`)
+        if(!user.user_id){
+            Swal.fire({
+                title: "¡Alerta!",
+                text: "Para verificar el estado de tu orden, necesitas ingresar a tu cuenta.",
+                icon: "warning",
+                confirmButtonText: "Iniciar sesión",
+            }).then((response) => {
+                if (response.isConfirmed) history.push("/login");
+            });
+        }
+        if(user.user_id && !orderId){
+            Swal.fire({
+                title: "Ingresa el ID de tu pedido",
+                confirmButtonColor: '#20232A',
+            })
+        }
+        if(user.user_id && orderId){  
+            history.push(`/followUp/${user.user_id}/${orderId}`)
+        }
     }
     
     return(
