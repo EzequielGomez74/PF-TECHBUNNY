@@ -30,8 +30,14 @@
 
 const { Router } = require("express");
 const controller = require("./controller.js");
+const requiredAccess = require("../../middlewares/requiredAccess.js");
 const validate = require("../../scripts/bodyValidators/index.js");
+const verifyJWT = require("../../middlewares/verifyJWT");
 const router = Router();
+
+router.use(verifyJWT); // !validacion de JWT
+//!     ----- ACCESO ADMIN  -----
+router.use(requiredAccess(3));
 
 router.get("/", async (req, res) => {
   try {
@@ -40,7 +46,13 @@ router.get("/", async (req, res) => {
     res.status(400).json(error.message);
   }
 });
-
-module.exports = router;
+router.get("/:products", async (req, res) => {
+  try {
+    if (req.params && req.params.products)
+      res.status(200).json(await controller.getProducts());
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+});
 
 module.exports = router;

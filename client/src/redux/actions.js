@@ -52,6 +52,16 @@ export const getProducts = (id) => {
     }
   };
 };
+export const getProductsAdmin = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/dashboard/products");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+    } catch (error) {
+      console.log("FAILED TO AUTHENTICATE");
+    }
+  };
+};
 
 export const postProduct = (productInfo) => {
   return async function (dispatch) {
@@ -62,7 +72,7 @@ export const postProduct = (productInfo) => {
         },
       });
       if (response.data === "Producto creado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
+        const allProducts = await axiosInstance.get("/dashboard/products");
         return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
@@ -89,11 +99,11 @@ export const deleteProduct = (product_id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.delete(`/products/${product_id}`);
-      if (response.data === "Producto deshabilitado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
-      } else {
-        const allProducts = await axiosInstance.get("/products");
+      if (
+        response.data === "Producto deshabilitado con exito!" ||
+        response.data === "Producto habilitado con exito!"
+      ) {
+        const allProducts = await axiosInstance.get("/dashboard/products");
         return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
