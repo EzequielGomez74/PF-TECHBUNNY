@@ -1,7 +1,7 @@
 // * En esta ruta se generan nuevas ordenes, se generan preferencias de mercadopago, modifica ordenes existentes y devuelven las ordenes solicitadas.
 
 // todo hablar con back para ver si creamos un get all orders (limitado a 10 o 20 orders)
-
+require("dotenv").config();
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
@@ -48,17 +48,17 @@ router.get("/pagar/:order_id", async (req, res) => {
     });
     // TODO: manejar casos de failure y pending con front
 
-    let path = "http://localhost:3000/feedback";
-    if (process.env.NODE_ENV === "production") {
-      path = "https://pf-techbunny-lake.vercel.app/feedback";
-    }
+    // let path = "http://localhost:3000/feedback";
+    // if (process.env.NODE_ENV === "production") {
+    //   path = "https://pf-techbunny-lake.vercel.app/feedback";
+    // }
 
     let preference = {
       items: carrito,
       back_urls: {
-        success: path, // ! ACA VA SI FUE PAGO EXITOSO
-        failure: path, // ! SI EL PAGO FALLA
-        pending: path, // ? PAGO PENDIENTE
+        success: "http://localhost:3000/feedback", // ! ACA VA SI FUE PAGO EXITOSO
+        failure: "http://localhost:3000/feedback", // ! SI EL PAGO FALLA
+        pending: "http://localhost:3000/feedback", // ? PAGO PENDIENTE
       },
       auto_return: "approved",
     };
@@ -103,14 +103,6 @@ router.put("/:order_id", async (req, res) => {
     }
   } catch (error) {
     res.status(407).send(error.message);
-  }
-});
-
-router.get("/preference/:preference_id", async (req, res) => {
-  try {
-    res.status(200).send(await controller.getOrderByPreferenceId(req.params));
-  } catch (error) {
-    res.status(400).send(error.message);
   }
 });
 

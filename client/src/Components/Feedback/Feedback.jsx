@@ -23,12 +23,14 @@ function Feedback() {
   let status = query.get("status");
   const initialLoad = useRef(true);
   useEffect(() => {
+    console.log("1");
     if (initialLoad.current) {
       initialLoad.current = false;
       console.log("status ", status);
       dispatch(getOrderByPreferenceId(query.get("preference_id")));
       return;
     }
+    console.log("2");
     if (status === "approved") {
       console.log("order_id -> ", orders[0].order_id);
       dispatch(updateOrder(orders[0].order_id, { status: "completed" }));

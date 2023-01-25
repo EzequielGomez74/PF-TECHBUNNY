@@ -144,15 +144,6 @@ async function getOrders() {
   }
 }
 
-//? GET ORDERS BY ID
-async function getOrderByPreferenceId(preference_id) {
-  try {
-    const order = await Order.findOne({ where: { preference_id } });
-    return order;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
 async function getOrderById(order_id) {
   // BUSCA UNA ORDER POR ID
   try {
@@ -284,5 +275,4 @@ module.exports = {
   updateOrderData,
   checkOrderStatus,
   createRelativeOrder,
-  getOrderByPreferenceId,
 };

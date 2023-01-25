@@ -602,9 +602,7 @@ export const cleanProductsByBrand = () => {
 export function getOrderByPreferenceId(preference_id) {
   return async function (dispatch) {
     try {
-      const order = await axiosInstance.get(
-        `/orders/preferences/${preference_id}`
-      );
+      const order = await axiosInstance.get(`/preferences/${preference_id}`);
       if (order)
         return dispatch({
           type: CREATE_ORDER,
