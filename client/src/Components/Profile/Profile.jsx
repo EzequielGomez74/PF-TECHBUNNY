@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { updateUserInfo } from "../../redux/actions";
 import s from "./Profile.module.css";
 import img from "../../Photos/conejoperfil.png";
@@ -107,7 +107,7 @@ function Profile() {
   };
 
   return (
-    <div>
+    <div className={dm ? s.dmprofilePage : s.profilePage}>
       <NavBar />
       <div className={dm ? s.dmprofileSection : s.profileSection}>
         {user.username && user.email ? (
@@ -147,7 +147,7 @@ function Profile() {
               </div>
             </section>
             <section className={s.profileOrdersHistory}>
-              <h3>Historial de Ordenes</h3>
+              <h3 className={dm ? s.dmorderTitle: s.orderTitle}>Historial de Ordenes</h3>
               <br />
               {orders.length
                 ? orders.map((o) => (
@@ -170,11 +170,11 @@ function Profile() {
                       <ul className={s.orderProductsContainer}>
                         {o.Products?.map((p) => (
                           <li className={s.liOrderElement}>
-                            <img
+                            <Link to={`/detail/${p.product_id}`}><img
                               className={s.productOrderImage}
                               src={p.image}
                               alt={p.product_id}
-                            />
+                            /></Link>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div className={s.productOrderInfo}>
                               <span>{p.name}</span>
@@ -192,7 +192,9 @@ function Profile() {
                       <span className={s.orderTotal}>Total: US$ {o.total.toFixed(2)}</span>
                     </div>
                   ))
-                : "Está vacio"}
+                : <div className={s.noOrder}> 
+                    <span>Todavía no has realizado pedidos</span>
+                  </div> }
             </section>
           </div>
         ) : (

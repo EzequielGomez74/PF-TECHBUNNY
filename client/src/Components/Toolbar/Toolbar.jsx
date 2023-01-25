@@ -9,7 +9,7 @@ function Toolbar({openSidebar}) {
   return (
     <div className='ToolBar'>
       <div className='burger' onClick={openSidebar} >
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon className='menuBar' icon={faBars} />
       </div>
       <div className='title'>TECHBUNNY</div>
     </div>

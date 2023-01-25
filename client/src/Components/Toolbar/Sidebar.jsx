@@ -9,7 +9,7 @@ import {
   faUser,
   faChartSimple,
   faHouse,
-  faChartLine,
+  faChartColumn
 } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar({ SideBar }) {
@@ -39,12 +39,12 @@ function Sidebar({ SideBar }) {
         <li>
           <FontAwesomeIcon icon={faBullhorn} /> Newsletter
         </li>
-      </NavLink> */}
+      </NavLink>
       <NavLink className="sidebarNavLink" to="/dashboard/statistics">
         <li>
-          <FontAwesomeIcon icon={faChartLine} /> Statistics
+          <FontAwesomeIcon icon={faChartColumn} /> Statistics
         </li>
-      </NavLink>
+      </NavLink> */}
       <NavLink className="sidebarNavLink" to="/home">
         <li>
           <FontAwesomeIcon icon={faHouse} /> Volver al inicio

@@ -165,8 +165,8 @@
 }
 
 .productOrderImage{
-    width: 8%;
-    height: 8%;
+    width: 100px;
+    height: auto;
 }
 
 .liOrderElement{
@@ -182,7 +182,28 @@
     align-items: flex-start;
 }
 
+.noOrder{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    padding-bottom: 30px;
+    height: 40px;
+    width: 80%;
+    border-radius: 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.noOrder span{
+    margin-top: 20px;
+}
+
 /* DARK MODE */
+.dmprofilePage{
+    background-color: #20232A;
+}
 
 .dmprofileSection{
     background-color: #20232A;
@@ -196,6 +217,10 @@
     padding-top: 50px;
     padding-bottom: 60px;
     font-family: 'Poppins';
+}
+
+.dmorderTitle{
+    color: white;
 }
 
 .dmprofileForm{

@@ -96,6 +96,11 @@ const Responsive = () => {
               <Link to="/profile">
                 <p>Mi perfil</p>
               </Link>
+              {loggedUser?.role === 3 && (
+              <Link to="/dashboard">
+                <p>Dashboard</p>
+              </Link>
+              )}
               <Link to="/login">
                 <p onClick={() => logoutUser()}>Cerrar sesión</p>
               </Link>
