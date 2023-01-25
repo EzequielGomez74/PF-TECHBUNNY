@@ -99,4 +99,7 @@
     .cointainerBanner{
         height: 180px; 
     }
+    .imgBanner2{
+        display: none;
+    }
 }

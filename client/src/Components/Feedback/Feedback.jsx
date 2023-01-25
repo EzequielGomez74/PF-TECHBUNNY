@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import s from "./Feedback.module.css";
 import img from "../../images/comprabunny.png";
 import axios from "axios";
+import { updateOrder } from "../../redux/actions";
 
 function Feedback() {
   let location = useLocation();
   const history = useHistory();
-
+  const dispatch = useDispatch();
+  const dm = useSelector((state) => state.darkMode);
+  const orders = useSelector((state) => state.orders);
   const handleClick = () => {
     history.push("/home");
   };
-  const dm = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     let query = new URLSearchParams(location.search);
@@ -23,7 +25,10 @@ function Feedback() {
     //let collection_status = query.get("collection_status");
     let status = query.get("status");
     console.log("status ", status);
-    //if (status === "approved")
+    if (status === "approved") {
+      console.log("orders[0] ", orders[0]);
+      dispatch(updateOrder(orders[0].order_id, "completed"));
+    }
   }, [location]);
 
   return (

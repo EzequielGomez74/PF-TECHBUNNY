@@ -35,11 +35,11 @@ import {
   DELETE_USER,
   GET_USERS,
   GET_ORDERS,
+  GET_ORDER_STATUS,
   UPDATE_ORDER,
   GET_ALL_STATISTICS,
   GET_SUBCATEGORY_BY_CATEGORY,
   CLEAN_PRODUCTS_BY_BRAND,
-  GET_ORDER_STATUS
 } from "./actionTypes";
 
 export const getProducts = (id) => {
@@ -162,13 +162,15 @@ export const getOrders = () => {
 export const getOrderStatus = (user_id, order_id) => {
   return async function (dispatch) {
     try {
-      const response = await axiosInstance.get(`/orders?user_id=${user_id}&order_id=${order_id}`);
+      const response = await axiosInstance.get(
+        `/orders?user_id=${user_id}&order_id=${order_id}`
+      );
       return dispatch({ type: GET_ORDER_STATUS, payload: response.data });
-    }catch(error){
-      console.log('No se encontró el order')
+    } catch (error) {
+      console.log("No se encontró el order");
     }
-  }
-}
+  };
+};
 
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
@@ -272,7 +274,7 @@ export function getProductsByCategory(category) {
 export function getProductsByBrand(brand) {
   return async function (dispatch) {
     try {
-      console.log("brand",brand);
+      console.log("brand", brand);
       let json = await axiosInstance.get(`/products?brand=${brand}`);
       return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
@@ -487,6 +489,21 @@ export function addOrRemoveQuantityFromCart(id, count) {
     payload: { id, count },
   };
 }
+//! GET ORDER
+
+export const getOrder = (user_id, order_id) => {
+  console.log("llega al getOrder");
+  return async function (dispatch) {
+    try {
+      const orders = await axiosInstance.get(
+        `/orders?user_id=${user_id}&order_id=${order_id}`
+      );
+      return dispatch({ type: CREATE_ORDER, payload: orders.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export const createOrder = (user_id, pushPayment) => {
   return async function (dispatch) {
@@ -555,7 +572,6 @@ export function updateUserInfo(user_id, input) {
       // const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
       // console.log(userInfoGet.data);
       const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
-
       return dispatch({ type: UPDATE_USER_INFO, payload: input });
     } catch (error) {
       console.log(error);
@@ -578,8 +594,6 @@ export function getAllStatistics(onSuccess) {
   };
 }
 
-export const cleanProductsByBrand=()=>{
-  
-    return { type: CLEAN_PRODUCTS_BY_BRAND };
-  
-}
+export const cleanProductsByBrand = () => {
+  return { type: CLEAN_PRODUCTS_BY_BRAND };
+};
