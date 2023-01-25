@@ -1,7 +1,6 @@
 .statSection{
   max-width: 1500px;
   margin: auto;
-  display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
