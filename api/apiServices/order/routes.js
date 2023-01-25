@@ -77,19 +77,14 @@ router.post("/:user_id", async (req, res) => {
 
 // $ Esta ruta modifica una orden para cambiar el estado de la misma. PARAMS { order_id } BODY { data }
 router.put("/:order_id", async (req, res) => {
+  //!! CAMBIOS EN EL ARGUMENTO DE UPDATEORDER linea 88 (se saco user_id)
   try {
     const { order_id } = req.params;
     if (order_id && req.body.status)
       // para cuando el admin use dashboard
       return res
         .status(200)
-        .send(
-          await controller.updateOrder(
-            req.body.user_id,
-            order_id,
-            req.body.status
-          )
-        );
+        .send(await controller.updateOrder(order_id, req.body.status));
     if (order_id)
       // para la compra
       res
