@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,29 +8,33 @@ import s from "./Feedback.module.css";
 import img from "../../images/comprabunny.png";
 import axios from "axios";
 import { updateOrder } from "../../redux/actions";
+import { getOrderByPreferenceId } from "../../../../api/apiServices/order/controller";
 
 function Feedback() {
   let location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
+  const orders = useSelector((state) => state.orders);
   const dm = useSelector((state) => state.darkMode);
   //const orders = useSelector((state) => state.orders);
   const handleClick = () => {
     history.push("/home");
   };
-
+  let query = new URLSearchParams(location.search);
+  let status = query.get("status");
+  const initialLoad = useRef(true);
   useEffect(() => {
-    let query = new URLSearchParams(location.search);
-    console.log(query);
-    //let collection_status = query.get("collection_status");
-    let status = query.get("status");
-    console.log("status ", status);
-    if (status === "approved") {
-      const order_id = localStorage.getItem("order_id");
-      console.log("order_id -> ", order_id);
-      dispatch(updateOrder(order_id, "completed"));
+    if (initialLoad.current) {
+      initialLoad.current = false;
+      console.log("status ", status);
+      dispatch(getOrderByPreferenceId(query.get("preference_id")));
+      return;
     }
-  }, [location]);
+    if (status === "approved") {
+      console.log("order_id -> ", orders[0].order_id);
+      dispatch(updateOrder(orders[0].order_id, "completed"));
+    }
+  }, [orders]); //location
 
   return (
     <div>

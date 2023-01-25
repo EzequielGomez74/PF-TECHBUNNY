@@ -53,6 +53,10 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: true,
       },
+      preference_id: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: true,

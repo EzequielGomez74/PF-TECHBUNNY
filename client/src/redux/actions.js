@@ -597,3 +597,20 @@ export function getAllStatistics(onSuccess) {
 export const cleanProductsByBrand = () => {
   return { type: CLEAN_PRODUCTS_BY_BRAND };
 };
+
+export function getOrderByPreferenceId(preference_id) {
+  return async function (dispatch) {
+    try {
+      const order = await axiosInstance.get(
+        `/orders/preferences/${preference_id}`
+      );
+      if (order)
+        return dispatch({
+          type: CREATE_ORDER,
+          payload: order.data,
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

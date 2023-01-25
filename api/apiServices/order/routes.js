@@ -95,6 +95,14 @@ router.put("/:order_id", async (req, res) => {
   }
 });
 
+router.get("/preference/:preference_id", async (req, res) => {
+  try {
+    res.status(200).send(await controller.getOrderByPreferenceId(req.params));
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 // /users?user_id=1&order_id=2  /users?user_id=1
 router.get("/", async (req, res, next) => {
   const { user_id, order_id } = req.query;

@@ -66,6 +66,7 @@ async function updateOrderData(order_id, body) {
       shippingAddress: body.shippingAddress,
       zipCode: body.zipCode,
       city: body.city,
+      preference_id: body.preference_id,
     };
     const order = await Order.update(dataUser, {
       where: { user_id: body.user_id, order_id: order_id },
@@ -143,7 +144,14 @@ async function getOrders() {
 }
 
 //? GET ORDERS BY ID
-
+async function getOrderByPreferenceId(preference_id) {
+  try {
+    const order = await Order.findOne({ where: { preference_id } });
+    return order;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 async function getOrderById(order_id) {
   // BUSCA UNA ORDER POR ID
   try {
@@ -209,7 +217,7 @@ async function checkOrderStatus() {
     if (foundOrders) {
       foundOrders.forEach((order) => {
         let timestamp = moment(order.createdAt).unix();
-        if (Date.now() / 1000 - timestamp > 120) {
+        if (Date.now() / 1000 - timestamp > 240) {
           updateOrder(order.order_id, "canceled");
         }
       });
@@ -275,4 +283,5 @@ module.exports = {
   updateOrderData,
   checkOrderStatus,
   createRelativeOrder,
+  getOrderByPreferenceId,
 };
