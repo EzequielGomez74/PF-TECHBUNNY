@@ -14,7 +14,7 @@ function Feedback() {
   const history = useHistory();
   const dispatch = useDispatch();
   const dm = useSelector((state) => state.darkMode);
-  const orders = useSelector((state) => state.orders);
+  //const orders = useSelector((state) => state.orders);
   const handleClick = () => {
     history.push("/home");
   };
@@ -26,8 +26,9 @@ function Feedback() {
     let status = query.get("status");
     console.log("status ", status);
     if (status === "approved") {
-      console.log("orders[0] ", orders[0]);
-      dispatch(updateOrder(orders[0].order_id, "completed"));
+      const order_id = localStorage.getItem("order_id");
+      console.log("order_id ", localStorage.getItem("order_id"));
+      dispatch(updateOrder(order_id, "completed"));
     }
   }, [location]);
 

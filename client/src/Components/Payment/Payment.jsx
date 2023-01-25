@@ -55,6 +55,7 @@ function Payment() {
 
   async function pay() {
     try {
+      localStorage.setItem("order_id", orderMp[0].order_id);
       dispatch(getPayPreferencesById(orderMp[0].order_id));
       dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
       //dispatch(allOrdersByUser(user.user_id))
