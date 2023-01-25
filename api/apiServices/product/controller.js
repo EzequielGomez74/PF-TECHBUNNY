@@ -53,8 +53,9 @@ async function getAllProducts(username) {
 
 async function getAllProductsBy(condition, username) {
   try {
+    condition.active = true;
     let products = await Product.findAll({
-      where: { condition, active: true },
+      where: condition,
     });
     return await setFavoriteStatus(products, username);
   } catch (error) {
