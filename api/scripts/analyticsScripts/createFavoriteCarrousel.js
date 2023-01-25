@@ -25,7 +25,7 @@ async function createFavoriteCarrousel(user_id) {
     favoritesLoaded = await Promise.all(
       favoritesLoaded.map(async (fav) => {
         const product = await Product.findByPk(fav.product_id, {
-          where: { active_true },
+          where: { active: true },
           raw: true,
         });
         return {
