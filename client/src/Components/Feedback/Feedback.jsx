@@ -7,8 +7,7 @@ import Footer from "../Footer/Footer";
 import s from "./Feedback.module.css";
 import img from "../../images/comprabunny.png";
 import axios from "axios";
-import { updateOrder } from "../../redux/actions";
-import { getOrderByPreferenceId } from "../../../../api/apiServices/order/controller";
+import { updateOrder, getOrderByPreferenceId } from "../../redux/actions";
 
 function Feedback() {
   let location = useLocation();
@@ -33,6 +32,7 @@ function Feedback() {
     if (status === "approved") {
       console.log("order_id -> ", orders[0].order_id);
       dispatch(updateOrder(orders[0].order_id, { status: "completed" }));
+      console.log("pasa el dispatch");
     }
   }, [orders]); //location
 
