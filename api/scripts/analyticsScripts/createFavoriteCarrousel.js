@@ -24,7 +24,10 @@ async function createFavoriteCarrousel(user_id) {
 
     favoritesLoaded = await Promise.all(
       favoritesLoaded.map(async (fav) => {
-        const product = await Product.findByPk(fav.product_id, { raw: true });
+        const product = await Product.findByPk(fav.product_id, {
+          where: { active_true },
+          raw: true,
+        });
         return {
           product_id: product.product_id,
           subcategory: product.subcategory,
@@ -42,6 +45,7 @@ async function createFavoriteCarrousel(user_id) {
           brand: fav.brand,
           subcategory: fav.subcategory,
           product_id: { [Op.ne]: fav.product_id },
+          active: true,
         },
         raw: true,
       });
@@ -53,7 +57,10 @@ async function createFavoriteCarrousel(user_id) {
     });
     //$ los null que restan los completo con un producto aleatorio
     if (carrousel.length < 10) {
-      const allProducts = await Product.findAll({ raw: true });
+      const allProducts = await Product.findAll({
+        where: { active: true },
+        raw: true,
+      });
       for (let i = carrousel.length; i < 10; i++) {
         let found = false;
         do {
@@ -71,6 +78,7 @@ async function createFavoriteCarrousel(user_id) {
     carrousel = await Promise.all(
       carrousel.map(async (ele) => {
         const productFound = await Product.findByPk(ele.product_id, {
+          where: { active: true },
           raw: true,
         });
         return productFound;
@@ -78,7 +86,10 @@ async function createFavoriteCarrousel(user_id) {
     );
     //TODO arreglar los favoritos con id repetido
     carrousel = checkDuplicates(favoritesBackUp, carrousel);
-    const products = await Product.findAll({ raw: true });
+    const products = await Product.findAll({
+      where: { active: true },
+      raw: true,
+    });
     for (let i = 0; i < carrousel.length; i++) {
       if (carrousel[i] === null) {
         const pos = Math.floor(Math.random() * products.length);
