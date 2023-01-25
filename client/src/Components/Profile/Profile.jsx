@@ -194,7 +194,9 @@ function Profile() {
                         </button>
                         <button
                           onClick={() =>
-                            dispatch(updateOrder(o.order_id, "canceled"))
+                            dispatch(
+                              updateOrder(o.order_id, { status: "canceled" })
+                            )
                           }
                         >
                           Cancelar el pedido

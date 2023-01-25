@@ -175,6 +175,7 @@ export const getOrderStatus = (user_id, order_id) => {
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
     try {
+      console.log("order_id ", order_id, "-", " orderInfo ", orderInfo);
       const response = await axiosInstance.put(
         `/orders/${order_id}`,
         orderInfo

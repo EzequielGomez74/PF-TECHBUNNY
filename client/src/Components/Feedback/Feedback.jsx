@@ -32,7 +32,7 @@ function Feedback() {
     }
     if (status === "approved") {
       console.log("order_id -> ", orders[0].order_id);
-      dispatch(updateOrder(orders[0].order_id, "completed"));
+      dispatch(updateOrder(orders[0].order_id, { status: "completed" }));
     }
   }, [orders]); //location
 
