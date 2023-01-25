@@ -35,17 +35,27 @@ import {
   DELETE_USER,
   GET_USERS,
   GET_ORDERS,
+  GET_ORDER_STATUS,
   UPDATE_ORDER,
   GET_ALL_STATISTICS,
   GET_SUBCATEGORY_BY_CATEGORY,
   CLEAN_PRODUCTS_BY_BRAND,
-  GET_ORDER_STATUS
 } from "./actionTypes";
 
 export const getProducts = (id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.get("/products");
+      return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
+    } catch (error) {
+      console.log("FAILED TO AUTHENTICATE");
+    }
+  };
+};
+export const getProductsAdmin = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axiosInstance.get("/dashboard/products");
       return dispatch({ type: GET_ALL_PRODUCTS, payload: response.data });
     } catch (error) {
       console.log("FAILED TO AUTHENTICATE");
@@ -62,7 +72,7 @@ export const postProduct = (productInfo) => {
         },
       });
       if (response.data === "Producto creado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
+        const allProducts = await axiosInstance.get("/dashboard/products");
         return dispatch({ type: POST_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
@@ -89,11 +99,11 @@ export const deleteProduct = (product_id) => {
   return async function (dispatch) {
     try {
       const response = await axiosInstance.delete(`/products/${product_id}`);
-      if (response.data === "Producto deshabilitado con exito!") {
-        const allProducts = await axiosInstance.get("/products");
-        return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
-      } else {
-        const allProducts = await axiosInstance.get("/products");
+      if (
+        response.data === "Producto deshabilitado con exito!" ||
+        response.data === "Producto habilitado con exito!"
+      ) {
+        const allProducts = await axiosInstance.get("/dashboard/products");
         return dispatch({ type: DELETE_PRODUCT, payload: allProducts.data });
       }
     } catch (error) {
@@ -162,17 +172,20 @@ export const getOrders = () => {
 export const getOrderStatus = (user_id, order_id) => {
   return async function (dispatch) {
     try {
-      const response = await axiosInstance.get(`/orders?user_id=${user_id}&order_id=${order_id}`);
+      const response = await axiosInstance.get(
+        `/orders?user_id=${user_id}&order_id=${order_id}`
+      );
       return dispatch({ type: GET_ORDER_STATUS, payload: response.data });
-    }catch(error){
-      console.log('No se encontró el order')
+    } catch (error) {
+      console.log("No se encontró el order");
     }
-  }
-}
+  };
+};
 
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
     try {
+      console.log("order_id ", order_id, "-", " orderInfo ", orderInfo);
       const response = await axiosInstance.put(
         `/orders/${order_id}`,
         orderInfo
@@ -272,7 +285,7 @@ export function getProductsByCategory(category) {
 export function getProductsByBrand(brand) {
   return async function (dispatch) {
     try {
-      console.log("brand",brand);
+      console.log("brand", brand);
       let json = await axiosInstance.get(`/products?brand=${brand}`);
       return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
@@ -487,6 +500,21 @@ export function addOrRemoveQuantityFromCart(id, count) {
     payload: { id, count },
   };
 }
+//! GET ORDER
+
+export const getOrder = (user_id, order_id) => {
+  console.log("llega al getOrder");
+  return async function (dispatch) {
+    try {
+      const orders = await axiosInstance.get(
+        `/orders?user_id=${user_id}&order_id=${order_id}`
+      );
+      return dispatch({ type: CREATE_ORDER, payload: orders.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export const createOrder = (user_id, pushPayment) => {
   return async function (dispatch) {
@@ -555,7 +583,6 @@ export function updateUserInfo(user_id, input) {
       // const userInfoGet = await axiosInstance.get(`/users/${user_id}`);
       // console.log(userInfoGet.data);
       const userInfo = await axiosInstance.put(`/users/${user_id}`, input);
-
       return dispatch({ type: UPDATE_USER_INFO, payload: input });
     } catch (error) {
       console.log(error);
@@ -578,8 +605,21 @@ export function getAllStatistics(onSuccess) {
   };
 }
 
-export const cleanProductsByBrand=()=>{
-  
-    return { type: CLEAN_PRODUCTS_BY_BRAND };
-  
+export const cleanProductsByBrand = () => {
+  return { type: CLEAN_PRODUCTS_BY_BRAND };
+};
+
+export function getOrderByPreferenceId(preference_id) {
+  return async function (dispatch) {
+    try {
+      const order = await axiosInstance.get(`/preferences/${preference_id}`);
+      if (order)
+        return dispatch({
+          type: CREATE_ORDER,
+          payload: order.data,
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

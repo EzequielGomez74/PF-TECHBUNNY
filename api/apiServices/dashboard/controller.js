@@ -108,6 +108,16 @@ async function dashboardData() {
   }
 }
 
+async function getProducts() {
+  try {
+    const products = await Product.findAll();
+    return products;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   dashboardData,
+  getProducts,
 };

@@ -53,7 +53,10 @@ async function getAllProducts(username) {
 
 async function getAllProductsBy(condition, username) {
   try {
-    let products = await Product.findAll({ where: condition });
+    condition.active = true;
+    let products = await Product.findAll({
+      where: condition,
+    });
     return await setFavoriteStatus(products, username);
   } catch (error) {
     throw new Error(error.message);
@@ -62,7 +65,9 @@ async function getAllProductsBy(condition, username) {
 
 async function getProductById(product_id, username) {
   try {
-    let product = await Product.findByPk(product_id);
+    let product = await Product.findByPk(product_id, {
+      where: { active: true },
+    });
     let arr = [product];
     let newProduct = await setFavoriteStatus(arr, username);
     const newObj = { ...newProduct[0].dataValues };
@@ -123,7 +128,6 @@ async function deleteProduct(product_id) {
           },
         }
       );
-
       return "Producto habilitado con exito!";
     }
     if (existe.active === true) {

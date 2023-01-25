@@ -27,7 +27,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { FormLabel } from "@mui/material";
 
 import {
-  getProducts,
+  getProductsAdmin,
   postProduct,
   updateProduct,
   deleteProduct,
@@ -107,7 +107,7 @@ function Products() {
 
   useEffect(() => {
     if (initialLoad.current) {
-      dispatch(getProducts());
+      dispatch(getProductsAdmin());
       dispatch(getCategories());
       initialLoad.current = false;
     }

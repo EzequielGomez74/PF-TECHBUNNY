@@ -1,7 +1,7 @@
 // * En esta ruta se generan nuevas ordenes, se generan preferencias de mercadopago, modifica ordenes existentes y devuelven las ordenes solicitadas.
 
 // todo hablar con back para ver si creamos un get all orders (limitado a 10 o 20 orders)
-
+require("dotenv").config();
 const { Router } = require("express");
 const controller = require("./controller.js");
 const router = Router();
@@ -47,6 +47,12 @@ router.get("/pagar/:order_id", async (req, res) => {
       };
     });
     // TODO: manejar casos de failure y pending con front
+
+    // let path = "http://localhost:3000/feedback";
+    // if (process.env.NODE_ENV === "production") {
+    //   path = "https://pf-techbunny-lake.vercel.app/feedback";
+    // }
+
     let preference = {
       items: carrito,
       back_urls: {
@@ -79,19 +85,24 @@ router.post("/:user_id", async (req, res) => {
 router.put("/:order_id", async (req, res) => {
   //!! CAMBIOS EN EL ARGUMENTO DE UPDATEORDER linea 88 (se saco user_id)
   try {
+    console.log("req.body ", req.body);
     const { order_id } = req.params;
-    if (order_id && req.body.status)
+    if (order_id && req.body.status) {
+      console.log("1");
       // para cuando el admin use dashboard
       return res
         .status(200)
         .send(await controller.updateOrder(order_id, req.body.status));
-    if (order_id)
+    }
+    if (order_id) {
       // para la compra
+      console.log("2");
       res
         .status(200)
         .send(await controller.updateOrderData(order_id, req.body));
+    }
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(407).send(error.message);
   }
 });
 

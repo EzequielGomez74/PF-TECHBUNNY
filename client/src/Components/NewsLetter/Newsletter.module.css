@@ -128,5 +128,7 @@
     .prueba{
         margin-bottom: 4%;
     }
-    
+    .imgNewsletter{
+        display: none;
+    }
 }

@@ -18,6 +18,7 @@ const dashboard = require("../apiServices/dashboard/routes.js");
 const carrousel = require("../apiServices/carrousel/routes.js");
 const recoverPassword = require("../apiServices/recoverPassword/routes.js");
 const statistic = require("../apiServices/statistic/routes.js");
+const preference = require("../apiServices/preference/routes.js");
 const generateAccesTokenInRequest = require("../middlewares/generateAccesTokenInRequest.js");
 
 //router.use(generateTestUsername);
@@ -40,7 +41,7 @@ router.use("/carrousels", carrousel);
 router.use("/dashboard", dashboard);
 router.use("/recoverPassword", recoverPassword);
 router.use("/statistics", statistic);
-
+router.use("/preferences", preference);
 //router.use
 
 module.exports = router;

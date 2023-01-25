@@ -7,9 +7,9 @@ import { updateUserInfo } from "../../redux/actions";
 import s from "./Profile.module.css";
 import img from "../../Photos/conejoperfil.png";
 import { useEffect, useRef } from "react";
-import { allOrdersByUser } from "../../redux/actions";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faSpinner, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { allOrdersByUser, getOrder, updateOrder } from "../../redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
   const user = useSelector((state) => state.loggedUser);
@@ -106,6 +106,12 @@ function Profile() {
     history.push("/editProfile");
   };
 
+  const handleCompleteOrder = (user_id, order_id) => {
+    console.log("sale el dispatch");
+    dispatch(getOrder(user_id, order_id));
+    history.push("/payment");
+  };
+
   return (
     <div className={dm ? s.dmprofilePage : s.profilePage}>
       <NavBar />
@@ -147,54 +153,90 @@ function Profile() {
               </div>
             </section>
             <section className={s.profileOrdersHistory}>
-              <h3 className={dm ? s.dmorderTitle: s.orderTitle}>Historial de Ordenes</h3>
+              <h3 className={dm ? s.dmorderTitle : s.orderTitle}>
+                Historial de Ordenes
+              </h3>
               <br />
-              {orders.length
-                ? orders.map((o) => (
-                    <div className={s.orderContainer}>
-                      <div
-                        className={dm ? s.dmorderByUserInfo : s.orderByUserInfo}
-                      >
-                        <span>Order N° {o.order_id}</span>
-                        <span>{`${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}</span>
-                        <span>
-                          Status:{" "}
-                          {o.status === "processed"
-                            ? <p>Procesado <FontAwesomeIcon icon={faSpinner} /></p>
-                            : o.status === "canceled"
-                            ? <p>Cancelado <FontAwesomeIcon icon={faXmark} /></p>
-                            : <p>Completado <FontAwesomeIcon icon={faCheck} /></p>
+              {orders.length ? (
+                orders.map((o) => (
+                  <div className={s.orderContainer}>
+                    <div
+                      className={dm ? s.dmorderByUserInfo : s.orderByUserInfo}
+                    >
+                      <span>Order N° {o.order_id}</span>
+                      <span>{`${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}</span>
+                      <span>
+                        Status:{" "}
+                        {o.status === "processed" ? (
+                          <p>
+                            Procesado <FontAwesomeIcon icon={faSpinner} />
+                          </p>
+                        ) : o.status === "canceled" ? (
+                          <p>
+                            Cancelado <FontAwesomeIcon icon={faXmark} />
+                          </p>
+                        ) : (
+                          <p>
+                            Completado <FontAwesomeIcon icon={faCheck} />
+                          </p>
+                        )}
+                      </span>
+                    </div>
+                    {o.status === "processed" && (
+                      <div>
+                        {" "}
+                        <button
+                          onClick={() =>
+                            handleCompleteOrder(o.user_id, o.order_id)
                           }
-                        </span>
+                        >
+                          Completar el pedido
+                        </button>
+                        <button
+                          onClick={() =>
+                            dispatch(
+                              updateOrder(o.order_id, { status: "canceled" })
+                            )
+                          }
+                        >
+                          Cancelar el pedido
+                        </button>
                       </div>
-                      <ul className={s.orderProductsContainer}>
-                        {o.Products?.map((p) => (
-                          <li className={s.liOrderElement}>
-                            <Link to={`/detail/${p.product_id}`}><img
+                    )}
+                    <ul className={s.orderProductsContainer}>
+                      {o.Products?.map((p) => (
+                        <li className={s.liOrderElement}>
+                          <Link to={`/detail/${p.product_id}`}>
+                            <img
                               className={s.productOrderImage}
                               src={p.image}
                               alt={p.product_id}
-                            /></Link>
+                            />
+                          </Link>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <div className={s.productOrderInfo}>
+                            <span>{p.name}</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div className={s.productOrderInfo}>
-                              <span>{p.name}</span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              <span className={dm ? s.dmprice : s.price}>
-                                US$ {p.price}
-                              </span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              <span>Cantidad: {p.count} unidades</span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                      <span className={s.orderTotal}>Total: US$ {o.total.toFixed(2)}</span>
-                    </div>
-                  ))
-                : <div className={s.noOrder}> 
-                    <span>Todavía no has realizado pedidos</span>
-                  </div> }
+                            <span className={dm ? s.dmprice : s.price}>
+                              US$ {p.price}
+                            </span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>Cantidad: {p.count} unidades</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <span className={s.orderTotal}>
+                      Total: US$ {o.total.toFixed(2)}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className={s.noOrder}>
+                  <span>Todavía no has realizado pedidos</span>
+                </div>
+              )}
             </section>
           </div>
         ) : (

@@ -9,6 +9,7 @@ import {
   allOrdersByUser,
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
+import { useRef } from "react";
 
 function Payment() {
   const dm = useSelector((state) => state.darkMode);
@@ -29,6 +30,7 @@ function Payment() {
     shippingAddress: "",
     city: "",
     zipCode: "",
+    preference_id: "",
   });
 
   const handleChange = (e) => {
@@ -37,9 +39,14 @@ function Payment() {
       [e.target.name]: e.target.value,
     });
   };
-
+  const flag = useRef(true);
   useEffect(() => {
-    if (Object.keys(preferences).length !== 0) {
+    console.log("2v");
+    if (Object.keys(preferences).length !== 0 && flag.current) {
+      flag.current = false;
+      setPayInfo({ ...payInfo, preference_id: preferences.preferenceId });
+      console.log("setpayinfo 2", payInfo);
+
       var script = document.createElement("script");
 
       // The source domain must be completed according to the site for which you are 	integrating.
@@ -50,13 +57,17 @@ function Payment() {
       script.dataset.preferenceId = preferences.preferenceId;
       document.getElementById("page-content").innerHTML = "";
       document.querySelector("#page-content").appendChild(script);
+      return;
     }
-  }, [preferences]);
+    console.log("1v");
+    console.log("setpayinfo 1", payInfo);
+    dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
+  }, [preferences, payInfo.preference_id]);
 
   async function pay() {
     try {
       dispatch(getPayPreferencesById(orderMp[0].order_id));
-      dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
+      //dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
       //dispatch(allOrdersByUser(user.user_id))
     } catch (error) {
       console.error(error.message);
