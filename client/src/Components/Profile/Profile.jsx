@@ -115,7 +115,7 @@ function Profile() {
     var s = new Date(date).toISOString();
     s = s.split("-");
     const y = s[0];
-    const m = month[parseInt(s[1])];
+    const m = month[parseInt(s[1])-1];
     const d = s[2].slice(0, 2);
     console.log(d, " ", m, " ", y, " - ", s);
     return `${d} de ${m} de ${y}`;
