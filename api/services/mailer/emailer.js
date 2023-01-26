@@ -42,7 +42,7 @@ const template = async (userdata) => {
     };
   }
   if (userdata.type === "recover") {
-    completePath = `${path}/recover/${userdata.verificationCode}`;
+    completePath = `${path}/NewPassword/${userdata.verificationCode}`;
     return {
       from: "🐰 TechBunny 🐰", // sender address
       to: `${userdata.email}`,
