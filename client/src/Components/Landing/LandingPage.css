@@ -6,27 +6,29 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: 5s;
+    transition: 7s;
     background:  url("../../images/background4.jpg") no-repeat;
+    background-size: cover;
     animation-name: animate;
     animation-direction:alternate-reverse;
-    animation-duration: 15s;
+    animation-duration: 21s;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: ease-in-out;
     user-select: none;
-   
 }
-
 @keyframes animate{
 0%{
-    background:  url("../../images/background4.jpg") no-repeat;
+    background: url("../../images/background4.jpg") no-repeat;
+    background-size: cover;
 }
 33%{
-    background:  url("../../images/background7.jpg") no-repeat;
+    background: url("../../images/background7.jpg") no-repeat;
+    background-size: cover;
 }
 66%{
-    background:  url("../../images/background6.jpg") no-repeat;
+    background: url("../../images/background6.jpg") no-repeat;
+    background-size: cover;
 }
 }
 
