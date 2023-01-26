@@ -20,6 +20,7 @@ function Category() {
   let products = useSelector((state) => state.productsByCategory);
   // let categories = useSelector(state => state.categories);
   let productsBackup = useSelector((state) => state.filtered);
+
   const [filterPanel, setFilterPanel] = useState({
     price: "none",
     brand: "none",
@@ -108,7 +109,11 @@ function Category() {
         <div className={s.selectors}>
           <select
             name="brand"
-            // value={active.brand}
+            value={
+              filterPanel.brand === "none"
+                ? "Filtrar por marcas"
+                : filterPanel.brand
+            }
             id="brand"
             onChange={(e) => handleFiltersChange(e)}
           >
@@ -126,7 +131,11 @@ function Category() {
           {name === "Periféricos" && (
             <select
               name="subcategory"
-              // value={active.brand}
+              value={
+                filterPanel.subcategory === "none"
+                  ? "Filtrar por subcategoría"
+                  : filterPanel.subcategory
+              }
               id="subcategory"
               onChange={(e) => handleFiltersChange(e)}
             >
@@ -146,7 +155,11 @@ function Category() {
             name="price"
             id="price"
             selected
-            // value={active.price}
+            value={
+              filterPanel.price === "none"
+                ? "Ordenar por precio"
+                : filterPanel.price
+            }
             onChange={(e) => handleFiltersChange(e)}
           >
             <option value="none" className={s.option}>
@@ -161,7 +174,7 @@ function Category() {
           </select>
         </div>
         <div className={s.results}>
-          {currentProduct.length ? (
+          {currentProduct.length && currentProduct[0] !== null ? (
             currentProduct.map((e) => (
               <div className={s.cardShadow}>
                 <CardV
@@ -178,20 +191,28 @@ function Category() {
                 />
               </div>
             ))
+          ) : currentProduct[0] === null ? (
+            <div className={s.notFoundContainer}>
+              <span className={s.notFound}>No se encontraron productos</span>
+            </div>
           ) : (
             <div className={s.loading}>
               <img src={loading} alt="" />
             </div>
           )}
         </div>
-        <div className={s.paginate}>
-          <Pagination
-            productsPerPage={productsPerPage}
-            products={products.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </div>
+        {currentProduct[0] !== null && currentProduct.length > 0 ? (
+          <div className={s.paginate}>
+            <Pagination
+              productsPerPage={productsPerPage}
+              products={products.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </div>
+        ) : (
+          <div className={s.spaceDown}></div>
+        )}
       </div>
       <Footer />
     </div>

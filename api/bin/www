@@ -11,4 +11,6 @@ db.sync({ force: true }).then(async () => {
   });
 });
 
+// 
+
   

@@ -118,9 +118,10 @@ export default function reducer(state = initialState, action) {
           : allProductsByCategory
               .filter((p) => p.subcategory.includes(action.payload.subcategory))
               .filter((p) => p.brand.includes(action.payload.brand));
+
       return {
         ...state,
-        productsByCategory: filteredProducts,
+        productsByCategory: filteredProducts.length > 0 ? filteredProducts : [null],
       };
     // case "FILTER_BY_BRAND":
     //   const allProductsByCategory = [...state.filtered];

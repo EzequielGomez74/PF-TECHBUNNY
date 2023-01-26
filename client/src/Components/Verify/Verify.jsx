@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer/Footer";
 //import s from "./Verify.module.css";
 import { statusRegister } from "../../redux/actions";
@@ -11,11 +11,13 @@ import fallida from "../../Photos/conejotriste.png";
 import "./Verify.scss";
 
 function Verify() {
+  const location = useLocation();
   const { token } = useParams();
   const [status, setStatus] = useState("");
   useEffect(() => {
     statusRegister(token);
-  }, []);
+    sessionStorage.setItem("route", location.pathname);
+  }, [location]);
 
   const history = useHistory();
 
@@ -33,7 +35,7 @@ function Verify() {
     if (status === "SUCCESS") {
       setTimeout(function () {
         history.push("/login");
-      }, 6000);
+      }, 4000);
       return (
         <div>
           <img className="imgExitosa" src={exitosa} alt="" />

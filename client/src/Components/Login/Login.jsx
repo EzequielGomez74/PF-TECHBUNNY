@@ -79,7 +79,15 @@ function Login() {
               icon: "success",
               confirmButtonColor: "#d7f136",
             });
-            history.goBack();
+            const route = sessionStorage.getItem("route");
+            if (route.includes("/verify/")) {
+              console.log("entre al primero");
+              history.push("/home");
+              sessionStorage.setItem("route", "");
+            } else {
+              console.log("entre al segundo");
+              history.goBack();
+            }
           }
         }
       );

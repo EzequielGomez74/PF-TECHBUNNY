@@ -97,6 +97,30 @@ function Profile() {
     });
   };
 
+  function parseRelativeDate(date) {
+    const month = [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ];
+    var s = new Date(date).toISOString();
+    s = s.split("-");
+    const y = s[0];
+    const m = month[parseInt(s[1])];
+    const d = s[2].slice(0, 2);
+    console.log(d, " ", m, " ", y, " - ", s);
+    return `${d} de ${m} de ${y}`;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateUserInfo(user.user_id, input));
@@ -164,7 +188,11 @@ function Profile() {
                       className={dm ? s.dmorderByUserInfo : s.orderByUserInfo}
                     >
                       <span>Order N° {o.order_id}</span>
-                      <span>{`${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}</span>
+                      <span>
+                        {o.relativeDateAdded !== 0
+                          ? parseRelativeDate(o.relativeDateAdded)
+                          : `${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}
+                      </span>
                       <span>
                         Status:{" "}
                         {o.status === "processed" ? (
@@ -182,27 +210,11 @@ function Profile() {
                         )}
                       </span>
                     </div>
-                    {o.status === "processed" && (
-                      <div>
-                        {" "}
-                        <button
-                          onClick={() =>
-                            handleCompleteOrder(o.user_id, o.order_id)
-                          }
-                        >
-                          Completar el pedido
-                        </button>
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              updateOrder(o.order_id, { status: "canceled" })
-                            )
-                          }
-                        >
-                          Cancelar el pedido
-                        </button>
-                      </div>
-                    )}
+                    
+
+
+
+
                     <ul className={s.orderProductsContainer}>
                       {o.Products?.map((p) => (
                         <li className={s.liOrderElement}>
@@ -230,6 +242,30 @@ function Profile() {
                     <span className={s.orderTotal}>
                       Total: US$ {o.total.toFixed(2)}
                     </span>
+
+                    {o.status === "processed" && (
+                      <div className={dm? s.dmbtnPedido : s.btnPedido}>
+                        {" "}
+                        <button className={dm? s.dmbtnCompletarPedido : s.btnCompletarPedido}
+                          onClick={() =>
+                            handleCompleteOrder(o.user_id, o.order_id)
+                          }
+                        >
+                          Completar pedido
+                        </button>
+                        <button className={dm? s.dmbtnCancelarPedido : s.btnCancelarPedido}
+                          onClick={() =>
+                            dispatch(
+                              updateOrder(o.order_id, { status: "canceled" })
+                            )
+                          }
+                        >
+                          Cancelar pedido
+                        </button>
+                      </div>
+                    )}
+
+
                   </div>
                 ))
               ) : (
