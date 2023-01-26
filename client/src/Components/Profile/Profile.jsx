@@ -111,7 +111,29 @@ function Profile() {
     dispatch(getOrder(user_id, order_id));
     history.push("/payment");
   };
-
+  function parseRelativeDate(date) {
+    const month = [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ];
+    var s = new Date(date).toISOString();
+    s = s.split("-");
+    const y = s[0];
+    const m = month[parseInt(s[1]) - 1];
+    const d = s[2].slice(0, 2);
+    console.log(d, " ", m, " ", y, " - ", s);
+    return `${d} de ${m} de ${y}`;
+  }
   return (
     <div className={dm ? s.dmprofilePage : s.profilePage}>
       <NavBar />
@@ -157,6 +179,7 @@ function Profile() {
                 Historial de Ordenes
               </h3>
               <br />
+              {console.log(orders)}
               {orders.length ? (
                 orders.map((o) => (
                   <div className={s.orderContainer}>
@@ -164,7 +187,12 @@ function Profile() {
                       className={dm ? s.dmorderByUserInfo : s.orderByUserInfo}
                     >
                       <span>Order N° {o.order_id}</span>
-                      <span>{`${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}</span>
+                      {/* <span>{`${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}</span> */}
+                      <span>
+                        {o.relativeDateAdded !== 0
+                          ? parseRelativeDate(o.relativeDateAdded)
+                          : `${o.createdAt[0]} de ${o.createdAt[1]} de ${o.createdAt[2]}`}
+                      </span>
                       <span>
                         Status:{" "}
                         {o.status === "processed" ? (

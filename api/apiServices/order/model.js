@@ -52,6 +52,7 @@ module.exports = (sequelize) => {
       relativeDateAdded: {
         type: DataTypes.FLOAT,
         allowNull: true,
+        defaultValue: 0,
       },
       preference_id: {
         type: DataTypes.STRING,

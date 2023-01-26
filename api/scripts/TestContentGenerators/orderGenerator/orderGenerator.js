@@ -70,7 +70,7 @@ class UserClass {
 
 async function orderGenerator() {
   try {
-    const MAX_USERS_SHOW = 21;
+    const MAX_USERS_SHOW = 36;
     const CURRENT_TIME = Date.now();
     const TIME_TO_SPEND = (604800 + 302400) * 1000; // 1 semana y media
     for (let user_id = 10; user_id < MAX_USERS_SHOW; user_id++) {
@@ -98,7 +98,7 @@ async function orderGenerator() {
             user_id
           );
           //? el user deja un review del producto comprado
-          if (Math.random() < 0.7) await reviewGenerator(user_id, product_id);
+          if (Math.random() < 0.8) await reviewGenerator(user_id, product_id);
         }
         //? usando orderController.createOrder() crear la order para el user_id
         const order_id = await orderController.createRelativeOrder(
