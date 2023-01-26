@@ -43,8 +43,8 @@ function Login() {
   const handleLogin = (e) => {
     setShowError(true);
     //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
-    //if (Object.keys(errors).length === 0) {
-    if (true) {
+    if (Object.keys(errors).length === 0) {
+    // if (true) {
       loginUser(
         {
           username: login.username,
@@ -73,21 +73,8 @@ function Login() {
               confirmButtonColor: "#2B3036",
             });
           else if (status === "SUCCESS") {
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "Logueado con éxito",
-              icon: "success",
-              confirmButtonColor: "#d7f136",
-            });
-            const route = sessionStorage.getItem("route");
-            if (route.includes("/verify/")) {
-              console.log("entre al primero");
-              history.push("/home");
-              sessionStorage.setItem("route", "");
-            } else {
-              console.log("entre al segundo");
-              history.goBack();
-            }
+            alert("TE HAS LOGUEADO CON EXITO");
+            history.goBack();
           }
         }
       );
