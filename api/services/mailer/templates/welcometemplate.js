@@ -203,7 +203,7 @@ const welcometemplate = (completePath, userdata) => {
     <tr>
       <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
         
-        <img align="center" border="0" src="https://res.cloudinary.com/dkautckhj/image/upload/v1674577974/welcomebunny_wmx5gf.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;/>
+        <img align="center" border="0" src="https://res.cloudinary.com/dkautckhj/image/upload/v1674696216/techbunny/unnamed_6_kfkx2x.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;/>
         
       </td>
     </tr>
