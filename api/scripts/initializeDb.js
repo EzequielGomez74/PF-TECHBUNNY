@@ -75,7 +75,7 @@ async function loadAllAssets() {
     //!! FAVORITES
     //for (let i = 2; i <= 9; i++) {
     //} //TEST
-    await loadtoDb(favorites, Favorite); //TEST
+    //await loadtoDb(favorites, Favorite); //TEST
     console.log("DATABASE LOADED SUCCESFULLY");
   } catch (error) {
     throw new Error(error.message);

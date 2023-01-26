@@ -70,7 +70,7 @@ class UserClass {
 
 async function orderGenerator() {
   try {
-    const MAX_USERS_SHOW = 12;
+    const MAX_USERS_SHOW = 36;
     const CURRENT_TIME = Date.now();
     const TIME_TO_SPEND = (604800 + 302400) * 1000; // 1 semana y media
     for (let user_id = 10; user_id < MAX_USERS_SHOW; user_id++) {
