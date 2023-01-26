@@ -152,7 +152,7 @@ const welcometemplate = (completePath, userdata) => {
       <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:35px 30px 0px;font-family:'Rubik',sans-serif;" align="left">
           
-    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola ${userdata.username}!</strong></p></h1>
+    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola!</strong></p></h1>
   
         </td>
       </tr>
