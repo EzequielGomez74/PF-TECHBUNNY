@@ -209,7 +209,7 @@ async function checkOrderStatus() {
     if (foundOrders) {
       foundOrders.forEach((order) => {
         let timestamp = moment(order.createdAt).unix();
-        if (Date.now() / 1000 - timestamp > 240) {
+        if (Date.now() / 1000 - timestamp > 3600) {
           updateOrder(order.order_id, "canceled");
         }
       });

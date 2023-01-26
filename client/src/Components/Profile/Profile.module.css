@@ -200,6 +200,50 @@
     margin-top: 20px;
 }
 
+/* AGREGADO */
+.btnPedido button{
+    margin: 3px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 30%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+}
+
+.btnPedido .btnCompletarPedido{
+    background-color: #20232A;
+    color: white;
+}
+
+.btnPedido .btnCompletarPedido:hover{
+    color: #d7f136;
+    transition: 0.5s;
+    cursor: pointer;
+    
+}
+
+.btnPedido .btnCancelarPedido{
+    background-color:transparent;
+    color: black;
+    border: 3px solid #20232A;
+    cursor: pointer;
+}
+
+.btnPedido .btnCancelarPedido:hover{
+    background-color:#d7f136;
+    color: black;
+    transition: 0.5s;
+    cursor: pointer;
+}
+/* AGREGADO */
+
+
 /* DARK MODE */
 .dmprofilePage{
     background-color: #20232A;
@@ -320,6 +364,49 @@
     border-radius: 20px 20px 0px 0px;
 }
 
+/* AGREGADO */
+.dmbtnPedido button{
+    margin: 3px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 30%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+}
+
+.dmbtnPedido .dmbtnCompletarPedido{
+    background-color: #20232A;
+    color: white;
+}
+
+.dmbtnPedido .dmbtnCompletarPedido:hover{
+    color: #d7f136;
+    transition: 0.5s;
+    cursor: pointer;
+    
+}
+
+.dmbtnPedido .dmbtnCancelarPedido{
+    background-color:transparent;
+    color: black;
+    border: 3px solid #20232A;
+    cursor: pointer;
+}
+
+.dmbtnPedido .dmbtnCancelarPedido:hover{
+    background-color:#d7f136;
+    color: black;
+    transition: 0.5s;
+    cursor: pointer;
+}
+/* AGREGADO */
+
 
 @media (max-width: 450px){
     .profileInfo{
@@ -382,7 +469,77 @@
 
      .dmimg {
         width: 100%;
-      }
+     }
+      /* PEDIDO */
+
+      .btnPedido button{
+        font-size: 10px;
+        width: 60%;
+        margin: 3px;
+        height: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: none;
+     }
+     .orderByUserInfo{
+        padding-top: 20px;
+        padding-bottom: 15px;
+        background-color: transparent;
+        display: flex;
+        font-family: 'Poppins';
+        font-weight: 800;
+        font-size: 12px;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #d7f136;
+        border-radius: 20px 20px 0px 0px;
+     }
+     .productOrderImage{
+            width: 100px;
+            height: auto;
+     }
+
+     .orderTotal{
+        margin-bottom: 20px;
+     }
+
+      /* PEDIDO DARK MODE*/
+
+      .dmbtnPedido button{
+        font-size: 10px;
+        width: 60%;
+        margin: 3px;
+        height: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: none;
+     }
+     .dmorderByUserInfo{
+        padding-top: 20px;
+        padding-bottom: 15px;
+        background-color: transparent;
+        display: flex;
+        font-family: 'Poppins';
+        font-weight: 800;
+        font-size: 12px;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #d7f136;
+        border-radius: 20px 20px 0px 0px;
+     }
+     .dmproductOrderImage{
+            width: 100px;
+            height: auto;
+     }
+     
+
+    
 
 
 }

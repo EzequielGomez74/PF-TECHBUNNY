@@ -152,7 +152,7 @@ const welcometemplate = (completePath, userdata) => {
       <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:35px 30px 0px;font-family:'Rubik',sans-serif;" align="left">
           
-    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola ${userdata.username}!</strong></p></h1>
+    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola!</strong></p></h1>
   
         </td>
       </tr>
@@ -203,7 +203,7 @@ const welcometemplate = (completePath, userdata) => {
     <tr>
       <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
         
-        <img align="center" border="0" src="https://res.cloudinary.com/dkautckhj/image/upload/v1674577974/welcomebunny_wmx5gf.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;/>
+        <img align="center" border="0" src="https://res.cloudinary.com/dkautckhj/image/upload/v1674696216/techbunny/unnamed_6_kfkx2x.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;/>
         
       </td>
     </tr>

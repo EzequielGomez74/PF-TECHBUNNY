@@ -40,15 +40,18 @@ function Register() {
       //!manejar response
       if (response.data.status === "SUCCESS")
         Swal.fire({
-          title: "¡Alerta!",
-          text: "REGISTRADO CON EXITO",
+          title: "¡Éxito!",
+          text: "Registrado con éxito, te hemos enviado un mail de verificación",
           icon: "success",
+          confirmButtonColor: "#d7f136",
         });
       else
         Swal.fire({
-          title: "¡Alerta!",
-          text: "REGISTRO FALLIDO",
-          icon: "warning",
+          title: "¡Error!",
+          text: "Registro fallido",
+          icon: "error",
+          confirmButtonText: "Volver a intentar",
+          confirmButtonColor: "#2B3036",
         });
     } catch (error) {
       console.log(error.message);
@@ -60,8 +63,8 @@ function Register() {
     e.preventDefault();
     setShowError(true);
     //!PROVISORIO SOLO POR MOTIVOS DE TESTEO EL IF QUEDA EN TRUE -> descomentar linea de abajo para produccion
-    //if (Object.keys(errors).length === 0) {
-    if (true) {
+    if (Object.keys(errors).length === 0) {
+    // if (true) {
       postNewUser(register);
     }
   };
@@ -76,7 +79,7 @@ function Register() {
   const dm = useSelector((state) => state.darkMode);
 
   return (
-    <div>
+    <div className={dm ? s.dmloginPage : s.loginPage}>
       <NavBar />
       <section className={dm ? s.dmloginSection : s.loginSection}>
         <div className={dm ? s.dmheroLogin : s.heroLogin}>
@@ -129,7 +132,10 @@ function Register() {
           </button>
           <GoogleLoginContainer />
           <span onClick={handleClick} className={dm ? s.dmm2 : s.m2}>
-            ¿Ya tienes cuenta? <strong>¡Ingresa aquí!</strong>
+            ¿Ya tienes cuenta?{" "}
+            <strong onClick={handleClick} className={dm ? s.dmlogin : s.login}>
+              ¡Ingresa aquí!
+            </strong>
           </span>
         </div>
       </section>
