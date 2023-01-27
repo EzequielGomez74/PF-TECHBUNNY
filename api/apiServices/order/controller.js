@@ -21,7 +21,7 @@ async function updateOrder(order_id, status) {
       { status: status },
       { where: { order_id: order_id } }
     );
-
+    const datos = await Order.findByPk(order_id); //Informacion que necesita para el mail
     const productos = await OrderProduct.findAll({
       where: { order_id },
       raw: true,
@@ -39,6 +39,7 @@ async function updateOrder(order_id, status) {
     }
     if (status === "completed") {
       productos.map(async (p) => {
+        
         const actual = await Product.findOne({
           where: { product_id: p.product_id },
           raw: true,
@@ -48,9 +49,13 @@ async function updateOrder(order_id, status) {
           { where: { product_id: p.product_id } }
         );
       });
-      // sendMail(userdata); //! su pago fue recibido
+      const userdata = {
+          ...datos.dataValues,
+          productos: productos,
+          type: "order",
+        };
+       sendMail(userdata); //! su pago fue recibido
     }
-    console.log("sale");
     return order;
   } catch (error) {
     throw new Error(error.message);
@@ -115,18 +120,6 @@ async function createOrder(user_id) {
     order = await Order.findOne({
       where: { order_id: order.dataValues.order_id },
     });
-    const datos = await Order.findByPk(order.order_id); //Informacion que necesita para el mail
-    const productos = await OrderProduct.findAll({
-      where: { order_id: order.dataValues.order_id },
-    });
-    const userdata = {
-      ...order.dataValues,
-      ...datos.dataValues,
-      ...user.dataValues,
-      productos: productos,
-      type: "order",
-    };
-    sendMail(userdata); // Envia el mail
     await Cart.destroy({ where: { user_id: user_id } }); // Elimina el carrito ya se transformo en una orden
     return order.order_id;
   } catch (error) {
