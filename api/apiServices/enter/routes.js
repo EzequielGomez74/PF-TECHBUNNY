@@ -38,6 +38,8 @@ router.put("/:accessType", async (req, res) => {
           });
         } else if (authResult === null || authResult.twoFactor) {
           return res.status(200).json(authResult);
+        } else if (authResult.status === "Login Failed") {
+          res.sendStatus(202);
         } else {
           res.status(200).json({ status: authResult });
         }

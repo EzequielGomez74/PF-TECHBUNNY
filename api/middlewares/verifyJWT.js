@@ -12,7 +12,7 @@ function verifyJWT(req, res, next) {
     req.username = decoded.username;
     req.role = decoded.role;
     const user = await userController.getUserBy({ username: decoded.username });
-    if (user.isDeleted) return res.sendStatus(401); // !!LOGOUT
+    if (!user || (user && user.isDeleted)) return res.sendStatus(401); // !!LOGOUT
     next();
   });
 }

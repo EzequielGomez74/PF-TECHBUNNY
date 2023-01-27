@@ -8,12 +8,16 @@ const {
   Category,
 } = require("../../services/db/db.js");
 
-async function getAllStatistics() {
-  const allStatisticsData = {};
+const allStatisticsData = {};
+
+async function generateAllStatistics() {
+  //const allStatisticsData = {};
   allStatisticsData.usersData = await createUserData();
   allStatisticsData.brandsData = await createBrandsData();
   allStatisticsData.categoriesData = await createCategoriesData();
-  return allStatisticsData;
+  const now = new Date();
+  allStatisticsData.generatedAt = now.toISOString();
+  //return allStatisticsData;
 }
 
 async function createCategoriesData() {
@@ -185,4 +189,4 @@ async function getProductsArray() {
   }
   return results;
 }
-module.exports = { getAllStatistics };
+module.exports = { generateAllStatistics, allStatisticsData };

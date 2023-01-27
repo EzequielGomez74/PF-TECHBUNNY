@@ -10,7 +10,7 @@ router.use(verifyJWT); // !validacion de JWT
 router.use(requiredAccess(3));
 router.get("/", async (req, res) => {
   try {
-    res.status(200).json(await controller.getAllStatistics());
+    res.status(200).json(controller.allStatisticsData);
   } catch (error) {
     res.status(400).send(error.message);
   }

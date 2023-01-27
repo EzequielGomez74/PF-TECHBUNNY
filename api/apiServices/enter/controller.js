@@ -137,25 +137,33 @@ async function handleGoogleLogin({ tokenId, twoFactorToken }) {
 async function handleLoginWithAccess(accessToken) {
   try {
     let result = false;
+    console.log("1");
     const foundUser = await User.findOne({ where: { accessToken } });
+    console.log("2");
     if (!foundUser) return { status: "Login Fail" };
+    console.log("3", foundUser);
     jwt.verify(
       foundUser.accessToken,
       process.env.ACCESS_TOKEN_SECRET,
       async (err, decode) => {
+        console.log("err ", err);
         if (err || foundUser.username !== decode.username)
-          throw new Error("not found");
+          return (result = false);
+        console.log("decode", decode.username);
         result = true;
       }
     );
+    console.log("4");
     if (result) {
       //todo mandar solo los valores correspondientes
       //todo SETEAR SAVED SESSION DATA
+      console.log("5");
       return {
         user: userController.setLoggedUserData(foundUser.dataValues),
         accessToken: foundUser.dataValues.accessToken,
       };
     } else {
+      console.log("5.5");
       return { status: "Login Failed" };
     }
   } catch (error) {
