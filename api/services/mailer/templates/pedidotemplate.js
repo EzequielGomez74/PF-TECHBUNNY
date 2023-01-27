@@ -3,7 +3,7 @@ const { Product } = require("../../db/db.js");
 async function ProdutsHTML(productos) {
   let productstotemplate = "";
   for (let i = 0; i < productos.length; i++) {
-    let product = productos[i].dataValues;
+    let product = productos[i];
     const productdata = await Product.findOne({
       where: { product_id: product.product_id },
     });
@@ -253,7 +253,7 @@ const pedidotemplate = async (userdata) => {
       <tr>
         <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:35px 30px 0px;font-family:'Rubik',sans-serif;" align="left">
           
-    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola !</strong></p>
+    <h1 class="v-text-align" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-weight: normal; font-family: 'Rubik',sans-serif; font-size: 18px;"><p><strong>Hola ${userdata.name}!</strong></p>
   <p> </p></h1>
   
         </td>
@@ -443,9 +443,6 @@ const pedidotemplate = async (userdata) => {
   
   </html>
   `;
-
-  // console.log("ANTES DE RETORNAR TEMPLATe",fulltemplate)
-
   return fulltemplate;
 };
 module.exports = { pedidotemplate };
