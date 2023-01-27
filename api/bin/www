@@ -4,7 +4,7 @@ const loadAllAssets = require("../scripts/initializeDb.js");
 //const cron = require("../services/cron/cron")
 // Syncing all the models at once.
 db.sync().then(async () => {
-  //await loadAllAssets();
+  //await loadAllAssets(); //!descomentar si se quiere resear la base de datos
   require("../services/cron/cron");
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001");
