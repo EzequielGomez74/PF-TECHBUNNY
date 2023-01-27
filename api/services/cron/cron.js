@@ -15,7 +15,7 @@ cron.schedule("1 * * * *", async () => {
 });
 
 //$ generar statistics -> cada dia
-cron.schedule("1 * * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   try {
     await statisticController.generateAllStatistics();
     console.log("STATISTICS GENERATED");
