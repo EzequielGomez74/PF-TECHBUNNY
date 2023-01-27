@@ -274,6 +274,7 @@ export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
       let json = await axiosInstance.get(`/products?category=${category}`);
+      console.log("json.data ", json.data);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
