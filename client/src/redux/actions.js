@@ -185,7 +185,6 @@ export const getOrderStatus = (user_id, order_id) => {
 export const updateOrder = (order_id, orderInfo) => {
   return async function (dispatch) {
     try {
-      console.log("order_id ", order_id, "-", " orderInfo ", orderInfo);
       const response = await axiosInstance.put(
         `/orders/${order_id}`,
         orderInfo
@@ -274,7 +273,6 @@ export function getProductsByCategory(category) {
   return async function (dispatch) {
     try {
       let json = await axiosInstance.get(`/products?category=${category}`);
-      console.log("json.data ", json.data);
       return dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: json.data });
     } catch (error) {
       console.log(error.message);
@@ -286,7 +284,6 @@ export function getProductsByCategory(category) {
 export function getProductsByBrand(brand) {
   return async function (dispatch) {
     try {
-      console.log("brand", brand);
       let json = await axiosInstance.get(`/products?brand=${brand}`);
       return dispatch({ type: GET_PRODUCTS_BY_BRAND, payload: json.data });
     } catch (error) {
@@ -504,7 +501,6 @@ export function addOrRemoveQuantityFromCart(id, count) {
 //! GET ORDER
 
 export const getOrder = (user_id, order_id) => {
-  console.log("llega al getOrder");
   return async function (dispatch) {
     try {
       const orders = await axiosInstance.get(

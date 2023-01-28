@@ -15,10 +15,8 @@ const loginUser = async (data, onResponse) => {
     }
     const response = await axios.put("/enter/login", data, config);
     if (response.data.accessToken) {
-      console.log("login success ", response.data);
       localStorage.setItem("accessToken", response.data.accessToken);
       const t = localStorage.getItem("accessToken");
-      console.log("t ", t);
       if (response.data.user) {
         //!response.data tambien trae info de la session (carrito,etc) se va a llamar savedSessionData
         await store.dispatch(setLoggedUser(response.data.user));
