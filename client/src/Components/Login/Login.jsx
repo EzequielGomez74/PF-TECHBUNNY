@@ -81,11 +81,9 @@ function Login() {
             });
             const route = sessionStorage.getItem("route");
             if (route && route.includes("/verify/")) {
-              console.log("entre al primero");
               history.push("/home");
               sessionStorage.setItem("route", "");
             } else {
-              console.log("entre al segundo");
               history.goBack();
             }
           }

@@ -1,62 +1,59 @@
-import React, { useEffect,useRef,useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import Footer from '../Footer/Footer'
-import NavBar from '../NavBar/NavBar'
-import { getProductsByBrand,cleanProductsByBrand } from '../../redux/actions'
-import CardV from '../Card V/CardV'
-import s from './Brand.module.css'
+import Footer from "../Footer/Footer";
+import NavBar from "../NavBar/NavBar";
+import { getProductsByBrand, cleanProductsByBrand } from "../../redux/actions";
+import CardV from "../Card V/CardV";
+import s from "./Brand.module.css";
 import Pagination from "../Pagination/Pagination";
 import loading from "../../images/loadingg.gif";
 
 function Brand() {
-   
-    const dispatch = useDispatch()
-    const { brand } = useParams()
-    const dm = useSelector((state) => state.darkMode);
+  const dispatch = useDispatch();
+  const { brand } = useParams();
+  const dm = useSelector((state) => state.darkMode);
 
-    const productsByBrand = useSelector(state => state.productsByBrand)
-    const user = useSelector((state) => state.loggedUser);
-    let initialLoad=useRef(true)
+  const productsByBrand = useSelector((state) => state.productsByBrand);
+  const user = useSelector((state) => state.loggedUser);
+  let initialLoad = useRef(true);
 
+  //PAGINACION
 
-    //PAGINACION
+  let [currentPage, setCurrentPage] = useState(1);
+  let [productsPerPage] = useState(12);
+  let indexLastProduct = currentPage * productsPerPage;
+  let indexFirstProduct = indexLastProduct - productsPerPage;
 
-    let [currentPage, setCurrentPage] = useState(1);
-    let [productsPerPage] = useState(12);
-    let indexLastProduct = currentPage * productsPerPage;
-    let indexFirstProduct = indexLastProduct - productsPerPage;
-    
-  
-    let currentProducts = productsByBrand.slice(indexFirstProduct, indexLastProduct);
-  
-    let paginate = (pageNumber) => {
-      setCurrentPage(pageNumber);
-    };
-  
+  let currentProducts = productsByBrand.slice(
+    indexFirstProduct,
+    indexLastProduct
+  );
 
+  let paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-    //razer, hiperx, logitech, redDragon, coolerMaster, Nintendo
-   useEffect(()=> {
-      if(initialLoad.current){
-        dispatch(getProductsByBrand(brand))
-        initialLoad.current=false
-        return
-      }
-      console.log("brand componente brand",brand)
-        window.scrollTo(0, 0);
-        setCurrentPage(1);
-   }, [dispatch])
+  //razer, hiperx, logitech, redDragon, coolerMaster, Nintendo
+  useEffect(() => {
+    if (initialLoad.current) {
+      dispatch(getProductsByBrand(brand));
+      initialLoad.current = false;
+      return;
+    }
+    window.scrollTo(0, 0);
+    setCurrentPage(1);
+  }, [dispatch]);
 
-   useEffect(() => () => dispatch(cleanProductsByBrand()), []);
+  useEffect(() => () => dispatch(cleanProductsByBrand()), []);
 
   return (
     <div>
-        <NavBar/>
-        <section className={dm ? s.dmbrandPage : s.brandPage}>
+      <NavBar />
+      <section className={dm ? s.dmbrandPage : s.brandPage}>
         <div className={s.brandProducts}>
-        {currentProducts.length ? (
+          {currentProducts.length ? (
             currentProducts.map((e) => (
               <div className={s.cardShadow}>
                 <CardV
@@ -87,10 +84,10 @@ function Brand() {
             currentPage={currentPage}
           />
         </div>
-        </section>
-        <Footer />
+      </section>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default Brand
+export default Brand;

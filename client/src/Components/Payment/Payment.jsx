@@ -51,11 +51,9 @@ function Payment() {
   };
   const flag = useRef(true);
   useEffect(() => {
-    console.log("2v");
     if (Object.keys(preferences).length !== 0 && flag.current) {
       flag.current = false;
       setPayInfo({ ...payInfo, preference_id: preferences.preferenceId });
-      console.log("setpayinfo 2", payInfo);
 
       var script = document.createElement("script");
 
@@ -69,17 +67,13 @@ function Payment() {
       document.querySelector("#page-content").appendChild(script);
       return;
     }
-    console.log("1v");
-    console.log("setpayinfo 1", payInfo);
     dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
   }, [preferences, payInfo.preference_id]);
 
   async function pay() {
-    console.log(Object.keys(errors));
     try {
       setShowError(true);
       if (Object.keys(errors).length === 0) {
-        console.log("Entre a dispatch pay");
         dispatch(getPayPreferencesById(orderMp[0].order_id));
         //dispatch(updateOrderInfoById(orderMp[0].order_id, payInfo));
         //dispatch(allOrdersByUser(user.user_id))
