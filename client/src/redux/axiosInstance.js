@@ -19,14 +19,26 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
+  //1 si hay un token y el usuario existe       ->  next
+  //2 si hay un token  y el usuario  no exite   ->  login con el token
+  //3 si no un token y el usuario existe        ->  logout
+  //4 si no hay un token y el usuario no exite  ->  !!!! (guest)
   async (config) => {
     const state = store.getState();
     if (Object.keys(state.loggedUser).length === 0) {
-      await loginUser(null);
+      let token = localStorage.getItem("accessToken");
+      if (token) {
+        await loginUser(null); // 2
+      } else {
+        // 4
+      }
     } else {
       let token = localStorage.getItem("accessToken");
-      if (token) config.headers["Authorization"] = "Bearer " + token;
-      else logoutUser();
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token; // 1
+      } else {
+        logoutUser(); // 3
+      }
     }
     return config;
   },

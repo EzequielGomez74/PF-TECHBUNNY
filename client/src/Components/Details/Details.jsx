@@ -28,7 +28,7 @@ function Details() {
   const reviews = useSelector((state) => state.reviews);
   const cart = useSelector((state) => state.cart);
   const dm = useSelector((state) => state.darkMode);
-
+  const ordersByUser = useSelector((state) => state.ordersByUser);
   let [active, setActive] = useState(product.favorite);
   const [stock, setStock] = useState(product.stock);
   const [trigger, setTrigger] = useState(false);
@@ -60,6 +60,11 @@ function Details() {
     return () => dispatch(actions.cleanDetail());
   }, []);
 
+  function loadOrders() {
+    if (Object.keys(user).length !== 0) {
+      dispatch(actions.allOrdersByUser(user.user_id));
+    }
+  }
   function getCartStock(product_id) {
     const productFound = cart.find((c) => c.product_id === product_id);
     if (productFound) {
@@ -271,6 +276,8 @@ function Details() {
         reviews={reviews}
         product_id={parseInt(id)}
         handlePost={handlePost}
+        ordersByUser={ordersByUser}
+        loadOrders={loadOrders}
       />
       <br />
       <Footer />

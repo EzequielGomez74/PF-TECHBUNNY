@@ -39,7 +39,6 @@ async function updateOrder(order_id, status) {
     }
     if (status === "completed") {
       productos.map(async (p) => {
-        
         const actual = await Product.findOne({
           where: { product_id: p.product_id },
           raw: true,
@@ -50,11 +49,11 @@ async function updateOrder(order_id, status) {
         );
       });
       const userdata = {
-          ...datos.dataValues,
-          productos: productos,
-          type: "order",
-        };
-       sendMail(userdata); //! su pago fue recibido
+        ...datos.dataValues,
+        productos: productos,
+        type: "order",
+      };
+      sendMail(userdata); //! su pago fue recibido
     }
     return order;
   } catch (error) {

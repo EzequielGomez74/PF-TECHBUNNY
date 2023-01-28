@@ -3,8 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 import s from "./Details.module.css";
 import Footer from "../Footer/Footer";
+import Swal from "sweetalert2";
 
-function DisplayReview({ reviews, product_id, handlePost }) {
+function DisplayReview({
+  reviews,
+  product_id,
+  handlePost,
+  ordersByUser,
+  loadOrders,
+}) {
   const dispatch = useDispatch();
   const initialLoad = useRef(true);
   const [totalReviews, setTotalReviews] = useState([]);
@@ -18,6 +25,7 @@ function DisplayReview({ reviews, product_id, handlePost }) {
     username: "loggedUser.username",
   });
   useEffect(() => {
+    loadOrders();
     setLocalReviews({
       ...localReviews,
       user_id: loggedUser.user_id,
@@ -33,13 +41,39 @@ function DisplayReview({ reviews, product_id, handlePost }) {
     });
   };
 
+  function isPurchasedProduct(product_id) {
+    let result = false;
+    if (ordersByUser.length > 0) {
+      for (let i = 0; i < ordersByUser.length; i++) {
+        const order = ordersByUser[i];
+        const productFound = order.Products.find(
+          (product) => product.product_id === product_id
+        );
+        if (productFound) {
+          result = true;
+          break;
+        }
+      }
+    }
+    return result;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handlePost({
-      description: localReviews.description,
-      user_id: localReviews.user_id,
-      rating: ratingToNumber(localReviews.rating),
-    });
+    if (isPurchasedProduct(product_id)) {
+      handlePost({
+        description: localReviews.description,
+        user_id: localReviews.user_id,
+        rating: ratingToNumber(localReviews.rating),
+      });
+    } else {
+      Swal.fire({
+        title: "¡Alerta!",
+        text: "Solo si compras este producto puedes calificarlo",
+        icon: "warning",
+        confirmButtonColor: "#2B3036",
+      });
+    }
     setLocalReviews({
       ...localReviews,
       rating: "",
