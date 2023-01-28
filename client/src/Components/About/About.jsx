@@ -4,7 +4,6 @@ import imgAli from "../../Photos/ali.png";
 import imgAbi from "../../Photos/abi.png";
 import imgBeto from "../../Photos/beto.png";
 import imgSanti from "../../Photos/santi.png";
-import imgEmi from "../../Photos/emi.png";
 import imgMati from "../../Photos/mati.png";
 import imgGer from "../../Photos/ger.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -86,19 +85,7 @@ function AboutUs() {
                 <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
             </div>
             
-
-            <div className={dm ? s.dmcard : s.card}>
-            <div className={dm ? s.dmdivImg : s.divImg}>
-                <img className={dm ? s.dmimg : s.img} src={imgEmi} alt="img"/>
-                </div>
-                <h3 className={dm ? s.dmapodo : s.apodo}>EMI</h3>
-                <h2 className={dm ? s.dmnombreCompleto : s.nombreCompleto}>Emiliano Hernandez</h2>
-
-                <a href="https://github.com/emijhernandez"> <FontAwesomeIcon className={dm ? s.dmgitHub : s.gitHub} icon={faGithub}/> </a>
-
-                <a href="https://www.linkedin.com/in/emiliano-hernandez-473a3a231/"><FontAwesomeIcon className={dm ? s.dmlinkedin : s.linkedin} icon={faLinkedin} /> </a>
-            </div>
-
+            
             <div className={dm ? s.dmcard : s.card}>
             <div className={dm ? s.dmdivImg : s.divImg}>
                 <img className={dm ? s.dmimg : s.img} src={imgMati} alt="img"/>

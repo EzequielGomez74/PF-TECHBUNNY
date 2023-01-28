@@ -3,7 +3,6 @@ import imgAli from "../../Photos/ali.png";
 import imgAbi from "../../Photos/abi.png";
 import imgBeto from "../../Photos/beto.png";
 import imgSanti from "../../Photos/santi.png";
-import imgEmi from "../../Photos/emi.png";
 import imgMati from "../../Photos/mati.png";
 import imgGer from "../../Photos/ger.png";
 import React from 'react';
@@ -117,18 +116,6 @@ export default function LandingPage() {
                 <a href="https://www.linkedin.com/in/santiago-larrique-8bb549146/"><FontAwesomeIcon className="landinglinkedin" icon={faLinkedin} /> </a>
             </div>
             
-
-            <div className="landingcard">
-            <div className="landingdivImg">
-                <img className="landingimg" src={imgEmi} alt="img"/>
-                </div>
-                <h3 className="landingapodo">EMI</h3>
-                <h2 className="landingnombreCompleto">Emiliano Hernandez</h2>
-
-                <a href="https://github.com/emijhernandez"> <FontAwesomeIcon className="landinggitHub" icon={faGithub}/> </a>
-
-                <a href="https://www.linkedin.com/in/emiliano-hernandez-473a3a231/"><FontAwesomeIcon className="landinglinkedin" icon={faLinkedin} /> </a>
-            </div>
 
             <div className="landingcard">
             <div className="landingdivImg">

@@ -31,17 +31,7 @@
     "zipCode": 11200,
     "isActive": true
   },
-  {
-    "username": "emi",
-    "name": "Emiliano",
-    "role": "3",
-    "surname": "Hernandez",
-    "password": "$2a$10$FgEXIFpYBwVV37KfTE5wNuq2.y/RmNMy/DfHEfOnGiQQtnTPBv4Ee",
-    "email": "c@gmail.com",
-    "billingAddress": "Jose Marti 1234",
-    "zipCode": 1722,
-    "isActive": true
-  },
+  
   {
     "username": "gerlini",
     "email": "d@gmail.com",

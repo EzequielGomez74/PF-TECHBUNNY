@@ -221,4 +221,3 @@ function Category() {
 
 export default Category;
 
-//eze le manda las imagenes de brands a ger para que las meta en cloudinary y que se agregue un atributo nuevo l modelo products que sea brandimages, en este componente se hace lo mismo para el array brands solo que con las imagenes
