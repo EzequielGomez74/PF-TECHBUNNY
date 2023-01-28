@@ -56,7 +56,6 @@ function Profile() {
             .split("-")
             .reverse()
             .map((dateElement, index) => {
-              console.log(dateElement);
               if (index === 1) {
                 let month = monthNames[0];
                 return month;
@@ -86,8 +85,6 @@ function Profile() {
       initialLoad.current = false;
       return;
     }
-
-    console.log(orders);
   }, [dispatch, orders, user.user_id, products, orders.length, check]);
 
   const handleChange = (e) => {
@@ -131,7 +128,6 @@ function Profile() {
   };
 
   const handleCompleteOrder = (user_id, order_id) => {
-    console.log("sale el dispatch");
     dispatch(getOrder(user_id, order_id));
     history.push("/payment");
   };
@@ -155,7 +151,6 @@ function Profile() {
     const y = s[0];
     const m = month[parseInt(s[1]) - 1];
     const d = s[2].slice(0, 2);
-    console.log(d, " ", m, " ", y, " - ", s);
     return `${d} de ${m} de ${y}`;
   }
   return (
@@ -203,7 +198,6 @@ function Profile() {
                 Historial de Ordenes
               </h3>
               <br />
-              {console.log(orders)}
               {orders.length ? (
                 orders.map((o) => (
                   <div className={s.orderContainer}>
