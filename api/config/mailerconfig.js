@@ -13,7 +13,7 @@ const configgmail = {                                   // CONFIGURACION PARA US
   secure: true,
   auth: {
     user: "techbunnypf@gmail.com", 
-    pass: "eusceaijmmpwfkut", 
+    pass: "qokmhlmucooxywpg", 
   },
 };
 module.exports = {configgmail, configmailtrap};
